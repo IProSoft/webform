@@ -20,7 +20,7 @@ use Drupal\webform\WebformInterface;
  * @param bool $reset
  *   If set TRUE old admin settings will be completely deleted.
  *
- * @see drush_webform_repair().
+ * @see drush_webform_repair()
  */
 function _webform_update_admin_settings($reset = FALSE) {
   $admin_config = \Drupal::configFactory()->getEditable('webform.settings');

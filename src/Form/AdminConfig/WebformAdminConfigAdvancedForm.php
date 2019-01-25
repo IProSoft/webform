@@ -305,7 +305,7 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       _webform_update_webform_settings();
 
       $this->messenger()->addMessage($this->t('Repairing webform handlers…'));
-      _webform_update_webform_handler_settings();
+      _webform_update_webform_handler_class_settings();
 
       $this->messenger()->addMessage($this->t('Repairing webform field storage definitions…'));
       _webform_update_field_storage_definitions();

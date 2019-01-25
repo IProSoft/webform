@@ -2210,14 +2210,14 @@ function webform_update_8119() {
  * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
  */
 function webform_update_8120() {
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
 
 /**
  * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
  */
 function webform_update_8121() {
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
 
 /******************************************************************************/
@@ -2328,7 +2328,7 @@ function webform_update_8128() {
 function webform_update_8129() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
 
 /******************************************************************************/
@@ -2611,7 +2611,7 @@ function webform_update_8141() {
  * Issue #2995413: Allow email handler theme to be customized.
  */
 function webform_update_8142() {
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
 
 /**

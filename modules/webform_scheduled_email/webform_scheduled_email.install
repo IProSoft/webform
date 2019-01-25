@@ -79,7 +79,7 @@ function webform_scheduled_email_schema() {
  * Update schema config to add new "past actions" item.
  */
 function webform_scheduled_email_update_8001() {
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
 
 /**
@@ -96,5 +96,5 @@ function webform_scheduled_email_update_8002() {
  * Issue #3014338: Add a setting to the Scheduled Email handler to allows emails to be sent immediately when a webform is being tested.
  */
 function webform_scheduled_email_update_8003() {
-  _webform_update_webform_handler_settings();
+  _webform_update_webform_handler_class_settings();
 }
