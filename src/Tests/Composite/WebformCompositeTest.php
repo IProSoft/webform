@@ -28,7 +28,8 @@ class WebformCompositeTest extends WebformTestBase {
     $this->drupalGet('webform/test_composite');
 
     // Check webform contact basic.
-    $this->assertRaw('<div id="edit-contact-basic--wrapper" class="form-composite js-form-item form-item js-form-type-webform-contact form-type-webform-contact js-form-item-contact-basic form-item-contact-basic form-no-label">');
+    $this->assertRaw('<fieldset data-drupal-selector="edit-contact-basic" id="edit-contact-basic--wrapper" class="webform-contact--wrapper fieldgroup form-composite webform-composite-hidden-title required js-webform-type-webform-contact webform-type-webform-contact js-form-item form-item js-form-wrapper form-wrapper">');
+    $this->assertRaw('<span class="visually-hidden fieldset-legend js-form-required form-required">Contact basic</span>');
     $this->assertRaw('<label for="edit-contact-basic-name" class="js-form-required form-required">Name</label>');
     $this->assertRaw('<input data-drupal-selector="edit-contact-basic-name" type="text" id="edit-contact-basic-name" name="contact_basic[name]" value="John Smith" size="60" maxlength="255" class="form-text required" required="required" aria-required="true" />');
 
@@ -44,17 +45,10 @@ class WebformCompositeTest extends WebformTestBase {
     // Check custom country access.
     $this->assertNoRaw('edit-contact-advanced-country');
 
-    // Check credit card.
-    $this->assertRaw('<div id="edit-creditcard-basic--wrapper" class="form-composite js-form-item form-item js-form-type-webform-creditcard form-type-webform-creditcard js-form-item-creditcard-basic form-item-creditcard-basic form-no-label">');
-    $this->assertRaw('<label for="edit-creditcard-basic" class="visually-hidden">Credit Card</label>');
-    $this->assertRaw('The credit card element is experimental and insecure because it stores submitted information as plain text.');
-    $this->assertRaw('<label for="edit-creditcard-basic-name">Name on Card</label>');
-    $this->assertRaw('<input data-drupal-selector="edit-creditcard-basic-name" type="text" id="edit-creditcard-basic-name" name="creditcard_basic[name]" value="John Smith" size="60" maxlength="255" class="form-text" />');
-
     // Check link multiple in table.
     $this->assertRaw('<label for="edit-link-multiple">Link multiple</label>');
-    $this->assertRaw('<th class="link_multiple-table--title webform-multiple-table--title">Link Title<a href="#help" title="This is link title help" data-webform-help="This is link title help" class="webform-element-help">?</a>');
-    $this->assertRaw('<th class="link_multiple-table--url webform-multiple-table--url">Link URL<a href="#help" title="This is link url help" data-webform-help="This is link url help" class="webform-element-help">?</a>');
+    $this->assertRaw('<th class="link_multiple-table--title webform-multiple-table--title">Link Title<span class="webform-element-help" role="tooltip" tabindex="0" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link Title&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link title help&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
+    $this->assertRaw('<th class="link_multiple-table--url webform-multiple-table--url">Link URL<span class="webform-element-help" role="tooltip" tabindex="0" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link URL&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link url help&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 
     /* Processing */
 
@@ -78,16 +72,6 @@ class WebformCompositeTest extends WebformTestBase {
     ];
     $this->drupalPostForm('webform/test_composite', $edit, t('Submit'));
     $this->assertRaw('Name field is required.');
-
-    // Check creditcard composite value.
-    $this->drupalPostForm('webform/test_composite', [], t('Submit'));
-    $this->assertRaw("creditcard_basic:
-  name: 'John Smith'
-  type: VI
-  number: '4111111111111111'
-  civ: '111'
-  expiration_month: '1'
-  expiration_year: '2025'");
   }
 
 }

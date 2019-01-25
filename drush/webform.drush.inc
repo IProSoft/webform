@@ -39,6 +39,7 @@ function webform_drush_command() {
         'range-latest' => 'Integer specifying the latest X submissions will be downloaded. Used if "range-type" is "latest" or no other range options are provided.',
         'range-start' => 'The submission ID or start date at which to start exporting.',
         'range-end' => 'The submission ID or end date at which to end exporting.',
+        'order' => 'The submission order "asc" (default) or "desc".',
         'state' => 'Submission state to be included: "completed", "draft" or "all" (default).',
         'sticky' => 'Flagged/starred submission status.',
         'files' => 'Download files: "1" or "0" (default). If set to 1, the exported CSV file and any submission file uploads will be download in a gzipped tar file.',
@@ -123,6 +124,9 @@ function webform_drush_command() {
         '8+',
       ),
       'bootstrap' => 1,
+      'options' => array(
+        'disable-tls' => 'If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.',
+      ),
       'examples' => array(
         'webform-libraries-composer' => "Generates the Webform module's composer.json with libraries as repositories.",
       ),
@@ -173,13 +177,13 @@ function webform_drush_command() {
       ),
     ),
     'webform-repair' => array(
-      'description' => 'Makes sure all Webform admin settings and webforms are up-to-date.',
+      'description' => 'Makes sure all Webform admin configuration and webform settings are up-to-date.',
       'core' => array(
         '8+',
       ),
       'bootstrap' => 1,
       'examples' => array(
-        'webform-repair' => 'Repairs admin settings and webforms are up-to-date.',
+        'webform-repair' => 'Repairs admin configuration and webform settings are up-to-date.',
       ),
       'aliases' => array(
         'wfr',
@@ -204,6 +208,9 @@ function webform_drush_command() {
         '8+',
       ),
       'bootstrap' => 1,
+      'options' => array(
+        'disable-tls' => 'If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.',
+      ),
       'examples' => array(
         'webform-composer-update' => "Updates the Drupal installation's composer.json to include the Webform module's selected libraries as repositories.",
       ),

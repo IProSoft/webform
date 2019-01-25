@@ -4,7 +4,6 @@ namespace Drupal\webform;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\webform\Plugin\WebformHandlerInterface;
 
@@ -12,6 +11,26 @@ use Drupal\webform\Plugin\WebformHandlerInterface;
  * Provides an interface defining a webform entity.
  */
 interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollectionInterface, EntityOwnerInterface {
+
+  /**
+   * Webform title.
+   */
+  const TITLE_WEBFORM = 'webform';
+
+  /**
+   * Source entity title.
+   */
+  const TITLE_SOURCE_ENTITY = 'source_entity';
+
+  /**
+   * Both source entity and webform title.
+   */
+  const TITLE_SOURCE_ENTITY_WEBFORM = 'source_entity_webform';
+
+  /**
+   * Both webform and source entity title.
+   */
+  const TITLE_WEBFORM_SOURCE_ENTITY = 'webform_source_entity';
 
   /**
    * Denote drafts are not allowed.
@@ -50,6 +69,11 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   const STATUS_SCHEDULED = 'scheduled';
 
   /**
+   * Webform status archived.
+   */
+  const STATUS_ARCHIVED = 'archived';
+
+  /**
    * Webform confirmation page.
    */
   const CONFIRMATION_PAGE = 'page';
@@ -85,12 +109,47 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   const CONFIRMATION_DEFAULT = 'default';
 
   /**
+   * Webform confirmation none.
+   */
+  const CONFIRMATION_NONE = 'none';
+
+  /**
+   * Display standard 403 access denied page.
+   */
+  const ACCESS_DENIED_DEFAULT = 'default';
+
+  /**
+   * Display customized access denied message.
+   */
+  const ACCESS_DENIED_MESSAGE = 'message';
+
+  /**
+   * Display customized 403 access denied page.
+   */
+  const ACCESS_DENIED_PAGE = 'page';
+
+  /**
+   * Redirect to user login with custom message.
+   */
+  const ACCESS_DENIED_LOGIN = 'login';
+
+  /**
    * Returns the webform's (original) langcode.
    *
    * @return string
    *   The webform's (original) langcode.
    */
   public function getLangcode();
+
+  /**
+   * Returns the webform's weight.
+   *
+   * Only applies to when multiple webforms are attached to a single node.
+   *
+   * @return int
+   *   The webform's weight.
+   */
+  public function getWeight();
 
   /**
    * Determine if the webform has page or is attached to other entities.
@@ -128,9 +187,17 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Determine if the webform has conditional logic (i.e. #states).
    *
    * @return bool
-   *   TRUE if the webform has conditional logic
+   *   TRUE if the webform has conditional logic.
    */
   public function hasConditions();
+
+  /**
+   * Determine if the webform has required elements.
+   *
+   * @return bool
+   *   TRUE if the webform has required elements.
+   */
+  public function hasRequired();
 
   /**
    * Determine if the webform has any custom actions (aka submit buttons).
@@ -157,10 +224,10 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function hasPreview();
 
   /**
-   * Determine if the webform has multistep form wizard pages.
+   * Determine if the webform has multi-step form wizard pages.
    *
    * @return bool
-   *   TRUE if the webform has multistep form wizard pages.
+   *   TRUE if the webform has multi-step form wizard pages.
    */
   public function hasWizardPages();
 
@@ -171,6 +238,34 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   The number of wizard pages.
    */
   public function getNumberOfWizardPages();
+
+  /**
+   * Returns the webform's current operation.
+   *
+   * @return string
+   *   The webform's operation.
+   */
+  public function getOperation();
+
+  /**
+   * Sets the webform's current operation .
+   *
+   * @param string $operation
+   *   The webform's operation.
+   *
+   * @return $this
+   *
+   * @see \Drupal\webform\WebformSubmissionForm
+   */
+  public function setOperation($operation);
+
+  /**
+   * Determine if the webform is being tested.
+   *
+   * @return bool
+   *   TRUE if the webform is being tested.
+   */
+  public function isTest();
 
   /**
    * Sets the webform settings and properties override state.
@@ -251,12 +346,37 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function isTemplate();
 
   /**
+   * Returns the webform archive indicator.
+   *
+   * @return bool
+   *   TRUE if the webform is archived.
+   */
+  public function isArchived();
+
+  /**
    * Returns the webform confidential indicator.
    *
    * @return bool
-   *   TRUE if the webform is confidential .
+   *   TRUE if the webform is confidential.
    */
   public function isConfidential();
+
+
+  /**
+   * Determine if remote IP address is being stored.
+   *
+   * @return bool
+   *   TRUE if remote IP address is being stored.
+   */
+  public function hasRemoteAddr();
+
+  /**
+   * Determine if the saving of submissions is disabled.
+   *
+   * @return bool
+   *   TRUE if the saving of submissions is disabled.
+   */
+  public function isResultsDisabled();
 
   /**
    * Determine if the current webform entity is a translation.
@@ -453,18 +573,18 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function setPropertyOverride($property_name, $value);
 
   /**
-   * Returns the webform access controls.
+   * Returns the webform access rules.
    *
    * @return array
-   *   A structured array containing all the webform access controls.
+   *   A structured array containing all the webform access rules.
    */
   public function getAccessRules();
 
   /**
-   * Sets the webform access.
+   * Sets the webform access rules.
    *
    * @param array $access
-   *   The structured array containing all the webform access controls.
+   *   The structured array containing all the webform access rules.
    *
    * @return $this
    */
@@ -477,30 +597,6 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   A structured array containing all the webform default settings.
    */
   public static function getDefaultSettings();
-
-  /**
-   * Returns the webform default access controls.
-   *
-   * @return array
-   *   A structured array containing all the webform default access controls.
-   */
-  public static function getDefaultAccessRules();
-
-  /**
-   * Checks webform access to an operation on a webform's submission.
-   *
-   * @param string $operation
-   *   The operation access should be checked for.
-   *   Usually "create", "view", "update", "delete", "purge", or "admin".
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   The user session for which to check access.
-   * @param \Drupal\webform\WebformSubmissionInterface|null $webform_submission
-   *   (optional) A webform submission.
-   *
-   * @return bool
-   *   The access result. Returns a TRUE if access is allowed.
-   */
-  public function checkAccessRules($operation, AccountInterface $account, WebformSubmissionInterface $webform_submission = NULL);
 
   /**
    * Get webform submission webform.
@@ -530,7 +626,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Get original elements decoded as an associative array.
    *
    * @return array|bool
-   *   Elements as an associative array. Returns FALSE is elements YAML is invalid.
+   *   Elements as an associative array. Returns FALSE if elements YAML is invalid.
    */
   public function getElementsOriginalDecoded();
 
@@ -546,7 +642,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Get webform elements decoded as an associative array.
    *
    * @return array|bool
-   *   Elements as an associative array. Returns FALSE is elements YAML is invalid.
+   *   Elements as an associative array. Returns FALSE if elements YAML is invalid.
    */
   public function getElementsDecoded();
 
@@ -576,7 +672,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Get webform elements initialized as an associative array.
    *
    * @return array|bool
-   *   Elements as an associative array. Returns FALSE is elements YAML is invalid.
+   *   Elements as an associative array. Returns FALSE if elements YAML is invalid.
    */
   public function getElementsInitialized();
 
@@ -588,7 +684,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *
    * @return array
    *   Webform raw elements decoded and flattened into an associative array
-   *   keyed by element name. Returns FALSE is elements YAML is invalid.
+   *   keyed by element key. Returns FALSE if elements YAML is invalid.
    */
   public function getElementsDecodedAndFlattened($operation = NULL);
 
@@ -599,8 +695,8 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   (optional) The operation that is to be performed on the element.
    *
    * @return array
-   *   Webform elements flattened into an associative array keyed by element name.
-   *   Returns FALSE is elements YAML is invalid.
+   *   Webform elements flattened into an associative array keyed by element key.
+   *   Returns FALSE if elements YAML is invalid.
    */
   public function getElementsInitializedAndFlattened($operation = NULL);
 
@@ -611,17 +707,33 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   (optional) The operation that is to be performed on the element.
    *
    * @return array
-   *   Webform elements flattened into an associative array keyed by element name.
+   *   Webform elements flattened into an associative array keyed by element key.
    */
   public function getElementsInitializedFlattenedAndHasValue($operation = NULL);
 
   /**
-   * Get webform elements selectors as options.
+   * Get webform manager file elements.
+   *
+   * @return array
+   *   Webform managed file elements.
+   */
+  public function getElementsManagedFiles();
+
+  /**
+   * Get webform element's selectors as options.
    *
    * @return array
    *   Webform elements selectors as options.
    */
   public function getElementsSelectorOptions();
+
+  /**
+   * Get webform element options as autocomplete source values.
+   *
+   * @return array
+   *   Webform element options as autocomplete source values.
+   */
+  public function getElementsSelectorSourceValues();
 
   /**
    * Get webform elements that can be prepopulated.
@@ -703,6 +815,14 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function deletePaths();
 
   /**
+   * Determine if the webform has any message handlers.
+   *
+   * @return bool
+   *   TRUE if the webform has any message handlers.
+   */
+  public function hasMessageHandler();
+
+  /**
    * Returns a specific webform handler.
    *
    * @param string $handler_id
@@ -769,7 +889,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Invoke a handlers method.
    *
    * @param string $method
-   *   The handle method to be invoked.
+   *   The handler method to be invoked.
    * @param mixed $data
    *   The argument to passed by reference to the handler method.
    * @param mixed $context1
@@ -783,7 +903,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Invoke elements method.
    *
    * @param string $method
-   *   The handle method to be invoked.
+   *   The handler method to be invoked.
    * @param mixed $data
    *   The argument to passed by reference to the handler method.
    * @param mixed $context1

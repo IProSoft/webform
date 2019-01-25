@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'webform_wizard_page' element.
@@ -11,7 +12,7 @@ use Drupal\webform\WebformInterface;
  * @WebformElement(
  *   id = "webform_wizard_page",
  *   label = @Translation("Wizard page"),
- *   description = @Translation("Provides an element to display multiple form elements as a page in a multistep form wizard."),
+ *   description = @Translation("Provides an element to display multiple form elements as a page in a multi-step form wizard."),
  *   category = @Translation("Wizard"),
  * )
  */
@@ -69,6 +70,27 @@ class WebformWizardPage extends Details {
   /**
    * {@inheritdoc}
    */
+  protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    $build = parent::formatHtmlItem($element, $webform_submission, $options);
+
+    // Add edit page link container to preview.
+    // @see Drupal.behaviors.webformWizardPagesLink
+    if ($build && isset($options['view_mode']) && $options['view_mode'] === 'preview' && $webform_submission->getWebform()->getSetting('wizard_preview_link')) {
+      $build['#children']['wizard_page_link'] = [
+        '#type' => 'container',
+        '#attributes' => [
+          'data-webform-page' => $element['#webform_key'],
+          'class' => ['webform-wizard-page-edit'],
+        ],
+      ];
+    }
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
@@ -94,10 +116,6 @@ class WebformWizardPage extends Details {
 
     // Wizard pages only support visible or hidden state.
     $form['conditional_logic']['states']['#multiple'] = FALSE;
-
-    // Wizard pages use server-side validation and can't support
-    // custom selectors.
-    $form['conditional_logic']['states']['#selector_other'] = FALSE;
 
     return $form;
   }

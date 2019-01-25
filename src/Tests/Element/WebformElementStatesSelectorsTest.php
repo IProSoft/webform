@@ -35,6 +35,15 @@ class WebformElementStatesSelectorsTest extends WebformElementTestBase {
 
     // Create 'tags' vocabulary.
     $this->createTags();
+
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('libraries.excluded_libraries', [])
+      ->save();
+
+    // Enable all elements, including password and password_confirm.
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('element.excluded_elements', [])
+      ->save();
   }
 
   /**

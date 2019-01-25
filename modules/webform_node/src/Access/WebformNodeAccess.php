@@ -15,6 +15,34 @@ use Drupal\webform\WebformSubmissionInterface;
 class WebformNodeAccess {
 
   /**
+   * Check whether the user can access a node's webform drafts.
+   *
+   * @param string $operation
+   *   Operation being performed.
+   * @param string $entity_access
+   *   Entity access rule that needs to be checked.
+   * @param \Drupal\node\NodeInterface $node
+   *   A node.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public static function checkWebformDraftsAccess($operation, $entity_access, NodeInterface $node, AccountInterface $account) {
+    $access_result = static::checkAccess($operation, $entity_access, $node, NULL, $account);
+    if ($access_result->isAllowed()) {
+      /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
+      $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
+      $webform = $entity_reference_manager->getWebform($node);
+      return WebformEntityAccess::checkDraftsAccess($webform, $node);
+    }
+    else {
+      return $access_result;
+    }
+  }
+
+  /**
    * Check whether the user can access a node's webform results.
    *
    * @param string $operation
@@ -121,6 +149,12 @@ class WebformNodeAccess {
 
       case 'webform_submission_resend':
         return WebformSubmissionAccess::checkResendAccess($webform_submission, $account);
+
+      case 'webform_submission_duplicate':
+        /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
+        $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
+        $webform = $entity_reference_manager->getWebform($node);
+        return WebformEntityAccess::checkWebformSettingValue($webform, 'submission_user_duplicate', TRUE);
     }
 
     return $access_result;

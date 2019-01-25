@@ -78,7 +78,7 @@ class WebformElementFormatCustomTest extends WebformElementTestBase {
     $this->assertRaw('<span class="file file--mime-image-png file--image"> <a href="' . $file_url . '" type="image/png; length=' . $file_size . '">' . $file_name . '</a></span>');
     $this->assertRaw('item[\'id\']: 1<br/>');
     $this->assertRaw("item['url']: $file_url<br/>");
-    $this->assertRaw('<img class="webform-image-file" alt="' . $file_name . '" src="' . $file_url . '" />');
+    $this->assertRaw('<img class="webform-image-file" alt="' . $file_name . '" title="' . $file_name . '" src="' . $file_url . '" />');
 
     // Check composite custom HTML format.
     $this->assertRaw('<label>address_custom</label>');
@@ -90,7 +90,7 @@ class WebformElementFormatCustomTest extends WebformElementTestBase {
     $this->assertRaw('element.country: {country}<br/>');
 
     // Check fieldset displayed as details.
-    $this->assertRaw('<details data-webform-element-id="test_element_format_custom--fieldset_custom" class="webform-container webform-container-type-details js-form-wrapper form-wrapper" id="test_element_format_custom--fieldset_custom" open="open">');
+    $this->assertRaw('<details class="webform-container webform-container-type-details js-form-wrapper form-wrapper" data-webform-element-id="test_element_format_custom--fieldset_custom" id="test_element_format_custom--fieldset_custom" open="open">');
     $this->assertRaw('<summary role="button" aria-controls="test_element_format_custom--fieldset_custom" aria-expanded="true" aria-pressed="true">fieldset_custom</summary>');
 
     // Check container custom HTML format.

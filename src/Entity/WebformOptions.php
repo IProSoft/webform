@@ -24,7 +24,7 @@ use Drupal\webform\WebformOptionsInterface;
  *       "add" = "Drupal\webform\WebformOptionsForm",
  *       "edit" = "Drupal\webform\WebformOptionsForm",
  *       "duplicate" = "Drupal\webform\WebformOptionsForm",
- *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
+ *       "delete" = "Drupal\webform\WebformOptionsDeleteForm",
  *     }
  *   },
  *   admin_permission = "administer webform",
@@ -135,6 +135,7 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
   public function setOptions(array $options) {
     $this->options = Yaml::encode($options);
     $this->optionsDecoded = NULL;
+    return $this;
   }
 
   /**
@@ -158,7 +159,7 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
     $temp_element = [];
     \Drupal::moduleHandler()->alter('webform_options_' . $this->id(), $altered_options, $temp_element);
     $altered_options = WebformOptionsHelper::convertOptionsToString($altered_options);
-    if ($altered_options == $this->getOptions()) {
+    if ($altered_options === $this->getOptions()) {
       $this->options = '';
     }
   }
@@ -186,11 +187,12 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
    * {@inheritdoc}
    */
   public static function getElementOptions(array &$element, $property_name = '#options') {
-    // If element already has #options return them.
-    // NOTE: Only WebformOptions can be altered. If you need to alter an
-    // element's options, @see hook_webform_element_alter().
+    // If element already has #options array just call alter hook with
+    // a NULL id.
     if (is_array($element[$property_name])) {
-      return $element[$property_name];
+      $options = $element[$property_name];
+      \Drupal::moduleHandler()->alter('webform_options', $options, $element);
+      return $options;
     }
 
     // Return empty options if element does not define an options id.

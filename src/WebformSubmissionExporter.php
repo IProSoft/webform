@@ -2,6 +2,7 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Archiver\ArchiverManager;
 use Drupal\Core\Archiver\ArchiveTar;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -50,6 +51,13 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface
    */
   protected $streamWrapperManager;
+
+  /**
+   * The archiver manager.
+   *
+   * @var \Drupal\Core\Archiver\ArchiverManager
+   */
+  protected $archiverManager;
 
   /**
    * Webform element manager.
@@ -111,16 +119,19 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    *   The entity type manager.
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
    *   The stream wrapper manager.
+   * @param \Drupal\Core\Archiver\ArchiverManager $archiver_manager
+   *   The archiver manager.
    * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    * @param \Drupal\webform\Plugin\WebformExporterManagerInterface $exporter_manager
    *   The results exporter manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, FileSystemInterface $file_system, EntityTypeManagerInterface $entity_type_manager, StreamWrapperManagerInterface $stream_wrapper_manager, WebformElementManagerInterface $element_manager, WebformExporterManagerInterface $exporter_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, FileSystemInterface $file_system, EntityTypeManagerInterface $entity_type_manager, StreamWrapperManagerInterface $stream_wrapper_manager, ArchiverManager $archiver_manager, WebformElementManagerInterface $element_manager, WebformExporterManagerInterface $exporter_manager) {
     $this->configFactory = $config_factory;
     $this->fileSystem = $file_system;
     $this->entityStorage = $entity_type_manager->getStorage('webform_submission');
     $this->streamWrapperManager = $stream_wrapper_manager;
+    $this->archiverManager = $archiver_manager;
     $this->elementManager = $element_manager;
     $this->exporterManager = $exporter_manager;
   }
@@ -256,6 +267,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       'range_latest' => '',
       'range_start' => '',
       'range_end' => '',
+      'order' => 'asc',
       'state' => 'all',
       'locked' => '',
       'sticky' => '',
@@ -263,7 +275,13 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       'files' => FALSE,
     ];
 
-    // Append element handler default options.
+    // Append webform exporter default options.
+    $exporter_plugins = $this->exporterManager->getInstances();
+    foreach ($exporter_plugins as $element_type => $element_plugin) {
+      $this->defaultOptions += $element_plugin->defaultConfiguration();
+    }
+
+    // Append webform element default options.
     $element_types = $this->getWebformElementTypes();
     $element_plugins = $this->elementManager->getInstances();
     foreach ($element_plugins as $element_type => $element_plugin) {
@@ -302,6 +320,8 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
         $states_options['invisible'][] = [':input[name="exporter"]' => ['value' => $plugin_id]];
       }
     }
+
+    $form['#attributes']['data-webform-states-no-clear'] = TRUE;
 
     $form['export']['format'] = [
       '#type' => 'details',
@@ -491,14 +511,14 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
         $form['export']['download']['submitted']['entity_type'] = [
           '#type' => 'select',
           '#title' => $this->t('Entity type'),
-          '#title_display' => 'Invisible',
+          '#title_display' => 'invisible',
           '#options' => ['' => $this->t('All')] + $entity_types,
           '#default_value' => $export_options['entity_type'],
         ];
         $form['export']['download']['submitted']['entity_id'] = [
           '#type' => 'number',
           '#title' => $this->t('Entity id'),
-          '#title_display' => 'Invisible',
+          '#title_display' => 'invisible',
           '#min' => 1,
           '#size' => 10,
           '#default_value' => $export_options['entity_id'],
@@ -565,7 +585,21 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
           '#default_value' => $export_options['range_end'],
         ];
     }
-
+    $form['export']['download']['order'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Order'),
+      '#description' => $this->t('Order submissions by ascending (oldest first) or descending (newest first).'),
+      '#options' => [
+        'asc' => $this->t('Sort ascending'),
+        'desc' => $this->t('Sort descending'),
+      ],
+      '#default_value' => $export_options['order'],
+      '#states' => [
+        'visible' => [
+          ':input[name="range_type"]' => ['!value' => 'latest'],
+        ],
+      ],
+    ];
     $form['export']['download']['sticky'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Starred/flagged submissions'),
@@ -655,7 +689,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     $is_archive = ($this->isArchive() && $export_options['files']);
     $files_directories = [];
     if ($is_archive) {
-      $archiver = new ArchiveTar($this->getArchiveFilePath(), 'gz');
+      $archiver = $this->getArchiveTar();
       $stream_wrappers = array_keys($this->streamWrapperManager->getNames(StreamWrapperInterface::WRITE_VISIBLE));
       foreach ($stream_wrappers as $stream_wrapper) {
         $files_directory = $this->fileSystem->realpath($stream_wrapper . '://webform/' . $webform->id());
@@ -695,9 +729,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
   public function writeExportToArchive() {
     $export_file_path = $this->getExportFilePath();
     if (file_exists($export_file_path)) {
-      $archive_file_path = $this->getArchiveFilePath();
-
-      $archiver = new ArchiveTar($archive_file_path, 'gz');
+      $archiver = $this->getArchiveTar();
       $archiver->addModify($export_file_path, $this->getBaseFileName(), $this->getFileTempDirectory());
 
       @unlink($export_file_path);
@@ -778,15 +810,23 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     if ($export_options['range_type'] == 'latest' && $export_options['range_latest']) {
       // Clone the query and use it to get latest sid starting sid.
       $latest_query = clone $query;
+      $latest_query->sort('created', 'DESC');
       $latest_query->sort('sid', 'DESC');
       $latest_query->range(0, (int) $export_options['range_latest']);
       if ($latest_query_entity_ids = $latest_query->execute()) {
         $query->condition('sid', end($latest_query_entity_ids), '>=');
       }
     }
+    else {
+      // Sort by created and sid in ASC or DESC order.
+      $query->sort('created', isset($export_options['order']) ? $export_options['order'] : 'ASC');
+      $query->sort('sid', isset($export_options['order']) ? $export_options['order'] : 'ASC');
+    }
 
-    // Sort by sid with the oldest one first.
-    $query->sort('sid', 'ASC');
+    // Do not check access to submission since the exporter UI and Drush
+    // already have access checking.
+    // @see webform_query_webform_submission_access_alter()
+    $query->accessCheck(FALSE);
 
     return $query;
   }
@@ -850,7 +890,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function getFileTempDirectory() {
-    return file_directory_temp();
+    return $this->configFactory->get('webform.settings')->get('export.temp_directory') ?: file_directory_temp();
   }
 
   /**
@@ -913,6 +953,28 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    */
   public function isBatch() {
     return ($this->isArchive() || ($this->getTotal() >= $this->getBatchLimit()));
+  }
+
+  /**
+   * Construct an instance of archive tar implementation.
+   *
+   * @return \Drupal\Core\Archiver\ArchiveTar
+   *   Archive tar implementation object.
+   */
+  protected function getArchiveTar() {
+    $archive_tar = $this->archiverManager->getInstance([
+      'filepath' => $this->getArchiveFilePath(),
+    ]);
+
+    $archive_tar = $archive_tar->getArchive();
+
+    if ($archive_tar instanceof ArchiveTar) {
+      // Make it gzip compress.
+      $archive_tar->_compress = TRUE;
+      $archive_tar->_compress_type = 'gz';
+    }
+
+    return $archive_tar;
   }
 
 }

@@ -72,8 +72,9 @@ class TwigExtension extends \Twig_Extension {
     // ISSUE. This TwigExtension is loaded on every page load, even when a
     // website is in maintenance mode.
     // @see https://www.drupal.org/node/2907960
-    /** @var \Drupal\webform\WebformTokenManagerInterface $value */
-    $value = \Drupal::service('webform.token_manager')->replace($token, $entity, $data, $options);
+    /** @var \Drupal\webform\WebformTokenManagerInterface $token_manager */
+    $token_manager = \Drupal::service('webform.token_manager');
+    $value = $token_manager->replace($token, $entity, $data, $options);
 
     return (WebformHtmlHelper::containsHtml($value)) ? ['#markup' => $value] : $value;
   }
@@ -130,7 +131,7 @@ class TwigExtension extends \Twig_Extension {
       '#markup' => '<p>' . t("You can also output tokens using the <code>webform_token()</code> function.") . '</p>',
     ];
     $output[] = [
-      '#markup' => "<pre>{{ webform_token('[webform_submission:values:element_value]', webform_submission) }}</pre>",
+      '#markup' => "<pre>{{ webform_token('[webform_submission:values:element_value]', webform_submission, [], options) }}</pre>",
     ];
     if (\Drupal::currentUser()->hasPermission('administer modules') && !\Drupal::moduleHandler()->moduleExists('twig_tweak')) {
       $t_args = [
@@ -160,7 +161,7 @@ class TwigExtension extends \Twig_Extension {
    * @param string $template
    *   A inline Twig template.
    * @param array $options
-   *   Template and token options.
+   *   (optional) Template and token options.
    *
    * @return string
    *   The fully rendered Twig template.
@@ -168,7 +169,33 @@ class TwigExtension extends \Twig_Extension {
    * @see \Drupal\webform\Element\WebformComputedTwig::processValue
    * @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::getMessage
    */
-  public static function renderTwigTemplate(WebformSubmissionInterface $webform_submission, $template, array $options) {
+  public static function renderTwigTemplate(WebformSubmissionInterface $webform_submission, $template, array $options = []) {
+    try {
+      $build = self::buildTwigTemplate($webform_submission, $template, $options);
+      return \Drupal::service('renderer')->renderPlain($build);
+    }
+    catch (\Exception $exception) {
+      if ($webform_submission->getWebform()->access('update')) {
+        \Drupal::messenger()->addError(t('Failed to render computed Twig value due to error "%error"', ['%error' => $exception->getMessage()]));
+      }
+      return '';
+    }
+  }
+
+  /**
+   * Build a Twig template with a webform submission.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   * @param string $template
+   *   A inline Twig template.
+   * @param array $options
+   *   (optional) Template and token options.
+   *
+   * @return array
+   *   A renderable containing an inline twig template.
+   */
+  public static function buildTwigTemplate(WebformSubmissionInterface $webform_submission, $template, array $options = []) {
     $options += [
       'html' => FALSE,
       'email' => FALSE,
@@ -187,30 +214,21 @@ class TwigExtension extends \Twig_Extension {
       'webform' => $webform_submission->getWebform(),
       'elements' => $webform_submission->getWebform()->getElementsDecoded(),
       'elements_flattened' => $webform_submission->getWebform()->getElementsDecodedAndFlattened(),
+      'options' => $options,
     ] + $webform_submission->toArray(TRUE);
 
-    $build = [
+    return [
       '#type' => 'inline_template',
       '#template' => $template,
       '#context' => $context,
     ];
-
-    try {
-      return \Drupal::service('renderer')->renderPlain($build);
-    }
-    catch (\Exception $exception) {
-      if ($webform_submission->getWebform()->access('update')) {
-        drupal_set_message(t('Failed to render computed Twig value due to error "%error"', ['%error' => $exception->getMessage()]), 'error');
-      }
-      return '';
-    }
   }
 
   /**
-   * Determine if the  current user can edit Twig templates.
+   * Determine if the current user can edit Twig templates.
    *
    * @return bool
-   *   TRUE if the  current user can edit Twig templates.
+   *   TRUE if the current user can edit Twig templates.
    */
   public static function hasEditTwigAccess() {
     return (\Drupal::currentUser()->hasPermission('edit webform twig') || \Drupal::currentUser()->hasPermission('administer webform'));
