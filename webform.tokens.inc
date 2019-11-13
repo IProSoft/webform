@@ -65,14 +65,17 @@ function webform_token_info() {
   $webform_submission['source-url'] = [
     'name' => t('Source URL'),
     'description' => t('The URL the user submitted the webform submission.'),
+    'type' => 'url',
   ];
   $webform_submission['view-url'] = [
-    'name' => t('Update (token) URL'),
+    'name' => t('View (token) URL'),
     'description' => t('The URL that can used to view the webform submission. The webform must be configured to allow users to view a submission using a secure token.'),
+    'type' => 'url',
   ];
   $webform_submission['update-url'] = [
     'name' => t('Update (token) URL'),
     'description' => t('The URL that can used to update the webform submission. The webform must be configured to allow users to update a submission using a secure token.'),
+    'type' => 'url',
   ];
   $webform_submission['langcode'] = [
     'name' => t('Langcode'),
@@ -706,7 +709,6 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
     }
 
     /* Chained token relationships. */
-
     if (($user_tokens = $token_service->findWithPrefix($tokens, 'user')) && ($user = $webform_submission->getOwner())) {
       $replacements += $token_service->generate('user', $user_tokens, ['user' => $user], $options, $bubbleable_metadata);
     }
@@ -727,6 +729,27 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
     }
     if (($submitted_to_tokens = $token_service->findWithPrefix($tokens, 'submitted-to')) && ($submitted_to = $webform_submission->getSourceEntity(TRUE) ?: $webform_submission->getWebform())) {
       $replacements += $token_service->generate($submitted_to->getEntityTypeId(), $submitted_to_tokens, [$submitted_to->getEntityTypeId() => $submitted_to], $options, $bubbleable_metadata);
+    }
+    foreach(['view-url', 'update-url', 'source-url'] as $token) {
+      if ($url_tokens = $token_service->findWithPrefix($tokens, $token)) {
+        $url = NULL;
+        switch ($token) {
+          case 'view-url':
+            $url = $webform_submission->getTokenUrl('view');
+            break;
+
+          case 'update-url':
+            $url = $webform_submission->getTokenUrl('update');
+            break;
+
+          case 'source-url':
+            $url = $webform_submission->getSourceUrl();
+            break;
+        }
+        if ($url) {
+          $replacements += $token_service->generate('url', $url_tokens, ['url' => $url], $options, $bubbleable_metadata);
+        }
+      }
     }
 
   }

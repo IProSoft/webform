@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional;
 
+use Drupal\Component\Utility\Html;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 
@@ -11,6 +12,13 @@ use Drupal\webform\Entity\WebformSubmission;
  * @group Webform
  */
 class WebformSubmissionTokenUpdateTest extends WebformBrowserTestBase {
+
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
+  public static $modules = ['token'];
 
   /**
    * Webforms to load.
@@ -33,6 +41,11 @@ class WebformSubmissionTokenUpdateTest extends WebformBrowserTestBase {
     $this->drupalLogin($this->rootUser);
     $sid = $this->postSubmissionTest($webform);
     $webform_submission = WebformSubmission::load($sid);
+    // Check confirmation page's URL token.
+    $token_url = $webform_submission->getTokenUrl();
+    $link_label = $token_url->setAbsolute(FALSE)->toString();
+    $link_url = $token_url->setAbsolute(TRUE)->toString();
+    $this->assertRaw('<a href="' . $link_url . '">' . $link_label . '</a>');
 
     /* View */
 
