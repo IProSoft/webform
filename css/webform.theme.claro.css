@@ -125,6 +125,9 @@ table td {
  */
 table .button {
   margin: 0 0.75rem 0 0;
+  padding: -webkit-calc(0.5rem - 1px) -webkit-calc(1rem - 1px);
+  padding: calc(0.5rem - 1px) calc(1rem - 1px);
+  font-size: 0.79rem;
 }
 [dir="rtl"] table .button {
   margin: 0 0 0 0.75rem;
@@ -138,7 +141,6 @@ table td > .button:only-child {
   margin-top: 0;
   margin-bottom: 0;
 }
-
 /**
  * Results table.
  */
