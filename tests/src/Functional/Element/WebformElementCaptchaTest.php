@@ -21,7 +21,7 @@ class WebformElementCaptchaTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'captcha'];
+  public static $modules = ['webform', 'captcha', 'image_captcha'];
 
   /**
    * Test CAPTCHA element.
@@ -36,6 +36,9 @@ class WebformElementCaptchaTest extends WebformElementBrowserTestBase {
     // Check CAPTCHA element custom title and description.
     $this->assertRaw('<label for="edit-captcha-response--4" class="js-form-required form-required">{captcha_math_title}</label>');
     $this->assertRaw('{captcha_math_description}');
+
+    // Check CAPTCHA image refresh link.
+    $this->assertLink('Get new captcha!');
 
     // Enable CAPTCHA admin mode.
     \Drupal::configFactory()
