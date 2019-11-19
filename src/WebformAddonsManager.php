@@ -318,7 +318,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     $projects['webform_email_reply_d8'] = [
       'title' => $this->t('Webform Email Reply'),
       'description' => $this->t('Allows users to send an email reply to submissions.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_embed'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_email_reply'),
       'category' => 'enhancement',
     ];
 
