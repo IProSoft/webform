@@ -5,7 +5,7 @@ namespace Drupal\webform\Form;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Webform for webform results clear webform.
+ * Form for webform results clear webform.
  */
 class WebformResultsClearForm extends WebformSubmissionsDeleteFormBase {
 

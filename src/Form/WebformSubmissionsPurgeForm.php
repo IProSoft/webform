@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Webform for webform submission purge webform.
+ * Form for webform submission purge webform.
  */
 class WebformSubmissionsPurgeForm extends WebformSubmissionsDeleteFormBase {
 

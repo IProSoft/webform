@@ -14,7 +14,7 @@ use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Webform form settings.
+ * Form form settings.
  */
 class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
 

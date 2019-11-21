@@ -8,7 +8,7 @@ use Drupal\webform\WebformSubmissionExporterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Webform for webform results export webform.
+ * Form for webform results export webform.
  */
 class WebformResultsExportForm extends FormBase {
 
