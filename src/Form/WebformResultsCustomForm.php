@@ -9,7 +9,7 @@ use Drupal\webform\WebformRequestInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form for webform results custom(ize) webform.
+ * Webform for webform results custom(ize) webform.
  */
 class WebformResultsCustomForm extends FormBase {
 

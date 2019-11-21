@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form for deleting a webform element.
+ * Webform for deleting a webform element.
  */
 class WebformUiElementDeleteForm extends WebformDeleteFormBase {
 
