@@ -440,9 +440,10 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
    *
    * @param bool $custom
    *   If TRUE, return customized array that contains simplified properties
-   *   and webform submission data.
+   *   and webform submission (element) data.
    * @param bool $check_access
-   *   If TRUE, view access is checked for element data.
+   *   If $custom and $check_access is TRUE, view access is checked
+   *   for webform submission (element) data.
    *
    * @return mixed[]
    *   An array of property values, keyed by property name.
