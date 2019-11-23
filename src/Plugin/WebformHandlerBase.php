@@ -140,7 +140,6 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $logger_factory, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, WebformSubmissionConditionsValidatorInterface $conditions_validator) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->setConfiguration($configuration);
     $this->loggerFactory = $logger_factory;
     $this->configFactory = $config_factory;
     $this->submissionStorage = $entity_type_manager->getStorage('webform_submission');
@@ -149,6 +148,8 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
     // @todo Webform 8.x-6.x: Properly inject the token manager.
     // @todo Webform 8.x-6.x: Update handlers that injects the token manager.
     $this->tokenManager = \Drupal::service('webform.token_manager');
+
+    $this->setConfiguration($configuration);
   }
 
   /**
