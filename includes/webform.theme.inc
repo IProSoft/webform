@@ -707,6 +707,11 @@ function _webform_preprocess_element(array &$variables, $title_parents = ['title
 
   // Add help to title (aka label).
   _webform_preprocess_help($variables, $title_parents);
+
+  // Hide 'item' label[for].
+  if ($type === 'item') {
+    $variables['label']['#attributes']['webform-remove-for-attribute'] = TRUE;
+  }
 }
 
 /**
