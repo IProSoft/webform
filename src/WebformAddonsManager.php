@@ -458,6 +458,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Group Webform.
+    $projects['group_webform'] = [
+      'title' => $this->t('Group Webform'),
+      'description' => $this->t('Designed to associate group specific webforms with a group when using the Group module.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/group_webform'),
+      'category' => 'integration',
+    ];
+
     // Integrations: GraphQL Webform.
     $projects['graphql_webform'] = [
       'title' => $this->t('GraphQL Webform'),
