@@ -44,7 +44,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       'excluded_libraries[jquery.chosen]' => TRUE,
       'excluded_libraries[jquery.icheck]' => TRUE,
     ];
-    $this->drupalPostForm('admin/structure/webform/config/libraries', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/libraries', $edit, t('Save configuration'));
 
     // Check optional libraries are included.
     $this->drupalGet('/webform/test_libraries_optional');
@@ -79,7 +79,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       'excluded_libraries[jquery.timepicker]' => FALSE,
       'excluded_libraries[jquery.textcounter]' => FALSE,
     ];
-    $this->drupalPostForm('admin/structure/webform/config/libraries', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/libraries', $edit, t('Save configuration'));
 
     // Check optional libraries are excluded.
     $this->drupalGet('/webform/test_libraries_optional');
@@ -124,7 +124,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       'excluded_elements[webform_toggle]' => FALSE,
       'excluded_elements[webform_toggles]' => FALSE,
     ];
-    $this->drupalPostForm('admin/structure/webform/config/elements', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
 
     // Check that status report excludes libraries required by element types.
     $this->drupalGet('/admin/reports/status');
@@ -140,7 +140,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       'excluded_libraries[jquery.select2]' => TRUE,
       'excluded_libraries[jquery.chosen]' => TRUE,
     ];
-    $this->drupalPostForm('admin/structure/webform/config/libraries', $edit, t('Save configuration'));
+    $this->drupalPostForm('/admin/structure/webform/config/libraries', $edit, t('Save configuration'));
     $this->drupalGet('/webform/test_libraries_optional');
     $this->assertRaw('https://cdnjs.cloudflare.com/ajax/libs/chosen');
     $this->assertRaw('https://cdnjs.cloudflare.com/ajax/libs/select2');

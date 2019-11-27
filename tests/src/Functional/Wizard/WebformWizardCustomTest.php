@@ -32,7 +32,7 @@ class WebformWizardCustomTest extends WebformWizardTestBase {
     $this->assertCurrentPage('Wizard page #1', 'wizard_1');
 
     // Check next page is #2.
-    $this->drupalPostForm('webform/test_form_wizard_custom', [], 'Next Page >');
+    $this->drupalPostForm('/webform/test_form_wizard_custom', [], 'Next Page >');
     $this->assertCurrentPage('Wizard page #2', 'wizard_2');
 
     // Check previous page is #1.

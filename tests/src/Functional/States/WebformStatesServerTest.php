@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\States;
 use Drupal\Component\Utility\Crypt;
 use Drupal\webform\Element\WebformOtherBase;
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform submission conditions (#states) validator.
@@ -484,17 +484,17 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
 
     // Check a and b sets target required page 1.
     $edit = ['a' => TRUE, 'b' => TRUE, 'c' => FALSE];
-    $this->drupalPostForm('webform/test_states_server_nested', $edit, t('Next Page >'));
+    $this->drupalPostForm('/webform/test_states_server_nested', $edit, t('Next Page >'));
     $this->assertRaw('page_1_target: [a and b] or c = required field is required.');
 
     // Check c sets target required page 1.
     $edit = ['a' => FALSE, 'b' => TRUE, 'c' => TRUE];
-    $this->drupalPostForm('webform/test_states_server_nested', $edit, t('Next Page >'));
+    $this->drupalPostForm('/webform/test_states_server_nested', $edit, t('Next Page >'));
     $this->assertRaw('page_1_target: [a and b] or c = required field is required.');
 
     // Check none sets target not required page 1.
     $edit = ['a' => FALSE, 'b' => FALSE, 'c' => FALSE];
-    $this->drupalPostForm('webform/test_states_server_nested', $edit, t('Next Page >'));
+    $this->drupalPostForm('/webform/test_states_server_nested', $edit, t('Next Page >'));
     $this->assertNoRaw('page_1_target: [a and b] or c = required field is required.');
 
     // Check none sets target not required page 2.
@@ -503,7 +503,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
 
     // Check a and b sets target required page 2.
     $edit = ['a' => TRUE, 'b' => TRUE, 'c' => FALSE, 'page_1_target' => '{value}'];
-    $this->drupalPostForm('webform/test_states_server_nested', $edit, t('Next Page >'));
+    $this->drupalPostForm('/webform/test_states_server_nested', $edit, t('Next Page >'));
     $this->assertNoRaw('<input data-drupal-selector="edit-page-2-target" type="text" id="edit-page-2-target" name="page_2_target" value="" size="60" maxlength="255" class="form-text" />');
     $this->assertRaw('<label for="edit-page-2-target" class="js-form-required form-required">page_2_target: [a and b] or c = required</label>');
     $this->assertRaw('<input data-drupal-selector="edit-page-2-target" type="text" id="edit-page-2-target" name="page_2_target" value="" size="60" maxlength="255" class="form-text required" required="required" aria-required="true" />');

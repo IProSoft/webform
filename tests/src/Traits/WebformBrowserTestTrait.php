@@ -237,7 +237,7 @@ trait WebformBrowserTestTrait {
    */
   protected function postSubmission(WebformInterface $webform, array $edit = [], $submit = NULL, array $options = []) {
     $submit = $this->getWebformSubmitButtonLabel($webform, $submit);
-    $this->drupalPostForm('webform/' . $webform->id(), $edit, $submit, $options);
+    $this->drupalPostForm('/webform/' . $webform->id(), $edit, $submit, $options);
     return $this->getLastSubmissionId($webform);
   }
 
@@ -258,7 +258,7 @@ trait WebformBrowserTestTrait {
    */
   protected function postSubmissionTest(WebformInterface $webform, array $edit = [], $submit = NULL, array $options = []) {
     $submit = $this->getWebformSubmitButtonLabel($webform, $submit);
-    $this->drupalPostForm('webform/' . $webform->id() . '/test', $edit, $submit, $options);
+    $this->drupalPostForm('/webform/' . $webform->id() . '/test', $edit, $submit, $options);
     return $this->getLastSubmissionId($webform);
   }
 

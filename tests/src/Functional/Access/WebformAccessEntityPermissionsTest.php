@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\Functional\Access;
 
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform entity permissions.
@@ -42,7 +42,7 @@ class WebformAccessEntityPermissionsTest extends WebformBrowserTestBase {
     $this->drupalLogin($own_account);
 
     // Check create own webform.
-    $this->drupalPostForm('admin/structure/webform/add', ['id' => 'test_own', 'title' => 'test_own'], t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/add', ['id' => 'test_own', 'title' => 'test_own'], t('Save'));
 
     // Check webform submission overview contains own webform.
     $this->drupalGet('/admin/structure/webform');

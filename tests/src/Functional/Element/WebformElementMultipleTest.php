@@ -30,7 +30,7 @@ class WebformElementMultipleTest extends WebformElementBrowserTestBase {
     $webform = Webform::load('test_element_multiple');
 
     // Check processing for all elements.
-    $this->drupalPostForm('webform/test_element_multiple', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_element_multiple', [], t('Submit'));
     $this->assertRaw("webform_multiple_default:
   - One
   - Two
@@ -176,7 +176,7 @@ webform_multiple_custom_attributes: {  }");
     $edit = [
       'webform_multiple_key[items][1][value]' => 'one',
     ];
-    $this->drupalPostForm('webform/test_element_multiple', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_multiple', $edit, t('Submit'));
     $this->assertRaw('The <em class="placeholder">Option value</em> \'one\' is already in use. It must be unique.');
 
     /**************************************************************************/
@@ -244,7 +244,7 @@ webform_multiple_custom_attributes: {  }");
     /**************************************************************************/
 
     // Check processing.
-    $this->drupalPostForm('webform/test_element_multiple_property', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_element_multiple_property', [], t('Submit'));
     $this->assertRaw('webform_element_multiple: false
 webform_element_multiple_true: true
 webform_element_multiple_false: false

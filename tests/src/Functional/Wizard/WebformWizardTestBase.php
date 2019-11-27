@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Wizard;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Defines an abstract test base for webform wizard tests.

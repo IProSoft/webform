@@ -4,7 +4,7 @@ namespace Drupal\Tests\webform\Functional\Settings;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform submission form confirmation.
@@ -96,12 +96,12 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $webform_confirmation_inline = Webform::load('test_confirmation_inline');
 
     // Check confirmation inline.
-    $this->drupalPostForm('webform/test_confirmation_inline', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_confirmation_inline', [], t('Submit'));
     $this->assertRaw('<a href="' . $webform_confirmation_inline->toUrl('canonical', ['absolute' => TRUE])->toString() . '" rel="prev" title="Back to form">Back to form</a>');
     $this->assertUrl('webform/test_confirmation_inline');
 
     // Check confirmation inline with custom query parameters.
-    $this->drupalPostForm('webform/test_confirmation_inline', [], t('Submit'), ['query' => ['custom' => 'param']]);
+    $this->drupalPostForm('/webform/test_confirmation_inline', [], t('Submit'), ['query' => ['custom' => 'param']]);
     $this->assertRaw('<a href="' . $webform_confirmation_inline->toUrl('canonical', ['absolute' => TRUE, 'query' => ['custom' => 'param']])->toString() . '" rel="prev" title="Back to form">Back to form</a>');
     $this->assertUrl('webform/test_confirmation_inline', ['query' => ['custom' => 'param']]);
 

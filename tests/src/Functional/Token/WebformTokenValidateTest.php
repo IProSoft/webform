@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Token;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform token element validation.

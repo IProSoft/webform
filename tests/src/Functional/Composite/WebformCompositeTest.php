@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Composite;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for composite elements.
@@ -59,7 +59,7 @@ class WebformCompositeTest extends WebformBrowserTestBase {
     /* Processing */
 
     // Check contact composite value.
-    $this->drupalPostForm('webform/test_composite', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_composite', [], t('Submit'));
     $this->assertRaw("contact_basic:
   name: 'John Smith'
   company: Acme
@@ -76,7 +76,7 @@ class WebformCompositeTest extends WebformBrowserTestBase {
     $edit = [
       'contact_basic[name]' => '',
     ];
-    $this->drupalPostForm('webform/test_composite', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_composite', $edit, t('Submit'));
     $this->assertRaw('Name field is required.');
 
     /* Custom options */

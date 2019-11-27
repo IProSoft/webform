@@ -139,7 +139,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
 
     $this->drupalLogin($this->adminSubmissionUser);
     // Edit the submission and insert 1 extra file into the multiple element.
-    $this->drupalPostForm('webform/' . $webform->id() . '/submissions/' . $sid . '/edit', [
+    $this->drupalPostForm('/webform/' . $webform->id() . '/submissions/' . $sid . '/edit', [
       'files[file_multiple][]' => \Drupal::service('file_system')->realpath($this->files[1]->uri),
     ], 'Save');
     $this->drupalLogout();

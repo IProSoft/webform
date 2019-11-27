@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\Functional\Handler;
 
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for email webform handler email states.
@@ -26,7 +26,7 @@ class WebformHandlerEmailStatesTest extends WebformBrowserTestBase {
     $webform = Webform::load('test_handler_email_states');
 
     // Check draft saved email.
-    $this->drupalPostForm('webform/test_handler_email_states', [], t('Save Draft'));
+    $this->drupalPostForm('/webform/test_handler_email_states', [], t('Save Draft'));
     $this->assertRaw('Debug: Email: Draft saved');
 
     // Check completed email.
@@ -84,7 +84,7 @@ class WebformHandlerEmailStatesTest extends WebformBrowserTestBase {
 
     // Check that resave draft handler automatically switches
     // states to completed.
-    $this->drupalPostForm('admin/structure/webform/manage/test_handler_email_states/handlers/email_draft/edit', [], t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/test_handler_email_states/handlers/email_draft/edit', [], t('Save'));
     $this->postSubmission($webform);
     $this->assertRaw('Debug: Email: Draft saved');
     $this->assertRaw('Debug: Email: Submission completed');

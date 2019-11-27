@@ -4,7 +4,7 @@ namespace Drupal\Tests\webform\Functional\Handler;
 
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for email webform handler rendering functionality.

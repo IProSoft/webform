@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Composite;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**

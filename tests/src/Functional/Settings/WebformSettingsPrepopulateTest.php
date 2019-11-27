@@ -4,7 +4,7 @@ namespace Drupal\Tests\webform\Functional\Settings;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform prepopulate settings.
@@ -71,7 +71,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
     /**************************************************************************/
 
     // Check prepopulating source entity.
-    $this->drupalPostForm('webform/test_form_prepopulate', [], t('Submit'), ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']]);
+    $this->drupalPostForm('/webform/test_form_prepopulate', [], t('Submit'), ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']]);
     $sid = $this->getLastSubmissionId($webform_prepopulate);
     $webform_submission = WebformSubmission::load($sid);
     $this->assertNotNull($webform_submission->getSourceEntity());
@@ -83,7 +83,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
     // Check disabling prepopulation source entity.
     $webform_prepopulate->setSetting('form_prepopulate_source_entity', FALSE);
     $webform_prepopulate->save();
-    $this->drupalPostForm('webform/test_form_prepopulate', [], t('Submit'), ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']]);
+    $this->drupalPostForm('/webform/test_form_prepopulate', [], t('Submit'), ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']]);
     $sid = $this->getLastSubmissionId($webform_prepopulate);
     $webform_submission = WebformSubmission::load($sid);
     $this->assert(!$webform_submission->getSourceEntity());
@@ -140,7 +140,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
     // Check query string parameters be be transfered from canonical to test.
     // @see webform_menu_local_tasks_alter
     $route_options = ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']];
-    $this->drupalGet('webform/test_form_prepopulate', $route_options);
+    $this->drupalGet('/webform/test_form_prepopulate', $route_options);
     $this->assertLinkByHref($webform_prepopulate->toUrl('canonical', $route_options)->toString());
   }
 

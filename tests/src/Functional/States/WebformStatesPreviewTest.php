@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\Functional\States;
 
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform states preview.

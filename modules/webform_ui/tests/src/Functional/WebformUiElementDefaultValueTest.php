@@ -30,7 +30,7 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
     /**************************************************************************/
 
     // Check validation when trying to set default value.
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/add/textfield', [], t('Set default value'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/textfield', [], t('Set default value'));
     $this->assertRaw('Key field is required.');
     $this->assertRaw('Title field is required.');
 
@@ -39,7 +39,7 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
       'key' => 'textfield',
       'properties[title]' => 'textfield',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/add/textfield', $edit, t('Set default value'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/textfield', $edit, t('Set default value'));
     $this->assertRaw('<label for="edit-default-value">textfield</label>');
     $this->assertFieldByName('default_value', '');
 
@@ -57,7 +57,7 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
       'properties[title]' => 'textfield',
       'properties[multiple][container][cardinality]' => '-1',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/add/textfield', $edit, t('Set default value'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/textfield', $edit, t('Set default value'));
     $this->assertFieldByName('default_value[items][0][_item_]', '');
 
     // Check setting the text field's default value.
@@ -73,7 +73,7 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
       'key' => 'address',
       'properties[title]' => 'address',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/add/webform_address', $edit, t('Set default value'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/webform_address', $edit, t('Set default value'));
     $this->assertFieldByName('default_value[address]', '');
     $this->assertFieldByName('default_value[address_2]', '');
 

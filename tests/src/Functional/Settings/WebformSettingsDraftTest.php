@@ -4,7 +4,7 @@ namespace Drupal\Tests\webform\Functional\Settings;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform submission form draft.
@@ -219,13 +219,13 @@ class WebformSettingsDraftTest extends WebformBrowserTestBase {
     $this->assertNoFieldByName('state', 'all');
 
     // Check autosave on submit with validation errors.
-    $this->drupalPostForm('webform/test_form_draft_authenticated', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_form_draft_authenticated', [], t('Submit'));
     $this->assertRaw('Name field is required.');
     $this->drupalGet('/webform/test_form_draft_authenticated');
     $this->assertRaw('You have an existing draft');
 
     // Check autosave on preview.
-    $this->drupalPostForm('webform/test_form_draft_authenticated', ['name' => 'John Smith'], t('Preview'));
+    $this->drupalPostForm('/webform/test_form_draft_authenticated', ['name' => 'John Smith'], t('Preview'));
     $this->assertRaw('Please review your submission.');
     $this->drupalGet('/webform/test_form_draft_authenticated');
     $this->assertRaw('You have an existing draft');

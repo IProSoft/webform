@@ -124,7 +124,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'select_other_basic[select]' => '_other_',
       'select_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Select other basic field is required.');
 
     // Check select other is not required when not selected.
@@ -132,7 +132,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'select_other_basic[select]' => '',
       'select_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertNoRaw('Select other basic field is required.');
 
     // Check select other required validation.
@@ -140,7 +140,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'select_other_advanced[select]' => '',
       'select_other_advanced[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Select other advanced field is required.');
 
     // Check select other processing w/ other min/max character validation.
@@ -148,7 +148,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'select_other_advanced[select]' => '_other_',
       'select_other_advanced[other]' => 'X',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Other must be longer than <em class="placeholder">4</em> characters but is currently <em class="placeholder">1</em> characters long.');
 
     // Check select other processing w/ other.
@@ -156,7 +156,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'select_other_advanced[select]' => '_other_',
       'select_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('select_other_advanced: Five');
 
     // Check select other processing w/o other.
@@ -165,7 +165,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       // This value is ignored, because 'select_other_advanced[select]' is not set to '_other_'.
       'select_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('select_other_advanced: One');
     $this->assertNoRaw('select_other_advanced: Five');
 
@@ -173,13 +173,13 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $elements = $webform->getElementsDecoded();
     $elements['select_other']['select_other_advanced']['#default_value'] = NULL;
     $webform->setElements($elements)->save();
-    $this->drupalPostForm('webform/test_element_other', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', [], t('Submit'));
     $this->assertRaw('Select other advanced field is required.');
 
     // Check select other validation is skipped when #access is set to FALSE.
     $elements['select_other']['select_other_advanced']['#access'] = FALSE;
     $webform->setElements($elements)->save();
-    $this->drupalPostForm('webform/test_element_other', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', [], t('Submit'));
     $this->assertNoRaw('Select other advanced field is required.');
 
     /**************************************************************************/
@@ -191,7 +191,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'radios_other_basic[radios]' => '_other_',
       'radios_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Radios other basic field is required.');
 
     // Check radios other not required when not checked.
@@ -199,7 +199,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'radios_other_basic[radios]' => 'One',
       'radios_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertNoRaw('Radios other basic field is required.');
 
     // Check radios other required validation.
@@ -207,7 +207,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'radios_other_advanced[radios]' => '_other_',
       'radios_other_advanced[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Radios other advanced field is required.');
 
     // Check radios other processing w/ other.
@@ -215,7 +215,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'radios_other_advanced[radios]' => '_other_',
       'radios_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('radios_other_advanced: Five');
 
     // Check radios other processing w/o other.
@@ -224,7 +224,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
       'radios_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('radios_other_advanced: One');
     $this->assertNoRaw('radios_other_advanced: Five');
 
@@ -237,7 +237,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'checkboxes_other_basic[checkboxes][_other_]' => TRUE,
       'checkboxes_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Checkboxes other basic field is required.');
 
     // Check checkboxes other not required when not checked.
@@ -245,7 +245,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'checkboxes_other_basic[checkboxes][_other_]' => FALSE,
       'checkboxes_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertNoRaw('Checkboxes other basic field is required.');
 
     // Check checkboxes other required validation.
@@ -256,7 +256,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'checkboxes_other_advanced[checkboxes][_other_]' => TRUE,
       'checkboxes_other_advanced[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Checkboxes other advanced field is required.');
 
     // Check checkboxes other processing w/ other.
@@ -267,7 +267,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'checkboxes_other_advanced[checkboxes][_other_]' => TRUE,
       'checkboxes_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('checkboxes_other_advanced:
   - Five');
 
@@ -280,7 +280,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
       'checkboxes_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('checkboxes_other_advanced:
   - One');
     $this->assertNoRaw('checkboxes_other_advanced:
@@ -295,7 +295,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'buttons_other_basic[buttons]' => '_other_',
       'buttons_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Buttons other basic field is required.');
 
     // Check buttons other not required when not checked.
@@ -303,7 +303,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'buttons_other_basic[buttons]' => 'One',
       'buttons_other_basic[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertNoRaw('Buttons other basic field is required.');
 
     // Check buttons other required validation.
@@ -311,7 +311,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'buttons_other_advanced[buttons]' => '_other_',
       'buttons_other_advanced[other]' => '',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('Buttons other advanced field is required.');
 
     // Check buttons other processing w/ other.
@@ -319,7 +319,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       'buttons_other_advanced[buttons]' => '_other_',
       'buttons_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('buttons_other_advanced: Five');
 
     // Check buttons other processing w/o other.
@@ -328,7 +328,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
       // This value is ignored, because 'buttons_other_advanced[buttons]' is not set to '_other_'.
       'buttons_other_advanced[other]' => 'Five',
     ];
-    $this->drupalPostForm('webform/test_element_other', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_other', $edit, t('Submit'));
     $this->assertRaw('buttons_other_advanced: One');
     $this->assertNoRaw('buttons_other_advanced: Five');
   }

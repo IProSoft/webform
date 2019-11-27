@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\States;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform states hidden.
@@ -39,7 +39,7 @@ class WebformStatesHiddenTest extends WebformBrowserTestBase {
    * Tests states hidden..
    */
   public function testFormStatesHidden() {
-    $this->drupalGet('webform/test_states_server_hidden');
+    $this->drupalGet('/webform/test_states_server_hidden');
 
     // Text field.
     $this->assertRaw('<div class="js-webform-states-hidden js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-dependent-textfield form-item-dependent-textfield">');

@@ -67,7 +67,7 @@ class WebformElementActionsTest extends WebformElementBrowserTestBase {
     // Check next button.
     $this->assertRaw('<input class="webform-button--next wizard_next_button_attributes button js-form-submit form-submit" style="color: yellow" data-drupal-selector="edit-actions-wizard-next" type="submit" id="edit-actions-wizard-next" name="op" value="Next Page &gt;" />');
 
-    $this->drupalPostForm('webform/test_element_actions_buttons', [], t('Next Page >'));
+    $this->drupalPostForm('/webform/test_element_actions_buttons', [], t('Next Page >'));
 
     // Check previous button.
     $this->assertRaw('<input formnovalidate="formnovalidate" class="webform-button--previous wizard_prev_button_attributes button js-form-submit form-submit" style="color: yellow" data-drupal-selector="edit-actions-wizard-prev" type="submit" id="edit-actions-wizard-prev" name="op" value="&lt; Previous Page" />');

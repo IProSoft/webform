@@ -82,14 +82,14 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
     $this->assertNoFieldById('edit-reset', 'reset');
 
     // Check results filtered by uuid.
-    $this->drupalPostForm('admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['search' => $submissions[0]->get('uuid')->value], t('Filter'));
+    $this->drupalPostForm('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['search' => $submissions[0]->get('uuid')->value], t('Filter'));
     $this->assertUrl('admin/structure/webform/manage/' . $webform->id() . '/results/submissions?search=' . $submissions[0]->get('uuid')->value);
     $this->assertRaw($submissions[0]->getElementData('first_name'));
     $this->assertNoRaw($submissions[1]->getElementData('first_name'));
     $this->assertNoRaw($submissions[2]->getElementData('first_name'));
 
     // Check results filtered by key(word).
-    $this->drupalPostForm('admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['search' => $submissions[0]->getElementData('first_name')], t('Filter'));
+    $this->drupalPostForm('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['search' => $submissions[0]->getElementData('first_name')], t('Filter'));
     $this->assertUrl('admin/structure/webform/manage/' . $webform->id() . '/results/submissions?search=' . $submissions[0]->getElementData('first_name'));
     $this->assertRaw($submissions[0]->getElementData('first_name'));
     $this->assertNoRaw($submissions[1]->getElementData('first_name'));
@@ -97,7 +97,7 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
     $this->assertFieldById('edit-reset', 'Reset');
 
     // Check results filtered by state:starred.
-    $this->drupalPostForm('admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['state' => 'starred'], t('Filter'));
+    $this->drupalPostForm('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['state' => 'starred'], t('Filter'));
     $this->assertUrl('admin/structure/webform/manage/' . $webform->id() . '/results/submissions?state=starred');
     $this->assertRaw('<option value="starred" selected="selected">Starred [1]</option>');
     $this->assertNoRaw($submissions[0]->getElementData('first_name'));
@@ -106,7 +106,7 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
     $this->assertFieldById('edit-reset', 'Reset');
 
     // Check results filtered by state:starred.
-    $this->drupalPostForm('admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['state' => 'locked'], t('Filter'));
+    $this->drupalPostForm('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions', ['state' => 'locked'], t('Filter'));
     $this->assertUrl('admin/structure/webform/manage/' . $webform->id() . '/results/submissions?state=locked');
     $this->assertRaw('<option value="locked" selected="selected">Locked [1]</option>');
     $this->assertNoRaw($submissions[0]->getElementData('first_name'));
@@ -161,7 +161,7 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
       'limit' => 20,
       'link_type' => 'table',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/' . $webform->id() . '/results/submissions/custom', $edit, t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions/custom', $edit, t('Save'));
     $this->assertRaw('The customized table has been saved.');
 
     // Check that table now link to table.

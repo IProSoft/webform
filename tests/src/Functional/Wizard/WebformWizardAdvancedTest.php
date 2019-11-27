@@ -48,7 +48,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $edit = [
       'first_name' => 'Jane',
     ];
-    $this->drupalPostForm('webform/test_form_wizard_advanced', $edit, t('Next Page >'));
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', $edit, t('Next Page >'));
     // Check progress bar is set to 'Contact Information'.
     $this->assertPattern('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--done">\s+<b>Your Information</b><span></span></li>#');
     $this->assertPattern('#<li data-webform-page="contact" class="webform-progress-bar__page webform-progress-bar__page--current">\s+<b>Contact Information</b></li>#');
@@ -99,7 +99,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $this->assertFieldChecked('edit-gender-female');
 
     // Move to next page (Contact Information).
-    $this->drupalPostForm('webform/test_form_wizard_advanced', [], t('Next Page >'));
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], t('Next Page >'));
     // Check nosave class.
     $this->assertRaw('js-webform-unsaved');
     // Check nosave attributes.
@@ -179,7 +179,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
       ->set('settings.default_wizard_next_button_label', '{global wizard next}')
       ->set('settings.default_wizard_prev_button_label', '{global wizard previous}')
       ->save();
-    $this->drupalPostForm('webform/test_form_wizard_advanced', [], t('{global wizard next}'));
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], t('{global wizard next}'));
 
     // Check progress bar.
     $this->assertRaw('class="webform-progress-bar"');
@@ -199,7 +199,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $webform->save();
 
     // Check webform next and previous button labels.
-    $this->drupalPostForm('webform/test_form_wizard_advanced', [], t('{webform wizard next}'));
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], t('{webform wizard next}'));
     // Check previous button.
     $this->assertFieldById('edit-actions-wizard-prev', '{webform wizard previous}');
     // Check next button.
@@ -211,7 +211,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $elements['contact']['#prev_button_label'] = '{elements wizard previous}';
     $webform->set('elements', Yaml::encode($elements));
     $webform->save();
-    $this->drupalPostForm('webform/test_form_wizard_advanced', [], t('{webform wizard next}'));
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], t('{webform wizard next}'));
 
     // Check previous button.
     $this->assertFieldById('edit-actions-wizard-prev', '{elements wizard previous}');

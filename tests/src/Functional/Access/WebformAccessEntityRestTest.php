@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\Functional\Access;
 
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform entity REST access.

@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Handler;
 use Drupal\webform\Element\WebformSelectOther;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for basic email webform handler functionality.
@@ -74,7 +74,7 @@ class WebformHandlerEmailBasicTest extends WebformBrowserTestBase {
       'Test that "double quotes" are not encoded.',
     ]);
 
-    $this->drupalPostForm('admin/structure/webform/manage/test_handler_email/handlers/email/edit', ['settings[body]' => WebformSelectOther::OTHER_OPTION, 'settings[body_custom_text]' => $body], t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/test_handler_email/handlers/email/edit', ['settings[body]' => WebformSelectOther::OTHER_OPTION, 'settings[body_custom_text]' => $body], t('Save'));
 
     $sid = $this->postSubmission($webform);
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
@@ -102,7 +102,7 @@ class WebformHandlerEmailBasicTest extends WebformBrowserTestBase {
       'settings[body]' => '_other_',
       'settings[body_custom_text]' => '[webform_submission:values][webform_submission:values:message:value]',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/test_handler_email/handlers/email/edit', $edit, t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/test_handler_email/handlers/email/edit', $edit, t('Save'));
 
     // Check special characters in message value.
     $edit = [

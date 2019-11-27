@@ -32,7 +32,7 @@ class WebformElementPatternTest extends WebformElementBrowserTestBase {
       'pattern_error' => 'GoodBye',
       'pattern_unicode' => 'Unicode',
     ];
-    $this->drupalPostForm('webform/test_element_pattern', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_pattern', $edit, t('Submit'));
     $this->assertRaw('<li class="messages__item"><em class="placeholder">pattern</em> field is not in the right format.</li>');
     $this->assertRaw('<li class="messages__item">You did not enter &#039;Hello&#039;</li>');
     $this->assertRaw('<li class="messages__item"><em class="placeholder">pattern_unicode</em> field is not in the right format.</li>');
@@ -43,7 +43,7 @@ class WebformElementPatternTest extends WebformElementBrowserTestBase {
       'pattern_error' => 'Hello',
       'pattern_unicode' => '⺏',
     ];
-    $this->drupalPostForm('webform/test_element_pattern', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_pattern', $edit, t('Submit'));
     $this->assertNoRaw('<li class="messages__item"><em class="placeholder">pattern</em> field is not in the right format.</li>');
     $this->assertNoRaw('<li class="messages__item">You did not enter &#039;Hello&#039;</li>');
     $this->assertNoRaw('<li class="messages__item"><em class="placeholder">pattern_unicode</em> field is not in the right format.</li>');

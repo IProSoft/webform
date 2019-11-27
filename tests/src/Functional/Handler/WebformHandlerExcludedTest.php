@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Handler;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for the webform handler excluded.

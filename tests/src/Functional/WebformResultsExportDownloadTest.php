@@ -51,7 +51,7 @@ class WebformResultsExportDownloadTest extends WebformBrowserTestBase {
 
     // Download tar ball archive with CSV.
     $edit = ['files' => TRUE];
-    $this->drupalPostForm('admin/structure/webform/manage/test_element_managed_file/results/download', $edit, t('Download'));
+    $this->drupalPostForm('/admin/structure/webform/manage/test_element_managed_file/results/download', $edit, t('Download'));
 
     // Load the tar and get a list of files.
     $tar = new ArchiveTar($submission_exporter->getArchiveFilePath(), 'gz');
@@ -82,7 +82,7 @@ class WebformResultsExportDownloadTest extends WebformBrowserTestBase {
       'files' => TRUE,
       'exporter' => 'yaml',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/test_element_managed_file/results/download', $edit, t('Download'));
+    $this->drupalPostForm('/admin/structure/webform/manage/test_element_managed_file/results/download', $edit, t('Download'));
 
     // Load the tar and get a list of files.
     $tar = new ArchiveTar($submission_exporter->getArchiveFilePath(), 'gz');

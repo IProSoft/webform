@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Composite;
 
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for custom composite element.
@@ -42,7 +42,7 @@ class WebformCompositeCustomTest extends WebformBrowserTestBase {
     /* Processing */
 
     // Check contact composite value.
-    $this->drupalPostForm('webform/test_composite_custom', [], t('Submit'));
+    $this->drupalPostForm('/webform/test_composite_custom', [], t('Submit'));
     $this->assertRaw("webform_custom_composite_basic:
   - first_name: John
     last_name: Smith

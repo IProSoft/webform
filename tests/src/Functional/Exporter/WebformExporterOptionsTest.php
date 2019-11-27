@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\Functional\Exporter;
 
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for the webform exporter options.

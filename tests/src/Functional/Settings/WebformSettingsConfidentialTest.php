@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Settings;
 use Drupal\user\Entity\Role;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for confidential webform submissions.

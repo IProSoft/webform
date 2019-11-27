@@ -40,7 +40,7 @@ class WebformElementTableTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<input data-drupal-selector="edit-table-1-first-name" type="text" id="edit-table-1-first-name" name="table__1__first_name" value="John" size="20" maxlength="255" class="form-text" />');
 
     // Check rendering.
-    $this->drupalPostForm('webform/test_element_table', [], t('Preview'));
+    $this->drupalPostForm('/webform/test_element_table', [], t('Preview'));
     $this->assertRaw('<th>First Name</th>');
     $this->assertRaw('<th>Last Name</th>');
     $this->assertRaw('<th>Gender</th>');
@@ -71,7 +71,7 @@ class WebformElementTableTest extends WebformElementBrowserTestBase {
       'webform_tableselect_sort_custom[four][checkbox]' => TRUE,
       'webform_tableselect_sort_custom[five][checkbox]' => TRUE,
     ];
-    $this->drupalPostForm('webform/test_element_table', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_table', $edit, t('Submit'));
     $this->assertRaw("webform_tableselect_sort_custom:
   - five
   - four
@@ -91,7 +91,7 @@ class WebformElementTableTest extends WebformElementBrowserTestBase {
       'webform_table_sort_custom[four][weight]' => '1',
       'webform_table_sort_custom[five][weight]' => '0',
     ];
-    $this->drupalPostForm('webform/test_element_table', $edit, t('Submit'));
+    $this->drupalPostForm('/webform/test_element_table', $edit, t('Submit'));
     $this->assertRaw("webform_table_sort_custom:
   - five
   - four

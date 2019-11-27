@@ -51,7 +51,7 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
 
     // Get test webform preview with test values.
     $this->drupalLogin($this->rootUser);
-    $this->drupalPostForm('webform/test_element_media_file/test', [], t('Preview'));
+    $this->drupalPostForm('/webform/test_element_media_file/test', [], t('Preview'));
 
     // Check audio file preview.
     $this->assertRaw('<source src="' . $this->getAbsoluteUrl('/system/files/webform/test_element_media_file/_sid_/audio_file_mp3.mp3') . '" type="audio/mpeg">');

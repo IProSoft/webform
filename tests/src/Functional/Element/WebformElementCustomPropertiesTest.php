@@ -52,7 +52,7 @@ class WebformElementCustomPropertiesTest extends WebformElementBrowserTestBase {
     $edit = [
       'properties[custom_data]' => '',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/name/edit', $edit, t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/name/edit', $edit, t('Save'));
 
     // Get updated contact webform.
     $webform_storage->resetCache();
@@ -66,7 +66,7 @@ class WebformElementCustomPropertiesTest extends WebformElementBrowserTestBase {
     $edit = [
       'properties[custom_data]' => 'custom-data',
     ];
-    $this->drupalPostForm('admin/structure/webform/manage/contact/element/name/edit', $edit, t('Save'));
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/name/edit', $edit, t('Save'));
 
     // Get updated contact webform.
     $webform_storage->resetCache();

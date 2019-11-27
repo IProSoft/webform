@@ -69,7 +69,7 @@ class WebformElementValidateUniqueTest extends WebformElementBrowserTestBase {
     $edit = [
       'unique_textfield_multiple[add][more_items]' => 2,
     ];
-    $this->drupalPostForm('webform/test_element_validate_unique', $edit, 'unique_textfield_multiple_table_add');
+    $this->drupalPostForm('/webform/test_element_validate_unique', $edit, 'unique_textfield_multiple_table_add');
 
     $edit = [
       'unique_textfield_multiple[items][0][_item_]' => '{same}',

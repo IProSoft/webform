@@ -4,7 +4,7 @@ namespace Drupal\Tests\webform\Functional\Access;
 
 use Drupal\user\Entity\Role;
 use Drupal\webform\Entity\Webform;
-use \Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform submission permissions.
