@@ -1144,6 +1144,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'validation',
     ];
 
+    // Webform Handler: Compare Fields.
+    $projects['webform_handler_compare_fields'] = [
+      'title' => $this->t('Webform Handler: Compare Fields'),
+      'description' => $this->t('Validation handler to compare two fields on a webform.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_handler_compare_fields'),
+      'category' => 'validation',
+    ];
+
     /**************************************************************************/
     // Web services.
     /**************************************************************************/
