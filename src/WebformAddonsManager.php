@@ -346,14 +346,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
-    // Enhancement: Webform IP Tracking.
-    $projects['webform_ip_track'] = [
-      'title' => $this->t('Webform IP Tracking'),
-      'description' => $this->t('Provides IP location details as custom tokens to use in webform submission values.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_ip_track'),
-      'category' => 'enhancement',
-    ];
-
     // Enhancement: Webform OCR.
     $projects['webform_ocr'] = [
       'title' => $this->t('Webform Webform OCR'),
