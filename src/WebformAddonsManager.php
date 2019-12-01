@@ -701,6 +701,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform to Paypal.
+    $projects['webform_to_paypal'] = [
+      'title' => $this->t('Webform to Paypal'),
+      'description' => $this->t('Adds extra fields and settings to webforms to integrate with Paypal.'),
+      'url' => Url::fromUri('https://github.com/IE-Digital/webform_to_paypal'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Webform User Registration.
     $projects['webform_user_registration'] = [
       'title' => $this->t('Webform User Registration'),
