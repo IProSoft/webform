@@ -13,7 +13,6 @@ test_dependencies:
   - 'bootstrap:bootstrap'
   - 'captcha:captcha'
   - 'chosen:chosen'
-  - 'group:group'
   - 'jsonapi:jsonapi'
   - 'mailsystem:mailsystem'
   - 'select2:select2'

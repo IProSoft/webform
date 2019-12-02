@@ -896,8 +896,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       'webform' => $webform,
       'webform_submission' => $webform_submission,
     ];
-    $modules = \Drupal::moduleHandler()
-      ->getImplementations('webform_element_access');
+    $modules = \Drupal::moduleHandler()->getImplementations('webform_element_access');
     foreach ($modules as $module) {
       $hook = $module . '_webform_element_access';
       $hook_result = $hook($operation, $element, $account, $context);
@@ -925,7 +924,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    * @see \Drupal\webform\Entity\Webform::checkAccessRule
    */
   protected function checkAccessRule(array $element, $operation, AccountInterface $account) {
-    // If no access rules are set return NULL (no opinion).
+    // If no access rules are set return TRUE.
     // @see \Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties
     if (!isset($element['#access_' . $operation . '_roles'])
       && !isset($element['#access_' . $operation . '_users'])
