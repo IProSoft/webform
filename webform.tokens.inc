@@ -62,6 +62,10 @@ function webform_token_info() {
     'name' => t('IP address'),
     'description' => t('The IP address that was used when submitting the webform submission.'),
   ];
+  $webform_submission['source-title'] = [
+    'name' => t('Source URL'),
+    'description' => t('The Title of the source entity or webform.'),
+  ];
   $webform_submission['source-url'] = [
     'name' => t('Source URL'),
     'description' => t('The URL the user submitted the webform submission.'),
