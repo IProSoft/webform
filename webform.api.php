@@ -42,7 +42,6 @@ function hook_webform_source_entity_info_alter(array &$definitions) {
   }
 }
 
-
 /**
  * Alter webform elements.
  *
@@ -189,7 +188,6 @@ function hook_webform_element_access($operation, array &$element, \Drupal\Core\S
 
   return !empty($element['#confidential']) ? \Drupal\Core\Access\AccessResult::forbidden() : \Drupal\Core\Access\AccessResult::neutral();
 }
-
 
 /**
  * Return information about input masks for text based webform elements.
@@ -617,6 +615,24 @@ function hook_webform_message_custom($operation, $id) {
         \Drupal::state()->delete($id);
         return NULL;
     }
+  }
+}
+
+/**
+ * Alter webform submission query access.
+ *
+ * @param \Drupal\Core\Database\Query\AlterableInterface $query
+ *   An Query object describing the composite parts of a SQL query.
+ * @param array $webform_submission_tables
+ *   An array webform submission tables that contains the table's alias and
+ *   OR conditions which are used to build the alter query.
+ *
+ * @see webform_query_webform_submission_access_alter()
+ */
+function hook_webform_submission_query_access_alter(\Drupal\Core\Database\Query\AlterableInterface $query, array $webform_submission_tables) {
+  // Always allow the current user access to their submissions.
+  foreach ($webform_submission_tables as $table) {
+    $table['condition']->condition($table['alias'] . '.uid', \Drupal::currentUser()->id());
   }
 }
 
