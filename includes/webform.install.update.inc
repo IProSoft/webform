@@ -2995,7 +2995,7 @@ function webform_update_8157() {
  * Issue #3023863: Typo in State/Province codes options.
  */
 function webform_update_8158() {
-  /** \Drupal\webform\WebformOptionsInterface $webform_options */
+  /** @var \Drupal\webform\WebformOptionsInterface $webform_options */
   $webform_options = WebformOptions::load('state_province_codes');
   if (!$webform_options) {
     return;
@@ -3251,7 +3251,7 @@ function _webform_update_8173(array &$element) {
 }
 
 /**
- * Issue #3084531: Allow Email handler add additional parameters
+ * Issue #3084531: Allow Email handler add additional parameters.
  */
 function webform_update_8174() {
   _webform_update_webform_handler_settings();

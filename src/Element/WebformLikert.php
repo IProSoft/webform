@@ -275,7 +275,7 @@ class WebformLikert extends FormElement {
   /**
    * {@inheritdoc}
    */
-  public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
+  static public function valueCallback(&$element, $input, FormStateInterface $form_state) {
     $default_value = [];
     foreach ($element['#questions'] as $question_key => $question_title) {
       $default_value[$question_key] = NULL;
@@ -309,7 +309,7 @@ class WebformLikert extends FormElement {
    * @param array $element
    *   An element.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current form's status
+   *   The current form's state.
    */
   public static function setRequiredError(array &$element, FormStateInterface $form_state) {
     $value = $element['#value'];

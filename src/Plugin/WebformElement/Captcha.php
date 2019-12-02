@@ -151,25 +151,6 @@ class Captcha extends WebformElementBase {
       }
     }
 
-//    $captcha_types = ['default' => $this->t('Default challenge type')];
-//    if (\Drupal::moduleHandler()->moduleExists('captcha')) {
-//      if (\Drupal::hasService('captcha.helper')) {
-//        /** @var \Drupal\captcha\Service\CaptchaService $captcha_helper */
-//        $captcha_helper = \Drupal::service('captcha.helper');
-//        $captcha_types = $captcha_helper->getAvailableChallengeTypes() ?: $captcha_types;
-//      }
-//      else {
-//        // @todo Webform 8.x-6.x: Remove the below code.
-//        // Issue #3086495: Remove deprecated _captcha_available_challenge_types
-//        // function.
-//        // @see https://www.drupal.org/project/captcha/issues/3086495
-//        module_load_include('inc', 'captcha', 'captcha.admin');
-//        if (function_exists('_captcha_available_challenge_types')) {
-//          $captcha_types = _captcha_available_challenge_types();
-//        }
-//      }
-//    }
-
     $form['captcha'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('CAPTCHA settings'),

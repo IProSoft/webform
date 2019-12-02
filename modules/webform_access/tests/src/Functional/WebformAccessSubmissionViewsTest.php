@@ -11,7 +11,6 @@ use Drupal\webform\WebformInterface;
  *
  * @group WebformAccess
  */
-// class WebformAccessSubmissionViewsTest extends WebformAccessTestBase {
 class WebformAccessSubmissionViewsTest extends WebformAccessBrowserTestBase {
 
   /**

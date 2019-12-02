@@ -12,7 +12,6 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformYaml;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

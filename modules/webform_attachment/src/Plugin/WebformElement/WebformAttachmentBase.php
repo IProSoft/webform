@@ -51,7 +51,6 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
     return $properties;
   }
 
-
   /**
    * {@inheritdoc}
    */

@@ -63,14 +63,11 @@ trait WebformEntityInjectionTrait {
   /**
    * Set webform and webform submission entity.
    *
-   * @param \Drupal\webform\WebformInterface|\Drupal\webform\WebformSubmissionInterface $entity
-   *   A webform or webform submission entity.
-   *
-   * @return $this
-   *   This webform handler.
+   * @return \Drupal\webform\WebformSubmissionInterface
+   *   A webform submission.
    *
    * @throws \Exception
-   *   Throw exception if entity type is not a webform or webform submission
+   *   Throw exception if entity type is not a webform or webform submission.
    */
   public function getWebformSubmission() {
     return $this->webformSubmission;

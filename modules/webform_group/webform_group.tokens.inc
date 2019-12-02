@@ -126,7 +126,6 @@ function webform_group_tokens($type, $tokens, array $data, array $options, Bubbl
           $token_role_id = $group_type_role_id;
         }
 
-
         // If token role id is *-member get all members.
         if ($token_role_id === "$group_type_id-member") {
           $members = $group->getMembers();

@@ -13,7 +13,7 @@ interface WebformGroupManagerInterface {
   /**
    * Determine if the group owner token is enabled.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the group owner token is enabled.
    */
   public function isGroupOwnerTokenEnable();
@@ -21,7 +21,7 @@ interface WebformGroupManagerInterface {
   /**
    * Determine if the group role token is enabled.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the group role token is enabled.
    */
   public function isGroupRoleTokenEnabled($group_role_id);

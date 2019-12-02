@@ -62,17 +62,18 @@ class WebformExampleComposite extends WebformCompositeBase {
   /**
    * Performs the after_build callback.
    */
-  static public function afterBuild(array $element, FormStateInterface $form_state) {
+  public static function afterBuild(array $element, FormStateInterface $form_state) {
     // Add #states targeting the specific element and table row.
     preg_match('/^(.+)\[[^]]+]$/', $element['#name'], $match);
     $composite_name = $match[1];
     $element['#states']['disabled'] = [
       [':input[name="' . $composite_name . '[first_name]"]' => ['empty' => TRUE]],
-      [':input[name="' . $composite_name . '[last_name]"]'=> ['empty' => TRUE]],
+      [':input[name="' . $composite_name . '[last_name]"]' => ['empty' => TRUE]],
     ];
     // Add .js-form-wrapper to wrapper (ie td) to prevent #states API from
     // disabling the entire table row when this element is disabled.
     $element['#wrapper_attributes']['class'][] = 'js-form-wrapper';
     return $element;
   }
+
 }

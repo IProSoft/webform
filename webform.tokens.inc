@@ -734,7 +734,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
     if (($submitted_to_tokens = $token_service->findWithPrefix($tokens, 'submitted-to')) && ($submitted_to = $webform_submission->getSourceEntity(TRUE) ?: $webform_submission->getWebform())) {
       $replacements += $token_service->generate($submitted_to->getEntityTypeId(), $submitted_to_tokens, [$submitted_to->getEntityTypeId() => $submitted_to], $options, $bubbleable_metadata);
     }
-    foreach(['view-url', 'update-url', 'source-url'] as $token) {
+    foreach (['view-url', 'update-url', 'source-url'] as $token) {
       if ($url_tokens = $token_service->findWithPrefix($tokens, $token)) {
         $url = NULL;
         switch ($token) {

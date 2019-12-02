@@ -20,7 +20,7 @@ use Drupal\webform\WebformSubmissionInterface;
  * @see \Drupal\webform\Plugin\WebformElementManagerInterface
  * @see plugin_api
  */
-interface WebformElementInterface extends PluginInspectionInterface, PluginFormInterface, ContainerFactoryPluginInterface, WebformEntityInjectionInteface  {
+interface WebformElementInterface extends PluginInspectionInterface, PluginFormInterface, ContainerFactoryPluginInterface, WebformEntityInjectionInterface {
 
   /****************************************************************************/
   // Property methods.

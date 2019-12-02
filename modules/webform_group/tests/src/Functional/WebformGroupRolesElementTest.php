@@ -62,7 +62,7 @@ class WebformGroupRolesElementTest extends WebformGroupBrowserTestBase {
     // Check posting group role.
     $edit = [
       'webform_group_roles' => ['custom', 'member'],
-      'webform_group_roles_advanced' => 'custom'
+      'webform_group_roles_advanced' => 'custom',
     ];
     $this->postSubmission($webform, $edit);
     $this->assertRaw('webform_group_roles:

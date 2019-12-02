@@ -264,7 +264,7 @@ class ActionWebformHandler extends WebformHandlerBase {
       $this->configuration['sticky'] = NULL;
     }
 
-    // Cleanup locked.'
+    // Cleanup locked.
     if ($form_state->getValue('locked') === '') {
       $this->configuration['locked'] = NULL;
     }

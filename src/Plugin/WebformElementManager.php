@@ -35,7 +35,6 @@ class WebformElementManager extends DefaultPluginManager implements FallbackPlug
   protected $themeHandler;
 
   /**
-  /**
    * The configuration object factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface

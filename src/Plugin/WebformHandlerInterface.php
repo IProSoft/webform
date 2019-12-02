@@ -265,7 +265,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * @return $this
    *   This webform handler.
    *
-   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInteface.
+   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInterface.
    */
   public function setWebform(WebformInterface $webform);
 
@@ -275,7 +275,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * @return \Drupal\webform\WebformInterface
    *   A webform.
    *
-   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInteface.
+   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInterface.
    */
   public function getWebform();
 
@@ -288,7 +288,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * @return $this
    *   This webform handler.
    *
-   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInteface.
+   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInterface.
    */
   public function setWebformSubmission(WebformSubmissionInterface $webform_submission = NULL);
 
@@ -298,7 +298,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * @return \Drupal\webform\WebformSubmissionInterface
    *   A webform submission.
    *
-   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInteface.
+   * @todo Webform 8.x-6.x: Replace with WebformEntityInjectionInterface.
    */
   public function getWebformSubmission();
 
@@ -501,7 +501,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    *   The account trying to access the entity.
    *
    * @return \Drupal\Core\Core\AccessResultInterface
-   *    The result of the access check. No option returns a nuetral result.
+   *   The result of the access check. No option returns a nuetral result.
    */
   public function access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account = NULL);
 
@@ -556,7 +556,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    *   The account trying to access the entity.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
-   *    The result of the access check. Defaults to neutral.
+   *   The result of the access check. Defaults to neutral.
    */
   public function accessElement(array &$element, $operation, AccountInterface $account = NULL);
 

@@ -18,7 +18,6 @@ function webform_test_element_input_masks_webform_element_input_masks() {
   return $input_masks;
 }
 
-
 /**
  * Implements hook_webform_element_input_masks_alter().
  */

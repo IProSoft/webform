@@ -426,14 +426,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-//    // Integrations: Donorbox.
-//    $projects['donorbox'] = [
-//      'title' => $this->t('Donorbox'),
-//      'description' => $this->t('Provides integration with Donorbox'),
-//      'url' => Url::fromUri('https://www.drupal.org/project/donorbox'),
-//      'category' => 'integration',
-//    ];
-
     // Integrations: Druminate Webforms.
     $projects['druminate'] = [
       'title' => $this->t('Druminate Webforms'),

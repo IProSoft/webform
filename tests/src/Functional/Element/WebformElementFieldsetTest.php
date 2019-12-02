@@ -36,7 +36,7 @@ class WebformElementFieldsetTest extends WebformElementBrowserTestBase {
     // Check fieldset title_display: invisible.
     $this->assertRaw('<span class="visually-hidden fieldset-legend">fieldset_title_invisible</span>');
 
-    // Check fieldset title_display: none
+    // Check fieldset title_display: none.
     $this->assertRaw('<legend style="display:none">');
     $this->assertRaw('<span class="fieldset-legend"></span>');
 

@@ -69,7 +69,7 @@ function hook_webform_source_entity_info_alter(array &$definitions) {
  *
  *   Sub-element's can have properties defined using #SUB_ELEMENT__PROPERTY.
  *   For example, an other element's placeholder can be defined using
- *   the #other__placeholder property
+ *   the #other__placeholder property.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current state of the form.
  * @param array $context
@@ -91,6 +91,7 @@ function hook_webform_element_alter(array &$element, \Drupal\Core\Form\FormState
   // Add custom data attributes to all elements.
   $element['#attributes']['data-custom'] = '{custom data goes here}';
 }
+
 /**
  * Alter webform elements for a specific type.
  *
@@ -122,7 +123,7 @@ function hook_webform_element_alter(array &$element, \Drupal\Core\Form\FormState
  *
  *   Sub-element's can have properties defined using #SUB_ELEMENT__PROPERTY.
  *   For example, an other element's placeholder can be defined using
- *   the #other__placeholder property
+ *   the #other__placeholder property.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current state of the form.
  * @param array $context
@@ -169,7 +170,7 @@ function hook_webform_element_ELEMENT_TYPE_alter(array &$element, \Drupal\Core\F
  *
  *   Sub-element's can have properties defined using #SUB_ELEMENT__PROPERTY.
  *   For example, an other element's placeholder can be defined using
- *   the #other__placeholder property
+ *   the #other__placeholder property.
  * @param \Drupal\Core\Session\AccountInterface|null $account
  *   (optional) If provided, only those formats that are allowed for this user
  *   account will be returned. All enabled formats will be returned otherwise.
@@ -204,7 +205,7 @@ function hook_webform_element_input_masks() {
     'example' => '01/01/2000',
     'mask' => 'dd/mm/yyyy',
   ];
-	return $input_masks;
+  return $input_masks;
 }
 
 /**

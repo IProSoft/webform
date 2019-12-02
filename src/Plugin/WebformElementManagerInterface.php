@@ -107,7 +107,7 @@ interface WebformElementManagerInterface extends PluginManagerInterface, CachedD
    *   A webform element plugin instance
    *
    * @throws \Exception
-   *   Throw exception if entity type is not a webform or webform submission
+   *   Throw exception if entity type is not a webform or webform submission.
    */
   public function getElementInstance(array $element, EntityInterface $entity = NULL);
 

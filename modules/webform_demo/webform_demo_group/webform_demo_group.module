@@ -24,7 +24,6 @@ function webform_demo_group_block_access(Block $block, $operation, AccountInterf
     // Get the current route group context.
     // @see \Drupal\group\Context\GroupRouteContext;
     // @see \Drupal\group\Plugin\views\access\GroupPermission
-
     /** @var \Drupal\Core\Plugin\Context\ContextProviderInterface $context_provider */
     $context_provider = \Drupal::service('group.group_route_context');
     $contexts = $context_provider->getRuntimeContexts(['group']);

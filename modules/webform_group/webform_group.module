@@ -46,7 +46,7 @@ function webform_group_config_schema_info_alter(&$definitions) {
  * Adds group role token options to email handler elements.
  */
 function webform_group_form_webform_handler_form_alter(&$form, FormStateInterface $form_state) {
-  /** @var \Drupal\webform\Form\WebformHandlerFormBase $form_object  */
+  /** @var \Drupal\webform\Form\WebformHandlerFormBase $form_object */
   $form_object = $form_state->getFormObject();
   $webform_handler = $form_object->getWebformHandler();
   if (!$webform_handler instanceof EmailWebformHandler) {
@@ -99,7 +99,7 @@ function webform_group_form_webform_handler_form_alter(&$form, FormStateInterfac
   }
 
   if ($group_role_options) {
-   _webform_group_form_webform_handler_form_alter_email_element_recursive($form, $group_role_options);
+    _webform_group_form_webform_handler_form_alter_email_element_recursive($form, $group_role_options);
   }
 
   if (empty($group_role_options) && \Drupal::currentUser()->hasPermission('administer webform')) {
@@ -247,7 +247,6 @@ function webform_group_form_webform_ui_element_form_alter(&$form, FormStateInter
   $form_state->set('default_properties', $default_properties);
 }
 
-
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -274,6 +273,9 @@ function webform_group_form_webform_admin_config_handlers_form_alter(&$form, For
   $form['#submit'][] = '_webform_group_form_webform_admin_config_handlers_form_submit';
 }
 
+/**
+ * Submit handler for handlers configuration form.
+ */
 function _webform_group_form_webform_admin_config_handlers_form_submit(&$form, FormStateInterface $form_state) {
   \Drupal::configFactory()->getEditable('webform_group.settings')
     ->set('mail', $form_state->getValue('webform_group_mail'))

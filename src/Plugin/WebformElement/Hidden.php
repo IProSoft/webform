@@ -23,9 +23,9 @@ class Hidden extends TextBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    // Include only the access-view-related base properties
+    // Include only the access-view-related base properties.
     $access_properties = $this->getDefaultBaseProperties();
-    $access_properties = array_filter($access_properties, function($access_default, $access_key) {
+    $access_properties = array_filter($access_properties, function ($access_default, $access_key) {
       return strpos($access_key, 'access_') === 0;
     }, ARRAY_FILTER_USE_BOTH);
 
