@@ -763,6 +763,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'mail',
     ];
 
+    // Mail: Queue Mail.
+    $projects['queue_mail'] = [
+      'title' => $this->t('Queue Mail'),
+      'description' => $this->t('Queues webform email sending so that instead of being sent immediately it is sent on cron or via some other queue processor.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/queue_mail'),
+      'category' => 'mail',
+    ];
+
     // Mail: SMTP Authentication Support.
     $projects['smtp'] = [
       'title' => $this->t('SMTP Authentication Support'),
