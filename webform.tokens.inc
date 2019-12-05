@@ -91,11 +91,11 @@ function webform_token_info() {
   ];
   $webform_submission['current-page'] = [
     'name' => t('Current page'),
-    'description' => t('The current (wizard) page of the webform submission.'),
+    'description' => t('The current (last submitted) wizard page of the webform submission.'),
   ];
   $webform_submission['current-page:title'] = [
     'name' => t('Current page title'),
-    'description' => t('The current (wizard) page title of the webform submission.'),
+    'description' => t('The current (last submitted) wizard page title of the webform submission.'),
   ];
   $webform_submission['in-draft'] = [
     'name' => t('In draft'),
