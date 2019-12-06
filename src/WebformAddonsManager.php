@@ -278,6 +278,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Summation Field.
+    $projects['webform_summation_field'] = [
+      'title' => $this->t('Webform Summation Field'),
+      'description' => $this->t('Provides a webform summation field to collect the values of other fields.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_summation_field'),
+      'category' => 'element',
+    ];
+
     /**************************************************************************/
     // Enhancement.
     /**************************************************************************/
