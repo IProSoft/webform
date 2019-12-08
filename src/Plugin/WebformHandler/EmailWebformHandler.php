@@ -651,12 +651,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // Elements.
     $form['elements'] = [
       '#type' => 'details',
-      '#title' => $this->t('Included email values'),
+      '#title' => $this->t('Included email values/markup'),
       '#description' => $this->t('The selected elements will be included in the [webform_submission:values] token. Individual values may still be printed if explicitly specified as a [webform_submission:values:?] in the email body template.'),
       '#open' => $this->configuration['excluded_elements'] ? TRUE : FALSE,
     ];
     $form['elements']['excluded_elements'] = [
       '#type' => 'webform_excluded_elements',
+      '#exclude_markup' => FALSE,
       '#webform_id' => $this->webform->id(),
       '#default_value' => $this->configuration['excluded_elements'],
     ];
