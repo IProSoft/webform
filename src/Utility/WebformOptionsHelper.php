@@ -26,12 +26,12 @@ class WebformOptionsHelper {
    *   An associative array of options.
    */
   public static function appendValueToText(array $options) {
-    foreach ($options as $value => $text) {
-      if (is_array($text)) {
-        $options[$value] = self::appendValueToText($text);
+    foreach ($options as $option_value => $option_text) {
+      if (is_array($option_text)) {
+        $options[$option_value] = self::appendValueToText($option_text);
       }
       else {
-        $options[$value] = $text . ' (' . $value . ')';
+        $options[$option_value] = $option_text . ' (' . $option_value . ')';
       }
     }
     return $options;
@@ -234,10 +234,10 @@ class WebformOptionsHelper {
    */
   public static function encodeConfig(array $options) {
     $config = [];
-    foreach ($options as $value => $text) {
+    foreach ($options as $option_value => $option_text) {
       $config[] = [
-        'value' => $value,
-        'text' => $text,
+        'value' => $option_value,
+        'text' => $option_text,
       ];
     }
     return $config;
