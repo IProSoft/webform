@@ -1090,6 +1090,17 @@ function _webform_token_render_more($more_title, $more) {
     '#more' => $more,
     '#more_title' => $more_title,
   ];
+
+  // Token info might be called via CLI and not all modules are loaded and
+  // this would throw 'The theme implementations may not be rendered until all
+  // modules are loaded.' exception.
+  // @see \Drupal\Core\Theme\ThemeManager::render
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = \Drupal::service('module_handler');
+  if (!$module_handler->isLoaded()) {
+    $module_handler->loadAll();
+  }
+
   return (string) \Drupal::service('renderer')->renderPlain($build);
 }
 
