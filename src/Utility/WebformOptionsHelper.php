@@ -169,6 +169,27 @@ class WebformOptionsHelper {
   }
 
   /**
+   * Strip tags from options.
+   *
+   * @param array $options
+   *   An associative array of options.
+   *
+   * @return array
+   *   Options with HTML tags removed
+   */
+  public static function stripTagsOptions(array $options) {
+    foreach ($options as $option_value => $option_text) {
+      if (is_array($option_text)) {
+        $options[$option_value] = self::stripTagsOptions($option_text);
+      }
+      else {
+        $options[$option_value] = strip_tags((string) $option_text);
+      }
+    }
+    return $options;
+  }
+
+  /**
    * Decode HTML entities in options.
    *
    * Issue #2826451: TermSelection returning HTML characters in select list.
