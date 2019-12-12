@@ -5,5 +5,6 @@ package: 'Webform Demo'
 core: 8.x
 dependencies:
   - 'drupal:block'
+  - 'drupal:views'
   - 'webform:webform'
   - 'webform:webform_node'
