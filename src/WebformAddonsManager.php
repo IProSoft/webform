@@ -354,9 +354,17 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Navigation.
+    $projects['webformnavigation'] = [
+      'title' => $this->t('Webform Navigation'),
+      'description' => $this->t('Creates a navigation setting for webform that allows users to navigate forwards and backwards through wizard pages when the wizard navigation progress bar is enabled.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webformnavigation'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform OCR.
     $projects['webform_ocr'] = [
-      'title' => $this->t('Webform Webform OCR'),
+      'title' => $this->t('Webform OCR'),
       'description' => $this->t('OCR images as new Webforms.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_ocr'),
       'category' => 'enhancement',
