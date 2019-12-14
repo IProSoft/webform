@@ -3,6 +3,7 @@
 namespace Drupal\webform\Utility;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\OptGroup;
 
 /**
  * Helper class webform options based methods.
@@ -210,6 +211,27 @@ class WebformOptionsHelper {
       }
     }
     return $options;
+  }
+
+  /**
+   * Validate options values by removing invalid option values.
+   *
+   * @param array $options
+   *   An associative array of options.
+   * @param array $values
+   *   An indexed array of options values.
+   *
+   * @return array
+   *   An indexed array of options values with invalid options removed.
+   */
+  public static function validateOptionValues(array $options, array $values) {
+    $flattened_options = OptGroup::flattenOptions($options) ?: [];
+    foreach ($values as $index => $item) {
+      if (!isset($flattened_options[$item])) {
+        unset($values[$index]);
+      }
+    }
+    return array_values($values);
   }
 
   /**
