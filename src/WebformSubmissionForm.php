@@ -1755,7 +1755,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         // For all other submissions, use the request URI.
         $uri = preg_replace('#^' . base_path() . '#', '/', $this->getRequest()->getRequestUri());
         // Remove Ajax query string parameters.
-        $uri = preg_replace('/(ajax_form=1|_wrapper_format=drupal_ajax)(&|$)/', '', $uri);
+        $uri = preg_replace('/(ajax_form=1|_wrapper_format=(drupal_ajax|drupal_modal|drupal_dialog|html|ajax))(&|$)/', '', $uri);
         // Remove empty query string.
         $uri = preg_replace('/\?$/', '', $uri);
       }
