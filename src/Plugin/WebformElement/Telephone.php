@@ -50,6 +50,13 @@ class Telephone extends TextBase {
   /**
    * {@inheritdoc}
    */
+  public function getTranslatableProperties() {
+    return array_merge(parent::getTranslatableProperties(), ['international_initial_country']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
