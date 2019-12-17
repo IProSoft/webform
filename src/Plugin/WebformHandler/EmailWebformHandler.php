@@ -15,6 +15,7 @@ use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Element\WebformSelectOther;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
@@ -46,6 +47,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMessageInterface {
+
+  use WebformAjaxElementTrait;
 
   /**
    * Other option value.
@@ -1498,12 +1501,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $options[(string) $this->t('Other')] = $other_options;
     }
 
-    $ajax_wrapper = Html::getUniqueId('ajax-wrapper');
-
-    $element = [
-      '#type' => 'container',
-      '#attributes' => ['id' => $ajax_wrapper],
-    ];
+    $element = [];
 
     $element[$name] = [
       '#type' => 'webform_select_other',
@@ -1563,34 +1561,9 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       return $element;
     }
 
-    // Add Ajax trigger update submit button.
-    $element[$name]['#attributes']['data-webform-trigger-submit'] = ".js-$ajax_wrapper-submit";
-
-    // Add update submit button.
-    $element[$name . '_update'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Update'),
-      '#name' => $element_name . '_update_button',
-      '#validate' => [],
-      '#limit_validation_errors' => [['settings', $name]],
-      '#submit' => [[get_called_class(), 'rebuildCallback']],
-      '#ajax' => [
-        'callback' => [get_called_class(), 'ajaxCallback'],
-        'wrapper' => $ajax_wrapper,
-        'progress' => ['type' => 'fullscreen'],
-      ],
-      // Disable validation, hide button, add submit button trigger class.
-      '#attributes' => [
-        'formnovalidate' => 'formnovalidate',
-        'class' => [
-          'js-hide',
-          "js-$ajax_wrapper-submit",
-        ],
-      ],
-    ];
-
-    // Attached webform.form library for Ajax submit trigger behavior.
-    $element['#attached']['library'][] = 'webform/webform.form';
+    $ajax_id = 'webform-email-handler-' . $name;
+    $this->buildAjaxElementTrigger($ajax_id, $element[$name]);
+    $this->buildAjaxElementUpdate($ajax_id, $element);
 
     // Get options name.
     $options_name = $element_name . '_options';
@@ -1643,6 +1616,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       ];
     }
 
+    $this->buildAjaxElementWrapper($ajax_id, $element[$options_name]);
+
     return $element;
   }
 
@@ -1672,34 +1647,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       }
     }
     return $build;
-  }
-
-  /**
-   * Rebuild callback.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   */
-  public static function rebuildCallback(array $form, FormStateInterface $form_state) {
-    $form_state->setRebuild();
-  }
-
-  /**
-   * Ajax callback.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   *
-   * @return array
-   *   An associative array containing the email options elements.
-   */
-  public static function ajaxCallback(array $form, FormStateInterface $form_state) {
-    $trigger_element = $form_state->getTriggeringElement();
-    return NestedArray::getValue($form, array_slice($trigger_element['#array_parents'], 0, -1));
   }
 
   /**
