@@ -1048,6 +1048,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'submission',
     ];
 
+    // Submissions: Webform Views Extras.
+    $projects['webform_views'] = [
+      'title' => $this->t('Webform Views Extras'),
+      'description' => $this->t('Extends Webform views and supports relationships in views with all content entities not only node.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_views_extras'),
+      'category' => 'submission',
+    ];
+
     // Submissions: Webform XLSX Export.
     $projects['webform_xlsx_export'] = [
       'title' => $this->t('Webform XLSX Export'),
