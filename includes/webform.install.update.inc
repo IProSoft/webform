@@ -3302,3 +3302,46 @@ function webform_update_8177() {
 function webform_update_8178() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3101300: Allow 'Save' (update) action label to be customized.
+ */
+function webform_update_8179() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $elements = $webform_config->get('elements');
+
+    // Try to decode elements.
+    try {
+      $elements = Yaml::decode($elements);
+    }
+    catch (\Exception $exception) {
+      continue;
+    }
+
+    // Make sure elements is an array.
+    if (!is_array($elements)) {
+      continue;
+    }
+
+    // Copy submit attributes to update attributes to prevent any
+    // unexpected regressions.
+    $has_actions_element = FALSE;
+    $flattened_elements =& WebformFormHelper::flattenElements($elements);
+    foreach ($flattened_elements as &$element) {
+      if (!isset($element['#type']) || $element['#type'] !== 'webform_actions') {
+        continue;
+      }
+
+      if (!empty($element['#submit__attributes']) && empty($element['#update__attributes'])) {
+        $element['#update__attributes'] = $element['#submit__attributes'];
+        $has_actions_element = TRUE;
+      }
+    }
+    if ($has_actions_element) {
+      $webform_config->set('elements', Yaml::encode($elements));
+      $webform_config->save(TRUE);
+    }
+  }
+}
