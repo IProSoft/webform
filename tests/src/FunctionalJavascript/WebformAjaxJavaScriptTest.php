@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Tests\WebformTestTrait;
 
@@ -11,7 +11,7 @@ use Drupal\webform\Tests\WebformTestTrait;
  *
  * @group webform_javascript
  */
-class WebformAjaxJavaScriptTest extends JavascriptTestBase {
+class WebformAjaxJavaScriptTest extends WebDriverTestBase {
 
   use WebformTestTrait;
 

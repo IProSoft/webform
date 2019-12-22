@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Tests\WebformTestTrait;
 
@@ -13,7 +13,7 @@ use Drupal\webform\Tests\WebformTestTrait;
  *
  * @group webform_javascript
  */
-class WebformComputedElementAjaxJavaScriptTest extends JavascriptTestBase {
+class WebformComputedElementAjaxJavaScriptTest extends WebDriverTestBase {
 
   use WebformTestTrait;
 
@@ -46,7 +46,7 @@ class WebformComputedElementAjaxJavaScriptTest extends JavascriptTestBase {
     $assert->fieldExists('a[select]');
     $assert->fieldExists('b');
     $assert->buttonExists('webform-computed-webform_computed_twig-button');
-    $assert->responseContains('<input data-drupal-selector="edit-webform-computed-twig" type="hidden" name="webform_computed_twig" value="Please enter a value for a and b.">');
+    $assert->hiddenFieldValueEquals('webform_computed_twig', 'Please enter a value for a and b.');
 
     // Calculate computed Twig element.
     $page->fillField('a[select]', '1');
@@ -55,8 +55,8 @@ class WebformComputedElementAjaxJavaScriptTest extends JavascriptTestBase {
     $assert->waitForText('1 + 1 = 2');
 
     // Check that computed Twig was calculated.
-    $assert->responseNotContains('<input data-drupal-selector="edit-webform-computed-twig" type="hidden" name="webform_computed_twig" value="Please enter a value for a and b.">');
-    $assert->responseContains('<input data-drupal-selector="edit-webform-computed-twig" type="hidden" name="webform_computed_twig" value="1 + 1 = 2">');
+    $assert->hiddenFieldValueNotEquals('webform_computed_twig', 'Please enter a value for a and b.');
+    $assert->hiddenFieldValueEquals('webform_computed_twig', '1 + 1 = 2');
   }
 
 }

@@ -3,7 +3,7 @@
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
 use Drupal\Core\Serialization\Yaml;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Tests\WebformTestTrait;
@@ -14,7 +14,7 @@ use Drupal\webform\WebformInterface;
  *
  * @group webform_javascript
  */
-class WebformSubmissionToggleFlagsTest extends JavascriptTestBase {
+class WebformSubmissionToggleFlagsTest extends WebDriverTestBase {
 
   use WebformTestTrait;
 
@@ -54,7 +54,6 @@ class WebformSubmissionToggleFlagsTest extends JavascriptTestBase {
       'delete any webform submission',
     ]));
     $this->drupalGet('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions');
-    $assert->statusCodeEquals(200);
     $assert->elementExists('css', "#webform-submission-$sid-sticky")->click();
     $assert->assertWaitOnAjaxRequest();
     $assert->elementExists('css', "#webform-submission-$sid-locked")->click();
