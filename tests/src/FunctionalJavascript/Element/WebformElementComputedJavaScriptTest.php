@@ -1,7 +1,8 @@
 <?php
 
-namespace Drupal\Tests\webform\FunctionalJavascript;
+namespace Drupal\Tests\webform\FunctionalJavascript\Element;
 
+use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 
 /**
@@ -11,12 +12,7 @@ use Drupal\webform\Entity\Webform;
  *
  * @group webform_javascript
  */
-class WebformComputedElementAjaxJavaScriptTest extends WebformWebDriverTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static $modules = ['webform'];
+class WebformElementComputedJavaScriptTest extends WebformWebDriverTestBase {
 
   /**
    * Webforms to load.

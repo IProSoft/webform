@@ -8,7 +8,7 @@ use Drupal\Tests\webform\Traits\WebformBrowserTestTrait;
 use Drupal\Tests\webform\Traits\WebformAssertLegacyTrait;
 
 /**
- * Defines an abstract test base for webform tests.
+ * Defines an abstract test base for webform JavaScript tests.
  */
 abstract class WebformWebDriverTestBase extends WebDriverTestBase {
 

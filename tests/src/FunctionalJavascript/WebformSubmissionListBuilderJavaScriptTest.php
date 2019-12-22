@@ -12,24 +12,12 @@ use Drupal\webform\WebformInterface;
  *
  * @group webform_javascript
  */
-class WebformSubmissionToggleFlagsTest extends WebformWebDriverTestBase {
+class WebformSubmissionListBuilderJavaScriptTest extends WebformWebDriverTestBase {
 
   /**
-   * Webforms to load.
-   *
-   * @var array
+   * Test toggle links.
    */
-  protected static $testWebforms = [];
-
-  /**
-   * {@inheritdoc}
-   */
-  public static $modules = ['webform'];
-
-  /**
-   * Tests handler javascript.
-   */
-  public function testHandlerJavascript() {
+  public function testToggleLinks() {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::create([
       'langcode' => 'en',
@@ -54,6 +42,7 @@ class WebformSubmissionToggleFlagsTest extends WebformWebDriverTestBase {
     $assert->assertWaitOnAjaxRequest();
     $assert->elementExists('css', "#webform-submission-$sid-locked")->click();
     $assert->assertWaitOnAjaxRequest();
+
     // Reload the webform submission.
     \Drupal::entityTypeManager()->getStorage('webform_submission')->resetCache();
     $webform_submission = WebformSubmission::load($sid);
