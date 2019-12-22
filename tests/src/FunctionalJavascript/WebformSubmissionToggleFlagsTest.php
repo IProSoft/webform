@@ -3,10 +3,8 @@
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
 use Drupal\Core\Serialization\Yaml;
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use Drupal\webform\Tests\WebformTestTrait;
 use Drupal\webform\WebformInterface;
 
 /**
@@ -14,9 +12,7 @@ use Drupal\webform\WebformInterface;
  *
  * @group webform_javascript
  */
-class WebformSubmissionToggleFlagsTest extends WebDriverTestBase {
-
-  use WebformTestTrait;
+class WebformSubmissionToggleFlagsTest extends WebformWebDriverTestBase {
 
   /**
    * Webforms to load.

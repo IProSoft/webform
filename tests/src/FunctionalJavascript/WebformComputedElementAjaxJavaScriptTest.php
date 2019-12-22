@@ -2,9 +2,7 @@
 
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\webform\Entity\Webform;
-use Drupal\webform\Tests\WebformTestTrait;
 
 /**
  * Tests webform computed element Ajax support.
@@ -13,9 +11,7 @@ use Drupal\webform\Tests\WebformTestTrait;
  *
  * @group webform_javascript
  */
-class WebformComputedElementAjaxJavaScriptTest extends WebDriverTestBase {
-
-  use WebformTestTrait;
+class WebformComputedElementAjaxJavaScriptTest extends WebformWebDriverTestBase {
 
   /**
    * {@inheritdoc}
