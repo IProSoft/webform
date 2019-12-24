@@ -236,14 +236,19 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     }
 
     // Set element key reserved word warning message.
+    // @see Drupal.behaviors.webformUiElementKey
     if (!$key) {
-      $reserved_keys = ['form_build_id', 'form_token', 'form_id', 'data', 'op'];
+      $reserved_keys = ['form_build_id', 'form_token', 'form_id', 'data', 'op', 'destination'];
       $reserved_keys = array_merge($reserved_keys, array_keys($this->entityFieldManager->getBaseFieldDefinitions('webform_submission')));
       $form['#attached']['drupalSettings']['webform_ui']['reserved_keys'] = $reserved_keys;
       $form['properties']['element']['key_warning'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
-        '#message_message' => $this->t("Please avoid using the reserved word '@key' as the element's key."),
+        '#message_message' => [
+          '#markup' => $this->t("Please avoid using the reserved word '@key' as the element's key."),
+          '#prefix' => '<div id="webform-ui-reserved-key-warning">',
+          '#suffix' => '</div>',
+        ],
         '#weight' => -99,
         '#attributes' => ['style' => 'display:none'],
       ];
