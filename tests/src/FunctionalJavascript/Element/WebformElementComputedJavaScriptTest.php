@@ -29,26 +29,28 @@ class WebformElementComputedJavaScriptTest extends WebformWebDriverTestBase {
   public function testComputedElementAjax() {
     $session = $this->getSession();
     $page = $session->getPage();
-    $assert = $this->assertSession();
+    $assert_session = $this->assertSession();
 
     $webform = Webform::load('test_element_computed_ajax');
 
-    // Chech computed Twig element a and b elements exist.
+    /**************************************************************************/
+
+    // Check computed Twig element a and b elements exist.
     $this->drupalGet($webform->toUrl());
-    $assert->fieldExists('a[select]');
-    $assert->fieldExists('b');
-    $assert->buttonExists('webform-computed-webform_computed_twig-button');
-    $assert->hiddenFieldValueEquals('webform_computed_twig', 'Please enter a value for a and b.');
+    $assert_session->fieldExists('a[select]');
+    $assert_session->fieldExists('b');
+    $assert_session->buttonExists('webform-computed-webform_computed_twig-button');
+    $assert_session->hiddenFieldValueEquals('webform_computed_twig', 'Please enter a value for a and b.');
 
     // Calculate computed Twig element.
     $page->fillField('a[select]', '1');
     $page->fillField('b', '1');
     $session->executeScript("jQuery('input[name=\"webform_computed_twig\"]').click()");
-    $assert->waitForText('1 + 1 = 2');
+    $assert_session->waitForText('1 + 1 = 2');
 
     // Check that computed Twig was calculated.
-    $assert->hiddenFieldValueNotEquals('webform_computed_twig', 'Please enter a value for a and b.');
-    $assert->hiddenFieldValueEquals('webform_computed_twig', '1 + 1 = 2');
+    $assert_session->hiddenFieldValueNotEquals('webform_computed_twig', 'Please enter a value for a and b.');
+    $assert_session->hiddenFieldValueEquals('webform_computed_twig', '1 + 1 = 2');
   }
 
 }

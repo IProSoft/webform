@@ -194,6 +194,19 @@ table.webform-states-table td.webform-states-table--operator > .form-item > .for
   margin-right: 0;
 }
 
+
+/******************************************************************************/
+/* Filter */
+/******************************************************************************/
+
+div.webform-form-filter input.webform-form-filter-reset {
+  padding: 1em;
+}
+
+div.webform-form-filter input.webform-form-filter-text {
+  padding-right: 2em;
+}
+
 /******************************************************************************/
 /* Webform */
 /******************************************************************************/

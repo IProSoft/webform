@@ -90,6 +90,7 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
       '#size' => 30,
       '#placeholder' => $this->t('Filter by keyword'),
       '#attributes' => [
+        'name' => 'text',
         'class' => ['webform-form-filter-text'],
         'data-summary' => '.webform-addons-summary',
         'data-item-singlular' => $this->t('add-on'),

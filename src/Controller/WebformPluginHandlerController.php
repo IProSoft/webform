@@ -237,6 +237,8 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       ],
     ];
 
+    $build['#attached']['library'][] = 'webform/webform.admin';
+
     return $build;
   }
 

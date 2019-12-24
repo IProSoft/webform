@@ -675,7 +675,7 @@ trait WebformAssertLegacyTrait {
    * @param string $name
    *   (optional) Name of the session. Defaults to the active session.
    *
-   * @return \Drupal\Tests\WebAssert
+   * @return \Drupal\Tests\WebAssert|\Drupal\FunctionalJavascriptTests\WebDriverWebAssert
    *   A new web-assert option for asserting the presence of elements with.
    */
   abstract public function assertSession($name = NULL);

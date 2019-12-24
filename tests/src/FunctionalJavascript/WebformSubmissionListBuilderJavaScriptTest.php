@@ -28,7 +28,10 @@ class WebformSubmissionListBuilderJavaScriptTest extends WebformWebDriverTestBas
     ]);
     $webform->save();
 
-    $assert = $this->assertSession();
+    $assert_session = $this->assertSession();
+
+    /**************************************************************************/
+
     $submit = $this->getWebformSubmitButtonLabel($webform);
     $this->drupalPostForm('/webform/' . $webform->id(), [], $submit);
     $sid = $this->getLastSubmissionId($webform);
@@ -38,10 +41,10 @@ class WebformSubmissionListBuilderJavaScriptTest extends WebformWebDriverTestBas
       'delete any webform submission',
     ]));
     $this->drupalGet('/admin/structure/webform/manage/' . $webform->id() . '/results/submissions');
-    $assert->elementExists('css', "#webform-submission-$sid-sticky")->click();
-    $assert->assertWaitOnAjaxRequest();
-    $assert->elementExists('css', "#webform-submission-$sid-locked")->click();
-    $assert->assertWaitOnAjaxRequest();
+    $assert_session->elementExists('css', "#webform-submission-$sid-sticky")->click();
+    $assert_session->assertWaitOnAjaxRequest();
+    $assert_session->elementExists('css', "#webform-submission-$sid-locked")->click();
+    $assert_session->assertWaitOnAjaxRequest();
 
     // Reload the webform submission.
     \Drupal::entityTypeManager()->getStorage('webform_submission')->resetCache();
