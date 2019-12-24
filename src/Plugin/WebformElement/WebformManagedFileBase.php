@@ -610,10 +610,10 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // Copy sample file or generate a new temp file that can be uploaded.
     $sample_file = drupal_get_path('module', 'webform') . '/tests/files/sample.' . $file_extension;
     if (file_exists($sample_file)) {
-      $file_uri = file_unmanaged_copy($sample_file, $file_destination);
+      $file_uri = $this->fileSystem->copy($sample_file, $file_destination);
     }
     else {
-      $file_uri = file_unmanaged_save_data('{empty}', $file_destination);
+      $file_uri = $this->fileSystem->saveData('{empty}', $file_destination);
     }
 
     $file = $this->entityTypeManager->getStorage('file')->create([
@@ -1233,7 +1233,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
 
       // Save file if there is a new destination URI.
       if ($source_uri != $destination_uri) {
-        $destination_uri = file_unmanaged_move($source_uri, $destination_uri);
+        $destination_uri = $this->fileSystem->move($source_uri, $destination_uri);
         $file->setFileUri($destination_uri);
         $file->setFileName($this->fileSystem->basename($destination_uri));
         $file->save();
