@@ -2,17 +2,14 @@
 
 namespace Drupal\Tests\webform_ui\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-use Drupal\webform\Tests\WebformTestTrait;
+use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
 /**
  * Tests webform UI element JavasScript.
  *
  * @group webform_javascript
  */
-class WebformUiElementJavaScriptTest extends WebDriverTestBase {
-
-  use WebformTestTrait;
+class WebformUiElementJavaScriptTest extends WebformWebDriverTestBase {
 
   /**
    * {@inheritdoc}
