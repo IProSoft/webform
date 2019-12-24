@@ -384,7 +384,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       if ($webform->getSetting('limit_total_unique')) {
         // Require user to have update any submission access.
         if (!$webform->access('submission_view_any')
-          && !$webform->access('submission_update_any')) {
+          || !$webform->access('submission_update_any')) {
           throw new AccessDeniedHttpException();
         }
         // Get last webform/source entity submission.
@@ -397,7 +397,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         }
         // Require user to have update own submission access.
         if (!$webform->access('submission_view_own')
-          && !$webform->access('submission_update_own')) {
+          || !$webform->access('submission_update_own')) {
           throw new AccessDeniedHttpException();
         }
         // Get last user submission.
