@@ -1049,7 +1049,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     // Submissions: Webform Views Extras.
-    $projects['webform_views'] = [
+    $projects['webform_views_extras'] = [
       'title' => $this->t('Webform Views Extras'),
       'description' => $this->t('Extends Webform views and supports relationships in views with all content entities not only node.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_views_extras'),
