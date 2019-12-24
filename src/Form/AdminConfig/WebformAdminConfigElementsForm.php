@@ -3,6 +3,7 @@
 namespace Drupal\webform\Form\AdminConfig;
 
 use Drupal\Component\Utility\Bytes;
+use Drupal\Component\Utility\Environment;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -467,7 +468,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#title' => $this->t('Default maximum file upload size'),
       '#description' => $this->t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to restrict the allowed file size. If left empty the file sizes will be limited only by PHP\'s maximum post and file upload sizes.')
         . '<br /><br />'
-        . $this->t('Current limit: %limit', ['%limit' => function_exists('file_upload_max_size') ? format_size(file_upload_max_size()) : $this->t('N/A')]),
+        . $this->t('Current limit: %limit', ['%limit' => format_size(Environment::getUploadMaxSize())]),
       '#element_validate' => [[get_class($this), 'validateMaxFilesize']],
       '#size' => 10,
       '#default_value' => $config->get('file.default_max_filesize'),

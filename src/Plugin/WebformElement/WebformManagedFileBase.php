@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Transliteration\TransliterationInterface;
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
@@ -635,7 +636,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    *   Max file size.
    */
   protected function getMaxFileSize(array $element) {
-    $max_filesize = $this->configFactory->get('webform.settings')->get('file.default_max_filesize') ?: file_upload_max_size();
+    $max_filesize = $this->configFactory->get('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize() ;
     $max_filesize = Bytes::toInt($max_filesize);
     if (!empty($element['#max_filesize'])) {
       $max_filesize = min($max_filesize, Bytes::toInt($element['#max_filesize'] . 'MB'));
@@ -1023,7 +1024,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       ];
     }
 
-    $max_filesize = \Drupal::config('webform.settings')->get('file.default_max_filesize') ?: file_upload_max_size();
+    $max_filesize = \Drupal::config('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize() ;
     $max_filesize = Bytes::toInt($max_filesize);
     $max_filesize = ($max_filesize / 1024 / 1024);
     $form['file']['file_help'] = [

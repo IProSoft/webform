@@ -5,6 +5,7 @@
  * Provides the ability to export and import submissions.
  */
 
+use Drupal\Component\Utility\Environment;
 use Drupal\file\Entity\File;
 
 /**
@@ -84,7 +85,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   switch ($file_info->getError()) {
     case UPLOAD_ERR_INI_SIZE:
     case UPLOAD_ERR_FORM_SIZE:
-      \Drupal::messenger()->addError(t('The file %file could not be saved because it exceeds %maxsize, the maximum allowed size for uploads.', ['%file' => $file_info->getFilename(), '%maxsize' => format_size(file_upload_max_size())]));
+      \Drupal::messenger()->addError(t('The file %file could not be saved because it exceeds %maxsize, the maximum allowed size for uploads.', ['%file' => $file_info->getFilename(), '%maxsize' => format_size(Environment::getUploadMaxSize() )]));
       return FALSE;
 
     case UPLOAD_ERR_PARTIAL:
