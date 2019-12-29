@@ -3347,7 +3347,6 @@ function webform_update_8179() {
 }
 
 /**
-<<<<<<< HEAD
  * Issue #3103171: Move deprecated jQuery UI buttons element into a sub-module.
  */
 function webform_update_8180() {
@@ -3355,16 +3354,19 @@ function webform_update_8180() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->get($webform_config_name);
     $elements = $webform_config->get('elements');
-    if (strpos($elements , 'webform_buttons') !== FALSE) {
+    if (strpos($elements, 'webform_buttons') !== FALSE) {
       // Enable the webform_jqueryui_buttons.module.
-      \Drupal::service('module_installer')->install(['webform_jqueryui_buttons']);
+      \Drupal::service('module_installer')
+        ->install(['webform_jqueryui_buttons']);
       return;
     }
   }
-=======
+}
+
+/**
  * Issue #3103032: Move deprecated location geocomplete element into a sub-module
  */
-function webform_update_8180() {
+function webform_update_8181() {
   $config_factory = \Drupal::configFactory();
   $install_webform_location_geocomplete = FALSE;
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
@@ -3380,7 +3382,8 @@ function webform_update_8180() {
   $config = \Drupal::configFactory()->getEditable('webform.settings');
   if ($install_webform_location_geocomplete) {
     // Install the webform_location_geocomplete.module.
-    \Drupal::service('module_installer')->install(['webform_location_geocomplete']);
+    \Drupal::service('module_installer')
+      ->install(['webform_location_geocomplete']);
 
     // Move the default Google maps API key.
     $api_key = $config->get('element.default_google_maps_api_key');
@@ -3393,5 +3396,22 @@ function webform_update_8180() {
 
   // Remove 'webform_location_geocomplete' from excluded elements.
   $config->clear('element.excluded_elements.webform_location_geocomplete');
->>>>>>> 3103032-deprecated-location-geocomplete
+}
+
+
+/**
+ * Issue #3102996: Move deprecated toggles elements into a sub-module.
+ */
+function webform_update_8182() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->get($webform_config_name);
+    $elements = $webform_config->get('elements');
+    if (strpos($elements , 'webform_toggle') !== FALSE) {
+      // Enable the webform_toggles.module.
+      \Drupal::service('module_installer')
+        ->install(['webform_toggles']);
+      return;
+    }
+  }
 }
