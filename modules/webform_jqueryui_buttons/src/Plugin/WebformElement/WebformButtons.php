@@ -1,6 +1,8 @@
 <?php
 
-namespace Drupal\webform\Plugin\WebformElement;
+namespace Drupal\webform_jqueryui_buttons\Plugin\WebformElement;
+
+use Drupal\webform\Plugin\WebformElement\OptionsBase;
 
 /**
  * Provides a 'buttons' element.

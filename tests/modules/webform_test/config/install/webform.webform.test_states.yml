@@ -151,36 +151,6 @@ elements: |
         required:
           ':input[name="visible_trigger"]':
             checked: true
-    visible_webform_buttons:
-      '#type': webform_buttons
-      '#title': Buttons
-      '#options':
-        one: One
-        two: Two
-        three: Three
-      '#default_value': one
-      '#states':
-        visible:
-          ':input[name="visible_trigger"]':
-            checked: true
-        required:
-          ':input[name="visible_trigger"]':
-            checked: true
-    visible_webform_buttons_other:
-      '#type': webform_buttons_other
-      '#title': 'Buttons other'
-      '#options':
-        one: One
-        two: Two
-        three: Three
-      '#default_value': one
-      '#states':
-        visible:
-          ':input[name="visible_trigger"]':
-            checked: true
-        required:
-          ':input[name="visible_trigger"]':
-            checked: true
     visible_captcha:
       '#type': captcha
       '#title': CAPTCHA

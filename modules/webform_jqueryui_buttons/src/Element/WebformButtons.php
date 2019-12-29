@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\webform\Element;
+namespace Drupal\webform_jqueryui_buttons\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Radios;
 
 /**
- * Provides a webform element for buttons with an other option.
+ * Provides a webform element for buttons.
  *
  * @FormElement("webform_buttons")
  */
@@ -22,7 +22,7 @@ class WebformButtons extends Radios {
     $element['#attributes']['class'][] = 'webform-buttons';
     $element['#options_display'] = 'side_by_side';
 
-    $element['#attached']['library'][] = 'webform/webform.element.buttons';
+    $element['#attached']['library'][] = 'webform_jqueryui_buttons/webform_jqueryui_buttons.element';
 
     return $element;
   }

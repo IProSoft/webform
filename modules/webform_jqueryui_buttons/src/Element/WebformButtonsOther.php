@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\webform\Element;
+namespace Drupal\webform_jqueryui_buttons\Element;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Element\WebformOtherBase;
 
 /**
  * Provides a webform element for buttons with an other option.

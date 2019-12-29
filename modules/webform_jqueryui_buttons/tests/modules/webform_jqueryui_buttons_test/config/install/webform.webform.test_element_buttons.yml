@@ -3,7 +3,7 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_jqueryui_buttons_test
 open: null
 close: null
 weight: 0
@@ -15,23 +15,39 @@ title: 'Test: Element: buttons'
 description: 'Test the buttons element.'
 category: 'Test: Element'
 elements: |
-  buttons_inline_title_example:
-    '#type': details
-    '#title': 'Buttons inline title'
-    '#open': true
-    buttons_inline_title:
-      '#type': webform_buttons
-      '#title': buttons_inline_title
-      '#title_display': inline
-      '#options': yes_no
-      '#options_display': side_by_side
-    buttons_other_inline_title:
-      '#type': webform_buttons_other
-      '#title': buttons_other_inline_title
-      '#title_display': inline
-      '#options': yes_no
-      '#options_display': side_by_side
-  
+  buttons_inline_title:
+    '#type': webform_buttons
+    '#title': buttons_inline_title
+    '#title_display': inline
+    '#options': yes_no
+    '#options_display': side_by_side
+  buttons_other_inline_title:
+    '#type': webform_buttons_other
+    '#title': buttons_other_inline_title
+    '#title_display': inline
+    '#options': yes_no
+    '#options_display': side_by_side
+  buttons_other_basic:
+    '#type': webform_buttons_other
+    '#title': buttons_other_basic
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+    '#default_value': Four
+  buttons_other_advanced:
+    '#type': webform_buttons_other
+    '#title': buttons_other_advanced
+    '#options':
+      One: One
+      Two: Two
+      Three: Three
+    '#default_value': Four
+    '#required': true
+    '#other__option_label': Other
+    '#other__placeholder': 'What is this other option'
+    '#other__description': 'Other button description'
+
 css: ''
 javascript: ''
 settings:

@@ -402,18 +402,6 @@ webform.element.ajax:
     - core/drupal
     - core/jquery.once
 
-webform.element.buttons:
-  version: VERSION
-  js:
-    # Issue #2906737: With the new jquery 3 checkboxradio and selectmenu error.
-    # @see https://www.drupal.org/node/2906737
-    /core/assets/vendor/jquery.ui/ui/form-reset-mixin-min.js: { minified: true }
-    /core/assets/vendor/jquery.ui/ui/escape-selector-min.js: { minified: true }
-    /core/assets/vendor/jquery.ui/ui/widgets/checkboxradio-min.js: { minified: true }
-    js/webform.element.buttons.js: {}
-  dependencies:
-    - core/jquery.ui.checkboxradio
-
 webform.element.checkboxes:
   version: VERSION
   js:

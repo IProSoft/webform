@@ -3345,3 +3345,19 @@ function webform_update_8179() {
     }
   }
 }
+
+/**
+ * Issue #3103171: Move deprecated jQuery UI buttons element into a sub-module.
+ */
+function webform_update_8180() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->get($webform_config_name);
+    $elements = $webform_config->get('elements');
+    if (strpos($elements , 'webform_buttons') !== FALSE) {
+      // Enable the webform_jqueryui_buttons.module.
+      \Drupal::service('module_installer')->install(['webform_jqueryui_buttons']);
+      return;
+    }
+  }
+}
