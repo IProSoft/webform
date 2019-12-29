@@ -3,7 +3,7 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_icheck_test
 open: null
 close: null
 weight: 0
@@ -831,7 +831,7 @@ elements: |
         three: Three
       '#default_value': one
       '#icheck': square-aero
-  
+
 css: ''
 javascript: ''
 settings:

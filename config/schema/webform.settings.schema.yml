@@ -285,9 +285,6 @@ webform.settings:
         horizontal_rule_classes:
           type: string
           label: 'Horizontal rule CSS classes'
-        default_icheck:
-          type: string
-          label: 'Default iCheck style'
         default_description_display:
           type: string
           label: 'Default title display'

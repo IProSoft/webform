@@ -3414,3 +3414,20 @@ function webform_update_8182() {
     }
   }
 }
+
+/**
+ * Issue #3103571: Move deprecated icheck support into a dedicated sub-module.
+ */
+function webform_update_8183() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->get($webform_config_name);
+    $elements = $webform_config->get('elements');
+    if (strpos($elements , 'icheck') !== FALSE) {
+      // Enable the webform_icheck.module.
+      \Drupal::service('module_installer')
+        ->install(['webform_icheck']);
+      return;
+    }
+  }
+}

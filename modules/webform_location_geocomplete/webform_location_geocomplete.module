@@ -45,6 +45,7 @@ function webform_location_geocomplete_js_alter(&$javascript, AttachedAssetsInter
     $assets->setSettings($settings);
   }
 }
+
 /**
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
@@ -53,7 +54,7 @@ function webform_location_geocomplete_webform_admin_third_party_settings_form_al
   $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
   $default_google_maps_api_key = $third_party_settings_manager->getThirdPartySetting('webform_location_geocomplete', 'default_google_maps_api_key');
 
-  // Honeypot.
+  // Location geocomplete.
   $form['third_party_settings']['webform_location_geocomplete'] = [
     '#type' => 'details',
     '#title' => t('Location geocomplete'),

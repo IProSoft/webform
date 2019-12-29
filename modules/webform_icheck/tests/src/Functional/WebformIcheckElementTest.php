@@ -1,36 +1,27 @@
 <?php
 
-namespace Drupal\Tests\webform\Functional\Element;
+namespace Drupal\Tests\webform_icheck\Functional\Element;
+
+use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 
 /**
  * Tests for iCheck element.
  *
  * @group Webform
  */
-class WebformElementIcheckTest extends WebformElementBrowserTestBase {
+class WebformIcheckElementTest extends WebformElementBrowserTestBase {
 
   /**
-   * Webforms to load.
+   * Modules to enable.
    *
    * @var array
    */
-  protected static $testWebforms = ['test_element_icheck'];
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-    $this->config('webform.settings')
-      ->set('libraries.excluded_libraries', [])
-      ->save();
-  }
+  public static $modules = ['webform_icheck', 'webform_icheck_test'];
 
   /**
    * Test iCheck element.
    */
   public function testIcheckElement() {
-
     $this->drupalGet('/webform/test_element_icheck');
 
     // Check custom iCheck style set to 'flat'.
@@ -46,9 +37,9 @@ class WebformElementIcheckTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<input data-drupal-selector="edit-checkbox-none" type="checkbox" id="edit-checkbox-none" name="checkbox_none" value="1" class="form-checkbox" />');
 
     // Enable default icheck style.
-    \Drupal::configFactory()->getEditable('webform.settings')
-      ->set('element.default_icheck', 'minimal')
-      ->save();
+    /** @var \Drupal\webform\WebformThirdPartySettingsManagerInterface $third_party_settings_manager */
+    $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
+    $third_party_settings_manager->setThirdPartySetting('webform_icheck', 'default_icheck', 'minimal');
 
     $this->drupalGet('/webform/test_element_icheck');
 

@@ -3,7 +3,7 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_icheck_test
 open: null
 close: null
 weight: 0
@@ -97,7 +97,7 @@ elements: |
         enabled:
           ':input[name="checkboxes_trigger"]':
             filled: true
-  
+
 css: ''
 javascript: ''
 settings:

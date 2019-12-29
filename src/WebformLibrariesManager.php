@@ -346,15 +346,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'version' => '1.17.0',
       'elements' => ['webform_location_places'],
     ];
-    $libraries['jquery.icheck'] = [
-      'title' => $this->t('jQuery: iCheck'),
-      'description' => $this->t('Highly customizable checkboxes and radio buttons.'),
-      'notes' => $this->t('iCheck is used to optionally enhance checkboxes and radio buttons.'),
-      'homepage_url' => Url::fromUri('http://icheck.fronteed.com/'),
-      'download_url' => Url::fromUri('https://github.com/fronteed/icheck/archive/1.0.2.zip'),
-      'version' => '1.0.2 ',
-      'deprecated' => $this->t('The iCheck library is not being maintained. It has been <a href=":href">deprecated</a> and will be removed before Webform 8.x-6.0.', [':href' => 'https://www.drupal.org/project/webform/issues/2931154']),
-    ];
     $libraries['jquery.inputmask'] = [
       'title' => $this->t('jQuery: Input Mask'),
       'description' => $this->t('Input masks ensures a predefined format is entered. This can be useful for dates, numerics, phone numbers, etc…'),

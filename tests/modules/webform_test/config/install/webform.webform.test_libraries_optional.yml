@@ -22,10 +22,6 @@ elements: |
     codemirror:
       '#type': webform_codemirror
       '#title': Codemirror
-    icheck:
-      '#type': checkbox
-      '#title': iCheck
-      '#icheck': minimal
     input_mask:
       '#type': textfield
       '#title': 'Input Mask'

@@ -1,0 +1,7 @@
+name: 'Webform iCheck Test'
+type: module
+description: 'Support module for webform that provides iCheck element working examples.'
+package: Testing
+core: 8.x
+dependencies:
+  - 'webform:webform_icheck'
