@@ -306,7 +306,6 @@ libraries:
   excluded_libraries:
     - choices
     - jquery.chosen
-    - jquery.icheck
 requirements:
   cdn: true
   bootstrap: true
