@@ -19,7 +19,7 @@ html.js .form-type-webform-toggle label + input + .toggle {
 html.js .toggle {
   display: block;
   float: left;
-  margin: 2px .5em 2px 0;
+  margin: 2px 0.5em 2px 0;
   text-transform: uppercase;
 }
 
@@ -30,7 +30,7 @@ html.js .toggle.toggle-small + label {
 }
 
 html.js .toggle.toggle-medium,
-html.js .toggle.toggle-medium+ label {
+html.js .toggle.toggle-medium + label {
   height: 24px;
   line-height: 24px;
 }
