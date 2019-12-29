@@ -366,13 +366,6 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#tree' => TRUE,
       '#access' => $this->librariesManager->isIncluded('jquery.geocomplete') || $this->librariesManager->isIncluded('algolia.places'),
     ];
-    $form['location']['default_google_maps_api_key'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Google Maps API key'),
-      '#description' => $this->t('Google requires users to use a valid API key. Using the <a href="https://console.developers.google.com/apis">Google API Manager</a>, you can enable the <em>Google Maps JavaScript API</em>. That will create (or reuse) a <em>Browser key</em> which you can paste here.'),
-      '#default_value' => $config->get('element.default_google_maps_api_key'),
-      '#access' => $this->librariesManager->isIncluded('jquery.geocomplete'),
-    ];
     $form['location']['default_algolia_places_app_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Algolia application id'),

@@ -1,9 +1,10 @@
 <?php
 
-namespace Drupal\webform\Plugin\WebformElement;
+namespace Drupal\webform_location_geocomplete\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url as UrlGenerator;
+use Drupal\webform\Plugin\WebformElement\WebformLocationBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 

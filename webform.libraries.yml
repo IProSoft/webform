@@ -704,18 +704,6 @@ webform.element.likert:
     component:
       css/webform.element.likert.css: {}
 
-webform.element.location.geocomplete:
-  version: VERSION
-  css:
-    component:
-      css/webform.element.location.geocomplete.css: {}
-  js:
-    js/webform.element.location.geocomplete.js: {}
-  dependencies:
-    - core/drupal
-    - core/jquery.once
-    - webform/libraries.jquery.geocomplete
-
 webform.element.location.places:
   version: VERSION
   css:
@@ -1088,21 +1076,6 @@ libraries.algolia.places:
     /libraries/algolia.places/dist/cdn/: https://cdn.jsdelivr.net/npm/places.js@1.17.0/dist/cdn/
   js:
     /libraries/algolia.places/dist/cdn/places.js: {}
-
-libraries.jquery.geocomplete:
-  remote: http://ubilabs.github.io/geocomplete/
-  version: '1.7.0'
-  license:
-    name: MIT
-    url: https://github.com/ubilabs/geocomplete/blob/master/MIT-LICENSE.txt
-    gpl-compatible: true
-  cdn:
-    /libraries/geocomplete/: https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/
-  js:
-    https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places: {}
-    /libraries/geocomplete/jquery.geocomplete.min.js: { minified: true }
-  dependencies:
-    - core/jquery
 
 libraries.jquery.icheck:
   remote: http://icheck.fronteed.com/

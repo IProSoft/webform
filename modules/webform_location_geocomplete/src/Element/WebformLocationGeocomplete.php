@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\webform\Element;
+namespace Drupal\webform_location_geocomplete\Element;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Element\WebformLocationBase;
 
 /**
  * Provides a webform element for a location geocomplete element.
@@ -54,9 +55,20 @@ class WebformLocationGeocomplete extends WebformLocationBase {
 
     // Add Google Maps API key which is required by
     // https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places
-    // @see webform_js_alter()
-    $api_key = (!empty($element['#api_key'])) ? $element['#api_key'] : \Drupal::config('webform.settings')->get('element.default_google_maps_api_key');
+    // @see webform_location_geocomplete_js_alter()
+    if (!empty($element['#api_key'])) {
+      $api_key = $element['#api_key'];
+    }
+    else {
+      /** @var \Drupal\webform\WebformThirdPartySettingsManagerInterface $third_party_settings_manager */
+      $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
+      $api_key = $third_party_settings_manager->getThirdPartySetting('webform_location_geocomplete', 'default_google_maps_api_key') ?: '';
+    }
     $element['#attached']['drupalSettings']['webform']['location']['geocomplete']['api_key'] = $api_key;
+
+    // Attach library.
+    $element['#attached']['library'][] = 'webform_location_geocomplete/webform_location_geocomplete.element';
+
 
     return $element;
   }

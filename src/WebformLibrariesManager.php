@@ -346,16 +346,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'version' => '1.17.0',
       'elements' => ['webform_location_places'],
     ];
-    $libraries['jquery.geocomplete'] = [
-      'title' => $this->t('jQuery: Geocoding and Places Autocomplete Plugin'),
-      'description' => $this->t("Geocomple is an advanced jQuery plugin that wraps the Google Maps API's Geocoding and Places Autocomplete services."),
-      'notes' => $this->t('Geocomplete is used by the location element.'),
-      'homepage_url' => Url::fromUri('http://ubilabs.github.io/geocomplete/'),
-      'download_url' => Url::fromUri('https://github.com/ubilabs/geocomplete/archive/1.7.0.zip'),
-      'version' => '1.7.0',
-      'elements' => ['webform_location_geocomplete'],
-      'deprecated' => $this->t('The jQuery: Geocoding and Places Autocomplete Plugin library is not being maintained. It has been <a href=":href">deprecated</a> and will be removed before Webform 8.x-6.0.', [':href' => 'https://www.drupal.org/node/2991275']),
-    ];
     $libraries['jquery.icheck'] = [
       'title' => $this->t('jQuery: iCheck'),
       'description' => $this->t('Highly customizable checkboxes and radio buttons.'),

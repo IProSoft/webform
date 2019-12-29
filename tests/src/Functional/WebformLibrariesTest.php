@@ -118,7 +118,6 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     /*
     // Exclude element types that require libraries.
     $edit = [
-      'excluded_elements[webform_location_geocomplete]' => FALSE,
       'excluded_elements[webform_rating]' => FALSE,
       'excluded_elements[webform_signature]' => FALSE,
     ];
@@ -126,7 +125,6 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
 
     // Check that status report excludes libraries required by element types.
     $this->drupalGet('/admin/reports/status');
-    $this->assertNoText('jQuery: Geocoding and Places Autocomplete Plugin library');
     $this->assertNoText('jQuery: Image Picker library');
     $this->assertNoText('jQuery: RateIt library');
     $this->assertNoText('Signature Pad library');

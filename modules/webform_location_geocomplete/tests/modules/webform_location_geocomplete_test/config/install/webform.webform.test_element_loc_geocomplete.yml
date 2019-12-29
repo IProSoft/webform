@@ -3,7 +3,7 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_location_geocomplete_test
 open: null
 close: null
 weight: 0
@@ -94,7 +94,7 @@ elements: |
     '#title': 'Location with geolocation and hidden'
     '#geolocation': true
     '#hidden': true
-  
+
 css: ''
 javascript: ''
 settings:
