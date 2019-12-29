@@ -944,18 +944,6 @@ webform.element.time:
     - core/drupal
     - webform/libraries.jquery.timepicker
 
-webform.element.toggle:
-  version: VERSION
-  css:
-    component:
-      css/webform.element.toggle.css: {}
-  js:
-    js/webform.element.toggle.js: {}
-  dependencies:
-    - core/drupal
-    - webform/libraries.jquery.toggles
-    - core/jquery.once
-
 webform.element.video_file:
   version: VERSION
   css:
@@ -1294,23 +1282,6 @@ libraries.jquery.timepicker:
       /libraries/jquery.timepicker/jquery.timepicker.min.css: { minified: true }
   js:
     /libraries/jquery.timepicker/jquery.timepicker.min.js: { minified: true }
-  dependencies:
-    - core/jquery
-
-libraries.jquery.toggles:
-  remote: https://github.com/simontabor/jquery-toggles/
-  version: '4.0.0'
-  license:
-    name: MIT
-    url: http://opensource.org/licenses/mit-license.php
-    gpl-compatible: true
-  cdn:
-    /libraries/jquery.toggles/: https://cdn.jsdelivr.net/gh/simontabor/jquery-toggles@v4.0.0/
-  css:
-    component:
-      /libraries/jquery.toggles/css/toggles-full.css: {}
-  js:
-    /libraries/jquery.toggles/toggles.min.js: { minified: true }
   dependencies:
     - core/jquery
 

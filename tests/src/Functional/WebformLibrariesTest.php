@@ -121,8 +121,6 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       'excluded_elements[webform_location_geocomplete]' => FALSE,
       'excluded_elements[webform_rating]' => FALSE,
       'excluded_elements[webform_signature]' => FALSE,
-      'excluded_elements[webform_toggle]' => FALSE,
-      'excluded_elements[webform_toggles]' => FALSE,
     ];
     $this->drupalPostForm('/admin/structure/webform/config/elements', $edit, t('Save configuration'));
 
@@ -131,7 +129,6 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     $this->assertNoText('jQuery: Geocoding and Places Autocomplete Plugin library');
     $this->assertNoText('jQuery: Image Picker library');
     $this->assertNoText('jQuery: RateIt library');
-    $this->assertNoText('jQuery: Toggles library');
     $this->assertNoText('Signature Pad library');
     */
 

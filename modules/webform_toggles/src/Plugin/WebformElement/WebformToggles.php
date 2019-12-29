@@ -1,6 +1,8 @@
 <?php
 
-namespace Drupal\webform\Plugin\WebformElement;
+namespace Drupal\webform_toggles\Plugin\WebformElement;
+
+use Drupal\webform\Plugin\WebformElement\OptionsBase;
 
 /**
  * Provides a 'toggles' element.

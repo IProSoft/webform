@@ -1,36 +1,28 @@
 <?php
 
-namespace Drupal\Tests\webform\Functional\Element;
+namespace Drupal\Tests\webform_toggles\Functional\Element;
+
+use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 
 /**
- * Tests for toggle element.
+ * Tests for toggles element.
  *
  * @group Webform
  */
-class WebformElementToggleTest extends WebformElementBrowserTestBase {
+class WebformTogglesElementTest extends WebformElementBrowserTestBase {
 
   /**
-   * Webforms to load.
+   * Modules to enable.
    *
    * @var array
    */
-  protected static $testWebforms = ['test_element_toggle'];
+  public static $modules = ['webform_toggles', 'webform_toggles_test'];
 
   /**
-   * {@inheritdoc}
+   * Test toggles element.
    */
-  public function setUp() {
-    parent::setUp();
-    $this->config('webform.settings')
-      ->set('libraries.excluded_libraries', [])
-      ->save();
-  }
-
-  /**
-   * Test toggle element.
-   */
-  public function testToggleElement() {
-    $this->drupalGet('/webform/test_element_toggle');
+  public function testTogglesElement() {
+    $this->drupalGet('/webform/test_element_toggles');
 
     // Check basic toggle.
     $this->assertRaw('<div class="js-form-item form-item js-form-type-webform-toggle form-type-webform-toggle js-form-item-toggle-basic form-item-toggle-basic">');

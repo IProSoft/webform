@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform\Element;
+namespace Drupal\webform_toggles\Element;
 
 use Drupal\Core\Render\Element\Checkbox;
 
@@ -83,7 +83,7 @@ class WebformToggle extends Checkbox {
       '#tag' => 'div',
       '#attributes' => $attributes,
       '#attached' => [
-        'library' => ['webform/webform.element.toggle'],
+        'library' => ['webform_toggles/webform_toggles.element'],
       ],
     ];
 

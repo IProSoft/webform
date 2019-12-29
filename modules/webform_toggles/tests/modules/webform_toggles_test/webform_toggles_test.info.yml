@@ -1,0 +1,7 @@
+name: 'Webform Toggles Test'
+type: module
+description: 'Support module for webform that provides toggles element working examples.'
+package: Testing
+core: 8.x
+dependencies:
+  - 'webform:webform_toggles'

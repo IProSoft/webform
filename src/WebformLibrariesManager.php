@@ -406,16 +406,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/1.11.15.zip'),
       'version' => '1.11.15',
     ];
-    $libraries['jquery.toggles'] = [
-      'title' => $this->t('jQuery: Toggles'),
-      'description' => $this->t('Toggles is a lightweight jQuery plugin that creates easy-to-style toggle buttons.'),
-      'notes' => $this->t('Toggles is used to provide a toggle element.'),
-      'homepage_url' => Url::fromUri('https://github.com/simontabor/jquery-toggles/'),
-      'download_url' => Url::fromUri('https://github.com/simontabor/jquery-toggles/archive/v4.0.0.zip'),
-      'version' => '4.0.0',
-      'elements' => ['webform_toggle', 'webform_toggles'],
-      'deprecated' => $this->t('The Toogles library is not being maintained and has major accessibility issues. It has been <a href=":href">deprecated</a> and will be removed before Webform 8.x-6.0.', [':href' => 'https://www.drupal.org/project/webform/issues/2890861']),
-    ];
     $libraries['progress-tracker'] = [
       'title' => $this->t('Progress Tracker'),
       'description' => $this->t("A flexible SASS component to illustrate the steps in a multi-step process e.g. a multi-step form, a timeline or a quiz."),

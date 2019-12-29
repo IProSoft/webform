@@ -3,16 +3,16 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_toggles_test
 open: null
 close: null
 weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_toggle
-title: 'Test: Element: Toggle'
-description: 'Test the toggle element.'
+id: test_element_toggles
+title: 'Test: Element: Toggles'
+description: 'Test the toggles element.'
 category: 'Test: Element'
 elements: |
   toggle_elements:
@@ -49,7 +49,7 @@ elements: |
         one: One
         two: Two
         three: Three
-  
+
 css: ''
 javascript: ''
 settings:

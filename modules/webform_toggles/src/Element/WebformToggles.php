@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform\Element;
+namespace Drupal\webform_toggles\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
