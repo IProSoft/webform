@@ -3398,7 +3398,6 @@ function webform_update_8181() {
   $config->clear('element.excluded_elements.webform_location_geocomplete');
 }
 
-
 /**
  * Issue #3102996: Move deprecated toggles elements into a sub-module.
  */
