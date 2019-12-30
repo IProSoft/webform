@@ -246,12 +246,17 @@ abstract class DateBase extends WebformElementBase {
     $form['date']['date_container']['date_date_min'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date minimum'),
-      '#description' => $this->t('Specifies the minimum date.') . '<br /><br />' . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid.'),
+      '#description' => $this->t('Specifies the minimum date.')
+        . ' ' . $this->t('To limit the date minimum to submission date use the <code>[webform_submission:created:html_date]</code> token.')
+        . '<br /><br />'
+        . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid.'),
     ];
     $form['date']['date_container']['date_date_max'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date maximum'),
-      '#description' => $this->t('Specifies the maximum date.') . '<br /><br />' . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid.'),
+      '#description' => $this->t('Specifies the maximum date.')
+        . '<br /><br />'
+        . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid.'),
     ];
 
     // Date days of the week validation.
@@ -292,12 +297,17 @@ abstract class DateBase extends WebformElementBase {
     $form['validation']['date_container']['date_min'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date/time minimum'),
-      '#description' => $this->t('Specifies the minimum date/time.') . '<br /><br />' . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date/Time Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 10:00 PM are all valid.'),
+      '#description' => $this->t('Specifies the minimum date/time.')
+        . ' ' . $this->t('To limit the date/time minimum to submission date/time use the <code>[webform_submission:created:html_datetime]</code> token.')
+        . '<br /><br />'
+        . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date/Time Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 10:00 PM are all valid.'),
     ];
     $form['validation']['date_container']['date_max'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date/time maximum'),
-      '#description' => $this->t('Specifies the maximum date/time.') . '<br /><br />' . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date/Time Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 10:00 PM are all valid.'),
+      '#description' => $this->t('Specifies the maximum date/time.')
+        . '<br /><br />'
+        . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date/Time Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 10:00 PM are all valid.'),
     ];
     return $form;
   }
