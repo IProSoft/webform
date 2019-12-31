@@ -110,6 +110,10 @@ html.js .webform-message--close .webform-message__link:active {
 /* Tables */
 /*****************************************************************************   */
 
+table th {
+  height: auto;
+}
+
 /**
  * Align all tables cells need to align top, so we are removing the cell height
  * and adding more padding around the cells.
