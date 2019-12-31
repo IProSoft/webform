@@ -10,7 +10,6 @@ namespace Drupal\webform\Plugin\WebformElement;
  *   label = @Translation("Tableselect sort"),
  *   description = @Translation("Provides a form element for a table with radios or checkboxes in left column that can be sorted."),
  *   category = @Translation("Options elements"),
- *   states_wrapper = TRUE,
  * )
  */
 class WebformTableSelectSort extends OptionsBase {

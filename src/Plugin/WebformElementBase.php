@@ -2322,7 +2322,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     ];
 
     /* Form display */
-
     $form['form'] = [
       '#type' => 'details',
       '#title' => $this->t('Form display'),
