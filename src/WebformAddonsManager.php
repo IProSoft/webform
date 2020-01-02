@@ -538,6 +538,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform API Handler.
+    $projects['webform_api_handler'] = [
+      'title' => $this->t('Webform API Handler'),
+      'description' => $this->t("Extends Webform's built it Remote Post handler to enable the creation of custom plugins for pre-processing the request Webform makes to an API endpoint, and for processing and displaying the result of the API request."),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_api_handler'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Webform Copper CRM.
     $projects['webform_copper'] = [
       'title' => $this->t('Webform Copper'),
