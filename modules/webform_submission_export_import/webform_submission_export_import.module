@@ -184,8 +184,8 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   if (substr($destination, -1) != '/') {
     $destination .= '/';
   }
-  $file->destination = file_destination($destination . $file->getFilename(), $replace);
-  // If file_destination() returns FALSE then $replace === FILE_EXISTS_ERROR and
+  $file->destination = \Drupal::service('file_system')->getDestinationFilename($destination . $file->getFilename(), $replace);
+  // If \Drupal::service('file_system')->getDestinationFilename() returns FALSE then $replace === FILE_EXISTS_ERROR and
   // there's an existing file so we need to bail.
   if ($file->destination === FALSE) {
     \Drupal::messenger()->addError(t('The file %source could not be uploaded because a file by that name already exists in the destination %directory.', ['%source' => $form_field_name, '%directory' => $destination]));
