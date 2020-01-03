@@ -98,8 +98,8 @@ class WebformSignature extends WebformElementBase {
     $properties = [
       // General settings.
       'description' => $this->t('Sign above'),
+      'readonly' => FALSE,
     ] + parent::getDefaultProperties();
-    unset($properties['disabled']);
     return $properties;
   }
 
