@@ -282,7 +282,10 @@ class WebformLikert extends FormElement {
     }
 
     if ($input === FALSE) {
-      $element += ['#default_value' => []];
+      // FormBuilder can provide a default #default_value of an empty string.
+      if (empty($element['#default_value'])) {
+        $element['#default_value'] = [];
+      }
       return $element['#default_value'] + $default_value;
     }
     $value = $default_value;
