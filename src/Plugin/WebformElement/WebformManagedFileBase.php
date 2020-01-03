@@ -688,7 +688,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     }
 
     // Make sure the upload location exists and is writable.
-    file_prepare_directory($upload_location, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    $this->fileSystem->prepareDirectory($upload_location, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
 
     return $upload_location;
   }
@@ -1269,7 +1269,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // Replace /_sid_/ token with the submission id.
     if (strpos($destination_folder, '/_sid_')) {
       $destination_folder = str_replace('/_sid_', '/' . $webform_submission->id(), $destination_folder);
-      file_prepare_directory($destination_folder, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+      $this->fileSystem->prepareDirectory($destination_folder, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     }
 
     // Replace tokens in file name.
