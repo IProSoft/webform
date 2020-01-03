@@ -16,6 +16,7 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
@@ -51,6 +52,13 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
   protected $currentUser;
 
   /**
+   * The file system service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
    * Webform access rules manager service.
    *
    * @var \Drupal\webform\WebformAccessRulesManagerInterface
@@ -63,12 +71,13 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    * @todo Webform 8.x-6.x: Move $time before $access_rules_manager.
    * @todo Webform 8.x-6.x: Move $memory_cache right after $language_manager.
    */
-  public function __construct(EntityTypeInterface $entity_type, Connection $database, EntityManagerInterface $entity_manager, CacheBackendInterface $cache, LanguageManagerInterface $language_manager, AccountProxyInterface $current_user, WebformAccessRulesManagerInterface $access_rules_manager, TimeInterface $time = NULL, MemoryCacheInterface $memory_cache = NULL) {
+  public function __construct(EntityTypeInterface $entity_type, Connection $database, EntityManagerInterface $entity_manager, CacheBackendInterface $cache, LanguageManagerInterface $language_manager, AccountProxyInterface $current_user, WebformAccessRulesManagerInterface $access_rules_manager, TimeInterface $time = NULL, MemoryCacheInterface $memory_cache = NULL, FileSystemInterface $file_system = NULL) {
     parent::__construct($entity_type, $database, $entity_manager, $cache, $language_manager, $memory_cache);
 
     $this->currentUser = $current_user;
     $this->accessRulesManager = $access_rules_manager;
     $this->time = $time ?: \Drupal::time();
+    $this->fileSystem = $file_system ?: \Drupal::service('file_system');
   }
 
   /**
@@ -84,7 +93,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $container->get('current_user'),
       $container->get('webform.access_rules_manager'),
       $container->get('datetime.time'),
-      $container->get('entity.memory_cache')
+      $container->get('entity.memory_cache'),
+      $container->get('file_system')
     );
   }
 
@@ -1149,7 +1159,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         // Clear empty webform submission directory.
         if (file_exists($file_directory)
           && empty(file_scan_directory($file_directory, '/.*/'))) {
-          file_unmanaged_delete_recursive($file_directory);
+          $this->fileSystem->deleteRecursive($file_directory);
         }
       }
     }
