@@ -321,12 +321,18 @@ class WebformSubmissionForm extends ContentEntityForm {
     $data = $entity->getRawData();
 
     // If ?_webform_test is defined for the current webform, override
-    // the 'add' operation with 'test' operation and generate test data.
+    // the 'add' operation with 'test' operation.
     if ($this->operation === 'add' &&
       $this->getRequest()->query->get('_webform_test') === $webform->id() &&
       $webform->access('test')
     ) {
       $this->operation = 'test';
+    }
+
+    // Generate test data.
+    if ( $this->operation === 'test'
+      && $webform->access('test')) {
+      $webform->applyVariants($entity);
       $data = $this->generate->getData($webform);
     }
 
@@ -518,6 +524,16 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
 
+    // Only prepopulate data when a webform is initially loaded.
+    if (!$form_state->isRebuilding()) {
+      $data = $webform_submission->getData();
+      $this->prepopulateData($data);
+      $webform_submission->setData($data);
+    }
+
+    // Apply variants.
+    $webform->applyVariants($webform_submission);
+
     // All anonymous submissions are tracked in the $_SESSION.
     // @see \Drupal\webform\WebformSubmissionStorage::setAnonymousSubmission
     if ($this->currentUser()->isAnonymous()) {
@@ -698,10 +714,6 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Get and prepopulate (via query string) submission data.
     $data = $webform_submission->getData();
-    // Only prepopulate data when a webform is initially loaded.
-    if (!$form_state->isRebuilding()) {
-      $this->prepopulateData($data);
-    }
 
     /* Elements */
 
@@ -1760,6 +1772,9 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform = $this->getWebform();
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
+
+    // Apply variants.
+    $webform->applyVariants($webform_submission);
 
     // Make sure the uri and remote addr are set correctly because
     // Ajax requests can cause these values to be reset.

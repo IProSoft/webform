@@ -80,6 +80,7 @@ echo 'true' > modules/webform_examples_accessibility/webform_examples_accessibil
 echo 'true' > modules/webform_example_element/webform_example_element.features.yml
 echo 'true' > modules/webform_example_composite/webform_example_composite.features.yml
 echo 'true' > modules/webform_example_handler/webform_example_handler.features.yml
+echo 'true' > modules/webform_example_variant/webform_example_variant.features.yml
 echo 'true' > modules/webform_example_element/webform_example_remote_post.features.yml
 
 echo 'true' > modules/webform_group/tests/modules/webform_group_test/webform_group_test.features.yml
@@ -151,6 +152,7 @@ drush en -y webform\
   webform_examples_accessibility\
   webform_example_element\
   webform_example_handler\
+  webform_example_variant\
   webform_example_remote_post\
   webform_group_test\
   webform_image_select\
@@ -203,6 +205,7 @@ drush features-export -y webform_examples_accessibility
 drush features-export -y webform_example_element
 drush features-export -y webform_example_composite
 drush features-export -y webform_example_handler
+drush features-export -y webform_example_variant
 drush features-export -y webform_example_remote_post
 drush features-export -y webform_group_test
 drush features-export -y webform_image_select
@@ -254,6 +257,7 @@ drush webform:tidy -y --dependencies webform_examples_accessibility
 drush webform:tidy -y --dependencies webform_example_element
 drush webform:tidy -y --dependencies webform_example_composite
 drush webform:tidy -y --dependencies webform_example_handler
+drush webform:tidy -y --dependencies webform_example_variant
 drush webform:tidy -y --dependencies webform_example_remote_post
 drush webform:tidy -y --dependencies webform_group_test
 drush webform:tidy -y --dependencies webform_icheck
@@ -302,6 +306,7 @@ drush features-import -y webform_examples_accessibility
 drush features-import -y webform_example_element
 drush features-import -y webform_example_composite
 drush features-import -y webform_example_handler
+drush features-import -y webform_example_variant
 drush features-import -y webform_example_remote_post
 drush features-import -y webform_entity_print
 drush features-import -y webform_group_test

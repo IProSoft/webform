@@ -3431,3 +3431,11 @@ function webform_update_8183() {
     }
   }
 }
+
+/**
+ * Issue #3094270: Add webform variants support.
+ */
+function webform_update_8184() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}

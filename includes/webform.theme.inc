@@ -34,6 +34,7 @@ function webform_theme() {
     'webform_actions' => [
       'render element' => 'element',
     ],
+
     'webform_handler_action_summary' => [
       'variables' => ['settings' => NULL, 'handler' => NULL],
     ],
@@ -48,6 +49,10 @@ function webform_theme() {
     ],
     'webform_handler_settings_summary' => [
       'variables' => ['settings' => NULL, 'handler' => NULL],
+    ],
+
+    'webform_variant_override_summary' => [
+      'variables' => ['settings' => NULL, 'variant' => NULL],
     ],
 
     'webform_confirmation' => [

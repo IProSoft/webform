@@ -98,6 +98,8 @@ assets:
   javascript: ''
 handler:
   excluded_handlers: {  }
+variant:
+  excluded_variants: {  }
 export:
   temp_directory: ''
   exporter: delimited

@@ -2490,7 +2490,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     $form['form']['prepopulate'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Prepopulate'),
-      '#description' => $this->t('Allow element to be populated using query string parameters'),
+      '#description' => $this->t('Allow element to be populated using query string parameters.'),
       '#return_value' => TRUE,
       '#weight' => 50,
     ];

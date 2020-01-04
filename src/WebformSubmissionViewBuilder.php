@@ -101,6 +101,12 @@ class WebformSubmissionViewBuilder extends EntityViewBuilder implements WebformS
       $view_mode = $webform_submissions_view_mode;
     }
 
+    // Apply variants.
+    /** @var \Drupal\webform\WebformSubmissionInterface $entity  */
+    /** @var \Drupal\webform\WebformInterface $webform */
+    $webform = $entity->getWebform();
+    $webform->applyVariants($entity);
+
     return parent::view($entity, $view_mode, $langcode);
   }
 

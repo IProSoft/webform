@@ -71,6 +71,10 @@ class WebformSubmissionResendForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, WebformSubmissionInterface $webform_submission = NULL) {
     $this->webformSubmission = $webform_submission;
 
+    // Apply variants to the webform.
+    $webform = $webform_submission->getWebform();
+    $webform->applyVariants($webform_submission);
+
     // Get header.
     $header = [];
     $header['title'] = [

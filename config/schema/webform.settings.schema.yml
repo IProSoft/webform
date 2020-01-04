@@ -479,6 +479,13 @@ webform.settings:
         excluded_handlers:
           type: ignore
           label: 'Excluded submission handlers'
+    variant:
+      type: mapping
+      label: 'Variant settings'
+      mapping:
+        excluded_variants:
+          type: ignore
+          label: 'Excluded webform variants'
     batch:
       type: mapping
       label: 'Batch settings'

@@ -229,6 +229,17 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function isDisabled();
 
   /**
+   * Determine if this handle is applicable to the webform.
+   *
+   * @param \Drupal\webform\WebformInterface $webform
+   *   A webform.
+   *
+   * @return bool
+   *   TRUE if this handler is applicable to the webform.
+   */
+  public function isApplicable(WebformInterface $webform);
+
+  /**
    * Returns the webform submission is optional indicator.
    *
    * @return bool

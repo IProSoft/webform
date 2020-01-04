@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Url;
+use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Form\WebformDialogFormTrait;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
@@ -437,9 +438,17 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     }
 
     // Still set the redirect URL just to be safe.
-    $query = ['update' => $key];
-    if ($save_and_add_element) {
-      $query['add_element'] = $add_element;
+
+    // Variants require the entire page to be reloaded so that Variants tab
+    // is made visible,
+    if ($this->getWebformElementPlugin() instanceof WebformElementVariantInterface) {
+      $query = ['reload' => 'true'];
+    }
+    else {
+      $query = ['update' => $key];
+      if ($save_and_add_element) {
+        $query['add_element'] = $add_element;
+      }
     }
     $form_state->setRedirectUrl($this->webform->toUrl('edit-form', ['query' => $query]));
   }
