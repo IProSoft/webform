@@ -2369,11 +2369,26 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Validate entity references.
     // @see \Drupal\Core\Entity\Element\EntityAutocomplete::validateEntityAutocomplete
+    // @see \Drupal\webform\Plugin\WebformElement\WebformTermReferenceTrait
     if ($element_plugin instanceof WebformElementEntityReferenceInterface) {
-      $options = $element['#selection_settings'] + [
-        'target_type' => $element['#target_type'],
-        'handler' => $element['#selection_handler'],
-      ];
+      if (isset($element['#vocabulary'])) {
+        $vocabulary_id = $element['#vocabulary'];
+        $options = [
+          'target_type' => 'taxonomy_term',
+          'handler' => 'default:taxonomy_term',
+          'target_bundles' => [$vocabulary_id => $vocabulary_id],
+        ];
+      }
+      elseif (isset($element['#selection_settings'])) {
+        $options = $element['#selection_settings'] + [
+          'target_type' => $element['#target_type'],
+          'handler' => $element['#selection_handler'],
+        ];
+      }
+      else {
+        return TRUE;
+      }
+
       /** @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface $handler */
       $handler = $this->selectionManager->getInstance($options);
       $valid_ids = $handler->validateReferenceableEntities((array) $value);
