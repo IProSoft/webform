@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\webform\Plugin\WebformElementAttachmentInterface;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -300,6 +301,15 @@ class WebformSubmissionViewBuilder extends EntityViewBuilder implements WebformS
     // Checked excluded elements.
     if (isset($element['#webform_key']) && isset($options['excluded_elements'][$element['#webform_key']])) {
       return FALSE;
+    }
+
+    // Checked excluded attachments.
+    if (!empty($options['exclude_attachments'])) {
+      /** @var \Drupal\webform\Plugin\WebformElementInterface $webform_element */
+      $webform_element = $this->elementManager->getElementInstance($element, $webform_submission);
+      if ($webform_element instanceof WebformElementAttachmentInterface) {
+        return FALSE;
+      }
     }
 
     // Check if the element is conditionally hidden.

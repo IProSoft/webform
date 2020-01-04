@@ -106,6 +106,9 @@ webform.handler.email:
     exclude_empty_checkbox:
       type: boolean
       label: 'Exclude unselected checkboxes'
+    exclude_attachments:
+      type: boolean
+      label: 'Exclude file attachments'
     html:
       type: boolean
       label: HTML

@@ -254,6 +254,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       'ignore_access' => FALSE,
       'exclude_empty' => TRUE,
       'exclude_empty_checkbox' => FALSE,
+      'exclude_attachments' => FALSE,
       'html' => TRUE,
       'attachments' => FALSE,
       'twig' => FALSE,
@@ -666,7 +667,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     ];
     $form['elements']['ignore_access'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Always include private and restricted access elements.'),
+      '#title' => $this->t('Always include elements with private and restricted access.'),
       '#description' => $this->t('If checked, access controls for included element will be ignored.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['ignore_access'],
@@ -674,14 +675,28 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $form['elements']['exclude_empty'] = [
       '#type' => 'checkbox',
       '#title' => t('Exclude empty elements'),
+      '#description' => $this->t('If checked, empty elements will be excluded from the email values.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['exclude_empty'],
     ];
     $form['elements']['exclude_empty_checkbox'] = [
       '#type' => 'checkbox',
       '#title' => t('Exclude unselected checkboxes'),
+      '#description' => $this->t('If checked, empty checkboxes will be excluded from the email values.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['exclude_empty_checkbox'],
+    ];
+    $form['elements']['exclude_attachments'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Exclude file elements with attachments'),
+      '#return_value' => TRUE,
+      '#description' => $this->t('If checked, file attachments will be excluded from the email values, but the selected element files will still be attached to the email.'),
+      '#default_value' => $this->configuration['exclude_attachments'],
+      '#access' => $this->getWebform()->hasAttachments(),
+      '#disabled' => !$this->supportsAttachments(),
+      '#states' => [
+        'visible' => [':input[name="settings[attachments]"]' => ['checked' => TRUE]],
+      ],
     ];
     $elements = $this->webform->getElementsInitializedFlattenedAndHasValue();
     foreach ($elements as $element) {
@@ -906,6 +921,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       'ignore_access' => $this->configuration['ignore_access'],
       'exclude_empty' => $this->configuration['exclude_empty'],
       'exclude_empty_checkbox' => $this->configuration['exclude_empty_checkbox'],
+      'exclude_attachments' => $this->configuration['exclude_attachments'],
       'html' => ($this->configuration['html'] && $this->supportsHtml()),
     ];
 

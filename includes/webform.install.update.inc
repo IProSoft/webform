@@ -3439,3 +3439,10 @@ function webform_update_8184() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
 }
+
+/**
+ * Issue #3104049: Exclude attached files from email submission values.
+ */
+function webform_update_8185() {
+  _webform_update_webform_handler_settings();
+}
