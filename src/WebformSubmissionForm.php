@@ -330,7 +330,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Generate test data.
-    if ( $this->operation === 'test'
+    if ($this->operation === 'test'
       && $webform->access('test')) {
       $webform->applyVariants($entity);
       $data = $this->generate->getData($webform);
@@ -2362,7 +2362,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * Determine if element prepopulate data is valid.
    *
    * @param string $element_key
-   *   An element key
+   *   An element key.
    * @param string|array &$value
    *   A value.
    *

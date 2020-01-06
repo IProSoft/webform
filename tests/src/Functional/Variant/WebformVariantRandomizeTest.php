@@ -18,6 +18,7 @@ class WebformVariantRandomize extends WebformBrowserTestBase {
    * @var array
    */
   protected static $testWebforms = ['test_variant_randomize'];
+
   /**
    * Test variant randomize.
    */

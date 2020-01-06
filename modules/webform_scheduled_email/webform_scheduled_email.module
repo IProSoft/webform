@@ -20,7 +20,6 @@ function webform_scheduled_email_config_schema_info_alter(&$definitions) {
   $definitions['webform.handler.scheduled_email']['mapping'] += $mapping;
 }
 
-
 /**
  * Implements hook_entity_update().
  */

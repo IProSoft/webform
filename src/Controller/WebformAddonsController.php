@@ -42,12 +42,12 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
-   * @param \Drupal\webform\Controller\WebformThemeManagerInterface $theme_manager
+   * @param \Drupal\webform\WebformThemeManagerInterface $theme_manager
    *   The webform theme manager.
    * @param \Drupal\webform\WebformAddonsManagerInterface $addons
    *   The webform add-ons manager.
    */
-  public function __construct(RequestStack $request_stack,  WebformThemeManagerInterface $theme_manager, WebformAddonsManagerInterface $addons) {
+  public function __construct(RequestStack $request_stack, WebformThemeManagerInterface $theme_manager, WebformAddonsManagerInterface $addons) {
     $this->request = $request_stack->getCurrentRequest();
     $this->themeManager = $theme_manager;
     $this->addons = $addons;

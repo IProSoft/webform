@@ -49,7 +49,7 @@ class WebformListBuilderTest extends BrowserTestBase {
   /**
    * Tests the webform overview access.
    */
-  public function _testAccess() {
+  public function testAccess() {
     $assert_session = $this->assertSession();
 
     // Test with a superuser.

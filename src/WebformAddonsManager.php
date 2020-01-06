@@ -208,7 +208,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     // Element: Webform IBAN field .
     $projects['webform_iban_field'] = [
-      'title' => $this->t('Webform IBAN field '),
+      'title' => $this->t('Webform IBAN field'),
       'description' => $this->t('Provides an IBAN Field to collect a valid IBAN number.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_iban_field'),
       'category' => 'element',
@@ -516,7 +516,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     // Integrations: Sherpa Webform .
     $projects['sherpa_webform'] = [
-      'title' => $this->t('Sherpa Webform '),
+      'title' => $this->t('Sherpa Webform'),
       'description' => $this->t('Captures Webform submissions, convert them to JSON, and send them to Sherpa.'),
       'url' => Url::fromUri('https://www.drupal.org/project/sherpa_webform'),
       'category' => 'integration',
@@ -557,7 +557,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Integrations: Webform Emfluence.
     $projects['emfluence_webform'] = [
       'title' => $this->t('Webform Emfluence'),
-      'description' => $this->t('Integrates Emfluence Marketing Platform\'s contacts/save endpoint and Webform 8.x.'),
+      'description' => $this->t("Integrates Emfluence Marketing Platform's contacts/save endpoint and Webform 8.x."),
       'url' => Url::fromUri('https://www.drupal.org/sandbox/huskyninja/3074135'),
       'experimental' => TRUE,
       'category' => 'integration',

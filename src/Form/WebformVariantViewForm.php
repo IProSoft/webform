@@ -58,7 +58,7 @@ class WebformVariantViewForm extends FormBase {
     $form['description'] = [
       '#type' => 'container',
       'text' => [
-        '#markup' => $this->t('Select variants and then click submit, which will redirect you to the @operation form.', $t_args ),
+        '#markup' => $this->t('Select variants and then click submit, which will redirect you to the @operation form.', $t_args),
         '#prefix' => '<p>',
         '#suffix' => '</p>',
       ],
@@ -133,6 +133,5 @@ class WebformVariantViewForm extends FormBase {
     $redirect_url = $this->webform->toUrl($rel, $options);
     $form_state->setRedirectUrl($redirect_url);
   }
-
 
 }

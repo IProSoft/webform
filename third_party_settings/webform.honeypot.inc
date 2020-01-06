@@ -109,7 +109,7 @@ function _webform_honeypot_form(array &$form, FormStateInterface $form_state, $h
     }
   }
 
-  $form['third_party_settings']['honeypot']['time_restriction']['#description'] =  ($form['third_party_settings']['honeypot']['time_restriction']['#description'] ? '<br/>' : '')
+  $form['third_party_settings']['honeypot']['time_restriction']['#description'] = ($form['third_party_settings']['honeypot']['time_restriction']['#description'] ? '<br/>' : '')
     . '<strong>' . t('Page caching will be disabled when a time restriction is applied to a webform.') . '</strong>';
 
   $form['#validate'][] = '_webform_honeypot_form_validate';

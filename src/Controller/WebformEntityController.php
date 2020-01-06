@@ -209,7 +209,7 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
    *   The current request.
    * @param \Drupal\webform\WebformInterface|null $webform
    *   The current webform.
-   * @param \Drupal\Core\Entity\EntityInterface|NULL $source_entity
+   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
    *   The current source entity.
    *
    * @return array

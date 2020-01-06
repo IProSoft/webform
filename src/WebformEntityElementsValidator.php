@@ -479,6 +479,7 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
 
     return NULL;
   }
+
   /**
    * Validate element hierarchy.
    *

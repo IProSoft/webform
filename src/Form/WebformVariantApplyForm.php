@@ -29,7 +29,7 @@ class WebformVariantApplyForm extends WebformDeleteFormBase {
   /**
    * Track if webform has multiple variants.
    *
-   * @var boolean
+   * @var bool
    */
   protected $hasMultipleVariants;
 

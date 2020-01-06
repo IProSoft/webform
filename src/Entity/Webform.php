@@ -15,7 +15,6 @@ use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\webform\Plugin\WebformElement\WebformActions;
 use Drupal\webform\Plugin\WebformElement\WebformWizardPage;
-use Drupal\webform\Plugin\WebformElement\WebformVariant;
 use Drupal\webform\Plugin\WebformElementAssetInterface;
 use Drupal\webform\Plugin\WebformElementAttachmentInterface;
 use Drupal\webform\Plugin\WebformElementComputedInterface;

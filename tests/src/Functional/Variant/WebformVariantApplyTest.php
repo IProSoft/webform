@@ -18,7 +18,7 @@ class WebformVariantApplyTest extends WebformBrowserTestBase {
    */
   protected static $testWebforms = [
     'test_variant_randomize',
-    'test_variant_multiple'
+    'test_variant_multiple',
   ];
 
   /**

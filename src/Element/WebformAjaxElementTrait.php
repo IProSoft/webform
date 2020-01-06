@@ -61,7 +61,7 @@ trait WebformAjaxElementTrait {
    *   The element to be update via Ajax.
    * @param array &$trigger_element
    *   The element to trigger the Ajax update.
-   * @param array|NULL &$update_element
+   * @param array|null &$update_element
    *   The element to append the hidden Ajax submit button.
    */
   public function buildAjaxElement($id, array &$wrapper_element, array &$trigger_element, array &$update_element = NULL) {
@@ -113,7 +113,7 @@ trait WebformAjaxElementTrait {
    * @param array &$element
    *   The element to append the hidden Ajax submit button.
    */
-  public function buildAjaxElementUpdate($id,  array &$element) {
+  public function buildAjaxElementUpdate($id, array &$element) {
     $element['update'] = [
       '#type' => 'submit',
       '#value' => t('Update'),
@@ -202,6 +202,8 @@ trait WebformAjaxElementTrait {
   }
 
   /**
+   * Get ajax element wrapper.
+   *
    * @param string $id
    *   The id used to create the Ajax wrapper and trigger.
    * @param array $element

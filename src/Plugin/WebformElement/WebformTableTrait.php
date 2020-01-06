@@ -84,7 +84,7 @@ trait WebformTableTrait {
     ];
 
     $form['form']['display_container']['title_display']['#options'] = [
-        'header' => $this->t('Header')
+        'header' => $this->t('Header'),
       ] + $form['form']['display_container']['title_display']['#options'];
 
     return $form;

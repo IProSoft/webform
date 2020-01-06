@@ -549,10 +549,10 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $type = $webform_element->getPluginLabel();
     if ($webform_element instanceof WebformElement) {
       if (isset($element['#type'])) {
-        $type = '[' . $element['#type']  . ']';
+        $type = '[' . $element['#type'] . ']';
       }
       elseif (isset($element['#theme'])) {
-        $type = '[' . $element['#theme']  . ']';
+        $type = '[' . $element['#theme'] . ']';
       }
     }
     $row['type'] = ['#markup' => $type];

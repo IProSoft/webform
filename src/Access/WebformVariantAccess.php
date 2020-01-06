@@ -14,9 +14,7 @@ class WebformVariantAccess {
    * Check whether the webform variant settings is enabled.
    *
    * @param \Drupal\webform\WebformInterface $webform
-   *  A webform.
-   * @param string $webform_variant
-   *   A webform variant id.
+   *   A webform.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
@@ -44,8 +42,8 @@ class WebformVariantAccess {
    * Check whether the webform variant is enabled.
    *
    * @param \Drupal\webform\WebformInterface $webform
-   *  A webform.
-   * @param string $webform_variant
+   *   A webform.
+   * @param string|NULL $webform_variant
    *   A webform variant id.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
@@ -71,6 +69,5 @@ class WebformVariantAccess {
 
     return $access_result->addCacheTags(['config:webform.settings']);
   }
-
 
 }

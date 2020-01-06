@@ -9,7 +9,6 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Form for adding webform node variants.
  */
@@ -159,7 +158,7 @@ class WebformNodeReferencesAddForm extends FormBase {
     $route_options = ['query' => $query];
 
     // Redirect to node add form.
-    $form_state->setRedirect($route_name, $route_parameters, $route_options );
+    $form_state->setRedirect($route_name, $route_parameters, $route_options);
   }
 
 }

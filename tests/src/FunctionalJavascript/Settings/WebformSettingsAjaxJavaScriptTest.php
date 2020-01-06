@@ -40,7 +40,6 @@ class WebformSettingsAjaxJavaScriptTest extends WebformWebDriverTestBase {
 
     $webform_ajax = Webform::load('test_ajax');
 
-
     // Validate form.
     $this->drupalPostForm($webform_ajax->toUrl(), ['textfield' => ''], t('Submit'));
     $assert_session->waitForElement('css', '.messages--error');

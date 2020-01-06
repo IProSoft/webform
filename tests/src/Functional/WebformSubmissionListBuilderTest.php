@@ -255,7 +255,7 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
    *   Column table is sorted by.
    * @param string $sort
    *   Sort order for table column.
-   * @param string|NULL $label
+   * @param string|null $label
    *   Column label.
    */
   protected function assertTableHeaderSort($order, $sort = 'asc', $label = NULL) {
@@ -269,9 +269,8 @@ class WebformSubmissionListBuilderTest extends WebformBrowserTestBase {
       $this->assertRaw('<a href="' . $base_path . 'admin/structure/webform/manage/' . $webform->id() . '/results/submissions?sort=' . $sort . '&amp;order=' . str_replace(' ', '%20', $order) . '" title="sort by ' . $label . '" rel="nofollow">' . $label . '</a>');
     }
     else {
-      $this->assertRaw('<a href="' . $base_path . 'admin/structure/webform/manage/' . $webform->id() . '/results/submissions?sort=' . $sort . '&amp;order=' . str_replace(' ', '%20', $order)  . '" title="sort by ' . $label . '">' . $label . '</a>');
+      $this->assertRaw('<a href="' . $base_path . 'admin/structure/webform/manage/' . $webform->id() . '/results/submissions?sort=' . $sort . '&amp;order=' . str_replace(' ', '%20', $order) . '" title="sort by ' . $label . '">' . $label . '</a>');
     }
-
   }
 
 }

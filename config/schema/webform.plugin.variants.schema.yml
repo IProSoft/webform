@@ -11,4 +11,3 @@ webform.variant.override:
     debug:
       label: Debug
       type: string
-

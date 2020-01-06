@@ -3372,7 +3372,7 @@ function webform_update_8181() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->get($webform_config_name);
     $elements = $webform_config->get('elements');
-    if (strpos($elements , 'webform_location_geocomplete') !== FALSE) {
+    if (strpos($elements, 'webform_location_geocomplete') !== FALSE) {
       $install_webform_location_geocomplete = TRUE;
       break;
     }
@@ -3406,7 +3406,7 @@ function webform_update_8182() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->get($webform_config_name);
     $elements = $webform_config->get('elements');
-    if (strpos($elements , 'webform_toggle') !== FALSE) {
+    if (strpos($elements, 'webform_toggle') !== FALSE) {
       // Enable the webform_toggles.module.
       \Drupal::service('module_installer')
         ->install(['webform_toggles']);
@@ -3423,7 +3423,7 @@ function webform_update_8183() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->get($webform_config_name);
     $elements = $webform_config->get('elements');
-    if (strpos($elements , 'icheck') !== FALSE) {
+    if (strpos($elements, 'icheck') !== FALSE) {
       // Enable the webform_icheck.module.
       \Drupal::service('module_installer')
         ->install(['webform_icheck']);

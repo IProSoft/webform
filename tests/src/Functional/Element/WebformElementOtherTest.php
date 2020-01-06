@@ -269,6 +269,6 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
   - One');
     $this->assertNoRaw('checkboxes_other_advanced:
   - Five');
- }
+  }
 
 }

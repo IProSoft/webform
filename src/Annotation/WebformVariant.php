@@ -3,7 +3,6 @@
 namespace Drupal\webform\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
-use Drupal\webform\Plugin\WebformVariantInterface;
 
 /**
  * Defines a webform variant annotation object.

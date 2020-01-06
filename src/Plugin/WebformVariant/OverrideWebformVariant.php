@@ -203,7 +203,7 @@ class OverrideWebformVariant extends WebformVariantBase {
   public function applyVariant() {
     $webform = $this->getWebform();
 
-    // Override settings
+    // Override settings.
     if ($this->configuration['settings']) {
       $settings = $webform->getSettings();
       foreach ($this->configuration['settings'] as $setting_name => $setting_value) {

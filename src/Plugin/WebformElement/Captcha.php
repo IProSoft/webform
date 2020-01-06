@@ -242,7 +242,6 @@ class Captcha extends WebformElementBase {
       }
     }
 
-
     return $element;
   }
 

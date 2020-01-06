@@ -219,7 +219,7 @@ class WebformUiElementDeleteForm extends WebformDeleteFormBase {
 
     $query = [];
     // Variants require the entire page to be reloaded so that Variants tab
-    // can be hidden,
+    // can be hidden.
     if ($this->getWebformElementPlugin() instanceof WebformElementVariantInterface) {
       $query = ['reload' => 'true'];
     }

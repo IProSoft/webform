@@ -9,7 +9,7 @@ use Drupal\webform\Element\WebformMessage as WebformMessageElement;
 /**
  * Provides a hidden 'view' element.
  *
- ** @WebformElement(
+ * @WebformElement(
  *   id = "view",
  *   label = @Translation("View"),
  *   description = @Translation("Provides a view embed element. Only users who can 'Administer views' or 'Edit webform source code' can create and update this element."),
@@ -17,7 +17,7 @@ use Drupal\webform\Element\WebformMessage as WebformMessageElement;
  *   states_wrapper = TRUE,
  * )
  */
-class View extends WebformMarkupBase{
+class View extends WebformMarkupBase {
 
   /**
    * {@inheritdoc}
@@ -130,7 +130,7 @@ class View extends WebformMarkupBase{
     return $form;
   }
 
- /**
+  /**
    * {@inheritdoc}
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {

@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\WebformMessageManagerInterface;
 
 /**
  * Base webform entity settings form.
@@ -87,7 +86,7 @@ abstract class WebformEntitySettingsBaseForm extends EntityForm {
           $element['#description'] .= $this->t('Defaults to: %value', ['%value' => $value]);
         }
 
-        // Append [none] message to an element's description
+        // Append [none] message to an element's description.
         if (preg_match('/_message$/', $key)) {
           $none_translated = (string) t('[none]');
           $element['#description'] .= ($element['#description'] ? ' ' : '');

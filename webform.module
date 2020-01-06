@@ -573,7 +573,7 @@ function _webform_page_attachments(array &$attachments) {
     if ($variants) {
       // Using JavaScript for redirection allows pages to be cached
       // by URL with querystring parameters.
-      $json_variants = Json::encode($variants) ;
+      $json_variants = Json::encode($variants);
       $attachments['#attached']['html_head'][] = [
         [
           '#type' => 'html_tag',

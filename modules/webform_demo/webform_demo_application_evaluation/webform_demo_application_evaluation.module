@@ -86,7 +86,7 @@ function _webform_demo_application_evaluation_calculate_evaluation_rating(Webfor
   }
 
   // Set evaluations rating average and count.
-  $evaluation_rating = array_sum($ratings)/count($ratings);
+  $evaluation_rating = array_sum($ratings) / count($ratings);
   $source_entity->setElementData('evaluation_rating', $evaluation_rating);
   $source_entity->setElementData('evaluation_count', count($ratings));
   $source_entity->save();

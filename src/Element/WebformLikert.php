@@ -260,7 +260,7 @@ class WebformLikert extends FormElement {
   /**
    * Performs the after_build callback.
    */
-  static public function afterBuild(array $element, FormStateInterface $form_state) {
+  public static function afterBuild(array $element, FormStateInterface $form_state) {
     if ($form_state->isProcessingInput()) {
       // Likert elements contain a table which uses 'item' form elements to
       // display the questions. These 'item' elements provide undesired data to
@@ -275,7 +275,7 @@ class WebformLikert extends FormElement {
   /**
    * {@inheritdoc}
    */
-  static public function valueCallback(&$element, $input, FormStateInterface $form_state) {
+  public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     $default_value = [];
     foreach ($element['#questions'] as $question_key => $question_title) {
       $default_value[$question_key] = NULL;

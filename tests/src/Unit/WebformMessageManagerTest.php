@@ -32,10 +32,12 @@ class WebformMessageManagerTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $webform->method('getSettings')
-      ->will($this->returnCallback(function () {return [
-        WebformMessageManagerInterface::DRAFT_PENDING_SINGLE => '{single}',
-        WebformMessageManagerInterface::DRAFT_PENDING_MULTIPLE => '[none]',
-      ];}));
+      ->will($this->returnCallback(function () {
+        return [
+          WebformMessageManagerInterface::DRAFT_PENDING_SINGLE => '{single}',
+          WebformMessageManagerInterface::DRAFT_PENDING_MULTIPLE => '[none]',
+        ];
+      }));
 
     // Mock url.
     $url = $this->getMockBuilder('\Drupal\Core\Url')
@@ -57,7 +59,7 @@ class WebformMessageManagerTest extends UnitTestCase {
         'webform.settings' => [
           'html_editor.tidy' => TRUE,
           'html_editor.element_format' => '',
-          'element.allowed_tags' => 'p'
+          'element.allowed_tags' => 'p',
         ],
       ]
     );
@@ -101,7 +103,9 @@ class WebformMessageManagerTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $token_manager->method('replace')
-      ->will($this->returnCallback(function ($text) {return $text;}));
+      ->will($this->returnCallback(function ($text) {
+        return $text;
+    }));
 
     // Mock Drupal's container.
     $container = new ContainerBuilder();

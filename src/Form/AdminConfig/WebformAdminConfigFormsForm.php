@@ -669,7 +669,6 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       + $form_state->getValue('ajax_settings')
       + $form_state->getValue('dialog_settings');
 
-
     // Track if we need to trigger an update of all webform paths
     // because the 'default_page_base_path' changed.
     $update_paths = ($settings['default_page_base_path'] != $this->config('webform.settings')->get('settings.default_page_base_path')) ? TRUE : FALSE;

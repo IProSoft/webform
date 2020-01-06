@@ -106,7 +106,7 @@ class WebformEntityVariantsForm extends EntityForm {
             '#title' => $variant->label(),
             '#url' => Url::fromRoute('entity.webform.variant.edit_form', [
               'webform' => $webform->id(),
-              'webform_variant' => $variant_id
+              'webform_variant' => $variant_id,
             ]),
             '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes(),
           ],
@@ -245,7 +245,6 @@ class WebformEntityVariantsForm extends EntityForm {
     }
 
     // Add test multiple variants.
-
     if ($webform->getVariants()->count() > 1 && count($webform->getElementsVariant()) > 1) {
       $row = [];
       $row['#attributes']['class'] = ['webform-variant-table-test-multiple'];

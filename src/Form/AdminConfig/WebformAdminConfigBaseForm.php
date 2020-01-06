@@ -3,10 +3,8 @@
 namespace Drupal\webform\Form\AdminConfig;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\Core\Config\Config;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Element\WebformVariant;
 use Drupal\webform\Plugin\WebformElement\TableSelect;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformHandlerManager;
