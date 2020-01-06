@@ -426,6 +426,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     /**************************************************************************/
 
+    // Integrations: Webform AddressFinder.
+    $projects['academic_applications'] = [
+      'title' => $this->t('Academic Applications'),
+      'description' => $this->t('Provides a simple Webform-based system for applying to academic programs.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/academic_applications'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Ansible.
     $projects['ansible'] = [
       'title' => $this->t('Ansible'),
@@ -463,6 +471,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Flashpoint Course Content: Webform'),
       'description' => $this->t('Integrates Webforms into Flashpoint Courses.'),
       'url' => Url::fromUri('https://www.drupal.org/project/flashpoint_course_webform'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: GitLab API with Library
+    $projects['gitlab_api'] = [
+      'title' => $this->t('GitLab API with Library'),
+      'description' => $this->t(' Integrates your Drupal site into GitLab using the GitLab API.'),
+      'url' => Url::fromUri(' https://www.drupal.org/project/gitlab_api'),
       'category' => 'integration',
     ];
 
@@ -967,6 +983,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     /**************************************************************************/
+
+    // Submissions: Protected Submissions.
+    $projects['protected_submissions'] = [
+      'title' => $this->t('Protected Submissions'),
+      'description' => $this->t('Prevents submissions that contain undesired patterns.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/protected_submissions'),
+      'category' => 'submission',
+    ];
 
     // Submissions: Webform Auto Exports.
     $projects['coc_forms_auto_export'] = [
