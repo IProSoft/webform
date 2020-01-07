@@ -11,7 +11,7 @@ use Drupal\webform\Entity\WebformSubmission;
  *
  * @group WebformAccess
  */
-class WebformGroupSubmissionViewsTest extends WebformGroupBrowserTestBase {
+class WebformGroupSubmissionAccessTest extends WebformGroupBrowserTestBase {
 
   use WebformSubmissionViewAccessTrait;
 
