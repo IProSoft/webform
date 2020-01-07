@@ -52,7 +52,7 @@ class WebformSubmissionsController extends ControllerBase {
 
       $entities = $storage->loadMultiple($entity_ids);
       foreach ($entities as $source_entity_id => $source_entity) {
-        $label = Html::escape($this->entityManager()->getTranslationFromContext($source_entity)->label());
+        $label = Html::escape(\Drupal::service('entity.repository')->getTranslationFromContext($source_entity)->label());
         $value = "$label ($source_entity_type:$source_entity_id)";
         $matches[] = [
           'value' => $value,
