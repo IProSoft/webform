@@ -315,13 +315,13 @@ class WebformSignature extends WebformElementBase {
 
     // Create signature image (no results) directory.
     $image_signature_directory = "$image_base_directory/$element_key";
-    $this->fileSystem->prepareDirectory($image_signature_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    $this->fileSystem->prepareDirectory($image_signature_directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
     $image_directory = $image_signature_directory;
 
     // Create signature image submission directory.
     if ($sid) {
       $image_submission_directory = "$image_base_directory/$element_key/$sid";
-      $this->fileSystem->prepareDirectory($image_submission_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+      $this->fileSystem->prepareDirectory($image_submission_directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
       $image_directory = $image_submission_directory;
     }
 

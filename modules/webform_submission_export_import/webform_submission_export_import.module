@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Utility\Environment;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\Entity\File;
 
 /**
@@ -74,7 +75,7 @@ function webform_submission_export_import_local_tasks_alter(&$local_tasks) {
  * @see file_save_upload()
  * @see file_save_upload_single()
  */
-function _webform_submission_export_import_file_save_upload_single(\SplFileInfo $file_info, $form_field_name, array $validators = [], $destination = FALSE, $replace = FILE_EXISTS_RENAME) {
+function _webform_submission_export_import_file_save_upload_single(\SplFileInfo $file_info, $form_field_name, array $validators = [], $destination = FALSE, $replace = FileSystemInterface::EXISTS_RENAME) {
   /** @var \Drupal\Core\File\FileSystemInterface $file_system */
   $file_system = \Drupal::service('file_system');
   $current_user = \Drupal::currentUser();
@@ -185,7 +186,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
     $destination .= '/';
   }
   $file->destination = \Drupal::service('file_system')->getDestinationFilename($destination . $file->getFilename(), $replace);
-  // If \Drupal::service('file_system')->getDestinationFilename() returns FALSE then $replace === FILE_EXISTS_ERROR and
+  // If \Drupal::service('file_system')->getDestinationFilename() returns FALSE then $replace === FileSystemInterface::EXISTS_ERROR and
   // there's an existing file so we need to bail.
   if ($file->destination === FALSE) {
     \Drupal::messenger()->addError(t('The file %source could not be uploaded because a file by that name already exists in the destination %directory.', ['%source' => $form_field_name, '%directory' => $destination]));
@@ -234,7 +235,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   // If we are replacing an existing file re-use its database record.
   // @todo Do not create a new entity in order to update it. See
   //   https://www.drupal.org/node/2241865.
-  if ($replace == FILE_EXISTS_REPLACE) {
+  if ($replace == FileSystemInterface::EXISTS_REPLACE) {
     $existing_files = entity_load_multiple_by_properties('file', ['uri' => $file->getFileUri()]);
     if (count($existing_files)) {
       $existing = reset($existing_files);

@@ -719,7 +719,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
 
     // Get file destination.
     $file_destination = isset($element['#upload_location']) ? $element['#upload_location'] : NULL;
-    if (isset($file_destination) && !$this->fileSystem->prepareDirectory($file_destination, FILE_CREATE_DIRECTORY)) {
+    if (isset($file_destination) && !$this->fileSystem->prepareDirectory($file_destination, FileSystemInterface::CREATE_DIRECTORY)) {
       $this->loggerFactory->get('file')
         ->notice('The upload directory %directory for the file element %name could not be created or is not accessible. A newly uploaded file could not be saved in this directory as a consequence, and the upload was canceled.', [
           '%directory' => $file_destination,
