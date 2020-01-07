@@ -2,7 +2,7 @@
 
 namespace Drupal\webform\Plugin;
 
-use Drupal\Component\Plugin\ConfigurablePluginInterface;
+use Drupal\Component\Plugin\ConfigurableInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
@@ -17,7 +17,7 @@ use Drupal\webform\WebformInterface;
  * @see \Drupal\webform\Plugin\WebformVariantManagerInterface
  * @see plugin_api
  */
-interface WebformVariantInterface extends PluginInspectionInterface, ConfigurablePluginInterface, ContainerFactoryPluginInterface, PluginFormInterface, WebformEntityInjectionInterface {
+interface WebformVariantInterface extends PluginInspectionInterface, ConfigurableInterface, ContainerFactoryPluginInterface, PluginFormInterface, WebformEntityInjectionInterface {
 
   /**
    * Returns a render array summarizing the configuration of the webform variant.
