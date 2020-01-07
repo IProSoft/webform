@@ -45,7 +45,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
    *
    * @var array
    */
-  protected $elementsManagedFiles;
+  protected $elementsManagedFiles = [];
 
   /****************************************************************************/
   // Property methods.
@@ -1413,9 +1413,13 @@ abstract class WebformCompositeBase extends WebformElementBase {
    *   An array of managed file element keys.
    */
   protected function getManagedFiles(array $element) {
-    if (isset($this->elementsManagedFiles)) {
-      return $this->elementsManagedFiles;
+    $id = $element['#webform_id'];
+
+    if (isset($this->elementsManagedFiles[$id])) {
+      return $this->elementsManagedFiles[$id];
     }
+
+    $this->elementsManagedFiles[$id] = [];
 
     $composite_elements = WebformElementHelper::getFlattened(
       $this->getInitializedCompositeElement($element)
@@ -1424,10 +1428,10 @@ abstract class WebformCompositeBase extends WebformElementBase {
     foreach ($composite_elements as $composite_key => $composite_element) {
       $composite_element_plugin = $this->elementManager->getElementInstance($composite_element);
       if ($composite_element_plugin instanceof WebformManagedFileBase) {
-        $this->elementsManagedFiles[$composite_key] = $composite_key;
+        $this->elementsManagedFiles[$id][$composite_key] = $composite_key;
       }
     }
-    return $this->elementsManagedFiles;
+    return $this->elementsManagedFiles[$id];
   }
 
   /****************************************************************************/
