@@ -9,7 +9,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform group access submission views.
  *
- * @group WebformAccess
+ * @group webform_group
  */
 class WebformGroupSubmissionAccessTest extends WebformGroupBrowserTestBase {
 
