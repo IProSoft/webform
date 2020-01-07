@@ -236,7 +236,9 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   // @todo Do not create a new entity in order to update it. See
   //   https://www.drupal.org/node/2241865.
   if ($replace == FileSystemInterface::EXISTS_REPLACE) {
-    $existing_files = entity_load_multiple_by_properties('file', ['uri' => $file->getFileUri()]);
+    $existing_files = \Drupal::entityTypeManager()
+      ->getStorage('file')
+      ->loadByProperties(['uri' => $file->getFileUri()]);
     if (count($existing_files)) {
       $existing = reset($existing_files);
       $file->fid = $existing->id();

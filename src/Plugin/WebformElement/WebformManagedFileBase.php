@@ -1024,7 +1024,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       ];
     }
 
-    $max_filesize = \Drupal::config('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize() ;
+    $max_filesize = \Drupal::config('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize();
     $max_filesize = Bytes::toInt($max_filesize);
     $max_filesize = ($max_filesize / 1024 / 1024);
     $form['file']['file_help'] = [
