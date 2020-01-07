@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform_toggles\Functional\Element;
+namespace Drupal\Tests\webform_toggles\Functional;
 
 use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 

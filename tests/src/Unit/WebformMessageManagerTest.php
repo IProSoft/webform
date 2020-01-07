@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Kernel;
+namespace Drupal\Tests\webform\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityTypeManagerInterface;

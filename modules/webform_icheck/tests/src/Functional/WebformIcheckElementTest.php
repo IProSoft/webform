@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform_icheck\Functional\Element;
+namespace Drupal\Tests\webform_icheck\Functional;
 
 use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 

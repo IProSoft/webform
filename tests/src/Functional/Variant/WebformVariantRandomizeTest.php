@@ -10,7 +10,7 @@ use Drupal\webform\Entity\Webform;
  *
  * @group Webform
  */
-class WebformVariantRandomize extends WebformBrowserTestBase {
+class WebformVariantRandomizeTest extends WebformBrowserTestBase {
 
   /**
    * Webforms to load.

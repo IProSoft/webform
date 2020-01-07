@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform_location_geocomplete\Functional\Element;
+namespace Drupal\Tests\webform_location_geocomplete\Functional;
 
 use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;
 

@@ -11,7 +11,7 @@ use Drupal\webform\Entity\Webform;
  *
  * @group Webform
  */
-class WebformVariantOperations extends WebformBrowserTestBase {
+class WebformVariantOperationsTest extends WebformBrowserTestBase {
 
   /**
    * Webforms to load.
