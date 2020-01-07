@@ -7,6 +7,7 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Cache\MemoryCache\MemoryCacheInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Database\ReplicaKillSwitch;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -52,6 +53,13 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
   protected $currentUser;
 
   /**
+   * The replica kill switch.
+   *
+   * @var \Drupal\Core\Database\ReplicaKillSwitch
+   */
+  protected $replicaKillSwitch;
+
+  /**
    * The file system service.
    *
    * @var \Drupal\Core\File\FileSystemInterface
@@ -71,13 +79,14 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    * @todo Webform 8.x-6.x: Move $time before $access_rules_manager.
    * @todo Webform 8.x-6.x: Move $memory_cache right after $language_manager.
    */
-  public function __construct(EntityTypeInterface $entity_type, Connection $database, EntityManagerInterface $entity_manager, CacheBackendInterface $cache, LanguageManagerInterface $language_manager, AccountProxyInterface $current_user, WebformAccessRulesManagerInterface $access_rules_manager, TimeInterface $time = NULL, MemoryCacheInterface $memory_cache = NULL, FileSystemInterface $file_system = NULL) {
+  public function __construct(EntityTypeInterface $entity_type, Connection $database, EntityManagerInterface $entity_manager, CacheBackendInterface $cache, LanguageManagerInterface $language_manager, AccountProxyInterface $current_user, WebformAccessRulesManagerInterface $access_rules_manager, TimeInterface $time = NULL, MemoryCacheInterface $memory_cache = NULL, FileSystemInterface $file_system = NULL, ReplicaKillSwitch $replica_kill_switch = NULL) {
     parent::__construct($entity_type, $database, $entity_manager, $cache, $language_manager, $memory_cache);
 
     $this->currentUser = $current_user;
     $this->accessRulesManager = $access_rules_manager;
     $this->time = $time ?: \Drupal::time();
     $this->fileSystem = $file_system ?: \Drupal::service('file_system');
+    $this->replicaKillSwitch = $replica_kill_switch ?: \Drupal::service('database.replica_kill_switch');
   }
 
   /**
@@ -94,7 +103,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $container->get('webform.access_rules_manager'),
       $container->get('datetime.time'),
       $container->get('entity.memory_cache'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('database.replica_kill_switch')
     );
   }
 
@@ -1111,7 +1121,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $return = $this->doSave($entity->id(), $entity);
 
       // Ignore replica server temporarily.
-      db_ignore_replica();
+      $this->replicaKillSwitch->trigger();
       return $return;
     }
     catch (\Exception $e) {
