@@ -171,6 +171,9 @@ abstract class WebformOtherBase extends FormElement {
     // to the correct element.
     $element['#attributes']['id'] = $element['#id'];
 
+    // Make sure form element label has no 'for' attribute.
+    $element['#label_attributes']['webform-remove-for-attribute'] = TRUE;
+
     // Remove options.
     unset($element['#options']);
 

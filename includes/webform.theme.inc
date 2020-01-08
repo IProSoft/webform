@@ -496,6 +496,7 @@ function webform_preprocess_form_element_label(&$variables) {
 
   // Remove label 'for' attribute.
   if (!empty($element['#attributes']['webform-remove-for-attribute'])) {
+    unset($element['#attributes']['webform-remove-for-attribute']);
     unset($variables['attributes']['webform-remove-for-attribute']);
     unset($variables['attributes']['for']);
   }
