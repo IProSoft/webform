@@ -21,6 +21,9 @@ use Drupal\Core\Url as CoreUrl;
  *   description = @Translation("Provides a form element that determines whether the user is human."),
  *   category = @Translation("Advanced elements"),
  *   states_wrapper = TRUE,
+ *   dependencies = {
+ *     "captcha",
+ *   }
  * )
  */
 class Captcha extends WebformElementBase {
