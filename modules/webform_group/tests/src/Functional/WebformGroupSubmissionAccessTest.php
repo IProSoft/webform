@@ -20,7 +20,7 @@ class WebformGroupSubmissionAccessTest extends WebformGroupBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['views', 'webform_test_views'];
+  public static $modules = ['webform_group', 'webform_group_test', 'views', 'webform_test_views'];
 
   /**
    * Tests webform group access submission views.
