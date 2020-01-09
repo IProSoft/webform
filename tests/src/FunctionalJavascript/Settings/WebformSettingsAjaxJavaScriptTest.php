@@ -77,6 +77,7 @@ class WebformSettingsAjaxJavaScriptTest extends WebformWebDriverTestBase {
     // Submit form.
     $this->drupalPostForm($webform_ajax_confirmation_inline->toUrl(), [], t('Submit'));
     $assert_session->waitForElement('css', '.messages--status');
+    $assert_session->waitForText('This is a custom inline confirmation message.');
 
     // Check submit message.
     $assert_session->responseContains('This is a custom inline confirmation message.');

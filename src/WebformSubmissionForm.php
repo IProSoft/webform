@@ -1291,6 +1291,10 @@ class WebformSubmissionForm extends ContentEntityForm {
       // on preview page or right before the optional preview.
       $element['submit']['#access'] = $is_last_page || $is_preview_page || $is_next_page_optional_preview || $is_next_page_complete;
 
+      // Use next page submit callback to make sure conditional page logic
+      // is executed.
+      $element['submit']['#submit'] = ['::submit'];
+
       if ($track) {
         $element['submit']['#attributes']['data-webform-wizard-page'] = $track_last_page;
       }
@@ -1433,6 +1437,18 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /**
+   * Webform submission handler for the 'submit' action.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  public function submit(array &$form, FormStateInterface $form_state) {
+    $this->next($form, $form_state, TRUE);
+  }
+
+  /**
    * Webform submission handler for the 'next' action.
    *
    * @param array $form
@@ -1440,7 +1456,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function next(array &$form, FormStateInterface $form_state) {
+  public function next(array &$form, FormStateInterface $form_state, $skip_preview = FALSE) {
     if ($form_state->getErrors()) {
       return;
     }
@@ -1454,6 +1470,12 @@ class WebformSubmissionForm extends ContentEntityForm {
     // submit this form.
     // @see \Drupal\webform\WebformSubmissionForm::wizardSubmit
     if (empty($next_page)) {
+      $next_page = 'webform_confirmation';
+    }
+
+    // Skip preview page and move to the confirmation page.
+    // @see
+    if ($skip_preview && $next_page === 'webform_preview') {
       $next_page = 'webform_confirmation';
     }
 
