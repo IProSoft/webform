@@ -474,6 +474,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Gatsby Webform Backend.
+    $projects['react_webform_backend'] = [
+      'title' => $this->t('Gatsby Drupal Webform'),
+      'description' => $this->t('The goal of this project is to have a react component that generates bootstrap like HTML from webform YAML configuration.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/react_webform_backend'),
+      'category' => 'integration',
+    ];
+
     // Integrations: GitLab API with Library
     $projects['gitlab_api'] = [
       'title' => $this->t('GitLab API with Library'),
@@ -576,6 +584,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'description' => $this->t("Integrates Emfluence Marketing Platform's contacts/save endpoint and Webform 8.x."),
       'url' => Url::fromUri('https://www.drupal.org/sandbox/huskyninja/3074135'),
       'experimental' => TRUE,
+      'category' => 'integration',
+    ];
+
+    // Integrations: Webform Entity Builder.
+    $projects['webform_entity_builder'] = [
+      'title' => $this->t('Webform Entity Builder'),
+      'description' => $this->t('Provides support code for the generation and management of entities through webforms.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_entity_builder'),
       'category' => 'integration',
     ];
 
