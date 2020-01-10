@@ -61,26 +61,24 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
    *   The webform request handler.
    * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
    *   The webform token manager.
-   * @param \Drupal\webform\WebformEntityReferenceManagerInterface $webform_entity_reference_manager
-   *   The webform entity reference manager.
    */
-  public function __construct(RendererInterface $renderer, WebformRequestInterface $request_handler, WebformTokenManagerInterface $token_manager, WebformEntityReferenceManagerInterface $webform_entity_reference_manager) {
+  public function __construct(RendererInterface $renderer, WebformRequestInterface $request_handler, WebformTokenManagerInterface $token_manager) {
     $this->renderer = $renderer;
     $this->requestHandler = $request_handler;
     $this->tokenManager = $token_manager;
-    $this->webformEntityReferenceManager = $webform_entity_reference_manager;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
+    $instance = new static(
       $container->get('renderer'),
       $container->get('webform.request'),
-      $container->get('webform.token_manager'),
-      $container->get('webform.entity_reference_manager')
+      $container->get('webform.token_manager')
     );
+    $instance->webformEntityReferenceManager = $container->get('webform.entity_reference_manager');
+    return $instance;
   }
 
   /**
