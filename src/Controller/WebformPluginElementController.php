@@ -7,12 +7,12 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Render\ElementInfoManagerInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Url;
+use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Controller for all webform elements.
@@ -71,6 +71,9 @@ class WebformPluginElementController extends ControllerBase implements Container
    * {@inheritdoc}
    */
   public function index() {
+    // DEBUG:
+    // $this->printProperties();
+
     $webform_form_element_rows = [];
     $element_rows = [];
 
@@ -388,6 +391,24 @@ class WebformPluginElementController extends ControllerBase implements Container
   protected function getClassName($class) {
     $parts = preg_split('#\\\\#', $class);
     return end($parts);
+  }
+
+  /**
+   * Print every element's properties.
+   *
+   * This method is used to track changes to element properties.
+   */
+  private function printProperties() {
+    /** @var \Drupal\webform\Plugin\WebformElementInterface[] $webform_elements */
+    $webform_elements = $this->elementManager->getInstances();
+    $properties = [];
+    foreach ($webform_elements as $webform_element) {
+      $properties[$webform_element->getPluginId()] = $webform_element->getDefaultProperties();
+      ksort($properties[$webform_element->getPluginId()]);
+    }
+    ksort($properties);
+    WebformElementHelper::convertRenderMarkupToStrings($properties);
+    print Yaml::encode($properties); exit;
   }
 
 }
