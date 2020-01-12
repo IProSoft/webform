@@ -242,7 +242,7 @@ class WebformPluginElementController extends ControllerBase implements Container
             ['data' => ['#markup' => implode('<br /> → ', $parent_classes)], 'nowrap' => 'nowrap'],
             ['data' => ['#markup' => implode('<br />', $webform_info)], 'nowrap' => 'nowrap'],
             ['data' => ['#markup' => implode('<br />', $element_info)], 'nowrap' => 'nowrap'],
-            ['data' => ['#markup' => implode('<br />', $properties)], 'nowrap' => 'nowrap'],
+            ['data' => ['#markup' => implode('<br />' . PHP_EOL, $properties)], 'nowrap' => 'nowrap'],
             $formats ? ['data' => ['#markup' => '• ' . implode('<br />• ', $formats)], 'nowrap' => 'nowrap'] : '',
             $related_types ? ['data' => ['#markup' => '• ' . implode('<br />• ', $related_types)], 'nowrap' => 'nowrap'] : '<' . $this->t('none') . '>',
             $dependencies ? ['data' => ['#markup' => '• ' . implode('<br />• ', $dependencies)], 'nowrap' => 'nowrap'] : '',
