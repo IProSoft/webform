@@ -140,14 +140,14 @@ class Captcha extends WebformElementBase {
     // @see _captcha_available_challenge_types();
     // @see \Drupal\captcha\Service\CaptchaService::getAvailableChallengeTypes
     $captcha_types = [];
-    $captcha_types['default'] = t('Default challenge type');
+    $captcha_types['default'] = $this->t('Default challenge type');
     // We do our own version of Drupal's module_invoke_all() here because
     // we want to build an array with custom keys and values.
     foreach (\Drupal::moduleHandler()->getImplementations('captcha') as $module) {
       $result = call_user_func_array($module . '_captcha', ['list']);
       if (is_array($result)) {
         foreach ($result as $type) {
-          $captcha_types["$module/$type"] = t('@type (from module @module)', [
+          $captcha_types["$module/$type"] = $this->t('@type (from module @module)', [
             '@type' => $type,
             '@module' => $module,
           ]);

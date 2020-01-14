@@ -505,7 +505,7 @@ trait WebformEntityReferenceTrait {
 
     $form['entity_reference'] = [
       '#type' => 'fieldset',
-      '#title' => t('Entity reference settings'),
+      '#title' => $this->t('Entity reference settings'),
       '#weight' => -40,
     ];
     // Target type.
@@ -514,7 +514,7 @@ trait WebformEntityReferenceTrait {
       '#title' => $this->t('Type of item to reference'),
       '#options' => $target_type_options,
       '#required' => TRUE,
-      '#empty_option' => t('- Select a target type -'),
+      '#empty_option' => $this->t('- Select a target type -'),
       '#default_value' => $target_type,
     ];
     // Selection handler.

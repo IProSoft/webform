@@ -994,8 +994,8 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $scheme_options = static::getVisibleStreamWrappers();
     $form['file']['uri_scheme'] = [
       '#type' => 'radios',
-      '#title' => t('File upload destination'),
-      '#description' => t('Select where the final files should be stored. Private file storage has more overhead than public files, but allows restricted access to files within this element.'),
+      '#title' => $this->t('File upload destination'),
+      '#description' => $this->t('Select where the final files should be stored. Private file storage has more overhead than public files, but allows restricted access to files within this element.'),
       '#required' => TRUE,
       '#options' => $scheme_options,
     ];

@@ -673,21 +673,21 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     ];
     $form['elements']['exclude_empty'] = [
       '#type' => 'checkbox',
-      '#title' => t('Exclude empty elements'),
+      '#title' => $this->t('Exclude empty elements'),
       '#description' => $this->t('If checked, empty elements will be excluded from the email values.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['exclude_empty'],
     ];
     $form['elements']['exclude_empty_checkbox'] = [
       '#type' => 'checkbox',
-      '#title' => t('Exclude unselected checkboxes'),
+      '#title' => $this->t('Exclude unselected checkboxes'),
       '#description' => $this->t('If checked, empty checkboxes will be excluded from the email values.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['exclude_empty_checkbox'],
     ];
     $form['elements']['exclude_attachments'] = [
       '#type' => 'checkbox',
-      '#title' => t('Exclude file elements with attachments'),
+      '#title' => $this->t('Exclude file elements with attachments'),
       '#return_value' => TRUE,
       '#description' => $this->t('If checked, file attachments will be excluded from the email values, but the selected element files will still be attached to the email.'),
       '#default_value' => $this->configuration['exclude_attachments'],

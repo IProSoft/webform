@@ -139,7 +139,7 @@ class Telephone extends TextBase {
       '#title' => $this->t('Preferred countries'),
       '#type' => 'select',
       '#options' => CountryManager::getStandardList(),
-      '#description' => t('Specify the countries to appear at the top of the list.'),
+      '#description' => $this->t('Specify the countries to appear at the top of the list.'),
       '#select2' => TRUE,
       '#multiple' => TRUE,
       '#states' => [
@@ -184,7 +184,7 @@ class Telephone extends TextBase {
       $form['telephone']['telephone_validation_countries'] = [
         '#type' => 'select',
         '#title' => $this->t('Valid countries'),
-        '#description' => t('If no country selected all countries are valid.'),
+        '#description' => $this->t('If no country selected all countries are valid.'),
         '#options' => \Drupal::service('telephone_validation.validator')
           ->getCountryList(),
         '#select2' => TRUE,
@@ -227,7 +227,7 @@ class Telephone extends TextBase {
     switch ($format) {
       case 'link':
         $t_args = [':tel' => 'tel:' . $value, '@tel' => $value];
-        return t('<a href=":tel">@tel</a>', $t_args);
+        return $this->t('<a href=":tel">@tel</a>', $t_args);
 
       default:
         return parent::formatHtmlItem($element, $webform_submission, $options);
