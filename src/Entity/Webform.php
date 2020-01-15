@@ -2719,10 +2719,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         ];
         throw new \Exception($this->t('Variants can not be applied because the #@sid submission was not created using @webform_id', $t_args));
       }
-      $element_keys = $this->getElementsVariant();
-      foreach ($element_keys as $element_key) {
-        $variants[$element_key] = $webform_submission->getElementData($element_key);
-      }
+      $variants += $this->getVariantsData($webform_submission);
     }
 
     // Apply variants.
@@ -2735,6 +2732,18 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     if ($is_applied) {
       $this->setOverride();
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getVariantsData(WebformSubmissionInterface $webform_submission) {
+    $variants = [];
+    $element_keys = $this->getElementsVariant();
+    foreach ($element_keys as $element_key) {
+      $variants[$element_key] = $webform_submission->getElementData($element_key);
+    }
+    return $variants;
   }
 
   /**

@@ -1063,6 +1063,18 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function applyVariants(WebformSubmissionInterface $webform_submission = NULL, $variants = [], $force = FALSE);
 
   /**
+   * Get variants data from a webform submission.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   *
+   * @return array
+   *   A associative array containing the variant element keys
+   *   and variant value.
+   */
+  public function getVariantsData(WebformSubmissionInterface $webform_submission);
+
+  /**
    * Required to allow webform which are config entities to have an EntityViewBuilder.
    *
    * Prevents:
