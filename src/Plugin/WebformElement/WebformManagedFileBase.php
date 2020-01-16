@@ -801,17 +801,17 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $preview_element = ['#format' => $element['#file_preview']] + $element;
 
       // Convert '#theme': file_link to a container with a file preview.
-      $delta = 0;
-      foreach (Element::children($element) as $child_key) {
-        if (strpos($child_key, 'file_') !== 0) {
+      $fids = (array) $webform_submission->getElementData($element['#webform_key']) ?: [];
+      foreach ($fids as $delta => $fid) {
+        $child_key = 'file_' . $fid;
+        // Make sure the child element exists.
+        if (!isset($element[$child_key])) {
           continue;
         }
 
         // Set multiple options delta.
         $options = ['delta' => $delta];
-        $delta++;
 
-        $fid = str_replace('file_', '', $child_key);
         $file = File::load((string) $fid);
         // Make sure the file entity exists.
         if (!$file) {
