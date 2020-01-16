@@ -49,6 +49,7 @@ if (class_exists('\Drupal\file\Element\ManagedFile')) {
 
       return $element;
     }
+
   }
 
 }

@@ -45,7 +45,7 @@ function _webform_bootstrap_webform_element_webform_likert_pre_render(array $ele
     if (!empty($element[$element_key]['#description'])) {
       $element[$element_key]['#smart_description'] = FALSE;
     }
-    $element[$element_key] =_webform_bootstrap_webform_element_webform_likert_pre_render($element[$element_key]);
+    $element[$element_key] = _webform_bootstrap_webform_element_webform_likert_pre_render($element[$element_key]);
   }
   return $element;
 }

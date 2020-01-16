@@ -88,7 +88,7 @@ abstract class WebformEntitySettingsBaseForm extends EntityForm {
 
         // Append [none] message to an element's description.
         if (preg_match('/_message$/', $key)) {
-          $none_translated = (string) t('[none]');
+          $none_translated = (string) $this->t('[none]');
           $element['#description'] .= ($element['#description'] ? ' ' : '');
           $t_args = [
             '@none' => '[none]',

@@ -25,7 +25,6 @@ class WebformNodeVariantTest extends WebformNodeBrowserTestBase {
    */
   protected static $testWebforms = ['test_variant_multiple'];
 
-
   /**
    * Tests webform node variant.
    */

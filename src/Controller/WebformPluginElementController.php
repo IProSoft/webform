@@ -71,9 +71,6 @@ class WebformPluginElementController extends ControllerBase implements Container
    * {@inheritdoc}
    */
   public function index() {
-    // DEBUG:
-    // $this->printProperties();
-
     $webform_form_element_rows = [];
     $element_rows = [];
 
@@ -212,7 +209,7 @@ class WebformPluginElementController extends ControllerBase implements Container
         $properties = [];
         $element_default_properties = $webform_element->getDefaultProperties();
         foreach ($element_default_properties as $key => $default_value) {
-          $default_value = ($default_value  ? ' ⇒ ' . json_encode($default_value): '');
+          $default_value = ($default_value ? ' ⇒ ' . json_encode($default_value): '');
           if (!isset($default_properties[$key])) {
             $properties[$key] = '<b>#' . $key . '</b>' . $default_value;
             unset($element_default_properties[$key]);
@@ -391,24 +388,6 @@ class WebformPluginElementController extends ControllerBase implements Container
   protected function getClassName($class) {
     $parts = preg_split('#\\\\#', $class);
     return end($parts);
-  }
-
-  /**
-   * Print every element's properties.
-   *
-   * This method is used to track changes to element properties.
-   */
-  private function printProperties() {
-    /** @var \Drupal\webform\Plugin\WebformElementInterface[] $webform_elements */
-    $webform_elements = $this->elementManager->getInstances();
-    $properties = [];
-    foreach ($webform_elements as $webform_element) {
-      $properties[$webform_element->getPluginId()] = $webform_element->getDefaultProperties();
-      ksort($properties[$webform_element->getPluginId()]);
-    }
-    ksort($properties);
-    WebformElementHelper::convertRenderMarkupToStrings($properties);
-    print Yaml::encode($properties); exit;
   }
 
 }

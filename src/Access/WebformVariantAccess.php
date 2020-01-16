@@ -27,7 +27,7 @@ class WebformVariantAccess {
    * Check whether the webform variant create is enabled.
    *
    * @param \Drupal\webform\WebformInterface $webform
-   *  A webform.
+   *   A webform.
    * @param string $webform_variant
    *   A webform variant id.
    *
@@ -43,7 +43,7 @@ class WebformVariantAccess {
    *
    * @param \Drupal\webform\WebformInterface $webform
    *   A webform.
-   * @param string|NULL $webform_variant
+   * @param string|null $webform_variant
    *   A webform variant id.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
