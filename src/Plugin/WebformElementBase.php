@@ -3096,8 +3096,17 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $default_properties = $this->getDefaultProperties();
-    $element_properties = WebformArrayHelper::removePrefix($this->configuration)
-      + $default_properties;
+
+    // Unset 'format_items' if the element does not support multiple values.
+    if (!$this->supportsMultipleValues()) {
+      unset(
+        $default_properties['format_items'],
+        $default_properties['format_items_html'],
+        $default_properties['format_items_text']
+      );
+    }
+
+    $element_properties = WebformArrayHelper::removePrefix($this->configuration) + $default_properties;
 
     // Set default and element properties.
     // Note: Storing this information in the webform's state allows modules to view
