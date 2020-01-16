@@ -394,6 +394,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Validation.
+    $projects['webform_validation'] = [
+      'title' => $this->t('Webform Validation'),
+      'description' => $this->t('Add validation rules to Webforms.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_validation'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Wizard Full Title.
     $projects['webform_wizard_full_title'] = [
       'title' => $this->t('Webform Wizard Full Title'),
@@ -447,6 +455,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Commerce Webform Order'),
       'description' => $this->t('Integrates Webform with Drupal Commerce and it allows creating orders with the submission data of a Webform via a Webform handler.'),
       'url' => Url::fromUri('https://www.drupal.org/project/commerce_webform_order'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: Domain Webform.
+    $projects['domain_webform'] = [
+      'title' => $this->t('Domain Webform'),
+      'description' => $this->t('Domain intergration for the Webform module.'),
+      'url' => Url::fromUri('https://github.com/h3rj4n/domain_webform'),
       'category' => 'integration',
     ];
 
