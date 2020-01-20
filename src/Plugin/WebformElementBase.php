@@ -3115,8 +3115,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     $form_state->set('element_properties', $element_properties);
 
     $form = $this->form($form, $form_state);
+    \Drupal::moduleHandler()->alter('webform_element_configuration_form', $form, $form_state);
 
-    // Get element properties which can be altered by WebformElementHandlers.
+    // Get default and element properties which can be altered by WebformElementHandlers.
     // @see \Drupal\webform\Plugin\WebformElement\WebformEntityReferenceTrait::form
     $element_properties = $form_state->get('element_properties');
 
