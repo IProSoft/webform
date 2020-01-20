@@ -21,7 +21,12 @@ class WebformEmailMultiple extends Email {
    */
   public function getDefaultProperties() {
     $properties = parent::getDefaultProperties();
-    unset($properties['multiple']);
+    unset(
+      $properties['multiple'],
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
+    );
     return $properties;
   }
 

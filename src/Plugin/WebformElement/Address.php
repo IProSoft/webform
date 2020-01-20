@@ -64,7 +64,8 @@ class Address extends WebformCompositeBase {
       'available_countries' => [],
       'field_overrides' => [],
       'langcode_override' => '',
-    ] + $this->getDefaultBaseProperties() + $this->getDefaultMultipleProperties();
+    ] + $this->getDefaultBaseProperties()
+      + $this->getDefaultMultipleProperties();
     unset($properties['multiple__header']);
     return $properties;
   }

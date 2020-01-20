@@ -36,7 +36,6 @@ class WebformTermsOfService extends Checkbox {
       $properties['description'],
       $properties['description_display'],
       $properties['title_display']
-
     );
     return $properties;
   }

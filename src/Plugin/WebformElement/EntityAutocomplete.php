@@ -32,7 +32,8 @@ class EntityAutocomplete extends WebformElementBase implements WebformElementEnt
       'selection_handler' => 'default',
       'selection_settings' => [],
       'tags' => FALSE,
-    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultMultipleProperties();
   }
 
   /**

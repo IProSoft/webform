@@ -36,12 +36,13 @@ class WebformLocationGeocomplete extends WebformLocationBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return parent::getDefaultProperties() + [
+    return [
       'geolocation' => FALSE,
       'hidden' => FALSE,
       'map' => FALSE,
       'api_key' => '',
-    ] + $this->getDefaultBaseProperties();
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultBaseProperties();
   }
 
   /**

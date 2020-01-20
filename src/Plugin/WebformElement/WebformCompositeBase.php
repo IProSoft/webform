@@ -66,7 +66,8 @@ abstract class WebformCompositeBase extends WebformElementBase {
       'chosen' => FALSE,
       // Wrapper.
       'wrapper_type' => 'fieldset',
-    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultMultipleProperties();
     unset($properties['required_error']);
 
     $composite_elements = $this->getCompositeElements();

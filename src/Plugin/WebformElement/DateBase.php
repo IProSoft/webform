@@ -31,7 +31,8 @@ abstract class DateBase extends WebformElementBase {
       'date_date_min' => '',
       'date_date_max' => '',
       'date_days' => ['0', '1', '2', '3', '4', '5', '6'],
-    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultMultipleProperties();
   }
 
   /****************************************************************************/

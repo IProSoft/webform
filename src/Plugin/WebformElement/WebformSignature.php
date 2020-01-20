@@ -100,6 +100,11 @@ class WebformSignature extends WebformElementBase {
       'description' => $this->t('Sign above'),
       'readonly' => FALSE,
     ] + parent::getDefaultProperties();
+    unset(
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
+    );
     return $properties;
   }
 

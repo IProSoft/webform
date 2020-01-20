@@ -24,7 +24,8 @@ class Number extends NumericBase {
       'min' => '',
       'max' => '',
       'step' => '',
-    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultMultipleProperties();
   }
 
   /**

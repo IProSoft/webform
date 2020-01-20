@@ -24,12 +24,18 @@ class WebformCodeMirror extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return [
+    $properties = [
       // Codemirror settings.
       'placeholder' => '',
       'mode' => 'text',
       'wrap' => TRUE,
     ] + parent::getDefaultProperties();
+    unset(
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
+    );
+    return $properties;
   }
 
   /**

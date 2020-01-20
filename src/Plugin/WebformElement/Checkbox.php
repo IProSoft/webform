@@ -31,7 +31,10 @@ class Checkbox extends BooleanBase {
       $properties['unique'],
       $properties['unique_entity'],
       $properties['unique_user'],
-      $properties['unique_error']
+      $properties['unique_error'],
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
     );
     return $properties;
   }

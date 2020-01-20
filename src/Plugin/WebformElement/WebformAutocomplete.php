@@ -28,9 +28,10 @@ class WebformAutocomplete extends TextField {
       'autocomplete_limit' => 10,
       'autocomplete_match' => 3,
       'autocomplete_match_operator' => 'CONTAINS',
-    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
-    // Remove autocomplete property which is not applicable to this autocomplete
-    // element.
+    ] + parent::getDefaultProperties()
+      + $this->getDefaultMultipleProperties();
+    // Remove autocomplete property which is not applicable to
+    // this autocomplete element.
     unset($properties['autocomplete']);
     return $properties;
   }

@@ -40,13 +40,11 @@ abstract class OptionsBase extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties();
-
-    $properties += [
+    $properties = [
       // Options settings.
       'options' => [],
       'options_randomize' => FALSE,
-    ];
+    ] + parent::getDefaultProperties();
 
     // Add other properties to elements that include the other text field.
     if ($this->isOptionsOther()) {

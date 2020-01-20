@@ -25,14 +25,12 @@ class WebformEntityPrintAttachment extends WebformAttachmentBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties() + [
+    $properties = [
       'view_mode' => 'html',
       'template' => '',
-    ];
-
+    ] + parent::getDefaultProperties();
     // PDF documents should never be trimmed.
     unset($properties['trim']);
-
     return $properties;
   }
 

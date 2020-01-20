@@ -24,9 +24,11 @@ class WebformCustomComposite extends WebformCompositeBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $properties = $this->getDefaultMultipleProperties() + parent::getDefaultProperties();
-    $properties['title_display'] = '';
-    $properties['element'] = [];
+    $properties = [
+      'title_display' => '',
+      'element' => [],
+    ] + $this->getDefaultMultipleProperties()
+      + parent::getDefaultProperties();
     unset($properties['flexbox']);
     return $properties;
   }

@@ -32,13 +32,13 @@ class WebformExampleElement extends WebformElementBase {
     //
     // @see \Drupal\webform\Plugin\WebformElementBase::getDefaultProperties
     // @see \Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties
-    return parent::getDefaultProperties() + [
+    return [
       'multiple' => '',
       'size' => '',
       'minlength' => '',
       'maxlength' => '',
       'placeholder' => '',
-    ];
+    ] + parent::getDefaultProperties();
   }
 
   /**

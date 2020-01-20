@@ -40,7 +40,10 @@ class Range extends NumericBase {
       $properties['minlength'],
       $properties['maxlength'],
       $properties['placeholder'],
-      $properties['autocomplete']
+      $properties['autocomplete'],
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
     );
     return $properties;
   }

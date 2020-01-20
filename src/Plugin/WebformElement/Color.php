@@ -24,10 +24,16 @@ class Color extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return [
+    $properties = [
       // Color settings.
       'color_size' => 'medium',
     ] + parent::getDefaultProperties();
+    unset(
+      $properties['format_items'],
+      $properties['format_items_html'],
+      $properties['format_items_text']
+    );
+    return $properties;
   }
 
   /**

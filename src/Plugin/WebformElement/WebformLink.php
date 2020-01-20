@@ -24,13 +24,11 @@ class WebformLink extends WebformCompositeBase {
    */
   public function getDefaultProperties() {
     $properties = parent::getDefaultProperties();
-
     // Link does not have select menus.
     unset(
       $properties['select2'],
       $properties['chosed']
     );
-
     return $properties;
   }
 

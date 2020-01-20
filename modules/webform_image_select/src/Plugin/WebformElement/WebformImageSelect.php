@@ -25,7 +25,16 @@ class WebformImageSelect extends Select {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties();
+    $properties = [
+      'images' => [],
+      'images_randomize' => FALSE,
+      'show_label' => FALSE,
+      'filter' => FALSE,
+      'filter__placeholder' => (string) $this->t('Filter images by label'),
+      'filter__singlular' => (string) $this->t('image'),
+      'filter__plural' => (string) $this->t('images'),
+      'filter__no_results' => (string) $this->t('No images found.'),
+    ] + parent::getDefaultProperties();
     unset(
       $properties['options'],
       $properties['options_randomize'],
@@ -34,15 +43,6 @@ class WebformImageSelect extends Select {
       $properties['disabled'],
       $properties['select2']
     );
-
-    $properties['images'] = [];
-    $properties['images_randomize'] = FALSE;
-    $properties['show_label'] = FALSE;
-    $properties['filter'] = FALSE;
-    $properties['filter__placeholder'] = $this->t('Filter images by label');
-    $properties['filter__singlular'] = $this->t('image');
-    $properties['filter__plural'] = $this->t('images');
-    $properties['filter__no_results'] = $this->t('No images found.');
     return $properties;
   }
 
