@@ -10,7 +10,7 @@ use Drupal\webform\Utility\WebformElementHelper;
  *
  * @group Webform
  */
-class WebformElementPropertiesTest extends WebformElementBrowserTestBase {
+class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
 
   /**
    * Modules to enable.
@@ -23,11 +23,20 @@ class WebformElementPropertiesTest extends WebformElementBrowserTestBase {
     'image',
     'taxonomy',
     'webform',
-    'webform_image_select',
     'webform_attachment',
-    'webform_options_custom',
     'webform_entity_print_attachment',
+    'webform_image_select',
+    'webform_location_geocomplete',
+    'webform_options_custom',
+    'webform_toggles',
   ];
+
+  /**
+   * Debug dump the element's properties as YAML
+   *
+   * @var bool
+   */
+  protected $debug = FALSE;
 
   /**
    * Test element default properties.
@@ -38,6 +47,7 @@ class WebformElementPropertiesTest extends WebformElementBrowserTestBase {
     // default properties.
     $expected_elements = $this->getExpectedElementDefaultProperties();
     $actual_elements = $this->getActualElementDefaultProperties();
+    $this->htmlOutput('<pre>' . htmlentities(Yaml::encode($actual_elements)) . '</pre>');
     foreach ($actual_elements as $element_key => $actual_element) {
       $this->assertEquals($expected_elements[$element_key], $actual_element, "Expected and actual '$element_key' element properties match.");
     }
@@ -62,8 +72,10 @@ class WebformElementPropertiesTest extends WebformElementBrowserTestBase {
         && isset($default_properties['format_items'])) {
         throw new \Exception("'$element_key' does not support multiple value but has '#format_items' property.");
       }
+      ksort($default_properties);
       $properties[$webform_element->getPluginId()] = $default_properties;
     }
+    ksort($properties);
     WebformElementHelper::convertRenderMarkupToStrings($properties);
     return $properties;
   }
@@ -4568,6 +4580,189 @@ webform_wizard_page:
   states: {  }
   states_clear: true
   title: ''
+webform_location_geocomplete:
+  geolocation: false
+  hidden: false
+  map: false
+  api_key: ''
+  title: ''
+  default_value: {  }
+  multiple: false
+  help: ''
+  help_title: ''
+  description: ''
+  more: ''
+  more_title: ''
+  title_display: ''
+  description_display: ''
+  disabled: false
+  required: false
+  required_error: ''
+  wrapper_attributes: {  }
+  label_attributes: {  }
+  format: value
+  format_html: ''
+  format_text: ''
+  format_items: ul
+  format_items_html: ''
+  format_items_text: ''
+  admin_title: ''
+  prepopulate: false
+  private: false
+  flex: 1
+  states: {  }
+  states_clear: true
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_create_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_update_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  access_view_permissions: {  }
+  value__title: Address
+  value__placeholder: ''
+  lat__title: Latitude
+  lat__access: false
+  lng__title: Longitude
+  lng__access: false
+  location__title: Location
+  location__access: false
+  formatted_address__title: 'Formatted Address'
+  formatted_address__access: false
+  street_address__title: 'Street Address'
+  street_address__access: false
+  street_number__title: 'Street Number'
+  street_number__access: false
+  subpremise__title: Unit
+  subpremise__access: false
+  postal_code__title: 'Postal Code'
+  postal_code__access: false
+  locality__title: Locality
+  locality__access: false
+  sublocality__title: City
+  sublocality__access: false
+  administrative_area_level_1__title: State/Province
+  administrative_area_level_1__access: false
+  country__title: Country
+  country__access: false
+  country_short__title: 'Country Code'
+  country_short__access: false
+webform_toggle:
+  toggle_theme: light
+  toggle_size: medium
+  on_text: ''
+  off_text: ''
+  title_display: after
+  exclude_empty: false
+  default_value: false
+  title: ''
+  help: ''
+  help_title: ''
+  description: ''
+  more: ''
+  more_title: ''
+  description_display: ''
+  help_display: ''
+  field_prefix: ''
+  field_suffix: ''
+  disabled: false
+  required_error: ''
+  wrapper_attributes: {  }
+  label_attributes: {  }
+  attributes: {  }
+  format: value
+  format_html: ''
+  format_text: ''
+  format_attributes: {  }
+  admin_title: ''
+  prepopulate: false
+  private: false
+  flex: 1
+  states: {  }
+  states_clear: true
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_create_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_update_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  access_view_permissions: {  }
+
+
+
+
+webform_toggles:
+  toggle_theme: light
+  toggle_size: medium
+  on_text: ''
+  off_text: ''
+  options: {  }
+  options_randomize: false
+  title: ''
+  default_value: ''
+  help: ''
+  help_title: ''
+  description: ''
+  more: ''
+  more_title: ''
+  title_display: ''
+  description_display: ''
+  help_display: ''
+  field_prefix: ''
+  field_suffix: ''
+  disabled: false
+  required_error: ''
+  wrapper_attributes: {  }
+  label_attributes: {  }
+  attributes: {  }
+  format: value
+  format_html: ''
+  format_text: ''
+  format_items: comma
+  format_items_html: ''
+  format_items_text: ''
+  format_attributes: {  }
+  unique: false
+  unique_user: false
+  unique_entity: false
+  unique_error: ''
+  admin_title: ''
+  prepopulate: false
+  private: false
+  flex: 1
+  states: {  }
+  states_clear: true
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_create_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_update_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  access_view_permissions: {  }
 YAML;
     return Yaml::decode($yaml);
   }

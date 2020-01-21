@@ -14,11 +14,9 @@ use Drupal\webform\WebformSubmissionInterface;
  *
  * @WebformElement(
  *   id = "tel",
- *   api =
- *   "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Tel.php/class/Tel",
- *   label = @Translation("Telephone"), description = @Translation("Provides a
- *   form element for entering a telephone number."), category =
- *   @Translation("Advanced elements"),
+ *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Tel.php/class/Tel",
+ *   label = @Translation("Telephone"), description = @Translation("Provides a form element for entering a telephone number."),
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class Telephone extends TextBase {
