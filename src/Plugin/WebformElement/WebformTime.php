@@ -22,7 +22,7 @@ class WebformTime extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     return [
       // Time settings.
       'timepicker' => FALSE,
@@ -30,9 +30,11 @@ class WebformTime extends WebformElementBase {
       'min' => '',
       'max' => '',
       'step' => 60,
-    ] + parent::getDefaultProperties()
-      + $this->getDefaultMultipleProperties();
+    ] + parent::defineDefaultProperties()
+      + $this->defineDefaultMultipleProperties();
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

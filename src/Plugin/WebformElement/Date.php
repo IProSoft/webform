@@ -22,7 +22,7 @@ class Date extends DateBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $date_format = '';
     // Date formats cannot be loaded during install or update.
     if (!defined('MAINTENANCE_MODE')) {
@@ -39,8 +39,10 @@ class Date extends DateBase {
       'date_date_format' => $date_format,
       'step' => '',
       'size' => '',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

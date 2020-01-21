@@ -22,8 +22,8 @@ class WebformEmailConfirm extends Email {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties() + [
+  protected function defineDefaultProperties() {
+    $properties = parent::defineDefaultProperties() + [
       // Email confirm settings.
       'confirm__title' => '',
       'confirm__description' => '',
@@ -41,6 +41,8 @@ class WebformEmailConfirm extends Email {
     );
     return $properties;
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

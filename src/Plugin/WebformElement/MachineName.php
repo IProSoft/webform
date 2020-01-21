@@ -21,8 +21,8 @@ class MachineName extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties();
+  protected function defineDefaultProperties() {
+    $properties = parent::defineDefaultProperties();
     unset(
       $properties['format_items'],
       $properties['format_items_html'],
@@ -30,6 +30,9 @@ class MachineName extends WebformElementBase {
     );
     return $properties;
   }
+
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

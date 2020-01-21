@@ -23,13 +23,13 @@ class WebformToggles extends OptionsBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       'toggle_theme' => 'light',
       'toggle_size' => 'medium',
       'on_text' => '',
       'off_text' => '',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
     unset(
       $properties['required'],
       $properties['required_message']
@@ -37,6 +37,8 @@ class WebformToggles extends OptionsBase {
     return $properties;
 
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

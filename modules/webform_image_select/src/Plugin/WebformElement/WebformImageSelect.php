@@ -24,7 +24,7 @@ class WebformImageSelect extends Select {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       'images' => [],
       'images_randomize' => FALSE,
@@ -34,7 +34,7 @@ class WebformImageSelect extends Select {
       'filter__singlular' => (string) $this->t('image'),
       'filter__plural' => (string) $this->t('images'),
       'filter__no_results' => (string) $this->t('No images found.'),
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
     unset(
       $properties['options'],
       $properties['options_randomize'],
@@ -49,8 +49,8 @@ class WebformImageSelect extends Select {
   /**
    * {@inheritdoc}
    */
-  public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), [
+  protected function defineTranslatableProperties() {
+    return array_merge(parent::defineTranslatableProperties(), [
       'images',
       'filter__placeholder',
       'filter__singlular',
@@ -58,6 +58,8 @@ class WebformImageSelect extends Select {
       'filter__no_results',
     ]);
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

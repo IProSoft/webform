@@ -24,14 +24,14 @@ class Telephone extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
         'input_hide' => FALSE,
         'multiple' => FALSE,
         'international' => FALSE,
         'international_initial_country' => '',
         'international_preferred_countries' => [],
-      ] + parent::getDefaultProperties();
+      ] + parent::defineDefaultProperties();
     // Add support for telephone_validation.module.
     if (\Drupal::moduleHandler()->moduleExists('telephone_validation')) {
       $properties += [
@@ -46,9 +46,11 @@ class Telephone extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), ['international_initial_country']);
+  protected function defineTranslatableProperties() {
+    return array_merge(parent::defineTranslatableProperties(), ['international_initial_country']);
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

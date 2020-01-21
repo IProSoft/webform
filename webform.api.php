@@ -14,7 +14,7 @@
  * Alter the information provided in \Drupal\webform\Annotation\WebformElement.
  *
  * @param array $definitions
- *   The array of webform handlers, keyed on the machine-readable element name.
+ *   The array of webform elements, keyed on the machine-readable element name.
  */
 function hook_webform_element_info_alter(array &$definitions) {
 
@@ -53,6 +53,39 @@ function hook_webform_source_entity_info_alter(array &$definitions) {
 }
 
 /**
+ * Alter a webform element's default properties.
+ *
+ * @param array &$properties
+ *   An associative array containing an element's default properties.
+ * @param array $definition
+ *   The webform element's definition.
+ *
+ * @see webform_example_element_properties.module
+ */
+function hook_webform_element_default_properties_alter(array &$properties, array &$definition) {
+  // Add custom data property to all webform elements.
+  // Setting the custom property to an empty string makes the corresponding
+  // element defined via hook_webform_element_configuration_form_alter()
+  // automatically visible.
+  $properties['custom_data'] = '';
+}
+
+/**
+ * Alter a webform element's translatable properties.
+ *
+ * @param array &$properties
+ *   An indexed array containing an element's translatable properties.
+ * @param array $definition
+ *   The webform element's definition.
+ *
+ * @see webform_example_element_properties.module
+ */
+function hook_webform_element_translatable_properties_alter(array &$properties, array &$definition) {
+  // Make the custom data property translatable.
+  $properties[] = 'custom_data';
+}
+
+/**
  * Perform alterations before a webform element configuration form is populated.
  *
  * @param array $form
@@ -60,6 +93,7 @@ function hook_webform_source_entity_info_alter(array &$definitions) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current state of the form.
  *
+ * @see webform_example_element_properties.module
  * @ingroup form_api
  */
 function hook_webform_element_configuration_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {

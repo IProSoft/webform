@@ -21,12 +21,12 @@ class Checkbox extends BooleanBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       'title_display' => 'after',
       // Checkbox.
       'exclude_empty' => FALSE,
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
     unset(
       $properties['unique'],
       $properties['unique_entity'],
@@ -38,6 +38,8 @@ class Checkbox extends BooleanBase {
     );
     return $properties;
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

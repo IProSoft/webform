@@ -31,7 +31,7 @@ class Captcha extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     return [
       // Captcha settings.
       'captcha_type' => 'default',
@@ -43,6 +43,8 @@ class Captcha extends WebformElementBase {
       // Conditional logic.
     ];
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

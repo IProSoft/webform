@@ -18,7 +18,7 @@ abstract class TextBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     return [
       'readonly' => FALSE,
       'size' => '',
@@ -28,15 +28,17 @@ abstract class TextBase extends WebformElementBase {
       'autocomplete' => 'on',
       'pattern' => '',
       'pattern_error' => '',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), ['counter_minimum_message', 'counter_maximum_message', 'pattern_error']);
+  protected function defineTranslatableProperties() {
+    return array_merge(parent::defineTranslatableProperties(), ['counter_minimum_message', 'counter_maximum_message', 'pattern_error']);
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

@@ -20,7 +20,7 @@ class Radios extends OptionsBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       // Form display.
       'options_display' => 'one_column',
@@ -28,7 +28,7 @@ class Radios extends OptionsBase {
       'options__properties' => [],
       // Wrapper.
       'wrapper_type' => 'fieldset',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
     unset(
       $properties['format_items'],
       $properties['format_items_html'],
@@ -36,6 +36,8 @@ class Radios extends OptionsBase {
     );
     return $properties;
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

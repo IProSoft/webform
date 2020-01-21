@@ -25,14 +25,14 @@ class WebformTermCheckboxes extends Checkboxes implements WebformElementEntityRe
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       'vocabulary' => '',
       'breadcrumb' => FALSE,
       'breadcrumb_delimiter' => ' › ',
       'tree_delimiter' => '&nbsp;&nbsp;&nbsp;',
       'scroll' => TRUE,
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
 
     unset(
       $properties['options'],
@@ -41,6 +41,8 @@ class WebformTermCheckboxes extends Checkboxes implements WebformElementEntityRe
     );
     return $properties;
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

@@ -122,6 +122,20 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   protected $submissionStorage;
 
   /**
+   * An associative array of an element's default properties names and values.
+   *
+   * @var array
+   */
+  protected $defaultProperties;
+
+  /**
+   * An indexed array of an element's translated properties.
+   *
+   * @var array
+   */
+  protected $translatableProperties;
+
+  /**
    * Constructs a WebformElementBase object.
    *
    * @param array $configuration
@@ -180,20 +194,16 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   }
 
   /****************************************************************************/
-  // Property methods.
+  // Property definitions.
   /****************************************************************************/
 
   /**
-   * {@inheritdoc}
+   * Define an element's default properties.
    *
-   * Only a few elements don't inherit these default properties.
-   *
-   * @see \Drupal\webform\Plugin\WebformElement\Textarea
-   * @see \Drupal\webform\Plugin\WebformElement\WebformLikert
-   * @see \Drupal\webform\Plugin\WebformElement\WebformCompositeBase
-   * @see \Drupal\webform\Plugin\WebformElement\ContainerBase
+   * @return array
+   *   An associative array contain an the element's default properties.
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $properties = [
       // Element settings.
       'title' => '',
@@ -238,18 +248,18 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       ];
     }
 
-    $properties += $this->getDefaultBaseProperties();
+    $properties += $this->defineDefaultBaseProperties();
 
     return $properties;
   }
 
   /**
-   * Get default multiple properties used by most elements.
+   * Define default multiple properties used by most elements.
    *
    * @return array
    *   An associative array containing default multiple properties.
    */
-  protected function getDefaultMultipleProperties() {
+  protected function defineDefaultMultipleProperties() {
     return [
       'multiple' => FALSE,
       'multiple__header_label' => '',
@@ -267,12 +277,12 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   }
 
   /**
-   * Get default base properties used by all elements.
+   * Define default base properties used by all elements.
    *
    * @return array
    *   An associative array containing base properties used by all elements.
    */
-  protected function getDefaultBaseProperties() {
+  protected function defineDefaultBaseProperties() {
     return [
       // Administration.
       'admin_title' => '',
@@ -299,7 +309,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   /**
    * {@inheritdoc}
    */
-  public function getTranslatableProperties() {
+  /**
+   * Define an element's translatable properties.
+   *
+   * @return array
+   *   An array containing an element's translatable properties.
+   */
+  protected function defineTranslatableProperties() {
     return [
       'title',
       'label',
@@ -322,6 +338,72 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       'add_more_input_label',
       'no_items_message',
     ];
+  }
+
+  /****************************************************************************/
+  // Property methods.
+  /****************************************************************************/
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultProperties() {
+    if (!isset($this->defaultProperties)) {
+      $properties = $this->defineDefaultProperties();
+      $definition = $this->getPluginDefinition();
+      \Drupal::moduleHandler()->alter(
+        'webform_element_default_properties',
+        $properties,
+        $definition
+      );
+      $this->defaultProperties = $properties;
+    }
+    return $this->defaultProperties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTranslatableProperties() {
+    if (!isset($this->translatableProperties)) {
+      $properties = $this->defineTranslatableProperties();
+      $definition = $this->getPluginDefinition();
+      \Drupal::moduleHandler()->alter(
+        'webform_element_translatable_properties',
+        $properties,
+        $definition
+      );
+      $this->translatableProperties = array_unique($properties);
+    }
+    return $this->translatableProperties;
+  }
+
+  /**
+   * Get default multiple properties used by most elements.
+   *
+   * @return array
+   *   An associative array containing default multiple properties.
+   *
+   * @deprecated Scheduled for removal in Webform 8.x-6.x
+   *   Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.
+   */
+  protected function getDefaultMultipleProperties() {
+    @trigger_error('\Drupal\webform\Plugin\WebformElementBase::getDefaultMultipleProperties is scheduled for removal in Webform 8.x-6.x. Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.', E_USER_DEPRECATED);
+    return $this->defineDefaultBaseProperties();
+  }
+
+  /**
+   * Get default base properties used by all elements.
+   *
+   * @return array
+   *   An associative array containing base properties used by all elements.
+   *
+   * @deprecated Scheduled for removal in Webform 8.x-6.x
+   *   Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.
+   */
+  protected function getDefaultBaseProperties() {
+    @trigger_error('\Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties is scheduled for removal in Webform 8.x-6.x. Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.', E_USER_DEPRECATED);
+    return $this->defineDefaultBaseProperties();
   }
 
   /**
@@ -905,7 +987,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    */
   protected function checkAccessRule(array $element, $operation, AccountInterface $account) {
     // If no access rules are set return NULL (no opinion).
-    // @see \Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties
+    // @see \Drupal\webform\Plugin\WebformElementBase::defaultBaseProperties
     if (!isset($element['#access_' . $operation . '_roles'])
       && !isset($element['#access_' . $operation . '_users'])
       && !isset($element['#access_' . $operation . '_permissions'])) {
@@ -914,7 +996,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
 
     // If access roles are not set then use the anonymous and authenticated
     // roles from the element's default properties.
-    // @see \Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties
+    // @see \Drupal\webform\Plugin\WebformElementBase::defaultBaseProperties
     if (!isset($element['#access_' . $operation . '_roles'])) {
       $element['#access_' . $operation . '_roles'] = $this->getDefaultProperty('access_' . $operation . '_roles') ?: [];
     }
@@ -1125,7 +1207,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     }
 
     // Apply multiple properties.
-    $multiple_properties = $this->getDefaultMultipleProperties();
+    $multiple_properties = $this->defineDefaultMultipleProperties();
     foreach ($multiple_properties as $multiple_property => $multiple_value) {
       if (strpos($multiple_property, 'multiple__') === 0) {
         $property_name = str_replace('multiple__', '', $multiple_property);
@@ -3430,7 +3512,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
           // so we are looking for 'strict equality' (===).
           // This prevents #multiple: 2 from being interpeted as TRUE.
           // @see \Drupal\webform\Element\WebformElementMultiple::validateWebformElementMultiple
-          // @see \Drupal\webform\Plugin\WebformElement\Checkboxes::getDefaultProperties
+          // @see \Drupal\webform\Plugin\WebformElement\Checkboxes::defaultProperties
           if ($default_properties[$property_name] === $element_properties[$property_name]) {
             unset($element_properties[$property_name]);
           }

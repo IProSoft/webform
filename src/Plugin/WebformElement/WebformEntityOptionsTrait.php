@@ -12,8 +12,8 @@ trait WebformEntityOptionsTrait {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
-    $properties = parent::getDefaultProperties() + [
+  protected function defineDefaultProperties() {
+    $properties = parent::defineDefaultProperties() + [
       // Entity reference settings.
       'target_type' => '',
       'selection_handler' => '',
@@ -32,6 +32,8 @@ trait WebformEntityOptionsTrait {
     }
     return $properties;
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

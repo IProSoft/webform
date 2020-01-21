@@ -151,9 +151,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $file_extensions = $this->getFileExtensions();
-    $properties = parent::getDefaultProperties() + [
+    $properties = parent::defineDefaultProperties() + [
       'multiple' => FALSE,
       'max_filesize' => '',
       'file_extensions' => $file_extensions,
@@ -175,9 +175,11 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   /**
    * {@inheritdoc}
    */
-  public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), ['file_placeholder']);
+  protected function defineTranslatableProperties() {
+    return array_merge(parent::defineTranslatableProperties(), ['file_placeholder']);
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

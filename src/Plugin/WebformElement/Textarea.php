@@ -23,7 +23,7 @@ class Textarea extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     return [
       'title' => '',
       'default_value' => '',
@@ -68,9 +68,11 @@ class Textarea extends TextBase {
       'format_items_html' => '',
       'format_items_text' => '',
       'format_attributes' => [],
-    ] + parent::getDefaultProperties()
-      + $this->getDefaultMultipleProperties();
+    ] + parent::defineDefaultProperties()
+      + $this->defineDefaultMultipleProperties();
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}

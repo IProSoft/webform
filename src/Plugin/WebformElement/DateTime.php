@@ -24,7 +24,7 @@ class DateTime extends DateBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     $date_format = '';
     $time_format = '';
 
@@ -54,8 +54,10 @@ class DateTime extends DateBase {
       'date_time_min' => '',
       'date_time_max' => '',
       'date_time_step' => '',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
   }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}
