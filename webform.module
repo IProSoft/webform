@@ -127,6 +127,9 @@ function webform_modules_uninstalled($modules) {
  * Implements hook_config_schema_info_alter().
  */
 function webform_config_schema_info_alter(&$definitions) {
+  if (empty($definitions['webform.webform.*']['mapping'])) {
+    return;
+  }
   $mapping = $definitions['webform.webform.*']['mapping'];
 
   // Copy setting, elements, and handlers to variant override schema.
