@@ -2724,9 +2724,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
 
     // Apply variants.
     $is_applied = FALSE;
-    foreach ($variants as $element_key => $instance_id) {
-      if ($this->applyVariant($element_key, $instance_id, $force)) {
-        $is_applied = TRUE;
+    $variant_element_keys = $this->getElementsVariant();
+    foreach ($variant_element_keys as $varient_element_key) {
+      if (!empty($variants[$varient_element_key])) {
+        $instance_id = $variants[$varient_element_key];
+        if ($this->applyVariant($varient_element_key, $instance_id, $force)) {
+          $is_applied = TRUE;
+        }
       }
     }
     if ($is_applied) {
