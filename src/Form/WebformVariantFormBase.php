@@ -356,11 +356,14 @@ abstract class WebformVariantFormBase extends FormBase {
    */
   protected function getVariantElementsAsOptions() {
     $webform = $this->getWebform();
+    $variant_plugin_id = $this->getWebformVariant()->getPluginId();
     $elements = $this->getWebform()->getElementsVariant();
     $options = [];
     foreach ($elements as $element_key) {
       $element = $webform->getElement($element_key);
-      $options[$element_key] = WebformElementHelper::getAdminTitle($element);
+      if ($element['#variant'] === $variant_plugin_id) {
+        $options[$element_key] = WebformElementHelper::getAdminTitle($element);
+      }
     }
     return $options;
   }
