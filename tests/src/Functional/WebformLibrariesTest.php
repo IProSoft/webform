@@ -51,7 +51,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     $this->assertRaw('/chosen.jquery.min.js');
     $this->assertRaw('/textcounter.min.js');
     $this->assertRaw('/intlTelInput.min.js');
-    $this->assertRaw('/jquery.inputmask.bundle.min.js');
+    $this->assertRaw('/jquery.inputmask.min.js');
     $this->assertRaw('/codemirror.js');
     $this->assertRaw('/jquery.timepicker.min.js');
 
@@ -84,7 +84,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     $this->assertNoRaw('/chosen.jquery.min.js');
     $this->assertNoRaw('/textcounter.min.js');
     $this->assertNoRaw('/intlTelInput.min.js');
-    $this->assertNoRaw('/jquery.inputmask.bundle.min.js');
+    $this->assertNoRaw('/jquery.inputmask.min.js');
     $this->assertNoRaw('/codemirror.js');
     $this->assertNoRaw('/jquery.timepicker.min.js');
 
