@@ -21,9 +21,9 @@ abstract class TextBase extends WebformElementBase {
   protected function defineDefaultProperties() {
     return [
       'readonly' => FALSE,
-      'size' => '',
-      'minlength' => '',
-      'maxlength' => '',
+      'size' => NULL,
+      'minlength' => NULL,
+      'maxlength' => NULL,
       'placeholder' => '',
       'autocomplete' => 'on',
       'pattern' => '',

@@ -21,9 +21,9 @@ class Number extends NumericBase {
   protected function defineDefaultProperties() {
     return [
       // Number settings.
-      'min' => '',
-      'max' => '',
-      'step' => '',
+      'min' => NULL,
+      'max' => NULL,
+      'step' => NULL,
     ] + parent::defineDefaultProperties()
       + $this->defineDefaultMultipleProperties();
   }

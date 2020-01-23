@@ -209,13 +209,25 @@ class WebformPluginElementController extends ControllerBase implements Container
         $properties = [];
         $element_default_properties = $webform_element->getDefaultProperties();
         foreach ($element_default_properties as $key => $default_value) {
+          if (is_bool($default_value)) {
+            $data_type = 'boolean';
+          }
+          elseif (is_array($default_value)) {
+            $data_type = 'array';
+          }
+          elseif (is_numeric($default_value) || is_null($default_value)) {
+            $data_type = 'number';
+          }
+          else {
+            $data_type = 'string';
+          }
           $default_value = ($default_value ? ' ⇒ ' . json_encode($default_value): '');
           if (!isset($default_properties[$key])) {
-            $properties[$key] = '<b>#' . $key . '</b>' . $default_value;
+            $properties[$key] = '<b>#' . $key . '</b> [' . $data_type . ']' . $default_value;
             unset($element_default_properties[$key]);
           }
           else {
-            $element_default_properties[$key] = '#' . $key . $default_value;
+            $element_default_properties[$key] = '#' . $key . ' [' . $data_type . ']' .  $default_value;
           }
         }
         $properties += $element_default_properties;

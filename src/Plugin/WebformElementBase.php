@@ -263,7 +263,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     return [
       'multiple' => FALSE,
       'multiple__header_label' => '',
-      'multiple__min_items' => '',
+      'multiple__min_items' => NULL,
       'multiple__empty_items' => 1,
       'multiple__add_more' => TRUE,
       'multiple__add_more_items' => 1,
@@ -411,7 +411,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    */
   public function hasProperty($property_name) {
     $default_properties = $this->getDefaultProperties();
-    return isset($default_properties[$property_name]);
+    return array_key_exists($property_name, $default_properties);
   }
 
   /**
@@ -419,7 +419,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
    */
   public function getDefaultProperty($property_name) {
     $default_properties = $this->getDefaultProperties();
-    return (isset($default_properties[$property_name])) ? $default_properties[$property_name] : NULL;
+    return (array_key_exists($property_name, $default_properties)) ? $default_properties[$property_name] : NULL;
   }
 
   /**
@@ -3366,7 +3366,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       // always be visible.
       $is_input = $this->elementManager->getElementInstance($property_element)->isInput($property_element);
       if ($is_input) {
-        if (isset($element_properties[$property_name])) {
+        if (array_key_exists($property_name, $element_properties)) {
           // If this property exists, then set its default value.
           $this->setConfigurationFormDefaultValue($form, $element_properties, $property_element, $property_name);
           $has_input = TRUE;
@@ -3441,6 +3441,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
         elseif (is_bool($default_value) && $property_name == 'default_value') {
           $property_element['#default_value'] = $default_value ? 1 : 0;
         }
+        elseif (is_null($default_value) && $property_name == 'default_value') {
+          $property_element['#default_value'] = (string) $default_value;
+        }
         else {
           $property_element['#default_value'] = $default_value;
         }
@@ -3510,7 +3513,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     // elements need to be supported.
     $element = WebformArrayHelper::addPrefix($element_properties);
     foreach ($element_properties as $property_name => $property_value) {
-      if (!isset($default_properties[$property_name])) {
+      if (!array_key_exists($property_name, $default_properties)) {
         continue;
       }
 
@@ -3538,8 +3541,17 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
           }
 
           // Cast data types (except #multiple).
-          if (is_bool($default_properties[$property_name]) && isset($element_properties[$property_name])) {
-            $element_properties[$property_name] = (bool) $element_properties[$property_name];
+          if (isset($element_properties[$property_name])) {
+            if (is_bool($default_properties[$property_name])) {
+              $element_properties[$property_name] = (bool) $element_properties[$property_name];
+            }
+            elseif (is_null($default_properties[$property_name]) || is_numeric($default_properties[$property_name]) ) {
+              $value = $element_properties[$property_name];
+              $cast_value = ($value == (int) $value) ? (int) $value : (float) $value;
+              if ($value == $cast_value) {
+                $element_properties[$property_name] = $cast_value;
+              }
+            }
           }
           break;
       }

@@ -3446,3 +3446,60 @@ function webform_update_8184() {
 function webform_update_8185() {
   _webform_update_webform_handler_settings();
 }
+
+/**
+ * Issue #3108150: Save numeric properties as numbers instead of strings.
+ */
+function webform_update_8186() {
+  /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
+  $element_manager = \Drupal::service('plugin.manager.webform.element');
+
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $elements = $webform_config->get('elements');
+
+    // Try to decode elements.
+    try {
+      $elements = Yaml::decode($elements);
+    }
+    catch (\Exception $exception) {
+      continue;
+    }
+
+    // Make sure elements is an array.
+    if (!is_array($elements)) {
+      continue;
+    }
+
+    $has_numeric_element_property = FALSE;
+    $flattened_elements =& WebformFormHelper::flattenElements($elements);
+    foreach ($flattened_elements as &$element) {
+      $webform_element = $element_manager->getElementInstance($element);
+      $default_properties = WebformArrayHelper::addPrefix($webform_element->getDefaultProperties());
+      foreach ($element as $property_name => $property_value) {
+        // Make sure the default properties exists.
+        if (!array_key_exists($property_name, $default_properties)) {
+          continue;
+        }
+
+        // See if the default is NULL or numeric.
+        $default_value = $default_properties[$property_name];
+        if (!is_null($default_value) && !is_numeric($default_value)) {
+          continue;
+        }
+
+        $cast_value = ($property_value == (int) $property_value) ? (int) $property_value : (float) $property_value;
+        if ($property_value == $cast_value) {
+          $element[$property_name] = $cast_value;
+          $has_numeric_element_property = TRUE;
+        }
+      }
+    }
+
+    if ($has_numeric_element_property) {
+      $webform_config->set('elements', Yaml::encode($elements));
+      $webform_config->save(TRUE);
+    }
+  }
+}

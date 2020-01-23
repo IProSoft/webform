@@ -42,8 +42,8 @@ class Textarea extends TextBase {
       'placeholder' => '',
       'disabled' => FALSE,
       'readonly' => FALSE,
-      'rows' => '',
-      'maxlength' => '',
+      'rows' => NULL,
+      'maxlength' => NULL,
       // Form validation.
       'required' => FALSE,
       'required_error' => '',
@@ -52,9 +52,9 @@ class Textarea extends TextBase {
       'unique_entity' => FALSE,
       'unique_error' => '',
       'counter_type' => '',
-      'counter_minimum' => '',
+      'counter_minimum' => NULL,
       'counter_minimum_message' => '',
-      'counter_maximum' => '',
+      'counter_maximum' => NULL,
       'counter_maximum_message' => '',
       // Attributes.
       'wrapper_attributes' => [],
