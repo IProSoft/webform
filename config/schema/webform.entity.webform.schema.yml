@@ -30,7 +30,7 @@
       type: label
       label: Title
     description:
-      type: label
+      type: text
       label: 'Administrative description'
     category:
       type: label
