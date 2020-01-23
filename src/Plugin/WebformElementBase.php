@@ -3181,6 +3181,17 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     $element_properties = WebformArrayHelper::removePrefix($this->configuration)
       + $default_properties;
 
+    // Make sure 'format_items' is removed if the element does not
+    // support multiple values.
+    // @todo Webform 8.x-6.x: Remove and assume custom element are fixed.
+    if (!$this->supportsMultipleValues()) {
+      unset(
+        $default_properties['format_items'],
+        $default_properties['format_items_html'],
+        $default_properties['format_items_text']
+      );
+    }
+
     // Set default and element properties.
     // Note: Storing this information in the webform's state allows modules to view
     // and alter this information using webform alteration hooks.
