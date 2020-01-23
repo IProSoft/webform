@@ -652,7 +652,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
     ];
     $form['draft_settings']['draft_container']['draft_auto_save'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Automatically save as draft when paging, previewing, and when there are validation errors.'),
+      '#title' => $this->t('Automatically save as draft when paging, previewing, and when there are validation errors'),
       "#description" => $this->t('Automatically save partial submissions when users click the "Preview" button or when validation errors prevent a webform from being submitted.'),
       '#return_value' => TRUE,
       '#default_value' => $settings['draft_auto_save'],

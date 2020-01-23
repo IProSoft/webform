@@ -185,7 +185,7 @@ abstract class WebformVariantFormBase extends FormBase {
     ];
     $form['advanced']['status'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Enable the %name variant.', ['%name' => $this->webformVariant->label()]),
+      '#title' => $this->t('Enable the %name variant', ['%name' => $this->webformVariant->label()]),
       '#return_value' => TRUE,
       '#default_value' => $this->webformVariant->isEnabled(),
       // Disable broken plugins.

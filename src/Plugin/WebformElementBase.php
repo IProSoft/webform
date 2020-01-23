@@ -2794,13 +2794,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     ];
     $form['multiple']['multiple__sorting'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Allow users to sort elements.'),
+      '#title' => $this->t('Allow users to sort elements'),
       '#description' => $this->t('If unchecked, the elements will no longer be sortable.'),
       '#return_value' => TRUE,
     ];
     $form['multiple']['multiple__operations'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Allow users to add/remove elements.'),
+      '#title' => $this->t('Allow users to add/remove elements'),
       '#description' => $this->t('If unchecked, the add/remove (+/x) buttons will be removed from each table row.'),
       '#return_value' => TRUE,
     ];
@@ -2820,7 +2820,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     ];
     $form['multiple']['multiple__add_more_container']['multiple__add_more_input'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Allow users to input the number of items to be added.'),
+      '#title' => $this->t('Allow users to input the number of items to be added'),
       '#description' => $this->t('If checked, users will be able to input the number of items to be added.'),
       '#return_value' => TRUE,
     ];

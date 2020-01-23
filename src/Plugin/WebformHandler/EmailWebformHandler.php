@@ -666,7 +666,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     ];
     $form['elements']['ignore_access'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Always include elements with private and restricted access.'),
+      '#title' => $this->t('Always include elements with private and restricted access'),
       '#description' => $this->t('If checked, access controls for included element will be ignored.'),
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['ignore_access'],
