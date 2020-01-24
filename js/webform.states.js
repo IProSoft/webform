@@ -96,6 +96,20 @@
     else if ('greater' in reference) {
       return (value !== '' && parseFloat(reference['greater']) < parseFloat(value));
     }
+    else if ('between' in reference) {
+      if (value === '') {
+        return false;
+      }
+      else {
+        var between = reference['between'];
+        var betweenParts = between.split(':');
+        var greater = betweenParts[0];
+        var less = (typeof betweenParts[1] !== 'undefined') ? betweenParts[1] : null;
+        var isGreaterThan = (greater === null || greater === '' || parseFloat(value) >= parseFloat(greater));
+        var isLessThan = (less === null || less === '' || parseFloat(value) <= parseFloat(less));
+        return (isGreaterThan && isLessThan);
+      }
+    }
     else {
       return reference.indexOf(value) !== false;
     }
