@@ -799,7 +799,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
 
     // Set negate.
     $negate = FALSE;
-    if ($state[0] === '!') {
+    if (strpos($state, '!') === 0) {
       $negate = TRUE;
       $state = ltrim($state, '!');
     }
