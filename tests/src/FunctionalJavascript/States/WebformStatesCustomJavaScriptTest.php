@@ -5,7 +5,6 @@ namespace Drupal\Tests\webform\Functional\States;
 namespace Drupal\Tests\webform\FunctionalJavascript\Settings;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
-use Drupal\webform\Entity\Webform;
 
 
 /**
@@ -13,7 +12,7 @@ use Drupal\webform\Entity\Webform;
  *
  * @group Webform
  */
-class WebformStatesServerTest extends WebformWebDriverTestBase {
+class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
 
   /**
    * Webforms to load.
