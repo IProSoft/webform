@@ -2,6 +2,6 @@ name: 'Webform module config performance tests'
 type: module
 description: 'Test webform config performance by generating a 1000 webforms containing 100 elements.'
 package: Testing
-core: 8.x
+core_version_requirement: ^8.7.7 || ^9
 dependencies:
   - 'webform:webform'

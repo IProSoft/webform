@@ -3,7 +3,7 @@ type: module
 description: 'Provides a Webform integration with the Group module.'
 experimental: true
 package: 'Webform [EXPERIMENTAL]'
-core: 8.x
+core_version_requirement: ^8.7.7 || ^9
 dependencies:
   - 'webform:webform'
   - 'webform:webform_node'
