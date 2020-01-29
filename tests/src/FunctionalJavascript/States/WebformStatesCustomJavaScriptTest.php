@@ -1,8 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Functional\States;
-
-namespace Drupal\Tests\webform\FunctionalJavascript\Settings;
+namespace Drupal\Tests\webform\FunctionalJavascript\States;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
