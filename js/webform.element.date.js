@@ -42,7 +42,7 @@
         }, Drupal.webform.datePicker.options);
 
         // Add datepicker button.
-        if ($input.hasData('datepicker-button')) {
+        if ($input.hasData && $input.hasData('datepicker-button')) {
           options = $.extend({
             showOn: 'both',
             buttonImage: settings.webform.datePicker.buttonImage,

@@ -2169,31 +2169,19 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     ];
 
     /**************************************************************************/
-    // Devel.
+    // Export.
     /**************************************************************************/
 
-    // Devel: Export.
-    $help['devel_export'] = [
+    // Export: Config.
+    $help['webform_config_export'] = [
       'group' => 'development',
       'title' => $this->t('Devel: Export'),
-      'content' => $this->t("The <strong>Export</strong> form allows developers to quickly export a single webform's YAML configuration file.") . ' ' .
+      'content' => $this->t("The <strong>Config Export</strong> form allows developers to quickly export a single webform's YAML configuration file.") . ' ' .
         $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
       'video_id' => 'development',
       'routes' => [
         // @see /admin/structure/webform/manage/{webform}/export
         'entity.webform.export_form',
-      ],
-    ];
-
-    // Devel: Schema.
-    $help['devel_schema'] = [
-      'group' => 'development',
-      'title' => $this->t('Devel: Webform Schema'),
-      'content' => $this->t("The <strong>Schema</strong> page displays an overview of a webform's elements and specified data types, which can be used to map webform submissions to an external API."),
-      'video_id' => 'development',
-      'routes' => [
-        // @see /admin/structure/webform/manage/{webform}/schema
-        'entity.webform.schema_form',
       ],
     ];
 

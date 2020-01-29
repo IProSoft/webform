@@ -272,14 +272,19 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $element['#access'] = FALSE;
       $this->displayDisabledWarning($element);
     }
-    else {
+    elseif ($webform_submission) {
       $element['#upload_location'] = $this->getUploadLocation($element, $webform_submission->getWebform());
     }
 
     // Get file limit.
-    $file_limit = $webform_submission->getWebform()->getSetting('form_file_limit')
-        ?: \Drupal::config('webform.settings')->get('settings.default_form_file_limit')
-        ?: '';
+    if ($webform_submission) {
+      $file_limit = $webform_submission->getWebform()->getSetting('form_file_limit')
+          ?: \Drupal::config('webform.settings')->get('settings.default_form_file_limit')
+          ?: '';
+    }
+    else {
+      $file_limit = '';
+    }
 
     // Validate callbacks.
     $element_validate = [];
