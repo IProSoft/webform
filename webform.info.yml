@@ -7,15 +7,3 @@ configure: entity.webform.collection
 dependencies:
   - 'drupal:field'
   - 'drupal:user'
-test_dependencies:
-  - 'address:address'
-  - 'bootstrap:bootstrap'
-  - 'captcha:captcha'
-  - 'chosen:chosen'
-  - 'group:group'
-  - 'jsonapi:jsonapi'
-  - 'mailsystem:mailsystem'
-  - 'select2:select2'
-  - 'smtp:smtp'
-  - 'telephone_validation:telephone_validation'
-  - 'token:token'
