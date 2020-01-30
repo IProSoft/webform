@@ -1091,14 +1091,21 @@ function _webform_token_render_more($more_title, $more) {
     '#more_title' => $more_title,
   ];
 
-  // Token info might be called via CLI and not all modules are loaded and
-  // this would throw 'The theme implementations may not be rendered until all
-  // modules are loaded.' exception.
+  // Token info might be called via CLI and not all modules are loaded
+  // or an active theme is defined.
+  //
+  // Prevent the below expections:
+  // - The theme implementations may not be rendered until all modules
+  //   are loaded.
+  // - Call to a member function setParser() on array in Twig\Parser->parse().
+  //
   // @see \Drupal\Core\Theme\ThemeManager::render
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
   $module_handler = \Drupal::service('module_handler');
-  if (!$module_handler->isLoaded()) {
-    $module_handler->loadAll();
+  /** @var \Drupal\webform\WebformThemeManagerInterface $theme_manager */
+  $theme_manager = \Drupal::service('webform.theme_manager');
+  if (!$module_handler->isLoaded() || !$theme_manager->hasActiveTheme()) {
+    return '';
   }
 
   return (string) \Drupal::service('renderer')->renderPlain($build);
