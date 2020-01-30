@@ -60,8 +60,10 @@
    */
   Drupal.behaviors.webformDisableAutoSubmit = {
     attach: function (context) {
+      // Not using context so that inputs loaded via Ajax will have autosubmit
+      // disabled.
       // @see http://stackoverflow.com/questions/11235622/jquery-disable-form-submit-on-enter
-      $(context).find('.webform-submission-form.js-webform-disable-autosubmit input')
+      $('.js-webform-disable-autosubmit input')
         .not(':button, :submit, :reset, :image, :file')
         .once('webform-disable-autosubmit')
         .on('keyup keypress', function (e) {
