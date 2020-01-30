@@ -332,6 +332,15 @@ webform.form:
     - core/jquery.once
     - webform/webform.states
 
+webform.form.auto_focus:
+  version: VERSION
+  header: true
+  js:
+    js/webform.form.auto_focus.js: { preprocess: false }
+  dependencies:
+    - core/drupal
+    - core/jquery
+
 webform.form.disable_back:
   version: VERSION
   header: true

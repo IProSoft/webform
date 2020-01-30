@@ -487,6 +487,25 @@ class WebformExampleCustomFormSettingsForm extends ConfigFormBase {
     // Replace tokens.
     $form = $this->tokenManager->replace($form);
 
+    // Attach the webform library.
+    $form['#attached']['library'][] = 'webform/webform.form';
+
+    // Autofocus: Save details open/close state.
+    $form['#attributes']['class'][] = 'js-webform-autofocus';
+    $form['#attached']['library'][] = 'webform/webform.form.auto_focus';
+
+    // Unsaved: Warn users about unsaved changes.
+    $form['#attributes']['class'][] = 'js-webform-unsaved';
+    $form['#attached']['library'][] = 'webform/webform.form.unsaved';
+
+    // Details save: Attach details element save open/close library.
+    $form['#attached']['library'][] = 'webform/webform.element.details.save';
+
+    // Details toggle: Display collapse/expand all details link.
+    $form['#attributes']['class'][] = 'js-webform-details-toggle';
+    $form['#attributes']['class'][] = 'webform-details-toggle';
+    $form['#attached']['library'][] = 'webform/webform.element.details.toggle';
+
     return $form;
   }
 

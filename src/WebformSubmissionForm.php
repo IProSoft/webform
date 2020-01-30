@@ -764,92 +764,14 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Pages: Set current wizard or preview page.
     $this->displayCurrentPage($form, $form_state);
 
-    /* Webform */
-
     // Move all $elements properties to the $form.
     $this->setFormPropertiesFromElements($form, $elements);
 
-    // Default: Add CSS and JS.
-    // @see https://www.drupal.org/node/2274843#inline
-    $form['#attached']['library'][] = 'webform/webform.form';
+    // Attach libraries to the form.
+    $this->attachLibraries($form, $form_state);
 
-    // Assets: Add custom shared and webform specific CSS and JS.
-    // @see webform_library_info_build()
-    // @see _webform_page_attachments()
-    $assets = $webform->getAssets();
-    foreach ($assets as $type => $value) {
-      if ($value) {
-        $form['#attached']['library'][] = 'webform/webform.' . $type . '.' . $webform->id();
-      }
-    }
-
-    // Attach disable back button.
-    if ($this->getWebformSetting('form_disable_back')) {
-      $form['#attached']['library'][] = 'webform/webform.form.disable_back';
-    }
-
-    // Attach browser back button only when Ajax is disabled.
-    if ($this->getWebformSetting('form_submit_back') && !$this->isAjax()) {
-      $form['#attached']['library'][] = 'webform/webform.form.submit_back';
-    }
-
-    // Unsaved: Add unsaved message.
-    if ($this->getWebformSetting('form_unsaved')) {
-      $form['#attributes']['class'][] = 'js-webform-unsaved';
-      $form['#attached']['library'][] = 'webform/webform.form.unsaved';
-      // Set 'data-webform-unsaved' attribute if unsaved wizard.
-      $pages = $this->getPages($form, $form_state);
-      $current_page = $this->getCurrentPage($form, $form_state);
-      if ($current_page && ($current_page != $this->getFirstPage($pages))) {
-        $form['#attributes']['data-webform-unsaved'] = TRUE;
-      }
-    }
-
-    // Submit once: Prevent duplicate submissions.
-    if ($this->getWebformSetting('form_submit_once')) {
-      $form['#attributes']['class'][] = 'js-webform-submit-once';
-      $form['#attached']['library'][] = 'webform/webform.form.submit_once';
-    }
-
-    // Autocomplete: Add autocomplete=off attribute to form if autocompletion is
-    // disabled.
-    if ($this->getWebformSetting('form_disable_autocomplete')) {
-      $form['#attributes']['autocomplete'] = 'off';
-    }
-
-    // Novalidate: Add novalidate attribute to form if client side validation disabled.
-    if ($this->getWebformSetting('form_novalidate')) {
-      $form['#attributes']['novalidate'] = 'novalidate';
-    }
-
-    // Inline form errors: Add #disable_inline_form_errors property to form.
-    if ($this->getWebformSetting('form_disable_inline_errors')) {
-      $form['#disable_inline_form_errors'] = TRUE;
-    }
-
-    // Details save: Attach details element save open/close library.
-    // This ensures that the library will be loaded even if the webform is
-    // used as a block or a node.
-    if ($this->config('webform.settings')->get('ui.details_save')) {
-      $form['#attached']['library'][] = 'webform/webform.element.details.save';
-    }
-
-    // Details toggle: Display collapse/expand all details link.
-    if ($this->getWebformSetting('form_details_toggle')) {
-      $form['#attributes']['class'][] = 'js-webform-details-toggle';
-      $form['#attributes']['class'][] = 'webform-details-toggle';
-      $form['#attached']['library'][] = 'webform/webform.element.details.toggle';
-    }
-
-    // Autofocus: Add autofocus class to webform.
-    if ($this->entity->isNew() && $this->getWebformSetting('form_autofocus')) {
-      $form['#attributes']['class'][] = 'js-webform-autofocus';
-    }
-
-    // Pages: Disable webform auto submit on enter for wizard webform pages only.
-    if ($this->hasPages()) {
-      $form['#attributes']['class'][] = 'js-webform-disable-autosubmit';
-    }
+    // Attach behaviors to the form.
+    $this->attachBehaviors($form, $form_state);
 
     // Add #after_build callbacks.
     $form['#after_build'][] = '::afterBuild';
@@ -1106,7 +1028,124 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /****************************************************************************/
-  // Webform actions
+  // Webform libraries and behaviors.
+  /****************************************************************************/
+
+  /**
+   * Attach libraries to the form.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  protected function attachLibraries(array &$form, FormStateInterface $form_state) {
+    // Default: Add CSS and JS.
+    // @see https://www.drupal.org/node/2274843#inline
+    $form['#attached']['library'][] = 'webform/webform.form';
+
+    // Assets: Add custom shared and webform specific CSS and JS.
+    // @see webform_library_info_build()
+    // @see _webform_page_attachments()
+    $webform = $this->getWebform();
+    $assets = $webform->getAssets();
+    foreach ($assets as $type => $value) {
+      if ($value) {
+        $form['#attached']['library'][] = 'webform/webform.' . $type . '.' . $webform->id();
+      }
+    }
+  }
+
+  /**
+   * Attach behaviors with libraries to the form.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  protected function attachBehaviors(array &$form, FormStateInterface $form_state) {
+    // Form: Inline form errors.
+    // Add #disable_inline_form_errors property to form.
+    if ($this->getWebformSetting('form_disable_inline_errors')) {
+      $form['#disable_inline_form_errors'] = TRUE;
+    }
+
+    // Form: Novalidate
+    // Add novalidate attribute to form if client side validation disabled.
+    if ($this->getWebformSetting('form_novalidate')) {
+      $form['#attributes']['novalidate'] = 'novalidate';
+    }
+
+    // Form: Autocomplete.
+    // Add autocomplete=off attribute to form if autocompletion is disabled.
+    if ($this->getWebformSetting('form_disable_autocomplete')) {
+      $form['#attributes']['autocomplete'] = 'off';
+    }
+
+    // Form: Disable back button.
+    if ($this->getWebformSetting('form_disable_back')) {
+      $form['#attached']['library'][] = 'webform/webform.form.disable_back';
+    }
+
+    // Form: Back button submit.
+    // Move back when back button is pressed on multistep forms.
+    if ($this->getWebformSetting('form_submit_back') && !$this->isAjax()) {
+      $form['#attached']['library'][] = 'webform/webform.form.submit_back';
+    }
+
+    // Form; Unsaved.
+    // Add unsaved message.
+    if ($this->getWebformSetting('form_unsaved')) {
+      $form['#attributes']['class'][] = 'js-webform-unsaved';
+      // Set 'data-webform-unsaved' attribute if unsaved wizard.
+      $pages = $this->getPages($form, $form_state);
+      $current_page = $this->getCurrentPage($form, $form_state);
+      if ($current_page && ($current_page != $this->getFirstPage($pages))) {
+        $form['#attributes']['data-webform-unsaved'] = TRUE;
+      }
+      $form['#attached']['library'][] = 'webform/webform.form.unsaved';
+    }
+
+    // Form: Submit once.
+    // Prevent duplicate submissions.
+    if ($this->getWebformSetting('form_submit_once')) {
+      $form['#attributes']['class'][] = 'js-webform-submit-once';
+      $form['#attached']['library'][] = 'webform/webform.form.submit_once';
+    }
+
+    // Form: Autosubmit.
+    // Disable webform auto submit on enter for wizard webform pages only.
+    if ($this->hasPages()) {
+      $form['#attributes']['class'][] = 'js-webform-disable-autosubmit';
+    }
+
+    // Element: Autofocus.
+    // Add autofocus class to webform.
+    if ($this->entity->isNew() && $this->getWebformSetting('form_autofocus')) {
+      $form['#attributes']['class'][] = 'js-webform-autofocus';
+      $form['#attached']['library'][] = 'webform/webform.form.auto_focus';
+    }
+
+    // Details: Save.
+    // Attach details element save open/close library.
+    // This ensures that the library will be loaded even if the webform is
+    // used as a block or a node.
+    if ($this->config('webform.settings')->get('ui.details_save')) {
+      $form['#attached']['library'][] = 'webform/webform.element.details.save';
+    }
+
+    // Details Toggle:
+    // Display collapse/expand all details link.
+    if ($this->getWebformSetting('form_details_toggle')) {
+      $form['#attributes']['class'][] = 'js-webform-details-toggle';
+      $form['#attributes']['class'][] = 'webform-details-toggle';
+      $form['#attached']['library'][] = 'webform/webform.element.details.toggle';
+    }
+  }
+
+  /****************************************************************************/
+  // Webform actions.
   /****************************************************************************/
 
   /**
