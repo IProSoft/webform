@@ -4438,6 +4438,7 @@ webform_time:
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
   multiple__sorting: true
+  placeholder: ''
   prepopulate: false
   private: false
   required: false
