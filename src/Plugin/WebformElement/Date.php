@@ -37,6 +37,7 @@ class Date extends DateBase {
       'datepicker' => FALSE,
       'datepicker_button' => FALSE,
       'date_date_format' => $date_format,
+      'placeholder' => '',
       'step' => '',
       'size' => '',
     ] + parent::defineDefaultProperties();
@@ -57,6 +58,11 @@ class Date extends DateBase {
     // Set default date format to HTML date.
     if (!isset($element['#date_date_format'])) {
       $element['#date_date_format'] = $this->getDefaultProperty('date_date_format');
+    }
+
+    // Set placeholder attribute.
+    if (!empty($element['#placeholder'])) {
+      $element['#attributes']['placeholder'] = $element['#placeholder'];
     }
 
     // Prepare element after date format has been updated.
@@ -165,6 +171,14 @@ class Date extends DateBase {
         ],
       ],
     ];
+
+    // Show placeholder for the datepicker only.
+    $form['form']['placeholder']['#states'] = [
+      'visible' => [
+        ':input[name="properties[datepicker]"]' => ['checked' => TRUE],
+      ],
+    ];
+
     return $form;
   }
 

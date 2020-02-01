@@ -374,6 +374,7 @@ date:
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
   multiple__sorting: true
+  placeholder: ''
   prepopulate: false
   private: false
   required: false
@@ -498,6 +499,7 @@ datetime:
   date_date_format: Y-m-d
   date_date_max: ''
   date_date_min: ''
+  date_date_placeholder: ''
   date_days:
     - '0'
     - '1'
@@ -512,6 +514,7 @@ datetime:
   date_time_format: 'H:i:s'
   date_time_max: ''
   date_time_min: ''
+  date_time_placeholder: ''
   date_time_step: ''
   date_year_range: '1900:2050'
   default_value: ''
