@@ -363,6 +363,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       if ($webform_submission_token) {
         $entity = $webform_submission_token;
         $data = $entity->getRawData();
+        $this->operation = 'edit';
       }
       elseif ($webform->getSetting('draft') != WebformInterface::DRAFT_NONE) {
         if ($webform->getSetting('draft_multiple')) {
