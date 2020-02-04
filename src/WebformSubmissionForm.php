@@ -435,7 +435,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // This allows computed elements to be executed and tokens
     // to be replaced using the webform's default data.
     $default_data = $webform->getElementsDefaultData();
-    $default_data = $this->tokenManager->replace($default_data, $entity);
+    $default_data = $this->tokenManager->replaceNoRenderContext($default_data, $entity);
     $data += $default_data;
 
     // Set data and calculate computed values.

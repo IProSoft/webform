@@ -1034,7 +1034,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
         continue;
       }
 
-      $element[$key] = $this->tokenManager->replace($value, $entity);
+      $element[$key] = $this->tokenManager->replaceNoRenderContext($value, $entity);
     }
   }
 

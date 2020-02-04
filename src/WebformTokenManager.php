@@ -108,7 +108,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     // Replace tokens within an array.
     if (is_array($text)) {
       foreach ($text as $key => $token_value) {
-        $text[$key] = $this->replace($token_value, $entity, $data, $options);
+        $text[$key] = $this->replace($token_value, $entity, $data, $options, $bubbleable_metadata);
       }
       return $text;
     }
