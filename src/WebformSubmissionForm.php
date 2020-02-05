@@ -2195,6 +2195,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     if (($is_updated && !$confirmation_update) || $is_locked) {
       $this->getMessageManager()->display(WebformMessageManagerInterface::SUBMISSION_UPDATED);
+      $form_state->set('current_page', NULL);
       $form_state->setRedirect($route_name, $route_parameters, $route_options);
       return;
     }
