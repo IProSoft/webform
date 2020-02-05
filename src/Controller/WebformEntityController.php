@@ -164,7 +164,7 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
     }
 
     // Apply variants.
-    if ($webform->hasVariant()) {
+    if ($webform->hasVariants()) {
       if ($webform_submission) {
         $webform->applyVariants($webform_submission);
       }

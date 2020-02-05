@@ -764,7 +764,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
-  public function hasVariant() {
+  public function hasVariants() {
     $this->initElements();
     return (!empty($this->elementsVariant)) ? TRUE : FALSE;
   }
@@ -2607,6 +2607,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   protected function getWebformVariantPluginManager() {
     return \Drupal::service('plugin.manager.webform.variant');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasVariant($variant_id) {
+    return $this->getVariants()->has($variant_id);
   }
 
   /**

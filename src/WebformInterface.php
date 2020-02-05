@@ -190,7 +190,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * @return bool
    *   TRUE if the webform's elements include variants.
    */
-  public function hasVariant();
+  public function hasVariants();
 
   /**
    * Determine if the webform is using a Flexbox layout.
@@ -986,6 +986,17 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   /****************************************************************************/
   // Variant plugins.
   /****************************************************************************/
+
+  /**
+   * Determine if a specific webform variant exists.
+   *
+   * @param string $variant_id
+   *   The webform variant ID.
+   *
+   * @return boolean
+   *   TRUE if a specific webform variant exists.
+   */
+  public function hasVariant($variant_id);
 
   /**
    * Returns a specific webform variant.
