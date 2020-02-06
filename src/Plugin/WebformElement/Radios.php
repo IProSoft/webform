@@ -51,4 +51,17 @@ class Radios extends OptionsBase {
     $element['#attached']['library'][] = 'webform/webform.element.radios';
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function setDefaultValue(array &$element) {
+    // Unset empty string as default option to prevent '' === '0' issue.
+    // @see \Drupal\Core\Render\Element\Radio::preRenderRadio
+    if (isset($element['#default_value'])
+      && $element['#default_value'] == ''
+      && !isset($element['#options'][$element['#default_value']])) {
+      unset($element['#default_value']);
+    }
+  }
+
 }
