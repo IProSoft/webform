@@ -787,7 +787,10 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     if (!empty($element['#multiple']) && !empty($element['#files'])
       && (count($element['#files']) === $element['#multiple'])) {
       $element['upload']['#access'] = FALSE;
-      $element['upload_button']['#access'] = FALSE;
+      // We can't complete remove the upload button because it breaks
+      // the Ajax callback. Instead, we are going visually hide it from
+      // browsers with JavaScript disabled.
+      $element['upload_button']['#attributes']['style'] = 'display:none';
     }
 
     // Preview uploaded file.
