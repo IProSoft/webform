@@ -1569,6 +1569,15 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         // Load the element's handler.
         $element_plugin = $element_manager->getElementInstance($element, $this);
 
+        // Store a reference to the plugin id which is used by derivatives.
+        // Webform elements support derivatives but Form API elements
+        // do not support derivatives. Therefore we need to store a
+        // reference to the plugin id for when a webform element derivative
+        // changes the $elements['#type'] property.
+        // @see \Drupal\webform\Plugin\WebformElementManager::getElementPluginId
+        // @see \Drupal\webform_options_custom\Plugin\WebformElement\WebformOptionsCustom::setOptions
+        $element['#webform_plugin_id'] = $element_plugin->getPluginId();
+
         // Initialize the element.
         // Note: Composite sub elements are initialized via
         // \Drupal\webform\Plugin\WebformElement\WebformCompositeBase::initialize

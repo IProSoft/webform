@@ -238,7 +238,10 @@ class WebformElementManager extends DefaultPluginManager implements FallbackPlug
    * {@inheritdoc}
    */
   public function getElementPluginId(array $element) {
-    if (isset($element['#type']) && $this->hasDefinition($element['#type'])) {
+    if (isset($element['#webform_plugin_id']) && $this->hasDefinition($element['#webform_plugin_id'])) {
+      return $element['#webform_plugin_id'];
+    }
+    elseif (isset($element['#type']) && $this->hasDefinition($element['#type'])) {
       return $element['#type'];
     }
     elseif (isset($element['#markup'])) {
