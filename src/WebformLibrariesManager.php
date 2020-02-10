@@ -329,9 +329,9 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Code Mirror is a versatile text editor implemented in JavaScript for the browser.'),
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
       'homepage_url' => Url::fromUri('http://codemirror.net/'),
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/5.48.2.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/5.51.0.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
-      'version' => '5.48.2',
+      'version' => '5.51.0',
     ];
     $libraries['algolia.places'] = [
       'title' => $this->t('Algolia Places'),
