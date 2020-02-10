@@ -3503,3 +3503,18 @@ function webform_update_8186() {
     }
   }
 }
+
+/**
+ * Issue #3108266: Update external libraries. Display warning about InputMask.
+ */
+function webform_update_8187() {
+  if (!file_exists(\Drupal::root() . '/libraries/jquery.inputmask/dist/jquery.inputmask.min.js')) {
+    /** @var \Drupal\webform\WebformHelpManagerInterface $help_manager */
+    $help_manager = \Drupal::service('webform.help_manager');
+    $help_manager->addNotification('webform_update_8187',
+      t('<strong>ATTENTION DEVELOPERS!!!</strong> Please make sure to download and update the <a href=":href">Input Mask</a> library to version 5.0.x', [':href' => 'https://github.com/RobinHerbots/Inputmask']) .
+      ' ' . t('<a href=":href">Learn more about updating the Webform module\'s external libraries</a>', [':href' => 'https://www.drupal.org/docs/8/modules/webform/webform-libraries']),
+      'warning'
+    );
+  }
+}
