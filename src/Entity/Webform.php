@@ -2780,12 +2780,24 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *   Return TRUE is variant was applied.
    */
   public function applyVariant($element_key, $instance_id, $force = FALSE) {
+    $element = $this->getElement($element_key);
     // Check that the webform has a variant instance.
     if (!$this->getVariants()->has($instance_id)) {
+      $t_args = [
+        '@title' => $element['#title'],
+        '@key' => $element_key,
+        '@instance_id' => $instance_id,
+      ];
+      // Log warning for missing variant instances.
+      \Drupal::logger('webform')->warning("The '@instance_id' variant id is missing for the '@title (@key)' variant type. <strong>No variant settings have been applied.</strong>", $t_args);
+
+      // Display onscreen warning to users who can update the webform.
+      if (\Drupal::currentUser()->hasPermission('edit webform variants')) {
+        \Drupal::messenger()->addWarning($this->t("The '@instance_id' variant id is missing for the '@title (@key)' variant type. <strong>No variant settings have been applied.</strong>", $t_args));
+      }
       return FALSE;
     }
 
-    $element = $this->getElement($element_key);
     $variant_plugin_id = $element['#variant'];
     $variant_plugin = $this->getVariant($instance_id);
 
