@@ -32,7 +32,7 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
   ];
 
   /**
-   * Debug dump the element's properties as YAML
+   * Debug dump the element's properties as YAML.
    *
    * @var bool
    */

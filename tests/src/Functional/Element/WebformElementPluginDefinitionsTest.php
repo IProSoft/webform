@@ -32,7 +32,7 @@ class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase 
   ];
 
   /**
-   * Debug dump the element's definitions as YAML
+   * Debug dump the element's definitions as YAML.
    *
    * @var bool
    */

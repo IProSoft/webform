@@ -307,9 +307,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  /**
    * Define an element's translatable properties.
    *
    * @return array
@@ -945,7 +942,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     $access_result = $this->checkAccessRule($element, $operation, $account)
       ? AccessResult::allowed()
       : AccessResult::neutral();
-
 
     // Allow webform handlers to adjust the access and/or directly set an
     // element's #access to FALSE.

@@ -110,7 +110,6 @@ abstract class WebformCompositeBase extends WebformElementBase {
   // Property methods.
   /****************************************************************************/
 
-
   /**
    * {@inheritdoc}
    */
@@ -934,8 +933,6 @@ abstract class WebformCompositeBase extends WebformElementBase {
         '#access' => TRUE,
       ];
     }
-
-
 
     return $form;
   }

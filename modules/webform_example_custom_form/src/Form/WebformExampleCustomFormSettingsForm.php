@@ -4,7 +4,6 @@ namespace Drupal\webform_example_custom_form\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Serialization\Yaml;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

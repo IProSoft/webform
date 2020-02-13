@@ -26,7 +26,6 @@ function webform_example_element_properties_webform_element_translatable_propert
   $properties[] = 'custom_data';
 }
 
-
 /**
  * Implements hook_webform_element_configuration_form_alter().
  */
@@ -41,7 +40,7 @@ function webform_example_element_properties_webform_element_configuration_form_a
 
   // Append custom properties details container and textfield element.
   $t_args = [
-    '@label'=> $element_label,
+    '@label' => $element_label,
     '@type' => $element_type,
   ];
   $form['custom_properties'] = [

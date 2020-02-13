@@ -59,7 +59,7 @@ interface WebformGroupManagerInterface {
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
    *   A webform submission.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   A user account
+   *   A user account.
    *
    * @return \Drupal\group\Entity\GroupContentInterface|bool
    *   The group role  for the webform submission.

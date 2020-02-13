@@ -9,14 +9,18 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
  *
  * @group Webform
  */
-class WebformExampleElementPropertiesTest extends WebformBrowserTestBase{
+class WebformExampleElementPropertiesTest extends WebformBrowserTestBase {
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['webform', 'webform_ui', 'webform_example_element_properties'];
+  public static $modules = [
+    'webform',
+    'webform_ui',
+    'webform_example_element_properties',
+  ];
 
   /**
    * Tests element custom properties.

@@ -840,7 +840,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    *   Throw exception if table row column is not found.
    */
   public function buildRowColumn(array $column, EntityInterface $entity) {
-    /** @var $entity \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $entity */
 
     $is_raw = ($column['format'] == 'raw');
     $name = $column['name'];

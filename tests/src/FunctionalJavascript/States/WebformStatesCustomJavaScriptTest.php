@@ -4,7 +4,6 @@ namespace Drupal\Tests\webform\FunctionalJavascript\States;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
-
 /**
  * Tests for webform submission conditions (#states) validator.
  *
@@ -119,4 +118,5 @@ class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
     $page->fillField('edit-trigger-between', '21');
     $this->assertFalse($dependent_between->isVisible());
   }
+
 }

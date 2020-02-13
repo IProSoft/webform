@@ -37,7 +37,6 @@ function webform_devel_webform_help_info() {
   return $help;
 }
 
-
 /**
  * Implements hook_entity_type_alter().
  */

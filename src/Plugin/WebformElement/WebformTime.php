@@ -139,7 +139,6 @@ class WebformTime extends WebformElementBase {
       ],
     ];
 
-
     return $form;
   }
 

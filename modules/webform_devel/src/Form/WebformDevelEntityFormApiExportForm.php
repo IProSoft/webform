@@ -64,7 +64,7 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     ];
     $form_php = $this->renderer->render($build);
 
-    // Config
+    // Config.
     $config = $this->generate->getData($webform);
 
     // Form.
@@ -195,7 +195,6 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     $form_state->setResponse($response);
   }
 
-
   /****************************************************************************/
   // Helper functions.
   /****************************************************************************/
@@ -218,6 +217,12 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     }
   }
 
+  /**
+   * Get the form's PHP template.
+   *
+   * @return string
+   *   The form's PHP template.
+   */
   protected function getPhpTemplate() {
     return <<<'EOT'
 <?php
@@ -336,4 +341,5 @@ class {{ class_name }}SettingsForm extends ConfigFormBase {
 }
 EOT;
   }
+
 }

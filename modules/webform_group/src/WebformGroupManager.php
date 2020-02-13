@@ -265,7 +265,7 @@ class WebformGroupManager implements WebformGroupManagerInterface {
    * @param \Drupal\group\Entity\GroupContentInterface $group_content
    *   Group content.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   A user account
+   *   A user account.
    *
    * @return array
    *   An array of group roles for the group content.
@@ -278,7 +278,7 @@ class WebformGroupManager implements WebformGroupManagerInterface {
     // \Drupal\group\Entity\Storage\GroupRoleStorage::loadByUserAndGroup.
     // @see \Drupal\group\Entity\Storage\GroupRoleStorageInterface::loadByUserAndGroup
     /** @var \Drupal\group\Entity\Storage\GroupRoleStorageInterface $group_role_storage */
-    $group_role_storage = \Drupal::entityTypeManager()->getStorage('group_role');
+    $group_role_storage = $this->entityTypeManager->getStorage('group_role');
     $group_roles = $group_role_storage->loadByUserAndGroup($account, $group, TRUE);
     if (!$group_roles) {
       return [];
@@ -297,4 +297,5 @@ class WebformGroupManager implements WebformGroupManagerInterface {
 
     return $group_roles;
   }
+
 }

@@ -31,7 +31,6 @@ class MachineName extends WebformElementBase {
     return $properties;
   }
 
-
   /****************************************************************************/
 
   /**
