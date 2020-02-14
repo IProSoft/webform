@@ -1804,27 +1804,32 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Confirm webform via webform handler.
     $this->getWebform()->invokeHandlers('confirmForm', $form, $form_state, $webform_submission);
 
-    // Get confirmation type.
+    // Get confirmation type and submission state.
     $confirmation_type = $this->getWebformSetting('confirmation_type');
+    $state = $webform_submission->getState();
 
     // Rebuild or reset the form if reloading the current form via AJAX.
     if ($this->isAjax()) {
       // On update, rebuild and display message unless ?destination= is set.
       // @see \Drupal\webform\WebformSubmissionForm::setConfirmation
-      $state = $webform_submission->getState();
       if ($state === WebformSubmissionInterface::STATE_UPDATED) {
         if (!$this->getRequest()->get('destination')) {
-          static::rebuild($form, $form_state);
+          $this->reset($form, $form_state);
         }
       }
       elseif ($confirmation_type === WebformInterface::CONFIRMATION_MESSAGE || $confirmation_type === WebformInterface::CONFIRMATION_NONE) {
-        static::reset($form, $form_state);
+        $this->reset($form, $form_state);
       }
     }
 
-    // Always reset the form to trigger a modal dialog.
+    // Always rebuild or  reset the form to trigger a modal dialog.
     if ($confirmation_type === WebformInterface::CONFIRMATION_MODAL) {
-      static::reset($form, $form_state);
+      if ($state === WebformSubmissionInterface::STATE_UPDATED) {
+        $this->rebuild($form, $form_state);
+      }
+      else {
+        $this->reset($form, $form_state);
+      }
     }
   }
 
@@ -2137,7 +2142,6 @@ class WebformSubmissionForm extends ContentEntityForm {
             else {
               $page_element_plugin->showPage($page_element);
             }
-
           }
         }
       }
@@ -2201,7 +2205,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Add token route query options.
-    if ($state == WebformSubmissionInterface::STATE_COMPLETED && !$webform->getSetting('confirmation_exclude_token')) {
+    if ($state === WebformSubmissionInterface::STATE_COMPLETED && !$webform->getSetting('confirmation_exclude_token')) {
       $route_options['query']['token'] = $webform_submission->getToken();
     }
 
