@@ -414,7 +414,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   protected $elementsJavaScript = [];
 
   /**
-   * A webfrom default data extracted from each elements default value or value.
+   * A webform's default data extracted from each element's default value or value.
    *
    * @var array
    */
