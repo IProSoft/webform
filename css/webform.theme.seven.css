@@ -25,6 +25,10 @@ table hr {
   margin: 0.5em 0;
 }
 
+form hr {
+  margin: 1em 0;
+}
+
 /* Add background to nested details */
 details.seven-details details.seven-details {
   background-color: #f8f8f8;
