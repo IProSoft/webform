@@ -125,6 +125,10 @@ table td.tabledrag-cell {
   padding: 1em 1rem;
 }
 
+table .tabledrag-cell-content .indentation {
+  height: 1.5625rem;
+}
+
 table td.tabledrag-cell .tabledrag-handle::after {
   padding: 0 1rem;
 }
