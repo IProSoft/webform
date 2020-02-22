@@ -70,14 +70,14 @@ class WebformAttachmentUrl extends WebformAttachmentBase {
       $value = \Drupal::request()->getSchemeAndHttpHost() . $value;
     }
 
-    // Validate URL formatting.
-    if ($value !== '' && !UrlHelper::isValid($value, TRUE)) {
-      $form_state->setError($element, t('The URL %url is not valid.', ['%url' => $value]));
-    }
-
     // Skip validating [webform_submission] tokens which can't be replaced.
     if (strpos($value, '[webform_submission:') !== FALSE) {
       return;
+    }
+
+    // Validate URL formatting.
+    if ($value !== '' && !UrlHelper::isValid($value, TRUE)) {
+      $form_state->setError($element, t('The URL %url is not valid.', ['%url' => $value]));
     }
 
     // Validate URL access.
