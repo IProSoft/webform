@@ -97,7 +97,7 @@
     if (!navigator.userAgent.toLowerCase().match(/iphone|ipad|ipod|opera/)) {
       return;
     }
-    $('a').bind('click', function (evt) {
+    $('a:not(.use-ajax)').bind('click', function (evt) {
       var href = $(evt.target).closest('a').attr('href');
       if (typeof href !== 'undefined' && !(href.match(/^#/) || href.trim() === '')) {
         if ($(window).triggerHandler('beforeunload')) {
