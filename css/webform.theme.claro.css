@@ -344,3 +344,22 @@ div.webform-form-filter input.webform-form-filter-text {
 .ui-dialog.ui-dialog-off-canvas .ui-dialog-titlebar {
   border-radius: 0;
 }
+
+.webform-off-canvas .fieldset__label {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.webform-off-canvas .fieldset__label--group {
+  padding: 0;
+}
+
+.webform-off-canvas .fieldset__wrapper,
+.webform-off-canvas .claro-details__wrapper {
+  margin: 1rem;
+}
+
+.webform-off-canvas .fieldset__wrapper--group {
+  margin: 0;
+}
+
