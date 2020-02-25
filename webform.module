@@ -133,14 +133,18 @@ function webform_config_schema_info_alter(&$definitions) {
   $mapping = $definitions['webform.webform.*']['mapping'];
 
   // Copy setting, elements, and handlers to variant override schema.
-  $definitions['webform.variant.override']['mapping'] += [
-    'settings' => $mapping['settings'],
-    'elements' => $mapping['elements'],
-    'handlers' => $mapping['handlers'],
-  ];
+  if (isset($definitions['webform.variant.override'])) {
+    $definitions['webform.variant.override']['mapping'] += [
+      'settings' => $mapping['settings'],
+      'elements' => $mapping['elements'],
+      'handlers' => $mapping['handlers'],
+    ];
+  }
 
   // Append settings handler settings schema.
-  $definitions['webform.handler.settings']['mapping'] += _webform_config_schema_info_alter_settings_recursive($mapping['settings']['mapping']);
+  if (isset($definitions['webform.handler.settings'])) {
+    $definitions['webform.handler.settings']['mapping'] += _webform_config_schema_info_alter_settings_recursive($mapping['settings']['mapping']);
+  }
 }
 
 /**
