@@ -2,7 +2,6 @@
 
 namespace Drupal\webform_devel\Form;
 
-use Drupal\Core\Archiver\ArchiveTar;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Serialization\Yaml;
@@ -165,18 +164,8 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     $webform = $this->getEntity();
 
     // Get the Tar archive.
-    $archiver_file_path = file_directory_temp() . '/' . $webform->id() . '.tar.gz';
-    /** @var \Drupal\system\Plugin\Archiver\Tar $archiver */
-    $archiver = $this->archiverManager->getInstance([
-      'filepath' => $archiver_file_path,
-    ]);
-
-    $archive = $archiver->getArchive();
-    if ($archive instanceof ArchiveTar) {
-      // Make it gzip compress.
-      $archive->_compress = TRUE;
-      $archive->_compress_type = 'gz';
-    }
+    $archive_file_path = file_directory_temp() . '/' . $webform->id() . '.tar.gz';
+    $archive = new \Archive_Tar($archive_file_path, 'gz');
 
     // Add code to archive.
     $file_names = $form['code']['#file_names'];
@@ -186,7 +175,7 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     }
 
     // Set archive as the response and delete the temp file.
-    $response = new BinaryFileResponse($archiver_file_path, 200, [], FALSE);
+    $response = new BinaryFileResponse($archive_file_path, 200, [], FALSE);
     $response->setContentDisposition(
       ResponseHeaderBag::DISPOSITION_ATTACHMENT,
       $webform->id() . '.tar.gz'

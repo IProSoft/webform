@@ -430,6 +430,9 @@ webform.settings:
         excel:
           type: boolean
           label: 'Open HTML table in Excel'
+        archive_type:
+          type: string
+          label: 'Type of downloadable archive'
         file_name:
           type: string
           label: 'File name'

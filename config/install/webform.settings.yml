@@ -120,6 +120,7 @@ export:
   signature_format: status
   delimiter: ','
   excel: false
+  archive_type: tar
   excluded_exporters: {  }
 batch:
   default_batch_export_size: 500
