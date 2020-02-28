@@ -10,31 +10,27 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_checkbox_value
-title: 'Test: Element: Checkbox value'
-description: 'Test the checkbox value element.'
+id: test_element_checkbox
+title: 'Test: Element: Checkbox'
+description: 'Test the checkbox element.'
 category: 'Test: Element'
 elements: |
-  checkbox_value_empty:
-    '#type': webform_checkbox_value
-    '#title': checkbox_value_empty
-    '#value__title': 'Enter a value'
-  checkbox_value_filled:
-    '#type': webform_checkbox_value
-    '#title': checkbox_value_filled
-    '#value__title': 'Enter a value'
-    '#default_value': '{default_value}'
-  checkbox_value_select_other:
-    '#type': webform_checkbox_value
-    '#title': checkbox_value_select_other
-    '#default_value': Four
-    '#element':
-      '#type': webform_select_other
-      '#options':
-        One: One
-        Two: Two
-        Three: Three
-
+  checkbox:
+    '#type': checkbox
+    '#title': checkbox
+  checkbox_raw:
+    '#type': checkbox
+    '#title': checkbox_raw
+    '#format': raw
+  checkbox_return_value:
+    '#type': checkbox
+    '#title': checkbox_return_value
+    '#return_value': custom_return_value
+  checkbox_return_value_raw:
+    '#type': checkbox
+    '#title': checkbox_return_value_raw
+    '#return_value': custom_return_value_raw
+    '#format': raw
 css: ''
 javascript: ''
 settings:

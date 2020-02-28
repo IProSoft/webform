@@ -186,6 +186,7 @@ checkbox:
   more_title: ''
   prepopulate: false
   private: false
+  return_value: ''
   required: false
   required_error: ''
   states: {  }
@@ -3847,6 +3848,7 @@ webform_same:
   more_title: ''
   prepopulate: false
   private: false
+  return_value: ''
   source: ''
   states: {  }
   states_clear: true
@@ -4379,6 +4381,7 @@ webform_terms_of_service:
   private: false
   required: false
   required_error: ''
+  return_value: ''
   states: {  }
   states_clear: true
   terms_content: ''
@@ -4690,6 +4693,7 @@ webform_toggle:
   prepopulate: false
   private: false
   flex: 1
+  return_value: ''
   states: {  }
   states_clear: true
   access_create_roles:
