@@ -3518,3 +3518,10 @@ function webform_update_8187() {
     );
   }
 }
+
+/**
+ * Issue #3097101: Remote Post cast boolean and numer values.
+ */
+function webform_update_8188() {
+  _webform_update_webform_handler_settings();
+}
