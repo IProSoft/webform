@@ -1274,6 +1274,23 @@ class WebformHelpManager implements WebformHelpManagerInterface {
           ],
         ],
       ],
+      'api_reuse' => [
+        'title' => $this->t('Reusing Webform APIs'),
+        'content' => $this->t('This screencast walks through how to reusing the Webform module’s APls to create custom configuration forms.'),
+        'youtube_id' => 't8cIZuAjYck',
+        'presentation_id' => '11IdSeA_UwT2nbE3jlDEYrESov_mEkL4ehu_Sf1j-eww',
+        'links' => [
+          [
+            'title' => $this->t('Form API | Drupal.org'),
+            'url' => 'https://www.drupal.org/project/devel',
+          ],
+          [
+            'title' => $this->t('Examples for Developers | Drupal.org'),
+            'url' => 'https://www.drupal.org/project/examples',
+          ],
+        ],
+      ],
+
       'webform' => [
         'title' => $this->t('Webform: There is this for that'),
         'content' => $this->t('One of the key mantras in the Drupal is “there is a module for that, “ and Webform is the module for building forms for Drupal 8.'),
