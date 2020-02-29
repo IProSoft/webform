@@ -217,7 +217,12 @@ function _webform_entity_print_get_export_types() {
   $export_types = \Drupal::service('plugin.manager.entity_print.export_type')->getDefinitions();
 
   // Remove unsupported export types.
-  // @see Issue #2733781: Add Export to Word Support.
-  unset($export_types['word_docx'], $export_types['epub']);
+  // Issue #2733781: Add Export to Word Support.
+  // @see https://www.drupal.org/project/entity_print/issues/2733781
+  unset($export_types['word_docx']);
+  // Issue #2735559: Add Export to ePub.
+  // @see https://www.drupal.org/project/entity_print/issues/2735559
+  unset($export_types['epub']);
+
   return $export_types;
 }
