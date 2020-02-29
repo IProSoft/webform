@@ -586,6 +586,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform Authorize.Net.
+    $projects['authorizenetwebform'] = [
+      'title' => $this->t('Webform Authorize.Net'),
+      'description' => $this->t('Integrates Webform with Authorize.Net.'),
+      'url' => Url::fromUri('https://github.com/ivan-trokhanenko/authorizenetwebform'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Webform Copper CRM.
     $projects['webform_copper'] = [
       'title' => $this->t('Webform Copper'),
