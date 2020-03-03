@@ -243,6 +243,7 @@ class Captcha extends WebformElementBase {
         $element['captcha_widgets']['captcha_refresh'] = [
           '#theme' => 'image_captcha_refresh',
           '#captcha_refresh_link' => $uri,
+          '#parents' => array_merge($element['#parents'], ['captcha_widgets']),
         ];
       }
     }
