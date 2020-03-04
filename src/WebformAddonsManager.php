@@ -432,6 +432,15 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
+    // Integrations: Webform Entity Handler.
+    $projects['webform_entity_handler'] = [
+      'title' => $this->t('Webform Entity Handler'),
+      'description' => $this->t('Provides the ability to create or update entities with the webform submission values.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_entity_handler'),
+      'category' => 'integration',
+      'recommended' => TRUE,
+    ];
+
     /**************************************************************************/
 
     // Integrations: Webform AddressFinder.
