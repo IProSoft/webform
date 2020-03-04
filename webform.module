@@ -344,7 +344,7 @@ function webform_token_info_alter(&$data) {
   $more = _webform_token_render_more(t('Learn about token suffixes'), $token_suffixes);
   foreach ($data['types'] as $type => &$info) {
     if (strpos($type, 'webform') === 0) {
-      if (!empty($info['description'])) {
+      if (!empty($info['description'] && isset($info['description']))) {
         $description = $info['description'] . $more;
       }
       else {
