@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "webform_more",
  *   label = @Translation("More"),
  *   description = @Translation("Provides a more slideout element."),
- *   category = @Translation("Markup"),
+ *   category = @Translation("Markup elements"),
  * )
  */
 class WebformMore extends WebformMarkupBase {
