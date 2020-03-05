@@ -10,6 +10,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Entity\EntityInterface;
@@ -220,7 +221,7 @@ function webform_local_tasks_alter(&$local_tasks) {
 /**
  * Implements hook_menu_local_tasks_alter().
  */
-function webform_menu_local_tasks_alter(&$data, $route_name, \Drupal\Core\Cache\RefinableCacheableDependencyInterface $cacheability) {
+function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
   // Change config entities 'Translate *' tab to be just label 'Translate'.
   $webform_entities = [
     'webform',
