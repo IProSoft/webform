@@ -232,6 +232,19 @@
         .closest('.js-form-item, .js-form-submit, .js-form-wrapper').toggleClass('form-disabled', e.value)
         .find('select, input, textarea, button').prop('disabled', e.value);
 
+      // Never disable hidden file[fids] because the existing values will
+      // be completely lost when the webform is submitted.
+      var fileElements = $(e.target)
+        .find(':input[type="hidden"][name$="[fids]"]');
+      if (fileElements.length) {
+        // Remove 'disabled' attribute from fieldset which will block
+        // all disabled elements from being submitted.
+        if ($(e.target).is('fieldset')) {
+          $(e.target).prop('disabled', false);
+        }
+        fileElements.removeAttr('disabled');
+      }
+
       // Trigger webform:disabled.
       $(e.target).trigger('webform:disabled')
         .find('select, input, textarea, button').trigger('webform:disabled');
