@@ -1386,7 +1386,7 @@ webform_message:
 webform_more:
   dependencies: {  }
   default_key: ''
-  category: Markup
+  category: 'Markup elements'
   description: 'Provides a more slideout element.'
   hidden: false
   multiline: false
