@@ -47,6 +47,13 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
   protected $elementManager;
 
   /**
+   * An array of translatable properties.
+   *
+   * @var array
+   */
+  protected $translatableProperties;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -56,7 +63,18 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
     $instance->generate = $container->get('webform_submission.generate');
     $instance->tokenManager = $container->get('webform.token_manager');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
+    $instance->initialize();
     return $instance;
+  }
+
+   /**
+    * Initialize WebformDevelEntityFormApiBaseForm object.
+    */
+  protected function initialize() {
+    $translatable_properties = $this->elementManager->getTranslatableProperties();
+    $translatable_properties = array_combine($translatable_properties, $translatable_properties);
+    unset($translatable_properties['default_value']);
+    $this->translatableProperties = $translatable_properties;
   }
 
   /****************************************************************************/
@@ -122,6 +140,9 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
           if (Element::child($property)) {
             $element_children[$property] = $value;
           }
+          elseif ($this->isPropertyTranslatable($property)) {
+            $element_export[$property] = '<T>' . $value . '</T>';
+          }
           else {
             $element_export[$property] = $value;
           }
@@ -135,7 +156,30 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
         $output .= $this->renderExport($element_children, $element_prefix);
       }
     }
+
+    $output = str_replace("'<T>", "\$this->t('", $output);
+    $output = str_replace("</T>'", "')", $output);
     return $output;
+  }
+
+  /**
+   * Determine if an element property is translatable.
+   *
+   * @param string $property
+   *   An element property.
+   *
+   * @return bool
+   *  TRUE if an element property is translatable.
+   */
+  protected function isPropertyTranslatable($property) {
+    $property = str_replace('#', '', $property);
+    if (strpos($property, '__') !== FALSE) {
+      list(, $child_property) = explode('__', $property);
+      return isset($this->translatableProperties[$child_property]);
+    }
+    else {
+      return isset($this->translatableProperties[$property]);
+    }
   }
 
   /**
