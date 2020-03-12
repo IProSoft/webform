@@ -1085,6 +1085,10 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    */
   public function getVariantsData(WebformSubmissionInterface $webform_submission);
 
+  /****************************************************************************/
+  // Revisions.
+  /****************************************************************************/
+
   /**
    * Required to allow webform which are config entities to have an EntityViewBuilder.
    *
@@ -1100,6 +1104,10 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   Always return TRUE since config entities are not revisionable.
    */
   public function isDefaultRevision();
+
+  /****************************************************************************/
+  // State data.
+  /****************************************************************************/
 
   /**
    * Returns the stored value for a given key in the webform's state.
@@ -1139,8 +1147,54 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   The key of the data to retrieve.
    *
    * @return bool
-   *   TRUE if the stored value for a given key exists
+   *   TRUE if the stored value for a given key exists.
    */
   public function hasState($key);
+
+  /****************************************************************************/
+  // User data.
+  /****************************************************************************/
+
+  /**
+   * Returns the stored value for a given key in the webform's user data.
+   *
+   * @param string $key
+   *   The key of the data to retrieve.
+   * @param mixed $default
+   *   The default value to use if the key is not found.
+   *
+   * @return mixed
+   *   The stored value, or NULL if no value exists.
+   */
+  public function getUserData($key, $default = NULL);
+
+  /**
+   * Saves a value for a given key in the webform's user data.
+   *
+   * @param string $key
+   *   The key of the data to store.
+   * @param mixed $value
+   *   The data to store.
+   */
+  public function setUserData($key, $value);
+
+  /**
+   * Deletes an item from the webform's user data.
+   *
+   * @param string $key
+   *   The item name to delete.
+   */
+  public function deleteUserData($key);
+
+  /**
+   * Determine if the stored value for a given key exists in the webform's user data.
+   *
+   * @param string $key
+   *   The key of the data to retrieve.
+   *
+   * @return bool
+   *   TRUE if the stored value for a given key exists.
+   */
+  public function hasUserData($key);
 
 }

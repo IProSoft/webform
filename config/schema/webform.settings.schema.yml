@@ -188,6 +188,9 @@ webform.settings:
               sequence:
                 type: string
                 label: Route
+        default_results_customize:
+          type: boolean
+          label: 'Allow users to customize the results table'
         default_submission_access_denied_message:
           type: text
           label: 'Default submission access denied message'

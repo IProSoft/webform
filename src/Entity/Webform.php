@@ -1135,6 +1135,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'purge_days' => NULL,
       'results_disabled' => FALSE,
       'results_disabled_ignore' => FALSE,
+      'results_customize' => FALSE,
       'token_view' => FALSE,
       'token_update' => FALSE,
     ];
@@ -2048,13 +2049,21 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     /** @var \Drupal\webform\WebformInterface[] $entities */
     parent::preDelete($storage, $entities);
 
-    // Delete all paths and states associated with this webform.
+    /** @var \Drupal\user\UserDataInterface $user_data */
+    $user_data = \Drupal::service('user.data');
+
+    // Delete all paths, states, and user data associated with this webform.
     foreach ($entities as $entity) {
       // Delete all paths.
       $entity->deletePaths();
 
       // Delete the state.
+      // @see \Drupal\webform\Entity\Webform::getState
       \Drupal::state()->delete('webform.webform.' . $entity->id());
+
+      // Delete user data.
+      // @see \Drupal\webform\Entity\Webform::getUserData
+      $user_data->delete('webform', NULL, $entity->id());
     }
 
     // Delete all submission associated with this webform.
@@ -2815,6 +2824,10 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $variant_plugin->applyVariant();
   }
 
+  /****************************************************************************/
+  // URL.
+  /****************************************************************************/
+
   /**
    * {@inheritdoc}
    *
@@ -2866,12 +2879,20 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     return parent::link($text, $rel, $options);
   }
 
+  /****************************************************************************/
+  // Revisions.
+  /****************************************************************************/
+
   /**
    * {@inheritdoc}
    */
   public function isDefaultRevision() {
     return TRUE;
   }
+
+  /****************************************************************************/
+  // State.
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}
@@ -2911,6 +2932,61 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     return (isset($values[$key])) ? TRUE : FALSE;
   }
 
+  /****************************************************************************/
+  // User data.
+  /****************************************************************************/
+
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getUserData($key, $default = NULL) {
+    $account = \Drupal::currentUser();
+    /** @var \Drupal\user\UserDataInterface $user_data */
+    $user_data = \Drupal::service('user.data');
+    $values = $user_data->get('webform', $account->id(), $this->id());
+    return (isset($values[$key])) ? $values[$key] : $default;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUserData($key, $value) {
+    $account = \Drupal::currentUser();
+    /** @var \Drupal\user\UserDataInterface $user_data */
+    $user_data = \Drupal::service('user.data');
+    $values = $user_data->get('webform', $account->id(), $this->id()) ?: [];
+    $values[$key] = $value;
+    $user_data->set('webform', $account->id(), $this->id(), $values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function deleteUserData($key) {
+    $account = \Drupal::currentUser();
+    /** @var \Drupal\user\UserDataInterface $user_data */
+    $user_data = \Drupal::service('user.data');
+    $values = $user_data->get('webform', $account->id(), $this->id()) ?: [];
+    unset($values[$key]);
+    $user_data->set('webform', $account->id(), $this->id(), $values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasUserData($key) {
+    $account = \Drupal::currentUser();
+    /** @var \Drupal\user\UserDataInterface $user_data */
+    $user_data = \Drupal::service('user.data');
+    $values = $user_data->get('webform', $account->id(), $this->id()) ?: [];
+    return (isset($values[$key])) ? TRUE : FALSE;
+  }
+
+  /****************************************************************************/
+  // Dependency.
+  /****************************************************************************/
+
   /**
    * {@inheritdoc}
    */
@@ -2943,6 +3019,10 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
 
     return $changed;
   }
+
+  /****************************************************************************/
+  // Other.
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}
