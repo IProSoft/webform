@@ -3415,7 +3415,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
 
     foreach ($form as $property_name => &$property_element) {
       // Skip all properties.
-      if (Element::property($property_name)) {
+      if (is_string($property_name) && Element::property($property_name)) {
         continue;
       }
 

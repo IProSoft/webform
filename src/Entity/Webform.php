@@ -2297,7 +2297,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       return;
     }
 
-    $path_alias_storage->save($source, $alias, $langcode, $path['pid']);
+    $pid = $path['pid'] ?? NULL;
+    $path_alias_storage->save($source, $alias, $langcode, $pid);
   }
 
   /**
