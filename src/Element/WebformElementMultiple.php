@@ -111,7 +111,13 @@ class WebformElementMultiple extends FormElement {
    * Validates element multiple.
    */
   public static function validateWebformElementMultiple(&$element, FormStateInterface $form_state, &$complete_form) {
-    if (!empty($element['#disabled'])) {
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+    $is_disabled = (!empty($element['#disabled']));
+
+    if (!$has_access) {
+      $multiple = $element['#value'];
+    }
+    elseif ($is_disabled) {
       $multiple = $element['#default_value'];
     }
     else {
