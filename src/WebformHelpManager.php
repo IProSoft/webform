@@ -2190,11 +2190,15 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     /**************************************************************************/
 
     // Export: Config.
+    $config_import_href = ($this->moduleHandler->moduleExists('config') && $this->currentUser->hasPermission('import configuration'))
+      ? Url::fromRoute('config.import_single', [], ['query' => ['config_type' => 'webform']])->toString()
+      : 'https://www.drupal.org/docs/8/configuration-management';
     $help['webform_config_export'] = [
       'group' => 'development',
       'title' => $this->t('Devel: Export'),
-      'content' => $this->t("The <strong>Config Export</strong> form allows developers to quickly export a single webform's YAML configuration file.") . ' ' .
-        $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
+      'content' => $this->t("The <strong>Config Export</strong> form allows developers to quickly export a single webform's YAML configuration file.")
+        . ' ' . $this->t('A single webform\'s YAML configuration file can easily be <a href=":href">imported</a> into another Drupal instance.', [':href' => $config_import_href])
+        . ' ' . $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
       'video_id' => 'development',
       'routes' => [
         // @see /admin/structure/webform/manage/{webform}/export
