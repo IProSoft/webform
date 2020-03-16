@@ -19,7 +19,7 @@
   ],
   "support": {
     "issues": "https://www.drupal.org/project/issues/webform?version=8.x",
-    "source": "http://cgit.drupalcode.org/webform",
+    "source": "https://git.drupalcode.org/project/webform",
     "docs": "https://www.drupal.org/docs/8/modules/webform",
     "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
   },
