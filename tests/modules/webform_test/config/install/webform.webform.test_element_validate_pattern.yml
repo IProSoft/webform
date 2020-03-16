@@ -10,8 +10,8 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_pattern
-title: 'Test: Element: Pattern'
+id: test_element_validate_pattern
+title: 'Test: Element: Validate Pattern'
 description: 'Test element pattern validation.'
 category: 'Test: Element'
 elements: |
@@ -26,12 +26,18 @@ elements: |
     '#pattern': Hello
     '#pattern_error': 'You did not enter ''Hello'''
     '#description': 'Enter ''Hello'''
+  pattern_error_html:
+    '#type': textfield
+    '#title': pattern_error_html
+    '#pattern': Hello
+    '#pattern_error': 'You did not enter <strong>Hello</strong>'
+    '#description': 'Enter ''Hello'''
   pattern_unicode:
     '#type': textfield
     '#title': pattern_unicode
     '#pattern': \u2E8F
     '#description': 'Enter unicode CJK characters ''⺏'''
-  
+
 css: ''
 javascript: ''
 settings:

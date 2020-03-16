@@ -6,7 +6,6 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Component\Utility\Xss;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\EntityInterface;
@@ -19,6 +18,7 @@ use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Plugin\WebformElement\WebformComputedBase;
 use Drupal\webform\Utility\WebformDateHelper;
+use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformLogicHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -817,7 +817,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
             $token_value = \Drupal::service('renderer')->renderPlain($token_value);
           }
           else {
-            $token_value = Markup::create(Xss::filter($token_value));
+            $token_value = WebformHtmlHelper::toHtmlMarkup($token_value);
           }
           $replacements[$original] = $token_value;
         }

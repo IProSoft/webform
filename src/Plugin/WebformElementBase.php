@@ -858,7 +858,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       // @see Drupal.behaviors.webformRequiredError
       // @see webform.form.js
       if (!empty($element['#required_error'])) {
-        $element['#attributes']['data-webform-required-error'] = $element['#required_error'];
+        $element['#attributes']['data-webform-required-error'] = WebformHtmlHelper::toPlainText($element['#required_error']);
+        $element['#required_error'] = WebformHtmlHelper::toHtmlMarkup($element['#required_error']);
       }
     }
 
@@ -2044,7 +2045,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
     }
 
     if (isset($element['#unique_error'])) {
-      $form_state->setError($element, $element['#unique_error']);
+      $form_state->setError($element, WebformHtmlHelper::toHtmlMarkup($element['#unique_error']));
     }
     elseif (isset($element['#title'])) {
       // Get #options display value.
@@ -2082,7 +2083,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       $duplicates = WebformArrayHelper::getDuplicates($value);
 
       if (isset($element['#unique_error'])) {
-        $form_state->setError($element, $element['#unique_error']);
+        $form_state->setError($element, WebformHtmlHelper::toHtmlMarkup($element['#unique_error']));
       }
       elseif (isset($element['#title'])) {
         $t_args = [
@@ -2675,6 +2676,25 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       '#type' => 'details',
       '#title' => $this->t('Form validation'),
     ];
+    $error_messages = ['required_error', 'unique_error', 'pattern_error'];
+    $validation_html_message_states = [];
+    foreach ($error_messages as $error_message) {
+      if ($this->hasProperty($error_message)) {
+        if ($validation_html_message_states) {
+          $validation_html_message_states[] = 'or';
+        }
+        $validation_html_message_states[] = [':input[name="properties[' . $error_message . ']"]' => ['value' => ['pattern' => '(<[a-z][^>]*>|&(?:[a-z]+|#\d+);)']]];
+      }
+    }
+    if ($validation_html_message_states) {
+      $form['validation']['html_message'] = [
+        '#type' => 'webform_message',
+        '#message_message' => $this->t('Validation error message contains HTML markup. HTML markup can not be display via HTML5 clientside validation and will be removed.'),
+        '#message_type' => 'warning',
+        '#states' => ['visible' => $validation_html_message_states],
+        '#access' => TRUE,
+      ];
+    }
     $form['validation']['required_container'] = [
       '#type' => 'container',
     ];

@@ -2,9 +2,12 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformTextHelper;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -123,7 +126,7 @@ abstract class TextBase extends WebformElementBase {
       // @see Drupal.behaviors.webformRequiredError
       // @see webform.form.js
       if (!empty($element['#pattern_error'])) {
-        $element['#attributes']['data-webform-pattern-error'] = $element['#pattern_error'];
+        $element['#attributes']['data-webform-pattern-error'] = WebformHtmlHelper::toPlainText($element['#pattern_error']);
       }
     }
   }
@@ -286,7 +289,7 @@ abstract class TextBase extends WebformElementBase {
       $pattern = '{^(?:' . $pcre_pattern . ')$}u';
       if (!preg_match($pattern, $element['#value'])) {
         if (!empty($element['#pattern_error'])) {
-          $form_state->setError($element, $element['#pattern_error']);
+          $form_state->setError($element, WebformHtmlHelper::toHtmlMarkup($element['#pattern_error']));
         }
         else {
           $form_state->setError($element, t('%name field is not in the right format.', ['%name' => $element['#title']]));
