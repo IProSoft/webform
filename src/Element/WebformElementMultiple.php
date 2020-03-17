@@ -123,16 +123,19 @@ class WebformElementMultiple extends FormElement {
     else {
       $cardinality = $element['#value']['container']['cardinality'];
       $cardinality_number = (int) $element['#value']['container']['cardinality_number'];
-
       if ($cardinality == WebformMultiple::CARDINALITY_UNLIMITED) {
-        $multiple = TRUE;
-      }
-      elseif ($cardinality_number === 1) {
-        $multiple = FALSE;
+        $multiple = WebformMultiple::CARDINALITY_UNLIMITED;
       }
       else {
         $multiple = $cardinality_number;
       }
+    }
+
+    if ($multiple == WebformMultiple::CARDINALITY_UNLIMITED) {
+      $multiple = TRUE;
+    }
+    elseif ($multiple === 1) {
+      $multiple = FALSE;
     }
 
     $form_state->setValueForElement($element['container']['cardinality'], NULL);
