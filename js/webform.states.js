@@ -185,6 +185,12 @@
 
   });
 
+  $document.on('state:checked', function (e) {
+    if (e.trigger) {
+      $(e.target).change();
+    }
+  });
+
   $document.on('state:readonly', function (e) {
     if (e.trigger && $(e.target).isWebform()) {
       $(e.target).prop('readonly', e.value).closest('.js-form-item, .js-form-wrapper').toggleClass('webform-readonly', e.value).find('input, textarea').prop('readonly', e.value);
