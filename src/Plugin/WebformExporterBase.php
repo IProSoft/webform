@@ -327,7 +327,7 @@ abstract class WebformExporterBase extends PluginBase implements WebformExporter
    * {@inheritdoc}
    */
   public function getArchiveFileName() {
-    return $this->getBaseFileName() . '.'. $this->getArchiveFileExtension();
+    return $this->getBaseFileName() . '.' . $this->getArchiveFileExtension();
   }
 
   /**
@@ -348,7 +348,6 @@ abstract class WebformExporterBase extends PluginBase implements WebformExporter
       ? 'zip'
       : 'tar.gz';
   }
-
 
   /**
    * {@inheritdoc}
@@ -388,7 +387,7 @@ abstract class WebformExporterBase extends PluginBase implements WebformExporter
    * @param array $options
    *   Zip file options.
    */
-  protected function addToTarArchive($path, $name, $options = []) {
+  protected function addToTarArchive($path, $name, array $options = []) {
     if (!isset($this->archive)) {
       $this->archive = new \Archive_Tar($this->getArchiveFilePath(), 'gz');
     }

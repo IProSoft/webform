@@ -1078,7 +1078,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
     $elements = $webform->getElementsInitializedAndFlattened();
 
     $options = [];
-    foreach ($elements as $element_key => $element) {
+    foreach ($elements as $element) {
       $webform_element = $this->elementManager->getElementInstance($element);
       $is_options_element = ($webform_element->hasProperty('options')
         && strpos($webform_element->getPluginLabel(), 'tableselect') === FALSE);

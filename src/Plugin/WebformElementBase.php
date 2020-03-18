@@ -3642,7 +3642,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
             if (is_bool($default_properties[$property_name])) {
               $element_properties[$property_name] = (bool) $element_properties[$property_name];
             }
-            elseif (is_null($default_properties[$property_name]) || is_numeric($default_properties[$property_name]) ) {
+            elseif (is_null($default_properties[$property_name]) || is_numeric($default_properties[$property_name])) {
               $value = $element_properties[$property_name];
               $cast_value = ($value == (int) $value) ? (int) $value : (float) $value;
               if ($value == $cast_value) {

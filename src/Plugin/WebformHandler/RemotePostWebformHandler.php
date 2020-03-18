@@ -603,7 +603,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    * @param array $element
    *   An element.
    * @param \Drupal\webform\Plugin\WebformElementInterface $element_plugin
-   *   The element's webform plugin
+   *   The element's webform plugin.
    * @param mixed $value
    *   The element's value.
    *
@@ -629,14 +629,14 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    * @param array $element
    *   An element.
    * @param \Drupal\webform\Plugin\WebformElementInterface $element_plugin
-   *   The element's webform plugin
+   *   The element's webform plugin.
    * @param mixed $value
    *   The element's value.
    *
    * @return mixed
    *   The element's value cast to boolean or float when appropriate.
    */
-  protected function castRequestValue($element, $element_plugin , $value) {
+  protected function castRequestValue(array $element, WebformElementInterface $element_plugin, $value) {
     if ($element_plugin instanceof BooleanBase) {
       return (boolean) $value;
     }

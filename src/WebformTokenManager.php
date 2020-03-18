@@ -340,7 +340,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     }
 
     // Remove all suffixes which are not valid.
-    $pattern  = '/\[(webform[^]]+)((?::' . implode('|:', static::$suffixes) . ')+)\]/';
+    $pattern = '/\[(webform[^]]+)((?::' . implode('|:', static::$suffixes) . ')+)\]/';
     while (preg_match($pattern, $value)) {
       $value = preg_replace($pattern, '[\1]', $value);
     }

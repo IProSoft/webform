@@ -67,9 +67,9 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
     return $instance;
   }
 
-   /**
-    * Initialize WebformDevelEntityFormApiBaseForm object.
-    */
+  /**
+   * Initialize WebformDevelEntityFormApiBaseForm object.
+   */
   protected function initialize() {
     $translatable_properties = $this->elementManager->getTranslatableProperties();
     $translatable_properties = array_combine($translatable_properties, $translatable_properties);
@@ -169,7 +169,7 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
    *   An element property.
    *
    * @return bool
-   *  TRUE if an element property is translatable.
+   *   TRUE if an element property is translatable.
    */
   protected function isPropertyTranslatable($property) {
     $property = str_replace('#', '', $property);
@@ -206,7 +206,7 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
       [NULL, ']$1', ' => ['],
       $array
     );
-    $export = join(PHP_EOL, array_filter(["["] + $array));
+    $export = implode(PHP_EOL, array_filter(["["] + $array));
 
     // Clean up output to match Drupal coding guidelines.
     $export = str_replace('    ', '  ', $export);

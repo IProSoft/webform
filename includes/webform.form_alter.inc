@@ -183,4 +183,3 @@ function webform_form_config_single_import_form_alter(&$form, FormStateInterface
     $form['config_type']['#default_value'] = 'webform';
   }
 }
-

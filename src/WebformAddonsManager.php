@@ -507,7 +507,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Integrations: GitLab API with Library
+    // Integrations: GitLab API with Library.
     $projects['gitlab_api'] = [
       'title' => $this->t('GitLab API with Library'),
       'description' => $this->t(' Integrates your Drupal site into GitLab using the GitLab API.'),

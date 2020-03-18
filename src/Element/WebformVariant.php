@@ -47,7 +47,7 @@ class WebformVariant extends FormElement {
     $form_object = $form_state->getFormObject();
     if ($element['#value']) {
       $element['#children'] = $element['#value'];
-       if ($form_object instanceof WebformSubmissionForm) {
+      if ($form_object instanceof WebformSubmissionForm) {
         // Display variant label.
         /** @var \Drupal\webform\WebformInterface $webform */
         $webform = $form_object->getWebform();

@@ -19,7 +19,7 @@ class WebformHtmlHelper {
    *   Text that may contain HTML markup and encode characters.
    *
    * @return string
-   *    Text with HTML markup removed and special characters decoded.
+   *   Text with HTML markup removed and special characters decoded.
    */
   public static function toPlainText($string) {
     if (static::containsHtml($string)) {

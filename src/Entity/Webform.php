@@ -2937,7 +2937,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   // User data.
   /****************************************************************************/
 
-
   /**
    * {@inheritdoc}
    */
@@ -2995,7 +2994,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $changed = parent::onDependencyRemoval($dependencies);
 
     $handlers = $this->getHandlers();
-      if (!empty($handlers)) {
+    if (!empty($handlers)) {
       foreach ($handlers as $handler) {
         $plugin_definition = $handler->getPluginDefinition();
         $provider = $plugin_definition['provider'];
@@ -3007,7 +3006,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     $variants = $this->getVariants();
-      if (!empty($variants)) {
+    if (!empty($variants)) {
       foreach ($variants as $variant) {
         $plugin_definition = $variant->getPluginDefinition();
         $provider = $plugin_definition['provider'];

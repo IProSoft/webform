@@ -305,7 +305,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
     $this->assertPattern('#Last name.+First name#ms');
 
     // Check that disabled customized results don't pull user data.
-    $webform->setSetting('results_customize',  FALSE)->save();
+    $webform->setSetting('results_customize', FALSE)->save();
     $this->drupalGet('/admin/structure/webform/manage/test_submissions/results/submissions');
     $this->assertNoRaw('First name');
     $this->assertNoRaw('Last name');

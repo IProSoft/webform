@@ -15,7 +15,6 @@ use Drupal\Tests\UnitTestCase;
  */
 class WebformHtmlHelperTest extends UnitTestCase {
 
-
   /**
    * Tests WebformHtmlHelper::containsToPlainText().
    *

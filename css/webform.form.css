@@ -57,8 +57,8 @@
 
 [dir=rtl] .form-composite.webform-fieldset--title-inline legend {
   float: right; /* RTL */
-  margin-left: 0.5em; /* RTL */
   margin-right: 0; /* RTL */
+  margin-left: 0.5em; /* RTL */
 }
 
 .form-composite.webform-fieldset--title-inline .fieldset-wrapper,
@@ -89,7 +89,7 @@
 .webform-readonly input[type="time"],
 .webform-readonly input[type="url"],
 .webform-readonly textarea {
-  background: #ededed;
-  border-color: #bbb;
   color: #717171;
+  border-color: #bbb;
+  background: #ededed;
 }

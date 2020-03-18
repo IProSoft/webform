@@ -26,7 +26,6 @@ class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
   public function testCustomStates() {
     $session = $this->getSession();
     $page = $session->getPage();
-    $assert_session = $this->assertSession();
 
     $this->drupalGet('/webform/test_states_server_custom');
 
