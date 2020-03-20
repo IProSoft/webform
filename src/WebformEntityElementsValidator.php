@@ -275,7 +275,7 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
         break;
 
       case 'a-z0-9_-':
-        $machine_name_requirement = $this->t('lowercase letters, numbers, and underscores');
+        $machine_name_requirement = $this->t('lowercase letters, numbers, underscores, and dashes');
         break;
 
       case 'a-zA-Z0-9_-':
