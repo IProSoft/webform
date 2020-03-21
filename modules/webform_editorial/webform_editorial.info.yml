@@ -3,6 +3,7 @@ type: module
 description: 'Provides editorial management tools for the Webform module.'
 package: Webform
 core_version_requirement: ^8.7.7 || ^9
+configure: webform_editorial.index
 hidden: true
 dependencies:
   - 'webform:webform'
