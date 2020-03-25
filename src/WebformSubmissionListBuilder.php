@@ -432,7 +432,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         '%webform' => $this->webform->label(),
         '%user' => $this->account->getDisplayName(),
       ];
-      if ($this->state == self::STATE_DRAFT) {
+      if ($this->draft) {
         $build['#title'] = $this->t('Drafts for %webform for %user', $t_args);
       }
       else {
@@ -726,7 +726,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    *   A render array representing the information summary.
    */
   protected function buildInfo() {
-    if ($this->account && $this->state == self::STATE_DRAFT) {
+    if ($this->draft) {
       $info = $this->formatPlural($this->total, '@total draft', '@total drafts', ['@total' => $this->total]);
     }
     else {
