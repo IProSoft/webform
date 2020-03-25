@@ -1559,7 +1559,7 @@ elements: |
         '#multiple': true
         '#file_extensions': txt
         '#format_items': ul
-
+  
 css: ''
 javascript: ''
 settings:
@@ -1673,6 +1673,7 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
   token_view: false
   token_update: false
 access:
@@ -1795,3 +1796,4 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
+variants: {  }
