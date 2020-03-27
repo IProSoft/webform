@@ -2431,13 +2431,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Set prepopulate data.
-    if ($this->operation === 'test') {
-      // Query string data should override existing test data.
-      $data = $prepopulate_data + $data;
-    }
-    else {
-      $data += $prepopulate_data;
-    }
+    $data = $prepopulate_data + $data;
   }
 
   /**
