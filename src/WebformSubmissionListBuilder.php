@@ -496,10 +496,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     // Populate the views arguments.
     $arguments = [];
     foreach ($display_arguments as $argument_name => $display_argument) {
-      if ($display_argument['table'] !== 'webform_submission') {
-        $arguments[] = 'all';
-      }
-      else {
+      if ($display_argument['table'] === 'webform_submission') {
         switch ($argument_name) {
           case 'webform_id':
             $arguments[] = (isset($this->webform)) ? $this->webform->id() : 'all';
