@@ -2119,10 +2119,14 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($current_page == 'webform_preview') {
       // Hide all elements except 'webform_actions'.
       foreach ($form['elements'] as $element_key => $element) {
-        if (isset($element['#type']) && $element['#type'] == 'webform_actions') {
+        if (isset($element['#type']) && $element['#type'] === 'webform_actions') {
           continue;
         }
-        $form['elements'][$element_key]['#access'] = FALSE;
+
+        // Set #access to FALSE which will suppresses webform #required validation.
+        if (Element::child($element_key) && is_array($form['elements'])) {
+          WebformElementHelper::setPropertyRecursive($form['elements'][$element_key], '#access', FALSE);
+        }
       }
 
       // Display preview message.
