@@ -311,7 +311,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * {@inheritdoc}
    *
    * This is the best place to override an entity form's default settings
-   * because is is called immediately after the form object is initialized.
+   * because it is called immediately after the form object is initialized.
    *
    * @see \Drupal\Core\Entity\EntityFormBuilder::getForm
    */
