@@ -26,7 +26,7 @@ elements: |
     '#selection_settings':
       target_bundles:
         page: page
-  
+
 css: ''
 javascript: ''
 settings:
@@ -212,4 +212,5 @@ handlers:
       option_unlimited_message: '[Unlimited]'
       option_none_message: '[@remaining remaining]'
       option_error_message: '@name: @label is unavailable.'
+      tableselect_header: ''
 variants: {  }

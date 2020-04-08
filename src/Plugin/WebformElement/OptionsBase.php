@@ -938,7 +938,7 @@ abstract class OptionsBase extends WebformElementBase {
       '#title' => $this->t('Options properties'),
       '#description' => $this->t("Custom options properties must include the 'Option value' followed by option (element) properties prepended with a hash (#) character.") .
         "<pre>option_value:
-  '#wrapper_attributes': 
+  '#wrapper_attributes':
     class:
       - disabled
   '#disabled': true</pre>" .
