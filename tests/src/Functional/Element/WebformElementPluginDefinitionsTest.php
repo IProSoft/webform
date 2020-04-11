@@ -1807,6 +1807,25 @@ webform_wizard_page:
   container: true
   root: true
   multiple: false
+webform_scale:
+  dependencies: {  }
+  default_key: ''
+  category: 'Advanced elements'
+  description: 'Provides a form element for input of a numeric scale.'
+  hidden: false
+  multiline: false
+  composite: false
+  states_wrapper: false
+  deprecated: false
+  deprecated_message: ''
+  id: webform_scale
+  label: Scale
+  class: Drupal\webform\Plugin\WebformElement\WebformScale
+  provider: webform
+  input: true
+  container: false
+  root: false
+  multiple: false
 YAML;
 
     return Yaml::decode($yaml);

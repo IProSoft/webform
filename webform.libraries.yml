@@ -816,6 +816,12 @@ webform.element.roles:
     - core/drupal
     - core/jquery.once
 
+webform.element.scale:
+  version: VERSION
+  css:
+    component:
+      css/webform.element.scale.css: {}
+
 webform.element.select:
   version: VERSION
   js:

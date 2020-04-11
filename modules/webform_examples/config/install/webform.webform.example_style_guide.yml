@@ -232,6 +232,13 @@ elements: |
     webform_rating:
       '#type': webform_rating
       '#title': Rating
+    webform_scale:
+      '#type': webform_scale
+      '#title': Scale
+      '#min': 1
+      '#max': 10
+      '#min_text': '1 = disagree'
+      '#max_text': '10 = agree'
     webform_signature:
       '#type': webform_signature
       '#title': Signature
@@ -567,7 +574,7 @@ elements: |
       '#type': address
       '#title': Address
       '#description': '@see <a href="https://www.drupal.org/project/address">https://www.drupal.org/project/address</a>'
-  
+
 css: ''
 javascript: ''
 settings:

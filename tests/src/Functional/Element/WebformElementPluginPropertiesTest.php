@@ -4771,6 +4771,63 @@ webform_toggles:
     - authenticated
   access_view_users: {  }
   access_view_permissions: {  }
+webform_scale:
+  access_create_permissions: {  }
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_update_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_view_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  admin_title: ''
+  attributes: {  }
+  default_value: ''
+  description: ''
+  description_display: ''
+  disabled: false
+  field_prefix: ''
+  field_suffix: ''
+  flex: 1
+  format: value
+  format_attributes: {  }
+  format_html: ''
+  format_text: ''
+  help: ''
+  help_display: ''
+  help_title: ''
+  label_attributes: {  }
+  max: 5
+  max_text: ''
+  min: 1
+  min_text: ''
+  more: ''
+  more_title: ''
+  prepopulate: false
+  private: false
+  readonly: false
+  required: false
+  required_error: ''
+  scale_size: medium
+  scale_text: below
+  scale_type: circle
+  states: {  }
+  states_clear: true
+  title: ''
+  title_display: ''
+  unique: false
+  unique_entity: false
+  unique_error: ''
+  unique_user: false
+  wrapper_attributes: {  }
+  wrapper_type: fieldset
 YAML;
     return Yaml::decode($yaml);
   }
