@@ -27,6 +27,7 @@ use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Form\WebformDialogFormTrait;
 use Drupal\webform\Plugin\WebformElement\Hidden;
 use Drupal\webform\Plugin\WebformElement\OptionsBase;
+use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformElementOtherInterface;
@@ -1751,41 +1752,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Validate file (upload) limit.
-    // @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::validateManagedFileLimit
-    $file_limit = $this->getWebform()->getSetting('form_file_limit')
-      ?: $this->configFactory->get('webform.settings')->get('settings.default_form_file_limit')
-      ?: '';
-    $file_limit = Bytes::toInt($file_limit);
-    if (!$file_limit) {
-      return;
-    }
-
-    // Validate file upload limit.
-    $file_names = [];
-    $total_file_size = 0;
-    $element_keys = $this->getWebform()->getElementsManagedFiles();
-    foreach ($element_keys as $element_key) {
-      $data = $this->entity->getElementData($element_key);
-      if ($data) {
-        $fids = (array) $data;
-        /** @var \Drupal\file\FileInterface[] $files */
-        $files = $this->entityTypeManager->getStorage('file')->loadMultiple($fids);
-        foreach ($files as $file) {
-          $total_file_size += (int) $file->getSize();
-          $file_names[] = $file->getFilename() . ' - ' . format_size($file->getSize(), $this->entity->language()->getId());
-        }
-      }
-    }
-    if ($total_file_size > $file_limit) {
-      $t_args = ['%quota' => format_size($file_limit)];
-      $message = [];
-      $message['content'] = ['#markup' => $this->t("This form's file upload quota of %quota has been exceeded. Please remove some files.", $t_args)];
-      $message['files'] = [
-        '#theme' => 'item_list',
-        '#items' => $file_names,
-      ];
-      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
-    }
+    $this->validateUploadedManagedFiles($form, $form_state);
   }
 
   /**
@@ -1945,6 +1912,97 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Rebuild the form.
     $this->rebuild($form, $form_state);
+  }
+
+  /****************************************************************************/
+  // Validate functions.
+  /****************************************************************************/
+
+  /**
+   * Validate uploaded managed file limits.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::validateManagedFileLimit
+   */
+  protected function validateUploadedManagedFiles(array $form, FormStateInterface $form_state) {
+    $file_limit = $this->getWebform()->getSetting('form_file_limit')
+      ?: $this->configFactory->get('webform.settings')->get('settings.default_form_file_limit')
+      ?: '';
+    $file_limit = Bytes::toInt($file_limit);
+    if (!$file_limit) {
+      return;
+    }
+
+    // Validate file upload limit.
+    $fids = $this->getUploadedManagedFileIds();
+    if (!$fids) {
+      return;
+    }
+    $file_names = [];
+    $total_file_size = 0;
+
+    /** @var \Drupal\file\FileInterface[] $files */
+    $files = $this->entityTypeManager->getStorage('file')->loadMultiple($fids);
+    foreach ($files as $file) {
+      $total_file_size += (int) $file->getSize();
+      $file_names[] = $file->getFilename() . ' - ' . format_size($file->getSize(), $this->entity->language()->getId());
+    }
+
+    if ($total_file_size > $file_limit) {
+      $t_args = ['%quota' => format_size($file_limit)];
+      $message = [];
+      $message['content'] = ['#markup' => $this->t("This form's file upload quota of %quota has been exceeded. Please remove some files.", $t_args)];
+      $message['files'] = [
+        '#theme' => 'item_list',
+        '#items' => $file_names,
+      ];
+      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
+    }
+  }
+
+  /**
+   * Get uploaded managed file ids.
+   *
+   * @return array
+   *   An array of uploaded file ids.
+   */
+  protected function getUploadedManagedFileIds() {
+    $fids = [];
+
+    $element_keys = $this->getWebform()->getElementsManagedFiles();
+    foreach ($element_keys as $element_key) {
+      $data = $this->entity->getElementData($element_key);
+      if (!$data) {
+        continue;
+      }
+
+      $element = $this->getWebform()->getElement($element_key);
+      $element_plugin = $this->elementManager->getElementInstance($element);
+      $multiple = $element_plugin->hasMultipleValues($element);
+
+      // Get fids from composite sub-elements.
+      if ($element_plugin instanceof WebformCompositeBase) {
+        $managed_file_keys = $element_plugin->getManagedFiles($element);
+        // Convert single composite value to array of multiple composite values.
+        $data = (!$multiple) ? [$data] : $data;
+        foreach ($data as $item) {
+          foreach ($managed_file_keys as $manage_file_key) {
+            if ($item[$manage_file_key]) {
+              $fids[] = $item[$manage_file_key];
+            }
+          }
+        }
+      }
+      else {
+        $fids = array_merge($fids, (array) $data);
+      }
+    }
+
+    return $fids;
   }
 
   /****************************************************************************/

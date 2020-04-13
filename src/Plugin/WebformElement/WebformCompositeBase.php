@@ -1415,7 +1415,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
    * @return array
    *   An array of managed file element keys.
    */
-  protected function getManagedFiles(array $element) {
+  public function getManagedFiles(array $element) {
     $id = $element['#webform_id'];
 
     if (isset($this->elementsManagedFiles[$id])) {
