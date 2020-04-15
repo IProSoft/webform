@@ -22,7 +22,7 @@ class WebformHandlerPluginCollection extends DefaultLazyPluginCollection {
     $a_weight = $a->getWeight();
     $b_weight = $b->getWeight();
     if ($a_weight == $b_weight) {
-      return strnatcasecmp($a->getHandlerId(), $b->getHandlerId());
+      return 0;
     }
 
     return ($a_weight < $b_weight) ? -1 : 1;
