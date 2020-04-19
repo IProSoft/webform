@@ -389,7 +389,6 @@ elements: |
           two: Two
           three: Three
         '#options_display': side_by_side
-        '#multiple': true
         '#default_value':
           - one
           - two
@@ -403,7 +402,6 @@ elements: |
           two: Two
           three: Three
         '#options_display': side_by_side
-        '#multiple': true
         '#default_value':
           - one
           - two
@@ -417,7 +415,6 @@ elements: |
           two: Two
           three: Three
         '#options_display': side_by_side
-        '#multiple': true
         '#default_value':
           - one
           - two
@@ -431,7 +428,6 @@ elements: |
           two: Two
           three: Three
         '#options_display': side_by_side
-        '#multiple': true
         '#default_value':
           - one
           - two
@@ -445,12 +441,23 @@ elements: |
           two: Two
           three: Three
         '#options_display': side_by_side
-        '#multiple': true
         '#default_value':
           - one
           - two
           - three
         '#format_items': ul
+      checkboxes_checklist:
+        '#type': checkboxes
+        '#title': 'Checkboxes (Checklist)'
+        '#options':
+          one: One
+          two: Two
+          three: Three
+        '#default_value':
+          - one
+          - two
+          - three
+        '#format_items': 'checklist:boxes'
     webform_checkboxes_other:
       '#type': details
       '#title': 'Checkboxes other'
@@ -1559,7 +1566,7 @@ elements: |
         '#multiple': true
         '#file_extensions': txt
         '#format_items': ul
-  
+
 css: ''
 javascript: ''
 settings:
