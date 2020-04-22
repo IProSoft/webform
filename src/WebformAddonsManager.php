@@ -543,7 +543,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     $projects['graphql_webform'] = [
       'title' => $this->t('GraphQL Webform'),
       'description' => $this->t('Provides GraphQL integration with the Webform module.'),
-      'url' => Url::fromUri('https://github.com/duartegarin/graphql_webform'),
+      'url' => Url::fromUri('https://www.drupal.org/project/graphql_webform'),
       'category' => 'integration',
     ];
 
