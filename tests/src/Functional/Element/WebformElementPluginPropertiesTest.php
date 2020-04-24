@@ -49,6 +49,9 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     $actual_elements = $this->getActualElementDefaultProperties();
     $this->htmlOutput('<pre>' . htmlentities(Yaml::encode($actual_elements)) . '</pre>');
     foreach ($actual_elements as $element_key => $actual_element) {
+      if ($expected_elements[$element_key]!= $actual_element) {
+        $this->htmlOutput('<pre>' . Yaml::encode([$element_key => $actual_element]) . '</pre>');
+      }
       $this->assertEquals($expected_elements[$element_key], $actual_element, "Expected and actual '$element_key' element properties match.");
     }
   }
@@ -4711,10 +4714,6 @@ webform_toggle:
     - authenticated
   access_view_users: {  }
   access_view_permissions: {  }
-
-
-
-
 webform_toggles:
   toggle_theme: light
   toggle_size: medium
@@ -4771,6 +4770,75 @@ webform_toggles:
     - authenticated
   access_view_users: {  }
   access_view_permissions: {  }
+webform_table:
+  access_create_permissions: {  }
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_update_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_view_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  admin_title: ''
+  attributes: {  }
+  caption: ''
+  default_value: ''
+  description: ''
+  description_display: ''
+  field_prefix: ''
+  field_suffix: ''
+  flex: 1
+  format: table
+  format_attributes: {  }
+  format_html: ''
+  format_text: ''
+  header: {  }
+  help: ''
+  help_display: ''
+  help_title: ''
+  label_attributes: {  }
+  more: ''
+  more_title: ''
+  prefix_children: true
+  private: false
+  required: false
+  required_error: ''
+  states: {  }
+  states_clear: true
+  sticky: false
+  title: ''
+  title_display: ''
+  wrapper_attributes: {  }
+webform_table_row:
+  access_create_permissions: {  }
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_update_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_view_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  admin_title: ''
+  attributes: {  }
+  flex: 1
+  private: false
+  states: {  }
+  states_clear: true
+  title: ''
 webform_scale:
   access_create_permissions: {  }
   access_create_roles:
