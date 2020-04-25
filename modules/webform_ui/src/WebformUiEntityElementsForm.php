@@ -378,7 +378,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     if ($webform->hasContainer()) {
       $header['add'] = [
         'data' => '',
-        'class' => [RESPONSIVE_PRIORITY_MEDIUM, 'webform-ui-element-operations'],
+        'class' => ['webform-ui-element-operations'],
       ];
     }
     $header['key'] = [
@@ -536,7 +536,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
           $route_parameters['type'] = 'webform_table_row';
           $row['add'] = [
             '#type' => 'link',
-            '#title' => $this->t('Add row'),
+            '#title' => $this->t('Add <span>row</span>'),
             '#url' => new Url('entity.webform_ui.element.add_form', $route_parameters, $route_options),
             '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes(WebformDialogHelper::DIALOG_NORMAL, ['button', 'button-action', 'button--primary', 'button--small']),
           ];
@@ -544,7 +544,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
         else {
           $row['add'] = [
             '#type' => 'link',
-            '#title' => $this->t('Add element'),
+            '#title' => $this->t('Add <span>element</span>'),
             '#url' => new Url('entity.webform_ui.element', $route_parameters, $route_options),
             '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NORMAL, ['button', 'button-action', 'button--primary', 'button--small']),
           ];
