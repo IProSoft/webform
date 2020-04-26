@@ -1440,11 +1440,22 @@ tel:
   international_initial_country: ''
   international_preferred_countries: {  }
   label_attributes: {  }
-  maxlength: ''
-  minlength: ''
+  maxlength: null
+  minlength: null
   more: ''
   more_title: ''
   multiple: false
+  multiple__add_more: true
+  multiple__add_more_button_label: Add
+  multiple__add_more_input: true
+  multiple__add_more_input_label: 'more items'
+  multiple__add_more_items: 1
+  multiple__empty_items: 1
+  multiple__header_label: ''
+  multiple__min_items: null
+  multiple__no_items_message: 'No items entered. Please add items below.'
+  multiple__operations: true
+  multiple__sorting: true
   pattern: ''
   pattern_error: ''
   placeholder: ''
@@ -1453,7 +1464,7 @@ tel:
   readonly: false
   required: false
   required_error: ''
-  size: ''
+  size: null
   states: {  }
   states_clear: true
   title: ''
