@@ -2,7 +2,7 @@
   "name": "drupal/webform",
   "description": "Enables the creation of webforms and questionnaires.",
   "type": "drupal-module",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
   "homepage": "https://drupal.org/project/webform",
   "authors": [
