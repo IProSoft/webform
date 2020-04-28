@@ -136,8 +136,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $container->get('plugin.manager.webform.element')
     );
 
-    $instance->request =  $container->get('request_stack')->getCurrentRequest();
-    $instance->kernel =  $container->get('kernel');
+    $instance->request = $container->get('request_stack')->getCurrentRequest();
+    $instance->kernel = $container->get('kernel');
 
     return $instance;
   }

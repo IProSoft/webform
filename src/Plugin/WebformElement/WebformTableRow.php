@@ -327,7 +327,7 @@ class WebformTableRow extends WebformElementBase {
 
     // Get next row increment.
     $indexes = [];
-    foreach($table_element['#webform_children'] as $child_key) {
+    foreach ($table_element['#webform_children'] as $child_key) {
       preg_match('/\d+/', $child_key, $match);
       $indexes[] = intval($match[0]);
     }

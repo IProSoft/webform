@@ -17,8 +17,8 @@ class WebformUncacheableResponse extends Response {
     $this->setPrivate();
     $this->setMaxAge(0);
     $this->setSharedMaxAge(0);
-    $this->headers->addCacheControlDirective('must-revalidate', true);
-    $this->headers->addCacheControlDirective('no-store', true);
+    $this->headers->addCacheControlDirective('must-revalidate', TRUE);
+    $this->headers->addCacheControlDirective('no-store', TRUE);
   }
 
 }

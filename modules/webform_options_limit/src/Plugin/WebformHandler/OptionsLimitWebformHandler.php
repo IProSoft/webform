@@ -480,7 +480,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
           'visible' => [
             ':input[name="settings[option_message_display]"]' => ['value' => static::MESSAGE_DISPLAY_DESCRIPTION],
             $tableselect_states,
-          ]
+          ],
         ],
       ];
     }
@@ -556,7 +556,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       if ($this->isTableSelectElement()) {
         $message_display = $this->configuration['option_message_display'];
         if ($message_display === static::MESSAGE_DISPLAY_DESCRIPTION) {
-          $element['#header']['webform_options_limit'] =  $this->configuration['tableselect_header'] ?: '';
+          $element['#header']['webform_options_limit'] = $this->configuration['tableselect_header'] ?: '';
         }
       }
 
@@ -715,7 +715,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
   /**
    * Alter an options element's option labels recursively.
    *
-   * @param array $element
+   * @param array $options
    *   An options element with limits.
    * @param array $limits
    *   An options element's option limits.
@@ -912,7 +912,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
           case static::MESSAGE_DISPLAY_LABEL:
             $t_args = [
               '@label' => $element['#title'],
-              '@message' => $message
+              '@message' => $message,
             ];
             $element['#title'] = $this->t('@label @message', $t_args);
             break;
@@ -1284,7 +1284,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
    * @param int $limit
    *   The limit.
    * @param int $total
-   *   The total
+   *   The total.
    *
    * @return array
    *   The limit information including label, limit, total,
@@ -1364,7 +1364,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
     return $query->execute()->fetchAllKeyed();
   }
 
- /**
+  /**
    * Get boolean submission total for the current webform and source entity.
    *
    * @return int

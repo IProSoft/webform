@@ -4,7 +4,6 @@ namespace Drupal\webform_image_select\Element;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Select;
 use Drupal\webform\Element\WebformHtmlEditor;

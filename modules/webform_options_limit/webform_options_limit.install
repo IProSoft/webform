@@ -16,7 +16,7 @@ function webform_options_limit_update_8001() {
 }
 
 /**
- * Issue #3124729: Option Limit broken for Tableselect
+ * Issue #3124729: Option Limit broken for Tableselect.
  */
 function webform_options_limit_update_8002() {
   _webform_update_webform_handler_settings();

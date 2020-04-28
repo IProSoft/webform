@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Plugin\Field\FieldWidget;
 
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -126,7 +125,7 @@ trait WebformEntityReferenceWidgetTrait {
     if ($is_webform_closed) {
       $t_args = [
         '%webform' => $webform->label(),
-        ':href' => $webform->toUrl('settings-form')->toString()
+        ':href' => $webform->toUrl('settings-form')->toString(),
       ];
       if ($webform->access('update')) {
         $message = $this->t('The %webform webform is <a href=":href">closed</a>. The below status will be ignored.', $t_args);

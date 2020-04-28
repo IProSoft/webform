@@ -141,7 +141,6 @@ last_name: Smith
       'webform_submission:limit:user:source_entity' => '5',
       'webform_submission:total:user:source_entity' => '',
 
-
       // Clear.
       'webform_submission:values:missing' => '[webform_submission:values:missing]',
       'webform_submission:values:missing:clear' => '',

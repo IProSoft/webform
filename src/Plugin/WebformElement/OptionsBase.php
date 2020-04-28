@@ -8,7 +8,6 @@ use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Markup;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
@@ -87,7 +86,7 @@ abstract class OptionsBase extends WebformElementBase {
    */
   public function isMultiline(array $element) {
     $items_format = $this->getItemsFormat($element);
-    if ((strpos($items_format, 'checklist:') === 0) ) {
+    if (strpos($items_format, 'checklist:') === 0) {
       return TRUE;
     }
     else {
@@ -465,7 +464,7 @@ abstract class OptionsBase extends WebformElementBase {
         $build[$option_value] = [
           '#prefix' => isset($values[$option_value]) ? $checked : $unchecked,
           '#markup' => $option_text,
-          '#suffix' => '<br/>'
+          '#suffix' => '<br/>',
         ];
         unset($values[$option_value]);
       }
@@ -474,7 +473,7 @@ abstract class OptionsBase extends WebformElementBase {
         $build[$value] = [
           '#prefix' => $checked,
           '#markup' => $value,
-          '#suffix' => '<br/>'
+          '#suffix' => '<br/>',
         ];
       }
       return $build;

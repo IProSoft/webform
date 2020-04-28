@@ -5,7 +5,6 @@ namespace Drupal\webform\Element;
 use Drupal\Component\Utility\Html as HtmlUtility;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Radios;
-use Drupal\Core\Template\Attribute;
 
 /**
  * Provides a webform element for a scale (1-5).
@@ -65,7 +64,7 @@ class WebformScale extends Radios {
       'webform-scale',
       'webform-scale-' . $element['#scale_type'],
       'webform-scale-' . $element['#scale_size'],
-      'webform-scale-' . $element['#min'] . '-to-' . $element['#max']
+      'webform-scale-' . $element['#min'] . '-to-' . $element['#max'],
     ];
     $element['scale'] = [
       '#prefix' => '<div class="' . implode(' ', $classes) . '">',

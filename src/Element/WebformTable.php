@@ -12,7 +12,7 @@ use Drupal\Core\Render\Element\Table;
  */
 class WebformTable extends Table {
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function getInfo() {
@@ -42,4 +42,5 @@ class WebformTable extends Table {
 
     return $element;
   }
+
 }

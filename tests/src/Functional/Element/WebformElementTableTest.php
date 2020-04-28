@@ -163,7 +163,7 @@ table_advanced_04_textfield: ''");
     // Check that elements are prefixed with row key.
     $edit = [
       'key' => 'testing',
-      'properties[title]' => 'Testing'
+      'properties[title]' => 'Testing',
     ];
     $options = ['query' => ['parent' => 'table_basic_01']];
     $this->drupalPostForm('/admin/structure/webform/manage/test_element_table/element/add/textfield', $edit, t('Save'), $options);
@@ -179,7 +179,7 @@ table_advanced_04_textfield: ''");
     $this->assertNoFieldByName('properties[duplicate]');
 
     // Check prefix children disabled for table row.
-    $this->drupalGet('/admin/structure/webform/manage/test_element_table/element/add/webform_table_row',['query' => ['parent' => 'table_prefix_children_false']]);
+    $this->drupalGet('/admin/structure/webform/manage/test_element_table/element/add/webform_table_row', ['query' => ['parent' => 'table_prefix_children_false']]);
     $this->assertFieldByName('properties[title]', '');
     $this->assertFieldByName('key', '');
 
