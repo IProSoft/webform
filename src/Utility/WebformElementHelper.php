@@ -399,7 +399,7 @@ class WebformElementHelper {
    */
   public static function removeIgnoredProperties(array $element) {
     foreach ($element as $key => $value) {
-      if (Element::property($key) && self::isIgnoredProperty($key)) {
+      if ($key && Element::property($key) && self::isIgnoredProperty($key)) {
         // Computed elements use #ajax as boolean and should not be ignored.
         // @see \Drupal\webform\Element\WebformComputedBase
         $is_ajax_computed = ($key === '#ajax' && is_bool($value));
