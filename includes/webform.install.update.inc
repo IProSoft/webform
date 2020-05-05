@@ -3666,8 +3666,8 @@ function webform_update_8191() {
 }
 
 /**
-+ * Unsafe HMAC construction.
-+ */
+ * Unsafe HMAC construction.
+ */
 function webform_update_8192() {
   $invalid_signatures = [];
   $files = file_scan_directory('public://webform/','/signature-/');
