@@ -310,16 +310,18 @@ options:
     ];
     $this->postSubmission($webform, $edit);
     $this->assertRaw("form_params:
-    checkbox: true
-    number: 10
-    number_multiple:
-      - 10.5
-    custom_composite:
-      -
-        textfield: text
-        checkbox: true
-        number: 20.5");
-
+  boolean_true: true
+  integer: 100
+  float: 100.01
+  checkbox: true
+  number: !!float 10
+  number_multiple:
+    - 10.5
+  custom_composite:
+    -
+      textfield: text
+      checkbox: true
+      number: 20.5");
   }
 
 }

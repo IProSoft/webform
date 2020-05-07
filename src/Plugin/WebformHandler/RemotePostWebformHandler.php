@@ -318,8 +318,16 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     ];
     $form['additional']['cast'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Cast posted data'),
-      '#description' => $this->t('If checked, posted data will be casted to booleans and floats as needed.'),
+      '#title' => $this->t('Cast posted element value and custom data'),
+      '#description' => $this->t('If checked, posted element values will be cast to integers, floats, and booleans as needed. Custom data can be cast by placing the desired type in parentheses before the value or token. (i.e. "(int) [webform_submission:value:total]" or "(int) 100")') .
+        '<br/>' .
+        '<br/>' .
+        $this->t('For custom data, the casts allowed are:') .
+        '<ul>' .
+        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(int), (integer)', '@type' => 'integer']) . '</li>' .
+        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(float), (double), (real)', '@type' => 'float']) . '</li>' .
+        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(bool), (boolean)', '@type' => 'boolean']) . '</li>' .
+        '</ul>',
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['cast'],
     ];
@@ -596,22 +604,33 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         }
       }
       elseif (!empty($this->configuration['cast'])) {
+        // Cast value.
         $data[$element_key] = $this->castRequestValues($element, $element_plugin, $element_value);
       }
     }
 
+    // Replace tokens.
+    $data = $this->replaceTokens($data, $webform_submission);
+
     // Append custom data.
     if (!empty($this->configuration['custom_data'])) {
-      $data = Yaml::decode($this->configuration['custom_data']) + $data;
+      $custom_data = Yaml::decode($this->configuration['custom_data']);
+      // Replace tokens.
+      $custom_data = $this->replaceTokens($custom_data, $webform_submission);
+      // Cast custom data.
+      $custom_data = $this->castCustomData($custom_data);
+      $data = $custom_data + $data;
     }
 
     // Append state custom data.
     if (!empty($this->configuration[$state . '_custom_data'])) {
-      $data = Yaml::decode($this->configuration[$state . '_custom_data']) + $data;
+      $state_custom_data = Yaml::decode($this->configuration[$state . '_custom_data']);
+      // Replace tokens.
+      $state_custom_data = $this->replaceTokens($state_custom_data, $webform_submission);
+      // Cast custom data.
+      $state_custom_data = $this->castCustomData($state_custom_data);
+      $data = $state_custom_data + $data;
     }
-
-    // Replace tokens.
-    $data = $this->replaceTokens($data, $webform_submission);
 
     return $data;
   }
@@ -677,6 +696,48 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     else {
       return $value;
     }
+  }
+
+  /**
+   * Cast custom data.
+   *
+   * @param array $data
+   *   Custom data.
+   *
+   * @return array
+   */
+  protected function castCustomData(array $data) {
+    if (empty($this->configuration['cast'])) {
+      return $data;
+    }
+
+    foreach ($data as $key => $value) {
+      if (is_array($value)) {
+        $data[$key] = $this->castCustomData($value);
+      }
+      elseif (is_string($value) && preg_match('/^\((int|integer|bool|boolean|float|double|real)\)\s*(.+)$/', $value, $match)) {
+        $type_cast = $match[1];
+        $type_value = $match[2];
+        switch ($type_cast) {
+          case 'int':
+          case 'integer':
+            $data[$key] = (int) $type_value;
+            break;
+
+          case 'bool':
+          case 'boolean';
+            $data[$key] = (bool) $type_value;
+            break;
+
+          case 'float':
+          case 'double':
+          case 'real':
+            $data[$key] = (float) $type_value;
+            break;
+        }
+      }
+    }
+    return $data;
   }
 
   /**
