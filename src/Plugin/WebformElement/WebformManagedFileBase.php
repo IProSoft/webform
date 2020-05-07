@@ -1474,7 +1474,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'filecontent' => file_get_contents($file->getFileUri()),
         'filename' => $file->getFilename(),
         'filemime' => $file->getMimeType(),
-        // File URIs that are not supportted return FALSE, when this happens
+        // File URIs that are not supported return FALSE, when this happens
         // still use the file's URI as the file's path.
         'filepath' => \Drupal::service('file_system')->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
