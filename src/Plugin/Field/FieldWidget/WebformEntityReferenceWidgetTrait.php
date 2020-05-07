@@ -101,12 +101,20 @@ trait WebformEntityReferenceWidgetTrait {
     $weight = $element['target_id']['#weight'];
 
     // Get webform.
+    $target_id = NULL;
     if ($form_state->isRebuilding()) {
       $user_input = $form_state->getUserInput();
-      $target_id = $user_input[$field_name][$delta]['target_id'];
+      if (isset($user_input[$field_name])
+        && isset($user_input[$field_name][$delta])
+        && isset($user_input[$field_name][$delta]['target_id'])) {
+        $target_id = $user_input[$field_name][$delta]['target_id'];
+      }
     }
     else {
-      $target_id = $items[$delta]->target_id;
+      if (isset($items[$delta])
+        && isset($items[$delta]->target_id)) {
+        $target_id = $items[$delta]->target_id;
+      }
     }
 
     /** @var \Drupal\webform\WebformInterface $webform */
