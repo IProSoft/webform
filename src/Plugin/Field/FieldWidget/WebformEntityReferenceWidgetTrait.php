@@ -103,18 +103,10 @@ trait WebformEntityReferenceWidgetTrait {
     // Get webform.
     $target_id = NULL;
     if ($form_state->isRebuilding()) {
-      $user_input = $form_state->getUserInput();
-      if (isset($user_input[$field_name])
-        && isset($user_input[$field_name][$delta])
-        && isset($user_input[$field_name][$delta]['target_id'])) {
-        $target_id = $user_input[$field_name][$delta]['target_id'];
-      }
+      $target_id = $form_state->getValue(array_merge($element['target_id']['#field_parents'], [$field_name, $delta, 'target_id']));
     }
     else {
-      if (isset($items[$delta])
-        && isset($items[$delta]->target_id)) {
-        $target_id = $items[$delta]->target_id;
-      }
+      $target_id = $items[$delta]->target_id;
     }
 
     /** @var \Drupal\webform\WebformInterface $webform */
