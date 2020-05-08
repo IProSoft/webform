@@ -1795,7 +1795,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       // @see \Drupal\webform\WebformSubmissionForm::setConfirmation
       if ($state === WebformSubmissionInterface::STATE_UPDATED) {
         if (!$this->getRequest()->get('destination')) {
-          $this->rebuild($form, $form_state);
+          $this->reset($form, $form_state);
         }
       }
       elseif ($confirmation_type === WebformInterface::CONFIRMATION_MESSAGE || $confirmation_type === WebformInterface::CONFIRMATION_NONE) {

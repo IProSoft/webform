@@ -193,10 +193,10 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'draft_updated_custom_data' => '',
       'converted_url' => '',
       'converted_custom_data' => '',
-      // Custom response messages.
+      // Custom error response messages.
       'message' => '',
       'messages' => [],
-      // Custom response redirect URL.
+      // Custom error response redirect URL.
       'error_url' => '',
     ];
   }
@@ -348,7 +348,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     $form['additional']['message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Custom error response message'),
-      '#description' => $this->t('This message is displayed when the response status code is not 2xx.') . '<br/><br/>' . $this->t('Defaults to: %value', ['%value' => $this->messageManager->render(WebformMessageManagerInterface::SUBMISSION_EXCEPTION_MESSAGE)]),
+      '#description' => $this->t('This message is displayed when the response status code is not 2xx'),
       '#default_value' => $this->configuration['message'],
     ];
     $form['additional']['messages_token'] = [
@@ -358,8 +358,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     ];
     $form['additional']['messages'] = [
       '#type' => 'webform_multiple',
-      '#title' => $this->t('Custom response messages'),
-      '#description' => $this->t('Enter custom response messages for specific status codes.'),
+      '#title' => $this->t('Custom error response messages'),
+      '#description' => $this->t('Enter custom response messages for specific status codes.') . '<br/>' . $this->t('Defaults to: %value', ['%value' => $this->messageManager->render(WebformMessageManagerInterface::SUBMISSION_EXCEPTION_MESSAGE)]),
       '#empty_items' => 0,
       '#no_items_message' => $this->t('No error response messages entered. Please add messages below.'),
       '#add' => FALSE,
@@ -368,9 +368,6 @@ class RemotePostWebformHandler extends WebformHandlerBase {
           '#type' => 'webform_select_other',
           '#title' => $this->t('Response status code'),
           '#options' => [
-            '200' => $this->t('200 OK'),
-            '201' => $this->t('201 Created'),
-            '204' => $this->t('204 No Content'),
             '400' => $this->t('400 Bad Request'),
             '401' => $this->t('401 Unauthorized'),
             '403' => $this->t('403 Forbidden'),
@@ -525,8 +522,6 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $message = $this->t('Remote post request return @status_code status code.', ['@status_code' => $status_code]);
       $this->handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response);
       return;
-    } else {
-      $this->displayCustomResponseMessage($response, FALSE);
     }
 
     // If debugging is enabled, display the request and response.
@@ -1041,7 +1036,18 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       ->error('@form webform remote @type post (@state) to @url failed. @message', $context);
 
     // Display custom or default exception message.
-    if (!$this->displayCustomResponseMessage($response, TRUE)) {
+    if ($custom_response_message = $this->getCustomResponseMessage($response)) {
+      $token_data = [
+        'webform_handler' => [
+          $this->getHandlerId() => $this->getResponseData($response),
+        ],
+      ];
+      $build_message = [
+        '#markup' => $this->replaceTokens($custom_response_message, $this->getWebform(), $token_data),
+      ];
+      $this->messenger()->addError(\Drupal::service('renderer')->renderPlain($build_message));
+    }
+    else {
       $this->messageManager->display(WebformMessageManagerInterface::SUBMISSION_EXCEPTION_MESSAGE, 'error');
     }
 
@@ -1063,17 +1069,15 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   }
 
   /**
-   * Get custom response message.
+   * Get custom custom response message.
    *
    * @param \Psr\Http\Message\ResponseInterface|null $response
    *   The response returned by the remote server.
-   * @param bool $default
-   *   Display the default message. Defaults to TRUE.
    *
    * @return string
-   *   A custom response message.
+   *   A custom custom response message.
    */
-  protected function getCustomResponseMessage($response, $default = TRUE) {
+  protected function getCustomResponseMessage($response) {
     if ($response instanceof ResponseInterface) {
       $status_code = $response->getStatusCode();
       foreach ($this->configuration['messages'] as $message_item) {
@@ -1082,37 +1086,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         }
       }
     }
-    return ($default && !empty($this->configuration['message'])) ? $this->configuration['message'] : '';
-  }
-
-  /**
-   * Display custom response message.
-   *
-   * @param \Psr\Http\Message\ResponseInterface|null $response
-   *   The response returned by the remote server.
-   * @param bool $default
-   *   Display the default message. Defaults to TRUE.
-   *
-   * @return bool
-   *   TRUE if custom response message is displayed.
-   */
-  protected function displayCustomResponseMessage($response, $default = TRUE) {
-    $custom_response_message = $this->getCustomResponseMessage($response, $default);
-    if (!$custom_response_message) {
-      return FALSE;
-    }
-
-    $token_data = [
-      'webform_handler' => [
-        $this->getHandlerId() => $this->getResponseData($response),
-      ],
-    ];
-    $build_message = [
-      '#markup' => $this->replaceTokens($custom_response_message, $this->getWebform(), $token_data),
-    ];
-    $this->messenger()->addMessage(\Drupal::service('renderer')->renderPlain($build_message));
-
-    return TRUE;
+    return (!empty($this->configuration['message'])) ? $this->configuration['message'] : '';
   }
 
   /**
