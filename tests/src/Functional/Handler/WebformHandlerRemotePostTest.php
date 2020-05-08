@@ -72,7 +72,7 @@ options:
   response_type: '200'
   first_name: John
   last_name: Smith");
-    $this->assertRaw('Processed completed request.');
+    $this->assertRaw('This is a custom 200 success message.');
 
     // Check confirmation number is set via the
     // [webform:handler:remote_post:completed:confirmation_number] token.
@@ -144,6 +144,11 @@ options:
     $this->assertRaw("sid: '$sid'");
     $this->assertNoRaw('Unable to process this submission. Please contact the site administrator.');
 
+    // Check 200 Success Error.
+    $this->postSubmission($webform, ['response_type' => '200']);
+    $this->assertRaw('This is a custom 200 success message.');
+    $this->assertRaw('Processed completed request.');
+
     // Check 500 Internal Server Error.
     $this->postSubmission($webform, ['response_type' => '500']);
     $this->assertRaw('Failed to process completed request.');
@@ -159,6 +164,12 @@ options:
     $this->assertRaw('Failed to process completed request.');
     $this->assertNoRaw('Unable to process this submission. Please contact the site administrator.');
     $this->assertRaw('This is a custom response message');
+
+    // Check 201 Completed with no custom message.
+    $this->postSubmission($webform, ['response_type' => '201']);
+
+    $this->assertNoRaw('Processed created request.');
+    $this->assertNoRaw('This is a custom 404 not found message.');
 
     // Check 404 Not Found with custom message.
     $this->postSubmission($webform, ['response_type' => '404']);
