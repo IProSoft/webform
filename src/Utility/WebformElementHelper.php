@@ -432,11 +432,7 @@ class WebformElementHelper {
   protected static function isIgnoredProperty($property) {
     // Build cached ignored sub properties regular expression.
     if (!isset(self::$ignoredSubPropertiesRegExp)) {
-      $ignoredSubProperties = self::$ignoredProperties;
-      // Allow #weight as sub property. This makes it easier for developer to
-      // sort composite sub-elements
-      unset($ignoredSubProperties['#weight']);
-      self::$ignoredSubPropertiesRegExp = '/__(' . implode('|', array_keys(WebformArrayHelper::removePrefix($ignoredSubProperties))) . ')$/';
+      self::$ignoredSubPropertiesRegExp = '/__(' . implode('|', array_keys(WebformArrayHelper::removePrefix(self::$ignoredProperties))) . ')$/';
     }
 
     if (isset(self::$ignoredProperties[$property])) {
