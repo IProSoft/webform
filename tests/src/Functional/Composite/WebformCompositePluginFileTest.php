@@ -66,7 +66,7 @@ class WebformCompositePluginFileTest extends WebformElementManagedFileTestBase {
     $this->assertEqual($file->getFileUri(), 'private://webform/test_element_comp_file_plugin/' . $sid . '/' . $first_file->filename);
 
     // Check that test file exists.
-    $this->assert(file_exists($file->getFileUri()), 'File exists');
+    $this->assertFileExists($file->getFileUri());
 
     /**************************************************************************/
     // Multiple composite with file upload.
@@ -97,7 +97,7 @@ class WebformCompositePluginFileTest extends WebformElementManagedFileTestBase {
     $this->assertEqual($file->getFileUri(), 'private://webform/test_element_comp_file_plugin/' . $sid . '/' . $second_file->filename);
 
     // Check that test file exists.
-    $this->assert(file_exists($file->getFileUri()), 'File exists');
+    $this->assertFileExists($file->getFileUri());
   }
 
 }

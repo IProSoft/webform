@@ -62,7 +62,7 @@ class WebformCompositeCustomFileTest extends WebformElementManagedFileTestBase {
     $this->assertEqual($file->getFileUri(), 'private://webform/test_composite_custom_file/' . $sid . '/' . $first_file->filename);
 
     // Check that test file exists.
-    $this->assert(file_exists($file->getFileUri()), 'File exists');
+    $this->assertFileExists($file->getFileUri());
   }
 
 }
