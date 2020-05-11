@@ -49,7 +49,7 @@ class WebformCompositeCustomFileTest extends WebformElementManagedFileTestBase {
     $this->assertRaw('<strong><a href="' . file_create_url($file->getFileUri()) . '">' . $file->getFileName() . '</a></strong> (text/plain) - 1 KB');
 
     // Check file permanent.
-    $this->assert($file->isPermanent(), 'Test file is permanent');
+    $this->assertTrue($file->isPermanent());
 
     // Check file upload.
     $element_data = $webform_submission->getElementData('webform_custom_composite_file');
