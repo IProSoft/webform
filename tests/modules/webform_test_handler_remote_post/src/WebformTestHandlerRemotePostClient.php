@@ -65,6 +65,18 @@ class WebformTestHandlerRemotePostClient extends Client {
         ];
         return new Response($status, $headers, Json::encode($json));
 
+      case 201:
+        $status = 201;
+        $headers = ['Content-Type' => ['application/json']];
+        $json = [
+          'method' => $method,
+          'status' => 'success',
+          'message' => (string) new FormattableMarkup('Process @type request.', ['@type' => $operation]),
+          'options' => $options,
+          'confirmation_number' => $random->name(20, TRUE),
+        ];
+        return new Response($status, $headers, Json::encode($json));
+
       // 200 OK.
       case 200:
       default:
