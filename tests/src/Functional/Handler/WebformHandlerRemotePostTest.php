@@ -172,6 +172,12 @@ options:
     $this->assertNoRaw('Unable to process this submission. Please contact the site administrator.');
     $this->assertRaw('This is a message token <strong>Unauthorized to process completed request.</strong>');
 
+    // Check 405 Method Not Allowed with custom message and token.
+    $this->postSubmission($webform, ['response_type' => '405']);
+    $this->assertRaw('Method Not Allowed');
+    $this->assertNoRaw('Unable to process this submission. Please contact the site administrator.');
+    $this->assertRaw('This is a array token <strong>[webform:handler:remote_post:options]</strong>');
+
     // Disable saving of results.
     $webform->setSetting('results_disabled', TRUE);
     $webform->save();

@@ -37,6 +37,10 @@ class WebformTestHandlerRemotePostClient extends Client {
       case 404:
         return new Response(404, [], 'File not found');
 
+      // 405 Method Not Allowed.
+      case 405:
+        return new Response(405, [], 'Method Not Allowed');
+
       // 401 Unauthorized.
       case 401:
         $status = 401;
