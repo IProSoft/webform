@@ -172,7 +172,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
 
     /** @var \Drupal\file\FileInterface[] $multiple_file */
     $multiple_file = File::loadMultiple($submission->getElementData('file_multiple'));
-    $this->assertEqual(count($multiple_file), 2, 'Two files found in the multiple element.');
+    $this->assertCount(2, $multiple_file, 'Two files found in the multiple element.');
 
     $i = -1;
     foreach ($multiple_file as $file) {
