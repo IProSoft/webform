@@ -76,18 +76,21 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
      Term::load(2)->setUnpublished()->save();
 
      $this->drupalGet('/webform/test_element_term_reference');
- 
+
      // Check term select tree default.
      $this->assertRaw('<option value="1">Parent 1</option>');
      $this->assertNoRaw('<option value="2">-Parent 1: Child 1</option>');
      $this->assertRaw('<option value="3">-Parent 1: Child 2</option>');
      $this->assertRaw('<option value="4">-Parent 1: Child 3</option>');
- 
+
      // Check term select breadcrumb default.
      $this->assertRaw('<option value="1">Parent 1</option>');
      $this->assertNoRaw('<option value="2">Parent 1 › Parent 1: Child 1</option>');
      $this->assertRaw('<option value="3">Parent 1 › Parent 1: Child 2</option>');
      $this->assertRaw('<option value="4">Parent 1 › Parent 1: Child 3</option>');
+
+     // Publish term: 2
+     Term::load(2)->setPublished()->save();
 
     /**************************************************************************/
     // Term select.
