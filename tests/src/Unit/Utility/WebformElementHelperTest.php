@@ -145,8 +145,8 @@ class WebformElementHelperTest extends UnitTestCase {
     ];
     // Remove #subelement__tree and #subelement__element_validate.
     $tests[] = [
-      ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function'],
-      ['#value' => 'text'],
+      ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function', '#subelement__equal_stepwise_validate' => TRUE],
+      ['#value' => 'text', '#subelement__equal_stepwise_validate' => TRUE],
     ];
     // Remove random nested #element_validate.
     $tests[] = [
@@ -154,8 +154,8 @@ class WebformElementHelperTest extends UnitTestCase {
       ['random' => []],
     ];
     $tests[] = [
-      ['#prefix' => ['#markup' => 'some_markup', '#element_validate' => 'some_function']],
-      ['#prefix' => ['#markup' => 'some_markup']],
+      ['#prefix' => ['#markup' => 'some_markup', '#element_validate' => 'some_function', '#equal_stepwise_validate' => TRUE]],
+      ['#prefix' => ['#markup' => 'some_markup', '#equal_stepwise_validate' => TRUE]],
     ];
     // Remove any *_validate(s) and *_callback(s).
     $tests[] = [
