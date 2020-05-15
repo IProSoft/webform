@@ -76,6 +76,9 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     // Check single custom file upload button.
     $this->assertRaw('<label style="color: red" for="edit-managed-file-single-button-custom-upload-button--2" class="button button-action webform-file-button">{Custom label}</label>');
 
+    // Check comma delimited file extensions.
+    $this->assertRaw('Allowed types: txt, text.');
+
     /* Element processing */
 
     $this->checkFileUpload('single', $this->files[0], $this->files[1]);
