@@ -16,6 +16,7 @@ use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
@@ -51,7 +52,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @see \Drupal\webform\Plugin\WebformElementManagerInterface
  * @see plugin_api
  */
-class WebformElementBase extends PluginBase implements WebformElementInterface {
+class WebformElementBase extends PluginBase implements WebformElementInterface, TrustedCallbackInterface {
 
   use StringTranslationTrait;
   use MessengerTrait;
@@ -3695,6 +3696,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface {
       }
     }
     return FALSE;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public static function trustedCallbacks() {
+     return ['preRenderFixStatesWrapper', 'preRenderFixFlexboxWrapper', 'preRenderWebformCompositeFormElement'];
   }
 
 }
