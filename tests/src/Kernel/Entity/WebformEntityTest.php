@@ -21,16 +21,13 @@ class WebformEntityTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'path', 'webform', 'user', 'field'];
+  public static $modules = ['system', 'path', 'path_alias', 'webform', 'user', 'field'];
 
   /**
    * Tests some of the methods.
    */
   public function testWebformMethods() {
-    // @todo Remove once Drupal 8.8.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 8.8) {
-      $this->installEntitySchema('path_alias');
-    }
+    $this->installEntitySchema('path_alias');
     $this->installSchema('webform', ['webform']);
     $this->installConfig('webform');
 
@@ -338,10 +335,7 @@ class WebformEntityTest extends KernelTestBase {
    * Test paths.
    */
   public function testPaths() {
-    // @todo Remove once Drupal 8.8.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 8.8) {
-      $this->installEntitySchema('path_alias');
-    }
+    $this->installEntitySchema('path_alias');
     $this->installSchema('webform', ['webform']);
     $this->installConfig('webform');
 
@@ -364,10 +358,7 @@ class WebformEntityTest extends KernelTestBase {
    * Test elements CRUD operations.
    */
   public function testElementsCrud() {
-    // @todo Remove once Drupal 8.8.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 8.8) {
-      $this->installEntitySchema('path_alias');
-    }
+    $this->installEntitySchema('path_alias');
     $this->installSchema('webform', ['webform']);
     $this->installEntitySchema('webform_submission');
 
