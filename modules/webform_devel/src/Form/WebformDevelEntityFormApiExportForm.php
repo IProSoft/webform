@@ -164,7 +164,7 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     $webform = $this->getEntity();
 
     // Get the Tar archive.
-    $archive_file_path = file_directory_temp() . '/' . $webform->id() . '.tar.gz';
+    $archive_file_path = \Drupal::service('file_system')->getTempDirectory() . '/' . $webform->id() . '.tar.gz';
     $archive = new \Archive_Tar($archive_file_path, 'gz');
 
     // Add code to archive.

@@ -980,7 +980,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function getFileTempDirectory() {
-    return $this->configFactory->get('webform.settings')->get('export.temp_directory') ?: file_directory_temp();
+    return $this->configFactory->get('webform.settings')->get('export.temp_directory') ?: $this->fileSystem->getTempDirectory();
   }
 
   /**

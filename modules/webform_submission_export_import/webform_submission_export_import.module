@@ -80,6 +80,9 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   $file_system = \Drupal::service('file_system');
   $current_user = \Drupal::currentUser();
 
+  /** @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager */
+  $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+
   // Check for file upload errors and return FALSE for this file if a lower
   // level system error occurred. For a complete list of errors:
   // See http://php.net/manual/features.file-upload.errors.php.
@@ -174,8 +177,8 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   }
 
   // Assert that the destination contains a valid stream.
-  $destination_scheme = $file_system->uriScheme($destination);
-  if (!$file_system->validScheme($destination_scheme)) {
+  $destination_scheme = $stream_wrapper_manager->getScheme($destination);
+  if (!$stream_wrapper_manager->isValidScheme($destination_scheme)) {
     \Drupal::messenger()->addError(t('The file could not be uploaded because the destination %destination is invalid.', ['%destination' => $destination]));
     return FALSE;
   }
