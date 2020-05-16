@@ -195,7 +195,7 @@ class WebformEntityTest extends KernelTestBase {
     $webform->setElements($elements);
 
     // Check that elements are serialized to YAML.
-    $this->assertTrue($webform->getElementsRaw(), WebformYaml::encode($elements));
+    $this->assertEquals($webform->getElementsRaw(), WebformYaml::encode($elements));
 
     // Check elements decoded and flattened.
     $flattened_elements = [

@@ -273,4 +273,14 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     return $breadcrumb;
   }
 
+  /**
+   * Get the type of webform breadcrumb.
+   *
+   * @return string
+   *   The type of webform breadcrumb.
+   */
+  public function getType() {
+    return $this->type;
+  }
+
 }
