@@ -2264,13 +2264,17 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       return;
     }
 
-    /** @var \Drupal\Core\Path\AliasStorageInterface $path_alias_storage */
-    $path_alias_storage = \Drupal::service('path.alias_storage');
+    $path_alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
+    $query = $path_alias_storage->getQuery('OR');
 
     // Delete webform base, confirmation, submissions and drafts paths.
     $path_suffixes = ['', '/confirmation', '/submissions', '/drafts'];
     foreach ($path_suffixes as $path_suffix) {
-      $path_alias_storage->delete(['source' => '/webform/' . $this->id() . $path_suffix]);
+      $query->condition('path', '/webform/' . $this->id() . $path_suffix);
+    }
+
+    if ($ids = $query->execute()) {
+      $path_alias_storage->delete($path_alias_storage->loadMultiple($ids));
     }
   }
 
@@ -2285,18 +2289,26 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *   (optional) The language code of the alias.
    */
   protected function updatePath($source, $alias, $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED) {
-    /** @var \Drupal\Core\Path\AliasStorageInterface $path_alias_storage */
-    $path_alias_storage = \Drupal::service('path.alias_storage');
-
-    $path = $path_alias_storage->load(['source' => $source, 'langcode' => $langcode]);
+    $path_alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
 
     // Check if the path alias is already setup.
-    if ($path && ($path['alias'] == $alias)) {
-      return;
+    $path_aliases = $path_alias_storage->loadByProperties(['path' => $source, 'langcode' => $langcode]);
+    if ($path_aliases) {
+      /** @var \Drupal\path_alias\PathAliasInterface $path_alias */
+      $path_alias = reset($path_aliases);
+      if ($path_alias->getAlias() == $alias) {
+        return;
+      }
+    }
+    else {
+      $path_alias = $path_alias_storage->create([
+        'path' => $source,
+        'langcode' => $langcode
+      ]);
     }
 
-    $pid = $path['pid'] ?? NULL;
-    $path_alias_storage->save($source, $alias, $langcode, $pid);
+    $path_alias->setAlias($alias);
+    $path_alias->save();
   }
 
   /**

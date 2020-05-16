@@ -196,7 +196,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#default_value' => $settings['page'],
     ];
     if ($this->moduleHandler->moduleExists('path') && $settings['page']) {
-      $t_args[':path_alias'] = Url::fromRoute('path.admin_overview')->toString();
+      $t_args[':path_alias'] = Url::fromRoute('entity.path_alias.collection')->toString();
       $form['page_settings']['page_message_warning'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
@@ -219,7 +219,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       ],
     ];
     if ($this->moduleHandler->moduleExists('path')) {
-      $t_args[':path_alias'] = Url::fromRoute('path.admin_overview')->toString();
+      $t_args[':path_alias'] = Url::fromRoute('entity.path_alias.collection')->toString();
       $form['page_settings']['page_submit_path'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Webform URL alias'),
