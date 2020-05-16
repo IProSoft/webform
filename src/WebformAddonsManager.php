@@ -1055,7 +1055,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    // Submissions: Webform Submission Views Token Field
+    // Submissions: Webform Submission Views Token Field.
     $projects['ws_views_field'] = [
       'title' => $this->t('Webform Submission Views Token Field'),
       'description' => $this->t('Provides a token approach to list WebformSubmission fields in views.'),

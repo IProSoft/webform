@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional\Element;
 
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Utility\WebformElementHelper;
 
