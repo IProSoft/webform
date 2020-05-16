@@ -23,8 +23,8 @@ use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 use Drupal\webform\Utility\Mail;
-use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformInterface;
 
@@ -623,7 +623,7 @@ function _webform_page_attachments(array &$attachments) {
   }
   if (search !== location.search) {
     location.replace(location.pathname + search);
-  } 
+  }
 })();
 "),
           '#weight' => 1000,
@@ -765,19 +765,11 @@ function webform_webform_access_rules() {
  * @param string $key
  *   The element property to add the states attribute to.
  *
- * @see drupal_process_states()
+ * @deprecated Scheduled for removal in Webform 8.x-6.x
+ *   Use \Drupal\Core\Form\FormHelper::processStates instead.
  */
 function webform_process_states(array &$elements, $key = '#attributes') {
-  if (empty($elements['#states'])) {
-    return;
-  }
-
-  $elements['#attached']['library'][] = 'core/drupal.states';
-  $elements[$key]['data-drupal-states'] = Json::encode($elements['#states']);
-  // Make sure to include target class for this container.
-  if (empty($elements[$key]['class']) || !WebformArrayHelper::inArray(['js-form-item', 'js-form-submit', 'js-form-wrapper'], $elements[$key]['class'])) {
-    $elements[$key]['class'][] = 'js-form-item';
-  }
+  WebformFormHelper::processStates($elements, $key);
 }
 
 /******************************************************************************/
