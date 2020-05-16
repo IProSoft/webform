@@ -17,6 +17,14 @@ abstract class WebformWebDriverTestBase extends WebDriverTestBase {
   use WebformAssertLegacyTrait;
 
   /**
+   * Set default theme to classy.
+   *
+   * @var string
+   * @see https://www.drupal.org/node/3083055
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * Modules to enable.
    *
    * @var array
