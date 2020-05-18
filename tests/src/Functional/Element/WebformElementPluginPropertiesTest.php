@@ -1331,6 +1331,7 @@ select:
   required_error: ''
   select2: false
   size: ''
+  sort_options: false
   states: {  }
   states_clear: true
   title: ''
@@ -2980,6 +2981,7 @@ webform_entity_select:
   selection_handler: ''
   selection_settings: {  }
   size: ''
+  sort_options: false
   states: {  }
   states_clear: true
   target_type: ''
@@ -3125,6 +3127,7 @@ webform_image_select:
   required_error: ''
   show_label: false
   size: ''
+  sort_options: false
   states: {  }
   states_clear: true
   title: ''
@@ -3623,6 +3626,7 @@ webform_name:
   required: false
   required_error: ''
   select2: false
+  sort_options: false
   size: ''
   states: {  }
   states_clear: true
@@ -3687,6 +3691,7 @@ webform_name:
   required_error: ''
   select2: false
   size: ''
+  sort_options: false
   states: {  }
   states_clear: true
   title: ''
@@ -3977,6 +3982,7 @@ webform_select_other:
   required_error: ''
   select2: false
   size: ''
+  sort_options: false
   states: {  }
   states_clear: true
   title: ''

@@ -10,6 +10,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\webform\Element\WebformSelectOther;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 
@@ -279,6 +280,33 @@ function webform_preprocess_radios(&$variables) {
   }
 
   _webform_preprocess_options($variables);
+}
+
+/**
+ * Prepares variables for select templates.
+ */
+function webform_preprocess_select(&$variables) {
+  if (!WebformElementHelper::isWebformElement($variables['element'])) {
+    return;
+  }
+
+  $element = $variables['element'];
+
+  // When options are sorted (viu #sort_options: true) make sure the
+  // select '_other_' options is always last.
+  // @see \Drupal\webform\Element\WebformOtherBase::processWebformOther
+  // @see template_preprocess_select().
+  if (!empty($element['#sort_options']) && !empty($element['#webform_other'])) {
+    $options =& $variables['options'];
+    foreach ($options as $index => $option) {
+      if ($option['value'] === WebformSelectOther::OTHER_OPTION) {
+        unset($options[$index]);
+        $options[] = $option;
+        $options = array_values($options);
+        break;
+      }
+    }
+  }
 }
 
 /**
