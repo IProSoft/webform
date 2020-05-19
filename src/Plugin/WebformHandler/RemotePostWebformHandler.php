@@ -1074,7 +1074,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    *   A custom response message.
    */
   protected function getCustomResponseMessage($response, $default = TRUE) {
-    if ($response instanceof ResponseInterface) {
+    if (!empty($this->configuration['messages']) && $response instanceof ResponseInterface) {
       $status_code = $response->getStatusCode();
       foreach ($this->configuration['messages'] as $message_item) {
         if ($message_item['code'] == $status_code) {
@@ -1082,7 +1082,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         }
       }
     }
-    return ($default && !empty($this->configuration['message'])) ? $this->configuration['message'] : '';
+    return (!empty($this->configuration['message']) && $default) ? $this->configuration['message'] : '';
   }
 
   /**
