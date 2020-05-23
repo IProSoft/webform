@@ -361,6 +361,14 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
         'url' => Url::fromRoute('entity.node.webform.results_submissions', $route_parameters),
       ];
     }
+    if ($entity->access('update')
+      && $this->webform->getSetting('share_node', TRUE)
+      && $this->moduleHandler()->moduleExists('webform_share')) {
+      $operations['share'] = [
+        'title' => $this->t('Share'),
+        'url' => Url::fromRoute('entity.node.webform.share_embed', $route_parameters),
+      ];
+    }
     if ($entity->access('delete')) {
       $operations['delete'] = [
         'title' => $this->t('Delete'),

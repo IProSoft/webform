@@ -133,6 +133,7 @@ class WebformRequest implements WebformRequestInterface {
     else {
       $this->isAdminRoute = (preg_match('/^(webform\.|^entity\.([^.]+\.)?webform)/', $route_name)) ? TRUE : FALSE;
     }
+
     return $this->isAdminRoute;
   }
 

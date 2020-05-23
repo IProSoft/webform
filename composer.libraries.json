@@ -33,13 +33,13 @@
             "type": "package",
             "package": {
                 "name": "algolia/places",
-                "version": "1.17.1",
+                "version": "1.18.2",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "algolia.places"
                 },
                 "dist": {
-                    "url": "https://registry.npmjs.org/places.js/-/places.js-1.17.1.tgz",
+                    "url": "https://registry.npmjs.org/places.js/-/places.js-1.18.2.tgz",
                     "type": "tar"
                 },
                 "require": {

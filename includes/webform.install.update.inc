@@ -3725,3 +3725,11 @@ function webform_update_8192() {
     return \Drupal::service('renderer')->renderPlain($build);
   }
 }
+
+/**
+ * Issue #3137964: Make it easier to embed/share a webform.
+ */
+function webform_update_8193() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}
