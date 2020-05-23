@@ -34,14 +34,14 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
   protected $configFactory;
 
   /**
-   * File system service.
+   * The file system service.
    *
    * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
 
   /**
-   * Webform submission storage.
+   * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
    */
@@ -62,14 +62,14 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
   protected $archiverManager;
 
   /**
-   * Webform element manager.
+   * The webform element manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
   protected $elementManager;
 
   /**
-   * Results exporter manager.
+   * The results exporter manager.
    *
    * @var \Drupal\webform\Plugin\WebformExporterManagerInterface
    */

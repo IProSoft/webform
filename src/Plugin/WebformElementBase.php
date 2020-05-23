@@ -109,7 +109,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
   protected $tokenManager;
 
   /**
-   * The libraries manager.
+   * The webform libraries manager.
    *
    * @var \Drupal\webform\WebformLibrariesManagerInterface
    */

@@ -68,7 +68,7 @@ class WebformRequest implements WebformRequestInterface {
   protected $webformEntityReferenceManager;
 
   /**
-   * Webform source entity plugin manager.
+   * The webform source entity plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformSourceEntityManagerInterface
    */

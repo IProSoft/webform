@@ -31,7 +31,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
   protected $dateFormatter;
 
   /**
-   * Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */

@@ -26,7 +26,7 @@ class WebformEntityTest extends WebformBrowserTestBase {
   protected static $testWebforms = ['test_submissions'];
 
   /**
-   * Webform submission storage.
+   * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
    */

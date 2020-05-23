@@ -189,7 +189,7 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
   /****************************************************************************/
 
   /**
-   * Set webform elements default values using test data..
+   * Set webform elements default values using test data.
    *
    * @param array $elements
    *   An render array representing elements.
@@ -235,7 +235,7 @@ class {{ class_name }}SettingsForm extends ConfigFormBase {
   protected $tokenManager;
 
   /**
-   * The webform element (plugin) manager.
+   * The webform element plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */

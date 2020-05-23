@@ -35,21 +35,21 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
   protected $dateFormatter;
 
   /**
-   * Webform submission storage.
+   * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
    */
   protected $submissionStorage;
 
   /**
-   * Node type storage.
+   * The node type storage.
    *
    * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
    */
   protected $nodeTypeStorage;
 
   /**
-   * Field config storage.
+   * The field config storage.
    *
    * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
    */

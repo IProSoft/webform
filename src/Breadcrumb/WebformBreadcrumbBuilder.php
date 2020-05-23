@@ -29,7 +29,7 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   protected $type;
 
   /**
-   * Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */

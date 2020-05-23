@@ -67,7 +67,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
   protected $fileSystem;
 
   /**
-   * Webform access rules manager service.
+   * The webform access rules manager service.
    *
    * @var \Drupal\webform\WebformAccessRulesManagerInterface
    */

@@ -75,7 +75,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   protected $messageManager;
 
   /**
-   * A webform element plugin manager.
+   * The webform element plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */

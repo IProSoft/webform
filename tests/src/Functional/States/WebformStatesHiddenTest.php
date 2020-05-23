@@ -36,7 +36,7 @@ class WebformStatesHiddenTest extends WebformBrowserTestBase {
   }
 
   /**
-   * Tests states hidden..
+   * Tests states hidden.
    */
   public function testFormStatesHidden() {
     $this->drupalGet('/webform/test_states_server_hidden');

@@ -28,7 +28,7 @@ class WebformThemeNegotiator implements ThemeNegotiatorInterface {
   protected $configFactory;
 
   /**
-   * Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */

@@ -30,14 +30,14 @@ class WebformEntityVariantsForm extends EntityForm {
   protected $entity;
 
   /**
-   * Webform element manager.
+   * The webform element manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
   protected $elementManager;
 
   /**
-   * Webform variant manager.
+   * The webform variant manager.
    *
    * @var \Drupal\webform\Plugin\WebformVariantManagerInterface
    */

@@ -59,21 +59,21 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   protected $state;
 
   /**
-   * Webform submission storage.
+   * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
    */
   protected $submissionStorage;
 
   /**
-   * User storage.
+   * The user storage.
    *
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
 
   /**
-   * Role storage.
+   * The role storage.
    *
    * @var \Drupal\user\RoleStorageInterface
    */

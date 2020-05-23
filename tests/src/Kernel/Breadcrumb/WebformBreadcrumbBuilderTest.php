@@ -28,7 +28,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   protected $moduleHandler;
 
   /**
-   * The Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */
@@ -42,7 +42,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   protected $translationManager;
 
   /**
-   * The Webform breadcrumb builder.
+   * The webform breadcrumb builder.
    *
    * @var \Drupal\webform\Breadcrumb\WebformBreadcrumbBuilder
    */

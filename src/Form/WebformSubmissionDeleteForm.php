@@ -37,7 +37,7 @@ class WebformSubmissionDeleteForm extends ContentEntityDeleteForm implements Web
   protected $sourceEntity;
 
   /**
-   * Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */
