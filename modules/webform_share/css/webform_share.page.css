@@ -28,5 +28,6 @@ body.webform-share-page-body,
  * Make sure the page title is the default font color.
  */
 body.webform-share-page-body .page-title {
+  margin-top: 0;
   color: inherit;
 }
