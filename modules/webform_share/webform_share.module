@@ -244,6 +244,20 @@ function template_preprocess_page__webform_share(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for page title templates.
+ */
+function webform_share_preprocess_page_title(&$variables) {
+  if (!WebformShareHelper::isPage()) {
+    return;
+  }
+
+  // Remove shortcut widget from page title.
+  // @see shortcut_preprocess_page_title()
+  if (isset($variables['title_suffix'])) {
+    unset($variables['title_suffix']['add_or_remove_shortcut']);
+  }
+}
+/**
  * Prepares variables for webform share iframe templates.
  *
  * Default template: webform-share-iframe.html.twig.
