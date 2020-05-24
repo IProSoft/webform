@@ -8,7 +8,7 @@ use Drupal\webform\Utility\WebformElementHelper;
 /**
  * Tests for webform element properties.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
 

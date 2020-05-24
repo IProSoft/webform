@@ -11,7 +11,7 @@ use Drupal\webform\WebformSubmissionInterface;
 /**
  * Tests for webform submission webform element custom #format support.
  *
- * @group Webform
+ * @group webform
  */
 class WebformCompositeFormatTest extends WebformBrowserTestBase {
 

@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for computed elements.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementComputedTest extends WebformElementBrowserTestBase {
 

@@ -10,7 +10,7 @@ use Drupal\webform_image_select\Entity\WebformImageSelectImages;
 /**
  * Tests for webform image select image entity.
  *
- * @group Webform
+ * @group webform_image_select
  */
 class WebformImageSelectImagesTest extends WebformElementBrowserTestBase {
 

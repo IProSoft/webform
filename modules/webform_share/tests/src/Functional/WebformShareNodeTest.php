@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Webform share node test.
  *
- * @group webform_browser
+ * @group webform_share
  */
 class WebformShareNodeTest extends WebformNodeBrowserTestBase {
 

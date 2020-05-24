@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional;
 /**
  * Tests for webform help.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHelpTest extends WebformBrowserTestBase {
 

@@ -9,7 +9,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for email webform handler rendering functionality.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHandlerEmailRenderingTest extends WebformBrowserTestBase {
 

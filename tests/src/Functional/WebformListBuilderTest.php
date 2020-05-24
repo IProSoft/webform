@@ -7,7 +7,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Tests for webform list builder.
  *
- * @group Webform
+ * @group webform
  */
 class WebformListBuilderTest extends BrowserTestBase {
 

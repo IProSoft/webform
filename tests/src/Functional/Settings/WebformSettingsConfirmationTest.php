@@ -9,7 +9,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform submission form confirmation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
 

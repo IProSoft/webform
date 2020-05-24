@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for the webform variant element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformVariantElementTest extends WebformBrowserTestBase {
 

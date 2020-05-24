@@ -8,7 +8,7 @@ use Drupal\webform\Utility\WebformElementHelper;
 /**
  * Tests for webform element definitions.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase {
 

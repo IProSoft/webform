@@ -10,7 +10,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform submission view as HTML, YAML, and plain text.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSubmissionViewTest extends WebformBrowserTestBase {
 

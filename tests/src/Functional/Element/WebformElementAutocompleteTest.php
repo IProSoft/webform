@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for webform autocomplete element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementAutocompleteTest extends WebformElementBrowserTestBase {
 

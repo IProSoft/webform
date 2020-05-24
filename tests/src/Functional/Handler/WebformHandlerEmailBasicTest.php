@@ -10,7 +10,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for basic email webform handler functionality.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHandlerEmailBasicTest extends WebformBrowserTestBase {
 

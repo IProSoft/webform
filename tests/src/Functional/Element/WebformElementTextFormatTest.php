@@ -10,7 +10,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for text format element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTextFormatTest extends WebformElementBrowserTestBase {
 

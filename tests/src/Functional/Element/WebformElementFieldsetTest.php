@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for fieldset element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementFieldsetTest extends WebformElementBrowserTestBase {
 

@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for term reference elements.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
 

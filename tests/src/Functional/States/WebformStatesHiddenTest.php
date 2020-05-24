@@ -7,7 +7,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform states hidden.
  *
- * @group Webform
+ * @group webform
  */
 class WebformStatesHiddenTest extends WebformBrowserTestBase {
 

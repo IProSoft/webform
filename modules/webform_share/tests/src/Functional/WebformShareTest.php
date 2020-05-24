@@ -9,7 +9,7 @@ use Drupal\webform_share\Element\WebformShareIframe;
 /**
  * Webform share test.
  *
- * @group webform_browser
+ * @group webform_share
  */
 class WebformShareTest extends WebformBrowserTestBase {
 

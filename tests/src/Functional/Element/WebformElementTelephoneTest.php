@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional\Element;
 /**
  * Tests for telephone element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementTelephoneTest extends WebformElementBrowserTestBase {
 

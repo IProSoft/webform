@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform translation.
  *
- * @group Webform
+ * @group webform
  */
 class WebformEntityTranslationTest extends WebformBrowserTestBase {
 

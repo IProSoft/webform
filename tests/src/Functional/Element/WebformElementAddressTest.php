@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform address element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementAddressTest extends WebformElementBrowserTestBase {
 

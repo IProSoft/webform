@@ -10,7 +10,7 @@ use Drupal\webform\WebformInterface;
 /**
  * Tests for webform node results.
  *
- * @group WebformNode
+ * @group webform_node
  */
 class WebformNodeResultsTest extends WebformNodeBrowserTestBase {
 

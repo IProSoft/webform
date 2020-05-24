@@ -8,7 +8,7 @@ use Drupal\webform\Utility\WebformYaml;
 /**
  * Tests for webform entity.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsAdminTest extends WebformBrowserTestBase {
 

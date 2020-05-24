@@ -9,7 +9,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform editor.
  *
- * @group Webform
+ * @group webform
  */
 class WebformEditorTest extends WebformBrowserTestBase {
 

@@ -8,7 +8,7 @@ use Drupal\Core\Serialization\Yaml;
 /**
  * Tests for webform advanced wizard.
  *
- * @group Webform
+ * @group webform
  */
 class WebformWizardAdvancedTest extends WebformWizardTestBase {
 

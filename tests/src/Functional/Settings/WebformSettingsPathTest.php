@@ -10,7 +10,7 @@ use Drupal\webform\WebformInterface;
 /**
  * Tests for webform path and page.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsPathTest extends WebformBrowserTestBase {
 

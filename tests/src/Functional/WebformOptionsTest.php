@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformOptions;
 /**
  * Tests for webform option entity.
  *
- * @group Webform
+ * @group webform
  */
 class WebformOptionsTest extends WebformBrowserTestBase {
 

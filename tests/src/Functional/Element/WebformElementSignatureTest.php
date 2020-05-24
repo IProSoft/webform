@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for signature element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 

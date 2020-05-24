@@ -8,7 +8,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for advanced email webform handler functionality with HTML and attachments.
  *
- * @group Webform
+ * @group webform
  */
 class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
 

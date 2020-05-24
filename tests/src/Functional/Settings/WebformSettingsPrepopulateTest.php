@@ -9,7 +9,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform prepopulate settings.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
 

@@ -7,7 +7,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform entity.
  *
- * @group Webform
+ * @group webform
  */
 class WebformEntityTest extends WebformBrowserTestBase {
 

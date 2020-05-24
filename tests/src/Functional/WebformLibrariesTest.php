@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform\Functional;
 /**
  * Tests for webform libraries.
  *
- * @group Webform
+ * @group webform
  */
 class WebformLibrariesTest extends WebformBrowserTestBase {
 

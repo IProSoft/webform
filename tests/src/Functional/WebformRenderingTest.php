@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform token submission value.
  *
- * @group Webform
+ * @group webform
  */
 class WebformRenderingTest extends WebformBrowserTestBase {
 

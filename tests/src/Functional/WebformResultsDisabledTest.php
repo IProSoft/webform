@@ -8,7 +8,7 @@ use Drupal\webform\Entity\WebformSubmission;
 /**
  * Tests for webform results disabled.
  *
- * @group Webform
+ * @group webform
  */
 class WebformResultsDisabledTest extends WebformBrowserTestBase {
 

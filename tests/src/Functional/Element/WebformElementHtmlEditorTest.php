@@ -8,7 +8,7 @@ use Drupal\webform\Entity\Webform;
 /**
  * Tests for webform HTML editor element.
  *
- * @group Webform
+ * @group webform
  */
 class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
 

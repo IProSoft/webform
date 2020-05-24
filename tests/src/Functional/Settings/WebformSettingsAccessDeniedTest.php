@@ -10,7 +10,7 @@ use Drupal\webform\WebformInterface;
 /**
  * Tests for access denied webform and submissions.
  *
- * @group Webform
+ * @group webform
  */
 class WebformSettingsAccessDeniedTest extends WebformBrowserTestBase {
 

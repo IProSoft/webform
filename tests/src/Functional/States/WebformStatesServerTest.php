@@ -10,7 +10,7 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 /**
  * Tests for webform submission conditions (#states) validator.
  *
- * @group Webform
+ * @group webform
  */
 class WebformStatesServerTest extends WebformBrowserTestBase {
 
