@@ -257,6 +257,7 @@ function webform_share_preprocess_page_title(&$variables) {
     unset($variables['title_suffix']['add_or_remove_shortcut']);
   }
 }
+
 /**
  * Prepares variables for webform share iframe templates.
  *
