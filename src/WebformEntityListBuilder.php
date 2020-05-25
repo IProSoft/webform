@@ -459,7 +459,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
       $total = count($entity_ids);
       $limit = $this->getLimit();
       $start = ($page * $limit);
-      pager_default_initialize($total, $limit);
+      \Drupal::service('pager.manager')->createPager($total, $limit);
       return array_slice($entity_ids, $start, $limit, TRUE);
     }
     else {
