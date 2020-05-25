@@ -48,7 +48,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     $this->webform = Webform::load('test_element_managed_file');

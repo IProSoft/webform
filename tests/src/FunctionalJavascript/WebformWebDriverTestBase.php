@@ -41,7 +41,7 @@ abstract class WebformWebDriverTestBase extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
     $this->loadWebforms(static::$testWebforms);
   }
@@ -49,7 +49,7 @@ abstract class WebformWebDriverTestBase extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  protected function tearDown() {
     $this->purgeSubmissions();
     parent::tearDown();
   }

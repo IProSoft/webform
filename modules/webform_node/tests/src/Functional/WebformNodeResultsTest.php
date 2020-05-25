@@ -24,7 +24,7 @@ class WebformNodeResultsTest extends WebformNodeBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Place blocks.

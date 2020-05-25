@@ -28,7 +28,7 @@ class WebformElementManagedFilePublicTest extends WebformElementBrowserTestBase 
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Set public file upload support for testing.

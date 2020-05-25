@@ -30,7 +30,7 @@ class WebformSettingsLimitsTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Place webform test blocks.

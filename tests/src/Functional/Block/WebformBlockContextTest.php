@@ -22,7 +22,7 @@ class WebformBlockContextTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Manually install blocks.
