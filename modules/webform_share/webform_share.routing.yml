@@ -10,7 +10,7 @@ entity.webform.share_page:
       webform:
         type: 'entity:webform'
   requirements:
-    _entity_access: 'webform.submission_page'
+    _entity_access: 'webform.submission_create'
     _custom_access: '\Drupal\webform_share\Access\WebformShareAccess::checkAccess'
 
 entity.webform.share_page.javascript:
@@ -23,7 +23,7 @@ entity.webform.share_page.javascript:
       webform:
         type: 'entity:webform'
   requirements:
-    _entity_access: 'webform.submission_page'
+    _entity_access: 'webform.submission_create'
     _custom_access: '\Drupal\webform_share\Access\WebformShareAccess::checkAccess'
 
 entity.webform.share_script:
