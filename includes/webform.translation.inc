@@ -103,12 +103,49 @@ function webform_form_config_translation_add_form_alter(&$form, FormStateInterfa
       $form_state->set('webform_config_name', $config_name);
       $form_state->set('webform_source_elements', $source_elements);
 
-      // Tweak default 128 max length for certain settings.
-      $config_element['title']['translation']['#maxlength'] = 255;
-      $config_element['settings']['submission_label']['translation']['#maxlength'] = NULL;
+      // Tweak form elements.
+      $element_alterations = [
+        // Form settings.
+        'title' => ['#maxlength' => 255],
+        // Submission settings.
+        'submission_label' => ['#maxlength' => NULL],
+        // Email handler.
+        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler
+        'subject' => ['#maxlength' => NULL],
+        'from_name' => ['#maxlength' => 255],
+        'sender_name' => ['#maxlength' => 255],
+      ];
+      _webform_form_config_translation_add_form_alter_elements($config_element, $element_alterations);
 
       $form['#validate'][] = '_webform_form_config_translate_add_form_validate';
+
     }
+  }
+}
+
+/**
+ * Alter form element recursively.
+ *
+ * @param array $elements
+ *   An associative array of form elements.
+ * @param array $element_alterations
+ *   An associative array of element alterations.
+ */
+function _webform_form_config_translation_add_form_alter_elements(array &$elements, array $element_alterations) {
+  foreach ($elements as $key => &$element) {
+    if (Element::property($key) || !is_array($element)) {
+      continue;
+    }
+
+    // Override/alter translation element.
+    if (array_key_exists($key, $element_alterations)
+      && isset($element['translation'])
+      && isset($element['translation']['#type'])) {
+      $element['translation'] = $element_alterations[$key] + $element['translation'];
+    }
+
+    _webform_form_config_translation_add_form_alter_elements($element, $element_alterations);
+
   }
 }
 
