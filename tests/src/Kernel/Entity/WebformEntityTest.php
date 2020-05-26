@@ -279,7 +279,7 @@ class WebformEntityTest extends KernelTestBase {
 
     // Check invalid elements.
     $webform->set('elements', 'invalid')->save();
-    $this->assertFalse($webform->getElementsInitialized());
+    $this->assertEquals([], $webform->getElementsInitialized());
 
     /**************************************************************************/
     // Wizard pages.

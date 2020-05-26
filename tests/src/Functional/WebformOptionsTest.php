@@ -80,7 +80,7 @@ class WebformOptionsTest extends WebformBrowserTestBase {
     $webform_options->set('options', "not\nvalid\nyaml")->save();
 
     // Check invalid options.
-    $this->assertFalse($webform_options->getOptions());
+    $this->assertEqual($webform_options->getOptions(), []);
 
     // Check hook_webform_options_alter() && hook_webform_options_WEBFORM_OPTIONS_ID_alter().
     // Check that the default value can be set from the alter hook.

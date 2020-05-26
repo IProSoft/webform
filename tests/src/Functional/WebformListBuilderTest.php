@@ -9,7 +9,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group webform
  */
-class WebformListBuilderTest extends BrowserTestBase {
+class WebformListBuilderTest extends WebformBrowserTestBase {
 
   /**
    * Modules to enable.

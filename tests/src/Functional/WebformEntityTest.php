@@ -68,7 +68,7 @@ class WebformEntityTest extends WebformBrowserTestBase {
     $webform_test_submissions->set('elements', "not\nvalid\nyaml")->save();
 
     // Check invalid elements.
-    $this->assertFalse($webform_test_submissions->getElementsInitialized());
+    $this->assertEqual($webform_test_submissions->getElementsInitialized(), []);
 
     // Check invalid element columns.
     $this->assertEqual($webform_test_submissions->getElementsInitializedFlattenedAndHasValue(), []);

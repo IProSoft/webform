@@ -89,7 +89,7 @@ dog_4:
     $webform_images->set('images', "not\nvalid\nyaml")->save();
 
     // Check invalid images.
-    $this->assertFalse($webform_images->getImages());
+    $this->assertEqual([], $webform_images->getImages());
 
     // Check admin user access denied.
     $this->drupalGet('/admin/structure/webform/config/images/manage');

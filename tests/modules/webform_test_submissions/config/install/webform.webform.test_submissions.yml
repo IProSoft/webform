@@ -36,7 +36,7 @@ elements: |
     '#selection_handler': 'default:node'
     '#selection_settings':
       target_bundles:
-        page: page
+        webform_test_submissions: webform_test_submissions
   colors:
     '#type': checkboxes
     '#title': 'Flag colors'
@@ -58,7 +58,7 @@ elements: |
   address:
     '#type': webform_address
     '#title': Address
-  
+
 css: ''
 javascript: ''
 settings:

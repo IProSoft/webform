@@ -28,7 +28,7 @@ class WebformResultsDisabledTest extends WebformBrowserTestBase {
     // Check results disabled.
     $webform_results_disabled = Webform::load('test_form_results_disabled');
     $webform_submission = $this->postSubmission($webform_results_disabled);
-    $this->assertFalse($webform_submission, 'Submission not saved to the database.');
+    $this->assertNull($webform_submission, 'Submission not saved to the database.');
 
     // Check that error message is displayed and form is available for admins.
     $this->drupalGet('/webform/test_form_results_disabled');
