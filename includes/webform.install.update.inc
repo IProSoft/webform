@@ -3670,7 +3670,7 @@ function webform_update_8191() {
  */
 function webform_update_8192() {
   $invalid_signatures = [];
-  $files = file_scan_directory('public://webform/', '/signature-/');
+  $files = \Drupal::service('file_system')->scanDirectory('public://webform/', '/signature-/');
   foreach ($files as $file) {
     $value = file_get_contents($file->uri);
     $value = 'data:image/png;base64,' . base64_encode($value);
@@ -3684,7 +3684,7 @@ function webform_update_8192() {
     }
 
     // Delete invalid invalid signature file.
-    file_unmanaged_delete($file->uri);
+    \Drupal::service('file_system')->delete($file->uri);
   }
 
   // Exit if all signatures are valid.
