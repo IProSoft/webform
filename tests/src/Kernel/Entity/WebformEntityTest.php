@@ -342,13 +342,7 @@ class WebformEntityTest extends KernelTestBase {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::create(['id' => 'webform_test']);
     $webform->save();
-    // @todo Remove once Drupal 8.8.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 8.8) {
-      $aliases = \Drupal::database()->query('SELECT path, alias FROM {path_alias}')->fetchAllKeyed();
-    }
-    else {
-      $aliases = \Drupal::database()->query('SELECT source, alias FROM {url_alias}')->fetchAllKeyed();
-    }
+    $aliases = \Drupal::database()->query('SELECT path, alias FROM {path_alias}')->fetchAllKeyed();
     $this->assertEquals($aliases['/webform/webform_test'], '/form/webform-test');
     $this->assertEquals($aliases['/webform/webform_test/confirmation'], '/form/webform-test/confirmation');
     $this->assertEquals($aliases['/webform/webform_test/submissions'], '/form/webform-test/submissions');
