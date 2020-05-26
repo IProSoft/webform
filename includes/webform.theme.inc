@@ -374,6 +374,16 @@ function webform_preprocess_datetime_form(&$variables) {
     return;
   }
 
+  $element = $variables['element'];
+
+  // Date and time custom placeholder
+  if (isset($element['#date_date_placeholder']) && isset($variables['content']['date'])) {
+    $variables['content']['date']['#attributes']['placeholder'] = $element['#date_date_placeholder'];
+  }
+  if (isset($element['#date_time_placeholder']) && isset($variables['content']['time'])) {
+    $variables['content']['time']['#attributes']['placeholder'] = $element['#date_time_placeholder'];
+  }
+
   // Add .container-inline to datetime form wrapper which is missing from the
   // stable base theme.
   // @see core/themes/classy/templates/form/datetime-form.html.twig
