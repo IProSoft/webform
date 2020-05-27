@@ -250,7 +250,7 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    * {@inheritdoc}
    */
   public function getLangcode() {
-    return  $this->get('langode')->value;
+    return $this->get('langode')->value;
   }
 
   /**
