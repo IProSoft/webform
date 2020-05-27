@@ -3668,6 +3668,12 @@ function webform_update_8191() {
  * Unsafe HMAC construction.
  */
 function webform_update_8192() {
+  // Check if the webform directory exists.
+  $webform_uri = 'public://webform';
+  if (!\Drupal::service('file_system')->prepareDirectory($webform_uri)) {
+    return NULL;
+  }
+
   $invalid_signatures = [];
   $files = \Drupal::service('file_system')->scanDirectory('public://webform/', '/signature-/');
   foreach ($files as $file) {
