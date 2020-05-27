@@ -165,10 +165,6 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
       $this->assertNoRaw('https://cdnjs.cloudflare.com/ajax/libs/chosen');
       $this->assertNoRaw('https://cdnjs.cloudflare.com/ajax/libs/select2');
       $this->assertRaw('/modules/contrib/chosen/css/chosen-drupal.css');
-      // @todo Fix once Drupal 8.9.x is only supported.
-      if (floatval(\Drupal::VERSION) >= 8.9) {
-        $this->assertRaw('/libraries/select2/dist/css/select2.min.css');
-      }
     }
   }
 
