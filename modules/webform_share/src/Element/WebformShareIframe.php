@@ -34,6 +34,7 @@ class WebformShareIframe extends RenderElement implements TrustedCallbackInterfa
       '#source_entity' => NULL,
       '#javascript' => FALSE,
       '#script' => '//cdn.jsdelivr.net/gh/davidjbradshaw/iframe-resizer@' . static::VERSION . '/js/iframeResizer.min.js',
+      '#query' => [],
       '#options' => [],
       '#test' => [],
       '#theme' => 'webform_share_iframe',
@@ -79,10 +80,17 @@ class WebformShareIframe extends RenderElement implements TrustedCallbackInterfa
     }
 
     $route_options = QueryStringWebformSourceEntity::getRouteOptionsQuery($source_entity);
+    $route_options += ['query' => []];
+    // Append prepopulate and variant query to route options.
+    if ($element['#query']) {
+      $route_options['query'] += $element['#query'];
+    }
     // Append ?_webform_test={webform} to route options.
     if ($element['#test']) {
-      $route_options += ['query' => []];
       $route_options['query']['_webform_test'] = $webform->id();
+    }
+    if (empty($route_options['query'])) {
+      unset($route_options['query']);
     }
 
     // Get iframe URL.

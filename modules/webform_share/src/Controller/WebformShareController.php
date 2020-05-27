@@ -10,6 +10,7 @@ use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\WebformMessageManagerInterface;
 use Drupal\webform\WebformRequestInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provides route responses for webform share page, script, and embed.
@@ -67,6 +68,8 @@ class WebformShareController extends ControllerBase {
   /**
    * Returns a webform to be shared as the page of an iframe.
    *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request object.
    * @param string|null $library
    *   The iframe JavaScript library.
    * @param string|null $version
@@ -79,7 +82,7 @@ class WebformShareController extends ControllerBase {
    * @see page--webform-share.html.twig
    * @see webform_share.libraries.yml
    */
-  public function page($library = NULL, $version = NULL) {
+  public function page(Request $request, $library = NULL, $version = NULL) {
     $webform = $this->requestHandler->getCurrentWebform();
     $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform']);
 
@@ -107,6 +110,8 @@ class WebformShareController extends ControllerBase {
   /**
    * Returns a webform to be shared using (java)script.
    *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request object.
    * @param string|null $library
    *   The iframe JavaScript library.
    * @param string|null $version
@@ -119,7 +124,7 @@ class WebformShareController extends ControllerBase {
    * @see page--webform-share.html.twig
    * @see webform_share.libraries.yml
    */
-  public function script($library = NULL, $version = NULL) {
+  public function script(Request $request, $library = NULL, $version = NULL) {
     $webform = $this->requestHandler->getCurrentWebform();
     $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform']);
 
@@ -128,6 +133,7 @@ class WebformShareController extends ControllerBase {
       '#webform' => $webform,
       '#source_entity' => $source_entity,
       '#javascript' => TRUE,
+      '#query' => $request->query->all(),
     ];
     $iframe = $this->renderer->renderPlain($build);
 
@@ -138,10 +144,13 @@ class WebformShareController extends ControllerBase {
   /**
    * Returns a preview of a webform to be shared.
    *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request object.
+   *
    * @return array
    *   A render array containing a review of the webform to be shared.
    */
-  public function preview() {
+  public function preview(Request $request) {
     $webform = $this->requestHandler->getCurrentWebform();
     $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform']);
 
@@ -175,6 +184,7 @@ class WebformShareController extends ControllerBase {
       '#source_entity' => $source_entity,
       '#javascript' => TRUE,
       '#options' => ['log' => TRUE],
+      '#query' => $request->query->all(),
     ];
     $build['#attached']['library'][] = 'webform_share/webform_share.admin';
     return $build;
@@ -183,10 +193,13 @@ class WebformShareController extends ControllerBase {
   /**
    * Returns a test of a webform to be shared.
    *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request object.
+   *
    * @return array
    *   A render array containing a review of the webform to be shared.
    */
-  public function test() {
+  public function test(Request $request) {
     $webform = $this->requestHandler->getCurrentWebform();
     $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform']);
 
@@ -209,6 +222,7 @@ class WebformShareController extends ControllerBase {
       '#test' => TRUE,
       '#javascript' => TRUE,
       '#options' => ['log' => TRUE],
+      '#query' => $request->query->all(),
     ];
     $build['#attached']['library'][] = 'webform_share/webform_share.admin';
     return $build;

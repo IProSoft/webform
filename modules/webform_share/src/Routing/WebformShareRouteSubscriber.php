@@ -32,7 +32,7 @@ class WebformShareRouteSubscriber extends RouteSubscriberBase {
    * {@inheritdoc}
    */
   protected function alterRoutes(RouteCollection $collection) {
-    if (!$this->moduleHandler->moduleExists('webform_share')) {
+    if (!$this->moduleHandler->moduleExists('webform_node')) {
       $collection->remove('entity.node.webform.share_embed');
       $collection->remove('entity.node.webform.share_preview');
       $collection->remove('entity.node.webform.share_test');

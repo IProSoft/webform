@@ -1153,10 +1153,14 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     // Test a single webform variant which is set via
     // ?_webform_handler[ELEMENT_KEY]={variant_id}.
     $webform_variant = \Drupal::request()->query->get('_webform_variant') ?: [];
-    if ($webform_variant &&
-      ($operation === 'add' && $this->access('update') || $operation === 'test' && $this->access('test'))) {
-      $values += ['data' => []];
-      $values['data'] = $webform_variant + $values['data'];
+    if ($webform_variant) {
+      $is_add_operation = ($operation === 'add' && $this->access('update'));
+      $is_test_operation = ($operation === 'test' && $this->access('test'));
+      $is_share_operation = (strpos(\Drupal::routeMatch()->getRouteName(), 'entity.webform.share_page') === 0);
+      if ($is_add_operation || $is_test_operation || $is_share_operation) {
+        $values += ['data' => []];
+        $values['data'] = $webform_variant + $values['data'];
+      }
     }
 
     // Set this webform's id which can be used by preCreate hooks.

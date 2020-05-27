@@ -22,6 +22,7 @@ class WebformShareScript extends RenderElement implements TrustedCallbackInterfa
     return [
       '#webform' => NULL,
       '#source_entity' => NULL,
+      '#query' => [],
       '#theme' => 'webform_share_script',
       '#pre_render' => [
         [$class, 'preRenderWebformShareScript'],
@@ -42,6 +43,11 @@ class WebformShareScript extends RenderElement implements TrustedCallbackInterfa
     $route_name = 'entity.webform.share_script';
     $route_parameters = ['webform' => $webform->id()];
     $route_options = QueryStringWebformSourceEntity::getRouteOptionsQuery($source_entity);
+    // Append prepopulate and variant query to route options.
+    if ($element['#query']) {
+      $route_options += ['query' => []];
+      $route_options['query'] += $element['#query'];
+    }
     $url = Url::fromRoute($route_name, $route_parameters, $route_options);
     $script = preg_replace('#^https?:#', '', $url->setAbsolute()->toString());
     $element['#script'] = $script;

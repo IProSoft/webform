@@ -87,6 +87,12 @@ class WebformShareTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/manage/contact/share/preview');
     $this->assertResponse(200);
 
+    // Check that query string parameters are included in embed/iframe code.
+    $this->drupalGet('/admin/structure/webform/manage/contact/share', ['query' => ['test' => '123']]);
+    $this->assertRaw("/webform/contact/share?test=123");
+    $this->assertRaw('/webform/contact/share.js?test=123');
+    $this->assertRaw("/webform/contact/share/$library/$version?test=123");
+
     // Check that iframe page is using the default theme.
     $this->drupalGet('/webform/contact/share');
     $this->assertRaw('"theme":"' . \Drupal::config('system.theme')->get('default') . '"');

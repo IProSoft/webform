@@ -113,6 +113,7 @@ class WebformShareEmbedForm extends FormBase {
         '#type' => 'webform_share_' . $item['type'],
         '#webform' => $webform,
         '#source_entity' => $source_entity,
+        '#query' => $this->getRequest()->query->all(),
       ];
       if (!empty($item['javascript'])) {
         $build['#javascript'] = $item['javascript'];
