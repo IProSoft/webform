@@ -2308,7 +2308,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     else {
       $path_alias = $path_alias_storage->create([
         'path' => $source,
-        'langcode' => $langcode
+        'langcode' => $langcode,
       ]);
     }
 

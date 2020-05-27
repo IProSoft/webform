@@ -511,7 +511,7 @@ class WebformResultsCustomForm extends FormBase {
   /**
    * Get the full key for the custom data.
    *
-   * @param $name
+   * @param string $name
    *   The name for the custom data.
    *
    * @return string

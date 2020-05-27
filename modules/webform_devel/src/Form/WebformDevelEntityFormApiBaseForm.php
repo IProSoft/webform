@@ -179,7 +179,7 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
       return $value;
     }
     else {
-       return '<T>' . $value . '</T>';
+      return '<T>' . $value . '</T>';
     }
   }
 

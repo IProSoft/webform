@@ -133,7 +133,7 @@ Country code: US
 Language code: en',
     ];
     foreach ($elements as $value) {
-      $this-> assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));
+      $this->assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));
     }
 
     /**************************************************************************/

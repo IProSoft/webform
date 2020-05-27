@@ -181,8 +181,6 @@ class WebformSubmissionForm extends ContentEntityForm {
    *
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   The entity repository.
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
-   *   The entity manager.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
    * @param \Drupal\Core\Render\RendererInterface $renderer
@@ -2938,6 +2936,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * Determine if the submission form is being embedded in a share page.
    *
    * @return bool
+   *   TRUE the submission form is being embedded in a share page.
    */
   protected function isSharePage() {
     return (strpos($this->getRouteMatch()->getRouteName(), 'entity.webform.share_page') === 0);

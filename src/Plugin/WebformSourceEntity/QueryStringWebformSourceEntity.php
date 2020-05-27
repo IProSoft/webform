@@ -168,7 +168,7 @@ class QueryStringWebformSourceEntity extends PluginBase implements WebformSource
   /**
    * Get source entity route options query string parameters.
    *
-   * @param \Drupal\Core\Entity\EntityInterface|NULL $entity
+   * @param \Drupal\Core\Entity\EntityInterface|null $entity
    *   An entity.
    *
    * @return array

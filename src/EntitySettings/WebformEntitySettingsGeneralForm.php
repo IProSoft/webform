@@ -462,7 +462,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         'title' => $this->t('Form sharing enabled for webform nodes'),
         'all_description' => $this->t('Form sharing is enabled for all webforms node.'),
         'form_description' => $this->t('If checked, form sharing will be enabled for webform nodes that use this webform.'),
-        'access' => $this->moduleHandler->moduleExists('webform_node')
+        'access' => $this->moduleHandler->moduleExists('webform_node'),
       ],
       'share_title' => [
         'title' => $this->t('Display title on shared form'),

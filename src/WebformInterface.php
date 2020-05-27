@@ -993,7 +993,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * @param string $variant_id
    *   The webform variant ID.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if a specific webform variant exists.
    */
   public function hasVariant($variant_id);
