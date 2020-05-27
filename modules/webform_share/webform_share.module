@@ -22,7 +22,7 @@ function webform_share_webform_help_info() {
   $help['webform_share_embed'] = [
     'group' => 'share',
     'title' => t('Share embed'),
-    'content' => t("The <strong>Share embed</strong> page provides code snippets that are used to embedded a webform in any webpage."),
+    'content' => t("The <strong>Share embed</strong> page provides code snippets that are used to embedded a webform in any website, webpage, and application."),
     'routes' => [
       // @see /admin/structure/webform/manage/{webform}/share
       'entity.webform.share_embed',
