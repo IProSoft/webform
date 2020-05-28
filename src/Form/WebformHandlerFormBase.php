@@ -3,15 +3,12 @@
 namespace Drupal\webform\Form;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
-use Drupal\Component\Transliteration\TransliterationInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
-use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -70,30 +67,14 @@ abstract class WebformHandlerFormBase extends FormBase {
   }
 
   /**
-   * Constructs a WebformHandlerFormBase.
-   *
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
-   *   The language manager.
-   * @param \Drupal\Component\Transliteration\TransliterationInterface $transliteration
-   *   The transliteration helper.
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   */
-  public function __construct(LanguageManagerInterface $language_manager, TransliterationInterface $transliteration, WebformTokenManagerInterface $token_manager) {
-    $this->languageManager = $language_manager;
-    $this->transliteration = $transliteration;
-    $this->tokenManager = $token_manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('language_manager'),
-      $container->get('transliteration'),
-      $container->get('webform.token_manager')
-    );
+    $instance = parent::create($container);
+    $instance->languageManager = $container->get('language_manager');
+    $instance->transliteration = $container->get('transliteration');
+    $instance->tokenManager = $container->get('webform.token_manager');
+    return $instance;
   }
 
   /**

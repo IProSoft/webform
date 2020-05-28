@@ -6,15 +6,12 @@ use Drupal\Component\Plugin\PluginBase;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Link;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -36,11 +33,8 @@ use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformLibrariesManagerInterface;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\webform\WebformTokenManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -71,6 +65,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
+
+  /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
 
   /**
    * The current user.
@@ -136,61 +137,23 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
   protected $translatableProperties;
 
   /**
-   * Constructs a WebformElementBase object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The configuration factory.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   * @param \Drupal\Core\Render\ElementInfoManagerInterface $element_info
-   *   The element info manager.
-   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
-   *   The webform element manager.
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
-   *   The webform libraries manager.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, ConfigFactoryInterface $config_factory, AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager, ElementInfoManagerInterface $element_info, WebformElementManagerInterface $element_manager, WebformTokenManagerInterface $token_manager, WebformLibrariesManagerInterface $libraries_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->logger = $logger;
-    $this->configFactory = $config_factory;
-    $this->currentUser = $current_user;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->elementInfo = $element_info;
-    $this->elementManager = $element_manager;
-    $this->tokenManager = $token_manager;
-    $this->librariesManager = $libraries_manager;
-    $this->submissionStorage = $entity_type_manager->getStorage('webform_submission');
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('logger.factory')->get('webform'),
-      $container->get('config.factory'),
-      $container->get('current_user'),
-      $container->get('entity_type.manager'),
-      $container->get('plugin.manager.element_info'),
-      $container->get('plugin.manager.webform.element'),
-      $container->get('webform.token_manager'),
-      $container->get('webform.libraries_manager')
-    );
+    $instance = new static($configuration, $plugin_id, $plugin_definition);
+
+    $instance->logger = $container->get('logger.factory')->get('webform');
+    $instance->configFactory = $container->get('config.factory');
+    $instance->moduleHandler = $container->get('module_handler');
+    $instance->currentUser = $container->get('current_user');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->elementInfo = $container->get('plugin.manager.element_info');
+    $instance->elementManager = $container->get('plugin.manager.webform.element');
+    $instance->tokenManager = $container->get('webform.token_manager');
+    $instance->librariesManager = $container->get('webform.libraries_manager');
+    $instance->submissionStorage = $container->get('entity_type.manager')->getStorage('webform_submission');
+
+    return $instance;
   }
 
   /****************************************************************************/

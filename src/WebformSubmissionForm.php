@@ -7,19 +7,12 @@ use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
-use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
-use Drupal\Core\Path\AliasManagerInterface;
-use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
@@ -63,14 +56,21 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $renderer;
 
   /**
+   * The kill switch.
+   *
+   * @var \Drupal\Core\PageCache\ResponsePolicy\KillSwitch
+   */
+  protected $killSwitch;
+
+  /**
    * The path alias manager.
    *
-   * @var \Drupal\Core\Path\AliasManagerInterface
+   * @var \Drupal\path_alias\AliasManagerInterface
    */
   protected $aliasManager;
 
   /**
-   * The path validator.
+   * The path validator service.
    *
    * @var \Drupal\Core\Path\PathValidatorInterface
    */
@@ -126,6 +126,13 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $webformEntityReferenceManager;
 
   /**
+   * The selection plugin manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
+   */
+  protected $selectionManager;
+
+  /**
    * The webform submission generation service.
    *
    * @var \Drupal\webform\WebformSubmissionGenerateInterface
@@ -154,20 +161,6 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $statesPrefix;
 
   /**
-   * The kill switch.
-   *
-   * @var \Drupal\Core\PageCache\ResponsePolicy\KillSwitch
-   */
-  protected $killSwitch;
-
-  /**
-   * Selection Plugin Manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
-   */
-  protected $selectionManager;
-
-  /**
    * Stores the original submission data passed via the EntityFormBuilder.
    *
    * @var array
@@ -177,95 +170,25 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $originalData;
 
   /**
-   * Constructs a WebformSubmissionForm object.
-   *
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
-   *   The entity repository.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The renderer service.
-   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
-   *   The path alias manager.
-   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
-   *   The path validator.
-   * @param \Drupal\webform\WebformRequestInterface $request_handler
-   *   The webform request handler.
-   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
-   *   The webform element manager.
-   * @param \Drupal\webform\WebformThirdPartySettingsManagerInterface $third_party_settings_manager
-   *   The webform third party settings manager.
-   * @param \Drupal\webform\WebformMessageManagerInterface $message_manager
-   *   The webform message manager.
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   * @param \Drupal\webform\WebformSubmissionConditionsValidatorInterface $conditions_validator
-   *   The webform submission conditions (#states) validator.
-   * @param \Drupal\webform\WebformEntityReferenceManagerInterface $webform_entity_reference_manager
-   *   The webform entity reference manager.
-   * @param \Drupal\webform\WebformSubmissionGenerateInterface $submission_generate
-   *   The webform submission generation service.
-   * @param \Drupal\Core\PageCache\ResponsePolicy\KillSwitch $killSwitch
-   *   The page cache kill switch service.
-   * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
-   *   The selection plugin manager.
-   */
-  public function __construct(
-    EntityRepositoryInterface $entity_repository,
-    ConfigFactoryInterface $config_factory,
-    RendererInterface $renderer,
-    AliasManagerInterface $alias_manager,
-    PathValidatorInterface $path_validator,
-    WebformRequestInterface $request_handler,
-    WebformElementManagerInterface $element_manager,
-    WebformThirdPartySettingsManagerInterface $third_party_settings_manager,
-    WebformMessageManagerInterface $message_manager,
-    WebformTokenManagerInterface $token_manager,
-    WebformSubmissionConditionsValidatorInterface $conditions_validator,
-    WebformEntityReferenceManagerInterface $webform_entity_reference_manager,
-    WebformSubmissionGenerateInterface $submission_generate,
-    KillSwitch $killSwitch,
-    SelectionPluginManagerInterface $selection_manager
-  ) {
-    parent::__construct($entity_repository);
-    $this->configFactory = $config_factory;
-    $this->renderer = $renderer;
-    $this->requestHandler = $request_handler;
-    $this->aliasManager = $alias_manager;
-    $this->pathValidator = $path_validator;
-    $this->elementManager = $element_manager;
-    $this->thirdPartySettingsManager = $third_party_settings_manager;
-    $this->messageManager = $message_manager;
-    $this->tokenManager = $token_manager;
-    $this->conditionsValidator = $conditions_validator;
-    $this->webformEntityReferenceManager = $webform_entity_reference_manager;
-    $this->generate = $submission_generate;
-    $this->killSwitch = $killSwitch;
-    $this->selectionManager = $selection_manager;
-
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('entity.repository'),
-      $container->get('config.factory'),
-      $container->get('renderer'),
-      $container->get('path.alias_manager'),
-      $container->get('path.validator'),
-      $container->get('webform.request'),
-      $container->get('plugin.manager.webform.element'),
-      $container->get('webform.third_party_settings_manager'),
-      $container->get('webform.message_manager'),
-      $container->get('webform.token_manager'),
-      $container->get('webform_submission.conditions_validator'),
-      $container->get('webform.entity_reference_manager'),
-      $container->get('webform_submission.generate'),
-      $container->get('page_cache_kill_switch'),
-      $container->get('plugin.manager.entity_reference_selection')
-    );
+    $instance = parent::create($container);
+    $instance->configFactory = $container->get('config.factory');
+    $instance->renderer = $container->get('renderer');
+    $instance->killSwitch = $container->get('page_cache_kill_switch');
+    $instance->requestHandler = $container->get('webform.request');
+    $instance->aliasManager = $container->get('path_alias.manager');
+    $instance->pathValidator = $container->get('path.validator');
+    $instance->elementManager = $container->get('plugin.manager.webform.element');
+    $instance->thirdPartySettingsManager = $container->get('webform.third_party_settings_manager');
+    $instance->messageManager = $container->get('webform.message_manager');
+    $instance->tokenManager = $container->get('webform.token_manager');
+    $instance->conditionsValidator = $container->get('webform_submission.conditions_validator');
+    $instance->webformEntityReferenceManager = $container->get('webform.entity_reference_manager');
+    $instance->generate = $container->get('webform_submission.generate');
+    $instance->selectionManager = $container->get('plugin.manager.entity_reference_selection');
+    return $instance;
   }
 
   /**

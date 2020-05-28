@@ -4,10 +4,7 @@ namespace Drupal\webform_access;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\webform\Element\WebformHtmlEditor;
@@ -41,33 +38,13 @@ class WebformAccessGroupListBuilder extends ConfigEntityListBuilder {
   protected $entityTypeManager;
 
   /**
-   * Constructs a new WebformListBuilder object.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
-   *   The entity type definition.
-   * @param \Drupal\Core\Entity\EntityStorageInterface $storage
-   *   The entity storage class.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   */
-  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager) {
-    parent::__construct($entity_type, $storage);
-    $this->currentUser = $current_user;
-    $this->entityTypeManager = $entity_type_manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
-    return new static(
-      $entity_type,
-      $container->get('entity_type.manager')->getStorage($entity_type->id()),
-      $container->get('current_user'),
-      $container->get('entity_type.manager')
-    );
+    $instance = parent::createInstance($container, $entity_type);
+    $instance->currentUser = $container->get('current_user');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    return $instance;
   }
 
   /**

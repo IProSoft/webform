@@ -16,11 +16,28 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\WebformInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a base 'date' class.
  */
 abstract class DateBase extends WebformElementBase {
+
+  /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->dateFormatter = $container->get('date.formatter');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -170,7 +187,7 @@ abstract class DateBase extends WebformElementBase {
       return $value;
     }
     elseif (DateFormat::load($format)) {
-      return \Drupal::service('date.formatter')->format($timestamp, $format);
+      return $this->dateFormatter->format($timestamp, $format);
     }
     else {
       return static::formatDate($format, $timestamp);
@@ -381,12 +398,12 @@ abstract class DateBase extends WebformElementBase {
     elseif (is_array($element[$property])) {
       foreach ($element[$property] as $key => $value) {
         $timestamp = strtotime($value);
-        $element[$property][$key] = ($timestamp) ? \Drupal::service('date.formatter')->format($timestamp, 'html_' . $this->getDateType($element)) : NULL;
+        $element[$property][$key] = ($timestamp) ? $this->dateFormatter->format($timestamp, 'html_' . $this->getDateType($element)) : NULL;
       }
     }
     else {
       $timestamp = strtotime($element[$property]);
-      $element[$property] = ($timestamp) ? \Drupal::service('date.formatter')->format($timestamp, 'html_' . $this->getDateType($element)) : NULL;
+      $element[$property] = ($timestamp) ? $this->dateFormatter->format($timestamp, 'html_' . $this->getDateType($element)) : NULL;
     }
   }
 

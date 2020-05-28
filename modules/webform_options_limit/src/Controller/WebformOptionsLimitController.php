@@ -9,7 +9,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\webform\Access\WebformEntityAccess;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformRequestInterface;
 use Drupal\webform_options_limit\Plugin\WebformOptionsLimitHandlerInterface;
 use Drupal\webform_node\Access\WebformNodeAccess;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -27,22 +26,12 @@ class WebformOptionsLimitController extends ControllerBase implements ContainerI
   protected $requestHandler;
 
   /**
-   * Constructs a WebformSubmissionExportImportController object.
-   *
-   * @param \Drupal\webform\WebformRequestInterface $request_handler
-   *   The webform request handler.
-   */
-  public function __construct(WebformRequestInterface $request_handler) {
-    $this->requestHandler = $request_handler;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform.request')
-    );
+    $instance = parent::create($container);
+    $instance->requestHandler = $container->get('webform.request');
+    return $instance;
   }
 
   /**

@@ -5,7 +5,6 @@ namespace Drupal\webform\EntitySettings;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -19,24 +18,13 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
    * @var \Drupal\webform\WebformTokenManagerInterface
    */
   protected $tokenManager;
-
-  /**
-   * Constructs a WebformEntitySettingsConfirmationForm.
-   *
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   */
-  public function __construct(WebformTokenManagerInterface $token_manager) {
-    $this->tokenManager = $token_manager;
-  }
-
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform.token_manager')
-    );
+    $instance = parent::create($container);
+    $instance->tokenManager = $container->get('webform.token_manager');
+    return $instance;
   }
 
   /**

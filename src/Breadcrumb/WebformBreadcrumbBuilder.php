@@ -43,7 +43,7 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   protected $moduleHandler;
 
   /**
-   * Constructs a WebformBreadcrumbBuilder.
+   * Constructs a WebformBreadcrumbBuilder object.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler service.

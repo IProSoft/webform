@@ -8,7 +8,7 @@ use Drupal\Core\Render\Element;
 use Drupal\webform\Utility\WebformArrayHelper;
 
 /**
- * Provides a trait for webform composite form elements.
+ * Trait for webform composite form elements.
  *
  * Any form element that is comprised of several distinct parts can use this
  * trait to add support for a composite title or description.

@@ -141,7 +141,8 @@ class WebformWizardPage extends Details implements WebformElementWizardPageInter
    *   The setting's value.
    */
   protected function getDefaultSettings(WebformInterface $webform, $name) {
-    return $webform->getSetting($name) ?: \Drupal::config('webform.settings')->get("settings.default_$name");
+    return $webform->getSetting($name)
+      ?: $this->configFactory->get('webform.settings')->get("settings.default_$name");
   }
 
   /**

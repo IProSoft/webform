@@ -4,15 +4,12 @@ namespace Drupal\webform\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides a 'Webform' block.
@@ -47,40 +44,14 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $tokenManager;
 
   /**
-   * Creates a WebformBlock instance.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *   The request stack.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The webform token manager.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, WebformTokenManagerInterface $token_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->requestStack = $request_stack;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->tokenManager = $token_manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('request_stack'),
-      $container->get('entity_type.manager'),
-      $container->get('webform.token_manager')
-    );
+    $instance = new static($configuration, $plugin_id, $plugin_definition);
+    $instance->requestStack = $container->get('request_stack');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->tokenManager = $container->get('webform.token_manager');
+    return $instance;
   }
 
   /**

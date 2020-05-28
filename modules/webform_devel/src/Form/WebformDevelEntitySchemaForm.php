@@ -7,7 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Form\WebformEntityAjaxFormTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\webform_devel\WebformDevelSchemaInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -25,22 +24,12 @@ class WebformDevelEntitySchemaForm extends EntityForm {
   protected $scheme;
 
   /**
-   * Constructs a WebformDevelEntitySchemaForm.
-   *
-   * @param \Drupal\webform_devel\WebformDevelSchemaInterface $webform_devel_scheme
-   *   The webform devel scheme service.
-   */
-  public function __construct(WebformDevelSchemaInterface $webform_devel_scheme) {
-    $this->scheme = $webform_devel_scheme;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform_devel.schema')
-    );
+    $instance = parent::create($container);
+    $instance->scheme = $container->get('webform_devel.schema');
+    return $instance;
   }
 
   /**

@@ -30,7 +30,7 @@ class DebugWebformHandler extends WebformHandlerBase {
     $data = $webform_submission->getData();
     WebformElementHelper::convertRenderMarkupToStrings($data);
     $build = ['#markup' => 'Submitted values are:<pre>' . WebformYaml::encode($data) . '</pre>'];
-    $this->messenger()->addWarning(\Drupal::service('renderer')->renderPlain($build));
+    $this->messenger()->addWarning($this->renderer->renderPlain($build));
   }
 
 }

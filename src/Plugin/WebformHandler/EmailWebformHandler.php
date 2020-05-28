@@ -4,31 +4,20 @@ namespace Drupal\webform\Plugin\WebformHandler;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Render\Markup;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Element\WebformSelectOther;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
-use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformHandlerBase;
 use Drupal\webform\Plugin\WebformHandlerMessageInterface;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\Mail;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\WebformSubmissionConditionsValidatorInterface;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\webform\WebformThemeManagerInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -137,37 +126,16 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $logger_factory, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, WebformSubmissionConditionsValidatorInterface $conditions_validator, AccountInterface $current_user, ModuleHandlerInterface $module_handler, LanguageManagerInterface $language_manager, MailManagerInterface $mail_manager, WebformThemeManagerInterface $theme_manager, WebformTokenManagerInterface $token_manager, WebformElementManagerInterface $element_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $logger_factory, $config_factory, $entity_type_manager, $conditions_validator);
-    $this->currentUser = $current_user;
-    $this->moduleHandler = $module_handler;
-    $this->languageManager = $language_manager;
-    $this->mailManager = $mail_manager;
-    $this->themeManager = $theme_manager;
-    $this->tokenManager = $token_manager;
-    $this->elementManager = $element_manager;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('logger.factory'),
-      $container->get('config.factory'),
-      $container->get('entity_type.manager'),
-      $container->get('webform_submission.conditions_validator'),
-      $container->get('current_user'),
-      $container->get('module_handler'),
-      $container->get('language_manager'),
-      $container->get('plugin.manager.mail'),
-      $container->get('webform.theme_manager'),
-      $container->get('webform.token_manager'),
-      $container->get('plugin.manager.webform.element')
-    );
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->currentUser = $container->get('current_user');
+    $instance->moduleHandler = $container->get('module_handler');
+    $instance->languageManager = $container->get('language_manager');
+    $instance->mailManager = $container->get('plugin.manager.mail');
+    $instance->themeManager = $container->get('webform.theme_manager');
+    $instance->tokenManager = $container->get('webform.token_manager');
+    $instance->elementManager = $container->get('plugin.manager.webform.element');
+    return $instance;
   }
 
   /**

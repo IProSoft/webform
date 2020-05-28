@@ -2,17 +2,13 @@
 
 namespace Drupal\webform\Plugin;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformSubmissionConditionsValidatorInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -90,6 +86,13 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   protected $loggerFactory;
 
   /**
+   * The renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
    * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
@@ -111,7 +114,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   protected $tokenManager;
 
   /**
-   * Constructs a WebformHandlerBase object.
+   * {@inheritdoc}
    *
    * IMPORTANT:
    * Webform handlers are initialized and serialized when they are attached to a
@@ -121,50 +124,20 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    * from being thrown when a form is serialized via an Ajax callback and/or
    * form build.
    *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
-   *   The logger factory.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The configuration factory.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   * @param \Drupal\webform\WebformSubmissionConditionsValidatorInterface $conditions_validator
-   *   The webform submission conditions (#states) validator.
-   *
-   * @see \Drupal\webform\Entity\Webform::getHandlers
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $logger_factory, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, WebformSubmissionConditionsValidatorInterface $conditions_validator) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->loggerFactory = $logger_factory;
-    $this->configFactory = $config_factory;
-    $this->submissionStorage = $entity_type_manager->getStorage('webform_submission');
-    $this->conditionsValidator = $conditions_validator;
-
-    // @todo Webform 8.x-6.x: Properly inject the token manager.
-    // @todo Webform 8.x-6.x: Update handlers that injects the token manager.
-    $this->tokenManager = \Drupal::service('webform.token_manager');
-
-    $this->setConfiguration($configuration);
-  }
-
-  /**
-   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('logger.factory'),
-      $container->get('config.factory'),
-      $container->get('entity_type.manager'),
-      $container->get('webform_submission.conditions_validator')
-    );
+    $instance = new static($configuration, $plugin_id, $plugin_definition);
+
+    $instance->loggerFactory = $container->get('logger.factory');
+    $instance->configFactory = $container->get('config.factory');
+    $instance->renderer = $container->get('renderer');
+    $instance->submissionStorage = $container->get('entity_type.manager')->getStorage('webform_submission');
+    $instance->conditionsValidator = $container->get('webform_submission.conditions_validator');
+    $instance->tokenManager = $container->get('webform.token_manager');
+
+    $instance->setConfiguration($configuration);
+
+    return $instance;
   }
 
   /**

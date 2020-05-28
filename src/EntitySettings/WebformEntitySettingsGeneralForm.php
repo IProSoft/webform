@@ -41,30 +41,14 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
   protected $themeManager;
 
   /**
-   * Constructs a WebformEntitySettingsGeneralForm.
-   *
-   * @param \Drupal\webform\WebformMessageManagerInterface $message_manager
-   *   The webform message manager.
-   * @param \Drupal\webform\WebformThirdPartySettingsManagerInterface $third_party_settings_manager
-   *   The webform third party settings manager.
-   * @param \Drupal\webform\WebformThemeManagerInterface $theme_manager
-   *   The webform theme manager.
-   */
-  public function __construct(WebformMessageManagerInterface $message_manager, WebformThirdPartySettingsManagerInterface $third_party_settings_manager, WebformThemeManagerInterface $theme_manager) {
-    $this->messageManager = $message_manager;
-    $this->thirdPartySettingsManager = $third_party_settings_manager;
-    $this->themeManager = $theme_manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform.message_manager'),
-      $container->get('webform.third_party_settings_manager'),
-      $container->get('webform.theme_manager')
-    );
+    $instance = parent::create($container);
+    $instance->messageManager = $container->get('webform.message_manager');
+    $instance->thirdPartySettingsManager = $container->get('webform.third_party_settings_manager');
+    $instance->themeManager = $container->get('webform.theme_manager');
+    return $instance;
   }
 
   /**

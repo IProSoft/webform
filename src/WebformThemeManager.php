@@ -67,7 +67,7 @@ class WebformThemeManager implements WebformThemeManagerInterface {
   protected $activeTheme;
 
   /**
-   * Constructs a WebformTokenManager object.
+   * Constructs a WebformThemeManager object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.

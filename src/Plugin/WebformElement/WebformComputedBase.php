@@ -11,6 +11,7 @@ use Drupal\webform\Plugin\WebformElementComputedInterface;
 use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a base class for 'webform_computed' elements.
@@ -18,6 +19,22 @@ use Drupal\webform\WebformSubmissionInterface;
 abstract class WebformComputedBase extends WebformElementBase implements WebformElementDisplayOnInterface, WebformElementComputedInterface {
 
   use WebformDisplayOnTrait;
+
+  /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->database= $container->get('database');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -259,7 +276,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
       'delta' => 0,
       'value' => $value,
     ];
-    \Drupal::database()->update('webform_submission_data')
+    $this->database->update('webform_submission_data')
       ->fields($fields)
       ->condition('webform_id', $fields['webform_id'])
       ->condition('sid', $fields['sid'])
