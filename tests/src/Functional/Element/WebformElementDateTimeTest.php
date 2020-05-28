@@ -46,7 +46,7 @@ class WebformElementDateTimeTest extends WebformElementBrowserTestBase {
     // Check datepicker and timepicker.
     $now_date = date('D, m/d/Y', strtotime('now'));
     if (floatval(\Drupal::VERSION) >= 9) {
-      $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. Wed, 05/27/2020)" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., Wed, 05/27/2020)." id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
+      $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., ' . $now_date . ')." id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
     }
     else {
       $this->assertRaw('<input data-drupal-selector="edit-datetime-datepicker-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" id="edit-datetime-datepicker-timepicker-date" name="datetime_datepicker_timepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
