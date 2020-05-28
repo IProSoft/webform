@@ -4,6 +4,7 @@ description: 'Installs and integrates the Webform Test Bootstrap theme.'
 package: Testing
 core_version_requirement: ^8.7.7 || ^9
 dependencies:
-  - 'styleguide:styleguide'
   - 'webform:webform'
   - 'webform:webform_bootstrap'
+# Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module's (optional) dependencies.
+#  - 'styleguide:styleguide'
