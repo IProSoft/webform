@@ -5,3 +5,4 @@ package: 'Webform [DEPRECATED]'
 core_version_requirement: ^8.7.7 || ^9
 dependencies:
   - 'webform:webform'
+  - 'jquery_ui_checkboxradio:jquery_ui_checkboxradio'
