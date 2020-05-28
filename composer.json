@@ -43,7 +43,6 @@
   },
   "require-dev": {
     "drupal/address": "~1.0",
-    "drupal/chosen": "~2.0",
     "drupal/group": "1.x-dev",
     "drupal/jquery_ui_checkboxradio": "~1.0",
     "drupal/mailsystem": "~4.0",
