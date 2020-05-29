@@ -4,6 +4,5 @@ description: 'Provides an example of a webform submission posted to a remote ser
 package: 'Webform example'
 core_version_requirement: ^8.7.7 || ^9
 dependencies:
-# Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module's (optional) dependencies.
-#  - 'token:token'
+  - 'token:token'
   - 'webform:webform'

@@ -5,8 +5,7 @@ package: 'Webform Demo'
 core_version_requirement: ^8.7.7 || ^9
 dependencies:
   - 'drupal:datetime'
-# Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module's (optional) dependencies.
-#  - 'token:token'
+  - 'token:token'
   - 'webform:webform'
   - 'webform:webform_node'
   - 'webform:webform_access'
