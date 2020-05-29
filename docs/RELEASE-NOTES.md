@@ -197,7 +197,7 @@ References
 
 [Git Release Notes for Drush](https://www.drupal.org/project/grn)
 
-    drush release-notes --nouser 8.x-5.3-beta3 8.x-5.x
+    drush release-notes --nouser 8.x-5.3-beta3 6.x
 
 
 6. Tag and create a new release
@@ -231,7 +231,7 @@ References
     git push origin tag 8.x-5.NEXT-VERSION
 
     # Merge hotfix release with HEAD.
-    git checkout 8.x-5.x
+    git checkout 6.x
     git merge 8.x-5.NEXT-VERSION-hotfix
 
     # Delete hotfix release.

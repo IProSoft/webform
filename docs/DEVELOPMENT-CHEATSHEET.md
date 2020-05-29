@@ -5,18 +5,18 @@ Development Cheatsheet
 
 ```bash
 # Create branch
-git checkout 8.x-5.x
+git checkout 6.x
 git checkout -b [issue-number]-[issue-description]
 git push -u origin [issue-number]-[issue-description]
 
 # Create patch
-git diff 8.x-5.x > [project_name]-[issue-description]-[issue-number]-00.patch
+git diff 6.x > [project_name]-[issue-description]-[issue-number]-00.patch
 
 # Apply remote patch
 curl https://www.drupal.org/files/issues/[project_name]-[issue-description]-[issue-number]-00.patch | git apply -
 
 # Force apply patch
-patch -p1 < 3037968-2.patch	
+patch -p1 < 3037968-2.patch
 
 # Remove patch and untracked files
 git reset --hard; git clean -f -d
@@ -29,12 +29,12 @@ interdiff \
 cat interdiff-[issue-number]-[old-comment-number]-[new-comment-number].txt
 
 # Merge branch with all commits
-git checkout 8.x-5.x
+git checkout 6.x
 git merge [issue-number]-[issue-description]
 git push
 
 # Merge branch as a single new commit
-git checkout 8.x-5.x
+git checkout 6.x
 git merge --squash [issue-number]-[issue-description]
 git commit -m 'Issue #[issue-number]: [issue-description]'
 git push
@@ -165,7 +165,7 @@ drush en -y webform\
   webform_templates\
   webform_test\
   webform_test_element\
-  webform_test_entity_reference_views\  
+  webform_test_entity_reference_views\
   webform_test_handler\
   webform_test_handler_remote_post\
   webform_test_options\
@@ -175,8 +175,8 @@ drush en -y webform\
   webform_test_translation\
   webform_test_views\
   webform_attachment_test\
-  webform_entity_print_test\  
-  webform_entity_print_attachment_test\  
+  webform_entity_print_test\
+  webform_entity_print_attachment_test\
   webform_icheck_test\
   webform_image_select_test\
   webform_location_geocomplete_test\
