@@ -40,7 +40,7 @@
     "drupal/bootstrap": "~3.0",
     "drupal/captcha": "~1.0",
     "drupal/chosen": "~2.0",
-    "drupal/devel": "^3.0",
+    "drupal/devel": "~3.0",
     "drupal/entity_print": "~2.0",
     "drupal/group": "~1.0",
     "drupal/lingotek": "~2.0",
