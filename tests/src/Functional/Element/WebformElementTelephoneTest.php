@@ -28,9 +28,7 @@ class WebformElementTelephoneTest extends WebformElementBrowserTestBase {
    * {@inheritdoc}
    */
   public function setUp() {
-    if (floatval(\Drupal::VERSION) >= 9) {
-      $this->markTestSkipped('Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module\'s (optional) dependencies');
-    }
+    $this->markTestSkipped('Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module\'s (optional) dependencies');
     parent::setUp();
   }
 
