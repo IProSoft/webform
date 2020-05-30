@@ -1,6 +1,6 @@
 name: 'Webform Group [EXPERIMENTAL]'
 type: module
-description: 'Provides a Webform integration with the Group module.'
+description: 'Provides Webform and Group integration.'
 experimental: true
 package: 'Webform [EXPERIMENTAL]'
 core_version_requirement: ^8 || ^9

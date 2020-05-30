@@ -1,7 +1,7 @@
-name: 'Webform module exporter tests'
+name: 'Webform Exporter test'
 type: module
-description: 'Support module for webform that provides exporter plugin tests.'
-package: Testing
+description: 'Support module for webform exporter plugin testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform'

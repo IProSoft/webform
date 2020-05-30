@@ -1,7 +1,7 @@
-name: 'Webform module translation tests'
+name: 'Webform Translation test'
 type: module
-description: 'Support module for Webform module translation testing that provides working examples for translating webforms.'
-package: Testing
+description: 'Support module for webform translation testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'drupal:config_translation'

@@ -1,7 +1,7 @@
-name: 'Webform Custom Options Test'
+name: 'Webform Custom Options test'
 type: module
-description: 'Support module for webform that provides custom options element working examples.'
-package: Testing
+description: 'Support module for webform custom options element testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform_options_custom'

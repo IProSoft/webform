@@ -1,7 +1,7 @@
-name: 'Webform module markup tests'
+name: 'Webform Markup test'
 type: module
-description: 'Support module for markup tests.'
-package: Testing
+description: 'Support module for webform markup testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform'

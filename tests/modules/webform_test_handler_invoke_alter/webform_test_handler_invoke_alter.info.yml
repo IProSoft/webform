@@ -1,7 +1,7 @@
-name: 'Webform module handler invoke alter tests'
+name: 'Webform Handler Invoke test'
 type: module
-description: 'Support module for webform that provides handler invoke alter tests.'
-package: Testing
+description: 'Support module for webform handler invoke alter testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform'

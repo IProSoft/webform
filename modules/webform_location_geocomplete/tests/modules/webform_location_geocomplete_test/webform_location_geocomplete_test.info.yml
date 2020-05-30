@@ -1,7 +1,7 @@
-name: 'Webform Location Geocomplete Test'
+name: 'Webform Location Geocomplete test'
 type: module
-description: 'Support module for webform that provides location geocomplete element working examples.'
-package: Testing
+description: 'Support module for location geocomplete element testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform_location_geocomplete'

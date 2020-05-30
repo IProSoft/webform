@@ -1,7 +1,7 @@
-name: 'Webform Image Select Test'
+name: 'Webform Image Select test'
 type: module
-description: 'Support module for webform that provides image select element working examples.'
-package: Testing
+description: 'Support module for webform image select element testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform_image_select'

@@ -108,7 +108,7 @@ dog_4:
 
     // Check image altered message.
     $this->drupalGet('/admin/structure/webform/options/images/manage/animals/edit');
-    $this->assertRaw('The <em class="placeholder">Cute Animals</em> images are being altered by the <em class="placeholder">Webform Image Select Test</em> module.');
+    $this->assertRaw('The <em class="placeholder">Cute Animals</em> images are being altered by the <em class="placeholder">Webform Image Select test</em> module.');
 
     // Check hook_webform_image_select_images_alter().
     // Check hook_webform_image_select_images_WEBFORM_IMAGE_SELECT_IMAGES_ID_alter().

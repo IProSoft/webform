@@ -1,7 +1,7 @@
-name: 'Webform module alter hooks tests'
+name: 'Webform Alter Hooks test'
 type: module
-description: 'Support module for webform that tests form and element alter hooks.'
-package: Testing
+description: 'Support module for webform form and element alter hooks testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8 || ^9
 dependencies:
   - 'webform:webform'
