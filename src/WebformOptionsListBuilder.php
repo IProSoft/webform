@@ -160,7 +160,7 @@ class WebformOptionsListBuilder extends ConfigEntityListBuilder {
     if ($entity->access('duplicate')) {
       $operations['duplicate'] = [
         'title' => $this->t('Duplicate'),
-        'weight' => 23,
+        'weight' => 20,
         'url' => Url::fromRoute('entity.webform_options.duplicate_form', ['webform_options' => $entity->id()]),
       ];
     }

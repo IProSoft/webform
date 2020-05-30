@@ -175,14 +175,14 @@ class WebformOptionsCustomListBuilder extends ConfigEntityListBuilder {
     if ($entity->access('edit')) {
       $operations['preview'] = [
         'title' => $this->t('Preview'),
-        'weight' => 23,
+        'weight' => 20,
         'url' => Url::fromRoute('entity.webform_options_custom.preview_form', ['webform_options_custom' => $entity->id()]),
       ];
     }
     if ($entity->access('duplicate')) {
       $operations['duplicate'] = [
         'title' => $this->t('Duplicate'),
-        'weight' => 24,
+        'weight' => 30,
         'url' => Url::fromRoute('entity.webform_options_custom.duplicate_form', ['webform_options_custom' => $entity->id()]),
       ];
     }

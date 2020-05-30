@@ -1040,7 +1040,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       if ($entity->access('duplicate') && $webform->getSetting('submission_user_duplicate')) {
         $operations['duplicate'] = [
           'title' => $this->t('Duplicate'),
-          'weight' => 23,
+          'weight' => 30,
           'url' => $this->requestHandler->getUrl($entity, $this->sourceEntity, 'webform.user.submission.duplicate'),
         ];
       }
@@ -1074,7 +1074,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       if ($entity->access('notes')) {
         $operations['notes'] = [
           'title' => $this->t('Notes'),
-          'weight' => 21,
+          'weight' => 30,
           'url' => $this->requestHandler->getUrl($entity, $this->sourceEntity, 'webform_submission.notes_form'),
         ];
       }
@@ -1082,14 +1082,14 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       if ($entity->access('resend') && $webform->hasMessageHandler()) {
         $operations['resend'] = [
           'title' => $this->t('Resend'),
-          'weight' => 22,
+          'weight' => 40,
           'url' => $this->requestHandler->getUrl($entity, $this->sourceEntity, 'webform_submission.resend_form'),
         ];
       }
       if ($entity->access('duplicate')) {
         $operations['duplicate'] = [
           'title' => $this->t('Duplicate'),
-          'weight' => 23,
+          'weight' => 50,
           'url' => $this->requestHandler->getUrl($entity, $this->sourceEntity, 'webform_submission.duplicate_form'),
         ];
       }

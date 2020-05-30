@@ -321,18 +321,21 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
       $operations['edit'] = [
         'title' => $this->t('Edit'),
         'url' => $this->ensureDestination($entity->toUrl('edit-form')),
+        'weight' => 10,
       ];
     }
     if ($entity->access('view')) {
       $operations['view'] = [
         'title' => $this->t('View'),
         'url' => $this->ensureDestination($entity->toUrl('canonical')),
+        'weight' => 20,
       ];
     }
     if ($entity->access('submission_view_any') && !$this->webform->isResultsDisabled()) {
       $operations['results'] = [
         'title' => $this->t('Results'),
         'url' => Url::fromRoute('entity.node.webform.results_submissions', $route_parameters),
+        'weight' => 30,
       ];
     }
     if ($entity->access('update')
@@ -341,12 +344,14 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
       $operations['share'] = [
         'title' => $this->t('Share'),
         'url' => Url::fromRoute('entity.node.webform.share_embed', $route_parameters),
+        'weight' => 40,
       ];
     }
     if ($entity->access('delete')) {
       $operations['delete'] = [
         'title' => $this->t('Delete'),
         'url' => $this->ensureDestination($entity->toUrl('delete-form')),
+        'weight' => 100,
       ];
     }
     return $operations;
