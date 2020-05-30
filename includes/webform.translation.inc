@@ -17,7 +17,7 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\field\Entity\FieldConfig;
 
 /**
- * Implements hook_form_FORM_ID_alter() for language_content_settings_form().
+ * Implements hook_form_FORM_ID_alter() for language content settings form.
  */
 function webform_form_language_content_settings_form_alter(array &$form, FormStateInterface $form_state) {
   // Completely remove webform_submission from Content language admin
@@ -32,7 +32,7 @@ function webform_form_language_content_settings_form_alter(array &$form, FormSta
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for locale translate edit form.
  */
 function webform_form_locale_translate_edit_form_alter(&$form, FormStateInterface $form_state) {
   // Don't allow YAML to be validated using locale string translation.
@@ -57,7 +57,7 @@ function webform_form_locale_translate_edit_form_alter(&$form, FormStateInterfac
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for config translation add form.
  */
 function webform_form_config_translation_add_form_alter(&$form, FormStateInterface $form_state, $is_new = TRUE) {
   // Manually apply YAML editor to text field that store YAML data.
@@ -202,7 +202,7 @@ function _webform_form_config_translate_add_form_filter_elements(array &$transla
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for config translation edit form.
  */
 function webform_form_config_translation_edit_form_alter(&$form, FormStateInterface $form_state) {
   webform_form_config_translation_add_form_alter($form, $form_state, FALSE);
