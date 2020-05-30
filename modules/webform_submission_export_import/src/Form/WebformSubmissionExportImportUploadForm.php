@@ -326,7 +326,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
     // Warning.
     $total = $this->importer->getTotal();
     $t_args = [
-      '@submissions' => $this->formatPlural($total, '1 submission', '@total submissions', ['@total' => $total]),
+      '@submissions' => $this->formatPlural($total, '@count submission', '@count submissions'),
     ];
     $form['warning'] = [
       '#type' => 'webform_message',

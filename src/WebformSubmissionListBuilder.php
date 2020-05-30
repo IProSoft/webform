@@ -720,10 +720,10 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    */
   protected function buildInfo() {
     if ($this->draft) {
-      $info = $this->formatPlural($this->total, '@total draft', '@total drafts', ['@total' => $this->total]);
+      $info = $this->formatPlural($this->total, '@count draft', '@count drafts');
     }
     else {
-      $info = $this->formatPlural($this->total, '@total submission', '@total submissions', ['@total' => $this->total]);
+      $info = $this->formatPlural($this->total, '@count submission', '@count submissions');
     }
     return [
       '#markup' => $info,

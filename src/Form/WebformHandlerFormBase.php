@@ -114,9 +114,8 @@ abstract class WebformHandlerFormBase extends FormBase {
         throw new NotFoundHttpException(
           $this->formatPlural(
             $cardinality,
-            'Only @number instance is permitted',
-            'Only @number instances are permitted',
-            ['@number' => $cardinality]
+            'Only @count instance is permitted',
+            'Only @count instances are permitted'
           )
         );
       }

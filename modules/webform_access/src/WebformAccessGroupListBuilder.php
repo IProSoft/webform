@@ -109,7 +109,7 @@ class WebformAccessGroupListBuilder extends ConfigEntityListBuilder {
     }
 
     return [
-      '#markup' => $this->formatPlural($total, '@total access group', '@total access groups', ['@total' => $total]),
+      '#markup' => $this->formatPlural($total, '@count access group', '@count access groups'),
       '#prefix' => '<div class="webform-access-group-summary">',
       '#suffix' => '</div>',
     ];

@@ -192,7 +192,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     // Display info.
     if ($this->currentUser->hasPermission('administer webform') && ($total = $this->getTotal($this->keys, $this->category, $this->state))) {
       return [
-        '#markup' => $this->formatPlural($total, '@total webform', '@total webforms', ['@total' => $total]),
+        '#markup' => $this->formatPlural($total, '@count webform', '@count webforms'),
         '#prefix' => '<div>',
         '#suffix' => '</div>',
       ];

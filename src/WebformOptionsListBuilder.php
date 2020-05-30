@@ -107,7 +107,7 @@ class WebformOptionsListBuilder extends ConfigEntityListBuilder {
     }
 
     return [
-      '#markup' => $this->formatPlural($total, '@total option', '@total options', ['@total' => $total]),
+      '#markup' => $this->formatPlural($total, '@count option', '@count options'),
       '#prefix' => '<div>',
       '#suffix' => '</div>',
     ];

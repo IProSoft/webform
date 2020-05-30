@@ -114,7 +114,7 @@ class WebformImageSelectImagesListBuilder extends ConfigEntityListBuilder {
     }
 
     return [
-      '#markup' => $this->formatPlural($total, '@total images', '@total images', ['@total' => $total]),
+      '#markup' => $this->formatPlural($total, '@count images', '@count images'),
       '#prefix' => '<div>',
       '#suffix' => '</div>',
     ];
