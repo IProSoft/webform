@@ -2169,7 +2169,34 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
-    parent::postSave($storage, $update);
+    // Because webform are not fieldable, when a webform is saved not all
+    // config/content entity related caches need to be cleared.
+    // parent::postSave($storage, $update);
+
+    /**************************************************************************/
+
+    $this->invalidateTagsOnSave($update);
+
+    $entity_type_manager = $this->entityTypeManager();
+    $bundle_of = $this->getEntityType()->getBundleOf();
+    if (!$update) {
+      \Drupal::service('entity_bundle.listener')->onBundleCreate($this->id(), $bundle_of);
+    }
+    else {
+      // Invalidate the render cache of entities for which this entity
+      // is a bundle.
+      if ($entity_type_manager->hasHandler($bundle_of, 'view_builder')) {
+        $entity_type_manager->getViewBuilder($bundle_of)->resetCache();
+      }
+
+      // Webform does not not clear field definitions on every change.
+      // @see \Drupal\Core\Entity\EntityFieldManager::clearCachedFieldDefinitions
+      // Entity bundle field definitions may depend on bundle settings.
+      // \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
+      $this->entityTypeBundleInfo()->clearCachedBundles();
+    }
+
+    /**************************************************************************/
 
     // Update paths.
     $this->updatePaths();
