@@ -2,6 +2,6 @@ name: 'Webform module third party settings tests'
 type: module
 description: 'Support module for Webform module that provides example of third party settings.'
 package: Testing
-core_version_requirement: ^8.7.7 || ^9
+core_version_requirement: ^8
 dependencies:
   - 'webform:webform'
