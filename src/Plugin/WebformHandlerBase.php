@@ -22,6 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class WebformHandlerBase extends PluginBase implements WebformHandlerInterface {
 
+  use WebformEntityInjectionTrait;
+
   /**
    * The webform.
    *
@@ -138,36 +140,6 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
     $instance->setConfiguration($configuration);
 
     return $instance;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setWebform(WebformInterface $webform) {
-    $this->webform = $webform;
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getWebform() {
-    return $this->webform;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setWebformSubmission(WebformSubmissionInterface $webform_submission = NULL) {
-    $this->webformSubmission = $webform_submission;
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getWebformSubmission() {
-    return $this->webformSubmission;
   }
 
   /**
