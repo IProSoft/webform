@@ -12,7 +12,7 @@ template: false
 archive: false
 id: test_element_description_tooltip
 title: 'Test: Element: Description tooltip'
-description: 'Test element eescription tooltip.'
+description: 'Test element description tooltip.'
 category: 'Test: Element'
 elements: |
   basic_elements:
@@ -466,7 +466,7 @@ elements: |
       '#title': 'Machine name'
       '#description': 'This is a description for the ''machine_name'' element.'
       '#description_display': tooltip
-  
+
 css: ''
 javascript: ''
 settings:
