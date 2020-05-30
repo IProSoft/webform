@@ -287,20 +287,20 @@ elements: |
           '#type': textfield
           '#title': Name
           '#title_display': invisible
-        gender:
+        sex:
           '#type': select
-          '#title': Gender
+          '#title': Sex
           '#title_display': invisible
           '#options':
             Male: Male
             Female: Female
       '#default_value':
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
       '#states':
         visible:
           ':input[name="visible_trigger"]':
@@ -1235,20 +1235,20 @@ elements: |
           '#type': textfield
           '#title': Name
           '#title_display': invisible
-        gender:
+        sex:
           '#type': select
-          '#title': Gender
+          '#title': Sex
           '#title_display': invisible
           '#options':
             Male: Male
             Female: Female
       '#default_value':
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
       '#states':
         invisible:
           ':input[name="invisible_trigger"]':
@@ -1994,20 +1994,20 @@ elements: |
           '#type': textfield
           '#title': Name
           '#title_display': invisible
-        gender:
+        sex:
           '#type': select
-          '#title': Gender
+          '#title': Sex
           '#title_display': invisible
           '#options':
             Male: Male
             Female: Female
       '#default_value':
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
         - name: Loremipsum
-          gender: Male
+          sex: Male
       '#states':
         disabled:
           ':input[name="disabled_trigger"]':

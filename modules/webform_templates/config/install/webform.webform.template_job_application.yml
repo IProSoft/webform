@@ -26,10 +26,10 @@ elements: |
       '#title': 'Last Name'
       '#type': textfield
       '#required': true
-    gender:
+    sex:
       '#type': webform_radios_other
-      '#title': Gender
-      '#options': gender
+      '#title': Sex
+      '#options': sex
       '#required': true
   contact_information:
     '#title': 'Contact Information'

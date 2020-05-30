@@ -27,10 +27,10 @@ elements: |
     last_name:
       '#title': 'Last Name'
       '#type': textfield
-    gender:
+    sex:
       '#type': webform_radios_other
-      '#title': Gender
-      '#options': gender
+      '#title': Sex
+      '#options': sex
   contact:
     '#title': 'Contact Information'
     '#type': webform_wizard_page

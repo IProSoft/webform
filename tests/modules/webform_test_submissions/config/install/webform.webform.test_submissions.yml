@@ -24,7 +24,7 @@ elements: |
   sex:
     '#type': select
     '#title': Sex
-    '#options': gender
+    '#options': sex
   dob:
     '#type': date
     '#title': 'Date of birth'

@@ -140,12 +140,12 @@ elements: |
       last_name:
         '#type': textfield
         '#title': 'Last name'
-      gender:
+      sex:
         '#type': select
         '#options':
           Male: Male
           Female: Female
-        '#title': Gender
+        '#title': Sex
   webform_image_select:
     '#type': webform_image_select
     '#title': webform_image_select

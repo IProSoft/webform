@@ -56,10 +56,10 @@ elements: |
       '#multiple': true
       '#select2': true
       '#options': languages
-    gender:
+    sex:
       '#type': webform_radios_other
-      '#title': Gender
-      '#options': gender
+      '#title': Sex
+      '#options': sex
     biography:
       '#type': text_format
       '#title': Biography

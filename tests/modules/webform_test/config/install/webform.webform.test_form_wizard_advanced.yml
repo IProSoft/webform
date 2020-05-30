@@ -32,10 +32,10 @@ elements: |
       '#type': textfield
       '#required': true
       '#default_value': Smith
-    gender:
+    sex:
       '#type': radios
-      '#title': Gender
-      '#options': gender
+      '#title': Sex
+      '#options': sex
       '#required': true
       '#default_value': Male
   contact:

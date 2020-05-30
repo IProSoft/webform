@@ -28,7 +28,7 @@ elements: |
   radios_other:
     '#type': webform_radios_other
     '#title': radios_other
-    '#options': gender
+    '#options': sex
     '#description': 'Check and enter ''Other'' to trigger an email.'
   
 css: ''

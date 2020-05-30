@@ -44,10 +44,10 @@ elements: |
         - month
         - day
         - year
-    gender:
+    sex:
       '#type': webform_radios_other
-      '#title': Gender
-      '#options': gender
+      '#title': Sex
+      '#options': sex
       '#options_display': two_columns
   personal_information_2:
     '#type': webform_flexbox

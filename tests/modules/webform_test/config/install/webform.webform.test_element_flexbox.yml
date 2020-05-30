@@ -253,9 +253,9 @@ elements: |
           '#type': textfield
           '#title': Name
           '#title_display': invisible
-        gender:
+        sex:
           '#type': select
-          '#title': Gender
+          '#title': Sex
           '#title_display': invisible
           '#options':
             Male: Male
@@ -268,9 +268,9 @@ elements: |
           '#type': textfield
           '#title': Name
           '#title_display': invisible
-        gender:
+        sex:
           '#type': select
-          '#title': Gender
+          '#title': Sex
           '#title_display': invisible
           '#options':
             Male: Male

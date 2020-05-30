@@ -71,6 +71,10 @@ elements: |
       '#type': select
       '#title': 'Relationship (relationship)'
       '#options': relationship
+    sex:
+      '#type': select
+      '#title': 'Sex (sex)'
+      '#options': sex
     titles:
       '#type': select
       '#title': 'Titles (titles)'
@@ -219,7 +223,7 @@ elements: |
       '#options': range
       '#min': a
       '#max': z
-  
+
 css: ''
 javascript: ''
 settings:

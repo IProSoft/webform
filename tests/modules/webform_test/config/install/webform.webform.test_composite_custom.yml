@@ -38,12 +38,12 @@ elements: |
       last_name:
         '#type': textfield
         '#title': 'Last name'
-      gender:
+      sex:
         '#type': select
         '#options':
           Male: Male
           Female: Female
-        '#title': Gender
+        '#title': Sex
       martial_status:
         '#type': webform_select_other
         '#options': marital_status
@@ -61,7 +61,7 @@ elements: |
     '#default_value':
       - first_name: John
         last_name: Smith
-        gender: Male
+        sex: Male
         martial_status: Single
         employment_status: Unemployed
         age: 20
