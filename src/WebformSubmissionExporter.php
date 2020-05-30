@@ -281,7 +281,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     // Append webform exporter default options.
     $exporter_plugins = $this->exporterManager->getInstances();
     foreach ($exporter_plugins as $element_type => $element_plugin) {
-      $this->defaultOptions += $element_plugin->defaultConfiguration();
+      $this->defaultOptions = $element_plugin->defaultConfiguration() + $this->defaultOptions;
     }
 
     // Append webform element default options.
