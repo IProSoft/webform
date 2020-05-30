@@ -2,7 +2,7 @@ name: 'Webform Submission Export/Import Test'
 type: module
 description: 'Support module for webform submission export/import.'
 package: Testing
-core_version_requirement: ^8.7.7 || ^9
+core_version_requirement: ^8
 dependencies:
   - 'webform:webform_submission_export_import'
   - 'webform:webform_image_select'

@@ -2,7 +2,7 @@ name: 'Webform scheduled email module translation tests'
 type: module
 description: 'Support module for webform schedule email translation that provides test forms.'
 package: Testing
-core_version_requirement: ^8.7.7 || ^9
+core_version_requirement: ^8
 dependencies:
   - 'drupal:config_translation'
   - 'drupal:language'

@@ -2,7 +2,7 @@ name: 'Webform module Ajax tests'
 type: module
 description: 'Support module for Webform module Ajax testing.'
 package: Testing
-core_version_requirement: ^8.7.7 || ^9
+core_version_requirement: ^8
 dependencies:
   - 'drupal:block'
   - 'webform:webform'
