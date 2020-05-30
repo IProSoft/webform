@@ -571,11 +571,11 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       if ($element_plugin instanceof WebformManagedFileBase) {
         if ($element_plugin->hasMultipleValues($element)) {
           foreach ($element_value as $fid) {
-            $data['_' . $element_key][] = $this->getResponseFileData($fid);
+            $data['_' . $element_key][] = $this->getRequestFileData($fid);
           }
         }
         else {
-          $data['_' . $element_key] = $this->getResponseFileData($element_value);
+          $data['_' . $element_key] = $this->getRequestFileData($element_value);
         }
       }
       elseif (!empty($this->configuration['cast'])) {
@@ -726,7 +726,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    * @return array
    *   An associative array containing file data (name, uri, mime, and data).
    */
-  protected function getResponseFileData($fid, $prefix = '') {
+  protected function getRequestFileData($fid, $prefix = '') {
     /** @var \Drupal\file\FileInterface $file */
     $file = File::load($fid);
     if (!$file) {
