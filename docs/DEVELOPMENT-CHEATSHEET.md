@@ -28,6 +28,13 @@ interdiff \
   > interdiff-[issue-number]-[old-comment-number]-[new-comment-number].txt
 cat interdiff-[issue-number]-[old-comment-number]-[new-comment-number].txt
 
+# Commit remove patch
+git checkout 8.x-5.x
+curl https://www.drupal.org/files/issues/[project_name]-[issue-description]-[issue-number]-00.patch | git apply -
+git add .
+git commit -m 'Issue #[issue-number]: [issue-description]'
+git push
+
 # Merge branch with all commits
 git checkout 6.x
 git merge [issue-number]-[issue-description]
