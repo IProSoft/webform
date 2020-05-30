@@ -166,7 +166,7 @@ function webform_bootstrap_preprocess_input(&$variables) {
 }
 
 /**
- * Prepares variables for form element templates.
+ * Implements hook_preprocess_form_element() for form element templates.
  */
 function webform_bootstrap_preprocess_form_element(&$variables) {
   if (!_webform_bootstrap_is_active_theme()) {

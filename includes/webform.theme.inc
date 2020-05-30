@@ -223,7 +223,7 @@ function webform_theme_registry_alter(&$theme_registry) {
 /******************************************************************************/
 
 /**
- * Prepares variables for single local action link templates.
+ * Implements preprocess_menu_local_action() for single local action link templates.
  *
  * Applies custom link attributes to local actions.
  * Custom attributes are used to open Webform UI modals.
@@ -257,7 +257,7 @@ function webform_preprocess_menu_local_action(&$variables) {
 }
 
 /**
- * Prepares variables for checkboxes templates.
+ * Implements hook_preprocess_checkboxes() for checkboxes templates.
  *
  * @see \Drupal\webform\Plugin\WebformElement\OptionsBase
  */
@@ -270,7 +270,7 @@ function webform_preprocess_checkboxes(&$variables) {
 }
 
 /**
- * Prepares variables for radios templates.
+ * Implements hook_preprocess_radios() for radios templates.
  *
  * @see \Drupal\webform\Plugin\WebformElement\OptionsBase
  */
@@ -283,7 +283,7 @@ function webform_preprocess_radios(&$variables) {
 }
 
 /**
- * Prepares variables for select templates.
+ * Implements hook_preprocess_select() for select templates.
  */
 function webform_preprocess_select(&$variables) {
   if (!WebformElementHelper::isWebformElement($variables['element'])) {
@@ -323,7 +323,7 @@ function webform_preprocess_status_messages(&$variables) {
 /******************************************************************************/
 
 /**
- * Prepares variables for table templates.
+ * Implements hook_preprocess_table() for table templates.
  */
 function webform_preprocess_table(&$variables) {
   // Add links to 'Translate' webform tab.
@@ -367,7 +367,7 @@ function webform_preprocess_table(&$variables) {
 /******************************************************************************/
 
 /**
- * Prepares variables for datetime form element templates.
+ * Implements hook_preprocess_datetime_form() for datetime form element templates.
  */
 function webform_preprocess_datetime_form(&$variables) {
   if (!WebformElementHelper::isWebformElement($variables['element'])) {
@@ -392,7 +392,7 @@ function webform_preprocess_datetime_form(&$variables) {
 }
 
 /**
- * Prepares variables for details element templates.
+ * Implements hook_preprocess_details() for details element templates.
  */
 function webform_preprocess_details(&$variables) {
   if (!WebformElementHelper::isWebformElement($variables['element'])) {
@@ -419,7 +419,7 @@ function webform_preprocess_details(&$variables) {
 }
 
 /**
- * Prepares variables for fieldset element templates.
+ * Implements hook_preprocess_fieldset() for fieldset templates.
  */
 function webform_preprocess_fieldset(&$variables) {
   if (!WebformElementHelper::isWebformElement($variables['element'])) {
@@ -484,7 +484,7 @@ function webform_preprocess_fieldset(&$variables) {
 /******************************************************************************/
 
 /**
- * Prepares variables for form element templates.
+ * Implements hook_preprocess_form_element() for form element templates.
  */
 function webform_preprocess_form_element(&$variables) {
   if (!WebformElementHelper::isWebformElement($variables['element'])) {
@@ -528,7 +528,7 @@ function webform_preprocess_form_element(&$variables) {
 }
 
 /**
- * Prepares variables for form label templates.
+ * Implements hook_preprocess_form_element_label() for form element label templates.
  */
 function webform_preprocess_form_element_label(&$variables) {
   $element = &$variables['element'];
@@ -556,7 +556,7 @@ function webform_preprocess_form_element_label(&$variables) {
 /******************************************************************************/
 
 /**
- * Prepares variables for file managed file templates.
+ * Implements hook_preprocess_file_managed_file() for file managed file templates.
  *
  * @see https://stackoverflow.com/questions/21842274/cross-browser-custom-styling-for-file-upload-button
  * @see template_preprocess_file_managed_file()
@@ -613,7 +613,7 @@ function webform_preprocess_file_managed_file(&$variables) {
 }
 
 /**
- * Prepares variables for file upload help text templates.
+ * Implements hook_preprocess_file_upload_help() for file upload help text templates.
  *
  * @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::prepare
  */
@@ -641,7 +641,7 @@ function webform_preprocess_file_upload_help(&$variables) {
 }
 
 /**
- * Prepares variables for file link templates.
+ * Implements hook_preprocess_file_link() for file link templates.
  *
  * @see webform_file_access
  */
@@ -662,7 +662,7 @@ function webform_preprocess_file_link(&$variables) {
 }
 
 /**
- * Prepares variables for image.
+ * Implements hook_preprocess_image() for image templates.
  *
  * Make sure the image src for the 'webform_image_file' src is an absolute URL.
  */
@@ -671,18 +671,6 @@ function webform_preprocess_image(&$variables) {
   if (isset($variables['attributes']['class']) && in_array('webform-image-file', (array) $variables['attributes']['class'])) {
     $variables['attributes']['src'] = $base_url . preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', $variables['attributes']['src']);
   }
-}
-
-/******************************************************************************/
-// Preprocess webform specific elements.
-/******************************************************************************/
-
-/**
- * Prepares variables for webform section element templates.
- */
-function webform_preprocess_webform_section(&$variables) {
-  // Setup description, help, and more.
-  _webform_preprocess_element($variables);
 }
 
 /******************************************************************************/

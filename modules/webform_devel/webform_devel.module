@@ -52,7 +52,7 @@ function webform_devel_entity_type_alter(array &$entity_types) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for config single export form.
  */
 function webform_devel_form_config_single_export_form_alter(&$form, FormStateInterface $form_state) {
   $form['export']['#type'] = 'webform_codemirror';

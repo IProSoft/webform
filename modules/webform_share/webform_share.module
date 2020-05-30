@@ -204,7 +204,7 @@ function webform_share_theme_suggestions_page(array $variables) {
 }
 
 /**
- * Prepares variables for the webform share page HTML template.
+ * Prepares variables for the webform share page HTML templates.
  *
  * @see template_preprocess_html()
  */
@@ -259,7 +259,7 @@ function template_preprocess_html__webform_share(&$variables) {
 }
 
 /**
- * Prepares variables for the webform share page page template.
+ * Prepares variables for the webform share page templates.
  *
  * @see template_preprocess_page()
  */
