@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\WebformOptions;
+use Drupal\webform\EntityListBuilder\WebformEntityListBuilderSortLabelTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  * @see \Drupal\webform\Entity\WebformOption
  */
 class WebformOptionsListBuilder extends ConfigEntityListBuilder {
+
+  use WebformEntityListBuilderSortLabelTrait;
 
   /**
    * Search keys.

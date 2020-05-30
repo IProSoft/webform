@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\webform\Element\WebformHtmlEditor;
+use Drupal\webform\EntityListBuilder\WebformEntityListBuilderSortLabelTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @see \Drupal\webform\Entity\WebformOption
  */
 class WebformAccessGroupListBuilder extends ConfigEntityListBuilder {
+
+  use WebformEntityListBuilderSortLabelTrait;
 
   /**
    * {@inheritdoc}

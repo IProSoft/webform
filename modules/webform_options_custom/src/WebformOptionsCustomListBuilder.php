@@ -6,6 +6,7 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
+use Drupal\webform\EntityListBuilder\WebformEntityListBuilderSortLabelTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  * @see \Drupal\webform_options_custom\Entity\WebformOptionsCustom
  */
 class WebformOptionsCustomListBuilder extends ConfigEntityListBuilder {
+
+  use WebformEntityListBuilderSortLabelTrait;
 
   /**
    * The current request.

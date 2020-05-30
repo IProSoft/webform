@@ -3,9 +3,9 @@
 namespace Drupal\webform_access;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
-use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\webform\EntityListBuilder\WebformEntityListBuilderSortLabelTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform_access\Entity\WebformAccessGroup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @see \Drupal\webform\Entity\WebformOption
  */
 class WebformAccessTypeListBuilder extends ConfigEntityListBuilder {
+
+  use WebformEntityListBuilderSortLabelTrait;
 
   /**
    * {@inheritdoc}
