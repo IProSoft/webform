@@ -1,7 +1,7 @@
-name: 'Webform node module multiple tests'
+name: 'Webform Node Multiple test'
 type: module
-description: 'Support module for webform node that provides working examples multiple webforms attached to a single node.'
-package: Testing
+description: 'Support module for webform nodes with multiple webforms testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'drupal:field'

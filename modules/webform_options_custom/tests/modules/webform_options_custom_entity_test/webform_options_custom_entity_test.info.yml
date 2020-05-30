@@ -1,7 +1,7 @@
-name: 'Webform Custom Options Entity Reference Test'
+name: 'Webform Custom Options Entity Reference test'
 type: module
-description: 'Support module for webform that provides custom options entity reference element working examples.'
-package: Testing
+description: 'Support module for webform custom options entity reference element testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'drupal:node'

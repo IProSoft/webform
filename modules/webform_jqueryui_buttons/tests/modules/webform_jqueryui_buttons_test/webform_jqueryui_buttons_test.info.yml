@@ -1,7 +1,7 @@
-name: 'Webform jQueryUI Buttons Test'
+name: 'Webform jQueryUI Buttons test'
 type: module
-description: 'Support module for webform that provides buttons element working examples.'
-package: Testing
+description: 'Support module for jQuery UI buttons element testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform_jqueryui_buttons'

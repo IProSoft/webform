@@ -1,7 +1,7 @@
-name: 'Webform options limit module tests'
+name: 'Webform Options Limit test'
 type: module
-description: 'Support module for webform options limit that provides test forms.'
-package: Testing
+description: 'Support module for webform options limit testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'

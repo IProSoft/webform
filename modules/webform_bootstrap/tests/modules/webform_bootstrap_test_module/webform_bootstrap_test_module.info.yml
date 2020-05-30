@@ -1,7 +1,7 @@
 name: 'Webform Test Bootstrap Helper'
 type: module
-description: 'Installs and integrates the Webform Test Bootstrap theme.'
-package: Testing
+description: 'Suport module for webform bootstrap integration testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'styleguide:styleguide'

@@ -1,7 +1,7 @@
-name: 'Webform module wizard custom tests'
+name: 'Webform Wizard Custom test'
 type: module
-description: 'Support module for webform that provides form alter hook for wizard custom tests.'
-package: Testing
+description: 'Support module for webform for wizard customization testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'

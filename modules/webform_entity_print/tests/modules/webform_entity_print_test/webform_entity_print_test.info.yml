@@ -1,7 +1,7 @@
-name: 'Webform Entity Print (PDF) Test'
+name: 'Webform Entity Print (PDF) test'
 type: module
 description: 'Support module for webform entity print (PDF) testing.'
-package: Testing
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform_entity_print'

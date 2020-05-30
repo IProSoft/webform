@@ -1,7 +1,7 @@
-name: 'Webform module custom message tests'
+name: 'Webform Custom Messag test'
 type: module
-description: 'Support module for Webform module custom message testing.'
-package: Testing
+description: 'Support module for webform custom message testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'

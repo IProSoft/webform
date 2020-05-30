@@ -1,7 +1,7 @@
-name: 'Webform module entity reference tests'
+name: 'Webform Entity Reference Views test'
 type: module
-description: 'Support module for Webform module entity reference testing.'
-package: Testing
+description: 'Support module for webform entity reference testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'drupal:node'

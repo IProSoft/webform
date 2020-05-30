@@ -1,7 +1,7 @@
-name: 'Webform module remote post tests'
+name: 'Webform Remote Post test'
 type: module
-description: 'Support module for Webform module remote post testing.'
-package: Testing
+description: 'Support module for webform remote post testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'

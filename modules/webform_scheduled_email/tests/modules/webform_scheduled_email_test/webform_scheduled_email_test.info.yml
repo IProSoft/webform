@@ -1,7 +1,7 @@
-name: 'Webform scheduled email module tests'
+name: 'Webform Scheduled Email test'
 type: module
-description: 'Support module for webform schedule email that provides test forms.'
-package: Testing
+description: 'Support module for webform schedule email testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'

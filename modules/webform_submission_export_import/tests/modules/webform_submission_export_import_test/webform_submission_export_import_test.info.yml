@@ -1,7 +1,7 @@
-name: 'Webform Submission Export/Import Test'
+name: 'Webform Submission Export/Import test'
 type: module
-description: 'Support module for webform submission export/import.'
-package: Testing
+description: 'Support module for webform submission export/import testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform_submission_export_import'

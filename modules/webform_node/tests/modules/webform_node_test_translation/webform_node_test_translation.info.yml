@@ -1,7 +1,7 @@
-name: 'Webform node module translation test'
+name: 'Webform Node Translation test'
 type: module
-description: 'Support module for webform node that enabled translations for webform content type.'
-package: Testing
+description: 'Support module for webform node translation testing.'
+package: 'Webform Testing'
 core_version_requirement: ^8
 dependencies:
   - 'webform:webform'
