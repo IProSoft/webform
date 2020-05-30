@@ -354,7 +354,7 @@ abstract class OptionsBase extends WebformElementBase {
           $build = ['#markup' => $value];
         }
         else {
-          $build = ['#plain_text' => $value];
+          $build = ['#markup' => $value]; // DC: Allow run group radios to be shown in color.
         }
 
         $options += ['prefixing' => TRUE];
