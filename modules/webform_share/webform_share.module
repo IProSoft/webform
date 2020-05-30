@@ -72,6 +72,29 @@ function webform_share_local_tasks_alter(&$local_tasks) {
 }
 
 /**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function webform_share_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
+  // Allow webform query string parameters to be transferred
+  // from canonical to test URL.
+  $route_names = [
+    'entity.webform.share_embed', 'entity.webform.share_preview', 'entity.webform.share_test',
+  ];
+  if (in_array($route_name, $route_names)) {
+    if ($query = \Drupal::request()->query->all()) {
+      foreach ($route_names as $route_name) {
+        if (isset($data['tabs'][1][$route_name])) {
+          $url =& $data['tabs'][1][$route_name]['#link']['url'];
+          $url->setOption('query', $query);
+        }
+      }
+    }
+
+    // Query string to cache context webform canonical and test routes.
+    $cacheability->addCacheContexts(['url.query_args']);
+  }
+}
+/**
  * Implements hook_element_info_alter().
  */
 function webform_share_element_info_alter(&$type) {
