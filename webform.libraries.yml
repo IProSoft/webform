@@ -1205,16 +1205,16 @@ libraries.jquery.timepicker:
 
 libraries.progress-tracker:
   remote: https://github.com/NigelOToole/progress-tracker
-  version: '1.4.0'
+  version: '2.0.6'
   license:
     name: MIT
     url: https://github.com/NigelOToole/progress-tracker/blob/master/LICENSE
     gpl-compatible: true
   cdn:
-    /libraries/progress-tracker/: https://cdn.jsdelivr.net/gh/NigelOToole/progress-tracker@v1.4.0/
+    /libraries/progress-tracker/: https://cdn.jsdelivr.net/gh/NigelOToole/progress-tracker@v2.0.6/
   css:
     component:
-      /libraries/progress-tracker/app/styles/progress-tracker.css: {}
+      /libraries/progress-tracker/docs/styles/progress-tracker.css: {}
 
 libraries.signature_pad:
   remote: https://github.com/szimek/signature_pad
