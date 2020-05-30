@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin\WebformHandler;
 
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Utility\Mail;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
@@ -14,7 +15,6 @@ use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Plugin\WebformHandlerBase;
 use Drupal\webform\Plugin\WebformHandlerMessageInterface;
 use Drupal\webform\Twig\WebformTwigExtension;
-use Drupal\webform\Utility\Mail;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionInterface;
