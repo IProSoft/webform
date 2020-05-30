@@ -24,7 +24,6 @@ use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 use Drupal\webform\Utility\Mail;
 use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformInterface;
 
@@ -769,21 +768,6 @@ function webform_webform_access_rules() {
       ],
     ],
   ];
-}
-
-/**
- * Adds JavaScript to change the state of an element based on another element.
- *
- * @param array $elements
- *   A renderable array element having a #states property as described above.
- * @param string $key
- *   The element property to add the states attribute to.
- *
- * @deprecated Scheduled for removal in Webform 8.x-6.x
- *   Use \Drupal\Core\Form\FormHelper::processStates instead.
- */
-function webform_process_states(array &$elements, $key = '#attributes') {
-  WebformFormHelper::processStates($elements, $key);
 }
 
 /******************************************************************************/

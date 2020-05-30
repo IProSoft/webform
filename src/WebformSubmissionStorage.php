@@ -239,7 +239,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $accounts = User::loadMultiple($uids);
       $or_condition_group = $entity_query->orConditionGroup();
       foreach ($accounts as $account) {
-        $this->_addQueryConditions($or_condition_group, NULL, NULL, $account);
+        $this->addQueryConditions($or_condition_group, NULL, NULL, $account);
       }
       $entity_query->condition($or_condition_group);
       unset($values['uid']);
@@ -385,13 +385,6 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
   /****************************************************************************/
 
   /**
-   * {@inheritdoc}
-   */
-  public function addQueryConditions(AlterableInterface $query, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []) {
-    $this->_addQueryConditions($query, $webform, $source_entity, $account, $options);
-  }
-
-  /**
    * Add condition to submission query.
    *
    * @param \Drupal\Core\Database\Query\AlterableInterface|\Drupal\Core\Entity\Query\ConditionInterface $query
@@ -409,10 +402,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    *     Defaults to NULL
    *   - check_source_entity (boolean): Check that a source entity is defined.
    *   - interval (int): Limit total within an seconds interval.
-   *
-   * @todo Webform 8.x-6.x: Remove and move code to ::addQueryConditions.
    */
-  private function _addQueryConditions($query, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []) {
+  public function addQueryConditions($query, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []) {
     // Set default options/conditions.
     $options += [
       'check_source_entity' => FALSE,
@@ -1419,33 +1410,6 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     $this->database->delete('webform_submission_data')
       ->condition('sid', $sids, 'IN')
       ->execute();
-  }
-
-  /****************************************************************************/
-  // Log methods.
-  /****************************************************************************/
-
-  /**
-   * {@inheritdoc}
-   */
-  public function log(WebformSubmissionInterface $webform_submission, array $context = []) {
-    // Submission ID is required for logging.
-    if (empty($webform_submission->id())) {
-      return;
-    }
-
-    $message = $context['message'];
-    unset($context['message']);
-
-    $context += [
-      'uid' => $this->currentUser->id(),
-      'webform_submission' => $webform_submission,
-      'handler_id' => NULL,
-      'data' => [],
-      'link' => $webform_submission->toLink($this->t('Edit'), 'edit-form')->toString(),
-    ];
-
-    $this->loggerFactory->get('webform_submission')->notice($message, $context);
   }
 
   /****************************************************************************/

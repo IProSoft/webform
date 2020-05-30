@@ -12,6 +12,7 @@ use Drupal\Core\Render\Markup;
 use Drupal\webform\Element\WebformCompositeFormElementTrait;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 use Drupal\webform_options_custom\Entity\WebformOptionsCustom as WebformOptionsCustomEntity;
@@ -212,7 +213,7 @@ class WebformOptionsCustom extends FormElement implements WebformOptionsCustomIn
     }
 
     // Process states.
-    webform_process_states($element, '#wrapper_attributes');
+    WebformFormHelper::processStates($element, '#wrapper_attributes');
 
     return $element;
   }

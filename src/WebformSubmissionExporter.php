@@ -1047,16 +1047,4 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     return ($this->isArchive() || ($this->getTotal() >= $this->getBatchLimit()));
   }
 
-  /**
-   * Construct an instance of archive tar object.
-   *
-   * @return \Archive_Tar
-   *   Archive tar object.
-   *
-   * @deprecated Scheduled for removal in Webform 8.x-6.x
-   */
-  protected function getArchiveTar() {
-    return new \Archive_Tar($this->getArchiveFilePath(), 'gz');
-  }
-
 }

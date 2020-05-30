@@ -576,9 +576,6 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         }
         else {
           $data['_' . $element_key] = $this->getResponseFileData($element_value);
-          // @deprecated in Webform 8.x-5.0-rc17. Use new format
-          // This code will be removed in 8.x-6.x.
-          $data += $this->getResponseFileData($element_value, $element_key . '__');
         }
       }
       elseif (!empty($this->configuration['cast'])) {

@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Render\Element;
 use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformFormHelper;
 
 /**
  * Trait for webform composite form elements.
@@ -98,7 +99,7 @@ trait WebformCompositeFormElementTrait {
       case 'form_element':
         // Process #states for #wrapper_attributes.
         // @see template_preprocess_form_element().
-        webform_process_states($element, '#wrapper_attributes');
+        WebformFormHelper::processStates($element, '#wrapper_attributes');
         break;
     }
 

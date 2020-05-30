@@ -339,34 +339,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
   }
 
   /**
-   * Get default multiple properties used by most elements.
-   *
-   * @return array
-   *   An associative array containing default multiple properties.
-   *
-   * @deprecated Scheduled for removal in Webform 8.x-6.x
-   *   Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.
-   */
-  protected function getDefaultMultipleProperties() {
-    @trigger_error('\Drupal\webform\Plugin\WebformElementBase::getDefaultMultipleProperties is scheduled for removal in Webform 8.x-6.x. Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.', E_USER_DEPRECATED);
-    return $this->defineDefaultBaseProperties();
-  }
-
-  /**
-   * Get default base properties used by all elements.
-   *
-   * @return array
-   *   An associative array containing base properties used by all elements.
-   *
-   * @deprecated Scheduled for removal in Webform 8.x-6.x
-   *   Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.
-   */
-  protected function getDefaultBaseProperties() {
-    @trigger_error('\Drupal\webform\Plugin\WebformElementBase::getDefaultBaseProperties is scheduled for removal in Webform 8.x-6.x. Use \Drupal\webform\Plugin\WebformElementBase::defineDefaultBaseProperties instead.', E_USER_DEPRECATED);
-    return $this->defineDefaultBaseProperties();
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function hasProperty($property_name) {
@@ -3240,17 +3212,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $default_properties = $this->getDefaultProperties();
     $element_properties = WebformArrayHelper::removePrefix($this->configuration)
       + $default_properties;
-
-    // Make sure 'format_items' is removed if the element does not
-    // support multiple values.
-    // @todo Webform 8.x-6.x: Remove and assume custom element are fixed.
-    if (!$this->supportsMultipleValues()) {
-      unset(
-        $default_properties['format_items'],
-        $default_properties['format_items_html'],
-        $default_properties['format_items_text']
-      );
-    }
 
     // Set default and element properties.
     // Note: Storing this information in the webform's state allows modules to view

@@ -181,28 +181,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
   /**
    * {@inheritdoc}
    */
-  public function setConfiguration(array $configuration) {
-    parent::setConfiguration($configuration);
-
-    // Make sure 'default' is converted to '_default'.
-    // @see https://www.drupal.org/project/webform/issues/2980470
-    // @see webform_update_8131()
-    // @todo Webform 8.x-6.x: Remove the below code.
-    $default_configuration = $this->defaultConfiguration();
-    foreach ($this->configuration as $key => $value) {
-      if ($value === 'default'
-        && isset($default_configuration[$key])
-        && $default_configuration[$key] === static::DEFAULT_VALUE) {
-        $this->configuration[$key] = static::DEFAULT_VALUE;
-      }
-    }
-
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function defaultConfiguration() {
     return [
       'states' => [WebformSubmissionInterface::STATE_COMPLETED],
