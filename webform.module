@@ -261,22 +261,17 @@ function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableD
     }
   }
 
-  // Allow webform query string parameters to be transfered
+  // Allow webform query string parameters to be transferred
   // from canonical to test URL.
   $route_names = [
     'entity.webform.canonical', 'entity.webform.test_form',
     'entity.node.canonical', 'entity.node.webform.test_form',
-    'entity.webform.share_embed', 'entity.webform.share_preview', 'entity.webform.share_test',
   ];
   if (in_array($route_name, $route_names)) {
     if ($query = \Drupal::request()->query->all()) {
       foreach ($route_names as $route_name) {
         if (isset($data['tabs'][0][$route_name])) {
           $url =& $data['tabs'][0][$route_name]['#link']['url'];
-          $url->setOption('query', $query);
-        }
-        elseif (isset($data['tabs'][1][$route_name])) {
-          $url =& $data['tabs'][1][$route_name]['#link']['url'];
           $url->setOption('query', $query);
         }
       }
