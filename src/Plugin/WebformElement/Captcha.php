@@ -109,6 +109,13 @@ class Captcha extends WebformElementBase {
       $element['#captcha_admin_mode'] = TRUE;
     }
 
+    // Add default CAPTCHA description if required.
+    // @see captcha_form_alter()
+    if (empty($element['#description']) && \Drupal::config('captcha.settings')->get('add_captcha_description')) {
+      module_load_include('inc', 'captcha');
+      $element['#description'] = _captcha_get_description();
+    }
+
     parent::prepare($element, $webform_submission);
 
     $element['#after_build'][] = [get_class($this), 'afterBuildCaptcha'];
