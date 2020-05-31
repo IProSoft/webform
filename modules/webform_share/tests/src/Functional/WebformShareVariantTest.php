@@ -3,7 +3,6 @@
 namespace Drupal\Tests\webform_share\Functional;
 
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
-use Drupal\webform\Entity\Webform;
 use Drupal\webform_share\Element\WebformShareIframe;
 
 /**

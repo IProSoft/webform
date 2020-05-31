@@ -195,7 +195,6 @@ class TextFormat extends WebformElementBase {
     return array_merge(parent::trustedCallbacks(), ['preRenderFixTextFormatStates']);
   }
 
-
   /**
    * {@inheritdoc}
    */

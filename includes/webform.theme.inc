@@ -376,7 +376,7 @@ function webform_preprocess_datetime_form(&$variables) {
 
   $element = $variables['element'];
 
-  // Date and time custom placeholder
+  // Date and time custom placeholder.
   if (isset($element['#date_date_placeholder']) && isset($variables['content']['date'])) {
     $variables['content']['date']['#attributes']['placeholder'] = $element['#date_date_placeholder'];
   }
@@ -530,7 +530,7 @@ function webform_preprocess_form_element_label(&$variables) {
   if (isset($variables['title'])
     && is_array($variables['title'])
     && is_array($variables['title']['#markup'])) {
-      $variables['title'] = $variables['title']['#markup'];
+    $variables['title'] = $variables['title']['#markup'];
   }
 
   // Remove label 'for' attribute.

@@ -525,7 +525,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $message = $this->t('Remote post request return @status_code status code.', ['@status_code' => $response->getStatusCode()]);
       $this->handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response);
       return;
-    } else {
+    }
+    else {
       $this->displayCustomResponseMessage($response, FALSE);
     }
 
@@ -710,6 +711,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    *   Custom data.
    *
    * @return array
+   *   The custom data with value casted
    */
   protected function castCustomData(array $data) {
     if (empty($this->configuration['cast'])) {
