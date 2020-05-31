@@ -1144,8 +1144,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $from = $message['from_mail'];
 
     // Remove less than (<) and greater (>) than from name.
-    // @todo Figure out the proper way to encode special characters.
-    // Note: PhpMail call.
     $message['from_name'] = preg_replace('/[<>]/', '', $message['from_name']);
 
     if (!empty($message['from_name'])) {
