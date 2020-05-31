@@ -4,7 +4,6 @@ namespace Drupal\webform\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,7 +27,7 @@ class WebformSubmissionsController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
     $instance->entityRepository = $container->get('entity.repository');
-    return $instance ;
+    return $instance;
   }
 
   /**

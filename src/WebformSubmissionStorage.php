@@ -3,7 +3,6 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Database\Database;
-use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityInterface;

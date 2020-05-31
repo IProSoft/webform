@@ -32,7 +32,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->database= $container->get('database');
+    $instance->database = $container->get('database');
     return $instance;
   }
 

@@ -65,7 +65,6 @@ class WebformSubmissionLogController extends ControllerBase {
    */
   protected $logManager;
 
-
   /**
    * {@inheritdoc}
    */

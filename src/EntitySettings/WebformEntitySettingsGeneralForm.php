@@ -10,8 +10,6 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\WebformMessageManagerInterface;
-use Drupal\webform\WebformThemeManagerInterface;
-use Drupal\webform\WebformThirdPartySettingsManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

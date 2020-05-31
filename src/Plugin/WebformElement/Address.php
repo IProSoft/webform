@@ -58,7 +58,7 @@ class Address extends WebformCompositeBase {
   /**
    * The address county repository service.
    *
-   * @var \CommerceGuys\Addressing\Country\CountryRepositoryInterface $country_repository
+   * @var \CommerceGuys\Addressing\Country\CountryRepositoryInterface
    */
   protected $addressCountryRepository;
 

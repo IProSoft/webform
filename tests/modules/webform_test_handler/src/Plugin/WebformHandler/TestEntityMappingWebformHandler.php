@@ -79,7 +79,6 @@ class TestEntityMappingWebformHandler extends WebformHandlerBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $this->applyFormStateToConfiguration($form_state);
 
-
     // Define #ajax callback.
     $ajax = [
       'callback' => [get_class($this), 'ajaxCallback'],

@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional\Element;
 
-use Drupal\webform\Entity\Webform;
-
 /**
  * Tests for webform element description.
  *

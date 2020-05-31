@@ -48,7 +48,6 @@ class WebformOptionsCustomListBuilder extends ConfigEntityListBuilder {
    */
   protected $category;
 
-
   /**
    * {@inheritdoc}
    */

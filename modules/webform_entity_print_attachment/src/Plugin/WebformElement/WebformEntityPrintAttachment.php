@@ -28,8 +28,6 @@ class WebformEntityPrintAttachment extends WebformAttachmentBase {
    * @var \Drupal\entity_print\Plugin\ExportTypeManagerInterface
    */
   protected $exportTypeManager;
-
-
   /**
    * {@inheritdoc}
    */

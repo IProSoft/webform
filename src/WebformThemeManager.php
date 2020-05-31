@@ -69,6 +69,8 @@ class WebformThemeManager implements WebformThemeManagerInterface {
   /**
    * Constructs a WebformThemeManager object.
    *
+   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The current route match.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
    * @param \Drupal\Core\Render\RendererInterface $renderer
@@ -79,8 +81,6 @@ class WebformThemeManager implements WebformThemeManagerInterface {
    *   The theme handler.
    * @param \Drupal\Core\Theme\ThemeInitializationInterface $theme_initialization
    *   The theme initialization.
-   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
-   *   The current route match.
    */
   public function __construct(RouteMatchInterface $route_match, ConfigFactoryInterface $config_factory, RendererInterface $renderer, ThemeManagerInterface $theme_manager, ThemeHandlerInterface $theme_handler, ThemeInitializationInterface $theme_initialization) {
     $this->routeMatch = $route_match;

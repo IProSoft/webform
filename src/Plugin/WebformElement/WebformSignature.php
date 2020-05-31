@@ -31,7 +31,6 @@ class WebformSignature extends WebformElementBase {
    */
   protected $fileSystem;
 
-
   /**
    * {@inheritdoc}
    */

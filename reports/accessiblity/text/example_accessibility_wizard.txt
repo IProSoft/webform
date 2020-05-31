@@ -10,5 +10,25 @@ Results for URL: http://localhost/wf/webform/example_accessibility_wizard
    ├── #webform-submission-example-accessibility-wizard-add-form > div:nth-child(7) > ul > li:nth-child(1) > span:nth-child(1)
    └── <span class="progress-marker">1</span>
 
-1 Errors
+ • Error: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.03:1. Recommendation: change background to #767676.
+   ├── WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail
+   ├── #webform-submission-example-accessibility-wizard-add-form > div:nth-child(7) > ul > li:nth-child(2) > span:nth-child(1)
+   └── <span class="progress-marker">2</span>
+
+ • Error: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.03:1. Recommendation: change background to #767676.
+   ├── WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail
+   ├── #webform-submission-example-accessibility-wizard-add-form > div:nth-child(7) > ul > li:nth-child(3) > span:nth-child(1)
+   └── <span class="progress-marker">3</span>
+
+ • Error: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.03:1. Recommendation: change background to #767676.
+   ├── WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail
+   ├── #webform-submission-example-accessibility-wizard-add-form > div:nth-child(7) > ul > li:nth-child(4) > span:nth-child(1)
+   └── <span class="progress-marker">4</span>
+
+ • Error: This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.03:1. Recommendation: change background to #767676.
+   ├── WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail
+   ├── #webform-submission-example-accessibility-wizard-add-form > div:nth-child(7) > ul > li:nth-child(5) > span:nth-child(1)
+   └── <span class="progress-marker">5</span>
+
+5 Errors
 

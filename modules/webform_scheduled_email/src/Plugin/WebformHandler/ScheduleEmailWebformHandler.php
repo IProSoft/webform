@@ -38,7 +38,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
   /**
    * The webform scheculed email manager.
    *
-   * @var \Drupal\webform_scheduled_email\WebformScheduledEmailManagerInterface $webform_scheduled_email_manager
+   * @var \Drupal\webform_scheduled_email\WebformScheduledEmailManagerInterface
    */
   protected $scheduledEmailManager;
 
