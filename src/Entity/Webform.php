@@ -2172,7 +2172,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     // Because webform are not fieldable, when a webform is saved not all
     // config/content entity related caches need to be cleared.
     // parent::postSave($storage, $update);
-
     /**************************************************************************/
 
     $this->invalidateTagsOnSave($update);

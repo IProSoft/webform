@@ -95,6 +95,7 @@ function webform_share_menu_local_tasks_alter(&$data, $route_name, RefinableCach
     $cacheability->addCacheContexts(['url.query_args']);
   }
 }
+
 /**
  * Implements hook_element_info_alter().
  */

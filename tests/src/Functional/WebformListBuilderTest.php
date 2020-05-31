@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional;
 
-use Drupal\Tests\BrowserTestBase;
-
 /**
  * Tests for webform list builder.
  *
