@@ -2779,7 +2779,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
-  public function applyVariants(WebformSubmissionInterface $webform_submission = NULL, $variants = [], $force = FALSE) {
+  public function applyVariants(WebformSubmissionInterface $webform_submission = NULL, array $variants = [], $force = FALSE) {
     // Get variants from webform submission.
     if ($webform_submission) {
       // Make sure webform submission is associated with this webform.
