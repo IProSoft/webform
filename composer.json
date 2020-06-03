@@ -45,10 +45,11 @@
     }
   },
   "require": {
-    "drupal/jquery_ui": "~1.0",
-    "drupal/jquery_ui_datepicker": "~1.0",
-    "drupal/jquery_ui_tabs": "~1.0",
-    "drupal/jquery_ui_tooltip": "~1.0"
+      "drupal/core": "^8.8",
+      "drupal/jquery_ui": "~1.0",
+      "drupal/jquery_ui_datepicker": "~1.0",
+      "drupal/jquery_ui_tabs": "~1.0",
+      "drupal/jquery_ui_tooltip": "~1.0"
   },
   "require-dev": {
     "drupal/address": "~1.0",
