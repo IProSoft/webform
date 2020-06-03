@@ -2,7 +2,7 @@ name: 'Webform Test Bootstrap Helper'
 type: module
 description: 'Suport module for webform bootstrap integration testing.'
 package: 'Webform Testing'
-core_version_requirement: ^8
+core_version_requirement: ^8.8
 dependencies:
   - 'styleguide:styleguide'
   - 'webform:webform'
