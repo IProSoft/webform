@@ -693,7 +693,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Required indicator.
     $current_page = $this->getCurrentPage($form, $form_state);
-    if ($current_page != 'webform_preview' && $this->getWebformSetting('form_required') && $webform->hasRequired()) {
+    if ($current_page != WebformInterface::PAGE_PREVIEW && $this->getWebformSetting('form_required') && $webform->hasRequired()) {
       $form['required'] = [
         '#theme' => 'webform_required',
         '#label' => $this->getWebformSetting('form_required_label'),
@@ -763,7 +763,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Display inline confirmation message with back to link.
-    if ($form_state->get('current_page') === 'webform_confirmation') {
+    if ($form_state->get('current_page') === WebformInterface::PAGE_CONFIRMATION) {
       $form['confirmation'] = [
         '#theme' => 'webform_confirmation',
         '#webform' => $webform,
@@ -1120,7 +1120,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     $current_page_name = $this->getCurrentPage($form, $form_state);
-    if (!$this->getWebformSetting('wizard_progress_link') && !($this->getWebformSetting('wizard_preview_link') && $current_page_name === 'webform_preview')) {
+    if (!$this->getWebformSetting('wizard_progress_link') && !($this->getWebformSetting('wizard_preview_link') && $current_page_name === WebformInterface::PAGE_PREVIEW)) {
       return NULL;
     }
 
@@ -1258,15 +1258,15 @@ class WebformSubmissionForm extends ContentEntityForm {
         case 'name':
           $track_previous_page = $previous_page;
           $track_next_page = $next_page;
-          $track_last_page = 'webform_confirmation';
+          $track_last_page = WebformInterface::PAGE_CONFIRMATION;
           break;
       }
 
       $is_first_page = ($current_page == $this->getFirstPage($pages)) ? TRUE : FALSE;
-      $is_last_page = (in_array($current_page, ['webform_preview', 'webform_confirmation', $this->getLastPage($pages)])) ? TRUE : FALSE;
-      $is_preview_page = ($current_page == 'webform_preview');
-      $is_next_page_preview = ($next_page == 'webform_preview') ? TRUE : FALSE;
-      $is_next_page_complete = ($next_page == 'webform_confirmation') ? TRUE : FALSE;
+      $is_last_page = (in_array($current_page, [WebformInterface::PAGE_PREVIEW, WebformInterface::PAGE_CONFIRMATION, $this->getLastPage($pages)])) ? TRUE : FALSE;
+      $is_preview_page = ($current_page == WebformInterface::PAGE_PREVIEW);
+      $is_next_page_preview = ($next_page == WebformInterface::PAGE_PREVIEW) ? TRUE : FALSE;
+      $is_next_page_complete = ($next_page == WebformInterface::PAGE_CONFIRMATION) ? TRUE : FALSE;
       $is_next_page_optional_preview = ($is_next_page_preview && $preview_mode != DRUPAL_REQUIRED);
 
       // Only show that save button if this is the last page of the wizard or
@@ -1452,13 +1452,13 @@ class WebformSubmissionForm extends ContentEntityForm {
     // submit this form.
     // @see \Drupal\webform\WebformSubmissionForm::wizardSubmit
     if (empty($next_page)) {
-      $next_page = 'webform_confirmation';
+      $next_page = WebformInterface::PAGE_CONFIRMATION;
     }
 
     // Skip preview page and move to the confirmation page.
     // @see
-    if ($skip_preview && $next_page === 'webform_preview') {
-      $next_page = 'webform_confirmation';
+    if ($skip_preview && $next_page === WebformInterface::PAGE_PREVIEW) {
+      $next_page = WebformInterface::PAGE_CONFIRMATION;
     }
 
     // Set next page.
@@ -1501,7 +1501,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected function wizardSubmit(array &$form, FormStateInterface $form_state) {
     $current_page = $form_state->get('current_page');
 
-    if ($current_page === 'webform_confirmation') {
+    if ($current_page === WebformInterface::PAGE_CONFIRMATION) {
       $this->complete($form, $form_state);
       $this->submitForm($form, $form_state);
       $this->save($form, $form_state);
@@ -2100,7 +2100,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    */
   protected function displayCurrentPage(array &$form, FormStateInterface $form_state) {
     $current_page = $this->getCurrentPage($form, $form_state);
-    if ($current_page == 'webform_preview') {
+    if ($current_page == WebformInterface::PAGE_PREVIEW) {
       // Hide all elements except 'webform_actions'.
       foreach ($form['elements'] as $element_key => $element) {
         if (isset($element['#type']) && $element['#type'] === 'webform_actions') {
@@ -2261,7 +2261,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         return;
 
       case WebformInterface::CONFIRMATION_INLINE:
-        $form_state->set('current_page', 'webform_confirmation');
+        $form_state->set('current_page', WebformInterface::PAGE_CONFIRMATION);
         $form_state->setRebuild();
         return;
 

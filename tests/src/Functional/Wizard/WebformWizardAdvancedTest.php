@@ -4,6 +4,7 @@ namespace Drupal\Tests\webform\Functional\Wizard;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\Core\Serialization\Yaml;
+use Drupal\webform\WebformInterface;
 
 /**
  * Tests for webform advanced wizard.
@@ -141,7 +142,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     ];
     $this->drupalPostForm(NULL, $edit, 'Preview');
     // Check progress bar is set to 'Preview'.
-    $this->assertCurrentPage('Preview', 'webform_preview');
+    $this->assertCurrentPage('Preview', WebformInterface::PAGE_PREVIEW);
     // Check progress pages.
     $this->assertRaw('Page 4 of 5');
     // Check progress percentage.
@@ -164,7 +165,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Submit the webform.
     $this->drupalPostForm(NULL, [], 'Submit');
     // Check progress bar is set to 'Complete'.
-    $this->assertCurrentPage('Complete', 'webform_confirmation');
+    $this->assertCurrentPage('Complete', WebformInterface::PAGE_CONFIRMATION);
     // Check progress pages.
     $this->assertRaw('Page 5 of 5');
     // Check progress percentage.

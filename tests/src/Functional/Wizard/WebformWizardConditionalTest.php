@@ -3,6 +3,7 @@
 namespace Drupal\Tests\webform\Functional\Wizard;
 
 use Drupal\webform\Entity\Webform;
+use Drupal\webform\WebformInterface;
 
 /**
  * Tests for webform conditional wizard.
@@ -36,7 +37,7 @@ class WebformWizardConditionalTest extends WebformWizardTestBase {
     $this->drupalPostForm(NULL, [], 'Next Page >');
     $this->assertCurrentPage('Page 4', 'page_4');
     $this->drupalPostForm(NULL, [], 'Submit');
-    $this->assertCurrentPage('Complete', 'webform_confirmation');
+    $this->assertCurrentPage('Complete', WebformInterface::PAGE_CONFIRMATION);
     $sid = $this->getLastSubmissionId($webform);
     $this->assertNotEmpty($sid);
 
@@ -47,7 +48,7 @@ class WebformWizardConditionalTest extends WebformWizardTestBase {
     $this->drupalPostForm('/webform/test_form_wizard_conditional', $edit, 'Next Page >');
     $this->assertRaw('<div class="webform-progress">');
     $this->assertRaw('New submission added to Test: Webform: Wizard conditional.');
-    $this->assertCurrentPage('Complete', 'webform_confirmation');
+    $this->assertCurrentPage('Complete', WebformInterface::PAGE_CONFIRMATION);
     $sid = $this->getLastSubmissionId($webform);
     $this->assertNotEmpty($sid);
 
@@ -60,7 +61,7 @@ class WebformWizardConditionalTest extends WebformWizardTestBase {
       'trigger_none' => TRUE,
     ];
     $this->drupalPostForm('/webform/test_form_wizard_conditional', $edit, 'Next Page >');
-    $this->assertCurrentPage('Preview', 'webform_preview');
+    $this->assertCurrentPage('Preview', WebformInterface::PAGE_PREVIEW);
 
     // Disable preview and include confirmation in progress page.
     $webform->setSettings(['preview' => 0, 'wizard_confirmation' => FALSE]);
