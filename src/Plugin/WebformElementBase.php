@@ -233,6 +233,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       'multiple__add_more_button_label' => (string) $this->t('Add'),
       'multiple__add_more_input' => TRUE,
       'multiple__add_more_input_label' => (string) $this->t('more items'),
+      'multiple__item_label' => (string) $this->t('item'),
       'multiple__no_items_message' => (string) $this->t('No items entered. Please add items below.'),
       'multiple__sorting' => TRUE,
       'multiple__operations' => TRUE,
@@ -2796,6 +2797,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('Table header label'),
       '#description' => $this->t('This is used as the table header for this webform element when displaying multiple values.'),
+    ];
+    $form['multiple']['multiple__item_label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Item label'),
+      '#description' => $this->t('This is used by the add/remove (+/-) icons.'),
     ];
     $form['multiple']['multiple__no_items_message'] = [
       '#type' => 'webform_html_editor',
