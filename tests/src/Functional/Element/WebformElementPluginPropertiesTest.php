@@ -143,6 +143,7 @@ address:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -383,6 +384,7 @@ date:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -472,6 +474,7 @@ datelist:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -558,6 +561,7 @@ datetime:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -663,6 +667,7 @@ email:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -731,6 +736,7 @@ entity_autocomplete:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1075,6 +1081,7 @@ number:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1462,6 +1469,7 @@ tel:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1577,6 +1585,7 @@ textarea:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1656,6 +1665,7 @@ textfield:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1728,6 +1738,7 @@ url:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -1904,6 +1915,7 @@ webform_address:
   multiple__empty_items: 1
   multiple__header: false
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -2150,6 +2162,7 @@ webform_autocomplete:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -2476,6 +2489,7 @@ webform_contact:
   multiple__empty_items: 1
   multiple__header: false
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -2573,6 +2587,7 @@ webform_custom_composite:
   multiple__empty_items: 1
   multiple__header: true
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -2699,6 +2714,7 @@ webform_email_confirm:
   multiple__add_more_input_label: 'more items'
   multiple__add_more_items: 1
   multiple__empty_items: 1
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -2768,6 +2784,7 @@ webform_email_multiple:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -3215,6 +3232,7 @@ webform_link:
   multiple__empty_items: 1
   multiple__header: false
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -3595,6 +3613,7 @@ webform_name:
   multiple__empty_items: 1
   multiple__header: false
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -4386,6 +4405,7 @@ webform_telephone:
   multiple__empty_items: 1
   multiple__header: false
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
@@ -4636,6 +4656,7 @@ webform_time:
   multiple__add_more_items: 1
   multiple__empty_items: 1
   multiple__header_label: ''
+  multiple__item_label: item
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
