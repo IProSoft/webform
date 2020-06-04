@@ -647,7 +647,7 @@ tel:
   dependencies: {  }
   default_key: ''
   category: 'Advanced elements'
-  description: "Provides a form element for entering a telephone number."
+  description: 'Provides a form element for entering a telephone number.'
   hidden: false
   multiline: false
   composite: false
@@ -1126,26 +1126,6 @@ webform_entity_checkboxes:
   container: false
   root: false
   multiple: true
-'webform_entity_print_attachment:pdf':
-  dependencies: {  }
-  default_key: ''
-  category: 'File attachment elements'
-  description: 'Generates a PDF attachment.'
-  hidden: false
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: false
-  deprecated_message: ''
-  id: webform_entity_print_attachment
-  label: 'Attachment PDF'
-  deriver: \Drupal\webform_entity_print_attachment\Plugin\Derivative\WebformEntityPrintAttachmentDeriver
-  class: Drupal\webform_entity_print_attachment\Plugin\WebformElement\WebformEntityPrintAttachment
-  provider: webform_entity_print_attachment
-  input: true
-  container: false
-  root: false
-  multiple: false
 webform_entity_radios:
   dependencies: {  }
   default_key: ''
@@ -1530,6 +1510,25 @@ webform_same:
   container: false
   root: false
   multiple: false
+webform_scale:
+  dependencies: {  }
+  default_key: ''
+  category: 'Advanced elements'
+  description: 'Provides a form element for input of a numeric scale.'
+  hidden: false
+  multiline: false
+  composite: false
+  states_wrapper: false
+  deprecated: false
+  deprecated_message: ''
+  id: webform_scale
+  label: Scale
+  class: Drupal\webform\Plugin\WebformElement\WebformScale
+  provider: webform
+  input: true
+  container: false
+  root: false
+  multiple: false
 webform_section:
   dependencies: {  }
   default_key: ''
@@ -1585,6 +1584,44 @@ webform_signature:
   provider: webform
   input: true
   container: false
+  root: false
+  multiple: false
+webform_table:
+  dependencies: {  }
+  default_key: ''
+  category: Containers
+  description: 'Provides an element to render a table.'
+  hidden: false
+  multiline: false
+  composite: false
+  states_wrapper: false
+  deprecated: false
+  deprecated_message: ''
+  id: webform_table
+  label: Table
+  class: Drupal\webform\Plugin\WebformElement\WebformTable
+  provider: webform
+  input: false
+  container: true
+  root: false
+  multiple: false
+webform_table_row:
+  dependencies: {  }
+  default_key: ''
+  category: Containers
+  description: 'Provides an element to render a table row.'
+  hidden: true
+  multiline: false
+  composite: false
+  states_wrapper: false
+  deprecated: false
+  deprecated_message: ''
+  id: webform_table_row
+  label: 'Table row'
+  class: Drupal\webform\Plugin\WebformElement\WebformTableRow
+  provider: webform
+  input: false
+  container: true
   root: false
   multiple: false
 webform_table_sort:
@@ -1819,65 +1856,7 @@ webform_wizard_page:
   container: true
   root: true
   multiple: false
-webform_table:
-  dependencies: {  }
-  default_key: ''
-  category: Containers
-  description: 'Provides an element to render a table.'
-  hidden: false
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: false
-  deprecated_message: ''
-  id: webform_table
-  label: Table
-  class: Drupal\webform\Plugin\WebformElement\WebformTable
-  provider: webform
-  input: false
-  container: true
-  root: false
-  multiple: false
-webform_table_row:
-  dependencies: {  }
-  default_key: ''
-  category: 'Containers'
-  description: 'Provides an element to render a table row.'
-  hidden: true
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: false
-  deprecated_message: ''
-  id: webform_table_row
-  label: 'Table row'
-  class: Drupal\webform\Plugin\WebformElement\WebformTableRow
-  provider: webform
-  input: false
-  container: true
-  root: false
-  multiple: false
-webform_scale:
-  dependencies: {  }
-  default_key: ''
-  category: 'Advanced elements'
-  description: 'Provides a form element for input of a numeric scale.'
-  id: webform_scale
-  label: Scale
-  class: Drupal\webform\Plugin\WebformElement\WebformScale
-  provider: webform
-  input: true
-  container: false
-  root: false
-  multiple: false
-  hidden: false
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: false
-  deprecated_message: ''
 YAML;
-
     return Yaml::decode($yaml);
   }
 
