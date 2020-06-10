@@ -4901,6 +4901,7 @@ webform_wizard_page:
     - authenticated
   access_view_users: {  }
   admin_title: ''
+  attributes: {  }
   format: details
   format_attributes: {  }
   format_html: ''
