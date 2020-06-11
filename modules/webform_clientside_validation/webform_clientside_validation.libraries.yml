@@ -1,0 +1,9 @@
+webform_clientside_validation.ife:
+  version: VERSION
+  js:
+    js/webform_clientside_validation.ife.js: {}
+  css:
+    component:
+      css/webform_clientside_validation.ife.css: { }
+  dependencies:
+    - clientside_validation_jquery/jquery.validate.ife
