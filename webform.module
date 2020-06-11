@@ -832,7 +832,7 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
   }
 
   // Display as buttons.
-  if (!empty($element['#options_display']) && $element['#options_display'] === 'buttons') {
+  if (!empty($element['#options_display']) && strpos($element['#options_display'], 'buttons') === 0) {
     foreach (Element::children($element) as $key) {
       // Add wrapper which is needed to make flexbox work with tables.
       $element[$key]['#prefix'] = '<div class="webform-options-display-buttons-wrapper">';

@@ -111,6 +111,20 @@ elements: |
       '#title': radios_buttons
       '#options': yes_no
       '#options_display': buttons
+    radios_buttons_horizontal:
+      '#type': radios
+      '#title': radios_buttons_horizontal
+      '#options_display': buttons_horizontal
+      '#options_description_display': description
+      '#options':
+        one: 'One'
+        two: 'Two'
+        three: 'Three -- This is a description'
+    radios_buttons_vertical:
+      '#type': radios
+      '#title': radios_buttons_vertical
+      '#options': yes_no
+      '#options_display': buttons_vertical
     radios_buttons_inline:
       '#type': radios
       '#title': radios_buttons_inline
@@ -209,7 +223,7 @@ elements: |
           '#disabled': true
         three:
           '#disabled': true
-  
+
 css: ''
 javascript: ''
 settings:
