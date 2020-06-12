@@ -857,7 +857,9 @@ abstract class OptionsBase extends WebformElementBase {
         'two_columns' => $this->t('Two columns'),
         'three_columns' => $this->t('Three columns'),
         'side_by_side' => $this->t('Side by side'),
-        'buttons' => $this->t('Buttons'),
+        'buttons' => $this->t('Buttons - flexbox'),
+        'buttons_horizontal' => $this->t('Buttons - horizontal'),
+        'buttons_vertical' => $this->t('Buttons - vertical'),
       ],
     ];
     $form['options']['options_display_container']['options_description_display'] = [

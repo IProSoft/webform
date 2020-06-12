@@ -96,6 +96,20 @@ elements: |
       '#title': checkboxes_buttons
       '#options': yes_no
       '#options_display': buttons
+    checkboxes_buttons_horizontal:
+      '#type': checkboxes
+      '#title': checkboxes_buttons_horizontal
+      '#options_display': buttons_horizontal
+      '#options_description_display': description
+      '#options':
+        one: 'One'
+        two: 'Two'
+        three: 'Three -- This is a description'
+    checkboxes_buttons_vertical:
+      '#type': checkboxes
+      '#title': checkboxes_buttons_vertical
+      '#options': yes_no
+      '#options_display': buttons_vertical
     checkboxes_buttons_inline:
       '#type': checkboxes
       '#title': checkboxes_buttons_inline
@@ -194,7 +208,7 @@ elements: |
           '#disabled': true
         three:
           '#disabled': true
-  
+
 css: ''
 javascript: ''
 settings:
