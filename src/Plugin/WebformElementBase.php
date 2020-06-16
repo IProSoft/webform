@@ -3038,6 +3038,20 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#attributes__description' => $this->t("Enter additional attributes to be added to the details' summary."),
     ];
 
+    /* Title attributes */
+
+    $form['title_attributes'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Title attributes'),
+    ];
+    $form['title_attributes']['title_attributes'] = [
+      '#type' => 'webform_element_attributes',
+      '#title' => $this->t('Title'),
+      '#class__description' => $this->t("Apply classes to the title tag."),
+      '#style__description' => $this->t("Apply custom styles to the  title tag."),
+      '#attributes__description' => $this->t("Enter additional attributes to be added to the title tag."),
+    ];
+
     /* Submission display */
     $has_edit_twig_access = WebformTwigExtension::hasEditTwigAccess();
 
@@ -3413,6 +3427,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
           'element_attributes',
           'label_attributes',
           'summary_attributes',
+          'title_attributes',
           'display',
           'admin',
           'options_properties',

@@ -375,6 +375,20 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       '#size' => 20,
       '#default_value' => $settings['default_wizard_confirmation_label'],
     ];
+    $form['wizard_settings']['default_wizard_toggle_show_label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Default wizard show all elements label'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#default_value' => $settings['default_wizard_toggle_show_label'],
+    ];
+    $form['wizard_settings']['default_wizard_toggle_hide_label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Default wizard hide all elements label'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#default_value' => $settings['default_wizard_toggle_hide_label'],
+    ];
 
     // Preview settings.
     $form['preview_settings'] = [

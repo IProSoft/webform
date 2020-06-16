@@ -3738,3 +3738,10 @@ function webform_update_8193() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
 }
+
+/**
+ * Issue #3144962: Webform cards
+ */
+function webform_update_8194() {
+  _webform_update_webform_settings();
+}

@@ -24,6 +24,7 @@ class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase 
     'taxonomy',
     'webform',
     'webform_attachment',
+    'webform_cards',
     // Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the
     // Webform module's (optional) dependencies
     // @see https://www.drupal.org/project/webform/issues/3110478
@@ -916,6 +917,25 @@ webform_autocomplete:
   container: false
   root: false
   multiple: true
+webform_card:
+  dependencies: {  }
+  default_key: ''
+  category: Cards
+  description: 'Provides an element for a fast clientside pagination.'
+  hidden: true
+  multiline: false
+  composite: false
+  states_wrapper: false
+  deprecated: false
+  deprecated_message: ''
+  id: webform_card
+  label: Card
+  class: Drupal\webform_cards\Plugin\WebformElement\WebformCard
+  provider: webform_cards
+  input: false
+  container: true
+  root: true
+  multiple: false
 webform_checkboxes_other:
   dependencies: {  }
   default_key: ''
@@ -1842,7 +1862,7 @@ webform_wizard_page:
   default_key: ''
   category: Wizard
   description: 'Provides an element to display multiple form elements as a page in a multi-step form wizard.'
-  hidden: false
+  hidden: true
   multiline: false
   composite: false
   states_wrapper: false
