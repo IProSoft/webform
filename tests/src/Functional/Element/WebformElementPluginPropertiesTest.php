@@ -24,6 +24,7 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'taxonomy',
     'webform',
     'webform_attachment',
+    'webform_cards',
     // Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the
     // Webform module's (optional) dependencies
     // @see https://www.drupal.org/project/webform/issues/3110478
@@ -2185,6 +2186,36 @@ webform_autocomplete:
   unique_error: ''
   unique_user: false
   wrapper_attributes: {  }
+webform_card:
+  access_create_permissions: {  }
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_update_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_view_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  admin_title: ''
+  format: details
+  format_attributes: {  }
+  format_html: ''
+  format_text: ''
+  next_button_label: ''
+  prev_button_label: ''
+  private: false
+  states: {  }
+  states_clear: true
+  title: ''
+  title_attributes: {  }
+  title_display: ''
+  title_tag: h2
 webform_checkboxes_other:
   access_create_permissions: {  }
   access_create_roles:
@@ -4038,6 +4069,7 @@ webform_section:
   states: {  }
   states_clear: true
   title: ''
+  title_attributes: {  }
   title_display: ''
   title_tag: h2
 webform_select_other:

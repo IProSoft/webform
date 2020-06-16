@@ -173,6 +173,7 @@ function webform_theme() {
         'webform_submission' => NULL,
         'current_page' => NULL,
         'operation' => NULL,
+        'pages' => [],
       ],
     ],
 
@@ -183,6 +184,7 @@ function webform_theme() {
         'current_page' => NULL,
         'operation' => NULL,
         'max_pages' => 10,
+        'pages' => [],
       ],
     ],
 
@@ -193,6 +195,7 @@ function webform_theme() {
         'current_page' => NULL,
         'operation' => NULL,
         'max_pages' => 10,
+        'pages' => [],
       ],
     ],
   ];

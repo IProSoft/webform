@@ -54,6 +54,7 @@
   "require-dev": {
     "drupal/address": "~1.0",
     "drupal/captcha": "~1.0",
+    "drupal/clientside_validation": "~3.0",
     "drupal/devel": "~3.0",
     "drupal/group": "1.x-dev",
     "drupal/jquery_ui_checkboxradio": "~1.0",

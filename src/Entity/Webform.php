@@ -1093,11 +1093,17 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'wizard_progress_percentage' => FALSE,
       'wizard_progress_link' => FALSE,
       'wizard_progress_states' => FALSE,
+      'wizard_auto_forward' => TRUE,
       'wizard_start_label' => '',
       'wizard_preview_link' => FALSE,
       'wizard_confirmation' => TRUE,
       'wizard_confirmation_label' => '',
       'wizard_track' => '',
+      'wizard_prev_button_label' => '',
+      'wizard_next_button_label' => '',
+      'wizard_toggle' => FALSE,
+      'wizard_toggle_show_label' => '',
+      'wizard_toggle_hide_label' => '',
       'preview' => DRUPAL_DISABLED,
       'preview_label' => '',
       'preview_title' => '',
@@ -1887,6 +1893,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *
    * @return array
    *   An associative array of webform wizard pages.
+   *
+   * @see \Drupal\webform_cards\WebformCardsManager::buildPages
    */
   protected function buildPages($operation = 'default') {
     if (isset($this->pages[$operation])) {
@@ -1923,8 +1931,10 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         // to the current user.
         $access_operation = (in_array($operation, ['default', 'add'])) ? 'create' : 'update';
         if ($element_plugin->checkAccessRules($access_operation, $element)) {
-          $pages[$key] = array_intersect_key($element, $wizard_properties);
-          $pages[$key]['#access'] = TRUE;
+          $pages[$key] = array_intersect_key($element, $wizard_properties) + [
+              '#type' => 'page',
+              '#access' => TRUE,
+            ];
         }
       }
     }
@@ -1936,11 +1946,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       if (empty($pages)) {
         $pages[WebformInterface::PAGE_START] = [
           '#title' => $this->getSetting('wizard_start_label', TRUE),
+          '#type' => 'page',
           '#access' => TRUE,
         ];
       }
       $pages[WebformInterface::PAGE_PREVIEW] = [
         '#title' => $this->getSetting('preview_label', TRUE),
+        '#type' => 'page',
         '#access' => TRUE,
       ];
     }
@@ -1949,6 +1961,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     if ($pages && $this->getSetting('wizard_confirmation')) {
       $pages[WebformInterface::PAGE_CONFIRMATION] = [
         '#title' => $this->getSetting('wizard_confirmation_label', TRUE),
+        '#type' => 'page',
         '#access' => TRUE,
       ];
     }

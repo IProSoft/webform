@@ -31,13 +31,13 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check progress bar is set to 'Your Information'.
     $this->assertPattern('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--current"><b>Your Information</b><span></span></li>#');
     // Check progress pages.
-    $this->assertRaw('Page 1 of 5');
+    $this->assertRaw('1 of 5');
     // Check progress percentage.
-    $this->assertRaw('(0%)');
+    $this->assertText('(0%)');
     // Check draft button does not exist.
     $this->assertNoFieldById('edit-draft', 'Save Draft');
     // Check next button does exist.
-    $this->assertFieldById('edit-wizard-next', 'Next Page >');
+    $this->assertFieldById('edit-wizard-next', 'Next >');
     // Check first name field does exist.
     $this->assertFieldById('edit-first-name', 'John');
 
@@ -49,21 +49,21 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $edit = [
       'first_name' => 'Jane',
     ];
-    $this->drupalPostForm('/webform/test_form_wizard_advanced', $edit, 'Next Page >');
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', $edit, 'Next >');
     // Check progress bar is set to 'Contact Information'.
     $this->assertPattern('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--done"><b>Your Information</b><span></span></li>#');
     $this->assertPattern('#<li data-webform-page="contact" class="webform-progress-bar__page webform-progress-bar__page--current"><b>Contact Information</b></li>#');
     // Check progress pages.
-    $this->assertRaw('Page 2 of 5');
+    $this->assertRaw('2 of 5');
     // Check progress percentage.
-    $this->assertRaw('(25%)');
+    $this->assertText('(25%)');
 
     // Check draft button does exist.
     $this->assertFieldById('edit-draft', 'Save Draft');
     // Check previous button does exist.
-    $this->assertFieldById('edit-wizard-prev', '< Previous Page');
+    $this->assertFieldById('edit-wizard-prev', '< Previous');
     // Check next button does exist.
-    $this->assertFieldById('edit-wizard-next', 'Next Page >');
+    $this->assertFieldById('edit-wizard-next', 'Next >');
     // Check email field does exist.
     $this->assertFieldById('edit-email', 'johnsmith@example.com');
 
@@ -72,7 +72,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $edit = [
       'email' => 'janesmith@example.com',
     ];
-    $this->drupalPostForm(NULL, $edit, '< Previous Page');
+    $this->drupalPostForm(NULL, $edit, '< Previous');
     // Check progress bar is set to 'Your Information'.
     $this->assertPattern('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--current"><b>Your Information</b><span></span></li>#');
     // Check nosave class.
@@ -80,9 +80,9 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check no nosave attributes.
     $this->assertNoRaw('data-webform-unsaved');
     // Check progress pages.
-    $this->assertRaw('Page 1 of 5');
+    $this->assertRaw('1 of 5');
     // Check progress percentage.
-    $this->assertRaw('(0%)');
+    $this->assertText('(0%)');
 
     // Check first name set to Jane.
     $this->assertFieldById('edit-first-name', 'Jane');
@@ -100,7 +100,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $this->assertFieldChecked('edit-sex-female');
 
     // Move to next page (Contact Information).
-    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], 'Next Page >');
+    $this->drupalPostForm('/webform/test_form_wizard_advanced', [], 'Next >');
     // Check nosave class.
     $this->assertRaw('js-webform-unsaved');
     // Check nosave attributes.
@@ -108,9 +108,9 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check progress bar is set to 'Contact Information'.
     $this->assertCurrentPage('Contact Information', 'contact');
     // Check progress pages.
-    $this->assertRaw('Page 2 of 5');
+    $this->assertRaw('2 of 5');
     // Check progress percentage.
-    $this->assertRaw('(25%)');
+    $this->assertText('(25%)');
 
     // Check email field is now janesmith@example.com.
     $this->assertFieldById('edit-email', 'janesmith@example.com');
@@ -126,11 +126,11 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $this->assertCurrentPage('Contact Information', 'contact');
 
     // Move to last page (Your Feedback).
-    $this->drupalPostForm(NULL, [], 'Next Page >');
+    $this->drupalPostForm(NULL, [], 'Next >');
     // Check progress bar is set to 'Your Feedback'.
     $this->assertCurrentPage('Your Feedback', 'feedback');
     // Check previous button does exist.
-    $this->assertFieldById('edit-wizard-prev', '< Previous Page');
+    $this->assertFieldById('edit-wizard-prev', '< Previous');
     // Check next button is labeled 'Preview'.
     $this->assertFieldById('edit-preview-next', 'Preview');
     // Check submit button does exist.
@@ -144,9 +144,9 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check progress bar is set to 'Preview'.
     $this->assertCurrentPage('Preview', WebformInterface::PAGE_PREVIEW);
     // Check progress pages.
-    $this->assertRaw('Page 4 of 5');
+    $this->assertRaw('4 of 5');
     // Check progress percentage.
-    $this->assertRaw('(75%)');
+    $this->assertText('(75%)');
 
     // Check preview values.
     $this->assertRaw('<label>First Name</label>');
@@ -167,9 +167,9 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check progress bar is set to 'Complete'.
     $this->assertCurrentPage('Complete', WebformInterface::PAGE_CONFIRMATION);
     // Check progress pages.
-    $this->assertRaw('Page 5 of 5');
+    $this->assertRaw('5 of 5');
     // Check progress percentage.
-    $this->assertRaw('(100%)');
+    $this->assertText('(100%)');
 
     /* Custom wizard settings (using advanced wizard) */
 
@@ -231,9 +231,9 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     // Check no progress bar.
     $this->assertNoRaw('class="webform-progress-bar"');
     // Check progress pages.
-    $this->assertRaw('Page 1 of 5');
+    $this->assertRaw('1 of 5');
     // Check progress percentage.
-    $this->assertRaw('(0%)');
+    $this->assertText('(0%)');
 
     // Check global complete labels.
     $webform->setSettings([

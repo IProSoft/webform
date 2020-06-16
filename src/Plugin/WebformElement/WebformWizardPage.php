@@ -16,6 +16,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   label = @Translation("Wizard page"),
  *   description = @Translation("Provides an element to display multiple form elements as a page in a multi-step form wizard."),
  *   category = @Translation("Wizard"),
+ *   hidden = TRUE,
  * )
  */
 class WebformWizardPage extends Details implements WebformElementWizardPageInterface {
@@ -116,35 +117,19 @@ class WebformWizardPage extends Details implements WebformElementWizardPageInter
       '#type' => 'textfield',
       '#title' => $this->t('Previous page button label'),
       '#description' => $this->t('This is used for the Next Page button on the page before this page break.') . '<br /><br />' .
-      $this->t('Defaults to: %value', ['%value' => $this->getDefaultSettings($webform, 'wizard_prev_button_label')]),
+      $this->t('Defaults to: %value', ['%value' => $webform->getSetting('wizard_prev_button_label', TRUE)]),
     ];
     $form['wizard_page']['next_button_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Next page button label'),
       '#description' => $this->t('This is used for the Previous Page button on the page after this page break.') . '<br /><br />' .
-      $this->t('Defaults to: %value', ['%value' => $this->getDefaultSettings($webform, 'wizard_next_button_label')]),
+      $this->t('Defaults to: %value', ['%value' => $webform->getSetting('wizard_next_button_label', TRUE)]),
     ];
 
     // Wizard pages only support visible or hidden state.
     $form['conditional_logic']['states']['#multiple'] = FALSE;
 
     return $form;
-  }
-
-  /**
-   * Get default from webform or global settings.
-   *
-   * @param \Drupal\webform\WebformInterface $webform
-   *   A webform.
-   * @param string $name
-   *   The name of the setting.
-   *
-   * @return string
-   *   The setting's value.
-   */
-  protected function getDefaultSettings(WebformInterface $webform, $name) {
-    return $webform->getSetting($name)
-      ?: $this->configFactory->get('webform.settings')->get("settings.default_$name");
   }
 
   /**

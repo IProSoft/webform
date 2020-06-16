@@ -479,8 +479,9 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
       $row_class[] = 'webform-ui-element-disabled';
     }
 
-    // Add element key.
+    // Add element key and type.
     $row['#attributes']['data-webform-key'] = $element['#webform_key'];
+    $row['#attributes']['data-webform-type'] = (isset($element['#type'])) ? $element['#type'] : '';
 
     $row['#attributes']['class'] = $row_class;
 

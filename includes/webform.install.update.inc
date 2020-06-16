@@ -3750,3 +3750,10 @@ function webform_update_8194() {
     'jquery_ui_tooltip',
   ]);
 }
+
+/**
+ * Issue #3144962: Webform cards.
+ */
+function webform_update_8195() {
+  _webform_update_webform_settings();
+}

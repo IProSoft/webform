@@ -557,7 +557,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // The data parameter is append to the URL after the form has
     // been submitted.
     //
-    // @see js/webform.form.wizard.js
+    // @see js/webform.wizard.track.js
     $track = $this->getWebform()->getSetting('wizard_track');
     if ($track && $this->getRequest()->isMethod('POST')) {
       $current_page = $this->getCurrentPage($form, $form_state);
@@ -671,7 +671,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Add wizard progress tracker and page links to the webform.
     $pages = $webform->getPages($this->operation);
-    if ($pages) {
+    if ($pages && $operation !== 'edit_all') {
       $current_page = $this->getCurrentPage($form, $form_state);
 
       // Add hidden pages submit actions.
@@ -1187,7 +1187,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           'data-webform-page' => $page_name,
           'formnovalidate' => 'formnovalidate',
           'class' => ['webform-wizard-pages-link', 'js-webform-wizard-pages-link'],
-          'title' => $this->t("Edit '@label' (Page @start of @end)", $t_args),
+          'title' => $this->t("Edit '@label' (@start of @end)", $t_args),
         ],
         '#access' => $access,
       ];
@@ -1549,7 +1549,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           '@start' => ($current_index + 1),
           '@end' => $total_pages,
         ];
-        $this->announce($this->t('"@title: @page" loaded. (Page @start of @end)', $t_args));
+        $this->announce($this->t('"@title: @page" loaded. (@start of @end)', $t_args));
       }
     }
   }
