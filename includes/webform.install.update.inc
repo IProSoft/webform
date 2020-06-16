@@ -3740,8 +3740,8 @@ function webform_update_8193() {
 }
 
 /**
- * Issue #3144962: Webform cards
+ * Issue #3144962: Webform cards.
  */
-function webform_update_8194() {
+function webform_update_8195() {
   _webform_update_webform_settings();
 }
