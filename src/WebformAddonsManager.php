@@ -1082,14 +1082,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'submission',
     ];
 
-    // Submissions: Webform Deter.
-    $projects['webform_deter'] = [
-      'title' => $this->t('Webform Deter'),
-      'description' => $this->t('Allows for configuration of regular expressions that will be checked against text and textarea elements on webforms and caution the user against submitting sensitive information if the regular expressions match.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_deter'),
-      'category' => 'submission',
-    ];
-
     // Submissions: Webform double opt-in.
     $projects['webform_double_opt_in'] = [
       'title' => $this->t('Webform double opt-in'),
