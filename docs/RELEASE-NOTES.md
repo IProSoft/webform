@@ -205,6 +205,8 @@ References
 
 [Tag a release](https://www.drupal.org/node/1066342)
 
+    git checkout 6.x
+    git up
     git tag 6.0.0-VERSION
     git push --tags
     git push origin tag 6.0.0-VERSION
