@@ -104,6 +104,14 @@
             $button.show();
           }
         });
+
+        // If the signature pad is not visible (i.e. in a modal dialog),
+        // recalculate the dimensions, after everything has rendered.
+        if (!$input.is(':visible')) {
+          setTimeout(function () {
+            calculateDimensions();
+          }, 1);
+        }
       });
     }
   };
