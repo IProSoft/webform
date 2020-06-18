@@ -281,11 +281,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     $query = $this->getQuery();
     $query->accessCheck(FALSE);
     $this->addQueryConditions($query, $webform, $source_entity, $account, $options);
-
-    // Issue: Query count method is not working for SQL Lite.
-    // return $query->count()->execute();
-    // Work-around: Manually count the number of entity ids.
-    return count($query->execute());
+    $query->count();
+    return $query->execute();
   }
 
   /**
