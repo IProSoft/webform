@@ -276,7 +276,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
       $row['status']['data'] = [
         '#type' => 'html_tag',
         '#tag' => 'span',
-        '#markup' => $this->t('Archived'),
+        '#value' => $this->t('Archived'),
         '#attributes' => ['aria-label' => $this->t('@label is archived', $t_args)],
       ];
       $row['status'] = $this->t('Archived');
@@ -311,7 +311,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
         $row['status']['data'] = [
           '#type' => 'html_tag',
           '#tag' => 'span',
-          '#markup' => $status,
+          '#value' => $status,
           '#attributes' => ['aria-label' => $aria_label],
         ];
       }

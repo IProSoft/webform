@@ -402,6 +402,11 @@ trait WebformEntityReferenceTrait {
     }
 
     WebformEntityTrait::setOptions($element, $settings);
+
+    // Set options all after entity options are defined.
+    if (!empty($element['#options_all'])) {
+      $element['#options'][$element['#options_all_value']] = $element['#options_all_text'];
+    }
   }
 
   /**
