@@ -250,8 +250,14 @@ checkboxes:
   multiple_error: ''
   options: {  }
   options__properties: {  }
+  options_all: false
+  options_all_text: 'All of the above'
+  options_all_value: all
   options_description_display: description
   options_display: one_column
+  options_none: false
+  options_none_text: 'None of the above'
+  options_none_value: none
   options_randomize: false
   prepopulate: false
   private: false
@@ -2260,6 +2266,9 @@ webform_checkboxes_other:
   options__properties: {  }
   options_description_display: description
   options_display: one_column
+  options_none: false
+  options_none_text: 'None of the above'
+  options_none_value: none
   options_randomize: false
   other__counter_maximum: ''
   other__counter_maximum_message: ''
@@ -2879,6 +2888,9 @@ webform_entity_checkboxes:
   multiple: true
   multiple_error: ''
   options__properties: {  }
+  options_all: false
+  options_all_text: 'All of the above'
+  options_all_value: all
   options_display: one_column
   options_randomize: false
   prepopulate: false
@@ -4514,7 +4526,13 @@ webform_term_checkboxes:
   multiple: true
   multiple_error: ''
   options__properties: {  }
+  options_all: false
+  options_all_text: 'All of the above'
+  options_all_value: all
   options_description_display: description
+  options_none: false
+  options_none_text: 'None of the above'
+  options_none_value: none
   prepopulate: false
   private: false
   required: false
