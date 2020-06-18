@@ -23,7 +23,6 @@
         return;
       }
 
-
       $(context).find('input.js-webform-signature').once('webform-signature').each(function () {
         var $input = $(this);
         var value = $input.val();
