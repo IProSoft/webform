@@ -69,7 +69,7 @@ elements: |
         '#title': custom_composite_textfield
         '#pre_render':
           - 'webform_test_ignored_element_callback'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -81,7 +81,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''

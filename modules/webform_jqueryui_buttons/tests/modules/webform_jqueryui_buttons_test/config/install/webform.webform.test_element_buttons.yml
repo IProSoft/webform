@@ -47,7 +47,7 @@ elements: |
     '#other__option_label': Other
     '#other__placeholder': 'What is this other option'
     '#other__description': 'Other button description'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -59,7 +59,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''

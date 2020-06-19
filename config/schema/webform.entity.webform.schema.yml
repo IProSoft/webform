@@ -72,9 +72,9 @@
         page_confirm_path:
           type: string
           label: 'Page confirm URL alias'
-        page_admin_theme:
-          type: boolean
-          label: 'Use admin theme for page'
+        page_theme_name:
+          type: string
+          label: 'Page theme'
         form_title:
           type: string
           label: 'Form title display'
