@@ -40,7 +40,7 @@ elements: |
     '#title_display': invisible
     '#format': container
     gender:
-      '#type': webform_radios_other
+      '#type': webform_select_other
       '#title': Gender
       '#options': gender
       '#options_display': buttons_vertical
