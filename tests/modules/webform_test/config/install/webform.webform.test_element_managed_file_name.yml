@@ -31,7 +31,7 @@ elements: |
     '#type': managed_file
     '#title': 'File truncate (255)'
     '#file_name': 'file_truncate_123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -43,7 +43,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''

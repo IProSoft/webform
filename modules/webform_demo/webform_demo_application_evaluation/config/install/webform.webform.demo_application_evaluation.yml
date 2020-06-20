@@ -25,12 +25,12 @@ elements: |
       {{ children }}
       <div>{{ 'Submitted by'|t }}: <em>[webform_submission:user]</em></div>
       <hr/>
-  
+
     '#format_text': |
       {{ children }}
       {{ 'Submitted by'|t }} [webform_submission:user]
       ------------------------------------------------------------
-  
+
     rating:
       '#type': webform_rating
       '#title': Rating
@@ -38,7 +38,7 @@ elements: |
     comments:
       '#type': textarea
       '#title': Comments
-  
+
 css: ''
 javascript: ''
 settings:
@@ -50,7 +50,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''

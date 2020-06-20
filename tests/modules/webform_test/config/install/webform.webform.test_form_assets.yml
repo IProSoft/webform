@@ -18,21 +18,21 @@ elements: |
   test:
     '#type': textfield
     '#title': 'Text field'
-  
+
 css: |
   .webform-submission-form {
     background-color: #cccccc;
     display: none;
     padding: 20px;
   }
-  
+
 javascript: |
   (function ($) {
     $(function() {
       $('.webform-submission-form').fadeIn(3000);
     });
   })(jQuery);
-  
+
 settings:
   ajax: false
   ajax_scroll_top: form
@@ -42,7 +42,7 @@ settings:
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  page_admin_theme: false
+  page_theme_name: ''
   form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''
