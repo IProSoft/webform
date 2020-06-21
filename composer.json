@@ -33,15 +33,6 @@
       "services": {
         "drush.services.yml": "^9"
       }
-    },
-    "Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module's (optional) dependencies": {
-      "require-dev": {
-        "drupal/bootstrap": "~3.0",
-        "drupal/chosen": "~2.0",
-        "drupal/entity_print": "~2.0",
-        "drupal/lingotek": "~2.0",
-        "drupal/telephone_validation": "~2.0"
-      }
     }
   },
   "require": {
@@ -60,9 +51,8 @@
     "drupal/devel": "~3.0",
     "drupal/entity_print": "~2.0",
     "drupal/group": "1.x-dev",
-    "drupal/jquery_ui_checkboxradio": "~1.0",
+    "drupal/lingotek": "~3.0",
     "drupal/mailsystem": "~4.0",
-    "drupal/lingotek": "~2.0",
     "drupal/paragraphs": "~1.0",
     "drupal/select2": "~1.0",
     "drupal/smtp": "~1.0",
