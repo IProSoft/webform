@@ -33,6 +33,11 @@
       "services": {
         "drush.services.yml": "^9"
       }
+    },
+    "Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the Webform module's (optional) dependencies": {
+      "require-dev": {
+        "drupal/chosen": "~2.0"
+      }
     }
   },
   "require": {
@@ -47,7 +52,6 @@
     "drupal/bootstrap": "~3.0",
     "drupal/captcha": "~1.0",
     "drupal/clientside_validation": "~3.0",
-    "drupal/chosen": "~2.0",
     "drupal/devel": "~3.0",
     "drupal/entity_print": "~2.0",
     "drupal/group": "1.x-dev",
