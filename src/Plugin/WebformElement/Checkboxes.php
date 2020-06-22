@@ -77,12 +77,12 @@ class Checkboxes extends OptionsBase {
     $option_types = ['options_all', 'options_none'];
     foreach ($option_types as $option_type) {
       if (!empty($element['#' . $option_type])) {
-        $element['#' . $option_type .'_value'] = $this->getElementProperty($element, $option_type . '_value');
-        $element['#' . $option_type .'_text'] = $this->getElementProperty($element, $option_type . '_text');
+        $element['#' . $option_type . '_value'] = $this->getElementProperty($element, $option_type . '_value');
+        $element['#' . $option_type . '_text'] = $this->getElementProperty($element, $option_type . '_text');
         // Set #options for every element except 'webform_entity_checkboxes'.
         // @see \Drupal\webform\Plugin\WebformElement\WebformEntityReferenceTrait::setOptions
         if ($element['#type'] !== 'webform_entity_checkboxes') {
-          $element['#options'][$element['#' . $option_type .'_value']] = $element['#' . $option_type .'_text'];
+          $element['#options'][$element['#' . $option_type . '_value']] = $element['#' . $option_type . '_text'];
         }
       }
     }
@@ -101,10 +101,10 @@ class Checkboxes extends OptionsBase {
         // If options are randomized, make sure the 'all' and 'none' checkboxes
         // are always last.
         if (!empty($element['#options_randomize'])) {
-          unset($element['#options'][$element['#' . $option_type .'_value']]);
-          $element['#options'][$element['#' . $option_type .'_value']] = $element['#' . $option_type .'_text'];
+          unset($element['#options'][$element['#' . $option_type . '_value']]);
+          $element['#options'][$element['#' . $option_type . '_value']] = $element['#' . $option_type . '_text'];
         }
-        $element['#wrapper_attributes']['data-' . str_replace('_', '-', $option_type)] = $element['#' . $option_type .'_value'];
+        $element['#wrapper_attributes']['data-' . str_replace('_', '-', $option_type)] = $element['#' . $option_type . '_value'];
       }
     }
 

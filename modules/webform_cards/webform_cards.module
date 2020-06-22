@@ -66,7 +66,7 @@ function webform_cards_preprocess_menu_local_action(&$variables) {
 /******************************************************************************/
 
 /**
- *  Implements hook_ENTITY_TYPE_presave() for webform_submission entities.
+ * Implements hook_ENTITY_TYPE_presave() for webform_submission entities.
  */
 function webform_cards_webform_submission_presave(WebformSubmissionInterface $webform_submission) {
   if (!$webform_submission->isDraft()) {
@@ -92,7 +92,6 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
 
   /** @var \Drupal\webform_cards\WebformCardsManagerInterface $webform_cards_manager */
   $webform_cards_manager = \Drupal::service('webform_cards.manager');
-
 
   // Check if the webform has cards.
   $has_cards = $webform_cards_manager->hasCards($webform);

@@ -42,7 +42,7 @@ class WebformCardsConvertForm extends FormBase {
     $form['hr'] = ['#markup' => '<p><hr/></p>'];
     $form['confirm'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Please confirm that you want to convert this webform\'s wizard pages to cards'),
+      '#title' => $this->t("Please confirm that you want to convert this webform's wizard pages to cards"),
       '#required' => TRUE,
     ];
 
@@ -59,7 +59,7 @@ class WebformCardsConvertForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /** @var  \Drupal\webform\WebformInterface  $webform */
+    /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load($form_state->getValue('webform_id'));
     $elements = $webform->getElementsRaw();
     $elements = str_replace("'#type': webform_wizard_page", "'#type': webform_card", $elements);

@@ -14,6 +14,10 @@ function webform_clientside_validation_webform_submission_form_alter(array &$for
   if (\Drupal::moduleHandler()->moduleExists('inline_form_errors')) {
     $form['#attached']['library'][] = 'webform_clientside_validation/webform_clientside_validation.ife';
   }
+  if (isset($form['#attributes']['novalidate'])) {
+    $form['#attributes']['data-webform-clientside-validation-novalidate'] = TRUE;
+    $form['#attached']['library'][] = 'webform_clientside_validation/webform_clientside_validation.novalidate';
+  }
 }
 
 /**

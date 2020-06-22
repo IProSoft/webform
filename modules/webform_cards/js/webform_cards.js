@@ -112,7 +112,7 @@
                 ? $('#' + $(event.target).attr('for'))
                 : $(this);
               if ($radio.is(':radio') && $radio.val() !== '_other_') {
-                setTimeout(function() {
+                setTimeout(function () {
                   autoForwardEventHandler(event);
                 });
               }
@@ -130,9 +130,9 @@
 
         initialize();
 
-        /**********************************************************************/
+        /* ****************************************************************** */
         // Private functions.
-        /**********************************************************************/
+        /* ****************************************************************** */
 
         /**
          * Initialize the active card.
@@ -391,7 +391,7 @@
          *
          * Properties include index, total, percentage, and summary.
          *
-         * @returns {{summary: string, total: number, percentage: string,
+         * @return {{summary: string, total: number, percentage: string,
          *   index: *}} Cards progress properties.
          */
         function getCardsProgressProperties() {
@@ -425,7 +425,7 @@
         /**
          * Get cards as progress steps.
          *
-         * @returns {[]}
+         * @return {[]}
          *   Cards as progress steps.
          */
         function getCardsProgressSteps() {
@@ -562,11 +562,11 @@
         function nextButtonClickEventHandler(event) {
           var validator = $form.validate();
           if (!$form.valid()) {
-             // Focus first invalid input.
-             validator.focusInvalid();
-             // Shake the invalid card.
-             var $activeCard = $allCards.filter('.webform-card--active');
-             $activeCard.effect('shake', {distance: 10});
+            // Focus first invalid input.
+            validator.focusInvalid();
+            // Shake the invalid card.
+            var $activeCard = $allCards.filter('.webform-card--active');
+            $activeCard.effect('shake', {distance: 10});
           }
           else {
             // Get next visible card (not "display: none").
@@ -628,7 +628,7 @@
           }
 
           var inputHasValue = inputValues.every(function (value) {
-            return value
+            return value;
           });
           if (inputHasValue) {
             $nextButton.click();

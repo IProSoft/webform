@@ -2,10 +2,14 @@
  * @file
  * Attaches behaviors for the Clientside Validation jQuery module.
  */
+
 (function ($) {
+
+  'use strict';
+
   $(document).once('webform_cvjquery').on('cv-jquery-validate-options-update', function (event, options) {
     options.errorElement = 'strong';
-    options.showErrors = function(errorMap, errorList) {
+    options.showErrors = function (errorMap, errorList) {
       // Show errors using defaultShowErrors().
       this.defaultShowErrors();
 
@@ -20,4 +24,5 @@
       });
     };
   });
+
 })(jQuery);
