@@ -41,7 +41,7 @@ class WebformCardsAutoForwardJavaScriptTest extends WebformWebDriverTestBase {
 
     // Check that clicking radios other 'Other…' does NOT auto-forward.
     $session->executeScript('jQuery("#edit-radios-other-radios-other-").mouseup();');
-    $assert_session->waitForElement('css','#edit-radios-other-other');
+    $assert_session->waitForElement('css', '#edit-radios-other-other');
     $this->assertCssSelect('.webform-card--active[data-webform-key="radios_other_example"]');
 
     // Check that clicking radios other option does auto-forward.

@@ -50,6 +50,6 @@ interface WebformCardsManagerInterface {
    *
    * @see \Drupal\webform\Entity\Webform::getPages
    */
-  function applyConditions(array $pages, WebformSubmissionInterface $webform_submission = NULL);
+  public function applyConditions(array $pages, WebformSubmissionInterface $webform_submission = NULL);
 
 }

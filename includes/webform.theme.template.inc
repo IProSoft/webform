@@ -587,7 +587,7 @@ function _template_preprocess_webform_progress(array &$variables) {
   $current_page = $variables['current_page'];
   $operation = $variables['operation'];
 
-  $pages =  $variables['pages'] ?: $webform->getPages($operation, $webform_submission);
+  $pages = $variables['pages'] ?: $webform->getPages($operation, $webform_submission);
 
   $page_keys = array_keys($pages);
   $page_indexes = array_flip($page_keys);
@@ -1041,7 +1041,7 @@ function template_preprocess_webform_element_image_file(array &$variables) {
 }
 
 /**
- * Prepares variables for webform element video file templates
+ * Prepares variables for webform element video file templates.
  *
  * Default template: webform-element-video-file.html.twig.
  *

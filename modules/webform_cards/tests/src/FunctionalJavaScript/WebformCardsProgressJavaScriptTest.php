@@ -43,7 +43,7 @@ class WebformCardsProgressJavaScriptTest extends WebformWebDriverTestBase {
     $this->assertCssSelect('#edit-submit');
 
     // Check that only next button is visible on card 1.
-    $assert_session->waitForElement('css','.webform-card--active[data-webform-key="card_1"]');
+    $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_1"]');
     $this->assertElementNotVisible('#edit-cards-prev');
     $this->assertElementVisible('#edit-cards-next');
     $this->assertElementNotVisible('#edit-preview-next');
@@ -52,7 +52,8 @@ class WebformCardsProgressJavaScriptTest extends WebformWebDriverTestBase {
     // Move to card 2.
     $page->pressButton('edit-cards-next');
 
-    // Check that only previous, preview, and submit buttons are visible on card 2.
+    // Check that only previous, preview, and submit buttons are visible
+    // on card 2.
     $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_2"]');
     $assert_session->waitForElementVisible('css', '#edit-cards-prev');
     $this->assertElementVisible('#edit-cards-prev');
@@ -105,7 +106,7 @@ class WebformCardsProgressJavaScriptTest extends WebformWebDriverTestBase {
     $page->pressButton('edit-cards-next');
     $this->assertQuery('custom_param=1&page=card_2');
 
-    // Check preview URL with ?page=webform_preview
+    // Check preview URL with ?page=webform_preview.
     $page->pressButton('edit-preview-next');
     $this->assertQuery('custom_param=1&page=webform_preview');
 
@@ -148,9 +149,9 @@ class WebformCardsProgressJavaScriptTest extends WebformWebDriverTestBase {
     $this->assertCssSelect('.progress-step.is-active[data-webform-card="card_1"]');
 
     // Move to card 2.
-    $assert_session->waitForElement('css','.webform-card--active[data-webform-key="card_1"]');
+    $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_1"]');
     $page->pressButton('edit-cards-next');
-    $assert_session->waitForElement('css', '#edit-element-2');
+    $assert_session->waitForElement('css',  '#edit-element-2');
 
     // Check that only card 1 is linked in the progress bar.
     $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_2"]');
@@ -165,7 +166,7 @@ class WebformCardsProgressJavaScriptTest extends WebformWebDriverTestBase {
     // Move to preview.
     $page->pressButton('edit-preview-next');
     $assert_session->waitForElement('css', '.webform-preview');
-    $assert_session->waitForElement('css','input[type="submit"]#edit-webform-start-card_1');
+    $assert_session->waitForElement('css', 'input[type="submit"]#edit-webform-start-card_1');
 
     // Check that both cards are linked in the progress bar.
     $this->assertCssSelect('[data-webform-card="card_1"] .progress-marker[role="link"]');

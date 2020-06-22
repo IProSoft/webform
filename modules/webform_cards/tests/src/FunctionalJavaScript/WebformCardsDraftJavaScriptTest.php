@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\webform_cards\FunctionalJavaScript;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
 /**
@@ -31,13 +30,13 @@ class WebformCardsDraftJavaScriptTest extends WebformWebDriverTestBase {
 
     // Get the webform and load card 1.
     $this->drupalGet('/webform/test_cards_draft');
-    $assert_session->waitForElement('css','.webform-card--active[data-webform-key="card_1"]');
+    $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_1"]');
     $this->assertElementVisible('[data-webform-key="card_1"]');
     $this->assertElementNotVisible('[data-webform-key="card_2"]');
 
     // Move to card 2.
     $page->pressButton('edit-cards-next');
-    $assert_session->waitForElement('css','.webform-card--active[data-webform-key="card_2"]');
+    $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_2"]');
     $this->assertElementNotVisible('[data-webform-key="card_1"]');
     $this->assertElementVisible('[data-webform-key="card_2"]');
 
@@ -47,9 +46,9 @@ class WebformCardsDraftJavaScriptTest extends WebformWebDriverTestBase {
     $this->assertElementNotVisible('[data-webform-key="card_1"]');
     $this->assertElementVisible('[data-webform-key="card_2"]');
 
-    // Reload the webform
+    // Reload the webform.
     $this->drupalGet('/webform/test_cards_draft');
-    $assert_session->waitForElement('css','.webform-card--active[data-webform-key="card_2"]');
+    $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="card_2"]');
     $this->assertElementNotVisible('[data-webform-key="card_1"]');
     $this->assertElementVisible('[data-webform-key="card_2"]');
   }
