@@ -283,11 +283,11 @@ interface WebformScheduledEmailManagerInterface {
    * @return array
    *   An associative array containing cron task stats.
    *   Includes:
-   *   - static::EMAIL_SCHEDULED
-   *   - static::EMAIL_RESCHEDULED
-   *   - static::EMAIL_ALREADY_SCHEDULED
-   *   - static::EMAIL_UNSCHEDULED
-   *   - static::EMAIL_SENT
+   *   - WebformScheduledEmailManagerInterface::EMAIL_SCHEDULED
+   *   - WebformScheduledEmailManagerInterface::EMAIL_RESCHEDULED
+   *   - WebformScheduledEmailManagerInterface::EMAIL_ALREADY_SCHEDULED
+   *   - WebformScheduledEmailManagerInterface::EMAIL_UNSCHEDULED
+   *   - WebformScheduledEmailManagerInterface::EMAIL_SENT
    */
   public function cron(EntityInterface $entity = NULL, $handler_id = NULL, $schedule_limit = 1000, $send_limit = NULL);
 
