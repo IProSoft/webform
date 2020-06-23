@@ -926,7 +926,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     // Settings should not be empty even.
     // https://www.drupal.org/node/2880392.
     return (isset($this->settings)) ? $this->settings +
-      self::getDefaultSettings() : self::getDefaultSettings();
+      static::getDefaultSettings() : static::getDefaultSettings();
   }
 
   /**
@@ -1112,7 +1112,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'preview_excluded_elements' => [],
       'preview_exclude_empty' => TRUE,
       'preview_exclude_empty_checkbox' => FALSE,
-      'draft' => self::DRAFT_NONE,
+      'draft' => static::DRAFT_NONE,
       'draft_multiple' => FALSE,
       'draft_auto_save' => FALSE,
       'draft_saved_message' => '',

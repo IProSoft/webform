@@ -53,7 +53,7 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
       'data' => serialize([]),
       'timestamp' => '',
     ];
-    $this->database->insert(self::TABLE)
+    $this->database->insert(static::TABLE)
       ->fields($fields)
       ->execute();
   }

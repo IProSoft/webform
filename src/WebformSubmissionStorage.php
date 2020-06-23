@@ -1222,7 +1222,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
 
     $query = $this->entityManager->getStorage('webform')->getQuery();
     $query->accessCheck(FALSE);
-    $query->condition('settings.purge', [self::PURGE_DRAFT, self::PURGE_COMPLETED, self::PURGE_ALL], 'IN');
+    $query->condition('settings.purge', [static::PURGE_DRAFT, static::PURGE_COMPLETED, static::PURGE_ALL], 'IN');
     $query->condition('settings.purge_days', 0, '>');
     $webforms_to_purge = array_values($query->execute());
 
@@ -1239,11 +1239,11 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $query->condition('created', $this->time->getRequestTime() - ($webform->getSetting('purge_days') * $days_to_seconds), '<');
         $query->condition('webform_id', $webform->id());
         switch ($webform->getSetting('purge')) {
-          case self::PURGE_DRAFT:
+          case static::PURGE_DRAFT:
             $query->condition('in_draft', 1);
             break;
 
-          case self::PURGE_COMPLETED:
+          case static::PURGE_COMPLETED:
             $query->condition('in_draft', 0);
             break;
         }

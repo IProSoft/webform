@@ -671,22 +671,22 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    */
   public function getState() {
     if (!$this->id()) {
-      return self::STATE_UNSAVED;
+      return static::STATE_UNSAVED;
     }
     elseif ($this->isConverting()) {
-      return self::STATE_CONVERTED;
+      return static::STATE_CONVERTED;
     }
     elseif ($this->isDraft()) {
-      return ($this->created->value === $this->changed->value) ? self::STATE_DRAFT_CREATED : self::STATE_DRAFT_UPDATED;
+      return ($this->created->value === $this->changed->value) ? static::STATE_DRAFT_CREATED : static::STATE_DRAFT_UPDATED;
     }
     elseif ($this->isLocked()) {
-      return self::STATE_LOCKED;
+      return static::STATE_LOCKED;
     }
     elseif ($this->completed->value === $this->changed->value) {
-      return self::STATE_COMPLETED;
+      return static::STATE_COMPLETED;
     }
     else {
-      return self::STATE_UPDATED;
+      return static::STATE_UPDATED;
     }
   }
 

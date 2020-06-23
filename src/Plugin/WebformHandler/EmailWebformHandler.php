@@ -1036,8 +1036,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $email_options = WebformOptionsHelper::decodeConfig($this->configuration[$configuration_name . '_options']);
 
       // Set default email address.
-      if (!empty($email_options[self::DEFAULT_OPTION])) {
-        $emails[] = $email_options[self::DEFAULT_OPTION];
+      if (!empty($email_options[static::DEFAULT_OPTION])) {
+        $emails[] = $email_options[static::DEFAULT_OPTION];
       }
 
       // Get submission email addresses as an array.
@@ -1051,8 +1051,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
       // Set empty email address.
       if (empty($options_values)) {
-        if (!empty($email_options[self::EMPTY_OPTION])) {
-          $emails[] = $email_options[self::EMPTY_OPTION];
+        if (!empty($email_options[static::EMPTY_OPTION])) {
+          $emails[] = $email_options[static::EMPTY_OPTION];
         }
       }
       // Loop through options values and collect email addresses.
@@ -1062,8 +1062,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
             $emails[] = $email_options[$option_value];
           }
           // Set other email address.
-          elseif (!empty($email_options[self::OTHER_OPTION])) {
-            $emails[] = $email_options[self::OTHER_OPTION];
+          elseif (!empty($email_options[static::OTHER_OPTION])) {
+            $emails[] = $email_options[static::OTHER_OPTION];
           }
         }
       }
@@ -1601,12 +1601,12 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
         $value = '<b>' . $value . '</b>';
       });
       if (preg_match('/_other$/', $options_element['#type'])) {
-        $mapping_options[self::OTHER_OPTION] = $this->t("Other (Used when 'other' value is entered)");
+        $mapping_options[static::OTHER_OPTION] = $this->t("Other (Used when 'other' value is entered)");
       }
       if (empty($options_element['#required'])) {
-        $mapping_options[self::EMPTY_OPTION] = $this->t('Empty (Used when no option is selected)');
+        $mapping_options[static::EMPTY_OPTION] = $this->t('Empty (Used when no option is selected)');
       }
-      $mapping_options[self::DEFAULT_OPTION] = $this->t('Default (This email address will always be included)');
+      $mapping_options[static::DEFAULT_OPTION] = $this->t('Default (This email address will always be included)');
 
       // Set placeholder emails.
       $destination_placeholder_emails = ['example@example.com', '[site:mail]'];
