@@ -3812,7 +3812,7 @@ function webform_update_8602() {
 /**
   * Issue #3088780: Add the ability to disable user IP tracking for all forms.
   */
-function webform_update_8197() {
+function webform_update_8603() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
 }
