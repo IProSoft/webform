@@ -3740,18 +3740,6 @@ function webform_update_8193() {
 }
 
 /**
- * Issue #3087699: JQuery UI is being phased out from Drupal core.
- */
-function webform_update_8194() {
-  \Drupal::service('module_installer')->install([
-    'jquery_ui',
-    'jquery_ui_datepicker',
-    'jquery_ui_tabs',
-    'jquery_ui_tooltip',
-  ]);
-}
-
-/**
  * Issue #3144962: Webform cards.
  */
 function webform_update_8195() {
@@ -3763,4 +3751,20 @@ function webform_update_8195() {
  */
 function webform_update_8196() {
   _webform_update_webform_settings();
+}
+
+/******************************************************************************/
+// Webform 6.x.
+/******************************************************************************/
+
+/**
+ * Issue #3087699: JQuery UI is being phased out from Drupal core.
+ */
+function webform_update_8600() {
+  \Drupal::service('module_installer')->install([
+    'jquery_ui',
+    'jquery_ui_datepicker',
+    'jquery_ui_tabs',
+    'jquery_ui_tooltip',
+  ]);
 }
