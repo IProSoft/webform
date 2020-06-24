@@ -3768,3 +3768,20 @@ function webform_update_8600() {
     'jquery_ui_tooltip',
   ]);
 }
+
+/**
+ * Issue #3106961: [Webform 8.x-6.x] Improve token naming conventions.
+ */
+function webform_update_8601() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $yaml = Yaml::encode($webform_config->getRawData());
+    if (strpos($yaml, '[webform_submission:view-url]') !== FALSE
+      || strpos($yaml, '[webform_submission:update-url]') !== FALSE) {
+      $yaml = str_replace('[webform_submission:view-url]', '[webform_submission:token-view-url]', $yaml);
+      $yaml = str_replace('[webform_submission:update-url]', '[webform_submission:token-update-url]', $yaml);
+      $webform_config->setData(Yaml::decode($yaml));
+    }
+  }
+}

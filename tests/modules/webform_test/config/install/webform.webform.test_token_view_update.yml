@@ -119,8 +119,8 @@ settings:
   confirmation_type: page
   confirmation_title: ''
   confirmation_message: |
-    <p>You can view your submission via <a href="[webform_submission:view-url]">[webform_submission:view-url:relative]</a></p>
-    <p>You can update your submission via <a href="[webform_submission:update-url]">[webform_submission:update-url:relative]</a></p>
+    <p>You can view your submission via <a href="[webform_submission:token-view-url]">[webform_submission:token-view-url:relative]</a></p>
+    <p>You can update your submission via <a href="[webform_submission:token-update-url]">[webform_submission:token-update-url:relative]</a></p>
 
   confirmation_url: ''
   confirmation_attributes: {  }
@@ -218,8 +218,8 @@ handlers:
       from_name: _default
       subject: _default
       body: |
-        <a href="[webform_submission:view-url]">[webform_submission:view-url]</a><br/>
-        <a href="[webform_submission:update-url]">[webform_submission:update-url]</a>
+        <a href="[webform_submission:token-view-url]">[webform_submission:token-view-url]</a><br/>
+        <a href="[webform_submission:token-update-url]">[webform_submission:token-update-url]</a>
 
       excluded_elements: {  }
       ignore_access: false
