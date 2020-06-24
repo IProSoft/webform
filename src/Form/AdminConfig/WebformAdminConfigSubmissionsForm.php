@@ -108,6 +108,10 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
       '#tree' => TRUE,
     ];
     $behavior_elements = [
+      'default_form_disable_remote_addr' => [
+        'title' => $this->t('Disable the tracking of user IP addresses for all webforms'),
+        'description' => $this->t("If checked, a user's IP address will not be recorded for all webforms."),
+      ],
       'default_submission_log' => [
         'title' => $this->t('Log all submission events for all webforms'),
         'description' => $this->t('If checked, all submission events will be logged to dedicated submission log available to all webforms and submissions.') . '<br/><br/>' .

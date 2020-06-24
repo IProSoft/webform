@@ -167,6 +167,14 @@ function _webform_update_webform_setting_settings(array $settings) {
     }
     unset($settings['page_admin_theme']);
   }
+
+  // Issue #3088780: Add the ability to disable user IP tracking for all forms.
+  // Convert 'form_remote_addr' to 'form_disable_remote_addr'.
+  if (isset($settings['form_remote_addr'])) {
+    $settings['form_disable_remote_addr'] = $settings['form_remote_addr'] ? FALSE : TRUE;
+    unset($settings['form_remote_addr']);
+  }
+
   return $settings;
 }
 

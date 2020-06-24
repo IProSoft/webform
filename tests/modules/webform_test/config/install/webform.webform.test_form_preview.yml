@@ -51,13 +51,13 @@ elements: |
       '#format_attributes':
         class:
           - format-attributes-class
-
+  
 css: |
   .format-attributes-class {
     border: 1px dashed #ccc;
     padding: 10px;
   }
-
+  
 javascript: ''
 settings:
   ajax: false
@@ -77,7 +77,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: true
   form_prepopulate_source_entity: false

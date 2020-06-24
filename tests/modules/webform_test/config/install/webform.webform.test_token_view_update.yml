@@ -39,7 +39,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -121,7 +121,6 @@ settings:
   confirmation_message: |
     <p>You can view your submission via <a href="[webform_submission:token-view-url]">[webform_submission:token-view-url:relative]</a></p>
     <p>You can update your submission via <a href="[webform_submission:token-update-url]">[webform_submission:token-update-url:relative]</a></p>
-
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -220,7 +219,6 @@ handlers:
       body: |
         <a href="[webform_submission:token-view-url]">[webform_submission:token-view-url]</a><br/>
         <a href="[webform_submission:token-update-url]">[webform_submission:token-update-url]</a>
-
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

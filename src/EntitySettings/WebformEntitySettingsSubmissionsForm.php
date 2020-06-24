@@ -158,19 +158,6 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       ],
       '#weight' => -99,
     ];
-    $form['submission_behaviors']['form_remote_addr'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Track user IP address'),
-      '#description' => $this->t("If checked, a user's IP address will be recorded."),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['form_remote_addr'],
-      '#states' => [
-        'visible' => [
-          ':input[name="form_confidential"]' => ['checked' => FALSE],
-        ],
-      ],
-      '#weight' => -98,
-    ];
     $form['submission_behaviors']['form_convert_anonymous'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Convert anonymous user drafts and submissions to authenticated user'),
@@ -203,6 +190,16 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       ],
       // Global behaviors.
       // @see \Drupal\webform\Form\WebformAdminSettingsForm
+      'form_disable_remote_addr' => [
+        'title' => $this->t('Disable the tracking of user IP address'),
+        'all_description' => $this->t('User IP address tracking is disabled for all webforms.'),
+        'form_description' => $this->t("If checked, a user's IP address will not be recorded for this webform."),
+        'states' => [
+          'visible' => [
+            ':input[name="form_confidential"]' => ['checked' => FALSE],
+          ],
+        ],
+      ],
       'submission_log' => [
         'title' => $this->t('Log submission events'),
         'all_description' => $this->t('All submission event are being logged for all webforms'),

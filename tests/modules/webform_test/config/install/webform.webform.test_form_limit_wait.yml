@@ -18,7 +18,7 @@ elements: |
   name:
     '#type': textfield
     '#title': Name
-
+  
 css: ''
 javascript: ''
 settings:
@@ -39,7 +39,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: true
   form_prepopulate_source_entity: false
@@ -134,7 +134,7 @@ settings:
   limit_total_message: |
     webform_submission:interval:webform:wait =&gt; [webform_submission:interval:webform:wait]<br />
     webform_submission:interval:webform:source_entity:wait =&gt; [webform_submission:interval:webform:source_entity:wait]
-
+    
   limit_total_unique: false
   limit_user: 1
   limit_user_interval: 15
@@ -142,7 +142,7 @@ settings:
     <pre>
     webform_submission:interval:user:wait =&gt; [webform_submission:interval:user:wait]
     webform_submission:interval:user:source_entity:wait =&gt; [webform_submission:interval:user:source_entity:wait]</pre>
-
+    
   limit_user_unique: false
   entity_limit_total: 2
   entity_limit_total_interval: 30

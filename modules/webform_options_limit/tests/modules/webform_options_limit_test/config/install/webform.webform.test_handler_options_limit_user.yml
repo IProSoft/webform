@@ -28,7 +28,7 @@ elements: |
       A: A
       B: B
       C: C
-
+  
 css: ''
 javascript: ''
 settings:
@@ -49,7 +49,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: true
   form_prepopulate: true
   form_prepopulate_source_entity: false
