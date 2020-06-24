@@ -3752,3 +3752,11 @@ function webform_update_8195() {
 function webform_update_8196() {
   _webform_update_webform_settings();
 }
+
+/**
+ * Issue #3144962: Webform cards.
+ */
+function webform_update_8197() {
+  _webform_update_admin_settings();
+}
+
