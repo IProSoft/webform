@@ -1266,7 +1266,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $destination_uri = $this->getFileDestinationUri($element, $file, $webform_submission);
 
       // Save file if there is a new destination URI.
-      if ($source_uri != $destination_uri) {
+      if ($source_uri !== $destination_uri) {
         $destination_uri = $this->fileSystem->move($source_uri, $destination_uri);
         $file->setFileUri($destination_uri);
         $file->setFileName($this->fileSystem->basename($destination_uri));
@@ -1387,7 +1387,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $usage = $file_usage->listUsage($file);
     foreach ($usage as $module => $entity_types) {
       // Check for Webform module.
-      if ($module != 'webform') {
+      if ($module !== 'webform') {
         continue;
       }
 
@@ -1395,7 +1395,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         $entity_ids = array_keys($counts);
 
         // Check for webform submission entity type.
-        if ($entity_type != 'webform_submission' || empty($entity_ids)) {
+        if ($entity_type !== 'webform_submission' || empty($entity_ids)) {
           continue;
         }
 

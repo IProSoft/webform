@@ -63,7 +63,7 @@ class WebformMapping extends FormElement {
         $source_description = '';
       }
       else {
-        $source_description_property_name = ($element['#source__description_display'] == 'help') ? 'help' : 'description';
+        $source_description_property_name = ($element['#source__description_display'] === 'help') ? 'help' : 'description';
         list($source_title, $source_description) = explode(WebformOptionsHelper::DESCRIPTION_DELIMITER, $source);
       }
       $sources[$source_key] = [

@@ -58,7 +58,7 @@ trait WebformDisplayOnTrait {
    */
   protected function isDisplayOn(array $element, $display_on) {
     $element_display_on = (isset($element['#display_on'])) ? $element['#display_on'] : $this->getDefaultProperty('display_on');
-    return ($element_display_on == WebformElementDisplayOnInterface::DISPLAY_ON_BOTH || $element_display_on == $display_on) ? TRUE : FALSE;
+    return ($element_display_on === WebformElementDisplayOnInterface::DISPLAY_ON_BOTH || $element_display_on === $display_on) ? TRUE : FALSE;
   }
 
   /**
