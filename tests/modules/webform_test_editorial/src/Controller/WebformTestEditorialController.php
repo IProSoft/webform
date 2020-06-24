@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform_editorial\Controller;
+namespace Drupal\webform_test_editorial\Controller;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Controller\ControllerBase;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Provides route responses for webform editorial.
  */
-class WebformEditorialController extends ControllerBase implements ContainerInjectionInterface {
+class WebformTestEditorialController extends ControllerBase implements ContainerInjectionInterface {
 
   /**
    * Active database connection.
@@ -369,13 +369,6 @@ class WebformEditorialController extends ControllerBase implements ContainerInje
         '#suffix' => '</p>',
         '#markup' => $command['description'],
       ];
-      if ($help = webform_drush_help('drush:' . $command_name)) {
-        $build[$command_name]['help'] = [
-          '#prefix' => '<address>',
-          '#suffix' => '</address>',
-          '#markup' => $help,
-        ];
-      }
 
       $properties = ['arguments', 'options', 'examples'];
       foreach ($properties as $property) {
