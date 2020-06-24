@@ -3761,6 +3761,10 @@ function webform_update_8196() {
  * Issue #3087699: JQuery UI is being phased out from Drupal core.
  */
 function webform_update_8600() {
+  // Make sure webform_editorial.module is manually uninstalled before
+  // installing any new modules.
+  webform_update_8604();
+
   \Drupal::service('module_installer')->install([
     'jquery_ui',
     'jquery_ui_datepicker',
@@ -3815,4 +3819,24 @@ function webform_update_8602() {
 function webform_update_8603() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
+}
+
+/**
+ * Issue #3144019: Move webform_editorial to webform_test_editorial.
+ */
+function webform_update_8604() {
+  // Remove the webform_editorial.module which has changed to the
+  // webform_test_editorial.module, which is now a test module.
+
+  // Remove 'webform_editorial' from core.extensions.
+  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
+  $module = $extension_config->get('module');
+  if (isset($module['webform_editorial'])) {
+    unset($module['webform_editorial']);
+    $extension_config->set('module', $module);
+    $extension_config->save();
+  }
+
+  // Remove 'webform_editorial' from system.schema.
+  \Drupal::keyValue('system.schema')->delete('webform_editorial');
 }
