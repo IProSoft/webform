@@ -16,7 +16,7 @@ class WebformSubmissionAccessTest extends WebformAccessTestBase {
    * Tests the check webform submission access.
    *
    * @covers ::checkResendAccess
-   * @covers ::checkWizardPagesAccess
+   * @covers ::checkEditAllAccess
    */
   public function testWebformSubmissionAccess() {
     // Mock anonymous account.
@@ -78,8 +78,8 @@ class WebformSubmissionAccessTest extends WebformAccessTestBase {
     $this->assertEquals(AccessResult::allowed(), WebformSubmissionAccess::checkResendAccess($email_webform_submission, $submission_account));
 
     // Check wizard page access.
-    $this->assertEquals(AccessResult::neutral(), WebformSubmissionAccess::checkWizardPagesAccess($webform_submission));
-    $this->assertEquals(AccessResult::allowed(), WebformSubmissionAccess::checkWizardPagesAccess($webform_wizard_submission));
+    $this->assertEquals(AccessResult::neutral(), WebformSubmissionAccess::checkEditAllAccess($webform_submission));
+    $this->assertEquals(AccessResult::allowed(), WebformSubmissionAccess::checkEditAllAccess($webform_wizard_submission));
 
   }
 

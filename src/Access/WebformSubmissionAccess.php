@@ -20,7 +20,7 @@ class WebformSubmissionAccess {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public static function checkWizardPagesAccess(WebformSubmissionInterface $webform_submission) {
+  public static function checkEditAllAccess(WebformSubmissionInterface $webform_submission) {
     $elements_raw = $webform_submission->getWebform()->getElementsRaw();
     $has_pages = (strpos($elements_raw, "'#type': webform_wizard_page") !== FALSE
       || strpos($elements_raw, "'#type': webform_card") !== FALSE);
