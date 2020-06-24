@@ -379,7 +379,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         $this->customize = $this->webform->access('update')
           || $this->webform->getSetting('results_customize', TRUE);
 
-        if ($this->format['element_format'] == 'raw') {
+        if ($this->format['element_format'] === 'raw') {
           foreach ($this->columns as &$column) {
             $column['format'] = 'raw';
             if (isset($column['element'])) {
@@ -640,7 +640,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       static::STATE_UNLOCKED => $this->t('Unlocked [@total]', ['@total' => $this->getTotal(NULL, static::STATE_UNLOCKED, $this->sourceEntityTypeId)]),
     ];
     // Add draft to state options.
-    if (!$this->webform || $this->webform->getSetting('draft') != WebformInterface::DRAFT_NONE) {
+    if (!$this->webform || $this->webform->getSetting('draft') !== WebformInterface::DRAFT_NONE) {
       $state_options += [
         static::STATE_COMPLETED => $this->t('Completed [@total]', ['@total' => $this->getTotal(NULL, static::STATE_COMPLETED, $this->sourceEntityTypeId)]),
         static::STATE_DRAFT => $this->t('Draft [@total]', ['@total' => $this->getTotal(NULL, static::STATE_DRAFT, $this->sourceEntityTypeId)]),
@@ -784,7 +784,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    */
   protected function buildHeaderColumn(array $column) {
     $name = $column['name'];
-    if ($this->format['header_format'] == 'key') {
+    if ($this->format['header_format'] === 'key') {
       $title = isset($column['key']) ? $column['key'] : $column['name'];
     }
     else {
@@ -853,7 +853,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
   public function buildRowColumn(array $column, EntityInterface $entity) {
     /** @var \Drupal\webform\WebformSubmissionInterface $entity */
 
-    $is_raw = ($column['format'] == 'raw');
+    $is_raw = ($column['format'] === 'raw');
     $name = $column['name'];
 
     switch ($name) {
@@ -919,14 +919,14 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         else {
           $link_url = $this->requestHandler->getUrl($entity, $entity->getSourceEntity(), $this->getSubmissionRouteName());
         }
-        if ($name == 'serial') {
+        if ($name === 'serial') {
           $link_text = $entity->serial();
         }
         else {
           $link_text = $entity->label();
         }
         $link = Link::fromTextAndUrl($link_text, $link_url)->toRenderable();
-        if ($name == 'serial') {
+        if ($name === 'serial') {
           $link['#attributes']['title'] = $entity->label();
           $link['#attributes']['aria-label'] = $entity->label();
         }

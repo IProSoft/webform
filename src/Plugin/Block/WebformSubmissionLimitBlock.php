@@ -352,7 +352,7 @@ class WebformSubmissionLimitBlock extends BlockBase implements ContainerFactoryP
    */
   protected function getLimit() {
     $name = ($this->configuration['source_entity']) ? 'entity_' : '';
-    $name .= ($this->configuration['type'] == 'user') ? 'limit_user' : 'limit_total';
+    $name .= ($this->configuration['type'] === 'user') ? 'limit_user' : 'limit_total';
     return $this->getWebform()->getSetting($name) ?: FALSE;
   }
 
@@ -364,7 +364,7 @@ class WebformSubmissionLimitBlock extends BlockBase implements ContainerFactoryP
    */
   protected function getInterval() {
     $name = ($this->configuration['source_entity']) ? 'entity_' : '';
-    $name .= ($this->configuration['type'] == 'user') ? 'limit_user_interval' : 'limit_total_interval';
+    $name .= ($this->configuration['type'] === 'user') ? 'limit_user_interval' : 'limit_total_interval';
     return $this->getWebform()->getSetting($name);
   }
 
@@ -471,7 +471,7 @@ class WebformSubmissionLimitBlock extends BlockBase implements ContainerFactoryP
    *   The current user account or NULL if the user limit is not being displayed.
    */
   protected function getCurrentUser() {
-    return ($this->configuration['type'] == 'user') ? $this->currentUser : NULL;
+    return ($this->configuration['type'] === 'user') ? $this->currentUser : NULL;
   }
 
   /****************************************************************************/

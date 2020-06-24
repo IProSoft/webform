@@ -155,7 +155,7 @@ class WebformElementOptions extends FormElement {
     $custom_value = NestedArray::getValue($form_state->getValues(), $element['custom']['#parents']);
 
     $value = $options_value;
-    if ($options_value == static::CUSTOM_OPTION) {
+    if ($options_value === static::CUSTOM_OPTION) {
       try {
         $value = (is_string($custom_value)) ? Yaml::decode($custom_value) : $custom_value;
       }

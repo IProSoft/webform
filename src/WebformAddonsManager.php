@@ -35,7 +35,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     $projects = $this->projects;
     if ($category) {
       foreach ($projects as $project_name => $project) {
-        if ($project['category'] != $category) {
+        if ($project['category'] !== $category) {
           unset($projects[$project_name]);
         }
       }

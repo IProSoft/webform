@@ -269,7 +269,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
         $query = $this->database->update('webform_scheduled_email');
         $query->condition('eid', $scheduled_email->eid);
 
-        if ($scheduled_email->send != $send_timestamp) {
+        if ($scheduled_email->send !== $send_timestamp) {
           $action = $this->t('rescheduled');
           $status = WebformScheduledEmailManagerInterface::EMAIL_RESCHEDULED;
         }

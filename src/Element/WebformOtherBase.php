@@ -151,7 +151,7 @@ abstract class WebformOtherBase extends FormElement {
     $element['other']['#wrapper_attributes']['class'][] = "js-webform-$type-other-input";
     $element['other']['#wrapper_attributes']['class'][] = "webform-$type-other-input";
 
-    if ($element['other']['#type'] == 'datetime') {
+    if ($element['other']['#type'] === 'datetime') {
       $element['other']['#prefix'] = '<div class="' . implode(' ', $element['other']['#wrapper_attributes']['class']) . '">';
       $element['other']['#suffix'] = '</div>';
       unset($element['other']['#wrapper_attributes']['class']);
@@ -316,7 +316,7 @@ abstract class WebformOtherBase extends FormElement {
    *   TRUE if the webform element contains multiple values.
    */
   protected static function isMultiple(array $element) {
-    return (!empty($element['#multiple']) || static::$type == 'checkboxes') ? TRUE : FALSE;
+    return (!empty($element['#multiple']) || static::$type === 'checkboxes') ? TRUE : FALSE;
   }
 
   /**
