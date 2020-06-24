@@ -168,9 +168,9 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#title' => $this->t('URL path settings'),
       '#open' => TRUE,
     ];
-    $default_page_base_path = trim($default_settings['default_page_base_path'], '/');
+    $default_page_base_path = $default_settings['default_page_base_path'];
     if ($default_page_base_path) {
-      $default_page_submit_path = trim($default_settings['default_page_base_path'], '/') . '/' . str_replace('_', '-', $webform->id());
+      $default_page_submit_path = $default_page_base_path . '/' . str_replace('_', '-', $webform->id());
       $default_settings['default_page_submit_path'] = $default_page_submit_path;
       $default_settings['default_page_confirm_path'] = $default_page_submit_path . '/confirmation';
       $form_state->set('default_settings', $default_settings);
@@ -217,7 +217,9 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       $form['page_settings']['page_submit_path'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Webform URL alias'),
-        '#description' => $this->t('Optionally specify an alternative URL by which the webform submit page can be accessed. Any value entered here will overwrite ALL aliases you may have created for this form via the <a href=":path_alias">path</a> module.', $t_args),
+        '#description' => $this->t('Optionally specify an alternative URL by which the webform submit page can be accessed. Any value entered here will overwrite ALL aliases you may have created for this form via the <a href=":path_alias">path</a> module.', $t_args)
+           . ' ' . $this->t('The URL alias has to start with a slash and cannot handler with a slash.'),
+       '#pattern' => '^/.+(?<!/)$',
         '#default_value' => $settings['page_submit_path'],
         '#states' => [
           'visible' => [
@@ -228,7 +230,9 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       $form['page_settings']['page_confirm_path'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Confirmation page URL alias'),
-        '#description' => $this->t('Optionally specify an alternative URL by which the webform confirmation page can be accessed.', $t_args),
+        '#description' => $this->t('Optionally specify an alternative URL by which the webform confirmation page can be accessed.', $t_args)
+           . ' ' . $this->t('The URL alias has to start with a slash and cannot handler with a slash.'),
+       '#pattern' => '^/.+(?<!/)$',
         '#default_value' => $settings['page_confirm_path'],
         '#states' => [
           'visible' => [

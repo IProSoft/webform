@@ -3785,3 +3785,26 @@ function webform_update_8601() {
     }
   }
 }
+
+/**
+ * Issue #3104392: Webform URL aliases should begin with a forward slash.
+ */
+function webform_update_8602() {
+  $config_factory = \Drupal::configFactory();
+
+  // Update admin default base path.
+  $admin_config = $config_factory->getEditable('webform.settings');
+  $default_page_base_path = $admin_config->get('settings.default_page_base_path');
+  $default_page_base_path = '/' . trim($default_page_base_path, '/');
+  $admin_config->set('settings.default_page_base_path', $default_page_base_path)
+    ->save();
+
+  // Update webform custom base path.
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+    $data['settings']['page_submit_path'] = '/' . trim($data['settings']['page_submit_path'], '/');
+    $data['settings']['page_confirm_path'] = '/' . trim($data['settings']['page_confirm_path'], '/');
+    $webform_config->setData($data)->save();
+  }
+}

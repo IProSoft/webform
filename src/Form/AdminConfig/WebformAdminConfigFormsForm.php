@@ -131,7 +131,9 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
     $form['page_settings']['default_page_base_path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Default base path for webform URLs'),
-      '#description' => $this->t('Leave blank to disable the automatic generation of URL aliases for all webforms.'),
+      '#description' => $this->t('Leave blank to disable the automatic generation of URL aliases for all webforms.')
+        . ' ' . $this->t('The base path has to start with a slash and cannot handler with a slash.'),
+      '#pattern' => '^/.+(?<!/)$',
       '#default_value' => $settings['default_page_base_path'],
     ];
     $form['page_settings']['default_page_base_path_message'] = [
