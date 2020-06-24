@@ -3753,6 +3753,13 @@ function webform_update_8196() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #3144962: Webform cards.
+ */
+function webform_update_8197() {
+  _webform_update_admin_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -3839,4 +3846,11 @@ function webform_update_8604() {
 
   // Remove 'webform_editorial' from system.schema.
   \Drupal::keyValue('system.schema')->delete('webform_editorial');
+}
+
+/**
+ * Issue #3144962: Webform cards.
+ */
+function webform_update_8605() {
+  _webform_update_admin_settings();
 }
