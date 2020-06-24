@@ -1,4 +1,4 @@
-name: 'Webform Share'
+name: 'Webform Share [EXPERIMENTAL]'
 type: module
 description: 'Allows webforms to be shared on other websites using an iframe.'
 experimental: true
