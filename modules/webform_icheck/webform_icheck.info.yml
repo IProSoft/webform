@@ -1,0 +1,7 @@
+name: 'Webform iCheck'
+type: module
+description: 'Provides support for highly customizable checkboxes and radio buttons.'
+package: 'Webform [DEPRECATED]'
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - 'webform:webform'
