@@ -496,7 +496,7 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
     foreach ($elements as $key => $element) {
       $plugin_id = $this->elementManager->getElementPluginId($element);
       /** @var \Drupal\webform\Plugin\WebformElementInterface $webform_element */
-      $webform_element = $this->elementManager->createInstance($plugin_id, $element);
+      $webform_element = $this->elementManager->createInstance($plugin_id);
 
       $t_args = [
         '%title' => (!empty($element['#title'])) ? $element['#title'] : $key,

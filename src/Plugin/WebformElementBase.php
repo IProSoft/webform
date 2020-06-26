@@ -3229,8 +3229,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $element = $form_state->get('element');
+    if (is_null($element)) {
+      throw new \Exception('Element must be defined in the $form_state.');
+    }
+
     $default_properties = $this->getDefaultProperties();
-    $element_properties = WebformArrayHelper::removePrefix($this->configuration)
+    $element_properties = WebformArrayHelper::removePrefix($form_state->get('element'))
       + $default_properties;
 
     // Set default and element properties.

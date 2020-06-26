@@ -160,6 +160,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     $form['#parents'] = [];
     $form['properties'] = ['#parents' => ['properties']];
     $subform_state = SubformState::createForSubform($form['properties'], $form, $form_state);
+    $subform_state->set('element', $this->element);
     $form['properties'] = $element_plugin->buildConfigurationForm($form['properties'], $subform_state);
 
     // Move messages to the top of the webform.
