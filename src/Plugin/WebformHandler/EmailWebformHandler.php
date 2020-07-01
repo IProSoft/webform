@@ -415,6 +415,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $form['to'] = [
       '#type' => 'details',
       '#title' => $this->t('Send to'),
+      '#help' => $this->t('This is the "To:" email header which will be the person(s) responsible for receiving this webform.'),
       '#open' => TRUE,
     ];
     $form['to']['to_mail'] = $this->buildElement('to_mail', $this->t('To email'), $this->t('To email address'), TRUE, $mail_element_options, $options_element_options, $roles_element_options, $other_element_email_options);
@@ -451,12 +452,23 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // From.
     $form['from'] = [
       '#type' => 'details',
-      '#title' => $this->t('Send from'),
+      '#title' => $this->t('Send from (website/organization)'),
+      '#help' => $this->t('This is the "From:" email header which should come from <em>you</em>.  It should be your brand, company, organization, or website entity.'),
       '#open' => TRUE,
     ];
     $form['from']['from_mail'] = $this->buildElement('from_mail', $this->t('From email'), $this->t('From email address'), TRUE, $mail_element_options, $options_element_options, NULL, $other_element_email_options);
     $form['from']['from_name'] = $this->buildElement('from_name', $this->t('From name'), $this->t('From name'), FALSE, $name_element_options, NULL, NULL, $other_element_name_options);
     $form['from']['token_tree_link'] = $this->buildTokenTreeElement();
+
+    // Settings: Reply-to.
+    $form['reply_to'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Reply to (individual/organization)'),
+      '#help' => $this->t('The "Reply-To:" email header is used for replying to the email that is received.  For example, if you collect a customers email, you would want to reply-to them. If you collect a lead generation form and want to reply to the coordinator, you would reply-to them.'),
+      '#open' => TRUE,
+    ];
+    $form['reply_to']['reply_to'] = $this->buildElement('reply_to', $this->t('Reply-to email'), $this->t('Reply-to email address'), FALSE, $mail_element_options, NULL, NULL, $other_element_email_options);
+    $form['reply_to']['token_tree_link'] = $this->buildTokenTreeElement($token_types);
 
     // Message.
     $form['message'] = [
@@ -719,8 +731,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
         ],
       ],
     ];
-    // Settings: Reply-to.
-    $form['additional']['reply_to'] = $this->buildElement('reply_to', $this->t('Reply-to email'), $this->t('Reply-to email address'), FALSE, $mail_element_options, NULL, NULL, $other_element_email_options);
     // Settings: Return path.
     $form['additional']['return_path'] = $this->buildElement('return_path', $this->t('Return path'), $this->t('Return path email address'), FALSE, $mail_element_options, NULL, NULL, $other_element_email_options);
     // Settings: Sender mail.
@@ -1222,7 +1232,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     ];
     $element['from_divider'] = ['#markup' => '<hr/>'];
     $element['from_mail'] = [
-      '#type' => 'webform_email_multiple',
+      '#type' => 'email',
       '#title' => $this->t('From email'),
       '#required' => TRUE,
       '#default_value' => $message['from_mail'],
@@ -1232,6 +1242,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       '#title' => $this->t('From name'),
       '#required' => TRUE,
       '#default_value' => $message['from_name'],
+    ];
+    $element['reply_to_divider'] = ['#markup' => '<hr/>'];
+    $element['reply_to'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Reply to'),
+      '#required' => TRUE,
+      '#default_value' => $message['reply_to'],
     ];
     $element['message_divider'] = ['#markup' => '<hr/>'];
     $element['subject'] = [
@@ -1244,10 +1261,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       '#title' => $this->t('Message'),
       '#required' => TRUE,
       '#default_value' => $message['body'],
-    ];
-    $element['reply_to'] = [
-      '#type' => 'value',
-      '#value' => $message['reply_to'],
     ];
     $element['return_path'] = [
       '#type' => 'value',
@@ -1512,7 +1525,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
           break;
 
         case 'sender_mail':
-          $element[$name]['#description'] = $this->t('The email address submitting the message, if other than shown by the From header');
+          $element[$name]['#description'] = $this->t('Send From is the actual sender of the email. This is usually the brand or email address of the website.');
           break;
       }
       $t_args = ['@title' => $title];
