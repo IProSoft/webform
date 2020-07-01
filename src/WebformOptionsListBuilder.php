@@ -132,7 +132,7 @@ class WebformOptionsListBuilder extends ConfigEntityListBuilder {
       'class' => [RESPONSIVE_PRIORITY_LOW],
     ];
     $header['used_by'] = [
-      'data' => $this->t('Used by Webforms / Composites'),
+      'data' => $this->t('Used by'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
     ];
     return $header + parent::buildHeader();
