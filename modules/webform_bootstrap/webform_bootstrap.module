@@ -271,6 +271,9 @@ function _webform_bootstrap_convert_button_classes(array &$classes) {
  *   TRUE if Bootstrap is the active theme.
  */
 function _webform_bootstrap_is_active_theme() {
+  if (strpos($_SERVER['SCRIPT_NAME'], '/update.php') !== FALSE) {
+    return FALSE;
+  }
   /** @var \Drupal\webform\WebformThemeManagerInterface $theme_manager */
   $theme_manager = \Drupal::service('webform.theme_manager');
   return $theme_manager->isActiveTheme('bootstrap');
