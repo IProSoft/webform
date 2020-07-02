@@ -780,7 +780,8 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Append elements to the webform.
     $form['elements'] = [
-      '#type' => 'container',
+      '#type' => 'html_tag',
+      '#tag' => 'div',
       '#attributes' => ['class' => ['webform-elements']],
     ] + $elements;
 
