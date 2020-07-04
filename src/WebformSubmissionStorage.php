@@ -562,7 +562,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    * @param array $options
    *   (optional) Additional options and query conditions.
    * @param string $direction
-   *   Direction of the sibliing.
+   *   Direction of the sibling.
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The webform submission's sibling.

@@ -123,7 +123,7 @@ function _webform_get_config_entity_file_uuids(ConfigEntityInterface $entity) {
 /******************************************************************************/
 
 /**
- * Finds all files referenced (data-entity-uuid) in an associatve array.
+ * Finds all files referenced (data-entity-uuid) in an associative array.
  *
  * @param array $data
  *   An associative array.

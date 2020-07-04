@@ -118,7 +118,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
           $element['#after_build'][] = [get_class($this), 'elementAfterBuild'];
         }
 
-        $targets = $this->getConditionTargetsVisiblity($conditions, $visible_elements);
+        $targets = $this->getConditionTargetsVisibility($conditions, $visible_elements);
 
         // Determine if targets are visible or cross page.
         $all_targets_visible = (array_sum($targets) === count($targets));
@@ -719,7 +719,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     $element_value = $element_plugin->getElementSelectorInputValue($selector, $trigger_state, $element, $webform_submission);
 
     // Process trigger sub state used for custom #states API validation.
-    // @see Drupal.behaviors.webformStatesComparisions
+    // @see Drupal.behaviors.webformStatesComparisons
     // @see http://drupalsun.com/julia-evans/2012/03/09/extending-form-api-states-regular-expressions
     if ($trigger_state === 'value' && is_array($trigger_value)) {
       $trigger_substate = key($trigger_value);
@@ -861,7 +861,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   An associative array containing 'required'/'optional' states from parent
    *   container to be set on the element.
    */
-  protected function getBuildElementsRecusive(array &$elements, array &$form, array $parent_states = []) {
+  protected function getBuildElementsRecursive(array &$elements, array &$form, array $parent_states = []) {
     foreach ($form as $key => &$element) {
       if (!WebformElementHelper::isElement($element, $key)) {
         continue;
@@ -936,7 +936,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
 
       $elements[$key] = &$element;
 
-      $this->getBuildElementsRecusive($elements, $element, $subelement_states);
+      $this->getBuildElementsRecursive($elements, $element, $subelement_states);
 
       $element_plugin = $this->elementManager->getElementInstance($element);
       if ($element_plugin instanceof WebformCompositeBase && !$element_plugin->hasMultipleValues($element)) {
@@ -969,7 +969,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         // @see \Drupal\webform_composite\Plugin\WebformElement\WebformComposite::initializeCompositeElements
         //
         // Recurse through a composite's sub elements.
-        $this->getBuildElementsRecusive($elements, $element['#element'], $subelement_states);
+        $this->getBuildElementsRecursive($elements, $element['#element'], $subelement_states);
       }
     }
   }
@@ -985,9 +985,9 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    * @return array
    *   An associative array keyed by target selectors with a boolean state.
    */
-  protected function getConditionTargetsVisiblity(array $conditions, array $elements) {
+  protected function getConditionTargetsVisibility(array $conditions, array $elements) {
     $targets = [];
-    $this->getConditionTargetsVisiblityRecursive($conditions, $targets);
+    $this->getConditionTargetsVisibilityRecursive($conditions, $targets);
     foreach ($targets as $selector) {
       // Ignore invalid selector and return FALSE.
       $input_name = static::getSelectorInputName($selector);
@@ -1016,12 +1016,12 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    * @param array $targets
    *   An associative array keyed by target selectors with a boolean state.
    */
-  protected function getConditionTargetsVisiblityRecursive(array $conditions, array &$targets = []) {
+  protected function getConditionTargetsVisibilityRecursive(array $conditions, array &$targets = []) {
     foreach ($conditions as $index => $value) {
       if (is_int($index) && is_array($value) && WebformArrayHelper::isSequential($value)) {
         // Recurse downward and get nested target element.
         // NOTE: Nested conditions is not supported via the UI.
-        $this->getConditionTargetsVisiblityRecursive($value, $targets);
+        $this->getConditionTargetsVisibilityRecursive($value, $targets);
       }
       elseif (is_string($value) && in_array($value, ['and', 'or', 'xor'])) {
         // Skip AND, OR, or XOR operators.

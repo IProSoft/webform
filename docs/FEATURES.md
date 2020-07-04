@@ -150,8 +150,8 @@ Form settings include:
   <tr>
     <td width="50%"><div class="note">
     <a href="https://www.drupal.org/files/webform-8.x.5.x-features--settings-submissions.png">
-    <img src="https://www.drupal.org/files/webform-8.x.5.x-features--settings-submissions.png" alt="Configuration settings: Submisssions" /><br/>
-    <strong>Submisssions</strong>
+    <img src="https://www.drupal.org/files/webform-8.x.5.x-features--settings-submissions.png" alt="Configuration settings: Submissions" /><br/>
+    <strong>Submissions</strong>
     </a>
     </div></td>
     <td width="50%"><div class="note">

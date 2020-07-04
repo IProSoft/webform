@@ -37,7 +37,7 @@ The Webform module is a form builder and submission manager for Drupal 8.
  * Project status:
    [Webform Project Board] https://contribkanban.com/board/webform/8.x-5.x
 
- * Comparsion with other modules:
+ * Comparision with other modules:
    https://www.drupal.org/node/2083353
 
 
