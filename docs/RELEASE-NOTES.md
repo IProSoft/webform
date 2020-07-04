@@ -48,6 +48,47 @@ Steps for creating a new release
     cd /var/www/sites/d8_webform/web/core
     yarn run lint:css ../modules/sandbox/webform/css --fix
 
+[Spell Check](https://www.drupal.org/node/3122084) for Drupal 9.1+
+
+    # Install Pspell. (One-time)
+    cd /var/www/sites/d8_webform/web/core
+    yarn install
+
+    # Update dictionary. (core/misc/cspell/dictionary.txt)
+    algolia
+    Algolia
+    Antibot
+    ANTIBOT
+    codemirror
+    CodeMirror
+    imce
+    IMCE
+    inputmask
+    Inputmask
+    likert
+    Likert
+    lingotek
+    Lingotek
+    maillog
+    Maillog
+    Rockowitz
+    screencast
+    Screencast
+    unstarred
+    UNSTARRED
+    webform
+    Webform
+    webforms
+    Webforms
+    webform's
+    Webform's
+    wkhtmltopdf
+
+    cd /var/www/sites/d8_webform/web/core
+    yarn run spellcheck ../modules/sandbox/webform/**/* > ~/webform-spell-check.txt
+    cat ~/webform-spell-check.txt
+
+
 [File Permissions](https://www.drupal.org/comment/reply/2690335#comment-form)
 
     # Files should be 644 or -rw-r--r--
