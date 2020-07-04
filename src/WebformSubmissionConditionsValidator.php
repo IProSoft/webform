@@ -846,7 +846,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     }
 
     $elements = [];
-    $this->getBuildElementsRecusive($elements, $form_elements);
+    $this->getBuildElementsRecursive($elements, $form_elements);
     return $elements;
   }
 
