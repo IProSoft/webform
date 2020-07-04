@@ -564,8 +564,7 @@ trait WebformEntityReferenceTrait {
     $entity_reference_selection_handler = $this->selectionManager->getInstance([
       'target_type' => $target_type,
       'handler' => $selection_handler,
-      'handler_settings' => $selection_settings,
-    ]);
+    ] + $selection_settings);
     $form['entity_reference']['selection_settings'] = $entity_reference_selection_handler->buildConfigurationForm([], $form_state);
     $form['entity_reference']['selection_settings']['#tree'] = TRUE;
 
