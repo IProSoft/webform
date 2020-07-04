@@ -509,7 +509,7 @@ function hook_webform_libraries_info_alter(&$libraries) {
  *   - message_id: (string) Optional message ID that will be supplied into
  *     'webform_message' element. You are free to use 'message_*' keys if you
  *     want to additionally display a message when your help is displayed. These
- *     keyes will be supplied into 'webform_message' element. Refer to the docs
+ *     keys will be supplied into 'webform_message' element. Refer to the docs
  *     of this element for their meaning.
  *   - message_type: (string) Will be supplied into 'webform_message' element.
  *   - message_close: (bool) Will be supplied into 'webform_message' element.

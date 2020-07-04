@@ -356,7 +356,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($source_entity === $entity) {
       $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform', 'webform_submission']);
     }
-    // Handle paragraph sourc entity.
+    // Handle paragraph source entity.
     if ($source_entity && $source_entity->getEntityTypeId() === 'paragraph') {
       // Disable :clear suffix to prevent webform tokens from being removed.
       $data = $this->tokenManager->replace($data, $source_entity, [], ['suffixes' => ['clear' => FALSE]]);

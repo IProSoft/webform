@@ -66,7 +66,7 @@ function captcha_webform_submission_form_alter(&$form, FormStateInterface $form_
     return;
   }
 
-  // If the webform already has a CAPTCHA point is alread configured, do not
+  // If the webform already has a CAPTCHA point is already configured, do not
   // do anything.
   /* @var \Drupal\captcha\CaptchaPointInterface $captcha_point */
   $captcha_point = \Drupal::entityTypeManager()
@@ -80,7 +80,7 @@ function captcha_webform_submission_form_alter(&$form, FormStateInterface $form_
 }
 
 /**
- * After buld callback to add warning to CAPTCHA placement.
+ * After build callback to add warning to CAPTCHA placement.
  */
 function _captcha_webform_submission_form_after_build(array $form, FormStateInterface $form_state) {
   // Make sure 'Add CAPTCHA administration links to forms' is appended to the

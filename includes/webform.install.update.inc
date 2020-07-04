@@ -911,7 +911,7 @@ function webform_update_8044() {
 }
 
 /**
- * Issue #2878307: webform example module disable causes a customised webform deleted.
+ * Issue #2878307: webform example module disable causes a customized webform deleted.
  */
 function webform_update_8045() {
   // Remove sub module dependencies copied to new forms.
@@ -3521,7 +3521,7 @@ function webform_update_8187() {
 }
 
 /**
- * Issue #3097101: Remote Post cast boolean and numer values.
+ * Issue #3097101: Remote Post cast boolean and number values.
  */
 function webform_update_8188() {
   _webform_update_webform_handler_settings();
