@@ -238,6 +238,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform noUiSlider Element.
+    $projects['webform_nouislider'] = [
+      'title' => $this->t('Webform noUiSlider Element'),
+      'description' => $this->t('A lightweight range slider with multi-touch support and a ton of features.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_nouislider'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Promotion Code.
     $projects['webform_promotion_code'] = [
       'title' => $this->t('Webform Promotion Code'),
