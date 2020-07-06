@@ -3806,7 +3806,9 @@ function webform_update_8602() {
   // Update admin default base path.
   $admin_config = $config_factory->getEditable('webform.settings');
   $default_page_base_path = $admin_config->get('settings.default_page_base_path');
-  $default_page_base_path = '/' . trim($default_page_base_path, '/');
+  if ($default_page_base_path) {
+    $default_page_base_path = '/' . trim($default_page_base_path, '/');
+  }
   $admin_config->set('settings.default_page_base_path', $default_page_base_path)
     ->save();
 
@@ -3814,8 +3816,12 @@ function webform_update_8602() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->getEditable($webform_config_name);
     $data = $webform_config->getRawData();
-    $data['settings']['page_submit_path'] = '/' . trim($data['settings']['page_submit_path'], '/');
-    $data['settings']['page_confirm_path'] = '/' . trim($data['settings']['page_confirm_path'], '/');
+    if ($data['settings']['page_submit_path']) {
+      $data['settings']['page_submit_path'] = '/' . trim($data['settings']['page_submit_path'], '/');
+    }
+    if ($data['settings']['page_confirm_path']) {
+      $data['settings']['page_confirm_path'] = '/' . trim($data['settings']['page_confirm_path'], '/');
+    }
     $webform_config->setData($data)->save();
   }
 }
@@ -3853,4 +3859,43 @@ function webform_update_8604() {
  */
 function webform_update_8605() {
   _webform_update_admin_settings();
+}
+
+/**
+ * Issue #3104392: Webform URL aliases should begin with a forward slash.
+ */
+function webform_update_8606() {
+  $config_factory = \Drupal::configFactory();
+
+  // Remove empty default page base path.
+  $admin_config = $config_factory->getEditable('webform.settings');
+  $default_page_base_path = $admin_config->get('settings.default_page_base_path');
+  if ($default_page_base_path === '/') {
+    $admin_config->set('settings.default_page_base_path', '')->save();
+  }
+
+  // Remove empty page paths.
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+
+    $path_changed = FALSE;
+    if ($data['settings']['page_submit_path'] === '/') {
+      $data['settings']['page_submit_path'] = '';
+      $path_changed = TRUE;
+    }
+    if ($data['settings']['page_confirm_path'] === '/') {
+      $data['settings']['page_confirm_path'] = '';
+      $path_changed = TRUE;
+    }
+
+    if ($path_changed) {
+      $webform_config->setData($data)->save();
+      /** @var WebformInterface $webform */
+      $webform = Webform::load($data['id']);
+      $webform->setSetting('page_submit_path', $data['settings']['page_submit_path']);
+      $webform->setSetting('page_confirm_path', $data['settings']['page_confirm_path']);
+      $webform->updatePaths();
+    }
+  }
 }
