@@ -199,10 +199,10 @@ class Checkboxes extends OptionsBase {
           'required' => [[':input[name="properties[' . $option_type . ']"]' => ['checked' => TRUE]]],
         ],
       ];
+      $form['options'][$option_type . '_container']['#attributes']['data-webform-states-no-clear'] = TRUE;
       $form['options'][$option_type . '_container'][$option_type . '_value'] = [
         '#type' => 'textfield',
         '#title' => $this->t("@type option value", $t_args),
-
       ];
       $form['options'][$option_type . '_container'][$option_type . '_text'] = [
         '#type' => 'textfield',
