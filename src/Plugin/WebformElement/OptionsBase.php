@@ -262,7 +262,7 @@ abstract class OptionsBase extends WebformElementBase {
     }
 
     foreach ($element['#options__properties'] as $option_key => $options__properties) {
-      if (!isset($element[$option_key])) {
+      if (!isset($element[$option_key]) || !is_array($options__properties)) {
         continue;
       }
 

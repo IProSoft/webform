@@ -3760,6 +3760,52 @@ function webform_update_8197() {
   _webform_update_admin_settings();
 }
 
+/**
+ * Issue #3156982: Fix empty '#option_all_value' and '#option_all_text'.
+ */
+function webform_update_8198() {
+  $options_properties = [
+    '#options_all_value',
+    '#options_all_text',
+    '#options_none_value',
+    '#options_none_text',
+  ];
+
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $elements = $webform_config->get('elements');
+
+    // Try to decode elements.
+    try {
+      $elements = Yaml::decode($elements);
+    }
+    catch (\Exception $exception) {
+      continue;
+    }
+
+    // Make sure elements is an array.
+    if (!is_array($elements)) {
+      continue;
+    }
+
+    $has_options_property = FALSE;
+    $flattened_elements =& WebformFormHelper::flattenElements($elements);
+    foreach ($flattened_elements as &$element) {
+      foreach ($options_properties as $options_property) {
+        if (isset($element[$options_property]) && $element[$options_property] === '') {
+          unset($element[$options_property]);
+          $has_options_property = TRUE;
+        }
+      }
+    }
+    if ($has_options_property) {
+      $webform_config->set('elements', Yaml::encode($elements));
+      $webform_config->save(TRUE);
+    }
+  }
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -3898,4 +3944,11 @@ function webform_update_8606() {
       $webform->updatePaths();
     }
   }
+}
+
+/**
+ * Issue #3156982: Fix empty '#option_all_value' and '#option_all_text'.
+ */
+function webform_update_8607() {
+  webform_update_8198();
 }

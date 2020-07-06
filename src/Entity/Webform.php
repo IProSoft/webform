@@ -1772,6 +1772,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   protected function setElementPropertiesRecursive(array &$elements, $key, array $properties, $parent_key = '') {
     foreach ($elements as $element_key => &$element) {
+      // Make sure the element key is a string.
+      $element_key = (string) $element_key;
+
       if (!WebformElementHelper::isElement($element, $element_key)) {
         continue;
       }
