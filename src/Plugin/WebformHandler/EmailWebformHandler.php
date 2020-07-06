@@ -452,7 +452,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // From.
     $form['from'] = [
       '#type' => 'details',
-      '#title' => $this->t('Send from (website/organization)'),
+      '#title' => $this->t('Send from (website/domain)'),
       '#help' => $this->t('This is the "From:" email header which should come from <em>you</em>.  It should be your brand, company, organization, or website entity.'),
       '#open' => TRUE,
     ];
