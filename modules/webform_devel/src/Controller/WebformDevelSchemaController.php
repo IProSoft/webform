@@ -59,7 +59,8 @@ class WebformDevelSchemaController extends ControllerBase implements ContainerIn
       // Rows.
       $elements = $this->schema->getElements($webform);
       foreach ($elements as $element) {
-        $element['options'] = implode($multiple_delimiter, $element['options']);
+        $element['options_text'] = implode($multiple_delimiter, $element['options_text']);
+        $element['options_value'] = implode($multiple_delimiter, $element['options_value']);
         fputcsv($handle, $element);
       }
 
