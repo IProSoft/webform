@@ -560,7 +560,7 @@
          *   The event triggered.
          */
         function nextButtonClickEventHandler(event) {
-          var validator = $form.validate();
+          var validator = $form.validate(drupalSettings.cvJqueryValidateOptions);
           if (!$form.valid()) {
             // Focus first invalid input.
             validator.focusInvalid();
