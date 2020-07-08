@@ -23,6 +23,12 @@ elements: |
       '#type': textfield
       '#title': textfield
       '#required': true
+    textfield_prefix_suffix:
+      '#type': textfield
+      '#title': textfield_prefix_suffix
+      '#field_prefix': '{field_prefix}'
+      '#field_suffix': '{field_suffix}'
+      '#required': true
     pattern:
       '#type': textfield
       '#title': 'pattern (^[a-z]+$)'
@@ -58,6 +64,16 @@ elements: |
         one: One
         two: Two
         three: Three
+      '#required': true
+    checkboxes_two_columns:
+      '#type': checkboxes
+      '#title': checkboxes_two_columns
+      '#options_display': two_columns
+      '#options':
+        one: One
+        two: Two
+        three: Three
+        four: Four
       '#required': true
   date_elements:
     '#type': details
