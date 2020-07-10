@@ -218,6 +218,14 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
     '#weight' => 1,
   ];
 
+  // Add 'data-webform-unsaved-ignore' attribute to forms with unsaved
+  // data warning.
+  // @see webform.form.unsaved.js
+  if ($webform->getSetting('form_unsaved', TRUE)) {
+    $form['actions']['cards_prev']['#attributes']['data-webform-unsaved-ignore'] = TRUE;
+    $form['actions']['cards_next']['#attributes']['data-webform-unsaved-ignore'] = TRUE;
+  };
+
   // Process the submitted values before they are stored.
   $form['#entity_builders'][] = 'webform_card_webform_submission_builder';
 }
