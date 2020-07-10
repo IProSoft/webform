@@ -2151,7 +2151,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           $page_element =& $form['elements'][$page_key];
           $page_element_plugin = $this->elementManager->getElementInstance($page_element);
           if ($page_element_plugin instanceof WebformElementWizardPageInterface) {
-            if ($page_key !== $current_page) {
+            if ($page_key != $current_page) {
               $page_element_plugin->hidePage($page_element);
             }
             else {
