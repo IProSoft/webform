@@ -7,6 +7,10 @@
 
   'use strict';
 
+  Drupal.webform = Drupal.webform || {};
+  Drupal.webform.cards = Drupal.webform.cards || {};
+  Drupal.webform.cards.autoForwardDelay = Drupal.webform.cards.autoForwardDelay || 250; // 1/4 second delay.
+
   /**
    * Initialize webform cards.
    *
@@ -631,7 +635,7 @@
             return value;
           });
           if (inputHasValue) {
-            $nextButton.click();
+            setTimeout(function () {$nextButton.click();}, Drupal.webform.cards.autoForwardDelay);
           }
         }
       });
