@@ -60,7 +60,7 @@ function webform_test_webform_load(array $entities) {
 
   foreach ($entities as $id => $entity) {
     $name = _webform_test_load_include($id);
-    if ($name) {
+    if ($name && function_exists('webform_test_' . $name)) {
       $function = 'webform_test_' . $name;
       $elements = $function($entity);
       $entity->setElements($elements);
