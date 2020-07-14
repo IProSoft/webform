@@ -106,8 +106,14 @@
     else if ('less' in reference) {
       return (value !== '' && parseFloat(reference['less']) > parseFloat(value));
     }
+    else if ('less_equal' in reference) {
+      return (value !== '' && parseFloat(reference['less_equal']) >= parseFloat(value));
+    }
     else if ('greater' in reference) {
       return (value !== '' && parseFloat(reference['greater']) < parseFloat(value));
+    }
+    else if ('greater_equal' in reference) {
+      return (value !== '' && parseFloat(reference['greater_equal']) <= parseFloat(value));
     }
     else if ('between' in reference) {
       if (value === '') {

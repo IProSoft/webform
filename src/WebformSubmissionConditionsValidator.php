@@ -723,7 +723,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     // @see http://drupalsun.com/julia-evans/2012/03/09/extending-form-api-states-regular-expressions
     if ($trigger_state === 'value' && is_array($trigger_value)) {
       $trigger_substate = key($trigger_value);
-      if (in_array($trigger_substate, ['pattern', '!pattern', 'less', 'greater', 'between'])) {
+      if (in_array($trigger_substate, ['pattern', '!pattern', 'less', 'less_equal', 'greater', 'greater_equal', 'between'])) {
         $trigger_state = $trigger_substate;
         $trigger_value = reset($trigger_value);
       }
@@ -767,8 +767,16 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         $result = ($element_value !== '' && floatval($trigger_value) > floatval($element_value));
         break;
 
+      case 'less_equal':
+        $result = ($element_value !== '' && floatval($trigger_value) >= floatval($element_value));
+        break;
+
       case 'greater':
         $result = ($element_value !== '' && floatval($trigger_value) < floatval($element_value));
+        break;
+
+      case 'greater_equal':
+        $result = ($element_value !== '' && floatval($trigger_value) <= floatval($element_value));
         break;
 
       case 'between':

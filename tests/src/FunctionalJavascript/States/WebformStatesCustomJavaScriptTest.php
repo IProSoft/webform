@@ -78,6 +78,22 @@ class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
     $this->assertFalse($dependent_less->isVisible());
 
     /**************************************************************************/
+    // Less/Equal (<= 10).
+    /**************************************************************************/
+
+    // Check less dependent is not visible.
+    $dependent_less_equal = $page->findField('edit-dependent-less-equal');
+    $this->assertFalse($dependent_less_equal->isVisible());
+
+    // Check less dependent is visible.
+    $page->fillField('edit-trigger-less-equal', '10');
+    $this->assertTrue($dependent_less_equal->isVisible());
+
+    // Check less dependent is not visible.
+    $page->fillField('edit-trigger-less-equal', '11');
+    $this->assertFalse($dependent_less_equal->isVisible());
+
+    /**************************************************************************/
     // Greater (> 10).
     /**************************************************************************/
 
@@ -92,6 +108,22 @@ class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
     // Check greater dependent is not visible.
     $page->fillField('edit-trigger-greater', '5');
     $this->assertFalse($dependent_greater->isVisible());
+
+    /**************************************************************************/
+    // Greater/Equal (> 10).
+    /**************************************************************************/
+
+    // Check greater dependent is not visible.
+    $dependent_greater_equal = $page->findField('edit-dependent-greater-equal');
+    $this->assertFalse($dependent_greater_equal->isVisible());
+
+    // Check greater dependent is visible.
+    $page->fillField('edit-trigger-greater-equal', '10');
+    $this->assertTrue($dependent_greater_equal->isVisible());
+
+    // Check greater dependent is not visible.
+    $page->fillField('edit-trigger-greater-equal', '5');
+    $this->assertFalse($dependent_greater_equal->isVisible());
 
     /**************************************************************************/
     // Between (10 > & < 20).

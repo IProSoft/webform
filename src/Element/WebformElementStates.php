@@ -483,7 +483,11 @@ class WebformElementStates extends FormElement {
           'or',
           [$trigger_selector => ['value' => 'greater']],
           'or',
+          [$trigger_selector => ['value' => 'greater_equal']],
+          'or',
           [$trigger_selector => ['value' => 'less']],
+          'or',
+          [$trigger_selector => ['value' => 'less_equal']],
           'or',
           [$trigger_selector => ['value' => 'between']],
         ],
@@ -931,7 +935,7 @@ class WebformElementStates extends FormElement {
       if (in_array($trigger, ['value', '!value'])) {
         $value = $condition['value'];
       }
-      elseif (in_array($trigger, ['pattern', '!pattern', 'less', 'greater', 'between'])) {
+      elseif (in_array($trigger, ['pattern', '!pattern', 'less', 'less_equal', 'greater', 'greater_equal', 'between'])) {
         $value = [$trigger => $condition['value']];
         $trigger = 'value';
       }
@@ -1092,7 +1096,9 @@ class WebformElementStates extends FormElement {
       'pattern' => t('Pattern'),
       '!pattern' => t('Not Pattern'),
       'less' => t('Less than'),
+      'less_equal' => t('Less than/Equal to'),
       'greater' => t('Greater than'),
+      'greater_equal' => t('Greater than/Equal to'),
       'between' => t('Between'),
     ];
   }
