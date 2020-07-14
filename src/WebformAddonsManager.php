@@ -318,7 +318,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Enhancement: Webform Bulk Emails.
     $projects['webform_bulk_email'] = [
       'title' => $this->t('Webform Bulk Emails'),
-      'description' => $this->t('Provides a Webform Email/Handler plugin to send webform submission in bulk on a given time schedule.'),
+      'description' => $this->t('Provides a webform handler to send webform submission in bulk on a given time schedule.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_bulk_email'),
       'category' => 'enhancement',
     ];
