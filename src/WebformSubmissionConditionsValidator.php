@@ -573,6 +573,10 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    * {@inheritdoc}
    */
   public function validateConditions(array $conditions, WebformSubmissionInterface $webform_submission) {
+    if (empty($conditions)) {
+      return TRUE;
+    }
+
     // Determine condition logic.
     // @see Drupal.states.Dependent.verifyConstraints
     if (WebformArrayHelper::isSequential($conditions)) {
