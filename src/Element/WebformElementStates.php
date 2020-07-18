@@ -156,6 +156,7 @@ class WebformElementStates extends FormElement {
     // Get states and number of rows.
     if (($form_state->isRebuilding())) {
       $states = $element['#value'];
+      self::processSetToState($states);
     }
     else {
       $states = (isset($element['#default_value'])) ? static::convertFormApiStatesToStatesArray($element['#default_value']) : [];
@@ -370,22 +371,42 @@ class WebformElementStates extends FormElement {
    *   A render array containing a state table row.
    */
   protected static function buildStateRow(array $element, array $state, $table_id, $row_index, array $ajax_settings) {
-    $state += ['state' => '', 'operator' => 'and'];
+    $state += ['state' => '', 'value' => '', 'operator' => 'and'];
     $row = [
       '#attributes' => [
         'class' => ['webform-states-table--state'],
       ],
     ];
-    $row['state'] = [
+    $row['state_wrapper'] = [
+      '#wrapper_attributes' => ['class' => ['webform-states-table--state']],
+    ];
+    $element_name = $element['#name'];
+    $row['state_wrapper']['state'] = [
       '#type' => 'select',
       '#title' => t('State'),
       '#title_display' => 'invisible',
       '#options' => $element['#state_options'],
       '#default_value' => $state['state'],
       '#empty_option' => t('- Select -'),
-      '#wrapper_attributes' => ['class' => ['webform-states-table--state']],
+      '#parents' => [$element_name, 'states', $row_index , 'state'],
       '#error_no_message' => TRUE,
     ];
+    $row['state_wrapper']['value'] = [
+      '#type' => 'textfield',
+      '#title' => t('Value'),
+      '#title_display' => 'invisible',
+      '#size' => 10,
+      '#default_value' => $state['value'],
+      '#placeholder' => t('Enter value…'),
+      '#parents' => [$element_name, 'states', $row_index , 'value'],
+      '#states' => [
+        'visible' => [
+          [":input[name=\"{$element_name}[states][{$row_index}][state]\"]" => ['value' => 'set']],
+        ],
+      ],
+      '#error_no_message' => TRUE,
+    ];
+
     $row['operator'] = [
       '#type' => 'select',
       '#title' => t('Operator'),
@@ -583,6 +604,7 @@ class WebformElementStates extends FormElement {
     // Add new state and condition.
     $values[] = [
       'state' => '',
+      'value' => '',
       'operator' => 'and',
     ];
     $values[] = [
@@ -793,6 +815,7 @@ class WebformElementStates extends FormElement {
       }
       $index++;
     }
+    self::processSetToState($states);
     return $states;
   }
 
@@ -969,6 +992,9 @@ class WebformElementStates extends FormElement {
     foreach ($values as $value) {
       if (isset($value['state'])) {
         $index++;
+        if ($value['state'] == 'set') {
+          $value['state'] = $value['state'] . '|' . str_replace(' ', '&nbsp;', htmlentities($value['value']));
+        }
         $states[$index] = [
           'state' => $value['state'],
           'operator' => (isset($value['operator'])) ? $value['operator'] : 'and',
@@ -1005,6 +1031,10 @@ class WebformElementStates extends FormElement {
     $state_options = OptGroup::flattenOptions($element['#state_options']);
     $states = $element['#default_value'];
     foreach ($states as $state => $conditions) {
+      if (strpos($state, 'set|') !== FALSE) {
+        $state = 'set';
+      }
+
       if (!isset($state_options[$state])) {
         return t('Conditional logic (Form API #states) is using a custom %state state.', ['%state' => $state]);
       }
@@ -1075,6 +1105,7 @@ class WebformElementStates extends FormElement {
       $value_optgroup => [
         'checked' => t('Checked'),
         'unchecked' => t('Unchecked'),
+        'set' => t('Set to'),
       ],
     ];
   }
@@ -1101,6 +1132,17 @@ class WebformElementStates extends FormElement {
       'greater_equal' => t('Greater than/Equal to'),
       'between' => t('Between'),
     ];
+  }
+
+  protected static function processSetToState(&$states) {
+    foreach ($states as &$state) {
+      if (strpos($state['state'], 'set|') === FALSE) {
+        continue;
+      }
+      $state_values = explode('|', $state['state']);
+      $state['state'] = $state_values[0];
+      $state['value'] = empty($state_values[1]) ? NULL : html_entity_decode($state_values[1]);
+    }
   }
 
 }

@@ -27,6 +27,7 @@ use Drupal\webform\Plugin\WebformElement\Checkbox;
 use Drupal\webform\Plugin\WebformElement\Checkboxes;
 use Drupal\webform\Plugin\WebformElement\ContainerBase;
 use Drupal\webform\Plugin\WebformElement\Details;
+use Drupal\webform\Plugin\WebformElement\TextBase;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -2182,6 +2183,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       $states[$value_optgroup] = [
         'checked' => $this->t('Checked'),
         'unchecked' => $this->t('Unchecked'),
+      ];
+    }
+
+    // Set "set to" state for all text based elements.
+    if ($this instanceof TextBase) {
+      $states[$value_optgroup] = [
+        'set' => $this->t('Set to'),
       ];
     }
 
