@@ -272,28 +272,6 @@
     }
   });
 
-  // Set state for "Set to" state.
-  // State has integrated value in it. Listeners initialization is dynamical.
-  var $states = $document.find('[data-drupal-states]');
-  for (var i = 0; i < $states.length; i++) {
-    var config = JSON.parse($states[i].getAttribute('data-drupal-states'));
-    Object.keys(config || {}).forEach(function (state) {
-      if (state.indexOf('set|') != 0) {
-        return;
-      }
-      $document.on('state:' + state, function (e) {
-        // Converting html decoded value to normal.
-        var elem = document.createElement('textarea');
-        elem.innerHTML = state.replace('set|', '');
-        if (e.trigger && $(e.target).isWebform()) {
-          if (e.value) {
-            $(e.target).filter('select, input, textarea, button').val(elem.value).change();
-          }
-        }
-      });
-    });
-  }
-
   /* ************************************************************************ */
   // Behaviors.
   /* ************************************************************************ */

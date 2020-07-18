@@ -580,11 +580,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     if ($webform->hasConditions()) {
       $states = [];
       if (!empty($element['#states'])) {
-        $element_states = $element['#states'];
         $states = array_intersect_key($element_state_options, $element['#states']);
-        if ($set_states = preg_grep('/^set\|/', array_keys($element_states))) {
-          $states[] = $element_state_options['set'];
-        }
         $is_conditionally_required = array_intersect_key($this->requiredStates, $element['#states']);
       }
       $row['conditional'] = [
