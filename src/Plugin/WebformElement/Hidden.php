@@ -36,6 +36,9 @@ class Hidden extends TextBase {
       // Administration.
       'prepopulate' => FALSE,
       'private' => FALSE,
+      // Conditional logic.
+      'states' => [],
+      'states_clear' => TRUE,
     ] + $access_properties;
   }
 
@@ -74,6 +77,20 @@ class Hidden extends TextBase {
     ];
 
     return $form;
+  }
+
+
+  /****************************************************************************/
+  // #states API methods.
+  /****************************************************************************/
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getElementStateOptions() {
+    return array_filter(parent::getElementStateOptions(), function ($state_array, $state_group) {
+      return $state_group == (string) $this->t('Value');
+    }, ARRAY_FILTER_USE_BOTH);
   }
 
 }
