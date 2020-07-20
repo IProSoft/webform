@@ -3806,6 +3806,13 @@ function webform_update_8198() {
   }
 }
 
+/**
+ * Issue #3157587: Hide the next button when auto-forwarding cards.
+ */
+function webform_update_8199() {
+  _webform_update_webform_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -3951,4 +3958,11 @@ function webform_update_8606() {
  */
 function webform_update_8607() {
   webform_update_8198();
+}
+
+/**
+ * Issue #3157587: Hide the next button when auto-forwarding cards.
+ */
+function webform_update_8608() {
+  _webform_update_webform_settings();
 }

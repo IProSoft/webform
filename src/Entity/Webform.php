@@ -1095,6 +1095,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'wizard_progress_link' => FALSE,
       'wizard_progress_states' => FALSE,
       'wizard_auto_forward' => TRUE,
+      'wizard_auto_forward_hide_next_button' => FALSE,
       'wizard_start_label' => '',
       'wizard_preview_link' => FALSE,
       'wizard_confirmation' => TRUE,
