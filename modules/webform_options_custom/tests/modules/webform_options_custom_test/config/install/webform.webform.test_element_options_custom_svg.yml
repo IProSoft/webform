@@ -24,7 +24,7 @@ elements: |
     '#type': 'webform_options_custom:test_ballroom'
     '#title': webform_options_custom_url_ballroom
     '#required': true
-
+  
 css: ''
 javascript: ''
 settings:
@@ -97,6 +97,7 @@ settings:
   wizard_progress_link: false
   wizard_progress_states: false
   wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true

@@ -52,7 +52,7 @@ elements: |
       '#type': textfield
       '#title': nested_textfield
       '#default_value': '{value}'
-
+  
 css: ''
 javascript: ''
 settings:
@@ -125,6 +125,7 @@ settings:
   wizard_progress_link: false
   wizard_progress_states: false
   wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true

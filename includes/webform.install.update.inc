@@ -3805,3 +3805,10 @@ function webform_update_8198() {
     }
   }
 }
+
+/**
+ * Issue #3157587: Hide the next button when auto-forwarding cards.
+ */
+function webform_update_8199() {
+  _webform_update_webform_settings();
+}

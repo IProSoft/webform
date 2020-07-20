@@ -320,6 +320,9 @@
         wizard_auto_forward:
           type: boolean
           label: 'Auto-forward to next page when the page is completed'
+        wizard_auto_forward_hide_next_button:
+          type: boolean
+          label: 'Hide the next button when auto-forwarding'
         wizard_track:
           type: text
           label: 'Track wizard progress in the URL'
