@@ -221,14 +221,9 @@ handlers:
       from_name: _default
       subject: _default
       body: |
-<<<<<<< HEAD
-        <a href="[webform_submission:token-view-url]">[webform_submission:token-view-url]</a><br/>
-        <a href="[webform_submission:token-update-url]">[webform_submission:token-update-url]</a>
-=======
         <a href="[webform_submission:view-url]">[webform_submission:view-url]</a><br/>
         <a href="[webform_submission:update-url]">[webform_submission:update-url]</a>
 
->>>>>>> 8.x-5.x
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
