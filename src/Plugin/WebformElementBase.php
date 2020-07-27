@@ -274,6 +274,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       'multiple__no_items_message' => (string) $this->t('No items entered. Please add items below.'),
       'multiple__sorting' => TRUE,
       'multiple__operations' => TRUE,
+      'multiple__add' => TRUE,
+      'multiple__remove' => TRUE,
     ];
   }
 

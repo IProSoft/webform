@@ -137,6 +137,7 @@ address:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -148,6 +149,7 @@ address:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -384,6 +386,7 @@ date:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -395,6 +398,7 @@ date:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   placeholder: ''
   prepopulate: false
@@ -474,6 +478,7 @@ datelist:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -485,6 +490,7 @@ datelist:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -561,6 +567,7 @@ datetime:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -572,6 +579,7 @@ datetime:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -667,6 +675,7 @@ email:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -678,6 +687,7 @@ email:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -736,6 +746,7 @@ entity_autocomplete:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -747,6 +758,7 @@ entity_autocomplete:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -1081,6 +1093,7 @@ number:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1092,6 +1105,7 @@ number:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   placeholder: ''
   prepopulate: false
@@ -1469,6 +1483,7 @@ tel:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1480,6 +1495,7 @@ tel:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -1585,6 +1601,7 @@ textarea:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1596,6 +1613,7 @@ textarea:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -1665,6 +1683,7 @@ textfield:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1676,6 +1695,7 @@ textfield:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -1738,6 +1758,7 @@ url:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1749,6 +1770,7 @@ url:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -1914,6 +1936,7 @@ webform_address:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -1926,6 +1949,7 @@ webform_address:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   postal_code__access: true
   postal_code__description: ''
@@ -2162,6 +2186,7 @@ webform_autocomplete:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -2173,6 +2198,7 @@ webform_autocomplete:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -2521,6 +2547,7 @@ webform_contact:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -2533,6 +2560,7 @@ webform_contact:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   name__access: true
   name__description: ''
@@ -2619,6 +2647,7 @@ webform_custom_composite:
   more: ''
   more_title: ''
   multiple: true
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -2631,6 +2660,7 @@ webform_custom_composite:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -2748,6 +2778,7 @@ webform_email_confirm:
   minlength: null
   more: ''
   more_title: ''
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -2758,6 +2789,7 @@ webform_email_confirm:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -2817,6 +2849,7 @@ webform_email_multiple:
   minlength: null
   more: ''
   more_title: ''
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -2828,6 +2861,7 @@ webform_email_multiple:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   pattern: ''
   pattern_error: ''
@@ -3267,6 +3301,7 @@ webform_link:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -3279,6 +3314,7 @@ webform_link:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -3648,6 +3684,7 @@ webform_name:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -3660,6 +3697,7 @@ webform_name:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   prepopulate: false
   private: false
@@ -4441,6 +4479,7 @@ webform_telephone:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -4453,6 +4492,7 @@ webform_telephone:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   phone__access: true
   phone__description: ''
@@ -4699,6 +4739,7 @@ webform_time:
   more: ''
   more_title: ''
   multiple: false
+  multiple__add: true
   multiple__add_more: true
   multiple__add_more_button_label: Add
   multiple__add_more_input: true
@@ -4710,6 +4751,7 @@ webform_time:
   multiple__min_items: null
   multiple__no_items_message: 'No items entered. Please add items below.'
   multiple__operations: true
+  multiple__remove: true
   multiple__sorting: true
   placeholder: ''
   prepopulate: false
