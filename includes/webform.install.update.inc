@@ -3812,3 +3812,16 @@ function webform_update_8198() {
 function webform_update_8199() {
   _webform_update_webform_settings();
 }
+
+
+/**
+ * Issue #3161787: Image select element is included empty filter properties.
+ */
+function webform_update_8200() {
+  _webform_update_elements_clear_properties([
+    '#filter__placeholder' => '',
+    '#filter__singlular' => '',
+    '#filter__plural' => '',
+    '#filter__no_results' => '',
+  ]);
+}
