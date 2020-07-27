@@ -177,7 +177,7 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
       WebformInterface::PAGE_PREVIEW,
       WebformInterface::PAGE_CONFIRMATION,
     ])) {
-      $current_page = $current_card ?: array_key_first($pages);
+      $current_page = $current_card ?: key($pages);
     }
     $form['progress'] = [
       '#theme' => 'webform_progress',
