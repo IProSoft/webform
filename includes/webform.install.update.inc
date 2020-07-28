@@ -3813,7 +3813,6 @@ function webform_update_8199() {
   _webform_update_webform_settings();
 }
 
-
 /**
  * Issue #3161787: Image select element is included empty filter properties.
  */
