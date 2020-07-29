@@ -115,19 +115,19 @@
     else if ('greater_equal' in reference) {
       return (value !== '' && parseFloat(reference['greater_equal']) <= parseFloat(value));
     }
-    else if ('between' in reference) {
+    else if ('between' in reference || '!between' in reference) {
       if (value === '') {
         return false;
       }
-      else {
-        var between = reference['between'];
-        var betweenParts = between.split(':');
-        var greater = betweenParts[0];
-        var less = (typeof betweenParts[1] !== 'undefined') ? betweenParts[1] : null;
-        var isGreaterThan = (greater === null || greater === '' || parseFloat(value) >= parseFloat(greater));
-        var isLessThan = (less === null || less === '' || parseFloat(value) <= parseFloat(less));
-        return (isGreaterThan && isLessThan);
-      }
+
+      var between = reference['between'] || reference['!between'];
+      var betweenParts = between.split(':');
+      var greater = betweenParts[0];
+      var less = (typeof betweenParts[1] !== 'undefined') ? betweenParts[1] : null;
+      var isGreaterThan = (greater === null || greater === '' || parseFloat(value) >= parseFloat(greater));
+      var isLessThan = (less === null || less === '' || parseFloat(value) <= parseFloat(less));
+      var result = (isGreaterThan && isLessThan);
+      return (reference['!between']) ? !result : result;
     }
     else {
       return reference.indexOf(value) !== false;

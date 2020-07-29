@@ -490,6 +490,8 @@ class WebformElementStates extends FormElement {
           [$trigger_selector => ['value' => 'less_equal']],
           'or',
           [$trigger_selector => ['value' => 'between']],
+          'or',
+          [$trigger_selector => ['value' => '!between']],
         ],
       ],
       '#wrapper_attributes' => ['class' => ['webform-states-table--value']],
@@ -513,6 +515,8 @@ class WebformElementStates extends FormElement {
       '#states' => [
         'visible' => [
           [$trigger_selector => ['value' => 'between']],
+          'or',
+          [$trigger_selector => ['value' => '!between']],
         ],
       ],
     ];
@@ -935,7 +939,7 @@ class WebformElementStates extends FormElement {
       if (in_array($trigger, ['value', '!value'])) {
         $value = $condition['value'];
       }
-      elseif (in_array($trigger, ['pattern', '!pattern', 'less', 'less_equal', 'greater', 'greater_equal', 'between'])) {
+      elseif (in_array($trigger, ['pattern', '!pattern', 'less', 'less_equal', 'greater', 'greater_equal', 'between', '!between'])) {
         $value = [$trigger => $condition['value']];
         $trigger = 'value';
       }
@@ -1100,6 +1104,7 @@ class WebformElementStates extends FormElement {
       'greater' => t('Greater than'),
       'greater_equal' => t('Greater than/Equal to'),
       'between' => t('Between'),
+      '!between' => t('Not between'),
     ];
   }
 
