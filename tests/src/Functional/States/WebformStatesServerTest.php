@@ -382,16 +382,25 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $this->assertRaw('dependent_greater_equal field is required.');
 
     $edit = [
+      'trigger_between' => 11,
+    ];
+    $this->postSubmission($webform, $edit);
+    $this->assertRaw('dependent_between field is required.');
+    $this->assertNoRaw('dependent_not_between field is required.');
+
+    $edit = [
       'trigger_between' => 9,
     ];
     $this->postSubmission($webform, $edit);
     $this->assertNoRaw('dependent_between field is required.');
+    $this->assertRaw('dependent_not_between field is required.');
 
     $edit = [
       'trigger_between' => 21,
     ];
     $this->postSubmission($webform, $edit);
     $this->assertNoRaw('dependent_between field is required.');
+    $this->assertRaw('dependent_not_between field is required.');
 
     /**************************************************************************/
     // multiple element.

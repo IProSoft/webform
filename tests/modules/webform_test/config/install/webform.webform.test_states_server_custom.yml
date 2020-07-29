@@ -127,6 +127,18 @@ elements: |
         ':input[name="trigger_between"]':
           value:
             between: '10:20'
+  dependent_not_between:
+    '#type': textfield
+    '#title': dependent_not_between
+    '#states':
+      visible:
+        ':input[name="trigger_between"]':
+          value:
+            '!between': '10:20'
+      required:
+        ':input[name="trigger_between"]':
+          value:
+            '!between': '10:20'
   trigger_visible_slide:
     '#type': checkbox
     '#title': trigger_visible_slide
@@ -137,7 +149,7 @@ elements: |
       visible-slide:
         ':input[name="trigger_visible_slide"]':
           checked: true
-  
+
 css: ''
 javascript: ''
 settings:

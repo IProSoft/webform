@@ -131,23 +131,29 @@ class WebformStatesCustomJavaScriptTest extends WebformWebDriverTestBase {
 
     // Check between dependent is not visible.
     $dependent_between = $page->findField('edit-dependent-between');
+    $dependent_not_between = $page->findField('edit-dependent-not-between');
     $this->assertFalse($dependent_between->isVisible());
+    $this->assertFalse($dependent_not_between->isVisible());
 
     // Check between dependent is visible.
     $page->fillField('edit-trigger-between', '11');
     $this->assertTrue($dependent_between->isVisible());
+    $this->assertFalse($dependent_not_between->isVisible());
 
     // Check between dependent is not visible.
     $page->fillField('edit-trigger-between', '5');
     $this->assertFalse($dependent_between->isVisible());
+    $this->assertTrue($dependent_not_between->isVisible());
 
     // Check between dependent is not visible.
     $page->fillField('edit-trigger-between', '');
     $this->assertFalse($dependent_between->isVisible());
+    $this->assertFalse($dependent_not_between->isVisible());
 
     // Check between dependent is not visible.
     $page->fillField('edit-trigger-between', '21');
     $this->assertFalse($dependent_between->isVisible());
+    $this->assertTrue($dependent_not_between->isVisible());
   }
 
 }
