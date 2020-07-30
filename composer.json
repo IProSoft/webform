@@ -1,6 +1,5 @@
 {
   "name": "drupal/webform",
-  "_comment": "temp",
   "description": "Enables the creation of webforms and questionnaires.",
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
