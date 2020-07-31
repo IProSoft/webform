@@ -44,7 +44,14 @@ class WebformCardsManager implements WebformCardsManagerInterface {
    * {@inheritdoc}
    */
   public function hasCards(WebformInterface $webform) {
-    return (strpos($webform->getElementsRaw(), "'#type': webform_card") !== FALSE);
+    $elements = $webform->getElementsDecoded();
+    foreach ($elements as $element) {
+      $element_plugin = $this->elementManager->getElementInstance($element);
+      if ($element_plugin instanceof WebformCard) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   /**
