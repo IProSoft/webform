@@ -199,8 +199,9 @@
             $activeCard.find(':input:visible').first().focus();
           }
 
-          // Set current page.
+          // Set current card.
           $currentCardInput.val($activeCard.data('webform-key'));
+          $form.attr('data-webform-current-card', $activeCard.data('webform-key'));
 
           // Track the current page in a form data attribute and the URL.
           trackCurrentPage($activeCard);
