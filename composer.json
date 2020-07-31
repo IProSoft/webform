@@ -55,7 +55,7 @@
     "drupal/devel": "~3.0",
     "drupal/entity": "~1.0",
     "drupal/entity_print": "~2.0",
-    "drupal/group": "1.x-dev",
+    "drupal/group": "1.0",
     "drupal/lingotek": "~3.0",
     "drupal/mailsystem": "~4.0",
     "drupal/paragraphs": "~1.0",
