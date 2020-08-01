@@ -1367,6 +1367,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'web_services',
     ];
 
+    // Web services: Webform JSON:API.
+    $projects['webform_jsonapi'] = [
+      'title' => $this->t('Webform JSON:API'),
+      'description' => $this->t('Provides a webform integration with JSON:API to expose webform elements.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_jsonapi'),
+      'category' => 'web_services',
+    ];
+
     // Web services: Webform JSON Schema.
     $projects['webform_jsonschema'] = [
       'title' => $this->t('Webform JSON Schema'),
