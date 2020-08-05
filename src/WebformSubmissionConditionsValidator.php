@@ -710,8 +710,8 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   TRUE if condition is validated. NULL if the condition can't be evaluated.
    */
   protected function checkCondition(array $element, $selector, array $condition, WebformSubmissionInterface $webform_submission) {
-    $trigger_state = key($condition);
-    $trigger_value = $condition[$trigger_state];
+    $trigger = key($condition);
+    $trigger_value = $condition[$trigger];
 
     $element_plugin = $this->elementManager->getElementInstance($element);
 
@@ -720,72 +720,94 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
       return TRUE;
     }
 
-    $element_value = $element_plugin->getElementSelectorInputValue($selector, $trigger_state, $element, $webform_submission);
+    $element_value = $element_plugin->getElementSelectorInputValue($selector, $trigger, $element, $webform_submission);
 
     // Process trigger sub state used for custom #states API validation.
     // @see Drupal.behaviors.webformStatesComparisons
     // @see http://drupalsun.com/julia-evans/2012/03/09/extending-form-api-states-regular-expressions
-    if ($trigger_state === 'value' && is_array($trigger_value)) {
+    if ($trigger === 'value' && is_array($trigger_value)) {
       $trigger_substate = key($trigger_value);
       if (in_array($trigger_substate, ['pattern', '!pattern', 'less', 'less_equal', 'greater', 'greater_equal', 'between', '!between'])) {
-        $trigger_state = $trigger_substate;
+        $trigger = $trigger_substate;
         $trigger_value = reset($trigger_value);
       }
     }
 
     // Process trigger state/negate.
-    list($trigger_state, $trigger_negate) = $this->processState($trigger_state);
+    list($trigger, $trigger_negate) = $this->processState($trigger);
 
     // Process triggers (aka remote conditions).
     // @see \Drupal\webform\Element\WebformElementStates::processWebformStates
-    switch ($trigger_state) {
+    if ($element_plugin->hasMultipleValues($element) && $trigger !== 'empty') {
+      $result = FALSE;
+      $element_values = (array) $element_value;
+      foreach ($element_values as $element_value) {
+        $trigger_result = $this->checkConditionTrigger($trigger, $trigger_value, $element_value);
+        if ($trigger_result !== FALSE) {
+          $result = $trigger_result;
+        }
+      }
+    }
+    else {
+      $result = $this->checkConditionTrigger($trigger, $trigger_value, $element_value);
+    }
+
+    if ($result === NULL) {
+      return FALSE;
+    }
+
+    return ($trigger_negate) ? !$result : $result;
+  }
+
+  /**
+   * Process condition trigger.
+   *
+   * @param string $trigger
+   *   The trigger.
+   * @param string $trigger_value
+   *   The trigger value.
+   * @param string|array $element_value
+   *   The element value
+   *
+   * @return bool|null
+   *   The result.
+   */
+  protected function checkConditionTrigger($trigger, $trigger_value, $element_value) {
+    // Process triggers (aka remote conditions).
+    // @see \Drupal\webform\Element\WebformElementStates::processWebformStates
+    switch ($trigger) {
       case 'empty':
         $empty = (empty($element_value) && $element_value !== '0');
-        $result = ($empty === (boolean) $trigger_value);
-        break;
+        return ($empty === (boolean) $trigger_value);
 
       case 'checked':
-        $result = ((boolean) $element_value === (boolean) $trigger_value);
-        break;
+        return ((boolean) $element_value === (boolean) $trigger_value);
 
       case 'value':
-        if ($element_plugin->hasMultipleValues($element)) {
-          $trigger_values = (array) $trigger_value;
-          $element_values = (array) $element_value;
-          $result = (array_intersect($trigger_values, $element_values)) ? TRUE : FALSE;
-        }
-        else {
-          $result = ((string) $element_value === (string) $trigger_value);
-        }
-        break;
+        return ((string) $element_value === (string) $trigger_value);
 
       case 'pattern':
         // PHP: Convert JavaScript-escaped Unicode characters to PCRE
         // escape sequence format.
         // @see \Drupal\webform\Plugin\WebformElement\TextBase::validatePattern
         $pcre_pattern = preg_replace('/\\\\u([a-fA-F0-9]{4})/', '\\x{\\1}', $trigger_value);
-        $result = preg_match('{' . $pcre_pattern . '}u', $element_value);
-        break;
+        return preg_match('{' . $pcre_pattern . '}u', $element_value);
 
       case 'less':
-        $result = ($element_value !== '' && floatval($trigger_value) > floatval($element_value));
-        break;
+        return ($element_value !== '' && floatval($trigger_value) > floatval($element_value));
 
       case 'less_equal':
-        $result = ($element_value !== '' && floatval($trigger_value) >= floatval($element_value));
-        break;
+        return ($element_value !== '' && floatval($trigger_value) >= floatval($element_value));
 
       case 'greater':
-        $result = ($element_value !== '' && floatval($trigger_value) < floatval($element_value));
-        break;
+        return ($element_value !== '' && floatval($trigger_value) < floatval($element_value));
 
       case 'greater_equal':
-        $result = ($element_value !== '' && floatval($trigger_value) <= floatval($element_value));
-        break;
+        return ($element_value !== '' && floatval($trigger_value) <= floatval($element_value));
 
       case 'between':
         if ($element_value === '') {
-          return FALSE;
+          return NULL;
         }
 
         $greater = NULL;
@@ -798,14 +820,11 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         }
         $is_greater_than = ($greater === NULL || $greater === '' || floatval($element_value) >= floatval($greater));
         $is_less_than = ($less === NULL || $less === '' || floatval($element_value) <= floatval($less));
-        $result = ($is_greater_than && $is_less_than);
-        break;
+        return ($is_greater_than && $is_less_than);
 
       default:
         return NULL;
     }
-
-    return ($trigger_negate) ? !$result : $result;
   }
 
   /****************************************************************************/
