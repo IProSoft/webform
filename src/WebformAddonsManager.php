@@ -150,6 +150,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Attachment Gated Download.
+    $projects['webform_attachment_gated_download'] = [
+      'title' => $this->t('Webform Attachment Gated Download'),
+      'description' => $this->t('Provides a field formatter for file, image, and media types which links to a webform.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_attachment_gated_download'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Belgian National Insurance Number.
     $projects['webform_rrn_nrn'] = [
       'title' => $this->t('Webform Belgian National Insurance Number'),
@@ -190,11 +198,11 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
-    // Element: Webform Attachment Gated Download.
-    $projects['webform_attachment_gated_download'] = [
-      'title' => $this->t('Webform Attachment Gated Download'),
-      'description' => $this->t('Provides a field formatter for file, image, and media types which links to a webform.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_attachment_gated_download'),
+    // Element: Webform Dynamic Autocomplete.
+    $projects['webform_dynamic_autocomplete'] = [
+      'title' => $this->t('Webform Dynamic Autocomplete'),
+      'description' => $this->t('Provides a new element field in webform for Dynamically handling Autocomplete API request.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_dynamic_autocomplete'),
       'category' => 'element',
     ];
 
