@@ -1081,6 +1081,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'spam',
     ];
 
+    // Spam: Recaptcha Element.
+    $projects['recaptcha_element'] = [
+      'title' => $this->t('Recaptcha Element'),
+      'description' => $this->t('Provides a Webform Handler that allows you to enable reCAPTCHA protection on a webform using the webform UI.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/recaptcha_element'),
+      'category' => 'spam',
+    ];
+
     /**************************************************************************/
     // Submissions.
     /**************************************************************************/
