@@ -57,6 +57,9 @@
             // @see webform.element.details.save.js
             if (Drupal.webformDetailsSaveGetName) {
               $form.find('details').each(function () {
+                // Note: Drupal.webformDetailsSaveGetName checks if localStorage
+                // exists and is enabled.
+                // @see webform.element.details.save.js
                 var name = Drupal.webformDetailsSaveGetName($(this));
                 if (name) {
                   localStorage.setItem(name, open);
