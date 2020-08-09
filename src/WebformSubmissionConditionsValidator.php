@@ -386,12 +386,17 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $form_state->getFormObject()->getEntity();
 
+    // Check if we are in the middle of multiple wizard form and determine
+    // if element access should be checked.
+    $current_page = $form_state->get('current_page');
+    $check_access = (!$current_page || $current_page === WebformInterface::PAGE_CONFIRMATION) ? FALSE : TRUE;
+
     // Get submission data.
     $data = $webform_submission->getData();
 
     // Recursive through the form and unset unset submission data for
     // form elements that are hidden.
-    $this->submitFormRecursive($form, $webform_submission, $data);
+    $this->submitFormRecursive($form, $webform_submission, $data, $check_access);
 
     // Set submission data.
     $webform_submission->setData($data);
@@ -406,10 +411,13 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   A webform submission.
    * @param array $data
    *   A webform submission's data.
+   * @param bool $check_access
+   *   Flag that determine if the currrent form element's access
+   *   should be checked.
    * @param bool $visible
    *   Flag that determine if the currrent form elements are visible.
    */
-  protected function submitFormRecursive(array $elements, WebformSubmissionInterface $webform_submission, array &$data, $visible = TRUE) {
+  protected function submitFormRecursive(array $elements, WebformSubmissionInterface $webform_submission, array &$data, $check_access, $visible = TRUE) {
     foreach ($elements as $key => &$element) {
       if (!WebformElementHelper::isElement($element, $key)) {
         continue;
@@ -420,7 +428,9 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         continue;
       }
 
-      if (isset($element['#_webform_access']) && $element['#_webform_access'] === FALSE) {
+      // Skip if element #_webform_access should be checked to
+      // preserve default values.
+      if ($check_access && isset($element['#_webform_access']) && $element['#_webform_access'] === FALSE) {
         continue;
       }
 
@@ -432,7 +442,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         $data[$key] = (is_array($data[$key])) ? [] : '';
       }
 
-      $this->submitFormRecursive($element, $webform_submission, $data, $element_visible);
+      $this->submitFormRecursive($element, $webform_submission, $data, $check_access, $element_visible);
     }
   }
 
