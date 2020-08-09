@@ -20,11 +20,21 @@ class WebformSubmissionAccess {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public static function checkEditAllAccess(WebformSubmissionInterface $webform_submission) {
-    $elements_raw = $webform_submission->getWebform()->getElementsRaw();
-    $has_pages = (strpos($elements_raw, "'#type': webform_wizard_page") !== FALSE
-      || strpos($elements_raw, "'#type': webform_card") !== FALSE);
-    return AccessResult::allowedIf($has_pages);
+  public static function checkWizardPagesAccess(WebformSubmissionInterface $webform_submission) {
+    // Check wizard pages.
+    $has_wizard_pages = ($webform_submission->getWebform()->hasWizardPages());
+
+    // Check cards.
+    if (\Drupal::moduleHandler()->moduleExists('webform_cards')) {
+      /** @var \Drupal\webform_cards\WebformCardsManagerInterface $webform_cards_manager */
+      $webform_cards_manager = \Drupal::service('webform_cards.manager');
+      $has_cards = $webform_cards_manager->hasCards($webform_submission->getWebform());
+    }
+    else {
+      $has_cards = FALSE;
+    }
+
+    return AccessResult::allowedIf($has_wizard_pages || $has_cards);
   }
 
   /**
