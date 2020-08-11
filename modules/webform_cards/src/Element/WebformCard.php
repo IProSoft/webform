@@ -32,7 +32,7 @@ class WebformCard extends RenderElement {
     ];
   }
 
- /**
+  /**
    * Adds form element theming to webform card.
    *
    * @param array $element

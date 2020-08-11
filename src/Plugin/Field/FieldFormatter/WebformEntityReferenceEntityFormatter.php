@@ -134,7 +134,7 @@ class WebformEntityReferenceEntityFormatter extends WebformEntityReferenceFormat
     $is_paragraph_current_source_entity = ($items_main_entity->getEntityTypeId() === $request_source_entity->getEntityTypeId())
       && ($items_main_entity->id() === $request_source_entity->id());
 
-    $is_paragraph_entity_edit_form = ($is_entity_edit_form && $is_paragraph && $is_paragraph_current_source_entity );
+    $is_paragraph_entity_edit_form = ($is_entity_edit_form && $is_paragraph && $is_paragraph_current_source_entity);
 
     $elements = [];
     foreach ($this->getEntitiesToView($items, $langcode) as $delta => $entity) {

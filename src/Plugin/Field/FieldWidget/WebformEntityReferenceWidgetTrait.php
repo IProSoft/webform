@@ -120,7 +120,7 @@ trait WebformEntityReferenceWidgetTrait {
       '#weight' => $weight++,
     ];
 
-    // Disable a warning message about the webform's state using Ajax
+    // Disable a warning message about the webform's state using Ajax.
     $is_webform_closed = ($webform && $webform->isClosed());
     if ($is_webform_closed) {
       $t_args = [

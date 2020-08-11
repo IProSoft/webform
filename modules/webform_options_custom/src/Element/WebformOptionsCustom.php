@@ -14,7 +14,6 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Symfony\Component\CssSelector\CssSelectorConverter;
 use Drupal\webform_options_custom\Entity\WebformOptionsCustom as WebformOptionsCustomEntity;
 
 /**

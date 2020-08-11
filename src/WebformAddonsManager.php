@@ -322,7 +322,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
-
     // Enhancement: Webform Bulk Emails.
     $projects['webform_bulk_email'] = [
       'title' => $this->t('Webform Bulk Emails'),
@@ -734,7 +733,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Integrations: Webform Hubspot Integration
+    // Integrations: Webform Hubspot Integration.
     $projects['hubspot_api_integration'] = [
       'title' => $this->t('Webform Hubspot Integration'),
       'description' => $this->t('Provides a Webform handler that integrates with Hubspot.'),

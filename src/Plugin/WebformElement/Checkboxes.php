@@ -67,7 +67,6 @@ class Checkboxes extends OptionsBase {
     return TRUE;
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -110,9 +109,9 @@ class Checkboxes extends OptionsBase {
 
     $element['#attached']['library'][] = 'webform/webform.element.checkboxes';
 
-    if (!empty($element['#options_all']) || !empty($element['#options_none']))
-    $element['#element_validate'][] = [get_class($this), 'validateCheckAllOrNone'];
-
+    if (!empty($element['#options_all']) || !empty($element['#options_none'])) {
+      $element['#element_validate'][] = [get_class($this), 'validateCheckAllOrNone'];
+    }
   }
 
   /**
@@ -207,7 +206,7 @@ class Checkboxes extends OptionsBase {
       $form['options'][$option_type . '_container'][$option_type . '_text'] = [
         '#type' => 'textfield',
         '#title' => $this->t("@type option text", $t_args),
-        '#attributes' => ['class' => ['webform-ui-element-form-inline--input-double-width']]
+        '#attributes' => ['class' => ['webform-ui-element-form-inline--input-double-width']],
       ];
     }
     return $form;
