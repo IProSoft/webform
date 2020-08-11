@@ -515,9 +515,9 @@
           }
         }
 
-        /**********************************************************************/
+        /* ****************************************************************** */
         // Event handlers.
-        /**********************************************************************/
+        /* ****************************************************************** */
 
         /**
          * Toggle event handler.
@@ -648,6 +648,9 @@
 
         /**
          * Determine if next button is hidden when auto-forwarding
+         *
+         * @return {{boolean}}
+         *   TRUE if next button should be hidden
          */
         function hideAutoForwardNextButton() {
           if (!options.autoForwardHideNextButton) {

@@ -296,7 +296,8 @@ class WebformResultsExportController extends ControllerBase implements Container
     // Track finished.
     if ($context['sandbox']['max'] > 0 && $context['sandbox']['progress'] !== $context['sandbox']['max']) {
       $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
-    } else {
+    }
+    else {
       $context['finished'] = 1;
     }
   }

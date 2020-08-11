@@ -53,7 +53,7 @@
     return this.val() === '';
   };
 
- /* ************************************************************************ */
+  /* ************************************************************************ */
   // Dependents.
   /* ************************************************************************ */
 
@@ -315,6 +315,9 @@
   /**
    * Add HTML5 multiple checkboxes required validation.
    *
+   * @param {jQuery} $element
+   *   An jQuery object containing HTML5 radios.
+   *
    * @see https://stackoverflow.com/a/37825072/145846
    */
   function checkboxesRequired($element) {
@@ -326,6 +329,9 @@
 
   /**
    * Add HTML5 radios required validation.
+   *
+   * @param {jQuery} $element
+   *   An jQuery object containing HTML5 radios.
    *
    * @see https://www.drupal.org/project/webform/issues/2856795
    */
@@ -508,6 +514,7 @@
   /* ************************************************************************ */
 
   /**
+   * Toggle an input's required attributes.
    *
    * @param {element} $input
    *   An input.

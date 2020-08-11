@@ -53,7 +53,6 @@ class WebformElementCheckboxesJavaScriptTest extends WebformWebDriverTestBase {
     $assert_session->checkboxNotChecked('edit-checkboxes-none-two');
     $assert_session->checkboxNotChecked('edit-checkboxes-none-three');
 
-
     // Check the 'all' and 'none' work together.
     $this->click('#edit-checkboxes-both-none');
     $assert_session->checkboxNotChecked('edit-checkboxes-both-one');
