@@ -497,6 +497,14 @@ function webform_preprocess_form_element(&$variables) {
   // Setup description, help, and more.
   _webform_preprocess_element($variables, ['label', '#title']);
 
+  // Make sure the #description_display is always applied to account for
+  // #more which is placed in the #description.
+  // @see template_preprocess_form_element()
+  if (isset($variables['description'])) {
+    $element = &$variables['element'];
+    $variables['description_display'] = $element['#description_display'];
+  }
+
   // Issue #2700439: Description class not added to
   // form-element.html.twig template.
   // @see https://www.drupal.org/project/drupal/issues/2700439
