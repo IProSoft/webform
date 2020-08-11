@@ -568,7 +568,7 @@ entity.webform_submission.edit_form.all:
     _title_callback: '\Drupal\webform\Controller\WebformSubmissionViewController::title'
   requirements:
     _entity_access: 'webform_submission.update'
-    _custom_access: '\Drupal\webform\Access\WebformSubmissionAccess::checkEditAllAccess'
+    _custom_access: '\Drupal\webform\Access\WebformSubmissionAccess::checkWizardPagesAccess'
 
 entity.webform_submission.notes_form:
   path: '/admin/structure/webform/manage/{webform}/submission/{webform_submission}/notes'
