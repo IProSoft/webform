@@ -497,6 +497,14 @@ function webform_preprocess_form_element(&$variables) {
   // Setup description, help, and more.
   _webform_preprocess_element($variables, ['label', '#title']);
 
+  // Make sure the #description_display is always applied to account for
+  // #more which is placed in the #description.
+  // @see template_preprocess_form_element()
+  if (isset($variables['description'])) {
+    $element = &$variables['element'];
+    $variables['description_display'] = $element['#description_display'];
+  }
+
   // Add missing classes to the Claro theme's form elements.
   // @see core/modules/system/templates/form-element.html.twig
   // @see claro/templates/form-element.html.twig
