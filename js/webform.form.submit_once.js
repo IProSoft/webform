@@ -59,9 +59,7 @@
           $form.find('.js-webform-wizard-pages-links :submit, .form-actions :submit').addClass('is-disabled');
 
           // Set the throbber progress indicator.
-          // @see Drupal.Ajax.prototype.setProgressIndicatorThrobber
-          var $progress = $('<div class="ajax-progress ajax-progress-throbber"><div class="throbber">&nbsp;</div></div>');
-          $clickedButton.after($progress);
+          $clickedButton.after(Drupal.theme.ajaxProgressThrobber());
         });
       });
     }
