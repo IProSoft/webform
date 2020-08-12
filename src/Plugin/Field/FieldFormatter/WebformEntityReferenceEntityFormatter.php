@@ -131,7 +131,8 @@ class WebformEntityReferenceEntityFormatter extends WebformEntityReferenceFormat
 
     $is_paragraph = ($items_entity && $items_entity->getEntityTypeId() === 'paragraph');
 
-    $is_paragraph_current_source_entity = ($items_main_entity->getEntityTypeId() === $request_source_entity->getEntityTypeId())
+    $is_paragraph_current_source_entity = ($items_main_entity && $request_source_entity)
+      && ($items_main_entity->getEntityTypeId() === $request_source_entity->getEntityTypeId())
       && ($items_main_entity->id() === $request_source_entity->id());
 
     $is_paragraph_entity_edit_form = ($is_entity_edit_form && $is_paragraph && $is_paragraph_current_source_entity);
