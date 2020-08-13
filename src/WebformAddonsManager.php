@@ -684,7 +684,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-
     // Integration: Webform File Upload and Campaign as Salesforce Lead Attachment.
     $projects['wsla'] = [
       'title' => $this->t('Webform File Upload and Campaign as Salesforce Lead Attachment'),
