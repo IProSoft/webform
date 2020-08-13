@@ -684,6 +684,16 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+
+    // Integration: Webform File Upload and Campaign as Salesforce Lead Attachment.
+    $projects['wsla'] = [
+      'title' => $this->t('Webform File Upload and Campaign as Salesforce Lead Attachment'),
+      'description' => $this->t('This module uses webform properties as setting and allow the file uploaded as lead attachment. Campaign can also be attached with lead using this module.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/wsla'),
+      'experimental' => TRUE,
+      'category' => 'integration',
+    ];
+
     // Integration: Webform iContact.
     $projects['webform_icontact'] = [
       'title' => $this->t('Webform iContact'),
