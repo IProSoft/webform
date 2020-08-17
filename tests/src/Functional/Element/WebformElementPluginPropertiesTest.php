@@ -117,6 +117,7 @@ address:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   available_countries: {  }
   default_value: {  }
@@ -180,6 +181,7 @@ checkbox:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: false
@@ -226,6 +228,7 @@ checkboxes:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -291,6 +294,7 @@ color:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   color_size: medium
@@ -350,6 +354,7 @@ date:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   date_date_format: Y-m-d
@@ -432,6 +437,7 @@ datelist:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   date_abbreviate: true
@@ -521,6 +527,7 @@ datetime:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   date_date_datepicker_button: false
@@ -610,6 +617,7 @@ details:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   description: ''
@@ -648,6 +656,7 @@ email:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -723,6 +732,7 @@ entity_autocomplete:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -793,6 +803,7 @@ fieldset:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   description: ''
@@ -850,6 +861,7 @@ item:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   description: ''
   description_display: ''
@@ -885,6 +897,7 @@ label:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   description: ''
@@ -909,6 +922,7 @@ language_select:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -957,6 +971,7 @@ machine_name:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -1005,6 +1020,7 @@ managed_file:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   button: false
@@ -1067,6 +1083,7 @@ number:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1140,6 +1157,7 @@ processed_text:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   display_on: form
   flex: 1
@@ -1165,6 +1183,7 @@ radios:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -1219,6 +1238,7 @@ range:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -1275,6 +1295,7 @@ search:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1331,6 +1352,7 @@ select:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -1397,6 +1419,7 @@ tableselect:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -1453,6 +1476,7 @@ tel:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1531,6 +1555,7 @@ text_format:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   allowed_formats: {  }
   default_value: {  }
@@ -1570,6 +1595,7 @@ textarea:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1650,6 +1676,7 @@ textfield:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1731,6 +1758,7 @@ url:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -1809,6 +1837,7 @@ view:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   arguments: {  }
   display_id: ''
@@ -1833,6 +1862,7 @@ webform_actions:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   delete__attributes: {  }
@@ -1900,6 +1930,7 @@ webform_address:
   address__title: Address
   address__title_display: ''
   address__type: textfield
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -2001,6 +2032,7 @@ webform_attachment_token:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   display_on: none
   download: false
@@ -2032,6 +2064,7 @@ webform_attachment_twig:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   display_on: none
   download: false
@@ -2063,6 +2096,7 @@ webform_attachment_url:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   display_on: none
   download: false
@@ -2094,6 +2128,7 @@ webform_audio_file:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   button: false
@@ -2156,6 +2191,7 @@ webform_autocomplete:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete_existing: false
@@ -2241,6 +2277,7 @@ webform_card:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   format: details
   format_attributes: {  }
@@ -2271,6 +2308,7 @@ webform_checkboxes_other:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -2351,6 +2389,7 @@ webform_codemirror:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -2402,6 +2441,7 @@ webform_computed_token:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   ajax: false
   description: ''
@@ -2440,6 +2480,7 @@ webform_computed_twig:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   ajax: false
   description: ''
@@ -2495,6 +2536,7 @@ webform_contact:
   address__title: Address
   address__title_display: ''
   address__type: textfield
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -2628,6 +2670,7 @@ webform_custom_composite:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -2695,6 +2738,7 @@ webform_document_file:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   button: false
@@ -2758,6 +2802,7 @@ webform_email_confirm:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -2833,6 +2878,7 @@ webform_email_multiple:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   autocomplete: 'on'
@@ -2904,6 +2950,7 @@ webform_entity_checkboxes:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -2967,6 +3014,7 @@ webform_entity_radios:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -3022,6 +3070,7 @@ webform_entity_select:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3102,6 +3151,7 @@ webform_image_file:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attachment_image_style: ''
   attributes: {  }
@@ -3167,6 +3217,7 @@ webform_image_select:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3232,6 +3283,7 @@ webform_likert:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   answers: {  }
   answers_description_display: description
@@ -3282,6 +3334,7 @@ webform_link:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3364,6 +3417,7 @@ webform_location_geocomplete:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   administrative_area_level_1__access: false
   administrative_area_level_1__title: State/Province
@@ -3439,6 +3493,7 @@ webform_location_places:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   administrative__access: false
   administrative__title: State/Province
@@ -3509,6 +3564,7 @@ webform_mapping:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   arrow: →
   default_value: {  }
@@ -3558,6 +3614,7 @@ webform_markup:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   display_on: form
   flex: 1
@@ -3581,6 +3638,7 @@ webform_message:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   display_on: form
@@ -3609,6 +3667,7 @@ webform_more:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   display_on: form
@@ -3633,6 +3692,7 @@ webform_name:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3749,6 +3809,7 @@ webform_name:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3813,6 +3874,7 @@ webform_name:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -3877,6 +3939,7 @@ webform_radios_other:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -3949,6 +4012,7 @@ webform_rating:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: 0
@@ -4003,6 +4067,7 @@ webform_same:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: false
@@ -4050,6 +4115,7 @@ webform_scale:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4107,6 +4173,7 @@ webform_section:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   description: ''
@@ -4145,6 +4212,7 @@ webform_select_other:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -4227,6 +4295,7 @@ webform_signature:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4276,6 +4345,7 @@ webform_table:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   caption: ''
@@ -4322,6 +4392,7 @@ webform_table_row:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   flex: 1
@@ -4345,6 +4416,7 @@ webform_table_sort:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4397,6 +4469,7 @@ webform_tableselect_sort:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4453,6 +4526,7 @@ webform_telephone:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   choices: false
@@ -4546,6 +4620,7 @@ webform_term_checkboxes:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   breadcrumb: false
@@ -4613,6 +4688,7 @@ webform_term_select:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   breadcrumb: false
@@ -4677,6 +4753,7 @@ webform_terms_of_service:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: false
@@ -4721,6 +4798,7 @@ webform_time:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4793,6 +4871,7 @@ webform_toggle:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: false
@@ -4842,6 +4921,7 @@ webform_toggles:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4898,6 +4978,7 @@ webform_variant:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   default_value: ''
@@ -4937,6 +5018,7 @@ webform_video_file:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   button: false
@@ -4999,6 +5081,7 @@ webform_wizard_page:
     - anonymous
     - authenticated
   access_view_users: {  }
+  admin_notes: ''
   admin_title: ''
   attributes: {  }
   format: details
