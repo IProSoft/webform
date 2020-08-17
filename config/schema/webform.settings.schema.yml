@@ -30,6 +30,9 @@ webform.settings:
         default_reset_button_label:
           type: label
           label: 'Default reset button label'
+        default_delete_button_label:
+          type: label
+          label: 'Default delete button label'
         default_form_submit_once:
           type: boolean
           label: 'Prevent duplicate submissions'

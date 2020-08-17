@@ -23,6 +23,14 @@
       // @see Drupal.AjaxCommands.prototype.webformRefresh
       unsaved = false;
     },
+    get: function () {
+      // Get the current unsaved flag state.
+      return unsaved;
+    },
+    set: function(value) {
+      // Set the current unsaved flag state.
+      unsaved = value;
+    },
     attach: function (context) {
       // Look for the 'data-webform-unsaved' attribute which indicates that
       // a multi-step webform has unsaved data.

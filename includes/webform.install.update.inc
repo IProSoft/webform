@@ -3825,6 +3825,13 @@ function webform_update_8200() {
   ]);
 }
 
+/**
+ * Issue #3165395: Improve delete button handling.
+ */
+function webform_update_8201() {
+  _webform_update_admin_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -3989,4 +3996,11 @@ function webform_update_8609() {
     '#filter__plural' => '',
     '#filter__no_results' => '',
   ]);
+}
+
+/**
+ * Issue #3165395: Improve delete button handling.
+ */
+function webform_update_8610() {
+  _webform_update_admin_settings();
 }
