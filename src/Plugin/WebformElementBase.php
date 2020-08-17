@@ -1256,8 +1256,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $format_function = 'format' . ucfirst($format);
     $value = $this->$format_function($element, $webform_submission, $options);
 
-    // Handle empty value.
-    if ($value === '') {
+    // Handle empty value or empty array.
+    if ($value === '' || (is_array($value) && $value === [])) {
       // Return NULL if empty is excluded.
       if ($this->isEmptyExcluded($element, $options)) {
         return NULL;
@@ -1403,7 +1403,14 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Get items.
     $items = [];
     foreach (array_keys($value) as $delta) {
-      $items[] = $this->formatHtmlItem($element, $webform_submission, ['delta' => $delta] + $options);
+      $item = $this->formatHtmlItem($element, $webform_submission, ['delta' => $delta] + $options);
+      if ($item) {
+        $items[] = $item;
+      }
+    }
+
+    if (empty($items)) {
+      return [];
     }
 
     $format = $this->getItemsFormat($element);
@@ -1487,7 +1494,14 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Get items.
     $items = [];
     foreach (array_keys($value) as $delta) {
-      $items[] = $this->formatTextItem($element, $webform_submission, ['delta' => $delta] + $options);
+      $item = $this->formatTextItem($element, $webform_submission, ['delta' => $delta] + $options);;
+      if ($item) {
+        $items[] = $item;
+      }
+    }
+
+    if (empty($items)) {
+      return '';
     }
 
     $format = $this->getItemsFormat($element);
