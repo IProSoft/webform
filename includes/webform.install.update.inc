@@ -3824,3 +3824,10 @@ function webform_update_8200() {
     '#filter__no_results' => '',
   ]);
 }
+
+/**
+ * Issue #3165395: Improve delete button handling.
+ */
+function webform_update_8201() {
+  _webform_update_admin_settings();
+}

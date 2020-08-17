@@ -1305,9 +1305,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     /* @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $preview_mode = $this->getWebformSetting('preview');
 
-    // Remove the delete button from the webform submission webform.
-    unset($element['delete']);
-
     // Mark the submit action as the primary action, when it appears.
     $element['submit']['#button_type'] = 'primary';
     $element['submit']['#attributes']['class'][] = 'webform-button--submit';
@@ -1325,6 +1322,17 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Add confirm(ation) handler to submit button.
     $element['submit']['#submit'][] = '::confirmForm';
+
+    // Hide the delete button and move it last.
+    if (isset($element['delete'])) {
+      $element['delete']['#access'] = FALSE;
+      $element['delete']['#title'] = $this->config('webform.settings')->get('settings.default_delete_button_label');
+      // Redirect to the 'add' submission form when this submission is deleted.
+      if ($this->operation === 'add') {
+        $element['delete']['#url']->mergeOptions(['query' => $this->getRedirectDestination()->getAsArray()]);
+      }
+      $element['delete']['#weight'] = 20;
+    }
 
     $pages = $this->getPages($form, $form_state);
     $current_page = $this->getCurrentPage($form, $form_state);

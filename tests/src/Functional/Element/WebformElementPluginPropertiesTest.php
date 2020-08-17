@@ -1835,6 +1835,10 @@ webform_actions:
   access_view_users: {  }
   admin_title: ''
   attributes: {  }
+  delete__attributes: {  }
+  delete__dialog: false
+  delete__label: ''
+  delete_hide: true
   draft__attributes: {  }
   draft__label: ''
   draft_hide: false
@@ -1855,6 +1859,9 @@ webform_actions:
   submit__label: ''
   submit_hide: false
   title: ''
+  update__attributes: {  }
+  update__label: ''
+  update_hide: false
   wizard_next__attributes: {  }
   wizard_next__label: ''
   wizard_next_hide: false
