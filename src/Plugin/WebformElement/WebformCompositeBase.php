@@ -10,6 +10,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\file\Entity\File;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\Plugin\WebformElementAttachmentInterface;
+use Drupal\webform\Plugin\WebformElementCompositeInterface;
 use Drupal\webform\Plugin\WebformElementComputedInterface;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -22,25 +23,7 @@ use Drupal\webform\WebformSubmissionInterface;
 /**
  * Provides a base for composite elements.
  */
-abstract class WebformCompositeBase extends WebformElementBase implements WebformElementAttachmentInterface {
-
-  /**
-   * Composite elements defined in the webform composite form element.
-   *
-   * @var array
-   *
-   * @see \Drupal\webform\Element\WebformCompositeBase::processWebformComposite
-   */
-  protected $compositeElement;
-
-  /**
-   * Initialized composite element.
-   *
-   * @var array
-   *
-   * @see \Drupal\webform\Element\WebformCompositeBase::processWebformComputed
-   */
-  protected $initializedCompositeElement;
+abstract class WebformCompositeBase extends WebformElementBase implements WebformElementCompositeInterface, WebformElementAttachmentInterface {
 
   /**
    * Track managed file elements.
@@ -616,6 +599,13 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $options['webform_key'] = $element['#webform_key'];
     $composite_element = $this->getInitializedCompositeElement($element, $options['composite_key']);
     $composite_plugin = $this->elementManager->getElementInstance($composite_element);
+
+    // Exclude attachments for composite element.
+    // @see \Drupal\webform\WebformSubmissionViewBuilder::isElementVisible
+    if (!empty($options['exclude_attachments']) && $composite_plugin instanceof WebformElementAttachmentInterface) {
+      return '';
+    }
+
     $format_function = 'format' . $type;
     return $composite_plugin->$format_function($composite_element, $webform_submission, $options);
   }
