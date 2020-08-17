@@ -252,6 +252,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     return [
       // Administration.
       'admin_title' => '',
+      'admin_notes' => '',
       'prepopulate' => FALSE,
       'private' => FALSE,
       // Flexbox.
@@ -292,6 +293,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       'required_error',
       'unique_error',
       'admin_title',
+      'admin_notes',
       'placeholder',
       'markup',
       'test',
@@ -3169,6 +3171,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('The admin title will always be displayed when managing elements and viewing & downloading submissions.') .
         '<br/>' .
         $this->t("If an element's title is hidden, the element's admin title will be displayed when viewing a submission."),
+    ];
+    $form['admin']['admin_notes'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Admin notes/comments'),
+      '#description' => $this->t("Admin notes/comments are display next to the element title in the form builder and visible in the form's YAML source"),
     ];
 
     /**************************************************************************/
