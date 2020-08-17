@@ -6,6 +6,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Form\WebformDeleteFormBase;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
+use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -254,7 +255,7 @@ class WebformUiElementDeleteForm extends WebformDeleteFormBase {
    *   The webform element's title or key,
    */
   protected function getElementTitle() {
-    return (!empty($this->element['#title'])) ? $this->element['#title'] : $this->key;
+    return WebformElementHelper::getAdminTitle($this->element);
   }
 
   /**
