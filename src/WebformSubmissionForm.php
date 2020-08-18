@@ -906,7 +906,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           '#type' => 'link',
           '#title' => $this->t('Generate %title submissions', ['%title' => $webform->label()]),
           '#url' => Url::fromRoute('devel_generate.webform_submission', [], ['query' => $query]),
-          '#attributes' => ($offcanvas) ? WebformDialogHelper::getOffCanvasDialogAttributes(400) : [],
+          '#attributes' => ($offcanvas) ? WebformDialogHelper::getOffCanvasDialogAttributes(400) : ['class' => ['button']],
         ];
         if ($offcanvas) {
           WebformDialogHelper::attachLibraries($form);
