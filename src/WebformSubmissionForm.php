@@ -352,7 +352,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Get the source entity and allow webform submission to be used as a source
     // entity.
-    $source_entity = $entity->getSourceEntity() ?: $this->requestHandler->getCurrentSourceEntity(['webform']);
+    $source_entity = $entity->getSourceEntity(TRUE) ?: $this->requestHandler->getCurrentSourceEntity(['webform']);
     if ($source_entity === $entity) {
       $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform', 'webform_submission']);
     }
@@ -849,7 +849,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       $form['confirmation'] = [
         '#theme' => 'webform_confirmation',
         '#webform' => $webform,
-        '#source_entity' => $webform_submission->getSourceEntity(),
+        '#source_entity' => $webform_submission->getSourceEntity(TRUE),
         '#webform_submission' => $webform_submission,
       ];
       // Add hidden back (aka reset) button used by the Ajaxified back to link.
