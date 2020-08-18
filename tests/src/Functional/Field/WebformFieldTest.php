@@ -17,7 +17,7 @@ class WebformFieldTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node'];
+  public static $modules = ['node', 'field_ui'];
 
   /**
    * Tests the webform (entity reference) field.
@@ -65,6 +65,24 @@ class WebformFieldTest extends WebformBrowserTestBase {
     // Check that webform select menu included optgroup.
     $this->drupalGet('/node/add/page');
     $this->assertCssSelect('#edit-field-webform-0-target-id optgroup[label="{Some category}"]');
+
+    // Create a second webform.
+    $webform_2 = $this->createWebform();
+
+    // Check that webform 2 is included in the select menu.
+    $this->drupalGet('/node/add/page');
+    $this->assertOption('edit-field-webform-0-target-id', 'contact');
+    $this->assertOption('edit-field-webform-0-target-id', $webform_2->id());
+
+    // Limit the webform select menu to only the contact form.
+    $this->drupalGet('/admin/structure/types/manage/page/form-display');
+    $this->drupalPostForm('/admin/structure/types/manage/page/form-display', [], 'field_webform_settings_edit');
+    $this->drupalPostForm(NULL, ['fields[field_webform][settings_edit_form][settings][webforms][]' => ['contact']], 'Save');
+
+    // Check that webform 2 is NOT included in the select menu.
+    $this->drupalGet('/node/add/page');
+    $this->assertOption('edit-field-webform-0-target-id', 'contact');
+    $this->assertNoOption('edit-field-webform-0-target-id', $webform_2->id());
   }
 
 }
