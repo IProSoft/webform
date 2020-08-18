@@ -5,6 +5,7 @@
  * Provides a 'Card' container element for clientside multistep form pagination.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Render\Element;
@@ -103,6 +104,20 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
   // Check if operation is edit all.
   if ($form_object->getOperation() === 'edit_all') {
     return;
+  }
+
+  // Display quick form submit when testing webform cards.
+  if ($form_object->getOperation() === 'test'
+    && \Drupal::request()->getMethod() === 'GET') {
+    $form_id = Html::getId($form_object->getFormId());
+    $build = [
+      '#type' => 'link',
+      '#url' => Url::fromRoute('<none>', [], ['fragment' => $form_id]),
+      '#title' => t('Submit %title form ', ['%title' => $webform->label()]),
+      '#attributes' => ['class' => ['js-webform-card-test-submit-form']],
+    ];
+    \Drupal::messenger()->addWarning(\Drupal::service('renderer')->render($build));
+     $form['#attached']['library'][] = 'webform_cards/webform_cards.test';
   }
 
   // Add cards JavaScript.
