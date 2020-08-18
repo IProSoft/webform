@@ -362,6 +362,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Discount.
+    $projects['webform_discount'] = [
+      'title' => $this->t('Webform Discount'),
+      'description' => $this->t('Provides the ability to create Discount Codes that can be applied to alter the value of fields in Webform submissions.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_discount'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Email Reply.
     $projects['webform_email_reply_d8'] = [
       'title' => $this->t('Webform Email Reply'),
