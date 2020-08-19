@@ -588,6 +588,9 @@ webform.settings:
         cdn:
           type: boolean
           label: 'Check if CDN is being used for external libraries'
+        clientside_validation:
+          type: boolean
+          label: 'Check if Webform Clientside Validation module is installed when using the Clientside Validation module'
         bootstrap:
           type: boolean
           label: 'Check if Webform Bootstrap Integration module is installed when using the Bootstrap theme'

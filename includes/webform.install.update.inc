@@ -3831,3 +3831,11 @@ function webform_update_8200() {
 function webform_update_8201() {
   _webform_update_admin_settings();
 }
+
+
+/**
+ * Issue #3152884: Clientside validation with AJAXs.
+ */
+function webform_update_8202() {
+  _webform_update_admin_settings();
+}
