@@ -88,4 +88,3 @@ UPGRADING
    you _should_ be okay. If you extended webforms with plugins, altered
    hooks, and overrode templates, you will need to read each release's
    notes and assume that _things have changed_.
-
