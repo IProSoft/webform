@@ -3832,6 +3832,14 @@ function webform_update_8201() {
   _webform_update_admin_settings();
 }
 
+
+/**
+ * Issue #3152884: Clientside validation with AJAX.
+ */
+function webform_update_8202() {
+  _webform_update_admin_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4002,5 +4010,12 @@ function webform_update_8609() {
  * Issue #3165395: Improve delete button handling.
  */
 function webform_update_8610() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #3152884: Clientside validation with AJAX.
+ */
+function webform_update_8611() {
   _webform_update_admin_settings();
 }

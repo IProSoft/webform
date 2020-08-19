@@ -320,6 +320,7 @@ libraries:
 requirements:
   cdn: true
   bootstrap: true
+  clientside_validation: true
   spam: true
 langcode: en
 third_party_settings:

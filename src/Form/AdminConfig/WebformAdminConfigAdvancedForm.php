@@ -153,6 +153,15 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#return_value' => TRUE,
       '#default_value' => $config->get('requirements.cdn'),
     ];
+
+    $form['requirements']['clientside_validation'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Check if Webform Clientside Validation module is installed when using the Clientside Validation module'),
+      '#description' => $this->t('If unchecked, all warnings about the Webform Clientside Validation will be disabled.'),
+      '#return_value' => TRUE,
+      '#default_value' => $config->get('requirements.clientside_validation'),
+    ];
+
     $form['requirements']['bootstrap'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Check if the Webform Bootstrap Integration module is installed when using the Bootstrap theme'),
