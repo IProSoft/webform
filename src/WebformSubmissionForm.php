@@ -388,6 +388,13 @@ class WebformSubmissionForm extends ContentEntityForm {
             $entity = $webform_submission_token;
             $data = $entity->getRawData();
           }
+          else if (isset($_POST['webform_submission_token'])) {
+            $webform_submission_token = $this->getStorage()->loadFromToken($_POST['webform_submission_token'], $webform, $source_entity, $account);
+            if ($webform_submission_token && $webform_submission_token->isDraft()) {
+              $entity = $webform_submission_token;
+              $data = $entity->getRawData();
+            }
+          }
         }
         elseif ($webform_submission_draft = $this->getStorage()->loadDraft($webform, $source_entity, $account)) {
           // Else load the most recent draft.
@@ -544,6 +551,18 @@ class WebformSubmissionForm extends ContentEntityForm {
     /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
+
+    // Track the 'webform_submission_token' form multiple draft submissions.
+    // The 'webform_submission_token' value is set after the form is cached
+    // and built.
+    // @see \Drupal\webform\WebformSubmissionForm::afterBuild
+    if ($webform->getSetting('draft_multiple')
+      && ($webform_submission->isNew() || $webform_submission->isDraft())) {
+      $form['webform_submission_token'] = [
+        '#type' => 'hidden',
+        '#value' => $webform_submission->getToken(),
+      ];
+    }
 
     // Only prepopulate data when a webform is initially loaded.
     if (!$form_state->isRebuilding()) {
@@ -1654,9 +1673,18 @@ class WebformSubmissionForm extends ContentEntityForm {
       if ($this->draftEnabled() && $this->getWebformSetting('draft_auto_save') && !$this->entity->isCompleted()) {
         $form_state->set('in_draft', TRUE);
 
+        $was_new = $this->entity->isNew();
+
         $this->submitForm($form, $form_state);
         $this->save($form, $form_state);
         $this->rebuild($form, $form_state);
+
+        if ($was_new && $form_state->hasAnyErrors()) {
+          // Prevent the previously-cached form object, which is stored in
+          // $form['build_info']['callback_object'] from being used because it
+          // refers to the original new (unsaved) entity.
+          \Drupal::formBuilder()->deleteCache($form['#build_id']);
+        }
       }
     }
   }
