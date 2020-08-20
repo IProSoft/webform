@@ -113,7 +113,7 @@ elements: |
       '#title': 'User: Created'
       '#template': '[webform_submission:values:user:entity:created:clear]'
       '#display_on': view
-
+  
 css: |
   .calculation {
     font-size: 2em;
@@ -122,7 +122,7 @@ css: |
     width: 4em;
     text-align: right;
   }
-
+  
 javascript: ''
 settings:
   ajax: false
@@ -195,6 +195,7 @@ settings:
   wizard_progress_states: false
   wizard_auto_forward: true
   wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true

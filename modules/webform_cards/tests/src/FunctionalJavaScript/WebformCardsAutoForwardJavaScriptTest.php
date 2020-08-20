@@ -32,7 +32,7 @@ class WebformCardsAutoForwardJavaScriptTest extends WebformWebDriverTestBase {
     $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="textfield"]');
 
     // Check that enter in textfield auto-forwards.
-    $session->executeScript('var event = jQuery.Event("keypress"); event.which = 13; jQuery("#edit-textfield").trigger(event);');
+    $this->executeJqueryEvent('#edit-textfield', 'keydown', ['which' => 13]);
     $assert_session->waitForElement('css', '.webform-card--active[data-webform-key="radios_example"]');
 
     // Check that radios auto-forwards.
