@@ -36,6 +36,11 @@ function webform_update_dependencies() {
   // @see https://www.drupal.org/project/webform/issues/2958102
   $dependencies['webform'][8099]['system'] = 8501;
 
+  // Ensure that system_update_8805() runs before the webform update, so that
+  // the 'path_alias' module is enabled and configured correctly.
+  // @see https://www.drupal.org/project/webform/issues/3166248
+  $dependencies['webform']['8158']['system'] = 8805;
+
   return $dependencies;
 }
 

@@ -225,6 +225,11 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
       'class' => ['webform-button--previous', 'webform-cards-button--previous'],
     ],
     '#weight' => 0,
+    // Cards and previews previous button labels can have the same value.
+    // Issue #1342066 Document that buttons with the same #value need a unique
+    // #name for the Form API to distinguish them, or change the Form API to
+    // assign unique #names automatically.
+    '#name' => $webform->id() . '_card_previous_button',
   ];
   $form['actions']['cards_next'] = [
     '#type' => 'submit',
