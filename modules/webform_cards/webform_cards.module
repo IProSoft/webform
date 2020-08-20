@@ -160,6 +160,8 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
     'wizard_auto_forward',
     // Hide the next button when auto-forwarding
     'wizard_auto_forward_hide_next_button',
+    // Navigate between cards using left or right arrow keys.
+    'wizard_keyboard',
     // Link to previous pages in preview.
     'wizard_preview_link',
     // Include confirmation page in progress.
@@ -369,6 +371,9 @@ function webform_cards_form_webform_settings_form_form_alter(array &$form, FormS
         '#access' => TRUE,
       ],
       'wizard_auto_forward_hide_next_button' => [
+        '#access' => TRUE,
+      ],
+      'wizard_keyboard' => [
         '#access' => TRUE,
       ],
       'wizard_start_label' => [

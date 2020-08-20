@@ -157,7 +157,7 @@ elements: |
     '#draft_hide': true
     '#wizard_prev_hide': true
     '#wizard_next_hide': true
-
+  
 css: ''
 javascript: ''
 settings:
@@ -231,6 +231,7 @@ settings:
   wizard_progress_states: false
   wizard_auto_forward: true
   wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true

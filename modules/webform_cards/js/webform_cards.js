@@ -33,6 +33,7 @@
           progressLink: $form[0].hasAttribute('data-progress-link'),
           autoForward: $form[0].hasAttribute('data-auto-forward'),
           autoForwardHideNextButton: $form[0].hasAttribute('data-auto-forward-hide-next-button'),
+          keyboard: $form[0].hasAttribute('data-keyboard'),
           previewLink: $form[0].hasAttribute('data-preview-link'),
           confirmation: $form[0].hasAttribute('data-confirmation'),
           track: $form.data('track'),
@@ -54,9 +55,16 @@
         // Cards.
         var $allCards = $form.find('.webform-card');
 
+        // Actions and buttons.
+        var $formActions = $form.find('.form-actions');
+        var $previewButton = $formActions.find('.webform-button--preview');
+        var $submitButton = $formActions.find('.webform-button--submit');
+        var $previousButton = $form.find('.webform-button--previous');
+        var $nextButton = $form.find('.webform-button--next');
+
         // Preview.
         if (!$allCards.length) {
-          setPreviewLinks();
+          setPreview();
           return;
         }
 
@@ -78,14 +86,7 @@
           return;
         }
 
-        // Actions, preview, and submit buttons.
-        var $formActions = $form.find('.form-actions');
-        var $previewButton = $formActions.find('.webform-button--preview');
-        var $submitButton = $formActions.find('.webform-button--submit');
-
         // Previous and next buttons.
-        var $previousButton = $form.find('.webform-button--previous');
-        var $nextButton = $form.find('.webform-button--next');
         $previousButton.data('default-label', $previousButton.val());
         $nextButton.data('default-label', $nextButton.val());
         $previousButton.on('click', previousButtonClickEventHandler).show();
@@ -96,7 +97,7 @@
           // Auto-forward on enter.
           $form.find('input')
             .not(':button, :submit, :reset, :image, :file')
-            .on('keypress', function (event) {
+            .on('keydown', function (event) {
               if (event.which === 13) {
                 autoForwardEventHandler(event);
                 // Disable auto submit.
@@ -122,6 +123,43 @@
                 });
               }
             });
+        }
+
+        // Keyboard navigation.
+        if (options.keyboard) {
+          $('body').on('keydown', function (event) {
+            // Only track left and right keys.
+            if (event.which !== 37 && event.which !== 39) {
+              return;
+            }
+
+            // If input and the cursor is not at the end of the input, do not
+            // trigger navigation.
+            // @see https://stackoverflow.com/questions/21177489/selectionstart-selectionend-on-input-type-number-no-longer-allowed-in-chrome
+            if (event.target.value !== undefined
+              && event.target.selectionStart !== undefined
+              && event.target.selectionStart !== null) {
+              if (event.target.value.length !== event.target.selectionStart) {
+                return;
+              }
+              // Ignore the left keydown event if the input has a value.
+              if (event.target.value.length && event.which === 37) {
+                return;
+              }
+            }
+
+            switch (event.which) {
+              // Left key triggers the previous button.
+              case 37:
+                setTimeout(function () {$previousButton.click();}, Drupal.webform.cards.autoForwardDelay);
+                break;
+
+              // Right key triggers the next button.
+              case 39:
+                setTimeout(function () {$nextButton.click();}, Drupal.webform.cards.autoForwardDelay);
+                break;
+            }
+          });
         }
 
         // Track when cards are hidden/shown via #states conditional logic.
@@ -195,9 +233,7 @@
           }
 
           // Focus the active card's first visible input.
-          if (!initialize || $form.hasClass('js-webform-autofocus')) {
-            $activeCard.find(':input:visible').first().focus();
-          }
+          autofocus($activeCard);
 
           // Set current card.
           $currentCardInput.val($activeCard.data('webform-key'));
@@ -336,13 +372,33 @@
         }
 
         /**
-         * Set links to previous pages/cards in preview.
+         * Set preview.
          */
-        function setPreviewLinks() {
+        function setPreview() {
           if (currentPage !== 'webform_preview' || !$form.find('.webform-preview').length) {
             return;
           }
 
+          if (options.keyboard) {
+            $('body').on('keydown', function (event) {
+              switch (event.which) {
+                case 37: // left.
+                  setTimeout(function () {$previousButton.click();}, Drupal.webform.cards.autoForwardDelay);
+                  break;
+
+                case 39: // right
+                  setTimeout(function () {$submitButton.click();}, Drupal.webform.cards.autoForwardDelay);
+                  break;
+              }
+            });
+          }
+          setPreviewLinks();
+        }
+
+        /**
+         * Set links to previous pages/cards in preview.
+         */
+        function setPreviewLinks() {
           var $button = $form.find('.js-webform-wizard-pages-link[data-webform-page="webform_start"]');
 
           // Link to previous pages in progress steps (aka bar).
@@ -701,7 +757,54 @@
               return $('[name="' + name + '"]').val() ? false : true;
           }
         }
+
+        /**
+         * Auto focus a card's first input, if it has not been entered.
+         *
+         * @param {jQuery} $activeCard
+         *   An jQuery object containing the active card.
+         *
+         */
+        function autofocus($activeCard) {
+          if (!$form.hasClass('js-webform-autofocus')) {
+            return;
+          }
+
+          var $firstInput = $activeCard.find(':input:visible').first();
+          if (!inputHasValue($firstInput)) {
+            $firstInput.focus();
+          }
+        }
+
+        /**
+         * Determine if an input has been entered.
+         *
+         * @param {jQuery} $input
+         *   An jQuery object containing an :input.
+         *
+         * @return {{boolean}}
+         *   TRUE if next button should be hidden
+         */
+        function inputHasValue($input) {
+          var type = $input[0].type;
+          var name = $input[0].name;
+          switch (type) {
+            case 'checkbox':
+            case 'radio':
+              return $('[name="' + name + '"]:checked').length ? true : false;
+
+            case 'range':
+              return $('[name="' + name + '"]').val() !== '0' ? true : false;
+
+            case 'select-one':
+            default:
+              return $('[name="' + name + '"]').val() ? true : false;
+          }
+          return false;
+        }
+
       });
+
     }
   };
 
