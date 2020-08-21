@@ -51,6 +51,7 @@ function webform_library_info_alter(&$libraries, $extension) {
   // @see hook_webform_libraries_info()
   $webform_libraries_modules = \Drupal::moduleHandler()->getImplementations('webform_libraries_info');
   $webform_libraries_modules[] = 'webform';
+
   if (!in_array($extension, $webform_libraries_modules)) {
     return;
   }
@@ -93,7 +94,6 @@ function webform_library_info_alter(&$libraries, $extension) {
       unset($libraries[$library_name]);
       continue;
     }
-
     // Skip libraries installed by other modules.
     if (isset($library['module'])) {
       continue;
@@ -109,18 +109,11 @@ function webform_library_info_alter(&$libraries, $extension) {
       }
     }
 
-    // Check CDN setting exists.
-    if (!isset($library['cdn'])) {
-      continue;
+    // Handle CDN support.
+    if (isset($library['cdn']) && isset($library['directory'])
+      && !$libraries_manager->exists($library['directory'])) {
+      _webform_library_info_alter_recursive($library, $library['cdn']);
     }
-
-    // Check if the CDN's source /library/* path exists.
-    reset($library['cdn']);
-    if (file_exists(DRUPAL_ROOT . key($library['cdn']))) {
-      continue;
-    }
-
-    _webform_library_info_alter_recursive($library, $library['cdn']);
   }
 }
 

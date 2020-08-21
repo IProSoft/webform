@@ -20,6 +20,7 @@ libraries.svg-pan-zoom:
     name: BDS
     url: https://github.com/ariutta/svg-pan-zoom/blob/master/LICENSE
     gpl-compatible: true
+  directory: svg-pan-zoom
   cdn:
     /libraries/svg-pan-zoom/: https://cdn.jsdelivr.net/gh/ariutta/svg-pan-zoom@3.6.1/
   js:

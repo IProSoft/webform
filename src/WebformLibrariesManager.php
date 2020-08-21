@@ -108,8 +108,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         continue;
       }
 
-      $library_path = '/libraries/' . $library_name;
-      $library_exists = (file_exists(DRUPAL_ROOT . $library_path)) ? TRUE : FALSE;
+      $library_exists = $this->exists($library_name);
+      $library_path = ($library_exists) ? '/' . $this->find($library_name) : '/libraries/' . $library_name;
 
       $t_args = [
         '@title' => $library['title'],
@@ -187,6 +187,45 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         'severity' => $severity,
       ],
     ];
+  }
+
+  /**
+   * Determine if a library's directory exist.
+   *
+   * @param string $name
+   *   The library's directory name.
+   *
+   * @return bool
+   *   TRUE if the library's directory exist.
+   */
+  public function exists($name) {
+    // @todo Inject dependency once Drupal 8.9.x is only supported.
+    if (\Drupal::hasService('library.libraries_directory_file_finder')) {
+      return \Drupal::service('library.libraries_directory_file_finder')->find($name) ? TRUE : FALSE;
+    }
+    else {
+      return file_exists(DRUPAL_ROOT . '/libraries/' . $name);
+    }
+  }
+
+  /**
+   * Finds files that are located in the supported 'libraries' directories.
+   *
+   * @param string $path
+   *   The path for the library file to find.
+   *
+   * @return string|false
+   *   The real path to the library file relative to the root directory. If the
+   *   library cannot be found then FALSE.
+   */
+
+  public function find($name) {
+    if (\Drupal::hasService('library.libraries_directory_file_finder')) {
+      return \Drupal::service('library.libraries_directory_file_finder')->find($name);
+    }
+    else {
+      return (file_exists('libraries/' . $name)) ? 'libraries/' . $name : FALSE;
+    }
   }
 
   /**
