@@ -86,7 +86,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $sid = $this->postSubmission($webform_confirmation_modal, ['test' => 'value']);
     $this->assertRaw('This is a <b>custom</b> confirmation modal.');
     $this->assertRaw('<div class="js-hide webform-confirmation-modal js-webform-confirmation-modal webform-message js-webform-message js-form-wrapper form-wrapper" data-drupal-selector="edit-webform-confirmation-modal" id="edit-webform-confirmation-modal">');
-    $this->assertRaw('<div role="contentinfo" aria-label="Status message" class="messages messages--status">');
+    $this->assertRaw('<div role="contentinfo" aria-label="Status message">');
     $this->assertRaw('<b class="webform-confirmation-modal--title">Custom confirmation modal</b><br />');
     $this->assertRaw('<div class="webform-confirmation-modal--content">This is a <b>custom</b> confirmation modal. (test: value)</div>');
     $this->assertUrl('webform/test_confirmation_modal');
@@ -158,7 +158,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
 
     // Check custom confirmation page.
     $this->postSubmission($webform_confirmation_page_custom);
-    $this->assertRaw('<h1 class="page-title">Custom confirmation page title</h1>');
+    $this->assertRaw('<h1>Custom confirmation page title</h1>');
     $this->assertRaw('<div style="border: 10px solid red; padding: 1em;" class="webform-confirmation">');
     $this->assertRaw('<a href="' . $webform_confirmation_page_custom->toUrl()->setAbsolute()->toString() . '" rel="prev" class="button">Custom back to link</a>');
 
