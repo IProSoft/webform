@@ -87,7 +87,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     /**************************************************************************/
 
     // Check form_item wrapper type.
-    $this->assertRaw('<div class="js-webform-select-other webform-select-other js-form-item form-item js-form-type-webform-select-other form-type-webform-select-other js-form-item-wrapper-other-form-element form-item-wrapper-other-form-element" id="edit-wrapper-other-form-element">');
+    $this->assertRaw('<div class="js-webform-select-other webform-select-other js-form-item form-item js-form-type-webform-select-other form-item-wrapper-other-form-element js-form-item-wrapper-other-form-element" id="edit-wrapper-other-form-element">');
 
     // Check container wrapper type.
     $this->assertRaw('<div data-drupal-selector="edit-wrapper-other-container" class="js-webform-select-other webform-select-other webform-select-other--wrapper fieldgroup form-composite js-form-wrapper form-wrapper" id="edit-wrapper-other-container">');
