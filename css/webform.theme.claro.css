@@ -67,8 +67,6 @@ html.js .webform-message--close .webform-message__link:active {
  * @see claro/css/src/components/messages.css
  */
 .webform-message .messages.messages--webform {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin-bottom: 1rem;
   padding: 1.5rem 1.5rem 2rem -webkit-calc(1.5rem - 5px);
