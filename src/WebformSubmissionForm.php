@@ -76,6 +76,20 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $pathValidator;
 
   /**
+   * The entity field manager.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
+
+  /**
+   * The selection plugin manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
+   */
+  protected $selectionManager;
+
+  /**
    * The webform element plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
@@ -125,13 +139,6 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $webformEntityReferenceManager;
 
   /**
-   * The selection plugin manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
-   */
-  protected $selectionManager;
-
-  /**
    * The webform submission generation service.
    *
    * @var \Drupal\webform\WebformSubmissionGenerateInterface
@@ -176,9 +183,11 @@ class WebformSubmissionForm extends ContentEntityForm {
     $instance->configFactory = $container->get('config.factory');
     $instance->renderer = $container->get('renderer');
     $instance->killSwitch = $container->get('page_cache_kill_switch');
-    $instance->requestHandler = $container->get('webform.request');
     $instance->aliasManager = $container->get('path_alias.manager');
     $instance->pathValidator = $container->get('path.validator');
+    $instance->selectionManager = $container->get('plugin.manager.entity_reference_selection');
+    $instance->entityFieldManager = $container->get('entity_field.manager');
+    $instance->requestHandler = $container->get('webform.request');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
     $instance->thirdPartySettingsManager = $container->get('webform.third_party_settings_manager');
     $instance->messageManager = $container->get('webform.message_manager');
@@ -186,7 +195,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     $instance->conditionsValidator = $container->get('webform_submission.conditions_validator');
     $instance->webformEntityReferenceManager = $container->get('webform.entity_reference_manager');
     $instance->generate = $container->get('webform_submission.generate');
-    $instance->selectionManager = $container->get('plugin.manager.entity_reference_selection');
     return $instance;
   }
 
@@ -445,14 +453,24 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform_submission = $entity;
     $webform = $webform_submission->getWebform();
 
-    // Get elements values from webform submission.
-    $values = array_intersect_key(
+    // Get elements values from webform submission and merge existing data.
+    $element_values = array_intersect_key(
       $form_state->getValues(),
       $webform->getElementsInitializedFlattenedAndHasValue()
     );
+    $webform_submission->setData($element_values + $webform_submission->getData());
 
-    // Serialize the values as YAML and merge existing data.
-    $webform_submission->setData($values + $webform_submission->getData());
+    // Get field values.
+    // This used to support the Workflows Field module.
+    // @see https://www.drupal.org/project/webform/issues/3002547
+    // @see https://www.drupal.org/project/workflows_field
+    $base_field_definitions = $this->entityFieldManager->getBaseFieldDefinitions($entity->getEntityTypeId());
+    $all_fields = $webform_submission->getFields(FALSE);
+    $bundle_fields = array_diff_key($all_fields, $base_field_definitions);
+    $field_values = array_intersect_key($form_state->getValues(), $bundle_fields);
+    foreach ($field_values as $name => $field_value) {
+      $webform_submission->set($name, $field_value);
+    }
 
     // Set current page.
     if ($current_page = $this->getCurrentPage($form, $form_state)) {

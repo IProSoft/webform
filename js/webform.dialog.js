@@ -84,6 +84,11 @@
         element_settings.dialogType = $a.data('dialog-type') || 'modal';
         element_settings.dialog = options;
         element_settings.element = this;
+        element_settings.error = function error (xmlhttp, uri) {
+          if (xmlhttp.status === 403) {
+            window.location.replace(href.split("?")[0]);
+          }
+        };
         Drupal.ajax(element_settings);
       });
     }
