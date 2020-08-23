@@ -159,6 +159,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: true
+  serial_disabled: false
 access:
   create:
     roles:

@@ -3844,10 +3844,16 @@ function webform_update_8202() {
   _webform_update_admin_settings();
 }
 
-
 /**
  * Issue #3166341: Add keyboard navigation support to Webform cards.
  */
 function webform_update_8203() {
   _webform_update_webform_settings();
+}
+
+/**
+ * Issue #3166236: Make "next_serial" optional.
+ */
+function webform_update_8204() {
+  _webform_update_admin_settings();
 }
