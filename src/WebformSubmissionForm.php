@@ -8,6 +8,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityentityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
@@ -75,6 +76,13 @@ class WebformSubmissionForm extends ContentEntityForm {
    * @var \Drupal\Core\Path\PathValidatorInterface
    */
   protected $pathValidator;
+
+  /**
+   * The entity field manager.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
 
   /**
    * The webform element plugin manager.
@@ -161,7 +169,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $killSwitch;
 
   /**
-   * Selection Plugin Manager service.
+   * The selection plugin manager.
    *
    * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
    */
@@ -209,6 +217,8 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The page cache kill switch service.
    * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
    *   The selection plugin manager.
+   * @param \Drupal\Core\Entity\EntityentityFieldManagerInterface $entity_field_manager
+   *   The entity field manager.
    */
   public function __construct(
     EntityRepositoryInterface $entity_repository,
@@ -225,7 +235,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     WebformEntityReferenceManagerInterface $webform_entity_reference_manager,
     WebformSubmissionGenerateInterface $submission_generate,
     KillSwitch $killSwitch,
-    SelectionPluginManagerInterface $selection_manager
+    SelectionPluginManagerInterface $selection_manager,
+    EntityentityFieldManagerInterface $entity_field_manager
   ) {
     parent::__construct($entity_repository);
     $this->configFactory = $config_factory;
@@ -242,7 +253,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $this->generate = $submission_generate;
     $this->killSwitch = $killSwitch;
     $this->selectionManager = $selection_manager;
-
+    $this->entityFieldManager = $entity_field_manager;
   }
 
   /**
@@ -264,7 +275,8 @@ class WebformSubmissionForm extends ContentEntityForm {
       $container->get('webform.entity_reference_manager'),
       $container->get('webform_submission.generate'),
       $container->get('page_cache_kill_switch'),
-      $container->get('plugin.manager.entity_reference_selection')
+      $container->get('plugin.manager.entity_reference_selection'),
+      $container->get('entity_field.manager')
     );
   }
 
@@ -523,14 +535,24 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform_submission = $entity;
     $webform = $webform_submission->getWebform();
 
-    // Get elements values from webform submission.
-    $values = array_intersect_key(
+    // Get elements values from webform submission and merge existing data.
+    $element_values = array_intersect_key(
       $form_state->getValues(),
       $webform->getElementsInitializedFlattenedAndHasValue()
     );
+    $webform_submission->setData($element_values + $webform_submission->getData());
 
-    // Serialize the values as YAML and merge existing data.
-    $webform_submission->setData($values + $webform_submission->getData());
+    // Get field values.
+    // This used to support the Workflows Field module.
+    // @see https://www.drupal.org/project/webform/issues/3002547
+    // @see https://www.drupal.org/project/workflows_field
+    $base_field_definitions = $this->entityFieldManager->getBaseFieldDefinitions($entity->getEntityTypeId());
+    $all_fields = $webform_submission->getFields(FALSE);
+    $bundle_fields = array_diff_key($all_fields, $base_field_definitions);
+    $field_values = array_intersect_key($form_state->getValues(), $bundle_fields);
+    foreach ($field_values as $name => $field_value) {
+      $webform_submission->set($name, $field_value);
+    }
 
     // Set current page.
     if ($current_page = $this->getCurrentPage($form, $form_state)) {
