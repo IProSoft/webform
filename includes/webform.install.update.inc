@@ -3851,6 +3851,13 @@ function webform_update_8203() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #3166236: Make "next_serial" optional.
+ */
+function webform_update_8204() {
+  _webform_update_admin_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4036,4 +4043,11 @@ function webform_update_8611() {
  */
 function webform_update_8612() {
   _webform_update_webform_settings();
+}
+
+/**
+ * Issue #3166236: Make "next_serial" optional.
+ */
+function webform_update_8613() {
+  _webform_update_admin_settings();
 }

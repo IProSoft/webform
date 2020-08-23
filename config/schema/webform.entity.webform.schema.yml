@@ -482,6 +482,9 @@
         token_update:
           type: boolean
           label: 'Allow updating a submission using token'
+        serial_disabled:
+          type: boolean
+          label: 'Next submission number disabled'
     access:
       type: sequence
       label: 'Access Rules'
