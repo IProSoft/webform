@@ -8,7 +8,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityentityFieldManagerInterface;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
@@ -217,7 +217,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The page cache kill switch service.
    * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
    *   The selection plugin manager.
-   * @param \Drupal\Core\Entity\EntityentityFieldManagerInterface $entity_field_manager
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
    *   The entity field manager.
    */
   public function __construct(
@@ -236,7 +236,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     WebformSubmissionGenerateInterface $submission_generate,
     KillSwitch $killSwitch,
     SelectionPluginManagerInterface $selection_manager,
-    EntityentityFieldManagerInterface $entity_field_manager
+    EntityFieldManagerInterface $entity_field_manager
   ) {
     parent::__construct($entity_repository);
     $this->configFactory = $config_factory;
