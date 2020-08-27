@@ -7,7 +7,6 @@ CONTENTS OF THIS FILE
  * Configuration
  * Upgrading
 
-
 INTRODUCTION
 ------------
 
