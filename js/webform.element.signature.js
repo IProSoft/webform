@@ -36,18 +36,20 @@
           $canvas.attr('height', $wrapper.width() / 3);
         };
 
-        // Set height.
-        $canvas.attr('width', $wrapper.width());
-        $canvas.attr('height', $wrapper.width() / 3);
-        $(window).resize(function () {
-          calculateDimensions();
-
-          // Resizing clears the canvas so we need to reset the signature pad.
+        var resetDimensions = function () {
           signaturePad.clear();
           var value = $input.val();
           if (value) {
             signaturePad.fromDataURL(value);
           }
+        };
+
+        // Set height.
+        $canvas.attr('width', $wrapper.width());
+        $canvas.attr('height', $wrapper.width() / 3);
+        $(window).resize(function () {
+          calculateDimensions();
+          resetDimensions();
         });
 
         // Initialize signature canvas.
@@ -67,6 +69,9 @@
         if ($input.is(':disabled') || $input.is('[readonly]')) {
           signaturePad.off();
           $button.hide();
+          setTimeout(function () {
+            resetDimensions();
+          }, 1);
         }
 
         // Set reset handler.
