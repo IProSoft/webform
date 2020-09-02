@@ -3858,6 +3858,13 @@ function webform_update_8204() {
   _webform_update_admin_settings();
 }
 
+/**
+ * Issue #3168333: Allow site builders to customize debug handler data and format.
+ */
+function webform_update_8205() {
+  _webform_update_webform_handler_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4067,4 +4074,11 @@ function webform_update_8614() {
       $webform_config->save();
     }
   }
+}
+
+/**
+ * Issue #3168333: Allow site builders to customize debug handler data and format.
+ */
+function webform_update_8615() {
+  _webform_update_webform_handler_settings();
 }
