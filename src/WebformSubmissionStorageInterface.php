@@ -606,4 +606,15 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    */
   public function getAnonymousSubmissionIds(AccountInterface $account);
 
+  /**
+   * Check if anonymous users submission are tracked using $_SESSION.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   *
+   * @return bool
+   *   TRUE if anonymous users submission are tracked using $_SESSION.
+   */
+  public function hasAnonymousSubmissionTracking(WebformSubmissionInterface $webform_submission);
+
 }

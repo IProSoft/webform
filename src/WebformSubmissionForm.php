@@ -516,11 +516,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Apply variants.
     $webform->applyVariants($webform_submission);
 
-    // All anonymous submissions are tracked in the $_SESSION.
-    // @see \Drupal\webform\WebformSubmissionStorage::setAnonymousSubmission
-    if ($this->currentUser()->isAnonymous()) {
-      $form['#cache']['contexts'][] = 'session';
-    }
+    // Add cache dependency to the form's render array.
+    $this->addCacheableDependency($form);
 
     // Add the webform as a cacheable dependency.
     $this->renderer->addCacheableDependency($form, $webform);
@@ -2622,6 +2619,51 @@ class WebformSubmissionForm extends ContentEntityForm {
 
       // Populate sub-elements.
       $this->populateElements($element, $values);
+    }
+  }
+
+  /****************************************************************************/
+  // Cache related functions.
+  /****************************************************************************/
+
+  /**
+   * Add cache dependency to the form's render array.
+   *
+   * @param array &$form
+   *   The form's render array to update.
+   */
+  protected function addCacheableDependency(array &$form) {
+    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    $webform_submission = $this->getEntity();
+
+    // All anonymous submissions are tracked in the $_SESSION.
+    // @see \Drupal\webform\WebformSubmissionStorage::setAnonymousSubmission
+    /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
+    $submission_storage = $this->entityTypeManager->getStorage('webform_submission');
+    if ($this->currentUser()->isAnonymous() && $submission_storage->hasAnonymousSubmissionTracking($webform_submission)) {
+      $form['#cache']['contexts'][] = 'session';
+    }
+    // Allow all form elements to be prepopulated via the URL.
+    if ($this->getWebformSetting('form_prepopulate')) {
+      $form['#cache']['contexts'][] = 'url.query_args';
+    }
+    else {
+      // Allow specific form elements to be prepopulated via the URL.
+      $elements_prepopulate = $this->getWebform()->getElementsPrepopulate();
+      if ($elements_prepopulate) {
+        foreach ($elements_prepopulate as $element_key) {
+          $form['#cache']['contexts'][] = 'url.query_args:' . $element_key;
+        }
+      }
+      // Allow source entity type and id to be passed via the URL.
+      if ($this->getWebformSetting('form_prepopulate_source_entity')) {
+        $form['#cache']['contexts'][] = 'url.query_args:source_entity_type';
+        $form['#cache']['contexts'][] = 'url.query_args:source_entity_id';
+      }
+      // Allow variants to be passed.
+      if ($this->getWebform()->hasVariants()) {
+        $form['#cache']['contexts'][] = 'url.query_args:_webform_variant';
+      }
     }
   }
 
