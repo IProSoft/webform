@@ -2287,43 +2287,18 @@ class WebformSubmissionForm extends ContentEntityForm {
 
       case WebformInterface::CONFIRMATION_URL:
       case WebformInterface::CONFIRMATION_URL_MESSAGE:
-        $confirmation_url = trim($this->getWebformSetting('confirmation_url', ''));
-        // Remove base path from root-relative URL.
-        // Only applies for Drupal sites within a sub directory.
-        $confirmation_url = preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', $confirmation_url);
-        // Get system path.
-        $confirmation_url = $this->aliasManager->getPathByAlias($confirmation_url);
-        // Get redirect URL if internal or valid.
-        if (strpos($confirmation_url, 'internal:') === 0) {
-          $redirect_url = Url::fromUri($confirmation_url);
-        }
-        else {
-          $redirect_url = $this->pathValidator->getUrlIfValid($confirmation_url);
-        }
+        $redirect_url = $this->getConfirmationUrl();
         if ($redirect_url) {
           if ($confirmation_type === WebformInterface::CONFIRMATION_URL_MESSAGE) {
             $this->getMessageManager()->display(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION_MESSAGE);
           }
           $this->setTrustedRedirectUrl($form_state, $redirect_url);
-          return;
         }
         else {
-          $t_args = [
-            '@webform' => $webform->label(),
-            '%url' => $this->getWebformSetting('confirmation_url'),
-          ];
-          // Display warning to use who can update the webform.
-          if ($webform->access('update')) {
-            $this->messenger()->addWarning($this->t('Confirmation URL %url is not valid.', $t_args));
-          }
-          // Log warning.
-          $this->getLogger('webform')->warning('@webform: Confirmation URL %url is not valid.', $t_args);
+          $this->getMessageManager()->display(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION_MESSAGE);
+          $route_options['query']['webform_id'] = $webform->id();
+          $form_state->setRedirect($route_name, $route_parameters, $route_options);
         }
-
-        // If confirmation URL is invalid display message.
-        $this->getMessageManager()->display(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION_MESSAGE);
-        $route_options['query']['webform_id'] = $webform->id();
-        $form_state->setRedirect($route_name, $route_parameters, $route_options);
         return;
 
       case WebformInterface::CONFIRMATION_INLINE:
@@ -2354,6 +2329,55 @@ class WebformSubmissionForm extends ContentEntityForm {
         $this->getMessageManager()->display(WebformMessageManagerInterface::SUBMISSION_DEFAULT_CONFIRMATION);
         return;
     }
+  }
+
+  /**
+   * Get the webform's confrmation URL.
+   *
+   * @return \Drupal\Core\Url|false
+   *   The url object, or FALSE if the path is not valid.
+   *
+   * @see \Drupal\Core\Path\PathValidatorInterface::getUrlIfValid
+   */
+  protected function getConfirmationUrl() {
+    $confirmation_url = trim($this->getWebformSetting('confirmation_url', ''));
+
+    if (strpos($confirmation_url, '/') === 0) {
+      // Get redirect URL using an absolute URL for the absolute  path.
+      $redirect_url = Url::fromUri($this->getRequest()->getSchemeAndHttpHost() . $confirmation_url);
+    }
+    elseif (preg_match('#^[a-z]+(?:://|:)#', $confirmation_url)) {
+      // Get redirect URL from URI (i.e. http://, https:// or ftp://)
+      // and Drupal custom URIs (i.e internal:).
+      $redirect_url = Url::fromUri($confirmation_url);
+    }
+    elseif (strpos($confirmation_url, '<') === 0) {
+      // Get redirect URL from special paths: '<front>' and '<none>'.
+      $redirect_url = $this->pathValidator->getUrlIfValid($confirmation_url);
+    }
+    else  {
+      // Get redirect URL by validating the Drupal relative path which does not
+      // begin with a forward slash (/).
+      $confirmation_url = $this->aliasManager->getPathByAlias('/' . $confirmation_url);
+      $redirect_url = $this->pathValidator->getUrlIfValid($confirmation_url);
+    }
+
+    // If redirect url is FALSE, display and log a warning.
+    if (!$redirect_url) {
+      $webform = $this->getWebform();
+      $t_args = [
+        '@webform' => $webform->label(),
+        '%url' => $this->getWebformSetting('confirmation_url'),
+      ];
+      // Display warning to use who can update the webform.
+      if ($webform->access('update')) {
+        $this->messenger()->addWarning($this->t('Confirmation URL %url is not valid.', $t_args));
+      }
+      // Log warning.
+      $this->getLogger('webform')->warning('@webform: Confirmation URL %url is not valid.', $t_args);
+    }
+
+    return $redirect_url;
   }
 
   /**

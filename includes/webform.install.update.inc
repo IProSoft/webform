@@ -4051,3 +4051,20 @@ function webform_update_8612() {
 function webform_update_8613() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3160378: Confirmation URLs and Drupal paths.
+ */
+function webform_update_8614() {
+  // Convert all confirmation URL to Drupal paths.
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $confirmation_url = $webform_config->get('settings.confirmation_url');
+    if (strpos($confirmation_url, '/') === 0) {
+      $confirmation_url = substr($confirmation_url, 1);
+      $webform_config->set('settings.confirmation_url', $confirmation_url);
+      $webform_config->save();
+    }
+  }
+}
