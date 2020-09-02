@@ -74,75 +74,82 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
     $is_off_canvas = in_array($wrapper_format, ['drupal_dialog.off_canvas']);
 
     // Get title, description, and code example.
-    $title = $this->t('Default webform submission data (YAML)');
+    // @see \Drupal\webform\Plugin\Field\FieldWidget\WebformEntityReferenceWidgetTrait::formElement
+    $title = $this->t('Default submission data (YAML)');
+    $placeholder = $this->t("Enter 'name': 'value' pairs…");
     $description = [
       'content' => ['#markup' => $this->t('Enter submission data as name and value pairs as <a href=":href">YAML</a> which will be used to prepopulate the selected webform.', [':href' => 'https://en.wikipedia.org/wiki/YAML']), '#suffix' => ' '],
       'token' => $this->tokenManager->buildTreeLink(),
     ];
-    $example = [];
-    $example[] = '# ' . $this->t('This is an example of a comment.');
-    $example[] = "element_key: 'some value'";
-    $example[] = '';
-    $example[] = '# ' . $this->t("The below example uses a token to get the current node's title.");
-    $example[] = "title: '[webform_submission:node:title:clear]'";
-    $example[] = '';
-    $example[] = '# ' . $this->t("Add ':clear' to the end token to return an empty value when the token is missing.");
-    $example[] = '# ' . $this->t('The below example uses a token to get a field value from the current node.');
-    $example[] = "full_name: '[webform_submission:node:field_full_name:clear]'";
-    $example[] = '';
+    $default_data_example = [];
+    $default_data_example[] = '# ' . $this->t('This is an example of a comment.');
+    $default_data_example[] = "element_key: 'some value'";
+    $default_data_example[] = '';
+    $default_data_example[] = '# ' . $this->t("The below example uses a token to get the current node's title.");
+    $default_data_example[] = "title: '[webform_submission:node:title:clear]'";
+    $default_data_example[] = '';
+    $default_data_example[] = '# ' . $this->t("Add ':clear' to the end token to return an empty value when the token is missing.");
+    $default_data_example[] = '# ' . $this->t('The below example uses a token to get a field value from the current node.');
+    $default_data_example[] = "full_name: '[webform_submission:node:field_full_name:clear]'";
 
     $form['#attributes'] = ['class' => ['webform-block-settings-tray-form']];
     $form['webform_id'] = [
-      '#title' => $this->t('Webform'),
       '#type' => 'entity_autocomplete',
+      '#title' => $this->t('Webform'),
+      '#description' => $this->t('Select the webform that you would like to display in this block.'),
       '#target_type' => 'webform',
       '#required' => TRUE,
       '#default_value' => $this->getWebform(),
     ];
+    $form['settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Webform settings'),
+    ];
     if ($is_off_canvas) {
-      $form['default_data'] = [
-        '#title' => $title,
+      // Using <textarea> and <pre> tags to support off-canvas CSS reset.
+      $form['settings']['default_data'] = [
         '#type' => 'textarea',
+        '#title' => $title,
+        '#description' => $description,
+        '#placeholder' => $placeholder,
         '#default_value' => $this->configuration['default_data'],
         '#webform_element' => TRUE,
-        '#description' => $description,
         '#more_title' => $this->t('Example'),
-        '#wrapper_attributes' => [
-          'class' => ['webform-default-data'],
-        ],
         '#more' => [
-          '#markup' => implode(PHP_EOL, $example),
+          '#markup' => implode(PHP_EOL, $default_data_example),
           '#prefix' => '<pre>',
           '#suffix' => '</pre>',
+        ],
+        '#wrapper_attributes' => [
+          'class' => ['webform-default-data'],
         ],
       ];
       $form['#attached']['library'][] = 'webform/webform.off_canvas';
     }
     else {
-      $form['default_data'] = [
-        '#title' => $title,
+      $form['settings']['default_data'] = [
         '#type' => 'webform_codemirror',
         '#mode' => 'yaml',
+        '#title' => $title,
+        '#description' => $description,
+        '#placeholder' => $placeholder,
         '#default_value' => $this->configuration['default_data'],
         '#webform_element' => TRUE,
-        '#description' => $description,
         '#more_title' => $this->t('Example'),
         '#more' => [
           '#theme' => 'webform_codemirror',
           '#type' => 'yaml',
-          '#code' => implode(PHP_EOL, $example),
+          '#code' => implode(PHP_EOL, $default_data_example),
         ],
       ];
     }
-    $form['redirect'] = [
+    $form['settings']['redirect'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Redirect to the webform'),
       '#default_value' => $this->configuration['redirect'],
       '#return_value' => TRUE,
       '#description' => $this->t('If your webform has multiple pages, this will change the behavior of the "Next" button. This will also affect where validation messages show up after an error.'),
     ];
-
-    $form['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     $this->tokenManager->elementValidate($form);
 
@@ -153,9 +160,10 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['webform_id'] = $form_state->getValue('webform_id');
-    $this->configuration['default_data'] = $form_state->getValue('default_data');
-    $this->configuration['redirect'] = $form_state->getValue('redirect');
+    $values = $form_state->getValues();
+    $this->configuration['webform_id'] = $values['webform_id'];
+    $this->configuration['default_data'] = $values['settings']['default_data'];
+    $this->configuration['redirect'] = $values['settings']['redirect'];
   }
 
   /**
