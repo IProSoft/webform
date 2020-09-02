@@ -320,7 +320,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://ckeditor.com/addon/autogrow'),
       'download_url' => Url::fromUri("https://download.ckeditor.com/autogrow/releases/autogrow_$ckeditor_version.zip"),
       'plugin_path' => 'libraries/ckeditor.autogrow/',
-      'plugin_url' => "https://cdn.rawgit.com/ckeditor/ckeditor-dev/$ckeditor_version/plugins/autogrow/",
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/autogrow/",
       'version' => $ckeditor_version,
     ];
     $libraries['ckeditor.fakeobjects'] = [
@@ -330,7 +330,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://ckeditor.com/addon/fakeobjects'),
       'download_url' => Url::fromUri("https://download.ckeditor.com/fakeobjects/releases/fakeobjects_$ckeditor_version.zip"),
       'plugin_path' => 'libraries/ckeditor.fakeobjects/',
-      'plugin_url' => "https://cdn.rawgit.com/ckeditor/ckeditor-dev/$ckeditor_version/plugins/fakeobjects/",
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/fakeobjects/",
       'version' => $ckeditor_version,
     ];
     $libraries['ckeditor.image'] = [
@@ -340,7 +340,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://ckeditor.com/addon/image'),
       'download_url' => Url::fromUri("https://download.ckeditor.com/image/releases/image_$ckeditor_version.zip"),
       'plugin_path' => 'libraries/ckeditor.image/',
-      'plugin_url' => "https://cdn.rawgit.com/ckeditor/ckeditor-dev/$ckeditor_version/plugins/image/",
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/image/",
       'version' => $ckeditor_version,
     ];
     $libraries['ckeditor.link'] = [
@@ -350,7 +350,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://ckeditor.com/addon/link'),
       'download_url' => Url::fromUri("https://download.ckeditor.com/link/releases/link_$ckeditor_version.zip"),
       'plugin_path' => 'libraries/ckeditor.link/',
-      'plugin_url' => "https://cdn.rawgit.com/ckeditor/ckeditor-dev/$ckeditor_version/plugins/link/",
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/link/",
       'version' => $ckeditor_version,
     ];
     $libraries['ckeditor.codemirror'] = [
@@ -360,7 +360,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin'),
       'download_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.12/CKEditor-CodeMirror-Plugin.zip'),
       'plugin_path' => 'libraries/ckeditor.codemirror/codemirror/',
-      'plugin_url' => "https://cdn.rawgit.com/w8tcha/CKEditor-CodeMirror-Plugin/v1.17.12/codemirror/",
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/w8tcha/CKEditor-CodeMirror-Plugin@v1.17.12/codemirror/",
       'version' => 'v1.17.12',
     ];
     $libraries['codemirror'] = [

@@ -845,6 +845,7 @@ webform.element.signature:
     js/webform.element.signature.js: {}
   dependencies:
     - core/drupal
+    - core/drupal.debounce
     - webform/libraries.signature_pad
 
 webform.element.states:
