@@ -109,17 +109,17 @@ function webform_bootstrap_js_alter(&$javascript, AttachedAssetsInterface $asset
     return;
   }
 
-  $path = drupal_get_path('module', 'webform_bootstrap');
-  // Make sure jQuery tooltip is never loaded and use custom
-  // webform.element.help.js.
-  unset(
-    $javascript['core/assets/vendor/jquery.ui/ui/tooltip-min.js'],
-    $javascript['core/assets/vendor/jquery.ui/ui/widgets/tooltip-min.js']
-  );
-
+  // Make sure jQuery tooltip is never loaded and use
+  // bootstrap specific webform.element.help.js.
+  foreach ($javascript as $javascript_path => $javascript_item) {
+    if (strpos($javascript_path, 'tooltip-min') !== FALSE) {
+      unset($javascript[$javascript_path]);
+    }
+  }
   $webform_help_path = drupal_get_path('module', 'webform') . '/js/webform.element.help.js';
+  $webform_bootstrap_help_path = drupal_get_path('module', 'webform_bootstrap') . '/js/webform.element.help.js';;
   if (isset($javascript[$webform_help_path])) {
-    $javascript[$webform_help_path]['data'] = $path . '/js/webform.element.help.js';
+    $javascript[$webform_help_path]['data'] = $webform_bootstrap_help_path;
   }
 }
 
