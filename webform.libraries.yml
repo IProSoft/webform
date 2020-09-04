@@ -89,6 +89,12 @@ webform.admin.tabledrag:
   dependencies:
     - core/drupal.tabledrag
 
+webform.admin.toolbar:
+  version: VERSION
+  css:
+    theme:
+      css/webform.admin.toolbar.css: {}
+
 webform.admin.translation:
   version: VERSION
   css:

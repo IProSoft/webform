@@ -3864,3 +3864,10 @@ function webform_update_8204() {
 function webform_update_8205() {
   _webform_update_webform_handler_settings();
 }
+
+/**
+ * Issue #3166827: Make the "Webforms" menu item a top-level toolbar item.
+ */
+function webform_update_8206() {
+  _webform_update_admin_settings();
+}

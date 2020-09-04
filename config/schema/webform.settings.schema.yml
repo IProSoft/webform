@@ -571,6 +571,9 @@ webform.settings:
         description_help:
           type: boolean
           label: 'Display element description as help text (tooltip)'
+        toolbar_item:
+          type: boolean
+          label: 'Display webforms as a top-level item in toolbar'
     libraries:
       type: mapping
       label: 'Library settings'
