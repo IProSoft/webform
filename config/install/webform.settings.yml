@@ -313,6 +313,7 @@ ui:
   offcanvas_disabled: false
   promotions_disabled: false
   description_help: true
+  toolbar_item: false
 libraries:
   excluded_libraries:
     - choices

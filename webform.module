@@ -472,6 +472,64 @@ function webform_mail_alter(&$message) {
 }
 
 /**
+ * Implements hook_toolbar_alter().
+ */
+function webform_toolbar_alter(&$items) {
+  if (\Drupal::config('webform.settings')->get('ui.toolbar_item')) {
+    $items['administration']['#attached']['library'][] = 'webform/webform.admin.toolbar';
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function webform_menu_links_discovered_alter(&$links) {
+  if (\Drupal::config('webform.settings')->get('ui.toolbar_item')) {
+    $links['entity.webform.collection']['parent'] = 'system.admin';
+    $links['entity.webform.collection']['weight'] = -9;
+  }
+
+  // Add webform local tasks as admin menu toolbar menu items.
+  // @see admin_toolbar_tools_menu_links_discovered_alter()
+  if (\Drupal::moduleHandler()->moduleExists('admin_toolbar_tools')) {
+    /** @var \Drupal\Core\Menu\LocalTaskManager $local_task_manager */
+    $local_task_manager = \Drupal::service('plugin.manager.menu.local_task');
+
+    $local_tasks = $local_task_manager->getLocalTasks('entity.webform.collection', 0);
+    foreach ($local_tasks['tabs'] as $local_task) {
+      $menu_item_title = $local_task['#link']['title'];
+      $menu_item_route_name = $local_task['#link']['url']->getRouteName();
+      $menu_item_name = $menu_item_route_name . '.item';
+      $links[$menu_item_name] = [
+        'title' => $menu_item_title,
+        'route_name' => $menu_item_route_name,
+        'parent' => 'entity.webform.collection',
+        'weight' => $local_task['#weight'],
+        'provider' => 'webform',
+        'menu_name' => 'admin',
+      ];
+
+      if (\Drupal::config('webform.settings')->get('ui.toolbar_item')) {
+        $local_sub_tasks = $local_task_manager->getLocalTasks($menu_item_route_name, 1);
+        foreach ($local_sub_tasks['tabs'] as $local_sub_task) {
+          $menu_sub_item_title = $local_sub_task['#link']['title'];
+          $menu_sub_item_route_name = $local_sub_task['#link']['url']->getRouteName();
+          $menu_sub_item_name = $menu_sub_item_route_name . '.sub_item';
+          $links[$menu_sub_item_name] = [
+            'title' => $menu_sub_item_title,
+            'route_name' => $menu_sub_item_route_name,
+            'parent' => $menu_item_name,
+            'weight' => $local_sub_task['#weight'],
+            'provider' => 'webform',
+            'menu_name' => 'admin',
+          ];
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function webform_page_attachments(array &$attachments) {

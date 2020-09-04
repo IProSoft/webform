@@ -42,6 +42,7 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
   public function build() {
     $webforms = Webform::loadMultiple();
 
+    // Ajax links.
     $ajax_links = [];
     foreach ($webforms as $webform_id => $webform) {
       if (strpos($webform_id, 'test_ajax') !== 0 && $webform_id !== 'test_form_wizard_long_100') {
@@ -72,34 +73,36 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
       ];
     }
 
+    // Inline links.
     $webform = Webform::load('contact');
-    $inline_links = [
-      'webform' => [
-        'title' => $this->t('Open Contact'),
-        'url' => $webform->toUrl('canonical'),
-        'attributes' => [
-          'class' => ['webform-dialog', 'webform-dialog-normal'],
-        ],
+    $inline_links = [];
+    $inline_links['webform'] = [
+      'title' => $this->t('Open Contact'),
+      'url' => $webform->toUrl('canonical'),
+      'attributes' => [
+        'class' => ['webform-dialog', 'webform-dialog-normal'],
       ],
-      'source_entity' => [
-        'title' => $this->t('Open Contact with Source Entity'),
-        'url' => $webform->toUrl('canonical', ['query' => ['source_entity_type' => 'ENTITY_TYPE', 'source_entity_id' => 'ENTITY_ID']]),
-        'attributes' => [
-          'class' => ['webform-dialog', 'webform-dialog-normal'],
-        ],
+    ];
+    $inline_links['source_entity'] = [
+      'title' => $this->t('Open Contact with Source Entity'),
+      'url' => $webform->toUrl('canonical', ['query' => ['source_entity_type' => 'ENTITY_TYPE', 'source_entity_id' => 'ENTITY_ID']]),
+      'attributes' => [
+        'class' => ['webform-dialog', 'webform-dialog-normal'],
       ],
-      'javascript' => [
-        'title' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
-        'url' => Url::fromRoute('<none>'),
-        'attributes' => [
-          'onclick' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
-        ],
+    ];
+    $inline_links['javascript'] = [
+      'title' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
+      'url' => Url::fromRoute('<none>'),
+      'attributes' => [
+        'onclick' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
       ],
     ];
 
+    // Dialog links.
+    $dialog_links = [];
     $webform_style_guide = Webform::load('example_style_guide');
-    $dialog_links = [
-      'style_guide' => [
+    if ($webform_style_guide) {
+      $dialog_links['style_guide'] = [
         'title' => $this->t('Open style guide'),
         'url' => $webform_style_guide->toUrl('canonical'),
         'attributes' => [
@@ -113,25 +116,30 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
             'use-ajax',
           ],
         ],
-      ],
-    ];
-    $build = [
-      'ajax' => [
+      ];
+    }
+    $build = [];
+    if ($ajax_links) {
+      $build['ajax'] = [
         '#prefix' => '<h3>' . $this->t('Ajax links') . '</h3>',
         '#theme' => 'links',
         '#links' => $ajax_links,
-      ],
-      'inline' => [
+      ];
+    }
+    if ($inline_links) {
+      $build['inline'] = [
         '#prefix' => '<h3>' . $this->t('Inline (Global) links') . '</h3>',
         '#theme' => 'links',
         '#links' => $inline_links,
-      ],
-      'dialog' => [
+      ];
+    }
+    if ($dialog_links) {
+      $build['dialog'] = [
         '#prefix' => '<h3>' . $this->t('Dialog/Offcanvas links') . '</h3>',
         '#theme' => 'links',
         '#links' => $dialog_links,
-      ],
-    ];
+      ];
+    }
     $build['#attached']['library'][] = 'webform/webform.dialog';
     $build['#attached']['drupalSettings']['webform']['dialog']['options'] = \Drupal::config('webform.settings')->get('settings.dialog_options');
     return $build;

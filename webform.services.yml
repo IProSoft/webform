@@ -110,7 +110,7 @@ services:
 
   webform.breadcrumb:
     class: Drupal\webform\Breadcrumb\WebformBreadcrumbBuilder
-    arguments: ['@module_handler', '@webform.request', '@string_translation']
+    arguments: ['@module_handler', '@webform.request', '@string_translation', '@config.factory']
     tags:
       - { name: breadcrumb_builder, priority: 1002 }
 
@@ -126,7 +126,7 @@ services:
 
   webform.route_subscriber:
     class: Drupal\webform\Routing\WebformRouteSubscriber
-    arguments: ['@module_handler']
+    arguments: ['@module_handler', '@config.factory']
     tags:
       - { name: event_subscriber }
 
