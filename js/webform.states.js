@@ -38,7 +38,17 @@
    *   TRUE if element is within the webform.
    */
   $.fn.isWebform = function () {
-    return $(this).closest('form[id^="webform"]').length ? true : false;
+    return $(this).closest('form[id^="webform"], form[data-is-webform]').length ? true : false;
+  };
+
+  /**
+   * Check if element is to be treated as a webform element.
+   *
+   * @return {boolean}
+   *   TRUE if element is to be treated as a webform element.
+   */
+  $.fn.isWebformElement = function () {
+    return ($(this).isWebform() || $(this).closest('[data-is-webform-element]').length) ? true : false;
   };
 
   /* ************************************************************************ */
@@ -141,7 +151,7 @@
   var $document = $(document);
 
   $document.on('state:required', function (e) {
-    if (e.trigger && $(e.target).isWebform()) {
+    if (e.trigger && $(e.target).isWebformElement()) {
       var $target = $(e.target);
       // Fix #required file upload.
       // @see Issue #2860529: Conditional required File upload field don't work.
@@ -207,7 +217,7 @@
   });
 
   $document.on('state:readonly', function (e) {
-    if (e.trigger && $(e.target).isWebform()) {
+    if (e.trigger && $(e.target).isWebformElement()) {
       $(e.target).prop('readonly', e.value).closest('.js-form-item, .js-form-wrapper').toggleClass('webform-readonly', e.value).find('input, textarea').prop('readonly', e.value);
 
       // Trigger webform:readonly.
@@ -217,7 +227,7 @@
   });
 
   $document.on('state:visible state:visible-slide', function (e) {
-    if (e.trigger && $(e.target).isWebform()) {
+    if (e.trigger && $(e.target).isWebformElement()) {
       if (e.value) {
         $(':input', e.target).addBack().each(function () {
           restoreValueAndRequired(this);
@@ -236,7 +246,7 @@
   });
 
   $document.on('state:visible-slide', function (e) {
-    if (e.trigger && $(e.target).isWebform()) {
+    if (e.trigger && $(e.target).isWebformElement()) {
       var effect = e.value ? 'slideDown' : 'slideUp';
       var duration = Drupal.webform.states[effect].duration;
       $(e.target).closest('.js-form-item, .js-form-submit, .js-form-wrapper')[effect](duration);
@@ -245,7 +255,7 @@
   Drupal.states.State.aliases['invisible-slide'] = '!visible-slide';
 
   $document.on('state:disabled', function (e) {
-    if (e.trigger && $(e.target).isWebform()) {
+    if (e.trigger && $(e.target).isWebformElement()) {
       // Make sure disabled property is set before triggering webform:disabled.
       // Copied from: core/misc/states.js
       $(e.target)
