@@ -258,8 +258,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $selectors = [];
     $composite_elements = $this->getInitializedCompositeElement($element);
     foreach ($composite_elements as $composite_key => $composite_element) {
-      $has_access = (!isset($composite_elements['#access']) || $composite_elements['#access']);
-      if ($has_access && isset($composite_element['#type'])) {
+      if (Element::isVisibleElement($composite_elements) && isset($composite_element['#type'])) {
         $element_plugin = $this->elementManager->getElementInstance($composite_element);
         $composite_element['#webform_key'] = "{$name}[{$composite_key}]";
         $selectors += OptGroup::flattenOptions($element_plugin->getElementSelectorOptions($composite_element));
@@ -281,8 +280,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $source_values = [];
     $composite_elements = $this->getInitializedCompositeElement($element);
     foreach ($composite_elements as $composite_key => $composite_element) {
-      $has_access = (!isset($composite_elements['#access']) || $composite_elements['#access']);
-      if ($has_access && isset($composite_element['#type'])) {
+      if (Element::isVisibleElement($composite_elements) && isset($composite_element['#type'])) {
         $element_plugin = $this->elementManager->getElementInstance($composite_element);
         $composite_element['#webform_key'] = "{$name}[{$composite_key}]";
         $source_values += $element_plugin->getElementSelectorSourceValues($composite_element);
@@ -399,7 +397,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     // Get header.
     $header = [];
     foreach (RenderElement::children($composite_elements) as $composite_key) {
-      if (isset($composite_elements[$composite_key]['#access']) && $composite_elements[$composite_key]['#access'] === FALSE) {
+      if (!Element::isVisibleElement($composite_elements[$composite_key])) {
         unset($composite_elements[$composite_key]);
         continue;
       }
@@ -723,7 +721,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $header = [];
     foreach (RenderElement::children($composite_elements) as $composite_key) {
       $composite_element = $composite_elements[$composite_key];
-      if (isset($composite_element['#access']) && $composite_element['#access'] === FALSE) {
+      if (!Element::isVisibleElement($composite_element['#access'])) {
         continue;
       }
 
@@ -754,7 +752,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $composite_elements = $this->getInitializedCompositeElement($element);
     foreach (RenderElement::children($composite_elements) as $composite_key) {
       $composite_element = $composite_elements[$composite_key];
-      if (isset($composite_element['#access']) && $composite_element['#access'] === FALSE) {
+      if (!Element::isVisibleElement($composite_element)) {
         continue;
       }
 
