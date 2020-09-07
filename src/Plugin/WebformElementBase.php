@@ -255,6 +255,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       'admin_notes' => '',
       'prepopulate' => FALSE,
       'private' => FALSE,
+      'access' => TRUE,
       // Flexbox.
       'flex' => 1,
       // Conditional logic.
@@ -3225,6 +3226,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     foreach ($operations as $operation => $operation_element) {
       $form['access']['access_' . $operation] = $operation_element + [
         '#type' => 'details',
+        '#states' => [
+          'visible' => [
+            ':input[name="properties[access]"]' => [
+              'checked' => TRUE,
+            ],
+          ]
+        ],
       ];
       $form['access']['access_' . $operation]['access_' . $operation . '_roles'] = [
         '#type' => 'webform_roles',
@@ -3241,6 +3249,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         '#select2' => TRUE,
       ];
     }
+    $form['access']['access'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Display element'),
+      '#description' => $this->t('If unchecked, the element is never displayed. The element will only be visible within the form builder and hidden from all other displays including submission details, results, and download.'),
+      '#weight' => 50,
+      '#return_value' => TRUE,
+    ];
 
     /**************************************************************************/
 
