@@ -4,7 +4,6 @@ namespace Drupal\webform\Element;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\Container;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -155,14 +154,15 @@ class WebformActions extends Container {
         };
       }
 
-      if (Element::isVisibleElement($element[$button_name])) {
+      if (!isset($element[$button_name]['#access']) || $element[$button_name]['#access'] === TRUE) {
         $has_visible_button = TRUE;
       }
     }
 
     // Hide form actions only if the element is accessible.
     // This prevents form from having no actions.
-    if (Element::isVisibleElement($element)) {
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+    if ($has_access) {
       $complete_form['actions']['#access'] = FALSE;
     }
 

@@ -4,7 +4,6 @@ namespace Drupal\webform_image_select\Element;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\WebformOptions as WebformOptionsEntity;
@@ -131,7 +130,8 @@ class WebformImageSelectElementImages extends FormElement {
       $value = $custom_value;
     }
 
-    if (Element::isVisibleElement($element) && $element['#required'] && empty($value)) {
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+    if ($element['#required'] && empty($value) && $has_access) {
       WebformElementHelper::setRequiredError($element, $form_state);
     }
 

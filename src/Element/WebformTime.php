@@ -98,7 +98,7 @@ class WebformTime extends FormElement {
    * Note that #required is validated by _form_valistatic::formatTime() already.
    */
   public static function validateWebformTime(&$element, FormStateInterface $form_state, &$complete_form) {
-    $has_access = Element::isVisibleElement($element);
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
 
     $value = $element['#value'];
     if (trim($value) === '') {

@@ -144,7 +144,8 @@ class WebformRating extends Range {
    */
   public static function validateWebformRating(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = $element['#value'];
-    if (Element::isVisibleElement($element) && !empty($element['#required']) && ($value === '0' || $value === '')) {
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+    if ($has_access && !empty($element['#required']) && ($value === '0' || $value === '')) {
       WebformElementHelper::setRequiredError($element, $form_state);
     }
   }

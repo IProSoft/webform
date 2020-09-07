@@ -611,7 +611,7 @@ class WebformMultiple extends FormElement {
           //
           // WORKAROUND:
           // Convert element to rendered hidden element.
-          if (Element::isVisibleElement($element)) {
+          if (!isset($element['#access']) || $element['#access'] !== FALSE) {
             $hidden_elements[$child_key]['#type'] = 'hidden';
             // Unset #access, #element_validate, and #pre_render.
             // @see \Drupal\webform\Plugin\WebformElementBase::prepare()
@@ -719,7 +719,15 @@ class WebformMultiple extends FormElement {
    *   TRUE if the element is hidden.
    */
   protected static function isHidden(array $element) {
-    return !Element::isVisibleElement($element);
+    if (isset($element['#access']) && $element['#access'] === FALSE) {
+      return TRUE;
+    }
+    elseif (isset($element['#type']) && in_array($element['#type'], ['hidden', 'value'])) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
   }
 
   /**

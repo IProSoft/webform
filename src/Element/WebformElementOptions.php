@@ -3,7 +3,6 @@
 namespace Drupal\webform\Element;
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
@@ -165,7 +164,8 @@ class WebformElementOptions extends FormElement {
       }
     }
 
-    if (Element::isVisibleElement($element) && $element['#required'] && empty($value)) {
+    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
+    if ($element['#required'] && empty($value) && $has_access) {
       WebformElementHelper::setRequiredError($element, $form_state);
     }
 
