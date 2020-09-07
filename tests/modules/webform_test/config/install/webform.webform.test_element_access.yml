@@ -105,7 +105,21 @@ elements: |
       '#access_view_roles': {  }
       '#access_view_permissions':
         - 'access user profiles'
-  
+  access_property:
+    '#type': details
+    '#title': access_property
+    textfield_access_property:
+      '#type': textfield
+      '#title': textfield_access_property
+      '#access': false
+    fieldset_access_property:
+      '#type': fieldset
+      '#title': fieldset_access_property
+      '#access': false
+      fieldset_textfield_access:
+        '#type': textfield
+        '#title': fieldset_textfield_access
+
 css: ''
 javascript: ''
 settings:

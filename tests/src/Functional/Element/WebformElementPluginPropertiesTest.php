@@ -102,6 +102,7 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
   protected function getExpectedElementDefaultProperties() {
     $yaml = <<<YAML
 address:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -166,6 +167,7 @@ captcha:
   captcha_type: default
   flex: 1
 checkbox:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -213,6 +215,7 @@ checkbox:
   title_display: after
   wrapper_attributes: {  }
 checkboxes:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -279,6 +282,7 @@ checkboxes:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 color:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -339,6 +343,7 @@ container:
   states: {  }
   states_clear: true
 date:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -422,6 +427,7 @@ date:
   unique_user: false
   wrapper_attributes: {  }
 datelist:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -512,6 +518,7 @@ datelist:
   unique_user: false
   wrapper_attributes: {  }
 datetime:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -602,6 +609,7 @@ datetime:
   unique_user: false
   wrapper_attributes: {  }
 details:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -641,6 +649,7 @@ details:
   title: ''
   title_display: ''
 email:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -717,6 +726,7 @@ email:
   unique_user: false
   wrapper_attributes: {  }
 entity_autocomplete:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -788,6 +798,7 @@ entity_autocomplete:
   unique_user: false
   wrapper_attributes: {  }
 fieldset:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -846,6 +857,7 @@ hidden:
   private: false
   title: ''
 item:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -882,6 +894,7 @@ item:
   title_display: ''
   wrapper_attributes: {  }
 label:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -907,6 +920,7 @@ label:
   states: {  }
   title: ''
 language_select:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -956,6 +970,7 @@ language_select:
   unique_user: false
   wrapper_attributes: {  }
 machine_name:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1005,6 +1020,7 @@ machine_name:
   unique_user: false
   wrapper_attributes: {  }
 managed_file:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1068,6 +1084,7 @@ managed_file:
   uri_scheme: private
   wrapper_attributes: {  }
 number:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1142,6 +1159,7 @@ number:
   unique_user: false
   wrapper_attributes: {  }
 processed_text:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1168,6 +1186,7 @@ processed_text:
   text: ''
   wrapper_attributes: {  }
 radios:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1223,6 +1242,7 @@ radios:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 range:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1280,6 +1300,7 @@ range:
   unique_user: false
   wrapper_attributes: {  }
 search:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1337,6 +1358,7 @@ search:
   unique_user: false
   wrapper_attributes: {  }
 select:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1404,6 +1426,7 @@ table:
   empty: ''
   header: {  }
 tableselect:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1461,6 +1484,7 @@ tableselect:
   unique_user: false
   wrapper_attributes: {  }
 tel:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1540,6 +1564,7 @@ tel:
   unique_user: false
   wrapper_attributes: {  }
 text_format:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1580,6 +1605,7 @@ text_format:
   states_clear: true
   title: ''
 textarea:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1661,6 +1687,7 @@ textarea:
   unique_user: false
   wrapper_attributes: {  }
 textfield:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1743,6 +1770,7 @@ textfield:
   unique_user: false
   wrapper_attributes: {  }
 url:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1822,6 +1850,7 @@ value:
   title: ''
   value: ''
 view:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1847,6 +1876,7 @@ view:
   private: false
   states: {  }
 webform_actions:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -1899,6 +1929,7 @@ webform_actions:
   wizard_prev__label: ''
   wizard_prev_hide: false
 webform_address:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2017,6 +2048,7 @@ webform_address:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_attachment_token:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2049,6 +2081,7 @@ webform_attachment_token:
   trim: false
   wrapper_attributes: {  }
 webform_attachment_twig:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2081,6 +2114,7 @@ webform_attachment_twig:
   trim: false
   wrapper_attributes: {  }
 webform_attachment_url:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2113,6 +2147,7 @@ webform_attachment_url:
   url: ''
   wrapper_attributes: {  }
 webform_audio_file:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2176,6 +2211,7 @@ webform_audio_file:
   uri_scheme: private
   wrapper_attributes: {  }
 webform_autocomplete:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2262,6 +2298,7 @@ webform_autocomplete:
   unique_user: false
   wrapper_attributes: {  }
 webform_card:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2293,6 +2330,7 @@ webform_card:
   title_display: ''
   title_tag: h2
 webform_checkboxes_other:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2374,6 +2412,7 @@ webform_checkboxes_other:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_codemirror:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2426,6 +2465,7 @@ webform_codemirror:
   wrap: true
   wrapper_attributes: {  }
 webform_computed_token:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2465,6 +2505,7 @@ webform_computed_token:
   title_display: ''
   wrapper_attributes: {  }
 webform_computed_twig:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2505,6 +2546,7 @@ webform_computed_twig:
   whitespace: ''
   wrapper_attributes: {  }
 webform_contact:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2655,6 +2697,7 @@ webform_contact:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_custom_composite:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2723,6 +2766,7 @@ webform_custom_composite:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_document_file:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2787,6 +2831,7 @@ webform_document_file:
   wrapper_attributes: {  }
 webform_element: {  }
 webform_email_confirm:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2863,6 +2908,7 @@ webform_email_confirm:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_email_multiple:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2935,6 +2981,7 @@ webform_email_multiple:
   unique_user: false
   wrapper_attributes: {  }
 webform_entity_checkboxes:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -2999,6 +3046,7 @@ webform_entity_checkboxes:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_entity_radios:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3055,6 +3103,7 @@ webform_entity_radios:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_entity_select:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3136,6 +3185,7 @@ webform_horizontal_rule:
   display_on: form
   states: {  }
 webform_image_file:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3202,6 +3252,7 @@ webform_image_file:
   uri_scheme: private
   wrapper_attributes: {  }
 webform_image_select:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3268,6 +3319,7 @@ webform_image_select:
   unique_user: false
   wrapper_attributes: {  }
 webform_likert:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3319,6 +3371,7 @@ webform_likert:
   title_display: ''
   wrapper_attributes: {  }
 webform_link:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3402,6 +3455,7 @@ webform_link:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_location_geocomplete:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3478,6 +3532,7 @@ webform_location_geocomplete:
   value__title: Address
   wrapper_attributes: {  }
 webform_location_places:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3549,6 +3604,7 @@ webform_location_places:
   value__title: Address
   wrapper_attributes: {  }
 webform_mapping:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3599,6 +3655,7 @@ webform_mapping:
   title_display: ''
   wrapper_attributes: {  }
 webform_markup:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3623,6 +3680,7 @@ webform_markup:
   states: {  }
   wrapper_attributes: {  }
 webform_message:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3652,6 +3710,7 @@ webform_message:
   private: false
   states: {  }
 webform_more:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3677,6 +3736,7 @@ webform_more:
   private: false
   states: {  }
 webform_name:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3794,6 +3854,7 @@ webform_name:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 'webform_options_custom:buttons':
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3859,6 +3920,7 @@ webform_name:
   unique_user: false
   wrapper_attributes: {  }
 'webform_options_custom:us_states':
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3924,6 +3986,7 @@ webform_name:
   unique_user: false
   wrapper_attributes: {  }
 webform_radios_other:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -3997,6 +4060,7 @@ webform_radios_other:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_rating:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4052,6 +4116,7 @@ webform_rating:
   unique_user: false
   wrapper_attributes: {  }
 webform_same:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4100,6 +4165,7 @@ webform_same:
   title_display: after
   wrapper_attributes: {  }
 webform_scale:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4158,6 +4224,7 @@ webform_scale:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_section:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4197,6 +4264,7 @@ webform_section:
   title_display: ''
   title_tag: h2
 webform_select_other:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4280,6 +4348,7 @@ webform_select_other:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_signature:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4330,6 +4399,7 @@ webform_signature:
   unique_user: false
   wrapper_attributes: {  }
 webform_table:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4377,6 +4447,7 @@ webform_table:
   title_display: ''
   wrapper_attributes: {  }
 webform_table_row:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4401,6 +4472,7 @@ webform_table_row:
   states_clear: true
   title: ''
 webform_table_sort:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4454,6 +4526,7 @@ webform_table_sort:
   unique_user: false
   wrapper_attributes: {  }
 webform_tableselect_sort:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4511,6 +4584,7 @@ webform_tableselect_sort:
   unique_user: false
   wrapper_attributes: {  }
 webform_telephone:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4605,6 +4679,7 @@ webform_telephone:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_term_checkboxes:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4673,6 +4748,7 @@ webform_term_checkboxes:
   wrapper_attributes: {  }
   wrapper_type: fieldset
 webform_term_select:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4738,6 +4814,7 @@ webform_term_select:
   vocabulary: ''
   wrapper_attributes: {  }
 webform_terms_of_service:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4783,6 +4860,7 @@ webform_terms_of_service:
   title: 'I agree to the {terms of service}.'
   wrapper_attributes: {  }
 webform_time:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4856,6 +4934,7 @@ webform_time:
   unique_user: false
   wrapper_attributes: {  }
 webform_toggle:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4906,6 +4985,7 @@ webform_toggle:
   toggle_theme: light
   wrapper_attributes: {  }
 webform_toggles:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -4963,6 +5043,7 @@ webform_toggles:
   unique_user: false
   wrapper_attributes: {  }
 webform_variant:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -5003,6 +5084,7 @@ webform_variant:
   variant: ''
   wrapper_attributes: {  }
 webform_video_file:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
@@ -5066,6 +5148,7 @@ webform_video_file:
   uri_scheme: private
   wrapper_attributes: {  }
 webform_wizard_page:
+  access: true
   access_create_permissions: {  }
   access_create_roles:
     - anonymous
