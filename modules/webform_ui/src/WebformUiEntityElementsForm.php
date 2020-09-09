@@ -474,7 +474,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $is_container = $webform_element->isContainer($element);
     $is_root = $webform_element->isRoot();
     $is_element_disabled = $webform_element->isDisabled();
-    $is_access_disabled = (isset($element['#access']) && $element['#access'] === FALSE);
+    $is_access_disabled = !Element::isVisibleElement($element);
 
     // If disabled, display warning.
     if ($is_element_disabled) {
