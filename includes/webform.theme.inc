@@ -5,6 +5,7 @@
  * Theme hooks, preprocessor, and suggestions.
  */
 
+use Drupal\Core\Render\Element;
 use Drupal\file\Entity\File;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
@@ -586,7 +587,7 @@ function webform_preprocess_file_managed_file(&$variables) {
   }
 
   // Don't alter hidden file upload input.
-  if (isset($element['upload']['#access']) && $element['upload']['#access'] === FALSE) {
+  if (!Element::isVisibleElement($element['upload'])) {
     return;
   }
 

@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Render\Markup;
 use Drupal\webform\Element\WebformCompositeFormElementTrait;
@@ -223,9 +224,6 @@ class WebformOptionsCustom extends FormElement implements WebformOptionsCustomIn
   public static function validateWebformOptionsCustom(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = NestedArray::getValue($form_state->getValues(), $element['select']['#parents']);
 
-    // Determine if the element is visible. (#access !== FALSE)
-    $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
-
     // Determine if the element has multiple values.
     $is_multiple = (empty($element['#multiple'])) ? FALSE : TRUE;
 
@@ -238,7 +236,7 @@ class WebformOptionsCustom extends FormElement implements WebformOptionsCustomIn
     }
 
     // Validate on elements with #access.
-    if ($has_access && !empty($element['#required']) && $is_empty) {
+    if (Element::isVisibleElement($element) && !empty($element['#required']) && $is_empty) {
       WebformElementHelper::setRequiredError($element, $form_state);
     }
 
