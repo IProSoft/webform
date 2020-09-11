@@ -9,4 +9,3 @@ dependencies:
   - 'drupal:user'
   - 'jquery_ui_tabs:jquery_ui_tabs'
   - 'jquery_ui_tooltip:jquery_ui_tooltip'
-  - 'jquery_ui_datepicker:jquery_ui_datepicker'

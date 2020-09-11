@@ -111,7 +111,9 @@ abstract class DateBase extends WebformElementBase {
     $cacheability = CacheableMetadata::createFromObject($config);
     $cacheability->applyTo($element);
 
-    $element['#attached']['library'][] = 'webform/webform.element.date';
+    if ($this->datePickerExists()) {
+      $element['#attached']['library'][] = 'webform/webform.element.date';
+    }
 
     $element['#after_build'][] = [get_class($this), 'afterBuild'];
   }
@@ -684,6 +686,16 @@ abstract class DateBase extends WebformElementBase {
     /** @var \Drupal\Core\Datetime\DateFormatterInterface $date_formatter */
     $date_formatter = \Drupal::service('date.formatter');
     return $date_formatter->format($timestamp ?: time(), 'custom', $custom_format);
+  }
+
+  /**
+   * Determine if the the jQuery UI date picker is supported.
+   *
+   * @return bool
+   *   TRUE if the the jQuery UI date picker is supported.
+   */
+  protected function datePickerExists() {
+    return $this->moduleHandler->moduleExists('jquery_ui_datepicker');
   }
 
 }

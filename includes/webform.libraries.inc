@@ -56,6 +56,11 @@ function webform_library_info_alter(&$libraries, $extension) {
     return;
   }
 
+  // If webform date element in D8 use the old dependency on 'core/drupal.date'.
+  if (isset($libraries['webform.element.date']) && floatval(\Drupal::VERSION) < 9) {
+    $libraries['webform.element.date']['dependencies'] = ['core/drupal.date', 'core/drupalSettings'];
+  }
+
   // If chosen_lib.module is installed, then update the dependency.
   if (\Drupal::moduleHandler()->moduleExists('chosen_lib')) {
     if (isset($libraries['webform.element.chosen'])) {
