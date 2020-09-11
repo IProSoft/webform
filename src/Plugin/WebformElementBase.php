@@ -3284,6 +3284,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
 
     $form['access'] = [
       '#type' => 'container',
+      '#attributes' => ['data-webform-states-no-clear' => TRUE],
     ];
     if (!$this->currentUser->hasPermission('administer webform') && !$this->currentUser->hasPermission('administer webform element access')) {
       $form['access']['#access'] = FALSE;
