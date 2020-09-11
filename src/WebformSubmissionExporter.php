@@ -319,7 +319,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     // Determine if the file can be downloaded or displayed in the file browser.
     $total = $this->entityStorage->getTotal($this->getWebform(), $this->getSourceEntity());
     $default_batch_limit = $this->configFactory->get('webform.settings')->get('batch.default_batch_export_size') ?: 500;
-    $download_access =  ($total > $default_batch_limit) ? FALSE : TRUE;
+    $download_access = ($total > $default_batch_limit) ? FALSE : TRUE;
 
     // Build #states.
     $states_archive = ['invisible' => []];

@@ -3,7 +3,6 @@
 namespace Drupal\webform\Plugin\WebformHandler;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -13,7 +12,6 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\WebformSubmissionConditionsValidatorInterface;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\webform\WebformTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -147,7 +145,7 @@ class DebugWebformHandler extends WebformHandlerBase {
           : WebformYaml::encode($data),
         '#prefix' => '<pre>',
         '#suffix' => '</pre>',
-      ]
+      ],
     ];
     $message = $this->renderer->renderPlain($build);
 

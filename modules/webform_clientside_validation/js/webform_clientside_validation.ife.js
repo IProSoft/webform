@@ -32,7 +32,7 @@
         var $fieldSuffix = $(this);
         var $errorMessages = $fieldSuffix.prev('strong.error.form-item--error-message');
         $errorMessages.insertAfter($fieldSuffix);
-      })
+      });
     };
   });
 

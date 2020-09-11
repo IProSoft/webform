@@ -4,6 +4,7 @@ namespace Drupal\webform_test_ajax\Plugin\Block;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
@@ -21,6 +22,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
+   * The configuration factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * The redirect destination service.
    *
    * @var \Drupal\Core\Routing\RedirectDestinationInterface
@@ -28,10 +36,12 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
   protected $redirectDestination;
 
   /**
+<<<<<<< HEAD
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = new static($configuration, $plugin_id, $plugin_definition);
+    $instance->configFactory = $container->get('config.factory');
     $instance->redirectDestination = $container->get('redirect.destination');
     return $instance;
   }
@@ -141,7 +151,7 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
       ];
     }
     $build['#attached']['library'][] = 'webform/webform.dialog';
-    $build['#attached']['drupalSettings']['webform']['dialog']['options'] = \Drupal::config('webform.settings')->get('settings.dialog_options');
+    $build['#attached']['drupalSettings']['webform']['dialog']['options'] = $this->configFactory->get('webform.settings')->get('settings.dialog_options');
     return $build;
   }
 

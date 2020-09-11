@@ -113,11 +113,11 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
     $build = [
       '#type' => 'link',
       '#url' => Url::fromRoute('<none>', [], ['fragment' => $form_id]),
-      '#title' => t('Submit %title form ', ['%title' => $webform->label()]),
+      '#title' => t('Submit %title form', ['%title' => $webform->label()]),
       '#attributes' => ['class' => ['js-webform-card-test-submit-form']],
     ];
     \Drupal::messenger()->addWarning(\Drupal::service('renderer')->render($build));
-     $form['#attached']['library'][] = 'webform_cards/webform_cards.test';
+    $form['#attached']['library'][] = 'webform_cards/webform_cards.test';
   }
 
   // Add cards JavaScript.
@@ -158,7 +158,7 @@ function webform_cards_webform_submission_form_alter(array &$form, FormStateInte
     'wizard_progress_link',
     // Auto forward to next page when the page is completed.
     'wizard_auto_forward',
-    // Hide the next button when auto-forwarding
+    // Hide the next button when auto-forwarding.
     'wizard_auto_forward_hide_next_button',
     // Navigate between cards using left or right arrow keys.
     'wizard_keyboard',

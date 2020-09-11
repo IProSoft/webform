@@ -320,7 +320,7 @@ class WebformSubmissionForm extends ContentEntityForm {
             $entity = $webform_submission_token;
             $data = $entity->getRawData();
           }
-          else if (isset($_POST['webform_submission_token'])) {
+          elseif (isset($_POST['webform_submission_token'])) {
             $webform_submission_token = $this->getStorage()->loadFromToken($_POST['webform_submission_token'], $webform, $source_entity, $account);
             if ($webform_submission_token && $webform_submission_token->isDraft()) {
               $entity = $webform_submission_token;

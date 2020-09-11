@@ -776,7 +776,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    * @param string $trigger_value
    *   The trigger value.
    * @param string|array $element_value
-   *   The element value
+   *   The element value.
    *
    * @return bool|null
    *   The result.

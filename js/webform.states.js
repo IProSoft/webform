@@ -528,7 +528,7 @@
    *
    * @param {element} $input
    *   An input.
-   * @param boolean required
+   * @param {boolean} required
    */
   function toggleRequired($input, required) {
     if (required) {
