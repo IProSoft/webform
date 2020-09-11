@@ -1087,7 +1087,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $element = $elements[$element_attachment];
       /** @var \Drupal\webform\Plugin\WebformElementAttachmentInterface $element_plugin */
       $element_plugin = $this->elementManager->getElementInstance($element);
-      $attachments = array_merge($attachments, $element_plugin->getAttachments($element, $webform_submission));
+      $attachments = array_merge($attachments, $element_plugin->getEmailAttachments($element, $webform_submission));
     }
     return $attachments;
   }

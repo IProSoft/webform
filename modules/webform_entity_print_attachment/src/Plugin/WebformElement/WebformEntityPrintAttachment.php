@@ -122,4 +122,11 @@ class WebformEntityPrintAttachment extends WebformAttachmentBase {
     return $definition['file_extension'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachmentsBatchLimit() {
+    return 10;
+  }
+
 }

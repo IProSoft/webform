@@ -120,6 +120,7 @@ class WebformCliService implements WebformCliServiceInterface {
         'state' => 'Submission state to be included: "completed", "draft" or "all" (default).',
         'sticky' => 'Flagged/starred submission status.',
         'files' => 'Download files: "1" or "0" (default). If set to 1, the exported CSV file and any submission file uploads will be download in a gzipped tar file.',
+        'attachments' => 'Download attachments: "1" or "0" (default). If set to 1, the exported CSV file and any submission element attachments will be download in a gzipped tar file.',
         // Output options.
         'destination' => 'The full path and filename in which the CSV or archive should be stored. If omitted the CSV file or archive will be outputted to the command line.',
       ],

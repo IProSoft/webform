@@ -151,7 +151,7 @@ class WebformImageFile extends WebformManagedFileBase {
   /**
    * {@inheritdoc}
    */
-  public function getAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  public function getEmailAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $attachments = [];
 
     /** @var \Drupal\image\ImageStyleInterface $image_style */

@@ -1411,7 +1411,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   /**
    * {@inheritdoc}
    */
-  public function getAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  public function getEmailAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $attachments = [];
     $files = $this->getTargetEntities($element, $webform_submission, $options) ?: [];
     foreach ($files as $file) {
@@ -1428,6 +1428,28 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       ];
     }
     return $attachments;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    // Managed files are bulk copied during an export.
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasExportAttachments() {
+    return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachmentsBatchLimit() {
+    return NULL;
   }
 
 }

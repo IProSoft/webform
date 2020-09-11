@@ -249,7 +249,7 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
   /**
    * {@inheritdoc}
    */
-  public function getAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  public function getEmailAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     if (!$this->conditionsValidator->isElementEnabled($element, $webform_submission)) {
       return [];
     }
@@ -274,6 +274,27 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
       ];
     }
     return $attachments;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    return $this->getEmailAttachments($element, $webform_submission, $options);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasExportAttachments() {
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachmentsBatchLimit() {
+    return NULL;
   }
 
 }
