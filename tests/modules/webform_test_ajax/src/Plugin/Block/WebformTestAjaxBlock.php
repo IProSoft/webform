@@ -4,6 +4,7 @@ namespace Drupal\webform_test_ajax\Plugin\Block;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RedirectDestinationInterface;
 use Drupal\Core\Url;
@@ -22,6 +23,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
+   * The configuration factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * The redirect destination service.
    *
    * @var \Drupal\Core\Routing\RedirectDestinationInterface
@@ -37,11 +45,14 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The configuration factory.
    * @param \Drupal\Core\Routing\RedirectDestinationInterface $redirect_destination
    *   The redirect destination service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RedirectDestinationInterface $redirect_destination) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, RedirectDestinationInterface $redirect_destination) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->configFactory = $config_factory;
     $this->redirectDestination = $redirect_destination;
   }
 
@@ -53,6 +64,7 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('config.factory'),
       $container->get('redirect.destination')
     );
   }
@@ -162,7 +174,7 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
       ];
     }
     $build['#attached']['library'][] = 'webform/webform.dialog';
-    $build['#attached']['drupalSettings']['webform']['dialog']['options'] = \Drupal::config('webform.settings')->get('settings.dialog_options');
+    $build['#attached']['drupalSettings']['webform']['dialog']['options'] = $this->configFactory->get('webform.settings')->get('settings.dialog_options');
     return $build;
   }
 

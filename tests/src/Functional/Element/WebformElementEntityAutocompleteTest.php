@@ -54,9 +54,9 @@ class WebformElementEntityAutocompleteTest extends WebformElementBrowserTestBase
     $this->assertFieldByName('entity_autocomplete_user_default', 'admin (1)');
     $this->assertFieldByName('entity_autocomplete_user_tags', 'admin (1)');
     $this->assertFieldByName('entity_autocomplete_user_multiple[items][0][_item_]', 'admin (1)');
-    $this->assertFieldByName('entity_autocomplete_node_default', $node_1->label() .  ' (' . $node_1->id() . ')');
-    $this->assertFieldByName('entity_autocomplete_term_tags_autocreate', $term_1->label() .  ' (' . $term_1->id() . ')');
-    $this->assertFieldByName('entity_autocomplete_term_multiple_autocreate[items][0][_item_]', $term_1->label() .  ' (' . $term_1->id() . ')');
+    $this->assertFieldByName('entity_autocomplete_node_default', $node_1->label() . ' (' . $node_1->id() . ')');
+    $this->assertFieldByName('entity_autocomplete_term_tags_autocreate', $term_1->label() . ' (' . $term_1->id() . ')');
+    $this->assertFieldByName('entity_autocomplete_term_multiple_autocreate[items][0][_item_]', $term_1->label() . ' (' . $term_1->id() . ')');
 
     // Check process entity_autocomplete.
     $this->postSubmission($webform);

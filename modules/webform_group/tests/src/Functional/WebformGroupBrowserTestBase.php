@@ -24,6 +24,9 @@ abstract class WebformGroupBrowserTestBase extends GroupBrowserTestBase {
    */
   public static $modules = ['webform_group', 'webform_group_test'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
     parent::setUp();
 

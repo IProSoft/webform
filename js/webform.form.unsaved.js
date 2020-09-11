@@ -27,7 +27,7 @@
       // Get the current unsaved flag state.
       return unsaved;
     },
-    set: function(value) {
+    set: function (value) {
       // Set the current unsaved flag state.
       unsaved = value;
     },

@@ -27,7 +27,7 @@ class WebformSettingsDraftTest extends WebformBrowserTestBase {
    */
   public function testDraft() {
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $webform_submission_storage */
-    $webform_submission_storage =  \Drupal::entityTypeManager()->getStorage('webform_submission');
+    $webform_submission_storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
 
     $normal_user = $this->drupalCreateUser(['view own webform submission']);
 

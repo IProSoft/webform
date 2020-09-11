@@ -19,11 +19,10 @@ trait WebformWebDriverTestTrait {
    * @param array $event_options
    *   The event options.
    */
-  function executeJqueryEvent($selector, $event_type, array $event_options = []) {
+  public function executeJqueryEvent($selector, $event_type, array $event_options = []) {
     $event_options = Json::encode($event_options);
     $script = "jQuery('$selector').trigger(jQuery.Event('$event_type', $event_options));";
     $this->getSession()->executeScript($script);
   }
 
 }
-

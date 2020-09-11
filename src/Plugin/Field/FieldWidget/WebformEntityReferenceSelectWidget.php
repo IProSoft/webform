@@ -36,6 +36,7 @@ class WebformEntityReferenceSelectWidget extends OptionsWidgetBase {
       'webforms' => [],
     ] + parent::defaultSettings();
   }
+
   /**
    * {@inheritdoc}
    */
