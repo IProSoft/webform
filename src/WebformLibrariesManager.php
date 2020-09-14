@@ -448,11 +448,19 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'version' => '2.3.0',
       'elements' => ['webform_signature'],
     ];
+    $libraries['tabby'] = [
+      'title' => $this->t('Tabby'),
+      'description' => $this->t("Tabby provides lightweight, accessible vanilla JS toggle tabs."),
+      'notes' => $this->t('Tabby is used to display tabs in the administrative UI'),
+      'homepage_url' => Url::fromUri('https://github.com/cferdinandi/tabby'),
+      'download_url' =>  Url::fromUri('https://github.com/cferdinandi/tabby/archive/v12.0.3.zip'),
+      'version' => '12.0.3',
+    ];
     // Drupal 8 and 9 supports different version of PopperJS which is a
     // dependency for TipperJS.
     // @see https://www.drupal.org/node/3112670
     $libraries['tippyjs/5.x'] = [
-      'title' => $this->t('tippyjs (5.x)'),
+      'title' => $this->t('Tippy.j (5.x)'),
       'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
       'notes' => $this->t('Tippy.js is used to provide a tooltips. Tippy.js 5.x is compatible with Drupal 8.x.'),
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
@@ -461,7 +469,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'core' => 8,
     ];
     $libraries['tippyjs/6.x'] = [
-      'title' => $this->t('tippyjs (6.x)'),
+      'title' => $this->t('Tippy.js (6.x)'),
       'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
       'notes' => $this->t('Tippy.js is used to provide a tooltips. Tippy.js 6.x is compatible with Drupal 9.x.'),
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),

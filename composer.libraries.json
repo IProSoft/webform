@@ -52,6 +52,7 @@
         "progress-tracker/progress-tracker": "*",
         "signature_pad/signature_pad": "*",
         "svg-pan-zoom/svg-pan-zoom": "*",
+        "tabby/tabby": "*",
         "tippyjs/5.x": "*",
         "tippyjs/6.x": "*"
     },
@@ -467,6 +468,24 @@
                 },
                 "dist": {
                     "url": "https://github.com/ariutta/svg-pan-zoom/archive/3.6.1.zip",
+                    "type": "zip"
+                },
+                "require": {
+                    "composer/installers": "~1.0"
+                }
+            }
+        },
+        "tabby": {
+            "type": "package",
+            "package": {
+                "name": "tabby/tabby",
+                "version": "12.0.3",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "tabby"
+                },
+                "dist": {
+                    "url": "https://github.com/cferdinandi/tabby/archive/v12.0.3.zip",
                     "type": "zip"
                 },
                 "require": {

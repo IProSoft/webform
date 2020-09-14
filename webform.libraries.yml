@@ -373,12 +373,15 @@ webform.form.submit_once:
 
 webform.form.tabs:
   version: VERSION
+  css:
+    component:
+      css/webform.form.tabs.css: {}
   js:
     js/webform.form.tabs.js: {}
   dependencies:
     - core/drupal
     - core/jquery.once
-    - jquery_ui_tabs/tabs
+    - webform/libraries.tabby
 
 webform.form.unsaved:
   version: VERSION
@@ -1245,6 +1248,22 @@ libraries.signature_pad:
     /libraries/signature_pad/: https://cdn.jsdelivr.net/gh/szimek/signature_pad@v2.3.0/
   js:
     /libraries/signature_pad/example/js/signature_pad.js: {}
+
+libraries.tabby:
+  remote: https://github.com/cferdinandi/tabby
+  version: '12.0.3'
+  license:
+    name: MIT
+    url: https://github.com/cferdinandi/tabby/blob/master/LICENSE.md
+    gpl-compatible: true
+  directory: tabby
+  cdn:
+    /libraries/tabby/: https://cdn.jsdelivr.net/gh/cferdinandi/tabby@12.0.3/
+  css:
+    component:
+      /libraries/tabby/dist/css/tabby-ui.min.css: {}
+  js:
+    /libraries/tabby/dist/js/tabby.min.js: {}
 
 # Tippy.js 5.x is compatible with Drupal 8.x.
 # Library info is altered to switch to Tippy.js 6.x for Drupal 9.x compatibility.
