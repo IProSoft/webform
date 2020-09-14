@@ -295,7 +295,7 @@ webform.tooltip:
   dependencies:
     - core/drupal
     - core/jquery.once
-    - jquery_ui_tooltip/tooltip
+    - webform/libraries.tippyjs
 
 # Theme
 
@@ -647,7 +647,7 @@ webform.element.help:
   dependencies:
     - core/drupal
     - core/jquery.once
-    - jquery_ui_tooltip/tooltip
+    - webform/libraries.tippyjs
 
 webform.element.html_editor:
   version: VERSION
@@ -1245,3 +1245,21 @@ libraries.signature_pad:
     /libraries/signature_pad/: https://cdn.jsdelivr.net/gh/szimek/signature_pad@v2.3.0/
   js:
     /libraries/signature_pad/example/js/signature_pad.js: {}
+
+# Tippy.js 5.x is compatible with Drupal 8.x.
+# Library info is altered to switch to Tippy.js 6.x for Drupal 9.x compatibility.
+# @see webform_library_info_alter()
+libraries.tippyjs:
+  remote: https://github.com/atomiks/tippyjs
+  version: '5.2.1'
+  license:
+    name: MIT
+    url: https://github.com/atomiks/tippyjs/blob/master/LICENSE
+    gpl-compatible: true
+  directory: tippyjs/5.x
+  cdn:
+    /libraries/tippyjs/5.x/: https://unpkg.com/tippy.js@5.2.1/dist/
+  js:
+    /libraries/tippyjs/5.x/tippy-bundle.iife.min.js: {}
+  dependencies:
+    - core/popperjs

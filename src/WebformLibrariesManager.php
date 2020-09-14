@@ -6,6 +6,7 @@ use Drupal\Core\Asset\LibraryDiscoveryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -246,11 +247,15 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     }
 
     $libraries = $this->libraries;
-    if ($included !== NULL) {
-      foreach ($libraries as $library_name => $library) {
-        if ($this->isIncluded($library_name) !== $included) {
-          unset($libraries[$library_name]);
-        }
+    foreach ($libraries as $library_name => $library) {
+      if ($included !== NULL
+        && $this->isIncluded($library_name) !== $included) {
+        unset($libraries[$library_name]);
+      }
+      if (isset($library['core'])
+        && $library['core'] !== intval(\Drupal::VERSION)
+        && !Settings::get('webform_libraries_ignore_core', FALSE)) {
+        unset($libraries[$library_name]);
       }
     }
     return $libraries;
@@ -442,6 +447,27 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/szimek/signature_pad/archive/v2.3.0.zip'),
       'version' => '2.3.0',
       'elements' => ['webform_signature'],
+    ];
+    // Drupal 8 and 9 supports different version of PopperJS which is a
+    // dependency for TipperJS.
+    // @see https://www.drupal.org/node/3112670
+    $libraries['tippyjs/5.x'] = [
+      'title' => $this->t('tippyjs (5.x)'),
+      'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
+      'notes' => $this->t('Tippy.js is used to provide a tooltips. Tippy.js 5.x is compatible with Drupal 8.x.'),
+      'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
+      'download_url' =>  Url::fromUri('https://unpkg.com/tippy.js@5.2.1/dist/tippy-bundle.iife.min.js'),
+      'version' => '5.2.1',
+      'core' => 8,
+    ];
+    $libraries['tippyjs/6.x'] = [
+      'title' => $this->t('tippyjs (6.x)'),
+      'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
+      'notes' => $this->t('Tippy.js is used to provide a tooltips. Tippy.js 6.x is compatible with Drupal 9.x.'),
+      'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
+      'download_url' =>  Url::fromUri('https://unpkg.com/tippy.js@6.2.6/dist/tippy-bundle.umd.min.js'),
+      'version' => '6.2.6',
+      'core' => 9,
     ];
     $libraries['jquery.select2'] = [
       'title' => $this->t('jQuery: Select2'),

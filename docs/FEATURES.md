@@ -296,7 +296,7 @@ Standard and custom properties allow for:
 - Input masks (using [jquery.inputmask](https://github.com/RobinHerbots/jquery.inputmask))
 - [Select2](https://select2.github.io/) or [Chosen](https://harvesthq.github.io/chosen/) replacement of select boxes
 - Word and character counting for text elements
-- Help tooltips (using [jQuery UI Tooltip](https://jqueryui.com/tooltip/))
+- Help tooltips
 - More information slideouts
 - Regular expression pattern validation
 - Private elements, visible only to administrators
