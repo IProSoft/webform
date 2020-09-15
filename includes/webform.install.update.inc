@@ -3883,13 +3883,6 @@ function webform_update_8600() {
   // Make sure webform_editorial.module is manually uninstalled before
   // installing any new modules.
   webform_update_8604();
-
-  \Drupal::service('module_installer')->install([
-    'jquery_ui',
-    'jquery_ui_datepicker',
-    'jquery_ui_tabs',
-    'jquery_ui_tooltip',
-  ]);
 }
 
 /**
