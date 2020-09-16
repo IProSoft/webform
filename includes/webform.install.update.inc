@@ -3783,7 +3783,7 @@ function webform_update_8198() {
 
     // Try to decode elements.
     try {
-      $elements = Yaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
@@ -3805,7 +3805,7 @@ function webform_update_8198() {
       }
     }
     if ($has_options_property) {
-      $webform_config->set('elements', Yaml::encode($elements));
+      $webform_config->set('elements', WebformYaml::encode($elements));
       $webform_config->save(TRUE);
     }
   }
