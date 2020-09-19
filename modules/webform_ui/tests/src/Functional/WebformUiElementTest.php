@@ -17,7 +17,7 @@ class WebformUiElementTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['filter', 'webform', 'webform_ui'];
+  public static $modules = ['filter', 'webform', 'webform_ui', 'webform_test_element'];
 
   /**
    * Webforms to load.
@@ -273,6 +273,23 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     ];
     $this->drupalPostForm('/admin/structure/webform/manage/test_element_date/element/date_min_max_dynamic/edit', $edit, 'Save');
     $this->assertRaw('The Default value could not be interpreted in <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>.');
+
+    /**************************************************************************/
+    // Off-canvas width.
+    /**************************************************************************/
+
+    // Check add off-canvas element width is 800.
+    $this->drupalGet('/admin/structure/webform/manage/contact/element/add');
+    $this->assertCssSelect('[href$="/admin/structure/webform/manage/contact/element/add/webform_test_offcanvas_width_element"][data-dialog-options*="800"]');
+    $this->assertNoCssSelect('[href$="/admin/structure/webform/manage/contact/element/add/webform_test_offcanvas_width_element"][data-dialog-options*="550"]');
+
+    // Create element.
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/webform_test_offcanvas_width_element', ['key' => 'webform_test_offcanvas_width_element'], 'Save');
+
+    // Check edit off-canvas element width is 800.
+    $this->drupalGet('/admin/structure/webform/manage/contact');
+    $this->assertCssSelect('[href$="/admin/structure/webform/manage/contact/element/webform_test_offcanvas_width_element/edit"][data-dialog-options*="800"]');
+    $this->assertNoCssSelect('[href$="/admin/structure/webform/manage/contact/element/webform_test_offcanvas_width_element/edit"][data-dialog-options*="550"]');
   }
 
   /**
