@@ -3872,6 +3872,13 @@ function webform_update_8206() {
   _webform_update_admin_settings();
 }
 
+/**
+ * Issue #3171834: Allow .webform-elements to support custom attributes.
+ */
+function webform_update_8207() {
+  _webform_update_webform_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4116,4 +4123,11 @@ function webform_update_8617() {
       $webform_config->save();
     }
   }
+}
+
+/**
+ * Issue #3171834: Allow .webform-elements to support custom attributes.
+ */
+function webform_update_8618() {
+  _webform_update_webform_settings();
 }
