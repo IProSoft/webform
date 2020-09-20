@@ -3871,3 +3871,11 @@ function webform_update_8205() {
 function webform_update_8206() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3171834: Allow .webform-elements to support custom attributes.
+ */
+function webform_update_8207() {
+  _webform_update_webform_settings();
+}
+
