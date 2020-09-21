@@ -233,8 +233,6 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/manage/contact/element/test/change');
     $this->assertRaw(t('Hidden'));
     $this->assertCssSelect('a[href$="admin/structure/webform/manage/contact/element/test/edit?type=hidden"][data-dialog-type][data-dialog-options][data-drupal-selector="edit-elements-hidden-operation"]');
-    $this->assertRaw(t('value'));
-    $this->assertCssSelect('a[href$="admin/structure/webform/manage/contact/element/test/edit?type=value"][data-dialog-type][data-dialog-options][data-drupal-selector="edit-elements-value-operation"]');
     $this->assertRaw(t('Search'));
     $this->assertCssSelect('a[href$="admin/structure/webform/manage/contact/element/test/edit?type=search"][data-dialog-type][data-dialog-options][data-drupal-selector="edit-elements-search-operation"]');
     $this->assertRaw(t('Telephone'));
@@ -243,20 +241,20 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->assertCssSelect('a[href$="admin/structure/webform/manage/contact/element/test/edit?type=url"][data-dialog-type][data-dialog-options][data-drupal-selector="edit-elements-url-operation"]');
 
     // Check change element type.
-    $this->drupalGet('/admin/structure/webform/manage/contact/element/test/edit', ['query' => ['type' => 'value']]);
-    // Check value has no description.
+    $this->drupalGet('/admin/structure/webform/manage/contact/element/test/edit', ['query' => ['type' => 'hidden']]);
+    // Check hidden has no description.
     $this->assertNoRaw(t('A short description of the element used as help for the user when he/she uses the webform.'));
-    $this->assertRaw('Value <a href="' . $base_path . 'admin/structure/webform/manage/contact/element/test/edit" class="button button--small webform-ajax-link" data-dialog-type="dialog" data-dialog-renderer="off_canvas" data-dialog-options="{&quot;width&quot;:600,&quot;dialogClass&quot;:&quot;ui-dialog-off-canvas webform-off-canvas&quot;}" data-drupal-selector="edit-cancel" id="edit-cancel">Cancel</a>');
+    $this->assertRaw('Hidden <a href="' . $base_path . 'admin/structure/webform/manage/contact/element/test/edit" class="button button--small webform-ajax-link" data-dialog-type="dialog" data-dialog-renderer="off_canvas" data-dialog-options="{&quot;width&quot;:600,&quot;dialogClass&quot;:&quot;ui-dialog-off-canvas webform-off-canvas&quot;}" data-drupal-selector="edit-cancel" id="edit-cancel">Cancel</a>');
     $this->assertRaw('(Changing from <em class="placeholder">Text field</em>)');
 
     // Change the element type.
-    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/test/edit', [], 'Save', ['query' => ['type' => 'value']]);
+    $this->drupalPostForm('/admin/structure/webform/manage/contact/element/test/edit', [], 'Save', ['query' => ['type' => 'hidden']]);
 
-    // Change the element type from 'textfield' to 'value'.
+    // Change the element type from 'textfield' to 'hidden'.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/test/edit');
 
     // Check change element type link.
-    $this->assertRaw('Value <a href="' . $base_path . 'admin/structure/webform/manage/contact/element/test/change" class="button button--small webform-ajax-link" data-dialog-type="modal" data-dialog-options="{&quot;width&quot;:800,&quot;dialogClass&quot;:&quot;webform-ui-dialog&quot;}" data-drupal-selector="edit-change-type" id="edit-change-type">Change</a>');
+    $this->assertRaw('Hidden <a href="' . $base_path . 'admin/structure/webform/manage/contact/element/test/change" class="button button--small webform-ajax-link" data-dialog-type="modal" data-dialog-options="{&quot;width&quot;:800,&quot;dialogClass&quot;:&quot;webform-ui-dialog&quot;}" data-drupal-selector="edit-change-type" id="edit-change-type">Change</a>');
 
     // Check color element that does not have related type and return 404.
     $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/color', ['key' => 'test_color', 'properties[title]' => 'Test color'], 'Save');
