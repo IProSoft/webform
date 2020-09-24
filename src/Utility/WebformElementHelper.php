@@ -316,9 +316,6 @@ class WebformElementHelper {
   public static function fixStatesWrapper(array &$element) {
     $attributes = [];
 
-    // Set .js-form-wrapper which is targeted by states.js hide/show logic.
-    $attributes['class'][] = 'js-form-wrapper';
-
     // Add .js-webform-states-hidden to hide elements when they are being rendered.
     $attributes_properties = ['#wrapper_attributes', '#attributes'];
     foreach ($attributes_properties as $attributes_property) {
@@ -331,6 +328,15 @@ class WebformElementHelper {
         }
       }
     }
+
+    // Do not add wrapper if there is no #states and
+    // is no .js-webform-states-hidden class.
+    if (empty($element['#states']) && empty($attributes)) {
+      return;
+    }
+
+    // Set .js-form-wrapper which is targeted by states.js hide/show logic.
+    $attributes['class'][] = 'js-form-wrapper';
 
     // Move the element's #states the wrapper's #states.
     if (isset($element['#states'])) {
