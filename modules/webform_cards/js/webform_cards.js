@@ -9,7 +9,8 @@
 
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.cards = Drupal.webform.cards || {};
-  Drupal.webform.cards.autoForwardDelay = Drupal.webform.cards.autoForwardDelay || 250; // 1/4 second delay.
+  // Autoforward (defaults to 1/4 second delay).
+  Drupal.webform.cards.autoForwardDelay = Drupal.webform.cards.autoForwardDelay || 250;
 
   /**
    * Initialize webform cards.
@@ -244,6 +245,9 @@
 
           // Track progress.
           trackProgress();
+
+          // Trigger card change event.
+          $form.trigger('webform_cards:change', [$activeCard]);
         }
 
         /**
@@ -601,6 +605,9 @@
             $previousButton.hide();
             $previewButton.show();
             $submitButton.show();
+
+            // Trigger card change event with no active card.
+            $form.trigger('webform_cards:change');
           }
         }
 

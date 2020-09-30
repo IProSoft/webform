@@ -4,6 +4,5 @@ description: 'Provides editorial management tools for the Webform module.'
 package: 'Webform Testing'
 core_version_requirement: ^8.8 || ^9
 configure: webform_test_editorial.index
-hidden: true
 dependencies:
   - 'webform:webform'
