@@ -234,7 +234,7 @@ elements: |
       '#default_value': '{default_value}'
       '#required': '{default_value}'
       '#description': '<b>Required:</b> page_01_trigger_checkbox:checked'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -416,6 +416,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

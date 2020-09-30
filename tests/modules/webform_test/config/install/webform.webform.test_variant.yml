@@ -20,7 +20,7 @@ elements: |
     '#type': webform_variant
     '#title': test_offcanvas_width
     '#variant': test_offcanvas_width
-  
+
 css: ''
 javascript: ''
 settings:
@@ -202,6 +202,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: false
     conditions: {  }

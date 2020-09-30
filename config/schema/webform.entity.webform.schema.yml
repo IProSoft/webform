@@ -528,6 +528,9 @@
           label:
             type: label
             label: Label
+          notes:
+            type: text
+            label: Notes
           status:
             type: boolean
             label: Status

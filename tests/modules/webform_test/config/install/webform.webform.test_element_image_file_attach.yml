@@ -21,7 +21,7 @@ elements: |
     '#title': webform_image_file_attachment
     '#file_extensions': gif
     '#attachment_image_style': thumbnail
-  
+
 css: ''
 javascript: ''
 settings:
@@ -203,6 +203,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }

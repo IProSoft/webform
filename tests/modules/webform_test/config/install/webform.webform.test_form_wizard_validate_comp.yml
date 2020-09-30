@@ -107,7 +107,7 @@ elements: |
   wizard_3:
     '#type': webform_wizard_page
     '#title': 'Wizard page #3'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -289,6 +289,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

@@ -712,7 +712,7 @@ elements: |
             phone: '+1 212-333-4444'
             ext: 0
         '#format_items': table
-  
+
 css: ''
 javascript: ''
 settings:
@@ -894,6 +894,7 @@ handlers:
   email_text:
     id: email
     label: 'Email (Text)'
+    notes: ''
     handler_id: email_text
     status: true
     conditions: {  }
@@ -930,6 +931,7 @@ handlers:
   email_html:
     id: email
     label: 'Email (HTML)'
+    notes: ''
     handler_id: email_html
     status: true
     conditions: {  }

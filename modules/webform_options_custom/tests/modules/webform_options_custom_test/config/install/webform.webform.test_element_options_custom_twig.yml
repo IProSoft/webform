@@ -23,7 +23,7 @@ elements: |
     '#options':
       4: '4 -- Four'
       5: '5 -- Five'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -205,6 +205,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

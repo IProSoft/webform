@@ -137,6 +137,24 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function setLabel($label);
 
   /**
+   * Returns notes of the webform variant.
+   *
+   * @return string
+   *   Notes for the webform variant, or an empty string.
+   */
+  public function getNotes();
+
+  /**
+   * Set notes for this webform variant.
+   *
+   * @param string $notes
+   *   Notes for this webform variant.
+   *
+   * @return $this
+   */
+  public function setNotes($notes);
+
+  /**
    * Returns the weight of the webform handler.
    *
    * @return int|string

@@ -193,7 +193,7 @@ elements: |
       table_advanced_04_textfield:
         '#type': textfield
         '#title': 'textfield (4)'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -375,6 +375,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

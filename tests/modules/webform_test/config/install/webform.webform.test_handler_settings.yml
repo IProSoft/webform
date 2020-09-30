@@ -61,7 +61,7 @@ elements: |
       '#type': textfield
       '#title': 'Draft loaded message'
       '#default_value': '{Custom draft loaded message}'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -243,6 +243,7 @@ handlers:
   preview:
     id: settings
     label: 'Preview settings'
+    notes: ''
     handler_id: preview
     status: true
     conditions:
@@ -260,6 +261,7 @@ handlers:
   confirmation:
     id: settings
     label: 'Confirmation Settings'
+    notes: ''
     handler_id: confirmation
     status: true
     conditions:
@@ -277,6 +279,7 @@ handlers:
   custom:
     id: settings
     label: 'Custom settings'
+    notes: ''
     handler_id: custom
     status: true
     conditions:

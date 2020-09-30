@@ -61,7 +61,7 @@ elements: |
     '#type': webform_actions
     '#title': 'Submit button(s)'
     '#submit__label': Register
-  
+
 css: ''
 javascript: ''
 settings:
@@ -235,6 +235,7 @@ handlers:
   email_notification:
     id: email
     label: 'Email Notification'
+    notes: ''
     handler_id: email_notification
     status: true
     conditions: {  }
@@ -271,6 +272,7 @@ handlers:
   email_reminder:
     id: scheduled_email
     label: 'Email Reminder'
+    notes: ''
     handler_id: email_reminder
     status: true
     conditions: {  }
@@ -312,6 +314,7 @@ handlers:
   submission_limit:
     id: settings
     label: 'Submission limit'
+    notes: ''
     handler_id: submission_limit
     status: true
     conditions: {  }
@@ -327,6 +330,7 @@ handlers:
   teeshirt_options_limits:
     id: options_limit
     label: 'Tee shirt limits'
+    notes: ''
     handler_id: teeshirt_options_limits
     status: true
     conditions: {  }

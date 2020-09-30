@@ -82,7 +82,7 @@ elements: |
     '#type': textfield
     '#title': module
     '#input_mask': '999'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -264,6 +264,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

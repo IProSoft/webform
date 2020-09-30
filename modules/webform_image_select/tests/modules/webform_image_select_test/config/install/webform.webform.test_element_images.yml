@@ -65,7 +65,7 @@ elements: |
         kitten_4:
           text: 'Cute Kitten 4'
           src: 'http://placekitten.com/270/200'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -247,6 +247,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

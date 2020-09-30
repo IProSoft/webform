@@ -70,7 +70,7 @@ elements: |
         five: Five
       '#attributes':
         'data-webform-select-options-disabled': 'one,two,four,five'
-  
+
   select_select2_examples:
     '#type': details
     '#title': 'Select select2'
@@ -373,7 +373,7 @@ elements: |
         three: Three
         four: Four
         five: Five
-  
+
 css: ''
 javascript: ''
 settings:
@@ -555,6 +555,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

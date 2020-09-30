@@ -88,7 +88,7 @@ class WebformEntityHandlersForm extends EntityForm {
           ],
           'description' => [
             '#prefix' => '<br/>',
-            '#markup' => $handler->description(),
+            '#markup' => $handler->getNotes() ?: $handler->description(),
           ],
         ],
       ];

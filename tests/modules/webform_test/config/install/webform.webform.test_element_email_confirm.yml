@@ -43,7 +43,7 @@ elements: |
     '#type': webform_email_confirm
     '#title': email_confirm_flexbox
     '#flexbox': 1
-  
+
 css: ''
 javascript: ''
 settings:
@@ -225,6 +225,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

@@ -1305,7 +1305,7 @@ elements: |
         '#title': 'Machine name (Raw value)'
         '#default_value': loremipsum
         '#format': raw
-  
+
 css: ''
 javascript: ''
 settings:
@@ -1487,6 +1487,7 @@ handlers:
   email_text:
     id: email
     label: 'Email (Text)'
+    notes: ''
     handler_id: email_text
     status: true
     conditions: {  }
@@ -1523,6 +1524,7 @@ handlers:
   email_html:
     id: email
     label: 'Email (HTML)'
+    notes: ''
     handler_id: email_html
     status: true
     conditions: {  }

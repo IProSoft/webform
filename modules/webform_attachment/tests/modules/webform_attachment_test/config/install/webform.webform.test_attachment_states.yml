@@ -28,7 +28,7 @@ elements: |
       'enabled':
         ':input[name="attach"]':
           checked: true
-  
+
 css: ''
 javascript: ''
 settings:
@@ -210,6 +210,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }

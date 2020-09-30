@@ -32,7 +32,7 @@ elements: |
     '#title': checkbox_return_value_raw
     '#return_value': custom_return_value_raw
     '#format': raw
-  
+
 css: ''
 javascript: ''
 settings:
@@ -214,6 +214,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }
