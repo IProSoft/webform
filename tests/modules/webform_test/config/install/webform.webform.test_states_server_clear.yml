@@ -103,7 +103,7 @@ elements: |
       '#type': textfield
       '#title': dependent_details_textfield
       '#default_value': '{dependent_details_textfield}'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -285,6 +285,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

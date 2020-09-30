@@ -56,6 +56,13 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   protected $label;
 
   /**
+   * The webform variant notes.
+   *
+   * @var string
+   */
+  protected $notes = '';
+
+  /**
    * The webform handler status.
    *
    * @var bool
@@ -284,6 +291,21 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   /**
    * {@inheritdoc}
    */
+  public function setNotes($notes) {
+    $this->notes = $notes;
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getNotes() {
+    return $this->notes;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function setStatus($status) {
     $this->status = $status;
     return $this;
@@ -437,6 +459,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
     return [
       'id' => $this->getPluginId(),
       'label' => $this->getLabel(),
+      'notes' => $this->getNotes(),
       'handler_id' => $this->getHandlerId(),
       'status' => $this->getStatus(),
       'conditions' => $this->getConditions(),
@@ -452,6 +475,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
     $configuration += [
       'handler_id' => '',
       'label' => '',
+      'notes' => '',
       'status' => 1,
       'conditions' => [],
       'weight' => '',
@@ -460,6 +484,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
     $this->configuration = $configuration['settings'] + $this->defaultConfiguration();
     $this->handler_id = $configuration['handler_id'];
     $this->label = $configuration['label'];
+    $this->notes = $configuration['notes'];
     $this->status = $configuration['status'];
     $this->conditions = $configuration['conditions'];
     $this->weight = $configuration['weight'];

@@ -37,7 +37,7 @@ elements: |
       managed_file:
         '#type': managed_file
         '#title': managed_file
-  
+
 css: ''
 javascript: ''
 settings:
@@ -219,6 +219,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }
@@ -227,6 +228,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }

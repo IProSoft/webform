@@ -42,7 +42,6 @@ abstract class WebformVariantBase extends PluginBase implements WebformVariantIn
    */
   protected $label;
 
-
   /**
    * The webform variant notes.
    *

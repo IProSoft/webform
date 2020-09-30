@@ -102,7 +102,7 @@ elements: |
     '#attributes':
       class:
         - webform-horizontal-rule--glyph
-  
+
 css: ''
 javascript: ''
 settings:
@@ -284,6 +284,7 @@ handlers:
   debug:
     id: debug
     label: Debug
+    notes: ''
     handler_id: debug
     status: true
     conditions: {  }

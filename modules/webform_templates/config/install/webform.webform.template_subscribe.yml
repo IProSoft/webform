@@ -32,7 +32,7 @@ elements: |
     '#type': webform_actions
     '#title': 'Submit button(s)'
     '#submit__label': Subscribe
-  
+
 css: ''
 javascript: ''
 settings:
@@ -214,6 +214,7 @@ handlers:
   email_notification:
     id: email
     label: 'Email Notification'
+    notes: ''
     handler_id: email_notification
     status: true
     conditions: {  }

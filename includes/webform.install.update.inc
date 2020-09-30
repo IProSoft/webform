@@ -3886,3 +3886,27 @@ function webform_update_8208() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #3174132: Add (admin) notes to handlers.
+ */
+function webform_update_8209() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+
+    $data = $webform_config->getRawData();
+    $save = FALSE;
+    foreach ($data['handlers'] as &$handler) {
+      if (!isset($handler['notes'])) {
+        WebformArrayHelper::insertAfter($handler, 'label', 'notes', '');
+        $save = TRUE;
+      }
+    }
+
+    if ($save) {
+      $webform_config->setData($data);
+      $webform_config->save();
+    }
+  }
+}
+

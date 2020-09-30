@@ -34,7 +34,7 @@ elements: |
     '#display_on': both
     '#view_mode': twig
     '#template': '{This is a custom template}'
-  
+
 css: ''
 javascript: ''
 settings:
@@ -216,6 +216,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }
