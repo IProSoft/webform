@@ -3879,3 +3879,10 @@ function webform_update_8207() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #3151506: Remove .webform-elements wrapper around elements.
+ */
+function webform_update_8208() {
+  _webform_update_webform_settings();
+}
+

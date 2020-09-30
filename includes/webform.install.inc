@@ -177,6 +177,12 @@ function _webform_update_webform_setting_settings(array $settings) {
     }
     unset($settings['page_admin_theme']);
   }
+
+  // Issue #3151506: Remove .webform-elements wrapper around elements.
+  if (isset($settings['form_elements_attributes'])) {
+    unset($settings['form_elements_attributes']);
+  }
+
   return $settings;
 }
 
