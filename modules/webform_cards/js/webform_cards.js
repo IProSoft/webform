@@ -57,11 +57,11 @@
         var $allCards = $form.find('.webform-card');
 
         // Actions and buttons.
-        var $formActions = $form.find('.form-actions');
+        var $formActions = $form.find('.form-actions').show();
         var $previewButton = $formActions.find('.webform-button--preview');
         var $submitButton = $formActions.find('.webform-button--submit');
-        var $previousButton = $form.find('.webform-button--previous');
-        var $nextButton = $form.find('.webform-button--next');
+        var $previousButton = $formActions.find('.webform-button--previous');
+        var $nextButton = $formActions.find('.webform-button--next');
 
         // Preview.
         if (!$allCards.length) {
