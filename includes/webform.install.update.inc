@@ -3879,6 +3879,13 @@ function webform_update_8207() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #3151506: Remove .webform-elements wrapper around elements.
+ */
+function webform_update_8208() {
+  _webform_update_webform_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4129,5 +4136,12 @@ function webform_update_8617() {
  * Issue #3171834: Allow .webform-elements to support custom attributes.
  */
 function webform_update_8618() {
+  _webform_update_webform_settings();
+}
+
+/**
+ * Issue #3151506: Remove .webform-elements wrapper around elements.
+ */
+function webform_update_8619() {
   _webform_update_webform_settings();
 }

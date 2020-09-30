@@ -737,13 +737,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Append elements to the webform.
-    $form_elements_attributes = $this->getWebformSetting('form_elements_attributes');
-    $form_elements_attributes['class'][] = 'webform-elements';
-    $form['elements'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'div',
-      '#attributes' => $form_elements_attributes,
-    ] + $elements;
+    $form['elements'] = $elements;
 
     // Pages: Set current wizard or preview page.
     $this->displayCurrentPage($form, $form_state);
