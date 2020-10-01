@@ -1283,7 +1283,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-
     // Enhancement: Webform Media Type.
     $projects['webform_media'] = [
       'title' => $this->t('Webform Navigation'),
