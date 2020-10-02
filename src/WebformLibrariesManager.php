@@ -457,11 +457,11 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Support CKEditor plugins without the ckeditor.* prefix.
     // @see https://www.drupal.org/project/fakeobjects
     // @see https://www.drupal.org/project/anchor_link
-    foreach ($libraries as $library_name => &$library) {
+    foreach ($libraries as $library_name => $library) {
       if (strpos($library_name, 'ckeditor.') === 0
         && !file_exists($library['plugin_path'])
         && file_exists(str_replace('ckeditor.', '', $library['plugin_path']))) {
-        $library['plugin_path'] = str_replace('ckeditor.', '', $library['plugin_path']);
+        $libraries[$library_name]['plugin_path'] = str_replace('ckeditor.', '', $library['plugin_path']);
       }
     }
 
