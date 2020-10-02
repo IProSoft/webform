@@ -767,6 +767,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     // Integrations: Lightweight Webform Mailchimp.
+    $projects['ldbase_handlers'] = [
+      'title' => $this->t('LDbase Webform Handlers'),
+      'description' => $this->t('Webform handlers to create and update LDbase content nodes.'),
+      'url' => Url::fromUri('https://github.com/ldbase/ldbase_handlers'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: Lightweight Webform Mailchimp.
     $projects['lwm'] = [
       'title' => $this->t('Lightweight Webform Mailchimp'),
       'description' => $this->t('Manage and processing a Mailchimp lightweight connection from a Drupal webform.'),
