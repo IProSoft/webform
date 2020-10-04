@@ -438,7 +438,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     $projects['webform_protected_downloads'] = [
       'title' => $this->t('Webform Protected Downloads'),
       'description' => $this->t('Provides protected file downloads using webforms.'),
-      'url' => Url::fromUri('https://github.com/timlovrecic/Webform-Protected-Downloads'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_protected_downloads'),
       'category' => 'enhancement',
     ];
 
