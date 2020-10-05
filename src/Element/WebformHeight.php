@@ -117,9 +117,9 @@ class WebformHeight extends FormElement {
     $inches_range = range(0, 11, $inches_step);
     if ($inches_step !== 1 && floor($inches_step) !== $inches_step) {
       $decimals = strlen(substr(strrchr($inches_step, '.'), 1));
-      $inches_range = array_map(function($number) use ($decimals) {
-          return number_format($number, $decimals);
-        }, $inches_range);
+      $inches_range = array_map(function ($number) use ($decimals) {
+        return number_format($number, $decimals);
+      }, $inches_range);
     }
     $inches_options = array_combine($inches_range, $inches_range);
 
