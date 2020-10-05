@@ -33,7 +33,6 @@ class WebformHeight extends WebformElementBase {
     ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
   }
 
-
   /**
    * {@inheritdoc}
    */
