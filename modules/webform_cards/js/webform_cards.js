@@ -149,6 +149,12 @@
               }
             }
 
+            // If input[type="radio"] ignore left/right keys which are used to
+            // navigate between radio buttons.
+            if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
+              return;
+            }
+
             switch (event.which) {
               // Left key triggers the previous button.
               case 37:
