@@ -130,6 +130,7 @@ webform.ajax:
     - core/drupal.announce
     - core/jquery.once
     - core/jquery.form
+    - webform/webform.scroll
 
 # Announce.
 
@@ -266,6 +267,16 @@ webform.promotions:
   css:
     component:
       css/webform.promotions.css: {}
+
+# Scroll.
+
+webform.scroll:
+  version: VERSION
+  js:
+    js/webform.scroll.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 # States.
 
