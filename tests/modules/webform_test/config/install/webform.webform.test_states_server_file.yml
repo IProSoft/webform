@@ -24,7 +24,7 @@ elements: |
     '#title': textfield_dependent_required
     '#states':
       required:
-        ':input[name="files[file_trigger]"]':
+        ':input[name="files[trigger_file]"]':
           filled: true
 
 css: ''
