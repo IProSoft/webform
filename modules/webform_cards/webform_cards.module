@@ -422,6 +422,10 @@ function webform_cards_form_webform_settings_form_form_alter(array &$form, FormS
       ],
       'wizard_track' => [
         '#title' => t('Track wizard/cards progress in the URL by'),
+        '#options' => [
+          'name' => t("Page/card name (?page=contact)"),
+          'index' => t("Page/card index (?page=2)"),
+        ],
       ],
       'wizard_prev_button_label' => [
         '#title' => t('Wizard/cards previous page button label'),
