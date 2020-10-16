@@ -8,3 +8,4 @@ dependencies:
   - 'drupal:language'
   - 'drupal:locale'
   - 'webform:webform'
+  - 'webform:webform_image_select'
