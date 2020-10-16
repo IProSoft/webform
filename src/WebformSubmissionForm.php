@@ -469,7 +469,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->operation === 'add'
       && $entity->isNew()
       && $webform->getSetting('autofill')) {
-      if ($last_submission = $this->getLastSubmission()) {
+      if ($last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE])) {
         $excluded_elements = $webform->getSetting('autofill_excluded_elements') ?: [];
         $last_submission_data = array_diff_key($last_submission->getRawData(), $excluded_elements);
         $data = $last_submission_data + $data;
@@ -1014,6 +1014,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
     $source_entity = $this->getSourceEntity();
+    $account = $this->currentUser();
 
     // Display test message, except on share page.
     if ($this->isGet() && $this->operation === 'test' && !$this->isSharePage()) {
@@ -1093,7 +1094,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         $this->getMessageManager()->display(WebformMessageManagerInterface::PREVIOUS_SUBMISSIONS);
       }
       else {
-        $last_submission = $this->getLastSubmission(FALSE);
+        $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account);
         if ($last_submission && $webform_submission->id() !== $last_submission->id()) {
           $this->getMessageManager()->display(WebformMessageManagerInterface::PREVIOUS_SUBMISSION);
         }
@@ -1105,7 +1106,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       && $this->operation === 'add'
       && $webform_submission->isNew()
       && $webform->getSetting('autofill')
-      && $this->getLastSubmission()) {
+      && $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE])) {
       $this->getMessageManager()->display(WebformMessageManagerInterface::AUTOFILL_MESSAGE);
     }
   }
@@ -2975,6 +2976,9 @@ class WebformSubmissionForm extends ContentEntityForm {
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The last completed webform submission for the current user.
+   *
+   * @deprecated Scheduled for removal in Webform 8.x-6.x
+   *   Use $this->getStorage()->getLastSubmission instead.
    */
   protected function getLastSubmission($completed = TRUE) {
     $webform = $this->getWebform();
