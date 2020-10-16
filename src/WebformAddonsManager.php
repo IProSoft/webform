@@ -346,6 +346,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Cookie.
+    $projects['webform_cookie'] = [
+      'title' => $this->t('Webform Cookie'),
+      'description' => $this->t('Provides a Webform submission handler that sets an arbitrary cookie after submission.'),
+      'url' => Url::fromUri('https://github.com/r0nn1ef/webform_cookie'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Confirmation File.
     $projects['webform_confirmation_file'] = [
       'title' => $this->t('Webform Confirmation File'),
