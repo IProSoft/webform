@@ -314,6 +314,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Enhancement.
     /**************************************************************************/
 
+    // Enhancement: Dopup.
+    $projects['dopup'] = [
+      'title' => $this->t('Dopup'),
+      'description' => $this->t('Simple webform popups for lead generation and other marketing needs.'),
+      'url' => Url::fromUri('Dopup https://www.drupal.org/project/dopup'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Formset.
     $projects['formset'] = [
       'title' => $this->t('Formset'),
