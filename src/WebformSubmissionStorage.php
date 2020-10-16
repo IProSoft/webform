@@ -399,6 +399,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    *     Defaults to NULL
    *   - check_source_entity (boolean): Check that a source entity is defined.
    *   - interval (int): Limit total within an seconds interval.
+   *   - check_access (boolean): Check access to the submission.
    */
   public function addQueryConditions($query, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []) {
     // Set default options/conditions.
