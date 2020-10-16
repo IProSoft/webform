@@ -314,6 +314,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Enhancement.
     /**************************************************************************/
 
+    // Enhancement: Dopup.
+    $projects['dopup'] = [
+      'title' => $this->t('Dopup'),
+      'description' => $this->t('Simple webform popups for lead generation and other marketing needs.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/dopup'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Formset.
     $projects['formset'] = [
       'title' => $this->t('Formset'),
@@ -335,6 +343,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Calculation'),
       'description' => $this->t('Provides ability to make dynamic calculations using Webform.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_calculation'),
+      'category' => 'enhancement',
+    ];
+
+    // Enhancement: Webform Cookie.
+    $projects['webform_cookie'] = [
+      'title' => $this->t('Webform Cookie'),
+      'description' => $this->t('Provides a Webform submission handler that sets an arbitrary cookie after submission.'),
+      'url' => Url::fromUri('https://github.com/r0nn1ef/webform_cookie'),
       'category' => 'enhancement',
     ];
 
