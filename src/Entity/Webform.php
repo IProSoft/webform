@@ -2818,10 +2818,10 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     // Apply variants.
     $is_applied = FALSE;
     $variant_element_keys = $this->getElementsVariant();
-    foreach ($variant_element_keys as $varient_element_key) {
-      if (!empty($variants[$varient_element_key])) {
-        $instance_id = $variants[$varient_element_key];
-        if ($this->applyVariant($varient_element_key, $instance_id, $force)) {
+    foreach ($variant_element_keys as $variant_element_key) {
+      if (!empty($variants[$variant_element_key])) {
+        $instance_id = $variants[$variant_element_key];
+        if ($this->applyVariant($variant_element_key, $instance_id, $force)) {
           $is_applied = TRUE;
         }
       }
@@ -2889,7 +2889,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     // Apply the variant.
-    $variant_plugin->applyVariant();
+    return $variant_plugin->applyVariant();
   }
 
   /****************************************************************************/
