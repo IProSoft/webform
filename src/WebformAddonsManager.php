@@ -1470,6 +1470,15 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
+    // Workflow: Workflows Field.
+    $projects['workflows_field'] = [
+      'title' => $this->t('Workflows Field'),
+      'description' => $this->t('A business process workflow solution that allows you to create and automate a sequence of tasks representing any business, document approval or collaboration process.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/workflows_field'),
+      'category' => 'workflow',
+      'recommended' => TRUE,
+    ];
+
     /**************************************************************************/
     // Development.
     /**************************************************************************/
