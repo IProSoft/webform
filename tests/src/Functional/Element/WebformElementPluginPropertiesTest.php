@@ -856,6 +856,8 @@ hidden:
   default_value: ''
   prepopulate: false
   private: false
+  states: {  }
+  states_clear: true
   title: ''
 item:
   access: true
