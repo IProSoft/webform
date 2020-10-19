@@ -370,6 +370,12 @@ class WebformSubmissionForm extends ContentEntityForm {
         $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE]);
       }
 
+      // If the webform is closed and user can not update any submission,
+      // block the submission from being updated.
+      if ($webform->isClosed() && !$webform->access('submission_update_any')) {
+        $last_submission = NULL;
+      }
+
       // Set last submission and switch to the edit operation.
       if ($last_submission) {
         $entity = $last_submission;
