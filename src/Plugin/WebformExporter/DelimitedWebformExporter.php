@@ -31,9 +31,7 @@ class DelimitedWebformExporter extends TabularBaseWebformExporter {
    */
   public function setConfiguration(array $configuration) {
     parent::setConfiguration($configuration);
-    if ($this->configuration['delimiter'] === '\t') {
-      $this->configuration['delimiter'] = "\t";
-    }
+    $this->configuration['delimiter'] = ($this->configuration['delimiter'] === '\t') ? "\t" : $this->configuration['delimiter'];
     return $this;
   }
 
@@ -61,7 +59,7 @@ class DelimitedWebformExporter extends TabularBaseWebformExporter {
         '.'  => $this->t('Period (.)'),
         ' '  => $this->t('Space ( )'),
       ],
-      '#default_value' => $this->configuration['delimiter'],
+      '#default_value' => ($this->configuration['delimiter'] === "\t") ? '\t' : $this->configuration['delimiter'],
     ];
     $form['excel'] = [
       '#type' => 'checkbox',
