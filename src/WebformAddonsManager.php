@@ -206,6 +206,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Entity View.
+    $projects['webform_entity_view'] = [
+      'title' => $this->t('Webform Entity View'),
+      'description' => $this->t('Provides an Entity Reference Webform element that can be picked in the build of a webform and will be rendered in the view.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_entity_view'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Handsontable.
     $projects['handsontable_yml_webform'] = [
       'title' => $this->t('Webform Handsontable'),
