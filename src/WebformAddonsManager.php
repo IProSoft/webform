@@ -619,6 +619,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Marketo MA.
+    $projects['marketo_ma'] = [
+      'title' => $this->t('Marketo MA Webform'),
+      'description' => $this->t('Integrates Marketo MA with Webform module forms.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/marketo_ma'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Micro Webform.
     $projects['micro_webform'] = [
       'title' => $this->t('Micro Webform'),
