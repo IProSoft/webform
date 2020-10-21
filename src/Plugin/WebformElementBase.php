@@ -1081,6 +1081,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    *   An element with #states added to the #prefix and #suffix.
    */
   public static function preRenderFixStatesWrapper(array $element) {
+    // Allow Ajax callbacks to disable states wrapper.
+    // @see \Drupal\webform\Element\WebformComputedBase::ajaxWebformComputedCallback
+    // @see \Drupal\webform\Element\WebformMultiple::ajaxCallback
+    if (isset($element['#webform_wrapper']) && $element['#webform_wrapper'] === FALSE) {
+      return $element;
+    }
+
     WebformElementHelper::fixStatesWrapper($element);
     return $element;
   }
@@ -1095,6 +1102,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    *   An element with flexbox wrapper added to the #prefix and #suffix.
    */
   public static function preRenderFixFlexboxWrapper(array $element) {
+    // Allow Ajax callbacks to disable flexbox wrapper.
+    // @see \Drupal\webform\Element\WebformComputedBase::ajaxWebformComputedCallback
+    // @see \Drupal\webform\Element\WebformMultiple::ajaxCallback
+    if (isset($element['#webform_wrapper']) && $element['#webform_wrapper'] === FALSE) {
+      return $element;
+    }
+
     $flex = (isset($element['#flex'])) ? $element['#flex'] : 1;
     $element += ['#prefix' => '', '#suffix' => ''];
     $element['#prefix'] = '<div class="webform-flex webform-flex--' . $flex . '"><div class="webform-flex--container">' . $element['#prefix'];
