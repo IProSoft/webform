@@ -448,7 +448,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       return $value;
     }
 
-    return $this->entityTypeManager->getStorage('file')->load($value);
+    return $this->getFileStorage()->load($value);
   }
 
   /**
@@ -468,7 +468,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     if (empty($value)) {
       return [];
     }
-    return $this->entityTypeManager->getStorage('file')->loadMultiple((array) $value);
+    return $this->getFileStorage()->loadMultiple((array) $value);
   }
 
   /**
@@ -550,7 +550,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $file_destination = $upload_location . '/' . $key . '.' . $file_extension;
 
     // Look for an existing temp files that have not been uploaded.
-    $fids = $this->entityTypeManager->getStorage('file')->getQuery()
+    $fids = $this->getFileStorage()->getQuery()
       ->condition('status', 0)
       ->condition('uid', $this->currentUser->id())
       ->condition('uri', $upload_location . '/' . $key . '.%', 'LIKE')
@@ -568,7 +568,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $file_uri = $this->fileSystem->saveData('{empty}', $file_destination);
     }
 
-    $file = $this->entityTypeManager->getStorage('file')->create([
+    $file = $this->getFileStorage()->create([
       'uri' => $file_uri,
       'uid' => $this->currentUser->id(),
     ]);
@@ -1195,7 +1195,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     }
 
     /** @var \Drupal\file\FileInterface[] $files */
-    $files = $this->entityTypeManager->getStorage('file')->loadMultiple($fids);
+    $files = $this->getFileStorage()->loadMultiple($fids);
     foreach ($files as $file) {
       $source_uri = $file->getFileUri();
       $destination_uri = $this->getFileDestinationUri($element, $file, $webform_submission);
@@ -1450,6 +1450,16 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    */
   public function getExportAttachmentsBatchLimit() {
     return NULL;
+  }
+
+  /**
+   * Retrieves the file storage.
+   *
+   * @return \Drupal\file\FileStorageInterface
+   *   The file storage.
+   */
+  protected function getFileStorage() {
+    return $this->getEntityStorage('file');
   }
 
 }
