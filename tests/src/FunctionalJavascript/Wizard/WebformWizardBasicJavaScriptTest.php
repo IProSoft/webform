@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\FunctionalJavaScript\Wizard;
+namespace Drupal\Tests\webform\FunctionalJavascript\Wizard;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
