@@ -117,17 +117,19 @@ class WebformEntityAddForm extends BundleEntityFormBase {
       // Poormans duplication of translated webform configuration.
       // This completely bypasses the config translation system and just
       // duplicates any translated webform config stored in the database.
-      $result = \Drupal::database()->select('config', 'c')
-        ->fields('c', ['collection', 'name', 'data'])
-        ->condition('c.name', 'webform.webform.' . $original_id)
-        ->condition('c.collection', 'language.%', 'LIKE')
-        ->execute();
-      while ($record = $result->fetchAssoc()) {
-        $record['name'] = 'webform.webform.' . $duplicate_id;
-        \Drupal::database()->insert('config')
-          ->fields(['collection', 'name', 'data'])
-          ->values($record)
+      if (\Drupal::moduleHandler()->moduleExists('config_translation')) {
+        $result = \Drupal::database()->select('config', 'c')
+          ->fields('c', ['collection', 'name', 'data'])
+          ->condition('c.name', 'webform.webform.' . $original_id)
+          ->condition('c.collection', 'language.%', 'LIKE')
           ->execute();
+        while ($record = $result->fetchAssoc()) {
+          $record['name'] = 'webform.webform.' . $duplicate_id;
+          \Drupal::database()->insert('config')
+            ->fields(['collection', 'name', 'data'])
+            ->values($record)
+            ->execute();
+        }
       }
 
       // Copy webform export and results from state.
