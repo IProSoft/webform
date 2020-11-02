@@ -748,10 +748,28 @@ function _webform_page_attachments(array &$attachments) {
  * @see webform_preprocess_file_link()
  */
 function webform_file_access(FileInterface $file, $operation, AccountInterface $account) {
-  // Block access to temporary anonymous private file uploads.
-  if ($operation === 'download' && $file->isTemporary() && (int) $file->getOwnerId() === 0 && strpos($file->getFileUri(), 'private://webform/') === 0) {
+  $is_webform_download = ($operation === 'download' && strpos($file->getFileUri(), 'private://webform/') === 0);
+
+  // Block access to temporary anonymous private file uploads
+  // only when an anonymous user is attempting to download the file.
+  // Links to anonymous file uploads are automatically suppressed.
+  // @see webform_preprocess_file_link()
+  // @see webform_file_download()
+  if ($is_webform_download
+    && $file->isTemporary()
+    && $file->getOwner() && $file->getOwner()->isAnonymous()
+    && \Drupal::routeMatch()->getRouteName() === 'system.files') {
     return AccessResult::forbidden();
   }
+
+  // Allow access to files associated with a webform submission.
+  // This prevent uploaded webform files from being lost when another user
+  // edits a submission with multiple file uploads.
+  // @see \Drupal\file\Element\ManagedFile::valueCallback
+  if ($is_webform_download && ManagedFile::accessFile($file, $account)) {
+    return AccessResult::allowed();
+  }
+
   return AccessResult::neutral();
 }
 
