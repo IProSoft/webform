@@ -1152,6 +1152,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'results_customize' => FALSE,
       'token_view' => FALSE,
       'token_update' => FALSE,
+      'token_delete' => FALSE,
       'serial_disabled' => FALSE,
     ];
   }
