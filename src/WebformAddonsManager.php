@@ -466,6 +466,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Unsubscribe.
+    $projects['webform_unsubscribe'] = [
+      'title' => $this->t('Webform Unsubscribe'),
+      'description' => $this->t('Provides the token for creation of the link for removing a webform submission by an anonymous user.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_unsubscribe'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Timeout.
     $projects['webform_timeout'] = [
       'title' => $this->t('Webform Timeout'),
