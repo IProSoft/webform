@@ -82,6 +82,11 @@ function webform_token_info() {
     'description' => t('The URL that can used to update the webform submission. The webform must be configured to allow users to update a submission using a secure token.'),
     'type' => 'url',
   ];
+  $webform_submission['delete-url'] = [
+    'name' => t('Delete (token) URL'),
+    'description' => t('The URL that can used to delete the webform submission. The webform must be configured to allow users to delete a submission using a secure token.'),
+    'type' => 'url',
+  ];
   $webform_submission['langcode'] = [
     'name' => t('Langcode'),
     'description' => t('The language code of the webform submission.'),
@@ -538,11 +543,9 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
           break;
 
         case 'view-url':
-          $replacements[$original] = $webform_submission->getTokenUrl('view')->toString();
-          break;
-
         case 'update-url':
-          $replacements[$original] = $webform_submission->getTokenUrl('update')->toString();
+        case 'delete-url':
+          $replacements[$original] = $webform_submission->getTokenUrl(str_replace('-url', '', $name))->toString();
           break;
 
         case 'token':
@@ -735,16 +738,14 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
     if (($submitted_to_tokens = $token_service->findWithPrefix($tokens, 'submitted-to')) && ($submitted_to = $webform_submission->getSourceEntity(TRUE) ?: $webform_submission->getWebform())) {
       $replacements += $token_service->generate($submitted_to->getEntityTypeId(), $submitted_to_tokens, [$submitted_to->getEntityTypeId() => $submitted_to], $options, $bubbleable_metadata);
     }
-    foreach (['view-url', 'update-url', 'source-url'] as $token) {
+    foreach (['view-url', 'update-url', 'delete-url', 'source-url'] as $token) {
       if ($url_tokens = $token_service->findWithPrefix($tokens, $token)) {
         $url = NULL;
         switch ($token) {
           case 'view-url':
-            $url = $webform_submission->getTokenUrl('view');
-            break;
-
           case 'update-url':
-            $url = $webform_submission->getTokenUrl('update');
+          case 'delete-url':
+            $url = $webform_submission->getTokenUrl(str_replace('-url', '', $token));
             break;
 
           case 'source-url':
