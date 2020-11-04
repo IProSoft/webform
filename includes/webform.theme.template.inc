@@ -159,11 +159,13 @@ function template_preprocess_webform_confirmation(array &$variables) {
   // Get query string parameters.
   $query = \Drupal::request()->query->all();
 
-  // Add Ajax trigger to back link.
+  // Add Ajax trigger to back link except for webform with unique limits which
+  // break the ajax callback.
   // @see \Drupal\webform\WebformSubmissionForm::getCustomForm
   // @see Drupal.behaviors.webformConfirmationBackAjax (js/webform.ajax.js)
   $is_ajax = (!empty($query['ajax_form'])) ? TRUE : FALSE;
-  if (!empty($is_ajax)) {
+  $is_limit_unique = ($webform  && ($webform->getSetting('limit_total_unique') || $webform ->getSetting('limit_user_unique')));
+  if (!empty($is_ajax) && !$is_limit_unique) {
     $variables['back_attributes']->addClass('js-webform-confirmation-back-link-ajax');
   }
 
