@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * Webform module reports tests.
+ */
+class WebformReportsTestCase extends WebformTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Webform reports'),
+      'description' => t('Checks Webform reports.'),
+      'group' => t('Webform'),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp($added_modules = array()) {
+    parent::setUp(array('file'));
+    $this->drupalLogin($this->webform_users['admin']);
+  }
+
+  /**
+   * Test downloading an archive of submissions and all files.
+   */
+  public function testDownloadResults() {
+    // Create webform with a file component.
+    $settings = array(
+      'type' => 'webform',
+      'webform' => array(
+        'components' => array(
+          1 => array(
+            'form_key' => 'file',
+            'name' => 'File',
+            'type' => 'file',
+            'required' => 0,
+            'cid' => 1,
+            'pid' => 0,
+            'weight' => -15,
+          ),
+        ),
+      ),
+    );
+    $node = $this->drupalCreateNode($settings);
+
+    // Submit webform with a sample file.
+    $file = current($this->drupalGetTestFiles('image'));
+    $edit = array(
+      'files[submitted_file]' => drupal_realpath($file->uri),
+    );
+    $this->drupalPost('node/' . $node->nid, $edit, t('Submit'), array(), array(), 'webform-client-form-' . $node->nid);
+
+    // There should be a checkbox to download submitted files.
+    $this->drupalGet('node/' . $node->nid . '/webform-results/download');
+    $this->assertFieldByName('compress');
+
+    // If this checkbox is unchecked, then I should be provided with a CSV.
+    $edit = array(
+      'format' => 'delimited',
+      'delimiter' => ',',
+      'compress' => FALSE,
+    );
+    $this->drupalPost('node/' . $node->nid . '/webform-results/download', $edit, t('Download'));
+    $this->clickLink(t('download the file here'));
+    $this->assertEqual('attachment; filename=' . _webform_safe_name($node->title) . '.csv', $this->drupalGetHeader('content-disposition'));
+    $this->assertEqual('text/csv;charset=UTF-8', $this->drupalGetHeader('content-type'));
+    $csv = $this->drupalGetContent();
+    $this->assertTrue(strpos($csv, $file->filename) !== FALSE);
+
+    // If this checkbox is checked, then I should be provided with a zip file.
+    $edit = array(
+      'format' => 'delimited',
+      'delimiter' => ',',
+      'compress' => TRUE,
+    );
+    $this->drupalPost('node/' . $node->nid . '/webform-results/download', $edit, t('Download'));
+    $this->clickLink(t('download the file here'));
+    $this->assertEqual('attachment; filename=' . _webform_safe_name($node->title) . '.zip', $this->drupalGetHeader('content-disposition'));
+    $this->assertEqual('application/zip', $this->drupalGetHeader('content-type'));
+
+    // Extract zip file.
+    $downloaded_file = tempnam(file_directory_temp(), 'downloaded_');
+    file_put_contents($downloaded_file, $this->drupalGetContent());
+    $zip = new ZipArchive();
+    $resource = $zip->open($downloaded_file);
+    if ($resource !== TRUE) {
+      $this->fail('Unable to unzip archive containing webform results.');
+    }
+    $extract_dir = file_directory_temp() . '/extracted';
+    $zip->extractTo($extract_dir);
+    $zip->close();
+
+    // The zip archive should contain the CSV.
+    $expected_csv = $extract_dir . '/' . _webform_safe_name($node->title) . '.csv';
+    $this->assertTrue(file_exists($expected_csv));
+    $this->assertEqual(md5($csv), md5_file($expected_csv));
+
+    // The zip archive should contain the file that was submitted.
+    $expected_file = $extract_dir . '/files/' . $file->filename;
+    $this->assertTrue(file_exists($expected_file));
+    $this->assertEqual(md5_file(drupal_realpath($file->uri)), md5_file($expected_file));
+  }
+
+}

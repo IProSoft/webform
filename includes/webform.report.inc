@@ -497,6 +497,17 @@ function webform_results_download_form($form, &$form_state, $node) {
     '#description' => t('Choose whether to show the label or form key in each column header.'),
   );
 
+  $form['compress'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include files'),
+    '#description' => t('All files in the webform results will be bundled in a .zip archive along with the exported results.'),
+  );
+
+  if (!class_exists('ZipArchive')) {
+    $form['compress']['#description'] = t('Unable to load ZipArchive class. This usually happens because the PHP interpreter is not compiled with zlib.');
+    $form['compress']['#disabled'] = TRUE;
+  }
+
   $form['select_options'] = array(
     '#type' => 'fieldset',
     '#title' => t('Select list options'),
@@ -862,6 +873,7 @@ function webform_results_download_form_submit(&$form, &$form_state) {
     'header_keys' => $form_state['values']['header_keys'],
     'select_keys' => $form_state['values']['select_keys'],
     'select_format' => $form_state['values']['select_format'],
+    'compress' => $form_state['values']['compress'],
     'range' => $form_state['values']['range'],
     'download' => $form_state['values']['download'],
   );
@@ -876,6 +888,9 @@ function webform_results_download_form_submit(&$form, &$form_state) {
   }
 
   $options['file_name'] = _webform_export_tempname();
+  if ($options['compress'] == 1) {
+    $options['file_name_zip'] = _webform_export_tempname();
+  }
 
   // Set up a batch to export the results.
   $batch = webform_results_export_batch($node, $format, $options);
@@ -977,7 +992,7 @@ function webform_results_export($node, $format = 'delimited', $options = array()
   // by reference.
   $last_sid = TRUE;
   $rows = webform_results_download_rows($node, $options, 0, $last_sid);
-  foreach ($rows as $row) {
+  foreach ($rows['rows'] as $row) {
     $exporter->add_row($handle, $row, $row_count);
     $row_count++;
   }
@@ -1157,6 +1172,7 @@ function webform_results_download_rows_process($node, array $options, $serial_st
   module_load_include('inc', 'webform', 'includes/webform.components');
 
   $submission_information = webform_results_download_submission_information($node, $options);
+  $attached_files = array();
 
   // Generate a row for each submission.
   $row_count = 0;
@@ -1183,6 +1199,12 @@ function webform_results_download_rows_process($node, array $options, $serial_st
         if (webform_component_feature($component['type'], 'csv')) {
           $data = webform_component_invoke($component['type'], 'csv_data', $component, $options, $raw_data);
 
+          // Collect attached files if any.
+          // Webform file components do not allow multiple files to be attached so there is no need to loop over $raw_data.
+          if ($component['type'] == 'file') {
+            $attached_files[] = webform_get_file($raw_data[0])->uri;
+          }
+
           // Allow modules to modify the CSV data.
           drupal_alter('webform_csv_data', $data, $component, $submission);
 
@@ -1199,7 +1221,7 @@ function webform_results_download_rows_process($node, array $options, $serial_st
     $rows[$serial_start + $row_count] = $row;
   }
 
-  return $rows;
+  return array('rows' => $rows, 'attached_files' => $attached_files);
 }
 
 /**
@@ -1319,6 +1341,7 @@ function webform_results_download_default_options($node, $format) {
     'header_keys' => 0,
     'select_keys' => 0,
     'select_format' => 'separate',
+    'compress' => 0,
     'range' => array(
       'range_type' => 'all',
       'completion_type' => 'all',
@@ -1349,12 +1372,33 @@ function webform_results_download($node, $export_info) {
   }
   // Otherwise use the set_headers() method to set headers and then read in the
   // file directly. Delete it when complete.
+  // If the files were bundled into a zip archive, then include the CSV/Excel into
+  // the zip and set the headers accordingly.
   else {
     $export_name = _webform_safe_name($node->title);
     if (!strlen($export_name)) {
       $export_name = t('Untitled');
     }
-    $export_info['exporter']->set_headers($export_name);
+    if ($export_info['options']['compress'] == 1) {
+      // Put the CSV/Excel file into the zip file.
+      // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
+      $zip = new ZipArchive();
+      $zip->open(drupal_realpath($export_info['options']['file_name_zip']), ZIPARCHIVE::CREATE);
+      $zip->addFile(drupal_realpath($export_info['file_name']), $export_info['exporter']->get_filename($export_name));
+      $zip->close();
+      // Drop the CSV/Excel file.
+      @unlink($export_info['file_name']);
+      // Make the user download the zip file instead of the CSV/Excel.
+      $export_info['file_name'] = $export_info['options']['file_name_zip'];
+      // Set headers for zip file.
+      drupal_add_http_header('Pragma', 'public');
+      drupal_add_http_header('Cache-Control', 'max-age=0');
+      drupal_add_http_header('Content-Type', 'application/zip');
+      drupal_add_http_header('Content-Disposition', "attachment; filename=$export_name.zip");
+    }
+    else {
+      $export_info['exporter']->set_headers($export_name);
+    }
     ob_clean();
     // The @ makes it silent.
     @readfile($export_info['file_name']);
@@ -1528,7 +1572,7 @@ function webform_results_batch_rows($node, $format = 'delimited', $options = arr
   if (!$handle) {
     return;
   }
-  foreach ($rows as $row) {
+  foreach ($rows['rows'] as $row) {
     $exporter->add_row($handle, $row, $context['results']['row_count']);
     $context['results']['row_count']++;
   }
@@ -1538,6 +1582,19 @@ function webform_results_batch_rows($node, $format = 'delimited', $options = arr
   $context['sandbox']['batch_number']++;
 
   @fclose($handle);
+
+  // Add file attachments to the zip file, if the user requested it.
+  // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
+  if ($options['compress'] == 1) {
+    $zip = new ZipArchive();
+    $zip->open(drupal_realpath($options['file_name_zip']), ZIPARCHIVE::CREATE);
+    foreach ($rows['attached_files'] as $attached_file) {
+      if (!empty($attached_file)) {
+        $zip->addFile(drupal_realpath($attached_file), 'files/' . basename($attached_file));
+      }
+    }
+    $zip->close();
+  }
 
   // Display status message.
   $context['message'] = t('Exported @count of @total submissions...', array('@count' => $context['sandbox']['serial'], '@total' => $context['sandbox']['sid_count']));
@@ -1576,6 +1633,9 @@ function webform_results_batch_post_process($node, $format = 'delimited', $optio
 
   $context['results']['node'] = $node;
   $context['results']['file_name'] = $options['file_name'];
+  if ($options['compress'] == 1) {
+    $context['results']['file_name_zip'] = $options['file_name_zip'];
+  }
 
   $exporter = webform_export_create_handler($format, $options);
   $exporter->post_process($context['results']);
