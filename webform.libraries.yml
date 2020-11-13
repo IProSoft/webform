@@ -50,6 +50,7 @@ webform.admin.dialog:
     - webform/webform.form.tabs
     - webform/webform.admin.dropbutton
     - webform/webform.element.codemirror.yaml
+    - webform/webform.element.help
     - webform/webform.element.html_editor
     - webform/webform.element.other
     - webform/webform.element.message
