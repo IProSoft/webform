@@ -229,6 +229,13 @@ div.webform-form-filter input.webform-form-filter-text {
 }
 
 /**
+ * Remove right margin so three inline elements are supported.
+ */
+.form--inline.webform-ui-element-form-inline--input .form-item {
+  margin-right: 0;
+}
+
+/**
  * Make tooltip a little bigger.
  */
 .webform-element-help {
