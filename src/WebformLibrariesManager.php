@@ -536,8 +536,11 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       if (strpos($library_name, 'ckeditor.') === 0) {
         $library_path = $this->find($library_name)
           ?: $this->find(str_replace('ckeditor.', '', $library_name));
-        $libraries[$library_name]['plugin_path'] = str_replace('libraries/' . $library_name, $library_path, $library['plugin_path']);
+        if ($library_path) {
+          $libraries[$library_name]['plugin_path'] = str_replace('libraries/' . $library_name, $library_path, $library['plugin_path']);
+        }
       }
+
     }
 
     // Move deprecated libraries last.
