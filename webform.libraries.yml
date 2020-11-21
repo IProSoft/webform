@@ -145,6 +145,13 @@ webform.announce:
     - core/drupal
     - core/drupal.announce
 
+# Behaviors.
+
+webform.behaviors:
+  version: VERSION
+  js:
+    js/webform.behaviors.js: {}
+
 # Block.
 
 webform.block:
@@ -286,6 +293,7 @@ webform.states:
   js:
     js/webform.states.js: {}
   dependencies:
+    - webform/webform.behaviors
     - core/drupal.states
 
 # Token.
