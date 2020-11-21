@@ -360,9 +360,23 @@ function template_preprocess_webform_submission_information(array &$variables) {
   if ($webform_submission->access('delete')) {
     /** @var \Drupal\webform\WebformRequestInterface $request_handler */
     $request_handler = \Drupal::service('webform.request');
-    $base_route_name = (strpos(\Drupal::routeMatch()->getRouteName(), 'webform.user.submission') !== FALSE) ? 'webform.user.submission.delete' : 'webform_submission.delete_form';
-    $url = $request_handler->getUrl($webform_submission, $source_entity, $base_route_name);
 
+    $current_url = Url::fromRoute('<current>')->toString();
+    $source_entity_url = $webform_submission->getSourceUrl()->setAbsolute(FALSE)->toString();
+
+    $route_options = [];
+    if ($current_url === $source_entity_url) {
+      $base_route_name =  'webform.user.submission.delete';
+      $route_options = ['query' => \Drupal::destination()->getAsArray()];
+    }
+    elseif (strpos(\Drupal::routeMatch()->getRouteName(), 'webform.user.submission') !== FALSE
+      || !$webform->access('submission_view_any')) {
+      $base_route_name =  'webform.user.submission.delete';
+    }
+    else {
+      $base_route_name =  'webform_submission.delete_form';
+    }
+    $url = $request_handler->getUrl($webform_submission, $source_entity, $base_route_name, $route_options);
     $variables['delete'] = [
       '#type' => 'link',
       '#title' => t('Delete submission'),
