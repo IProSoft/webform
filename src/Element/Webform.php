@@ -98,12 +98,6 @@ class Webform extends RenderElement {
       }
     }
 
-    // Allow anonymous drafts to be restored.
-    if (\Drupal::currentUser()->isAnonymous()
-      && $webform->getSetting('draft') === WebformInterface::DRAFT_ALL) {
-      $element['#cache']['max-age'] = 0;
-    }
-
     return $element;
   }
 
