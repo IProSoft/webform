@@ -246,7 +246,9 @@ class WebformElementHelper {
   public static function getProperties(array $element) {
     $properties = [];
     foreach ($element as $key => $value) {
-      if ($key && Element::property($key)) {
+      // Make sure the element key is a string.
+      $key = (string) $key;
+      if (Element::property($key)) {
         $properties[$key] = $value;
       }
     }
