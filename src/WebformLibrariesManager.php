@@ -158,17 +158,26 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         '#suffix' => '</dt>',
       ];
       $info[$library_name]['description'] = [
-        'content' => [
-          '#markup' => $description,
-        ],
-        'status' => (!empty($library['deprecated'])) ? [
-          '#markup' => $library['deprecated'],
-          '#prefix' => '<div class="color-warning"><strong>',
-          '#suffix' => '</strong></div>',
-        ] : [],
         '#prefix' => '<dd>',
         '#suffix' => '</dd>',
       ];
+      $info[$library_name]['description']['content'] = [
+        '#markup' => $description,
+      ];
+      if (!empty($library['notes'])) {
+        $info[$library_name]['description']['notes'] = [
+          '#markup' => $library['notes'],
+          '#prefix' => '<div><em>(',
+          '#suffix' => '}</em></div>',
+        ];
+      }
+      if (!empty($library['deprecated'])) {
+        $info[$library_name]['description']['status'] = [
+          '#markup' => $library['deprecated'],
+          '#prefix' => '<div class="color-warning"><strong>',
+          '#suffix' => '</strong></div>',
+        ];
+      }
     }
 
     // Description.
