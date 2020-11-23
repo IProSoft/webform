@@ -22,7 +22,7 @@
         backButton = true;
       }
       else if (window.performance.navigation
-        && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+        && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
         backButton = true;
       }
     }
@@ -32,7 +32,7 @@
       var attachBehaviors = Drupal.attachBehaviors;
       Drupal.attachBehaviors = function (context, settings) {
         setTimeout(function (context, settings) {
-          attachBehaviors(context, settings)
+          attachBehaviors(context, settings);
         }, 300);
       };
     }

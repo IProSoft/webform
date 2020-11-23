@@ -109,7 +109,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#states' => [
         'visible' => [
           ':input[name="serial_disabled"]' => ['checked' => FALSE],
-        ]
+        ],
       ],
     ];
     $form['submission_settings']['serial_disabled'] = [

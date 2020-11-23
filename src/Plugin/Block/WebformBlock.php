@@ -181,7 +181,7 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
   public function build() {
     $webform = $this->getWebform();
     if (!$webform) {
-      if (strpos(\Drupal::routeMatch()->getRouteName(), 'layout_builder.') === 0) {
+      if (strpos($this->routeMatch->getRouteName(), 'layout_builder.') === 0) {
         return ['#markup' => $this->t('The webform (@webform) is broken or missing.', ['@webform' => $this->configuration['webform_id']])];
       }
       else {
