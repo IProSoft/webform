@@ -2,12 +2,9 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\VerticalTabs as VerticalTabsElement;
 use Drupal\webform\Element\WebformMessage as WebformMessageElement;
 use Drupal\webform\Plugin\WebformElementBase;
-use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**

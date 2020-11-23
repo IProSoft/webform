@@ -488,7 +488,6 @@ function webform_toolbar_alter(&$items) {
   }
 }
 
-
 /**
  * Implements hook_menu_links_discovered_alter().
  */
@@ -903,7 +902,7 @@ function webform_process_states(array &$elements, $key = '#attributes') {
 /******************************************************************************/
 
 /**
- * Implements hook_devel_generate_info_alter()
+ * Implements hook_devel_generate_info_alter().
  */
 function webform_devel_generate_info_alter(array &$generators) {
   if (!isset($generators['webform_submission'])) {
