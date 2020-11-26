@@ -20,6 +20,10 @@ elements: |
     '#type': webform_variant
     '#title': Variant
     '#variant': override
+  processed_text:
+    '#type': processed_text
+    '#text': '<p><strong>Some text</strong></p>'
+    '#format': basic_html
   textfield:
     '#type': textfield
     '#title': 'Text field'
