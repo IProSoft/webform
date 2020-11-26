@@ -737,7 +737,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
       $replacements += $token_service->generate($type, $source_entity_tokens, [$type => $source_entity], $options, $bubbleable_metadata);
     }
     if (($submitted_to_tokens = $token_service->findWithPrefix($tokens, 'submitted-to')) && ($submitted_to = $webform_submission->getSourceEntity(TRUE) ?: $webform_submission->getWebform())) {
-      $type = $source_entity->getEntityType()->get('token_type') ?: $submitted_to->getEntityTypeId();
+      $type = $submitted_to->getEntityType()->get('token_type') ?: $submitted_to->getEntityTypeId();
       $replacements += $token_service->generate($type, $submitted_to_tokens, [$type => $submitted_to], $options, $bubbleable_metadata);
     }
     foreach (['token-view-url', 'token-update-url', 'token-delete-url', 'source-url'] as $token) {
