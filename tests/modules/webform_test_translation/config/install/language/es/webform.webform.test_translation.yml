@@ -59,13 +59,7 @@ settings:
 handlers:
   email_confirmation:
     label: ' Confirmación de correo electrónico'
-variants:
-  test:
-    settings:
-      elements: |
-        textfield:
-          '#title': 'Campo de texto - Variante'
-˚weight: 0
+weight: 0
 dependencies:
   enforced:
     module:

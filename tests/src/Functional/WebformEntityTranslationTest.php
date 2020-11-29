@@ -149,7 +149,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
 
     // Check translated webform token.
     $this->assertRaw('Site name: Sitio web de prueba');
-    
+
     // Check that webform is not translated into French.
     $this->drupalGet('/fr/webform/test_translation');
     $this->assertRaw('<label for="edit-textfield">Text field</label>');
@@ -283,41 +283,6 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check duplicate French translation.
     $this->drupalGet('/webform/duplicate', ['language' => $language_manager->getLanguage('fr')]);
     $this->assertRaw('<label for="edit-textfield">French</label>');
-  }
-
-  /**
-   * Tests webform translate variants.
-   */
-  public function testTranslateVariants() {
-    // Check English webform.
-    $this->drupalGet('/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Text field</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check English webform with test variant.
-    $this->drupalGet('/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Text field - Variant</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check Spanish webform.
-    $this->drupalGet('/es/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Campo de texto</label>');
-    $this->assertRaw('<label for="edit-select-options">Seleccione (opciones)</label>');
-
-    // Check Spanish webform with test variant.
-    $this->drupalGet('/es/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Campo de texto - Variante</label>');
-    $this->assertRaw('<label for="edit-select-options">Seleccione (opciones)</label>');
-
-    // Check French (not translated) webform.
-    $this->drupalGet('/fr/webform/test_translation');
-    $this->assertRaw('<label for="edit-textfield">Text field</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
-
-    // Check French (not translated) webform with test variant.
-    $this->drupalGet('/fr/webform/test_translation', ['query' => ['variant' => 'test']]);
-    $this->assertRaw('<label for="edit-textfield">Text field - Variant</label>');
-    $this->assertRaw('<label for="edit-select-options">Select (options)</label>');
   }
 
 }
