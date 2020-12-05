@@ -1249,10 +1249,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
    */
   protected function initializeCompositeElementsRecursive(array &$element, array &$composite_elements) {
     foreach ($composite_elements as $composite_key => &$composite_element) {
-      // Make sure the composite key is a string.
-      $composite_key = (string) $composite_key;
-
-      if (Element::property($composite_key)) {
+      if (WebformElementHelper::property($composite_key)) {
         continue;
       }
 
