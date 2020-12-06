@@ -747,7 +747,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
         '#prefix' => '<div class="webform-dropbutton">',
         '#suffix' => '</div>',
       ];
-      $row['operations']['#links']['customize'] = [w
+      $row['operations']['#links']['customize'] = [
         'title' => $this->t('Customize'),
         'url' => new Url('entity.webform_ui.element.add_form', ['webform' => $webform->id(), 'type' => 'webform_actions']),
         'attributes' => WebformDialogHelper::getOffCanvasDialogAttributes(),
