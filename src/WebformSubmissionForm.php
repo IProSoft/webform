@@ -622,6 +622,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // @todo Remove once bubbling of element's max-age to page cache is fixed.
     // @see https://www.drupal.org/project/webform/issues/3015760
     // @see https://www.drupal.org/project/drupal/issues/2352009
+    // @see \Drupal\webform\Element\Webform::preRenderWebformElement
     if ($webform->isScheduled()
       && $this->currentUser()->isAnonymous()
       && $this->moduleHandler->moduleExists('page_cache')) {
