@@ -59,14 +59,14 @@ class WebformMapping extends FormElement {
     $sources = [];
     foreach ($element['#source'] as $source_key => $source) {
       $source = (string) $source;
-      if (strpos($source, WebformOptionsHelper::DESCRIPTION_DELIMITER) === FALSE) {
+      if (!WebformOptionsHelper::hasOptionDescription($source)) {
         $source_description_property_name = NULL;
         $source_title = $source;
         $source_description = '';
       }
       else {
         $source_description_property_name = ($element['#source__description_display'] === 'help') ? 'help' : 'description';
-        list($source_title, $source_description) = explode(WebformOptionsHelper::DESCRIPTION_DELIMITER, $source);
+        list($source_title, $source_description) = WebformOptionsHelper::splitOption($source);
       }
       $sources[$source_key] = [
         'description_property_name' => $source_description_property_name,
