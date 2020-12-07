@@ -1429,7 +1429,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
 
       case WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_DESCRIPTION:
         return $label
-          . (strpos($label, WebformOptionsHelper::DESCRIPTION_DELIMITER) === FALSE ? WebformOptionsHelper::DESCRIPTION_DELIMITER : '')
+          . (!WebformOptionsHelper::hasOptionDescription($label) ? WebformOptionsHelper::DESCRIPTION_DELIMITER : '')
           . $message;
     }
   }
