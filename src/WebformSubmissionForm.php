@@ -1067,9 +1067,9 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Display link to multiple drafts message when user is adding a new
     // submission.
     if ($this->isGet()
+      && $this->operation === 'add'
       && $this->getWebformSetting('draft') !== WebformInterface::DRAFT_NONE
       && $this->getWebformSetting('draft_multiple', FALSE)
-      && ($this->isRoute('webform.canonical') || $this->isWebformEntityReferenceFromSourceEntity())
       && ($previous_draft_total = $this->getStorage()->getTotal($webform, $this->sourceEntity, $this->currentUser(), ['in_draft' => TRUE]))
     ) {
       if ($previous_draft_total > 1) {
@@ -1086,8 +1086,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Display link to previous submissions message when user is adding a new
     // submission.
     if ($this->isGet()
+      && $this->operation === 'add'
       && $this->getWebformSetting('form_previous_submissions', FALSE)
-      && ($this->isRoute('webform.canonical') || $this->isWebformEntityReferenceFromSourceEntity())
       && ($webform->access('submission_view_own') || $this->currentUser()->hasPermission('view own webform submission'))
       && ($previous_submission_total = $this->getStorage()->getTotal($webform, $this->sourceEntity, $this->currentUser()))
     ) {
