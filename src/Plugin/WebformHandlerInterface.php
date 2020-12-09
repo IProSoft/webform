@@ -513,7 +513,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE);
 
   /**
-   * Acts on a webform submission before they are purged.
+   * Acts on webform submissions before they are purged.
    *
    * Used before the entities are purged and before they are deleted.
    *
@@ -523,7 +523,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function prePurge(array $webform_submissions);
 
   /**
-   * Acts on a webform submission after they are purged.
+   * Acts on webform submissions after they are purged.
    *
    * Used after the entities are purged and after they are deleted..
    *
