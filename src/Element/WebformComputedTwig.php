@@ -41,10 +41,11 @@ class WebformComputedTwig extends WebformComputedBase {
   public static function computeValue(array $element, WebformSubmissionInterface $webform_submission) {
     /** @var \Drupal\webform\WebformThemeManagerInterface $theme_manager */
     $theme_manager = \Drupal::service('webform.theme_manager');
-    // Do not compute value via Twig if there is no active theme.
+    // Do not compute value via Twig if there is no active theme,
+    // except for CLI.
     // Rendering a Twig template before the theme is activated can cause
     // unexpected behaviors.
-    if (!$theme_manager->hasActiveTheme()) {
+    if (!$theme_manager->hasActiveTheme() && PHP_SAPI !== 'cli') {
       return '';
     }
 
