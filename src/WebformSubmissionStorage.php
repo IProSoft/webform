@@ -1237,11 +1237,11 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     $query->condition('settings.purge_days', 0, '>');
     $webform_ids = array_values($query->execute());
 
-    $sids = [];
-
+    $remaining = $count;
     if (!empty($webform_ids)) {
       $webform_ids = $this->entityManager->getStorage('webform')->loadMultiple($webform_ids);
       foreach ($webform_ids as $webform) {
+        $sids = [];
         $query = $this->getQuery();
         // Since results of this query are never displayed to the user and we
         // actually need to query the entire dataset of webform submissions, we
@@ -1258,31 +1258,25 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
             $query->condition('in_draft', 0);
             break;
         }
-        $query->range(0, $count - count($sids));
+        $query->range(0, $remaining);
         $result = array_values($query->execute());
-        if (!empty($result)) {
-          $sids = array_merge($sids, $result);
+        if (empty($result)) {
+          continue;
         }
-        if (count($sids) === $count) {
+        $remaining -= count($result);
+        $webform_submissions = $this->loadMultiple($result);
+
+        $webform->invokeHandlers('prePurge', $webform_submissions);
+        $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', $webform_submissions);
+
+        $this->delete($webform_submissions);
+
+        $webform->invokeHandlers('postPurge', $webform_submissions);
+        $this->moduleHandler()->invokeAll('webform_submissions_post_purge', $webform_submissions);
+        if ($remaining = 0) {
           // We've collected enough webform submissions for purging in this run.
           break;
         }
-      }
-    }
-
-    if (!empty($sids)) {
-      $webform_submissions = $this->loadMultiple($sids);
-
-      foreach ($webform_submissions as $webform_submission) {
-        $this->invokeWebformHandlers('prePurge', $webform_submission);
-        $this->moduleHandler()->invoke('webform_submission_pre_purge', $webform_submission);
-      }
-
-      $this->delete($webform_submissions);
-
-      foreach ($webform_submissions as $webform_submission) {
-        $this->invokeWebformHandlers('postPurge', $webform_submission);
-        $this->moduleHandler()->invoke('webform_submission_post_purge', $webform_submission);
       }
     }
   }

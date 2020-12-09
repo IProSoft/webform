@@ -332,22 +332,22 @@ function hook_webform_options_WEBFORM_OPTIONS_ID_alter(array &$options, array &$
 }
 
 /**
- * Respond to webform submission before purging (before it is deleted).
+ * Respond before webform submissions are purged (before they are deleted).
  *
- * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
- *   The webform submission being purged.
+ * @param \Drupal\webform\WebformSubmissionInterface[] $webform_submissions
+ *   The webform submissions being purged.
  */
-function hook_webform_submission_pre_purge(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+function hook_webform_submissions_pre_purge(array $webform_submissions) {
 
 }
 
 /**
- * Respond to webform submission before after (before it is deleted).
+ * Respond to webform submissions being purged (after they are deleted).
  *
- * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
- *   The webform submission being purged.
+ * @param \Drupal\webform\WebformSubmissionInterface[] $webform_submissions
+ *   The webform submissions that were purged.
  */
-function hook_webform_submission_post_purge(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+function hook_webform_submissions_post_purge(array $webform_submissions) {
 
 }
 
