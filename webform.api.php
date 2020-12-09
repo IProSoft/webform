@@ -332,6 +332,26 @@ function hook_webform_options_WEBFORM_OPTIONS_ID_alter(array &$options, array &$
 }
 
 /**
+ * Respond to webform submission before purging (before it is deleted).
+ *
+ * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+ *   The webform submission being purged.
+ */
+function hook_webform_submission_pre_purge(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+
+}
+
+/**
+ * Respond to webform submission before after (before it is deleted).
+ *
+ * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+ *   The webform submission being purged.
+ */
+function hook_webform_submission_post_purge(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+
+}
+
+/**
  * Perform alterations before a webform submission form is rendered.
  *
  * This hook is identical to hook_form_alter() but allows the
