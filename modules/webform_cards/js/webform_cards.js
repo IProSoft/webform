@@ -230,8 +230,8 @@
           }
 
           // Set the previous and next labels.
-          $previousButton.val($activeCard.data('prev-button-label') || $previousButton.data('default-label'));
-          $nextButton.val($activeCard.data('next-button-label') || $nextButton.data('default-label'));
+          setButtonLabel($previousButton, $activeCard.data('prev-button-label') || $previousButton.data('default-label'));
+          setButtonLabel($nextButton, $activeCard.data('next-button-label') || $nextButton.data('default-label'));
 
           // Show/hide the previous button.
           var hasPrevCard = !!$activeCard.prevAll('.webform-card:not([style*="display: none"])').length;
@@ -832,6 +832,22 @@
           return false;
         }
 
+        /**
+         * Set button label value or HTML markup.
+         *
+         * @param {jQuery} $button
+         *   A jQuery object containing a <button> or <input type="submit">.
+         * @param string label
+         *   The button's label.
+         */
+        function setButtonLabel($button, label) {
+          if ($button[0].tagName === 'BUTTON') {
+            $button.html(label);
+          }
+          else {
+            $button.val(label);
+          }
+        }
       });
 
     }
