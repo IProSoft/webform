@@ -4808,6 +4808,7 @@ webform_term_checkboxes:
   breadcrumb: false
   breadcrumb_delimiter: ' › '
   default_value: ''
+  depth: null
   description: ''
   description_display: ''
   disabled: false
@@ -4879,6 +4880,7 @@ webform_term_select:
   choices: false
   chosen: false
   default_value: ''
+  depth: null
   description: ''
   description_display: ''
   disabled: false
