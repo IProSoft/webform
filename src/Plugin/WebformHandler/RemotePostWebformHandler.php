@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Plugin\WebformHandler;
 
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -595,6 +596,12 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         continue;
       }
 
+      // Cast markup to string. This only applies to computed Twig values.
+      // @see \Drupal\webform\Element\WebformComputedTwig::computeValue
+      if ($element_value instanceof MarkupInterface) {
+        $data[$element_key] = $element_value = (string) $element_value;
+      }
+
       $element_plugin = $this->elementManager->getElementInstance($element);
 
       if ($element_plugin instanceof WebformManagedFileBase) {
@@ -962,7 +969,6 @@ class RemotePostWebformHandler extends WebformHandlerBase {
             '#suffix' => '</pre>',
           ],
         ];
-
       }
       if ($tokens = $this->getResponseTokens($response_data, ['webform', 'handler', $this->getHandlerId(), $state])) {
         asort($tokens);
