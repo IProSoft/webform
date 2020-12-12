@@ -34,6 +34,7 @@ class WebformMapping extends FormElement {
         [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
+      '#filter' => TRUE,
       '#required' => FALSE,
       '#source' => [],
       '#source__description_display' => 'description',
@@ -187,7 +188,11 @@ class WebformMapping extends FormElement {
    */
   public static function validateWebformMapping(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = NestedArray::getValue($form_state->getValues(), $element['#parents']);
-    $value = array_filter($value);
+
+    // Filter values.
+    if ($element['#filter']) {
+      $value = array_filter($value);
+    }
 
     // Note: Not validating REQUIRED_ALL because each destination element is
     // already required.
