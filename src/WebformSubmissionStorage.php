@@ -1239,8 +1239,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
 
     $remaining = $count;
     if (!empty($webform_ids)) {
-      $webform_ids = $this->entityManager->getStorage('webform')->loadMultiple($webform_ids);
-      foreach ($webform_ids as $webform) {
+      $webforms = $this->entityManager->getStorage('webform')->loadMultiple($webform_ids);
+      foreach ($webforms as $webform) {
         $query = $this->getQuery();
         // Since results of this query are never displayed to the user and we
         // actually need to query the entire dataset of webform submissions, we
@@ -1258,12 +1258,12 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
             break;
         }
         $query->range(0, $remaining);
-        $result = array_values($query->execute());
-        if (empty($result)) {
+        $sids = array_values($query->execute());
+        if (empty($sids)) {
           continue;
         }
-        $remaining -= count($result);
-        $webform_submissions = $this->loadMultiple($result);
+        $remaining -= count($sids);
+        $webform_submissions = $this->loadMultiple($sids);
 
         $webform->invokeHandlers('prePurge', $webform_submissions);
         $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', [$webform_submissions]);
@@ -1272,7 +1272,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
 
         $webform->invokeHandlers('postPurge', $webform_submissions);
         $this->moduleHandler()->invokeAll('webform_submissions_post_purge', [$webform_submissions]);
-        if ($remaining == 0) {
+        if ($remaining === 0) {
           // We've collected enough webform submissions for purging in this run.
           break;
         }

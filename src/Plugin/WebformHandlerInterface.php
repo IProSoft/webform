@@ -518,7 +518,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * Used before the entities are purged and before they are deleted.
    *
    * @param \Drupal\webform\WebformSubmissionInterface[] $webform_submissions
-   *   A webform submission.
+   *   The webform submissions to be purged.
    */
   public function prePurge(array $webform_submissions);
 
@@ -528,7 +528,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * Used after the entities are purged and after they are deleted..
    *
    * @param \Drupal\webform\WebformSubmissionInterface[] $webform_submissions
-   *   A webform submission.
+   *   The webform submissions that were purged.
    */
   public function postPurge(array $webform_submissions);
 
