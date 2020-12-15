@@ -2402,7 +2402,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $form['element_description']['description'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Description'),
-      '#description' => $this->t('A short description of the element used as help for the user when he/she uses the webform.'),
+      '#description' => $this->t('A short description of the element used as help for the user when they use the webform.'),
     ];
     $form['element_description']['help'] = [
       '#type' => 'details',
