@@ -83,11 +83,11 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   protected $elementManager;
 
   /**
-   * The current request.
+   * The request stack.
    *
-   * @var \Symfony\Component\HttpFoundation\Request
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
-  protected $request;
+  protected $requestStack;
 
   /**
    * The DrupalKernel instance used in the test.
@@ -138,7 +138,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $container->get('plugin.manager.webform.element')
     );
 
-    $instance->request = $container->get('request_stack')->getCurrentRequest();
+    $instance->requestStack = $container->get('request_stack');
     $instance->kernel = $container->get('kernel');
 
     return $instance;
@@ -1062,11 +1062,12 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         $error_url = $base_url . preg_replace('#^' . $base_path . '#', '/', $error_url);
       }
       $response = new TrustedRedirectResponse($error_url);
+      $request = $this->requestStack->getCurrentRequest();
       // Save the session so things like messages get saved.
-      $this->request->getSession()->save();
-      $response->prepare($this->request);
+      $request->getSession()->save();
+      $response->prepare($request);
       // Make sure to trigger kernel events.
-      $this->kernel->terminate($this->request, $response);
+      $this->kernel->terminate($request, $response);
       $response->send();
     }
   }
