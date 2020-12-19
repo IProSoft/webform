@@ -169,7 +169,8 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
 
     // Check customized maxlengths.
-    $this->assertCssSelect('input[name$="[title]"][maxlength=255]');
+    $this->assertCssSelect('input[name$="[title]"]');
+    $this->assertNoCssSelect('input[name$="[title][maxlength"]');
     $this->assertCssSelect('input[name$="[submission_label]"]');
     $this->assertNoCssSelect('input[name$="[submission_label]"][maxlength]');
 
