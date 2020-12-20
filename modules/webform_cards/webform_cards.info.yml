@@ -1,8 +1,7 @@
-name: 'Webform Cards [EXPERIMENTAL]'
+name: 'Webform Cards'
 type: module
 description: 'Provides a ''Card'' container element for fast clientside multistep form pagination.'
-package: 'Webform [EXPERIMENTAL]'
-experimental: true
+package: 'Webform'
 core_version_requirement: ^8.8 || ^9
 dependencies:
   - 'webform:webform'
