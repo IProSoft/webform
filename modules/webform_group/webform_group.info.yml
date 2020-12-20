@@ -1,8 +1,7 @@
-name: 'Webform Group [EXPERIMENTAL]'
+name: 'Webform Group'
 type: module
 description: 'Provides Webform and Group integration.'
-experimental: true
-package: 'Webform [EXPERIMENTAL]'
+package: 'Webform'
 core_version_requirement: ^8.8
 dependencies:
   - 'webform:webform'

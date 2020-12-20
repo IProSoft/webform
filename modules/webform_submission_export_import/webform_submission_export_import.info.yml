@@ -1,4 +1,4 @@
-name: 'Webform Submission Export/Import [EXPERIMENTAL]'
+name: 'Webform Submission Export/Import'
 type: module
 description: 'Provides the ability to export and import submissions.'
 package: 'Webform'
