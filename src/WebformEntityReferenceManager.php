@@ -272,7 +272,6 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   An entity.
-   *
    * @param array $target_entities
    *   An associate array of targeted webfrom entities.
    * @param array $sorted_entities
