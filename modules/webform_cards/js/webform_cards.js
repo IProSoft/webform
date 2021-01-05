@@ -373,7 +373,7 @@
           // Set properties.
           var properties = getCardsProgressProperties();
           for (var property in properties) {
-            if (propertie.hasOwnProperty(value)) {
+            if (properties.hasOwnProperty(value)) {
               var attribute = '[data-webform-progress-' + property + ']';
               var value = properties[property];
               $progress.find(attribute).html(value);
