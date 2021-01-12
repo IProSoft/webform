@@ -32,7 +32,7 @@ class WebformGroupManager implements WebformGroupManagerInterface {
 
   /**
    * The entity type manager.
-   *
+   *`
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
