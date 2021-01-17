@@ -465,6 +465,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Paragraphs.
+    $projects['webform_paragraphs'] = [
+      'title' => $this->t('Webform Paragraphs'),
+      'description' => $this->t('Adds a paragraph reference to the webforms when they are submitted from a paragraph context.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_paragraphs'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Pre-populate.
     $projects['webform_prepopulate'] = [
       'title' => $this->t('Webform Pre-populate'),
