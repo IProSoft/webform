@@ -498,9 +498,15 @@
       return;
     }
 
-    // Clear value.
     var type = input.type;
     var tag = input.tagName.toLowerCase(); // Normalize case.
+
+    // Do not touch hidden values.
+    if (type === 'hidden') {
+      return;
+    }
+
+    // Clear value.
     if (type === 'checkbox' || type === 'radio') {
       $input.prop('checked', false);
     }
