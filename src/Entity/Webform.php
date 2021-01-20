@@ -1316,7 +1316,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *   An associative array of flattened form elements with each element's
    *   operation access checked.
    */
-  protected function checkElementsFlattenedAccess($operation = NULL, array $elements) {
+  protected function checkElementsFlattenedAccess($operation = NULL, array $elements = []) {
     if ($operation === NULL) {
       return $elements;
     }

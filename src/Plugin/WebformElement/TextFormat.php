@@ -186,6 +186,9 @@ class TextFormat extends WebformElementBase {
         $element['#suffix'] = $element['#suffix'] . '</div>';
       }
     }
+    // Do not allow format value to be cleared when the text form is hidden
+    // via #states.
+    $element['format']['#attributes']['data-webform-states-no-clear'] = TRUE;
     return $element;
   }
 
