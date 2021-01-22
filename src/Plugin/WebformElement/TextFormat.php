@@ -188,6 +188,7 @@ class TextFormat extends WebformElementBase {
     }
     // Do not allow format value to be cleared when the text form is hidden
     // via #states.
+    // @see \Drupal\webform\Element\WebformHtmlEditor::processWebformHtmlEditor
     $element['format']['#attributes']['data-webform-states-no-clear'] = TRUE;
     return $element;
   }
