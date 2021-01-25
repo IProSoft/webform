@@ -16,6 +16,7 @@
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
+use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\Component\Utility\Html;
 
@@ -134,6 +135,9 @@ function _webform_get_config_entity_file_uuids(ConfigEntityInterface $entity) {
  * @see _editor_get_file_uuids_by_field()
  */
 function _webform_get_array_file_uuids(array $data) {
+  // Covert computed element value markup to strings to
+  // 'Object support when dumping a YAML file has been disabled' errors.
+  WebformElementHelper::convertRenderMarkupToStrings($data);
   $text = Yaml::encode($data);
   return _webform_parse_file_uuids($text);
 }
