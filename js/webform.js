@@ -426,12 +426,14 @@
 
   Drupal.webform.conditionalOperatorSelectLessThan = function (element, existingValue, ruleValue) {
     var currentValue = Drupal.webform.stringValue(element, existingValue);
-    return Drupal.webform.compare_select(currentValue[0], ruleValue, element) < 0;
+    // Compare rule with the greatest user-selected value.
+    return Drupal.webform.compare_select(currentValue[currentValue.length - 1], ruleValue, element) < 0;
   };
 
   Drupal.webform.conditionalOperatorSelectLessThanEqual = function (element, existingValue, ruleValue) {
     var currentValue = Drupal.webform.stringValue(element, existingValue);
-    var comparison = Drupal.webform.compare_select(currentValue[0], ruleValue, element);
+    // Compare with the greatest user-selected value.
+    var comparison = Drupal.webform.compare_select(currentValue[currentValue.length -1], ruleValue, element);
     return comparison < 0 || comparison === 0;
   };
 
