@@ -1025,11 +1025,11 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
  *   The level of the error raised.
  * @param string $message
  *   The error message.
- * @param $filename
+ * @param string $filename
  *   (optional) The filename that the error was raised in.
- * @param $line
+ * @param string $line
  *   (optional) The line number the error was raised at.
- * @param $context
+ * @param array $context
  *   (optional) An array that points to the active symbol table at the point the
  *   error occurred.
  *

@@ -701,7 +701,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Integrations: Sharpspring Webforms.
     $projects['sharpspring_webforms'] = [
       'title' => $this->t('Sharpspring Webforms'),
-      'description' => $this->t('Extends the SharpSpring module\'s functionality to add SharpSpring lead tracking to Webforms.'),
+      'description' => $this->t("Extends the SharpSpring module's functionality to add SharpSpring lead tracking to Webforms."),
       'url' => Url::fromUri('https://www.drupal.org/project/sharpspring_webforms'),
       'category' => 'integration',
     ];
