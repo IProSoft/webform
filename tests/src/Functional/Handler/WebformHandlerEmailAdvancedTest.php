@@ -58,7 +58,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
     $this->assertEqual($sent_email['headers']['Return-Path'], 'return_path@example.com');
     $this->assertEqual($sent_email['headers']['Sender'], 'sender_name <sender_mail@example.com>');
     $this->assertEqual($sent_email['headers']['Reply-to'], 'reply_to@example.com');
-    $this->assertEqual($sent_email['params']['custom_parameter'], ['test' => 'value']);
+    $this->assertEqual($sent_email['params']['custom_parameter'], 'test');
     $this->assertArrayNotHasKey('parameters', $sent_email['params']);
 
     $email_handler = $webform->getHandler('email');

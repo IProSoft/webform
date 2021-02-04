@@ -274,8 +274,7 @@ handlers:
       attachments: true
       twig: false
       theme_name: ''
-      parameters:
-        custom_parameter: "test: value"
+      parameters: 'custom_parameter: test'
       debug: true
       reply_to: reply_to@example.com
       return_path: return_path@example.com
