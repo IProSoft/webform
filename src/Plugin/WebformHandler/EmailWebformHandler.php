@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Mail;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformMessage;
@@ -1156,7 +1157,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
     // Append additional custom parameters.
     if (!empty($this->configuration['parameters'])) {
-      $message += $this->replaceTokens($this->configuration['parameters'], $webform_submission);
+      $additional_parameters = Yaml::decode($this->configuration['parameters']);
+      $message += $this->replaceTokens($additional_parameters, $webform_submission);
     }
     // Remove parameters.
     unset($message['parameters']);
