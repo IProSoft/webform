@@ -1517,7 +1517,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     // Get the webform's decoded elements and translations.
-    $elements = Yaml::decode($this->elements);
+    $elements = WebformYaml::decode($this->elements);
     $elementsTranslations = $translation_manager->getElements($this, $current_langcode);
 
     // If the elements are empty or they are equal to the translated elements
