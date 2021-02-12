@@ -491,8 +491,6 @@ class WebformCliService implements WebformCliServiceInterface {
     $entity_type_manager = \Drupal::service('entity_type.manager');
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
     $submission_storage = $entity_type_manager->getStorage('webform_submission');
-    /** @var \Drupal\webform\WebformRequestInterface $request_handler */
-    $request_handler = \Drupal::service('webform.request');
 
     // Make sure there are submissions that need to be deleted.
     if (!$submission_storage->getTotal($webform)) {
@@ -514,7 +512,7 @@ class WebformCliService implements WebformCliServiceInterface {
         return $this->drush_user_abort();
       }
 
-      $form = new WebformResultsClearForm($entity_type_manager, $request_handler);
+      $form = WebformResultsClearForm::create(\Drupal::getContainer());
       $form->batchSet();
       $this->drush_backend_batch_process();
     }
@@ -531,7 +529,7 @@ class WebformCliService implements WebformCliServiceInterface {
         return $this->drush_user_abort();
       }
 
-      $form = new WebformSubmissionsPurgeForm($entity_type_manager, $request_handler);
+      $form = WebformSubmissionsPurgeForm::create(\Drupal::getContainer());
       $form->batchSet($webform, $source_entity);
       $this->drush_backend_batch_process();
     }
