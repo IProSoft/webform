@@ -386,6 +386,18 @@
         .trigger('blur', extraParameters);
     }
     else if (tag === 'select') {
+      // Do not trigger the onchange event for Address element's country code
+      // when it is initialized.
+      // @see \Drupal\address\Element\Country
+      if ($input.closest('.webform-type-address').length) {
+        if (!$input.data('webform-states-address-initialized')
+          && $input.attr('autocomplete') === 'country'
+          && $input.val() === $input.find("option[selected]").attr('value')) {
+          return;
+        }
+        $input.data('webform-states-address-initialized', true);
+      }
+
       $input
         .trigger('change', extraParameters)
         .trigger('blur', extraParameters);
