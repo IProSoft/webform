@@ -410,11 +410,11 @@
         .trigger('keyup', extraParameters)
         .trigger('blur', extraParameters);
 
-      // Make sure input mask is reset when value is restored.
-      // @see https://www.drupal.org/project/webform/issues/3124155
-      if ($input.attr('data-inputmask-mask')) {
-        setTimeout(function () {$input.inputmask('remove').inputmask();});
-      }
+      // // Make sure input mask is reset when value is restored.
+      // // @see https://www.drupal.org/project/webform/issues/3124155
+      // if ($input.attr('data-inputmask-mask')) {
+      //   setTimeout(function () {$input.inputmask('remove').inputmask();});
+      // }
     }
   }
 

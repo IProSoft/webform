@@ -304,6 +304,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#options' => [
         'POST' => 'POST',
         'PUT' => 'PUT',
+        'PATCH' => 'PATCH',
         'GET' => 'GET',
       ],
       '#default_value' => $this->configuration['method'],
