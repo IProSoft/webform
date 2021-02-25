@@ -246,6 +246,14 @@ class WebformSubmissionForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}
+   */
+  protected function init(FormStateInterface $form_state) {
+    parent::init($form_state);
+    $this->getWebform()->invokeHandlers('prepareForm', $this->entity, $this->operation, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
    *
    * This is the best place to override an entity form's default settings
    * because it is called immediately after the form object is initialized.
