@@ -457,6 +457,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Notify Draft Authors.
+    $projects['webform_notify_draft_authors'] = [
+      'title' => $this->t('Webform Notify Draft Authors'),
+      'description' => $this->t('Enables to notify via email authors of a webform drafts about a webform submission.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_notify_draft_authors'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform OCR.
     $projects['webform_ocr'] = [
       'title' => $this->t('Webform OCR'),
