@@ -148,7 +148,7 @@ abstract class WebformVariantFormBase extends FormBase {
       '#machine_name' => [
         'source' => ['general', 'label'],
         'exists' => [$this, 'exists'],
-        'replace_pattern' => '[^a-zA-Z0-9_-]+',
+        'replace_pattern' => $this->webformVariant->getMachineNameReplacePattern(),
         'replace' => $this->webformVariant->getMachineNameReplace(),
         'error' => $this->t('The element key name must contain only @requirements.', $t_args),
       ],
