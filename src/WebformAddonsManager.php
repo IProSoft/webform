@@ -1224,6 +1224,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'spam',
     ];
 
+    // Spam: Simple Google reCAPTCHA.
+    $projects['simple_recaptcha'] = [
+      'title' => $this->t('Simple Google reCAPTCHA'),
+      'description' => $this->t('Provides simple integration with Google reCaptcha, keeping forms and webforms secure.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/simple_recaptcha'),
+      'category' => 'spam',
+    ];
+
     /**************************************************************************/
     // Submissions.
     /**************************************************************************/
