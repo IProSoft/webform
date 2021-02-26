@@ -59,7 +59,14 @@ class WebformVariant extends Plugin {
   public $description = '';
 
   /**
-   * The machine name replacement character. Defaults to an underscore (_).
+   * The machine name replacement pattern.
+   *
+   * @var string
+   */
+  public $machine_name_replace_pattern = '[^a-z0-9_]+';
+
+  /**
+   * The machine name replacement character.
    *
    * @var string
    */

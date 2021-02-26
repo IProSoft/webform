@@ -118,6 +118,13 @@ abstract class WebformVariantBase extends PluginBase implements WebformVariantIn
   /**
    * {@inheritdoc}
    */
+  public function getMachineNameReplacePattern() {
+    return $this->pluginDefinition['machine_name_replace_pattern'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getMachineNameReplace() {
     return $this->pluginDefinition['machine_name_replace'];
   }
