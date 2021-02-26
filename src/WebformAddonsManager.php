@@ -570,6 +570,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: AXEPTA e-POSitivity Payment Gateways.
+    $projects['epositivity'] = [
+      'title' => $this->t('AXEPTA e-POSitivity Payment Gateways'),
+      'description' => $this->t('Receive credit card payments through AXEPTA e-POSitivity Payment Gateways'),
+      'url' => Url::fromUri('https://www.drupal.org/project/epositivity'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Commerce Webform Order.
     $projects['commerce_webform_order'] = [
       'title' => $this->t('Commerce Webform Order'),
