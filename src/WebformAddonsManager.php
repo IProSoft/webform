@@ -149,6 +149,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+   // Element: OpenLayers.
+    $projects['openlayersd8'] = [
+      'title' => $this->t('OpenLayers'),
+      'description' => $this->t('Provides an example that shows how to create a Webform composite.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/openlayersd8'),
+      'category' => 'element',
+    ];
+
     // Element: Range Slider.
     $projects['range_slider'] = [
       'title' => $this->t('Range Slider'),
@@ -1073,6 +1081,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Queue Mail'),
       'description' => $this->t('Queues webform email sending so that instead of being sent immediately it is sent on cron or via some other queue processor.'),
       'url' => Url::fromUri('https://www.drupal.org/project/queue_mail'),
+      'category' => 'mail',
+    ];
+
+    // Mail: Webform Send Draft Link.
+    $projects['smtp'] = [
+      'title' => $this->t('Webform Send Draft Link'),
+      'description' => $this->t('Enables to send a link to a webform draft via email.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_send_draft_link'),
       'category' => 'mail',
     ];
 
