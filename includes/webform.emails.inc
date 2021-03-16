@@ -284,8 +284,9 @@ function webform_email_edit_form($form, $form_state, $node, $email = array(), $c
         }
 
         // To avoid flooding the form with hundreds of textfields, skip select
-        // lists that have huge numbers of options.
-        if (count($options) > webform_variable_get('webform_email_select_max')) {
+        // lists that have huge numbers of options. Do not skip the select list
+        // currently in use.
+        if (count($options) > webform_variable_get('webform_email_select_max') && $cid != $form[$field . '_component']['#default_value']) {
           unset($form[$field . '_component']['#options'][$cid]);
           continue;
         }
