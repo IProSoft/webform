@@ -269,6 +269,13 @@ function webform_admin_settings() {
     '#description' => t('Components containing multiple fields, such as checkboxes and radio buttons, will be wrapped in fieldsets. This improves the accessibility of webforms and helps them conform to web standards, but may require updates to the CSS of the active theme.'),
   );
 
+  $form['advanced']['webform_delete_user_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Delete user submissions when a user account is deleted'),
+    '#description' => t('When a user deletes their account any Webform submissions they created while logged will be removed as well.'),
+    '#default_value' => variable_get('webform_delete_user_data'),
+  );
+
   $form = system_settings_form($form);
   $form['#theme'] = 'webform_admin_settings';
   array_unshift($form['#submit'], 'webform_admin_settings_submit');
