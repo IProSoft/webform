@@ -285,11 +285,27 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Private Elements.
+    $projects['webform_private_elements'] = [
+      'title' => $this->t('Webform Private Elements'),
+      'description' => $this->t('Allows site administrators to define which webform elements are "private" by default.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_private_elements'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Promotion Code.
     $projects['webform_promotion_code'] = [
       'title' => $this->t('Webform Promotion Code'),
       'description' => $this->t('Provides a promotion code Webform element.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_promotion_code'),
+      'category' => 'element',
+    ];
+
+    // Element: Webform Remote Select.
+    $projects['webform_remote_select'] = [
+      'title' => $this->t('Webform Remote Select'),
+      'description' => $this->t('Provides a Webform Select Element whose options are populated from an endpoint through REST services.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_remote_select'),
       'category' => 'element',
     ];
 
@@ -1319,6 +1335,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform double opt-in'),
       'description' => $this->t('Provides e-mail double opt-in functionality.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_double_opt_in'),
+      'category' => 'submission',
+    ];
+
+    // Submissions: Webform Eager Purge.
+    $projects['webform_eager_purge'] = [
+      'title' => $this->t('Webform Eager Purge'),
+      'description' => $this->t('The minimum period for standard purge of webform submissions is a day. Now you can specify it in minutes.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_eager_purge'),
       'category' => 'submission',
     ];
 
