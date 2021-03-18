@@ -5603,11 +5603,11 @@ function webform_count_terminals($a) {
  *   User object.
  */
 function webform_user_delete($account) {
-  if(variable_get('webform_delete_user_data')){
+  if (variable_get('webform_delete_user_data')) {
     db_query("DELETE webform_submissions, webform_submitted_data
              FROM webform_submissions
              INNER JOIN webform_submitted_data
              ON webform_submissions.sid = webform_submitted_data.sid
-             WHERE webform_submissions.uid = :uid", [':uid' => $account->uid] );
+             WHERE webform_submissions.uid = :uid", [':uid' => $account->uid]);
   }
 }
