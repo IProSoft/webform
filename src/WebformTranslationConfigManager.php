@@ -3,6 +3,7 @@
 namespace Drupal\webform;
 
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -68,6 +69,13 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   protected $translationManager;
 
   /**
+   * A storage instance for reading configuration schema data.
+   *
+   * @var \Drupal\Core\Config\StorageInterface
+   */
+  protected $configStorageSchema;
+
+  /**
    * Constructs a WebformTranslationConfigManager object.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
@@ -78,12 +86,16 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform element manager.
    * @param \Drupal\webform\WebformTranslationManagerInterface $translation_manager
    *   The webform translation manager.
+   * @param \Drupal\Core\Config\StorageInterface $config_storage_schema
+   *   The storage object to use for reading schema data
    */
-  public function __construct(ModuleHandlerInterface $module_handler, FormBuilderInterface $form_builder, WebformElementManagerInterface $element_manager, WebformTranslationManagerInterface $translation_manager) {
+  public function __construct(ModuleHandlerInterface $module_handler, FormBuilderInterface $form_builder, WebformElementManagerInterface $element_manager, WebformTranslationManagerInterface $translation_manager, StorageInterface $config_storage_schema = null) {
     $this->formBuilder = $form_builder;
     $this->moduleHandler = $module_handler;
     $this->elementManager = $element_manager;
     $this->translationManager = $translation_manager;
+    // @todo [Webform 7.x] Require config storage schema.
+    $this->configStorageSchema = $config_storage_schema ?: \Drupal::service('config.storage.schema');
   }
 
   /**
@@ -124,8 +136,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform settings configuration element.
    */
   protected function alterConfigSettingsForm($config_name, array &$config_element) {
-    $this->alterTextareaElement($config_element['test']['types']);
-    $this->alterTextareaElement($config_element['test']['names']);
+    $this->alterSchemaElements($config_element, "webform.settings.schema");
   }
 
   /**
@@ -137,7 +148,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform block configuration element.
    */
   protected function alterConfigBlockForm($config_name, array &$config_element) {
-    $this->alterTextareaElement($config_element['settings']['default_data']);;
+    $this->alterSchemaElements($config_element['settings'], "webform.block.schema");
   }
 
   /**
@@ -178,7 +189,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform options configuration element.
    */
   protected function alterConfigOptionsForm($config_name, array &$config_element) {
-    $this->alterTextareaElement($config_element['options']);
+    $this->alterSchemaElements($config_element, "webform.entity.webform_options.schema");
   }
 
     /**
@@ -190,8 +201,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform options configuration element.
    */
   protected function alterConfigOptionsCustomForm($config_name, array &$config_element) {
-    $this->alterTextareaElement($config_element['options']);
-    $this->alterTextareaElement($config_element['template'], 'twig');
+    $this->alterSchemaElements($config_element, "webform_options_custom.schema");
   }
 
 
@@ -204,7 +214,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform image select configuration element.
    */
   protected function alterConfigImageSelectForm($config_name, array &$config_element) {
-    $this->alterTextareaElement($config_element['images']);
+    $this->alterSchemaElements($config_element, "webform_image_select.schema");
   }
 
   /**
@@ -220,6 +230,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The current state of the form.
    */
   protected function alterConfigWebformForm($config_name, &$config_element, &$form, $form_state) {
+    $this->alterSchemaElements($config_element, "webform.entity.webform.schema");
     $this->alterConfigWebformFormElements($config_name, $config_element, $form, $form_state);
 
     $webform = $this->loadWebform($config_name);
@@ -291,7 +302,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   /****************************************************************************/
 
   /**
-   * Alter the webform configuration form.
+   * Alter the webform configuration form elements.
    *
    * @param string $config_name
    *   The webform configuration name.
@@ -758,6 +769,57 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   }
 
   /****************************************************************************/
+
+  /**
+   * Alter the webform configuration form using schema.
+   *
+   * @param array $elements
+   *   An array of form elements.
+   * @param string $schema_name
+   *   Schema name.
+   */
+  protected function alterSchemaElements(array &$elements, $schema_name) {
+    // DEBUG: List all config schemas.
+    // dsm($this->configStorageSchema->listAll());
+    $data= $this->configStorageSchema->read($schema_name);
+    $schema = reset($data);
+    $this->alterSchemaElementsRecursive($elements, $schema['mapping']);
+  }
+
+  /**
+   * Alter schema elements.
+   *
+   * @param array $elements
+   *   An array of form elements.
+   * @param array $schema_mapping
+   *   Schema mapping.
+   */
+  protected function alterSchemaElementsRecursive(array &$elements, array $schema_mapping) {
+    foreach (Element::children($elements) as $element_key) {
+      if (!isset($schema_mapping[$element_key])) {
+        continue;
+      }
+
+      $element =& $elements[$element_key];
+      $schema =& $schema_mapping[$element_key];
+
+      if (isset($schema['type']) && $schema['type'] === 'mapping') {
+        $this->alterSchemaElementsRecursive($element, $schema['mapping']);
+      }
+      elseif (isset($schema['webform_type'])) {
+        switch ($schema['webform_type']) {
+          case 'html':
+            $element['translation']['#type'] = 'webform_html_editor';
+            break;
+
+          case 'yaml':
+          case 'twig':
+            $this->alterTextareaElement($element, $schema['webform_type']);
+            break;
+        }
+      }
+    }
+  }
 
   /**
    * Alter text area element and convert it to a Codemirror editor.
