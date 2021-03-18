@@ -403,6 +403,12 @@
         .trigger('blur', extraParameters);
     }
     else if (type !== 'submit' && type !== 'button' && type !== 'file') {
+      // Make sure input mask is removed and then reset when value is restored.
+      // @see https://www.drupal.org/project/webform/issues/3124155
+      // @see https://www.drupal.org/project/webform/issues/3202795
+      var hasInputMask = ($.fn.inputmask && $input.hasClass('js-webform-input-mask'));
+      hasInputMask && $input.inputmask('remove');
+
       $input
         .trigger('input', extraParameters)
         .trigger('change', extraParameters)
@@ -410,11 +416,7 @@
         .trigger('keyup', extraParameters)
         .trigger('blur', extraParameters);
 
-      // // Make sure input mask is reset when value is restored.
-      // // @see https://www.drupal.org/project/webform/issues/3124155
-      // if ($input.attr('data-inputmask-mask')) {
-      //   setTimeout(function () {$input.inputmask('remove').inputmask();});
-      // }
+      hasInputMask && $input.inputmask();
     }
   }
 
