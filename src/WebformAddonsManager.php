@@ -1469,6 +1469,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     /**************************************************************************/
 
+    // Utility: Calendar Links Token.
+    $projects['calendar_links_token'] = [
+      'title' => $this->t('Calendar Links Token'),
+      'description' => $this->t('Generate add to calendar links for Google, iCal, etc using tokens.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/calendar_links_token'),
+      'category' => 'utility',
+    ];
+
     // Utility: Googalytics Webform.
     $projects['ga_webform'] = [
       'title' => $this->t('Googalytics Webform'),
