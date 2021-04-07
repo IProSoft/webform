@@ -1962,7 +1962,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'title' => $this->t('Handlers'),
       'content' => $this->t('The <strong>Emails/Handlers</strong> page allows additional actions and behaviors to be processed when a webform or submission is created, updated, or deleted.') . ' ' .
         $this->t('<strong>Handlers</strong> are used to route submitted data to external applications and send notifications & confirmations.'),
-      'video_id' => 'submissions',
+      'video_id' => 'handlers',
       'routes' => [
         // @see /admin/structure/webform/manage/{webform}/handlers
         'entity.webform.handlers',
