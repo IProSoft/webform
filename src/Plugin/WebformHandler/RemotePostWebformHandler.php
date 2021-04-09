@@ -1054,7 +1054,10 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       // Make sure to trigger kernel events.
       $this->kernel->terminate($request, $response);
       $response->send();
-      exit;
+      // Only exit, an Ajax request to prevent headers from being overwritten.
+      if ($is_ajax_request) {
+        exit;
+      }
     }
   }
 
