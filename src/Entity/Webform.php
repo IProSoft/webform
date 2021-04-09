@@ -2306,6 +2306,11 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       $this->elements = Yaml::encode($this->elements);
     }
 
+    // @todo: Add check settings schema & UI.
+    if (\Drupal::config('webform.settings')->get('antibot.always_enabled')) {
+      $this->setThirdPartySetting('antibot', 'antibot', TRUE);
+    }
+
     parent::preSave($storage);
   }
 
