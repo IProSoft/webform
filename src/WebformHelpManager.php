@@ -1560,12 +1560,12 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     $t_args = [
       ':href_involved' => 'https://www.drupal.org/getting-involved',
       ':href_opencollective' => 'https://opencollective.com/webform',
-      ':href_support' => 'https://www.jrockowitz.com/#contact',
+      ':href_support' => 'https://www.jrockowitz.com',
     ];
     $help['promotion_webform'] = [
       'group' => 'promotions',
       'title' => $this->t('Promotions: Drupal Association'),
-      'content' => $this->t('If you enjoy and value Drupal and the Webform module consider <a href=":href_involved">getting involved in the Drupal community</a>, <a href=":href_opencollective">contributing funds to the Webform module\'s Open Collective</a>, and <a href=":href_supoprt">getting professional support</a>.', $t_args),
+      'content' => $this->t('If you enjoy and value Drupal and the Webform module consider <a href=":href_involved">getting involved in the Drupal community</a>, <a href=":href_opencollective">contributing funds to the Webform module\'s Open Collective</a>, and <a href=":href_supoprt">hiring professional support</a>.', $t_args),
       'message_type' => 'webform',
       'message_close' => TRUE,
       'message_storage' => WebformMessage::STORAGE_STATE,
