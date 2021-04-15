@@ -518,6 +518,9 @@ function webform_preprocess_form_element(&$variables) {
   if (isset($variables['description_display']) && $variables['description_display'] === 'before') {
     // Add system .description class.
     if (isset($variables['description'])) {
+      if (empty($variables['description']['attributes'])) {
+        $variables['description']['attributes'] = new Attribute();
+      }
       $variables['description']['attributes']->addClass('description');
     }
   }
