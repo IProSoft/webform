@@ -825,7 +825,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       if (!WebformElementHelper::isElement($element, $key)) {
         continue;
       }
-      if (isset($element['#type']) && !in_array($element['#type'], ['fieldset', 'details'])) {
+      if (isset($element['#type']) && !in_array($element['#type'], ['fieldset', 'details', 'container'])) {
         $flattened_elements[$key] = WebformElementHelper::getProperties($element);
       }
       $flattened_elements += $this->getElementsFlattened($element);
