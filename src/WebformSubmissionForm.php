@@ -293,7 +293,8 @@ class WebformSubmissionForm extends ContentEntityForm {
       && $webform->access('test')) {
       $webform->applyVariants($entity);
       $data = $webform->getVariantsData($entity)
-        + $this->generate->getData($webform);
+        + $this->generate->getData($webform)
+        + $data;
     }
 
     // Get the source entity and allow webform submission to be used as a source
