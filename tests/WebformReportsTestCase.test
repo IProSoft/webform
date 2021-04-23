@@ -56,13 +56,13 @@ class WebformReportsTestCase extends WebformTestCase {
 
     // There should be a checkbox to download submitted files.
     $this->drupalGet('node/' . $node->nid . '/webform-results/download');
-    $this->assertFieldByName('compress');
+    $this->assertFieldByName('include_files');
 
     // If this checkbox is unchecked, then I should be provided with a CSV.
     $edit = array(
       'format' => 'delimited',
       'delimiter' => ',',
-      'compress' => FALSE,
+      'include_files' => FALSE,
     );
     $this->drupalPost('node/' . $node->nid . '/webform-results/download', $edit, t('Download'));
     $this->clickLink(t('download the file here'));
@@ -75,7 +75,7 @@ class WebformReportsTestCase extends WebformTestCase {
     $edit = array(
       'format' => 'delimited',
       'delimiter' => ',',
-      'compress' => TRUE,
+      'include_files' => TRUE,
     );
     $this->drupalPost('node/' . $node->nid . '/webform-results/download', $edit, t('Download'));
     $this->clickLink(t('download the file here'));

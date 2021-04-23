@@ -497,15 +497,15 @@ function webform_results_download_form($form, &$form_state, $node) {
     '#description' => t('Choose whether to show the label or form key in each column header.'),
   );
 
-  $form['compress'] = array(
+  $form['include_files'] = array(
     '#type' => 'checkbox',
     '#title' => t('Include files'),
     '#description' => t('All files in the webform results will be bundled in a .zip archive along with the exported results.'),
   );
 
   if (!class_exists('ZipArchive')) {
-    $form['compress']['#description'] .= t('Unable to load ZipArchive class. This usually happens because the PHP interpreter is not compiled with zlib.');
-    $form['compress']['#disabled'] = TRUE;
+    $form['include_files']['#description'] .= t('Unable to load ZipArchive class. This usually happens because the PHP interpreter is not compiled with zlib.');
+    $form['include_files']['#disabled'] = TRUE;
   }
 
   $form['select_options'] = array(
@@ -873,7 +873,7 @@ function webform_results_download_form_submit(&$form, &$form_state) {
     'header_keys' => $form_state['values']['header_keys'],
     'select_keys' => $form_state['values']['select_keys'],
     'select_format' => $form_state['values']['select_format'],
-    'compress' => $form_state['values']['compress'],
+    'include_files' => $form_state['values']['include_files'],
     'range' => $form_state['values']['range'],
     'download' => $form_state['values']['download'],
   );
@@ -888,7 +888,7 @@ function webform_results_download_form_submit(&$form, &$form_state) {
   }
 
   $options['file_name'] = _webform_export_tempname();
-  if ($options['compress']) {
+  if ($options['include_files']) {
     $options['file_name_zip'] = _webform_export_tempname();
   }
 
@@ -1341,7 +1341,7 @@ function webform_results_download_default_options($node, $format) {
     'header_keys' => 0,
     'select_keys' => 0,
     'select_format' => 'separate',
-    'compress' => 0,
+    'include_files' => 0,
     'range' => array(
       'range_type' => 'all',
       'completion_type' => 'all',
@@ -1379,7 +1379,7 @@ function webform_results_download($node, $export_info) {
     if (!strlen($export_name)) {
       $export_name = t('Untitled');
     }
-    if ($export_info['options']['compress']) {
+    if ($export_info['options']['include_files']) {
       // Put the CSV/Excel file into the zip file.
       // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
       $zip = new ZipArchive();
@@ -1585,7 +1585,7 @@ function webform_results_batch_rows($node, $format = 'delimited', $options = arr
 
   // Add file attachments to the zip file, if the user requested it.
   // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
-  if ($options['compress']) {
+  if ($options['include_files']) {
     $zip = new ZipArchive();
     $zip->open(drupal_realpath($options['file_name_zip']), ZIPARCHIVE::CREATE);
     foreach ($rows['attached_files'] as $attached_file) {
@@ -1633,7 +1633,7 @@ function webform_results_batch_post_process($node, $format = 'delimited', $optio
 
   $context['results']['node'] = $node;
   $context['results']['file_name'] = $options['file_name'];
-  if ($options['compress']) {
+  if ($options['include_files']) {
     $context['results']['file_name_zip'] = $options['file_name_zip'];
   }
 
