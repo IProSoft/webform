@@ -504,7 +504,7 @@ function webform_results_download_form($form, &$form_state, $node) {
   );
 
   if (!class_exists('ZipArchive')) {
-    $form['compress']['#description'] = t('Unable to load ZipArchive class. This usually happens because the PHP interpreter is not compiled with zlib.');
+    $form['compress']['#description'] .= t('Unable to load ZipArchive class. This usually happens because the PHP interpreter is not compiled with zlib.');
     $form['compress']['#disabled'] = TRUE;
   }
 
