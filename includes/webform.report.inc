@@ -1173,7 +1173,7 @@ function webform_results_download_rows($node, array $options, $serial_start = 0,
  *   by the super-global $_GET['page'] variable.
  *   If $attach_files is FALSE:
  *   An array with two keys: 'rows' (which contains the submissions) and
- *   'attached_files' which contains the files attached to submissions.
+ *   'attached_files' (which contains the files attached to submissions).
  */
 function webform_results_download_rows_process($node, array $options, $serial_start, array $submissions, $attach_files = FALSE) {
   module_load_include('inc', 'webform', 'includes/webform.components');
