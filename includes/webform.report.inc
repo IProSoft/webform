@@ -1145,7 +1145,7 @@ function webform_results_download_rows($node, array $options, $serial_start = 0,
     $last_sid = end($submissions) ? key($submissions) : NULL;
   }
 
-  return webform_results_download_rows_process($node, $options, $serial_start, $submissions);
+  return webform_results_download_rows_process($node, $options, $serial_start, $submissions, TRUE);
 }
 
 /**
@@ -1168,7 +1168,7 @@ function webform_results_download_rows($node, array $options, $serial_start = 0,
  *   $pager_count variables. Note that the current page number is determined
  *   by the super-global $_GET['page'] variable.
  */
-function webform_results_download_rows_process($node, array $options, $serial_start, array $submissions) {
+function webform_results_download_rows_process($node, array $options, $serial_start, array $submissions, $attach_files = FALSE) {
   module_load_include('inc', 'webform', 'includes/webform.components');
 
   $submission_information = webform_results_download_submission_information($node, $options);
@@ -1221,7 +1221,7 @@ function webform_results_download_rows_process($node, array $options, $serial_st
     $rows[$serial_start + $row_count] = $row;
   }
 
-  return array('rows' => $rows, 'attached_files' => $attached_files);
+  return $attach_files ? $rows : array('rows' => $rows, 'attached_files' => $attached_files);
 }
 
 /**
@@ -1564,7 +1564,7 @@ function webform_results_batch_rows($node, $format = 'delimited', $options = arr
 
   $submissions = webform_get_submissions_load($query);
 
-  $rows = webform_results_download_rows_process($node, $options, $context['sandbox']['serial'], $submissions);
+  $rows = webform_results_download_rows_process($node, $options, $context['sandbox']['serial'], $submissions, TRUE);
 
   // Write these submissions to the file.
   $exporter = webform_export_create_handler($format, $options);
