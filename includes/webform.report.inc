@@ -888,7 +888,7 @@ function webform_results_download_form_submit(&$form, &$form_state) {
   }
 
   $options['file_name'] = _webform_export_tempname();
-  if ($options['compress'] == 1) {
+  if ($options['compress']) {
     $options['file_name_zip'] = _webform_export_tempname();
   }
 
@@ -1379,7 +1379,7 @@ function webform_results_download($node, $export_info) {
     if (!strlen($export_name)) {
       $export_name = t('Untitled');
     }
-    if ($export_info['options']['compress'] == 1) {
+    if ($export_info['options']['compress']) {
       // Put the CSV/Excel file into the zip file.
       // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
       $zip = new ZipArchive();
@@ -1585,7 +1585,7 @@ function webform_results_batch_rows($node, $format = 'delimited', $options = arr
 
   // Add file attachments to the zip file, if the user requested it.
   // $zip->open() and $zip->close() issue warnings if the archive cannot be created so there is no need to check the result.
-  if ($options['compress'] == 1) {
+  if ($options['compress']) {
     $zip = new ZipArchive();
     $zip->open(drupal_realpath($options['file_name_zip']), ZIPARCHIVE::CREATE);
     foreach ($rows['attached_files'] as $attached_file) {
@@ -1633,7 +1633,7 @@ function webform_results_batch_post_process($node, $format = 'delimited', $optio
 
   $context['results']['node'] = $node;
   $context['results']['file_name'] = $options['file_name'];
-  if ($options['compress'] == 1) {
+  if ($options['compress']) {
     $context['results']['file_name_zip'] = $options['file_name_zip'];
   }
 
