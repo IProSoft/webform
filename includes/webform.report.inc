@@ -1162,6 +1162,9 @@ function webform_results_download_rows($node, array $options, $serial_start = 0,
  *   The starting position for the Serial column in the output.
  * @param array $submissions
  *   An associative array of loaded submissions, indexed by sid.
+ * @param bool $attach_files
+ *   If TRUE, will also return files attached to submissions.
+ *   This parameter is set to FALSE by default for backward-compatibility reasons.
  *
  * @return array
  *   An array of rows built according to the provided $serial_start and
@@ -1221,7 +1224,7 @@ function webform_results_download_rows_process($node, array $options, $serial_st
     $rows[$serial_start + $row_count] = $row;
   }
 
-  return $attach_files ? $rows : array('rows' => $rows, 'attached_files' => $attached_files);
+  return $attach_files ? array('rows' => $rows, 'attached_files' => $attached_files) : $rows;
 }
 
 /**
