@@ -287,7 +287,7 @@ class WebformCliService implements WebformCliServiceInterface {
       'core' => ['8+'],
       'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_ROOT,
       'examples' => [
-        'webform-repair' => 'Generates HTML documentation used by the Webform module\'s documentation pages.',
+        'webform-docs' => 'Generates HTML documentation used by the Webform module\'s documentation pages.',
       ],
       'aliases' => ['wfd'],
     ];
