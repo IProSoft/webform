@@ -2,6 +2,7 @@
 
 namespace Drupal\webform;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -15,6 +16,8 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
+use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
+use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -230,8 +233,10 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The current state of the form.
    */
   protected function alterConfigWebformForm($config_name, &$config_element, &$form, $form_state) {
-    $this->alterTypedConfigElements($config_element, "webform.webform.*");
     $this->alterConfigWebformFormElements($config_name, $config_element, $form, $form_state);
+    $this->alterConfigWebformFormHandlers($config_name, $config_element, $form, $form_state);
+
+    $this->alterTypedConfigElements($config_element, "webform.webform.*");
 
     $webform = $this->loadWebform($config_name);
     $source_elements = $this->translationManager->getSourceElements($webform);
@@ -295,6 +300,50 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     // Update webform value.
     $values['translation']['config_names'][$config_name]['elements'] = ($translation_elements) ? Yaml::encode($translation_elements) : '';
     $form_state->setValues($values);
+  }
+
+  /****************************************************************************/
+  // Handler alteration methods.
+  /****************************************************************************/
+
+  /**
+   * Alter the webform configuration form handlers.
+   *
+   * @param string $config_name
+   *   The webform configuration name.
+   * @param array $config_element
+   *   The webform configuration element.
+   * @param $form
+   *   Nested array of form elements that comprise the form.
+   * @param $form_state
+   *   The current state of the form.
+   */
+  protected function alterConfigWebformFormHandlers($config_name, &$config_element, &$form, $form_state) {
+    $webform = $this->loadWebform($config_name);
+
+    $handlers =& $config_element['handlers'];
+    foreach (Element::children($handlers) as $handler_id) {
+      $handler = $webform->getHandler($handler_id);
+      if (!$handler) {
+        continue;
+      }
+
+      // Apply custom logic to email body which can be twig, html, or text.
+      if ($handler instanceof EmailWebformHandler) {
+        $body_element =& NestedArray::getValue($config_element, ['handlers', $handler_id, 'settings', 'body']);
+        $configuration = $handler->getConfiguration();
+        if (!empty($configuration['settings']['twig'])) {
+          $this->alterTextareaElement($body_element, 'twig');
+          $body_element['translation']['#access'] = WebformTwigExtension::hasEditTwigAccess();
+        }
+        elseif (!empty($configuration['settings']['html'])) {
+          $this->alterHtmlEditorElement($body_element);
+        }
+        else {
+          $this->alterTextareaElement($body_element, 'text');
+        }
+      }
+    }
   }
 
   /****************************************************************************/
@@ -808,11 +857,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       elseif (isset($schema['webform_type'])) {
         switch ($schema['webform_type']) {
           case 'html':
-            // Undo nl2br() so that the HTML markup's spacing is correct.
-            // @see \Drupal\config_translation\FormElement\FormElementBase::getSourceElement
-            // @see https://stackoverflow.com/questions/2494754/opposite-of-nl2br-is-it-str-replace
-            $element['source']['#markup'] = preg_replace("#<br />$#m","", (string) $element['source']['#markup']);
-            $element['translation']['#type'] = 'webform_html_editor';
+            $this->alterHtmlEditorElement($element);
             break;
 
           case 'yaml':
@@ -823,6 +868,20 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
         }
       }
     }
+  }
+
+  /**
+   * Alter text area element and convert it to an HTML editor.
+   *
+   * @param array $element
+   *   A element containing 'source' and 'translation'.
+   */
+  protected function alterHtmlEditorElement(array &$element) {
+    // Undo nl2br() so that the HTML markup's spacing is correct.
+    // @see \Drupal\config_translation\FormElement\FormElementBase::getSourceElement
+    // @see https://stackoverflow.com/questions/2494754/opposite-of-nl2br-is-it-str-replace
+    $element['source']['#markup'] = preg_replace("#<br />$#m","", (string) $element['source']['#markup']);
+    $element['translation']['#type'] = 'webform_html_editor';
   }
 
   /**

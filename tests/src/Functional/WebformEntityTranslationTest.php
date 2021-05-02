@@ -69,6 +69,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     /** @var \Drupal\webform\WebformTranslationManagerInterface $translation_manager */
     $translation_manager = \Drupal::service('webform.translation_manager');
 
+    /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load('test_translation');
     $elements_raw = \Drupal::config('webform.webform.test_translation')->get('elements');
     $elements = Yaml::decode($elements_raw);
@@ -193,6 +194,18 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
 
     // Check custom HTML Editor.
     $this->assertCssSelect('textarea.js-html-editor[name="translation[config_names][webform.webform.test_translation][description][value]"]');
+
+    // Check email body's HTML Editor.
+    $this->assertCssSelect('textarea.js-html-editor[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body][value]"]');
+
+    // Check email body's Twig Editor.
+    $handler = $webform->getHandler('email_confirmation');
+    $configuration = $handler->getConfiguration();
+    $configuration['settings']['twig'] = TRUE;
+    $handler->setConfiguration($configuration);
+    $webform->save();
+    $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
+    $this->assertCssSelect('textarea.js-webform-codemirror.twig[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
 
     // Check customized maxlengths.
     $this->assertCssSelect('input[name$="[title]"]');
