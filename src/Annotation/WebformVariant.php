@@ -73,4 +73,3 @@ class WebformVariant extends Plugin {
   public $machine_name_replace = '_';
 
 }
-
