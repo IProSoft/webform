@@ -227,7 +227,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The selection plugin manager.
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
    *   The entity field manager.
-   * @param \Drupal\Core\Form\FormBuilderInterface
+   * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder.
    */
   public function __construct(
