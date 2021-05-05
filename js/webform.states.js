@@ -478,6 +478,10 @@
       }
       else if (tag === 'select') {
         $.each(value, function (i, option_value) {
+          // Prevent "Syntax error, unrecognized expression" error by
+          // escaping single quotes.
+          // @see https://forum.jquery.com/topic/escape-characters-prior-to-using-selector
+          option_value = option_value.replace(/'/g, "\\\'");
           $input.find("option[value='" + option_value + "']").prop('selected', true);
         });
       }
