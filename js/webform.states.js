@@ -323,6 +323,31 @@
     }
   };
 
+ /**
+   * Adds HTML5 validation to required table select.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @see https://www.drupal.org/project/webform/issues/2856795
+   */
+  Drupal.behaviors.webformTableSelectRequired = {
+    attach: function (context) {
+      $('.js-webform-tableselect[required]', context)
+        .once('webform-radios-required')
+        .each(function () {
+          var $element = $(this);
+          var $tbody = $element.find('tbody');
+          var isMultiple = $element.is('[multiple');
+          if (isMultiple) {
+            $tbody.find('input[type="checkbox"]').on('click', statesCheckboxesRequiredEventHandler);
+          }
+          setTimeout(function () {
+            isMultiple ? checkboxesRequired($tbody) : radiosRequired($tbody);
+          });
+        });
+    }
+  };
+
   /**
    * Add HTML5 multiple checkboxes required validation.
    *
