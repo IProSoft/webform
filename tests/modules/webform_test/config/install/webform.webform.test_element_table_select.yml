@@ -16,9 +16,9 @@ title: 'Test: Element: Table select'
 description: 'Test table select required.'
 category: 'Test: Element'
 elements: |
-  tableselect_default_required:
+  tableselect_checkboxes_required:
     '#type': tableselect
-    '#title': tableselect_default_required:
+    '#title': tableselect_checkboxes_required
     '#required': true
     '#options':
       one: One
@@ -26,11 +26,43 @@ elements: |
       three: Three
       four: Four
       five: Five
-  tableselect_single_required:
+  tableselect_radios_required:
     '#type': tableselect
-    '#title': tableselect_single_required
+    '#title': tableselect_radios_required
     '#multiple': false
     '#required': true
+    '#options':
+      one: One
+      two: Two
+      three: Three
+      four: Four
+      five: Five
+  trigger:
+    '#type': checkbox
+    '#title': trigger
+  target_tableselect_checkboxes_required:
+    '#type': tableselect
+    '#title': target_tableselect_checkboxes_required
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="trigger"]':
+          checked: true
+    '#options':
+      one: One
+      two: Two
+      three: Three
+      four: Four
+      five: Five
+  target_tableselect_radios_required:
+    '#type': tableselect
+    '#title': target_tableselect_radios_required
+    '#multiple': false
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="trigger"]':
+          checked: true
     '#options':
       one: One
       two: Two
