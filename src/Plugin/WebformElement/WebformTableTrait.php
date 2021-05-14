@@ -174,6 +174,11 @@ trait WebformTableTrait {
       // Suppress inline error messages from appearing below
       // checkboxes and radios.
       $element[$key]['#error_no_message'] = TRUE;
+
+      // Add required attribute to table select radios
+      if (!empty($element['#required']) && empty($element['#multiple'])) {
+        $element[$key]['#attributes']['required'] = TRUE;
+      }
     }
     return $element;
   }

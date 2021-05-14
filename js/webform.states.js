@@ -338,11 +338,18 @@
           var $element = $(this);
           var $tbody = $element.find('tbody');
           var isMultiple = $element.is('[multiple');
+
           if (isMultiple) {
-            $tbody.find('input[type="checkbox"]').on('click', statesCheckboxesRequiredEventHandler);
+            // Check all checkbox triggers checkbox 'change' event on
+            // select and deselect all.
+            // @see Drupal.tableSelect
+            $tbody.find('input[type="checkbox"]').on('click change', function () {
+              checkboxesRequired($tbody);
+            });
           }
+
           setTimeout(function () {
-            isMultiple ? checkboxesRequired($tbody) : radiosRequired($tbody);
+            isMultiple ? checkboxesRequired($tbody) : radiosRequired($element);
           });
         });
     }
@@ -373,7 +380,7 @@
    */
   function radiosRequired($element) {
     var $radios = $element.find('input[type="radio"]');
-    var isRequired = $element.hasClass('required');
+    var isRequired = $element.hasClass('required') || $element.attr('required');
     toggleRequired($radios, isRequired);
     copyRequireMessage($element, $radios);
   }
