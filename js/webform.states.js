@@ -332,8 +332,8 @@
    */
   Drupal.behaviors.webformTableSelectRequired = {
     attach: function (context) {
-      $('.js-webform-tableselect[required]', context)
-        .once('webform-radios-required')
+      $('.js-webform-tableselect.required', context)
+        .once('webform-tableselect-required')
         .each(function () {
           var $element = $(this);
           var $tbody = $element.find('tbody');
@@ -380,7 +380,7 @@
    */
   function radiosRequired($element) {
     var $radios = $element.find('input[type="radio"]');
-    var isRequired = $element.hasClass('required') || $element.attr('required');
+    var isRequired = $element.hasClass('required');
     toggleRequired($radios, isRequired);
     copyRequireMessage($element, $radios);
   }

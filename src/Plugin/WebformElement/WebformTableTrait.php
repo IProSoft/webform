@@ -137,11 +137,13 @@ trait WebformTableTrait {
    * @see \Drupal\Core\Render\Element\Tableselect::processTableselect
    */
   public static function processTableSelect(array $element) {
-    $element['#attributes']['required'] = !empty($element['#required']);
-    $element['#attributes']['multiple'] = !empty($element['#multiple']);
     $element['#attributes']['class'][] = 'webform-tableselect';
     $element['#attributes']['class'][] = 'js-webform-tableselect';
     $element['#attached']['library'][] = 'webform/webform.element.tableselect';
+    if (!empty($element['#required'])) {
+      $element['#attributes']['class'][] = 'required';
+    }
+    $element['#attributes']['multiple'] = !empty($element['#multiple']);
     return $element;
   }
 
