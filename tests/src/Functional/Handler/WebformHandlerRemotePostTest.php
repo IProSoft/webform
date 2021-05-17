@@ -320,6 +320,20 @@ options:
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load('test_handler_remote_post_cast');
 
+    $this->postSubmission($webform);
+    $this->assertRaw("form_params:
+  boolean_true: true
+  integer: 100
+  float: 100.01
+  checkbox: false
+  number: ''
+  number_multiple: {  }
+  custom_composite:
+    -
+      textfield: ''
+      number: !!float 0
+      checkbox: false");
+
     $edit = [
       'checkbox' => TRUE,
       'number' => '10',
