@@ -133,12 +133,10 @@ options:
     $this->assertNoRaw('Unable to process this submission. Please contact the site administrator.');
 
     // Check excluded data.
-    $handler = $webform->getHandler('remote_post');
-    $configuration = $handler->getConfiguration();
-    $configuration['settings']['excluded_data'] = [
-      'last_name' => 'last_name',
-    ];
-    $handler->setConfiguration($configuration);
+    $webform->getHandler('remote_post')
+      ->setSetting('excluded_data', [
+        'last_name' => 'last_name',
+      ]);
     $webform->save();
     $sid = $this->postSubmission($webform);
     $this->assertRaw('first_name: John');
@@ -159,9 +157,7 @@ options:
 
     // Check default custom response message.
     $handler = $webform->getHandler('remote_post');
-    $configuration = $handler->getConfiguration();
-    $configuration['settings']['message'] = 'This is a custom response message';
-    $handler->setConfiguration($configuration);
+    $handler->setSetting('message', 'This is a custom response message');
     $webform->save();
     $this->postSubmission($webform, ['response_type' => '500']);
     $this->assertRaw('Failed to process completed request.');
@@ -206,9 +202,7 @@ options:
 
     // Set remote post error URL to homepage.
     $handler = $webform->getHandler('remote_post');
-    $configuration = $handler->getConfiguration();
-    $configuration['settings']['error_url'] = $webform->toUrl('canonical', ['query' => ['error' => '1']])->toString();
-    $handler->setConfiguration($configuration);
+    $handler->setSetting('error_url', $webform->toUrl('canonical', ['query' => ['error' => '1']])->toString());
     $webform->save();
 
     // Check 404 Not Found with custom error uri.
