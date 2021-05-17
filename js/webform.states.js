@@ -551,11 +551,22 @@
    *   Is input required.
    */
   function toggleRequired($input, required) {
+    var isCheckboxOrRadio = ($input.attr('type') === 'radio' || $input.attr('type') === 'checkbox');
     if (required) {
-      $input.attr({'required': 'required', 'aria-required': 'true'});
+      if (isCheckboxOrRadio) {
+        $input.attr({'required': 'required'});
+      }
+      else {
+        $input.attr({'required': 'required', 'aria-required': 'true'});
+      }
     }
     else {
-      $input.removeAttr('required aria-required');
+      if (isCheckboxOrRadio) {
+        $input.removeAttr('required');
+      }
+      else {
+        $input.removeAttr('required aria-required');
+      }
     }
   }
 
