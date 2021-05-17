@@ -157,9 +157,9 @@
       // @see Issue #2860529: Conditional required File upload field don't work.
       toggleRequired($target.find('input[type="file"]'), e.value);
 
-      // Fix #required for radios.
+      // Fix #required for radios and likert.
       // @see Issue #2856795: If radio buttons are required but not filled form is nevertheless submitted.
-      if ($target.is('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other')) {
+      if ($target.is('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .webform-likert-table')) {
         toggleRequired($target.find('input[type="radio"]'), e.value);
       }
 

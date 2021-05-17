@@ -57,6 +57,13 @@
         $errorMessages.insertAfter($container);
       });
 
+      // Move all likert errors to question <label>.
+      $(this.currentForm).find('.webform-likert-table tbody tr').each(function () {
+        var $row = $(this);
+        var $errorMessages = $row.find('strong.error.form-item--error-message');
+        $errorMessages.appendTo($row.find('td:first-child'));
+      });
+
       // Move error after field suffix.
       $(this.currentForm).find('strong.error.form-item--error-message ~ .field-suffix').each(function () {
         var $fieldSuffix = $(this);
