@@ -319,9 +319,13 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The current state of the form.
    */
   protected function alterConfigWebformFormHandlers($config_name, &$config_element, &$form, $form_state) {
-    $webform = $this->loadWebform($config_name);
-
     $handlers =& $config_element['handlers'];
+    // Verify if the webform has any handler.
+    if(!isset($handlers)){
+      return;
+    }
+
+    $webform = $this->loadWebform($config_name);
     foreach (Element::children($handlers) as $handler_id) {
       $handler = $webform->getHandler($handler_id);
       if (!$handler) {
