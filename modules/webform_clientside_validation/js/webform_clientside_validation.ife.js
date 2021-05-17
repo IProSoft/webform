@@ -63,6 +63,22 @@
         var $errorMessages = $fieldSuffix.prev('strong.error.form-item--error-message');
         $errorMessages.insertAfter($fieldSuffix);
       });
+
+      // Add custom clear error handling to checkboxes to remove the
+      // error message, when any checkbox is checked.
+      $(this.currentForm).find('.form-checkboxes').once('webform-clientside-validation-form-checkboxes').each(function () {
+        var $container = $(this);
+        $container.find('input:checkbox').click( function () {
+          var state = $container.find('input:checkbox:checked').length ? 'hide' : 'show';
+          var $message = $container.next('strong.error.form-item--error-message');
+          $message[state]();
+
+          // Ensure the message is set. This code addresses an expected bug
+          // where the error message is emptied when it is toggled.
+          var message = $container.find('[data-msg-required]').data('msg-required');
+          $message.html(message);
+        });
+      });
     };
   });
 
