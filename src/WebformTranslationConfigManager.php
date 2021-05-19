@@ -265,14 +265,14 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    * {@inheritdoc}
    */
   public static function validateWebformForm(&$form, FormStateInterface $form_state) {
-    if ($form_state::hasAnyErrors()) {
+    $source_elements = $form_state->get('webform_source_elements');
+    if ($form_state::hasAnyErrors() || empty($source_elements)) {
       return;
     }
 
     $values = $form_state->getValues();
 
     $config_name = $form_state->get('webform_config_name');
-    $source_elements = $form_state->get('webform_source_elements');
 
     $translation_elements = $values['translation']['config_names'][$config_name]['elements'];
     foreach ($translation_elements as $key => $element) {
