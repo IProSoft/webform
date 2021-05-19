@@ -314,7 +314,7 @@
    */
   Drupal.behaviors.webformRadiosRequired = {
     attach: function (context) {
-      $('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other', context)
+      $('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .js-webform-type-webform-scale', context)
         .once('webform-radios-required')
         .each(function () {
           var $element = $(this);
