@@ -50,6 +50,10 @@ elements: |
         two: Two
         three: Three
       '#required': true
+    checkbox:
+      '#type': checkbox
+      '#title': checkbox
+      '#required': true
     checkboxes:
       '#type': checkboxes
       '#title': checkboxes
@@ -182,7 +186,7 @@ elements: |
       '#type': webform_signature
       '#title': signature
       '#required': true
-  
+
 css: ''
 javascript: ''
 settings:
