@@ -58,7 +58,14 @@
           if ($.trim($telephone.val())) {
             if (!$telephone.intlTelInput('isValidNumber')) {
               $telephone.addClass('error');
-              var message = Drupal.t('The phone number is not valid. (e.g. @example)', {'@example': $telephone.attr('placeholder')});
+              var placeholder = $telephone.attr('placeholder');
+              var message;
+              if (placeholder) {
+                message = Drupal.t('The phone number is not valid. (e.g. @example)', {'@example': placeholder});
+              }
+              else {
+                message = Drupal.t('The phone number is not valid.');
+              }
               $error.html(message).show();
               return false;
             }
