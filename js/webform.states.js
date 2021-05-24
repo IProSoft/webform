@@ -159,7 +159,7 @@
 
       // Fix #required for radios and likert.
       // @see Issue #2856795: If radio buttons are required but not filled form is nevertheless submitted.
-      if ($target.is('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .webform-likert-table')) {
+      if ($target.is('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .js-webform-type-webform-entity-radios, .webform-likert-table')) {
         toggleRequired($target.find('input[type="radio"]'), e.value);
       }
 
@@ -314,7 +314,7 @@
    */
   Drupal.behaviors.webformRadiosRequired = {
     attach: function (context) {
-      $('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .js-webform-type-webform-scale', context)
+      $('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .js-webform-type-webform-entity-radios, .js-webform-type-webform-scale', context)
         .once('webform-radios-required')
         .each(function () {
           var $element = $(this);
