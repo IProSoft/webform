@@ -224,7 +224,21 @@ elements: |
           '#disabled': true
         three:
           '#disabled': true
-  
+    radios_options_grouped:
+      '#type': radios
+      '#title': radios_options_properties
+      '#options_description_display': description
+      '#options':
+        one: 'One -- This is a description'
+        two: 'Two -- This is a description'
+        three: 'Three -- This is a description'
+        four: 'Four -- This is a description'
+      '#options__properties':
+        one:
+          '#prefix': '<div><strong>Group 1</strong></div>'
+        three:
+          '#prefix': '<div><strong>Group 2</strong></div>'
+
 css: ''
 javascript: ''
 settings:
