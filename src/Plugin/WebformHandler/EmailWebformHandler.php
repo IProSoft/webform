@@ -1253,7 +1253,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $element['reply_to'] = [
       '#type' => 'email',
       '#title' => $this->t('Reply to'),
-      '#required' => TRUE,
       '#default_value' => $message['reply_to'],
     ];
     $element['message_divider'] = ['#markup' => '<hr/>'];
