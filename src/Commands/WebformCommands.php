@@ -26,7 +26,7 @@ class WebformCommands extends WebformCommandsBase {
   public function drush_webform_export_validate(CommandData $commandData) {
     $arguments = $commandData->arguments();
     array_shift($arguments);
-    call_user_func_array([$this->cliService, 'drush_webform_export_validate'], $arguments);
+    call_user_func_array([$this->cliService, 'drush_webform_export_validate'], array_values($arguments));
   }
 
   /**
@@ -73,7 +73,7 @@ class WebformCommands extends WebformCommandsBase {
   public function drush_webform_import_validate(CommandData $commandData) {
     $arguments = $commandData->arguments();
     array_shift($arguments);
-    call_user_func_array([$this->cliService, 'drush_webform_import_validate'], $arguments);
+    call_user_func_array([$this->cliService, 'drush_webform_import_validate'], array_values($arguments));
   }
 
   /**
@@ -102,7 +102,7 @@ class WebformCommands extends WebformCommandsBase {
   public function drush_webform_purge_validate(CommandData $commandData) {
     $arguments = $commandData->arguments();
     array_shift($arguments);
-    call_user_func_array([$this->cliService, 'drush_webform_purge_validate'], $arguments);
+    call_user_func_array([$this->cliService, 'drush_webform_purge_validate'], array_values($arguments));
   }
 
   /**
@@ -244,7 +244,7 @@ class WebformCommands extends WebformCommandsBase {
   public function drush_webform_generate_validate(CommandData $commandData) {
     $arguments = $commandData->arguments();
     array_shift($arguments);
-    call_user_func_array([$this->cliService, 'drush_webform_generate_validate'], $arguments);
+    call_user_func_array([$this->cliService, 'drush_webform_generate_validate'], array_values($arguments));
   }
 
   /**
