@@ -160,6 +160,7 @@
       // Fix #required for radios and likert.
       // @see Issue #2856795: If radio buttons are required but not filled form is nevertheless submitted.
       if ($target.is('.js-form-type-radios, .js-form-type-webform-radios-other, .js-webform-type-radios, .js-webform-type-webform-radios-other, .js-webform-type-webform-entity-radios, .webform-likert-table')) {
+        $target.toggleClass('required', e.value);
         toggleRequired($target.find('input[type="radio"]'), e.value);
       }
 
@@ -167,6 +168,7 @@
       // @see Issue #2938414: Checkboxes don't support #states required.
       // @see checkboxRequiredhandler
       if ($target.is('.js-form-type-checkboxes, .js-form-type-webform-checkboxes-other, .js-webform-type-checkboxes, .js-webform-type-webform-checkboxes-other')) {
+        $target.toggleClass('required', e.value);
         var $checkboxes = $target.find('input[type="checkbox"]');
         if (e.value) {
           // Add event handler.
