@@ -72,7 +72,11 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     // Removes all HTML tags from the token's value.
     'striptags',
     // URL encodes the token's value.
+    // @see https://www.php.net/manual/en/function.urlencode.php
     'urlencode',
+    // Raw URL encodes the token's value.
+    // @see https://www.php.net/manual/en/function.rawurlencode.php
+    'rawurlencode',
     // XML encodes the token's value.
     'xmlencode',
   ];
@@ -445,6 +449,9 @@ class WebformTokenManager implements WebformTokenManagerInterface {
           // Encode URL.
           if (isset($suffixes['urlencode'])) {
             $replace = urlencode($replace);
+          }
+          if (isset($suffixes['rawurlencode'])) {
+            $replace = rawurlencode($replace);
           }
           // Encode xml.
           if (isset($suffixes['xmlencode'])) {

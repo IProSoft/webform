@@ -304,6 +304,7 @@ function webform_token_info_alter(&$data) {
     '<ul>' .
     '<li>' . t('<code>:clear</code> removes the token when it is not replaced.') . '</li>' .
     '<li>' . t('<code>:urlencode</code> URL encodes returned value.') . '</li>' .
+    '<li>' . t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>' .
     '<li>' . t('<code>:xmlencode</code> XML encodes returned value.') . '</li>' .
     '<li>' . t('<code>:htmldecode</code> decodes HTML entities in returned value.') . '<br/><b>' . t('This suffix has security implications.') . '</b><br/>' . t('Use <code>:htmldecode</code> with <code>:striptags</code>.') . '</li>' .
     '<li>' . t('<code>:striptags</code> removes all HTML tags from returned value.') . '</li>' .
