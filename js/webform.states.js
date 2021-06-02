@@ -184,6 +184,33 @@
         }
       }
 
+      // Fix #required for tableselect.
+      // @see Issue #3212581: Table select does not trigger client side validation
+      if ($target.is('.js-webform-tableselect')) {
+        $target.toggleClass('required', e.value);
+        var isMultiple = $target.is('[multiple]');
+        if (isMultiple) {
+          // Checkboxes.
+          var $tbody = $target.find('tbody');
+          var $checkboxes = $tbody.find('input[type="checkbox"]');
+          copyRequireMessage($target, $checkboxes);
+          if (e.value) {
+            $checkboxes.on('click change', statesCheckboxesRequiredEventHandler);
+            checkboxesRequired($tbody);
+          }
+          else {
+            $checkboxes.off('click change ', statesCheckboxesRequiredEventHandler);
+            toggleRequired($tbody, false);
+          }
+        }
+        else {
+          // Radios.
+          var $radios = $target.find('input[type="radio"]');
+          copyRequireMessage($target, $radios);
+          toggleRequired($radios, e.value);
+        }
+      }
+
       // Fix required label for elements without the for attribute.
       // @see Issue #3145300: Conditional Visible Select Other not working.
       if ($target.is('.js-form-type-webform-select-other, .js-webform-type-webform-select-other')) {
@@ -321,6 +348,38 @@
         .each(function () {
           var $element = $(this);
           setTimeout(function () {radiosRequired($element);});
+        });
+    }
+  };
+
+ /**
+   * Adds HTML5 validation to required table select.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @see https://www.drupal.org/project/webform/issues/2856795
+   */
+  Drupal.behaviors.webformTableSelectRequired = {
+    attach: function (context) {
+      $('.js-webform-tableselect.required', context)
+        .once('webform-tableselect-required')
+        .each(function () {
+          var $element = $(this);
+          var $tbody = $element.find('tbody');
+          var isMultiple = $element.is('[multiple]');
+
+          if (isMultiple) {
+            // Check all checkbox triggers checkbox 'change' event on
+            // select and deselect all.
+            // @see Drupal.tableSelect
+            $tbody.find('input[type="checkbox"]').on('click change', function () {
+              checkboxesRequired($tbody);
+            });
+          }
+
+          setTimeout(function () {
+            isMultiple ? checkboxesRequired($tbody) : radiosRequired($element);
+          });
         });
     }
   };

@@ -52,7 +52,7 @@
 
       // Move all radios, checkboxes, and datelist errors to appear after
       // the parent container.
-      $(this.currentForm).find('.form-checkboxes, .form-radios, .form-type-datelist .container-inline, .form-type-tel, .webform-type-webform-height .form--inline').each(function () {
+      $(this.currentForm).find('.form-checkboxes, .form-radios, .form-type-datelist .container-inline, .form-type-tel, .webform-type-webform-height .form--inline, .js-webform-tableselect').each(function () {
         var $container = $(this);
         var $errorMessages = $container.find('strong.error.form-item--error-message');
         $errorMessages.insertAfter($container);

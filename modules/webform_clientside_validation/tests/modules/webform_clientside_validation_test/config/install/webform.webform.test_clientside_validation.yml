@@ -96,6 +96,31 @@ elements: |
       '#type': webform_time
       '#title': time
       '#required': true
+  tableselect_elements:
+    '#type': details
+    '#title': 'Table select elements'
+    '#open': true
+    tableselect_checkboxes:
+      '#type': tableselect
+      '#title': tableselect_checkboxes
+      '#required': true
+      '#options':
+        one: One
+        two: Two
+        three: Three
+        four: Four
+        five: Five
+    tableselect_radios:
+      '#type': tableselect
+      '#title': tableselect_radios
+      '#multiple': false
+      '#required': true
+      '#options':
+        one: One
+        two: Two
+        three: Three
+        four: Four
+        five: Five
   advanced_elements:
     '#type': details
     '#title': 'Advanced elements'
