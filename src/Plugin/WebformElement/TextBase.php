@@ -135,6 +135,11 @@ abstract class TextBase extends WebformElementBase {
         $element['#attributes']['data-webform-pattern-error'] = WebformHtmlHelper::toPlainText($element['#pattern_error']);
       }
     }
+
+    // Minlength attribute.
+    if (isset($element['#minlength'])) {
+      $element['#attributes']['minlength'] = $element['#minlength'];
+    }
   }
 
   /**
