@@ -2262,7 +2262,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         $cache_contexts[] = 'url.query_args:entity_id';
       }
       // Add webform (secure) token query string parameter.
-      if ($this->getSetting('token_view') || $this->getSetting('token_update')) {
+      if ($this->getSetting('token_view') || $this->getSetting('token_update') || $this->getSetting('token_delete')) {
         $cache_contexts[] = 'url.query_args:token';
       }
     }
