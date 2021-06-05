@@ -1127,7 +1127,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Mail: Mailboxlayer.
     $projects['mailboxlayer'] = [
       'title' => $this->t('Mailboxlayer'),
-      'description' => $this->t('Integrates the <a href=":href">Mailboxlayer API</a> with the Webforms.', [':href' => 'https://mailboxlayer.com']),
+      'description' => $this->t('Integrates the Mailboxlayer API with the Webforms.'),
       'url' => Url::fromUri('https://www.drupal.org/project/mailboxlayer'),
       'category' => 'mail',
     ];
