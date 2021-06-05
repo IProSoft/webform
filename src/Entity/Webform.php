@@ -2259,11 +2259,11 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     else {
       // Add source entity type and id query string parameters.
       if ($this->getSetting('form_prepopulate_source_entity')) {
-        $cache_contexts[] = 'url.query_args:entity_type';
-        $cache_contexts[] = 'url.query_args:entity_id';
+        $cache_contexts[] = 'url.query_args:source_entity_type';
+        $cache_contexts[] = 'url.query_args:source_entity_id';
       }
       // Add webform (secure) token query string parameter.
-      if ($this->getSetting('token_view') || $this->getSetting('token_update')) {
+      if ($this->getSetting('token_view') || $this->getSetting('token_update') || $this->getSetting('token_delete')) {
         $cache_contexts[] = 'url.query_args:token';
       }
     }
