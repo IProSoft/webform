@@ -335,16 +335,18 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       // Apply custom logic to email body which can be twig, html, or text.
       if ($handler instanceof EmailWebformHandler) {
         $body_element =& NestedArray::getValue($config_element, ['handlers', $handler_id, 'settings', 'body']);
-        $configuration = $handler->getConfiguration();
-        if (!empty($configuration['settings']['twig'])) {
-          $this->alterTextareaElement($body_element, 'twig');
-          $body_element['translation']['#access'] = WebformTwigExtension::hasEditTwigAccess();
-        }
-        elseif (!empty($configuration['settings']['html'])) {
-          $this->alterHtmlEditorElement($body_element);
-        }
-        else {
-          $this->alterTextareaElement($body_element, 'text');
+        if ($body_element) {
+          $configuration = $handler->getConfiguration();
+          if (!empty($configuration['settings']['twig'])) {
+            $this->alterTextareaElement($body_element, 'twig');
+            $body_element['translation']['#access'] = WebformTwigExtension::hasEditTwigAccess();
+          }
+          elseif (!empty($configuration['settings']['html'])) {
+            $this->alterHtmlEditorElement($body_element);
+          }
+          else {
+            $this->alterTextareaElement($body_element, 'text');
+          }
         }
       }
     }
