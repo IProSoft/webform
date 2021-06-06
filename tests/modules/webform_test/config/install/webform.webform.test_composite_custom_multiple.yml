@@ -25,12 +25,14 @@ elements: |
         '#title': checkboxes
         '#options':
           one: One
+          two: Two          three: Three
+      checkboxes_other:
+        '#type': webform_checkboxes_other
+        '#title': checkboxes_other
+        '#options':
+          one: One
           two: Two
           three: Three
-  webform_custom_composite_select:
-    '#type': webform_custom_composite
-    '#title': webform_custom_composite_select
-    '#element':
       select:
         '#type': select
         '#title': select
