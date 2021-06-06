@@ -2248,10 +2248,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function getCacheContexts() {
     $cache_contexts = parent::getCacheContexts();
 
-    // Add paths to cache contexts since webform can be placed on multiple
-    // pages.
-    $cache_contexts[] = 'url.path';
-
     // Add all prepopulate query string parameters.
     if ($this->getSetting('form_prepopulate')) {
       $cache_contexts[] = 'url.query_args';
