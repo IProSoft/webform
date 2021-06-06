@@ -1326,7 +1326,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
                 'name' => $name,
                 'property' => $property,
                 'delta' => $delta,
-                'value' => (string) $value,
+                'value' => (is_array($value)) ? serialize($value) : (string) $value,
               ];
             }
           }
@@ -1405,7 +1405,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
 
         if ($element['#webform_composite']) {
           if ($element['#webform_multiple']) {
-            $submissions_data[$sid][$name][$record['delta']][$record['property']] = $record['value'];
+            $submissions_data[$sid][$name][$record['delta']][$record['property']] = unserialize($record['value']);
           }
           else {
             $submissions_data[$sid][$name][$record['property']] = $record['value'];
