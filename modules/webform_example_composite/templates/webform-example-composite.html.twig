@@ -26,6 +26,9 @@
       {% if content.gender %}
         <div class="webform-flex webform-flex--1"><div class="webform-flex--container">{{ content.gender }}</div></div>
       {% endif %}
+      {% if content.languages %}
+        <div class="webform-flex webform-flex--1"><div class="webform-flex--container">{{ content.languages }}</div></div>
+      {% endif %}
     </div>
 {% else %}
   {{ content }}
