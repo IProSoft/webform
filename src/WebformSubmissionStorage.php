@@ -1403,19 +1403,26 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $elements = ($webform) ? $webform->getElementsInitializedFlattenedAndHasValue() : [];
         $element = (isset($elements[$name])) ? $elements[$name] : ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
 
+        $value = $record['value'];
         if ($element['#webform_composite']) {
+          // Unserialize a composite sub element that is storing
+          // multiple values.
+          if (strpos($value, 'a:') === 0) {
+            $data = @unserialize($value);
+            $value = ($data !== FALSE) ? $data : $value;
+          }
           if ($element['#webform_multiple']) {
-            $submissions_data[$sid][$name][$record['delta']][$record['property']] = unserialize($record['value']);
+            $submissions_data[$sid][$name][$record['delta']][$record['property']] = $value;
           }
           else {
-            $submissions_data[$sid][$name][$record['property']] = $record['value'];
+            $submissions_data[$sid][$name][$record['property']] = $value;
           }
         }
         elseif ($element['#webform_multiple']) {
-          $submissions_data[$sid][$name][$record['delta']] = $record['value'];
+          $submissions_data[$sid][$name][$record['delta']] = $value;
         }
         else {
-          $submissions_data[$sid][$name] = $record['value'];
+          $submissions_data[$sid][$name] = $value;
         }
       }
 

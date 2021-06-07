@@ -608,7 +608,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
       // Set #composite_value, so that composite sub-element get the
       // correct value.
       // @see \Drupal\webform\Plugin\WebformElementBase::getValue
-      $composite_element['#composite_value'] = $this->getValue($element, $webform_submission, $options);
+      $composite_element['#composite_value'] = (array) $this->getValue($element, $webform_submission, $options);
 
       // Clone options and remove #composite_key and #delta.
       $composite_options = $options;
