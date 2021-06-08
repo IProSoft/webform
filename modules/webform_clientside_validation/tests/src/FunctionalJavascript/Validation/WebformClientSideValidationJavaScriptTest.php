@@ -32,6 +32,7 @@ class WebformClientSideValidationJavaScriptTest extends WebformWebDriverTestBase
    * Tests custom states.
    */
   public function testClientSideValidation() {
+    $page = $this->getSession()->getPage();
     $assert_session = $this->assertSession();
 
     /**************************************************************************/
@@ -61,6 +62,28 @@ class WebformClientSideValidationJavaScriptTest extends WebformWebDriverTestBase
     $this->assertCssSelect('#edit-tableselect-checkboxes-one[required]');
     $this->assertCssSelect('#edit-tableselect-radios.required');
     $this->assertCssSelect('#edit-tableselect-radios-one[required]');
+
+    /**************************************************************************/
+    // Other elements.
+    /**************************************************************************/
+
+    // Check that custom 'other' error messages work.
+    $this->drupalGet('/webform/test_clientside_validation');
+    $page->findById('edit-select-other-select')->selectOption('_other_');
+    $page->findById('edit-radios-other-radios-other-')->selectOption('_other_');
+    $page->findById('edit-checkboxes-other-checkboxes-other-')->check();
+    $this->submitForm([], 'Submit');
+    $custom_errors = [
+      'select-other' => 'Custom select_other required message.',
+      'checkboxes-other' => 'Custom checkboxes_other required message.',
+      'radios-other' => 'Custom radios_other required message.',
+    ];
+    foreach ($custom_errors as $element_type => $expected_error) {
+      $element = $page->find('css', "#edit-$element_type-other-error.error");
+      static::assertNotNull($element);
+      static::assertEquals($expected_error, $element->getText());
+    }
+
   }
 
 }

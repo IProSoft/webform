@@ -50,6 +50,14 @@ elements: |
         two: Two
         three: Three
       '#required': true
+    select_other:
+      '#type': webform_select_other
+      '#title': select_other
+      '#options':
+        1: first_option
+        2: second_option
+      '#other__required_error': 'Custom select_other required message.'
+      '#required': true
     checkbox:
       '#type': checkbox
       '#title': checkbox
@@ -70,6 +78,14 @@ elements: |
         two: Two
         three: Three
       '#required': true
+    radios_other:
+      '#type': webform_radios_other
+      '#title': radios_other
+      '#options':
+        1: first_option
+        2: second_option
+      '#other__required_error': 'Custom radios_other required message.'
+      '#required': true
     checkboxes_two_columns:
       '#type': checkboxes
       '#title': checkboxes_two_columns
@@ -79,6 +95,14 @@ elements: |
         two: Two
         three: Three
         four: Four
+      '#required': true
+    checkboxes_other:
+      '#type': webform_checkboxes_other
+      '#title': checkboxes_other
+      '#options':
+        1: option_1
+        2: option_2
+      '#other__required_error': 'Custom checkboxes_other required message.'
       '#required': true
   date_elements:
     '#type': details
