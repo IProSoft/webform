@@ -38,7 +38,7 @@
    *   TRUE if element is within the webform.
    */
   $.fn.isWebform = function () {
-    return $(this).closest('form[id^="webform"], form[data-is-webform]').length ? true : false;
+    return $(this).closest('form.webform-submission-form, form[id^="webform"], form[data-is-webform]').length ? true : false;
   };
 
   /**
