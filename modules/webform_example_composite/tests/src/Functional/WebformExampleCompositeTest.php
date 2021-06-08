@@ -39,6 +39,8 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
     $this->assertFieldById('edit-webform-example-composite-date-of-birth');
     $this->assertRaw('<label for="edit-webform-example-composite-gender">Gender</label>');
     $this->assertFieldById('edit-webform-example-composite-gender');
+    $this->assertRaw('<span class="fieldset-legend">Languages spoken</span>');
+    $this->assertFieldById('edit-webform-example-composite-languages-checkboxes-english');
 
     // Check webform element submission.
     $edit = [
@@ -46,10 +48,12 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
       'webform_example_composite[last_name]' => 'Smith',
       'webform_example_composite[gender]' => 'Male',
       'webform_example_composite[date_of_birth]' => '1910-01-01',
+      'webform_example_composite[languages][checkboxes][English]' => TRUE,
       'webform_example_composite_multiple[items][0][first_name]' => 'Jane',
       'webform_example_composite_multiple[items][0][last_name]' => 'Doe',
       'webform_example_composite_multiple[items][0][gender]' => 'Female',
       'webform_example_composite_multiple[items][0][date_of_birth]' => '1920-12-01',
+      'webform_example_composite_multiple[items][0][languages][checkboxes][English]' =>  TRUE,
     ];
     $sid = $this->postSubmission($webform, $edit);
     $webform_submission = WebformSubmission::load($sid);
@@ -58,6 +62,7 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
       'last_name' => 'Smith',
       'gender' => 'Male',
       'date_of_birth' => '1910-01-01',
+      'languages' => ['English'],
     ]);
     $this->assertEqual($webform_submission->getElementData('webform_example_composite_multiple'), [
       [
@@ -65,6 +70,7 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
         'last_name' => 'Doe',
         'gender' => 'Female',
         'date_of_birth' => '1920-12-01',
+        'languages' => ['English'],
       ],
     ]);
   }
