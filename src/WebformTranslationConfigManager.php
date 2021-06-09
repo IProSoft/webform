@@ -1030,7 +1030,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       if ($translation_element === $source_element) {
         unset($translation_elements[$key]);
       }
-      elseif (is_array($translation_element)) {
+      elseif (is_array($translation_element) && is_array($source_element)) {
         $this->mergeTranslationAndSourceElementsProperties($translation_element, $source_element);
         if (empty($translation_element)) {
           unset($translation_elements[$key]);
