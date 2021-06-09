@@ -861,6 +861,18 @@ class WebformHelpManager implements WebformHelpManagerInterface {
           ],
         ],
       ],
+      'open_collective' => [
+        'title' => $this->t("The Webform module's Open Collective"),
+        'content' => $this->t("This screencast provides details about the Webform module's Open Collective"),
+        'youtube_id' => 'MtlFTwZLKpc',
+        'presentation_id' => '1ykQtm9dBthRoK2Tt3AwiopTxTcPm355uGZEHuXcx2nU',
+        'links' => [
+          [
+            'title' => $this->t("Webform module's Open Collective"),
+            'url' => 'https://opencollective.com/webform',
+          ],
+        ],
+      ],
       'about' => [
         'title' => $this->t('About Webform & the Drupal community'),
         'content' => $this->t('This screencast introduces you to the maintainer and community behind the Webform module.'),
