@@ -720,6 +720,7 @@ function template_preprocess_webform_section(array &$variables) {
   $variables['title_display'] = isset($element['#title_display']) ? $element['#title_display'] : NULL;
   $variables['title_tag'] = isset($element['#title_tag']) ? $element['#title_tag'] : 'h2';
   $variables['title_attributes'] = isset($element['#title_attributes']) ? $element['#title_attributes'] : [];
+  $variables['description_display'] = isset($element['#description_display']) ? $element['#description_display'] : 'before';
   $variables['children'] = $element['#children'];
   $variables['required'] = !empty($element['#required']) ? $element['#required'] : NULL;
 
