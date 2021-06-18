@@ -45,7 +45,7 @@ function webform_cards_entity_base_field_info(EntityTypeInterface $entity_type) 
  */
 function webform_cards_menu_local_actions_alter(&$local_actions) {
   if (!\Drupal::moduleHandler()->moduleExists('webform_ui')) {
-    $local_actions['entity.webform_ui.element.card'];
+    unset($local_actions['entity.webform_ui.element.card']);
   }
 }
 
