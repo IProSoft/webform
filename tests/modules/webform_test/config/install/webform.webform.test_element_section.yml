@@ -1,4 +1,3 @@
-uuid: null
 langcode: en
 status: open
 dependencies:
@@ -46,7 +45,7 @@ elements: |
     '#type': webform_section
     '#title': webform_section_description_display_before
     '#description': 'Display before description.'
-    '#description_display': 'before'
+    '#description_display': before
     webform_section_description_display_before_textfield:
       '#type': textfield
       '#title': webform_section_description_display_before_textfield
@@ -54,7 +53,7 @@ elements: |
     '#type': webform_section
     '#title': webform_section_description_display_after
     '#description': 'Display after description.'
-    '#description_display': 'after'
+    '#description_display': after
     webform_section_description_display_after_textfield:
       '#type': textfield
       '#title': webform_section_description_display_after_textfield
@@ -62,7 +61,7 @@ elements: |
     '#type': webform_section
     '#title': webform_section_description_display_invisible
     '#description': 'Display invisible description.'
-    '#description_display': 'invisible'
+    '#description_display': invisible
 css: ''
 javascript: ''
 settings:
