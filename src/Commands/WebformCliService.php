@@ -883,6 +883,7 @@ class WebformCliService implements WebformCliServiceInterface {
     _webform_update_webform_submission_translation();
 
     // Validate all webform elements.
+    \Drupal::moduleHandler()->loadAll();
     $this->drush_print($this->dt('Validating webform elements…'));
     /** @var \Drupal\webform\WebformEntityElementsValidatorInterface $elements_validator */
     $elements_validator = \Drupal::service('webform.elements_validator');
