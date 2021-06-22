@@ -63,10 +63,6 @@ elements: |
       '#default_value': |
         {textarea line 1}
         {textarea line 2}
-<<<<<<< HEAD
-=======
-
->>>>>>> 8.x-5.x
     textfield:
       '#type': textfield
       '#title': textfield
