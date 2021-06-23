@@ -86,6 +86,13 @@
           if (!validate()) {
             $telephone.focus();
             event.preventDefault();
+
+            // On validation error make sure to clear submit the once behavior.
+            // @see Drupal.behaviors.webformSubmitOnce
+            // @see webform.form.submit_once.js
+            if (Drupal.behaviors.webformSubmitOnce) {
+              Drupal.behaviors.webformSubmitOnce.clear();
+            }
           }
         });
       });
