@@ -1772,7 +1772,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
 
     // Configuration: Libraries.
     $t_args = [
-      '@webform-libraries-make' => 'webform-libraries-make',
       '@webform-libraries-composer' => 'webform-libraries-composer',
       '@webform-libraries-download' => 'webform-libraries-download',
       '@webform-composer-update' => 'webform-composer-update',
@@ -1798,7 +1797,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '</ul>' .
         '<p><strong>' . $this->t('Alternatives') . '</strong></p>' .
         '<ul>' .
-        '<li>' . $this->t('Generate a *.make.yml or composer.json file using <code>drush @webform-libraries-make</code> or <code>drush @webform-libraries-composer</code>.', $t_args) . '</li>' .
+        '<li>' . $this->t('Generate a composer.json file using <code>drush @webform-libraries-composer</code>.', $t_args) . '</li>' .
         '<li>' . $this->t('Execute <code>drush @webform-libraries-download</code>, to download third-party libraries required by the Webform module. (OSX/Linux)', $t_args) . '</li>' .
         '<li>' . $this->t("Execute <code>drush @webform-composer-update</code>, to update your Drupal installation's composer.json to include the Webform module's selected libraries as repositories.", $t_args) . '</li>' .
         '<li>' . $this->t('Download and extract a <a href=":href">zipped archive containing all webform libraries</a> and extract the directories and files to /libraries or /web/libraries', [':href' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/raw/8.x-5.x/libraries.zip']) . '</li>' .

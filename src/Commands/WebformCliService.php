@@ -18,6 +18,7 @@ use Drupal\webform\Utility\WebformObjectHelper;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm;
 use Drush\Commands\DrushCommands;
+use Drush\Drush;
 use Psr\Log\LogLevel;
 
 /**
@@ -196,16 +197,6 @@ class WebformCliService implements WebformCliServiceInterface {
         'webform-libraries-status' => 'Displays the status of third party libraries required by the Webform module.',
       ],
       'aliases' => ['wfls'],
-    ];
-
-    $items['webform-libraries-make'] = [
-      'description' => 'Generates libraries YAML to be included in a drush.make.yml files.',
-      'core' => ['8+'],
-      'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_ROOT,
-      'examples' => [
-        'webform-libraries-make' => 'Generates libraries YAML to be included in a drush.make.yml file.',
-      ],
-      'aliases' => ['wflm'],
     ];
 
     $items['webform-libraries-composer'] = [
@@ -694,35 +685,6 @@ class WebformCliService implements WebformCliServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function drush_webform_libraries_make() {
-    /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
-    $libraries_manager = \Drupal::service('webform.libraries_manager');
-    $libraries = $libraries_manager->getLibraries(TRUE);
-
-    $data = [
-      'core' => '8.x',
-      'api' => 2,
-      'libraries' => [],
-    ];
-    foreach ($libraries as $library_name => $library) {
-      $url = $library['download_url']->toString();
-      $data['libraries'][$library_name] = [
-        'directory_name' => $library_name,
-        'destination' => 'libraries',
-        'download' => [
-          'type' => 'get',
-          'url' => $url,
-        ],
-      ];
-    }
-
-    $data = Yaml::encode($data);
-    $this->drush_print($data);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function drush_webform_libraries_composer() {
     // Load existing composer.json file and unset certain properties.
     $composer_path = drupal_get_path('module', 'webform') . '/composer.json';
@@ -1097,7 +1059,7 @@ class WebformCliService implements WebformCliServiceInterface {
       return $this->drush_user_abort();
     }
 
-    $drupal_root = $this->drush_get_context('DRUSH_DRUPAL_ROOT');
+    $drupal_root = Drush::bootstrapManager()->getRoot();
     if (file_exists($drupal_root . '/composer.json')) {
       $composer_json = $drupal_root . '/composer.json';
       $composer_directory = '';
@@ -1393,7 +1355,7 @@ $functions
    * @hook validate $command_name
    */
   public function $validate_method(CommandData \$commandData) {
-    \$arguments = \$commandData->arguments();
+    \$arguments = array_values(\$commandData->arguments());
     array_shift(\$arguments);
     call_user_func_array([\$this->cliService, '$validate_method'], \$arguments);
   }";
