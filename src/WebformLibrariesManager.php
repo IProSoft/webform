@@ -87,6 +87,15 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
 
     $libraries = $this->getLibraries();
 
+    // Defined REQUIREMENT constants which may not be loaded.
+    // @see /private/var/www/sites/d8_webform/web/core/includes/install.inc
+    if (!defined('REQUIREMENT_OK')) {
+      define('REQUIREMENT_INFO', -1);
+      define('REQUIREMENT_OK', 0);
+      define('REQUIREMENT_WARNING', 1);
+      define('REQUIREMENT_ERROR', 2);
+    }
+
     // Track stats.
     $severity = REQUIREMENT_OK;
     $stats = [
