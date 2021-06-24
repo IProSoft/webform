@@ -169,14 +169,14 @@ function webform_group_form_webform_settings_access_form_alter(&$form, FormState
       ];
       $form['access']['administer_submissions']['group_roles'] = [
         '#type' => 'webform_group_roles',
-        '#title' => t('Group (node) roles'),
+        '#title' => t('Group roles'),
         '#default_value' => $access_rules[$permission]['group_roles'],
       ];
     }
     else {
       $form['access'][$permission]['group_roles'] = [
         '#type' => 'webform_group_roles',
-        '#title' => t('Group (node) roles'),
+        '#title' => t('Group roles'),
         '#default_value' => $access_rules[$permission]['group_roles'],
       ];
       $form['access'][$permission]['group_roles_message'] = [
