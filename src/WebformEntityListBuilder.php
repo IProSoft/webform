@@ -337,10 +337,12 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
 
     // Results.
     $result_total = $this->storage->getTotalNumberOfResults($entity->id());
-    $results_access = $entity->access('submission_view_any');
     $results_disabled = $entity->isResultsDisabled();
+    $results_access = $entity->access('submission_view_any');
     if ($results_disabled || !$results_access) {
-      $row['results'] = $result_total . ($entity->isResultsDisabled() ? ' ' . $this->t('(Disabled)') : '');
+      $row['results'] = ($result_total ? $result_total : '')
+        . ($result_total && $results_disabled ? ' ' : '')
+        . ($results_disabled ? $this->t('(Disabled)') : '');
     }
     else {
       $row['results'] = [
@@ -351,7 +353,6 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
             'aria-label' => $this->formatPlural($result_total, '@count result for @label', '@count results for @label', ['@label' => $entity->label()]),
           ],
           '#url' => $entity->toUrl('results-submissions'),
-          '#suffix' => ($entity->isResultsDisabled() ? ' ' . $this->t('(Disabled)') : ''),
         ],
       ];
     }
