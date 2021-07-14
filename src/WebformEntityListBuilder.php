@@ -59,6 +59,13 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   protected $state;
 
   /**
+   * Bulk operations.
+   *
+   * @var bool
+   */
+  protected $bulkOperations;
+
+  /**
    * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
@@ -106,6 +113,8 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     $this->category = ($query->has('category')) ? $query->get('category') : $config->get('form.filter_category');
     $this->state = ($query->has('state')) ? $query->get('state') : $config->get('form.filter_state');
 
+    $this->bulkOperations = $config->get('settings.webform_bulk_form') ?: FALSE;
+
     $this->submissionStorage = $entity_type_manager->getStorage('webform_submission');
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->roleStorage = $entity_type_manager->getStorage('user_role');
@@ -149,6 +158,11 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     $build += parent::render();
     $build['table']['#sticky'] = TRUE;
     $build['table']['#attributes']['class'][] = 'webform-forms';
+
+    // Bulk operations.
+    if ($this->bulkOperations && $this->currentUser->hasPermission('administer webform')) {
+      $build['table'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformEntityBulkForm', $build['table']);
+    }
 
     // Attachments.
     // Must preload libraries required by (modal) dialogs.
@@ -244,7 +258,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
       'specifier' => 'status',
       'field' => 'status',
     ];
-    $header['author'] = [
+    $header['owner'] = [
       'data' => $this->t('Author'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
       'specifier' => 'uid',
