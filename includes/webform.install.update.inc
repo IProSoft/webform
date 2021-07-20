@@ -3915,6 +3915,21 @@ function webform_update_8210() {
   _webform_update_webform_settings();
 }
 
+/**
+ * Issue #000000: Add support options to help and add-ons.
+ */
+function webform_update_8212() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #3220703: Add support for bulk operations on webform entities.
+ */
+function webform_update_8213() {
+  _webform_update_actions();
+  _webform_update_admin_settings();
+}
+
 /******************************************************************************/
 // Webform 6.x.
 /******************************************************************************/
@@ -4219,16 +4234,9 @@ function webform_update_8622() {
 }
 
 /**
- * Issue #000000: Add support options to help and add-ons.
- */
-function webform_update_8212() {
-  _webform_update_admin_settings();
-}
-
-/**
  * Issue #3220703: Add support for bulk operations on webform entities.
  */
-function webform_update_8213() {
+function webform_update_8623() {
   _webform_update_actions();
   _webform_update_admin_settings();
 }
