@@ -2141,7 +2141,11 @@ class WebformSubmissionForm extends ContentEntityForm {
         else {
           $form[$key] = $value;
         }
-        unset($elements[$key]);
+        // Remove the properties from the $elements and $form['elements'] array.
+        unset(
+          $elements[$key],
+          $form['elements'][$key]
+        );
       }
     }
     // Replace token in #attributes.
