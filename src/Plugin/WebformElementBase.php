@@ -807,19 +807,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       $element['#wrapper_attributes']['class'][] = 'webform-element--title-inline';
     }
 
-    // Check markup properties.
-    $markup_properties = [
-      '#description',
-      '#help',
-      '#more',
-      '#multiple__no_items_message',
-    ];
-    foreach ($markup_properties as $markup_property) {
-      if (isset($element[$markup_property]) && !is_array($element[$markup_property])) {
-        $element[$markup_property] = WebformHtmlEditor::checkMarkup($element[$markup_property]);
-      }
-    }
-
     // Add default description display.
     $default_description_display = $this->configFactory->get('webform.settings')->get('element.default_description_display');
     if ($default_description_display && !isset($element['#description_display']) && $this->hasProperty('description_display')) {
@@ -874,6 +861,20 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Replace tokens for all properties.
     if ($webform_submission) {
       $this->replaceTokens($element, $webform_submission);
+    }
+
+    // Check markup properties after token replacement just-in-case markup
+    // is empty.
+    $markup_properties = [
+      '#description',
+      '#help',
+      '#more',
+      '#multiple__no_items_message',
+    ];
+    foreach ($markup_properties as $markup_property) {
+      if (!empty($element[$markup_property]) && !is_array($element[$markup_property])) {
+        $element[$markup_property] = WebformHtmlEditor::checkMarkup($element[$markup_property]);
+      }
     }
   }
 

@@ -37,6 +37,9 @@ class WebformElementHelpTest extends WebformElementBrowserTestBase {
     // Check help with XSS.
     $this->assertRaw('<label for="edit-help-xss">help_xss<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;help_xss&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;{This is an example of help with &lt;b&gt;XSS alert(&quot;XSS&quot;)&lt;/b&gt;}&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 
+    // Check help empty.
+    $this->assertRaw('<label for="edit-help-empty">help_empty</label>');
+
     // Check help with inline title.
     $this->assertRaw('<label for="edit-help-checkbox" class="option">help_checkbox<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;help_checkbox&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;{This is an example of help}&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
     $this->assertRaw('<label for="edit-help-inline"><span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;help_inline&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;{This is an example of help with an inline title}&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
