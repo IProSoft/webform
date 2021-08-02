@@ -19,7 +19,6 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Mime\Address;
 
 /**
  * Emails a webform submission.
@@ -1115,26 +1114,32 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
     $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
 
+    // @todo [Drupal 9.x] Remove below class exists check.
+    // Issue #84883: Unicode::mimeHeaderEncode() doesn't correctly
+    // follow RFC 2047.
+    // @see https://www.drupal.org/project/drupal/issues/84883
     // Don't send the message if the From address is not valid.
-    try {
-      Address::create($from);
-    }
-    catch (\Exception $exception) {
-      if ($this->configuration['debug']) {
-        $t_args = [
-          '%form' => $this->getWebform()->label(),
-          '%handler' => $this->label(),
-          '%from_email' => $from,
-        ];
-        $this->messenger()->addWarning($this->t('%form: Email not sent for %handler handler because the <em>From</em> email (%from_email) is not valid.', $t_args), TRUE);
+    if (class_exists('\Symfony\Component\Mime\Address')) {
+      try {
+        \Symfony\Component\Mime\Address::create($from);
       }
-      $context = [
-        '@form' => $this->getWebform()->label(),
-        '@handler' => $this->label(),
-        '@from_email' => $from,
-      ];
-      $this->getLogger('webform_submission')->error("@form: Email not sent for '@handler' handler because the 'From' email (@from_email) is not valid.", $context);
-      return;
+      catch (\Exception $exception) {
+        if ($this->configuration['debug']) {
+          $t_args = [
+            '%form' => $this->getWebform()->label(),
+            '%handler' => $this->label(),
+            '%from_email' => $from,
+          ];
+          $this->messenger()->addWarning($this->t('%form: Email not sent for %handler handler because the <em>From</em> email (%from_email) is not valid.', $t_args), TRUE);
+        }
+        $context = [
+          '@form' => $this->getWebform()->label(),
+          '@handler' => $this->label(),
+          '@from_email' => $from,
+        ];
+        $this->getLogger('webform_submission')->error("@form: Email not sent for '@handler' handler because the 'From' email (@from_email) is not valid.", $context);
+        return;
+      }
     }
 
     // Don't send the message if To, CC, and BCC is empty.
