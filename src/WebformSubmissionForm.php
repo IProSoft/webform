@@ -2324,7 +2324,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     switch ($confirmation_type) {
       case WebformInterface::CONFIRMATION_PAGE:
         $redirect_url = $this->requestHandler->getUrl($webform, $this->sourceEntity, 'webform.confirmation', $route_options);
-        $this->setTrustedRedirectUrl($form_state, $redirect_url);
+        $form_state->setRedirectUrl($redirect_url);
         return;
 
       case WebformInterface::CONFIRMATION_URL:
