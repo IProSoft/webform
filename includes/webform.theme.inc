@@ -549,7 +549,7 @@ function webform_preprocess_form_element_label(&$variables) {
   $element = &$variables['element'];
 
   // Fix variable title #markup tha contains a render array which is most
-  // likely a help tooltip.
+  // likely a Help tooltip.
   // @see template_preprocess_form_element_label()
   // @see webform_preprocess_form_element()
   if (isset($variables['title'])

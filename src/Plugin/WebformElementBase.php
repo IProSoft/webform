@@ -2414,7 +2414,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $form['element_description']['help'] = [
       '#type' => 'details',
       '#title' => $this->t('Help'),
-      '#description' => $this->t("Displays a help tooltip after the element's title."),
+      '#description' => $this->t("Displays a Help tooltip after the element's title."),
       '#states' => [
         'invisible' => [
           [':input[name="properties[title_display]"]' => ['value' => 'invisible']],
@@ -2424,13 +2424,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $form['element_description']['help']['help_title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Help title'),
-      '#description' => $this->t("The text displayed in help tooltip after the element's title.") . '<br /><br />' .
+      '#description' => $this->t("The text displayed in Help tooltip after the element's title.") . '<br /><br />' .
         $this->t("Defaults to the element's title"),
     ];
     $form['element_description']['help']['help'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Help text'),
-      '#description' => $this->t("The text displayed in help tooltip after the element's title."),
+      '#description' => $this->t("The text displayed in Help tooltip after the element's title."),
     ];
     $form['element_description']['more'] = [
       '#type' => 'details',
@@ -2495,7 +2495,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         'element_before' => $this->t('Before element'),
         'element_after' => $this->t('After element'),
       ],
-      '#description' => $this->t('Determines the placement of the help tooltip.'),
+      '#description' => $this->t('Determines the placement of the Help tooltip.'),
     ];
     if ($this->hasProperty('title_display')) {
       $form['form']['title_display_message'] = [
