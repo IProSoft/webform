@@ -59,6 +59,23 @@ class WebformCardsManager implements WebformCardsManagerInterface {
   /**
    * {@inheritdoc}
    */
+  public function getNumberOfCards(WebformInterface $webform) {
+    $elements = $webform->getElementsDecoded();
+    $count = 0;
+    foreach ($elements as $element) {
+      if (is_array($element)) {
+        $element_plugin = $this->elementManager->getElementInstance($element);
+        if ($element_plugin instanceof WebformCard) {
+          $count++;
+        }
+      }
+    }
+    return $count;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPages(WebformInterface $webform, $operation = 'default') {
     $card_properties = [
       '#title' => '#title',
