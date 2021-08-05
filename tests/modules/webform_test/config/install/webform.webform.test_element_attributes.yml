@@ -30,8 +30,18 @@ elements: |
         - one
         - two
         - four
+        - five
       style: 'color: red'
       custom: test
+  webform_element_attributes_no_classes:
+    '#type': webform_element_attributes
+    '#title': webform_element_attributes_no_classes
+    '#default_value':
+      class:
+        - one
+        - two
+        - four
+        - five
 css: ''
 javascript: ''
 settings:
