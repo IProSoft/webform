@@ -35,7 +35,7 @@ class WebformEntitySettingsAccessForm extends WebformEntitySettingsBaseForm {
 
     $form['access']['#tree'] = TRUE;
 
-    $access = $webform->getAccessRules() + $this->accessRulesManager->getDefaultAccessRules();
+    $access = array_merge_recursive($this->accessRulesManager->getDefaultAccessRules(), $webform->getAccessRules());
     $access_rules = $this->accessRulesManager->getAccessRulesInfo();
     foreach ($access_rules as $access_rule => $info) {
       $form['access'][$access_rule] = [
