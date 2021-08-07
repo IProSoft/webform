@@ -52,33 +52,69 @@ class WebformBubbleableMetadataTest extends UnitTestCase {
    * Provides test data for testAppendTo().
    *
    * @return array
+   *   Array of datasets for testAppendTo().
    */
   public function providerTestAppendTo() {
     return [
       [
         (new WebformBubbleableMetadata())->setCacheContexts(['bar']),
         [],
-        ['#cache' => ['contexts' => ['bar'], 'tags' => [], 'max-age' => Cache::PERMANENT], '#attached' => []],
+        [
+          '#cache' => [
+            'contexts' => ['bar'],
+            'tags' => [],
+            'max-age' => Cache::PERMANENT,
+          ],
+          '#attached' => [],
+        ],
       ],
       [
         (new WebformBubbleableMetadata())->setCacheContexts(['bar']),
         ['#cache' => ['contexts' => ['bar']]],
-        ['#cache' => ['contexts' => ['bar'], 'tags' => [], 'max-age' => Cache::PERMANENT], '#attached' => []],
+        [
+          '#cache' => [
+            'contexts' => ['bar'],
+            'tags' => [],
+            'max-age' => Cache::PERMANENT,
+          ],
+          '#attached' => [],
+        ],
       ],
       [
         (new WebformBubbleableMetadata())->setCacheContexts(['bar', 'foo']),
         ['#cache' => ['contexts' => ['bar']]],
-        ['#cache' => ['contexts' => ['bar', 'foo'], 'tags' => [], 'max-age' => Cache::PERMANENT], '#attached' => []],
+        [
+          '#cache' => [
+            'contexts' => ['bar', 'foo'],
+            'tags' => [],
+            'max-age' => Cache::PERMANENT,
+          ],
+          '#attached' => [],
+        ],
       ],
       [
         (new WebformBubbleableMetadata())->setCacheMaxAge(99),
         [],
-        ['#cache' => ['contexts' => [], 'tags' => [], 'max-age' => 99], '#attached' => []],
+        [
+          '#cache' => [
+            'contexts' => [],
+            'tags' => [],
+            'max-age' => 99,
+          ],
+          '#attached' => [],
+        ],
       ],
       [
         (new WebformBubbleableMetadata())->setCacheContexts(['bar']),
         ['#cache' => ['max-age' => 99]],
-        ['#cache' => ['contexts' => ['bar'], 'tags' => [], 'max-age' => 99], '#attached' => []],
+        [
+          '#cache' => [
+            'contexts' => ['bar'],
+            'tags' => [],
+            'max-age' => 99,
+          ],
+          '#attached' => [],
+        ],
       ],
     ];
   }
