@@ -293,6 +293,15 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     ];
 
     // Wizard settings.
+    $wizards_progress_checked_states = [
+      'visible' => [
+        [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
+        'or',
+        [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
+        'or',
+        [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
+      ],
+    ];
     $form['wizard_settings'] = [
       '#type' => 'details',
       '#title' => $this->t('Form wizard settings'),
@@ -302,6 +311,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
           ':input[name="method"]' => ['value' => ''],
         ],
       ],
+    ];
+    // Wizard settings: Progress.
+    $form['wizard_settings']['wizard_progress_title'] = [
+      '#markup' => '<div><strong>' . $this->t('Progress') . '</strong></div>',
     ];
     $form['wizard_settings']['wizard_progress_bar'] = [
       '#type' => 'checkbox',
@@ -355,6 +368,12 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#description' => $this->t("If checked, the wizard's progress bar's pages will be hidden or shown based on each pages conditional logic."),
       '#return_value' => TRUE,
       '#default_value' => $settings['wizard_progress_states'],
+      '#states' => $wizards_progress_checked_states,
+    ];
+    // Wizard settings: Navigation.
+    $form['wizard_settings']['wizard_navigation_title'] = [
+      '#markup' => '<div><strong>' . $this->t('Navigation') . '</strong></div>',
+      '#access' => FALSE,
     ];
     $form['wizard_settings']['wizard_auto_forward'] = [
       '#type' => 'checkbox',
@@ -385,22 +404,19 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#default_value' => $settings['wizard_keyboard'],
       '#access' => FALSE,
     ];
-
+    // Wizard settings: Pages.
+    $form['wizard_settings']['wizard_pages_title'] = [
+      '#type' => 'container',
+      '#markup' => '<strong>' . $this->t('Pages') . '</strong>',
+      '#states' => $wizards_progress_checked_states,
+    ];
     $form['wizard_settings']['wizard_confirmation'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Include confirmation page in progress'),
       '#description' => $this->t("If checked, the confirmation page will be included in the progress bar."),
       '#return_value' => TRUE,
       '#default_value' => $settings['wizard_confirmation'],
-      '#states' => [
-        'visible' => [
-          [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
-          'or',
-          [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
-          'or',
-          [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
-        ],
-      ],
+      '#states' => $wizards_progress_checked_states,
     ];
     $form['wizard_settings']['wizard_toggle'] = [
       '#type' => 'checkbox',
@@ -409,6 +425,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#return_value' => TRUE,
       '#default_value' => $settings['wizard_auto_forward'],
       '#access' => FALSE,
+    ];
+    // Wizard settings: Labels.
+    $form['wizard_settings']['wizard_labels_title'] = [
+      '#markup' => '<div><strong>' . $this->t('Labels') . '</strong></div>',
     ];
     $form['wizard_settings']['wizard_toggle_show_label'] = [
       '#type' => 'textfield',
@@ -453,17 +473,6 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         ],
       ],
     ];
-    $form['wizard_settings']['wizard_track'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Track wizard progress in the URL by'),
-      '#description' => $this->t("Progress tracking allows analytic software to capture a multi-step form's progress."),
-      '#options' => [
-        'name' => $this->t("Page name (?page=contact)"),
-        'index' => $this->t("Page index (?page=2)"),
-      ],
-      '#empty_option' => $this->t('- None -'),
-      '#default_value' => $settings['wizard_track'],
-    ];
     $form['wizard_settings']['wizard_prev_button_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Wizard previous page button label'),
@@ -478,7 +487,22 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#size' => 20,
       '#default_value' => $settings['wizard_next_button_label'],
     ];
-
+    // Wizard settings: Track.
+    $form['wizard_settings']['wizard_track_title'] = [
+      '#markup' => '<div><strong>' . $this->t('Tracking') . '</strong></div>',
+    ];
+    $form['wizard_settings']['wizard_track'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Track wizard progress in the URL by'),
+      '#description' => $this->t("Progress tracking allows analytic software to capture a multi-step form's progress."),
+      '#options' => [
+        'name' => $this->t("Page name (?page=contact)"),
+        'index' => $this->t("Page index (?page=2)"),
+      ],
+      '#empty_option' => $this->t('- None -'),
+      '#default_value' => $settings['wizard_track'],
+    ];
+dsm(array_keys($form['wizard_settings']));
     // Preview settings.
     $form['preview_settings'] = [
       '#type' => 'details',
