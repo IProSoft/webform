@@ -314,7 +314,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     ];
     // Wizard settings: Progress.
     $form['wizard_settings']['wizard_progress_title'] = [
-      '#markup' => '<div><strong>' . $this->t('Progress') . '</strong></div>',
+      '#type' => 'container',
+      '#prefix' => '<strong>',
+      '#suffix' => '</strong>',
+      '#markup' => $this->t('Progress'),
     ];
     $form['wizard_settings']['wizard_progress_bar'] = [
       '#type' => 'checkbox',
@@ -372,7 +375,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     ];
     // Wizard settings: Navigation.
     $form['wizard_settings']['wizard_navigation_title'] = [
-      '#markup' => '<div><strong>' . $this->t('Navigation') . '</strong></div>',
+      '#type' => 'container',
+      '#prefix' => '<strong>',
+      '#suffix' => '</strong>',
+      '#markup' => $this->t('Navigation'),
       '#access' => FALSE,
     ];
     $form['wizard_settings']['wizard_auto_forward'] = [
@@ -407,7 +413,9 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     // Wizard settings: Pages.
     $form['wizard_settings']['wizard_pages_title'] = [
       '#type' => 'container',
-      '#markup' => '<strong>' . $this->t('Pages') . '</strong>',
+      '#prefix' => '<strong>',
+      '#suffix' => '</strong>',
+      '#markup' => $this->t('Pages'),
       '#states' => $wizards_progress_checked_states,
     ];
     $form['wizard_settings']['wizard_confirmation'] = [
@@ -428,7 +436,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     ];
     // Wizard settings: Labels.
     $form['wizard_settings']['wizard_labels_title'] = [
-      '#markup' => '<div><strong>' . $this->t('Labels') . '</strong></div>',
+      '#type' => 'container',
+      '#prefix' => '<strong>',
+      '#suffix' => '</strong>',
+      '#markup' => $this->t('Labels'),
     ];
     $form['wizard_settings']['wizard_toggle_show_label'] = [
       '#type' => 'textfield',
@@ -489,7 +500,10 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     ];
     // Wizard settings: Track.
     $form['wizard_settings']['wizard_track_title'] = [
-      '#markup' => '<div><strong>' . $this->t('Tracking') . '</strong></div>',
+      '#type' => 'container',
+      '#prefix' => '<strong>',
+      '#suffix' => '</strong>',
+      '#markup' => $this->t('Tracking'),
     ];
     $form['wizard_settings']['wizard_track'] = [
       '#type' => 'select',
@@ -502,7 +516,6 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#empty_option' => $this->t('- None -'),
       '#default_value' => $settings['wizard_track'],
     ];
-dsm(array_keys($form['wizard_settings']));
     // Preview settings.
     $form['preview_settings'] = [
       '#type' => 'details',
