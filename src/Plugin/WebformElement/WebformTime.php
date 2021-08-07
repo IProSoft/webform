@@ -35,7 +35,7 @@ class WebformTime extends WebformElementBase {
       + $this->defineDefaultMultipleProperties();
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

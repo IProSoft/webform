@@ -37,6 +37,11 @@ Steps for creating a new release
     phpcs --runtime-set testVersion 8.0 --standard=../vendor/phpcompatibility/php-compatibility/PHPCompatibility --extensions=php,module,inc,install,test,profile,theme modules/sandbox/webform > ~/webform-php-compatibility.txt
     cat ~/webform-php-compatibility.txt
 
+References
+
+- [Install Drupal Coder and PHP CodeSniffer to your Drupal project to lint PHP code](https://www.jeffgeerling.com/blog/2020/install-drupal-coder-and-php-codesniffer-your-drupal-project-lint-php-code)
+
+
 [JavaScript](https://www.drupal.org/node/2873849)
 
     # Install Eslint. (One-time)

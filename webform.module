@@ -157,11 +157,12 @@ function webform_config_schema_info_alter(&$definitions) {
  *   to support tokens
  */
 function _webform_config_schema_info_alter_settings_recursive(array $settings) {
+  $data_types_to_strings = ['boolean', 'integer', 'float', 'uri', 'email'];
   foreach ($settings as $name => $setting) {
     if (is_array($setting)) {
       $settings[$name] = _webform_config_schema_info_alter_settings_recursive($setting);
     }
-    elseif ($name === 'type' && in_array($setting, ['boolean', 'integer', 'float', 'uri', 'email'])) {
+    elseif ($name === 'type' && in_array($setting, $data_types_to_strings)) {
       $settings[$name] = 'string';
     }
   }
@@ -310,15 +311,18 @@ function webform_token_info_alter(&$data) {
   // Append learn more about token suffixes to all webform token descriptions.
   // @see \Drupal\webform\WebformTokenManager::replace
   // @see webform_page_attachments()
-  $token_suffixes = t('Append the below suffixes to alter the returned value.') .
-    '<ul>' .
-    '<li>' . t('<code>:clear</code> removes the token when it is not replaced.') . '</li>' .
-    '<li>' . t('<code>:urlencode</code> URL encodes returned value.') . '</li>' .
-    '<li>' . t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>' .
-    '<li>' . t('<code>:xmlencode</code> XML encodes returned value.') . '</li>' .
-    '<li>' . t('<code>:htmldecode</code> decodes HTML entities in returned value.') . '<br/><b>' . t('This suffix has security implications.') . '</b><br/>' . t('Use <code>:htmldecode</code> with <code>:striptags</code>.') . '</li>' .
-    '<li>' . t('<code>:striptags</code> removes all HTML tags from returned value.') . '</li>' .
-  '</ul>';
+  $token_suffixes = t('Append the below suffixes to alter the returned value.');
+  $token_suffixes .= '<ul>';
+  $token_suffixes .= '<li>' . t('<code>:clear</code> removes the token when it is not replaced.') . '</li>';
+  $token_suffixes .= '<li>' . t('<code>:urlencode</code> URL encodes returned value.') . '</li>';
+  $token_suffixes .= '<li>' . t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>';
+  $token_suffixes .= '<li>' . t('<code>:xmlencode</code> XML encodes returned value.') . '</li>';
+  $token_suffixes .= '<li>' . t('<code>:htmldecode</code> decodes HTML entities in returned value.') . '<br/><b>'
+    . t('This suffix has security implications.') . '</b><br/>'
+    . t('Use <code>:htmldecode</code> with <code>:striptags</code>.')
+    . '</li>';
+  $token_suffixes .= '<li>' . t('<code>:striptags</code> removes all HTML tags from returned value.') . '</li>';
+  $token_suffixes .= '</ul>';
   $more = _webform_token_render_more(t('Learn about token suffixes'), $token_suffixes);
   foreach ($data['types'] as $type => &$info) {
     if (strpos($type, 'webform') === 0) {
@@ -909,9 +913,9 @@ function webform_process_states(array &$elements, $key = '#attributes') {
   WebformFormHelper::processStates($elements, $key);
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // Devel generate info hooks.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Implements hook_devel_generate_info_alter().
@@ -933,9 +937,9 @@ function webform_devel_generate_info_alter(array &$generators) {
   }
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // Element info hooks.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Implements hook_element_info_alter().
@@ -1038,9 +1042,9 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
   return $element;
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // Private functions.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Provides custom PHP error handling when webform rendering is validated.

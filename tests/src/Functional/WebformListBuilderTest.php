@@ -81,9 +81,9 @@ class WebformListBuilderTest extends WebformBrowserTestBase {
     $this->assertCssSelect('option[value="webform_unarchive_action"]');
     $this->assertCssSelect('option[value="webform_delete_action"]');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Disable/Enable.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check bulk operation disable.
     \Drupal::configFactory()->getEditable('webform.settings')
@@ -97,9 +97,9 @@ class WebformListBuilderTest extends WebformBrowserTestBase {
       ->set('settings.webform_bulk_form', TRUE)
       ->save();
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Open/Close.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check webform one is opened.
     $this->assertTrue($webforms[0]->isOpen());
@@ -131,9 +131,9 @@ class WebformListBuilderTest extends WebformBrowserTestBase {
     $webforms[0] = $this->reloadWebform('one');
     $this->assertTrue($webforms[0]->isOpen());
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Archive/Restore.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check webform archive action.
     $edit = [
@@ -162,9 +162,9 @@ class WebformListBuilderTest extends WebformBrowserTestBase {
     $webforms[0] = $this->reloadWebform('one');
     $this->assertFalse($webforms[0]->isArchived());
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Delete.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check webform delete action.
     $edit = [

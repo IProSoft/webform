@@ -196,9 +196,9 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
     return $mapper->getLangcode();
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Translatable properties helpers.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Remove untranslatable properties form an element.

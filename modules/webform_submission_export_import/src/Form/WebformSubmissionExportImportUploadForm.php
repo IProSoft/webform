@@ -113,9 +113,9 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
     // @see \Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm::buildConfirmForm
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Upload form.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Build upload form.
@@ -299,9 +299,9 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Confirm form.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Build confirm import form.
@@ -476,9 +476,9 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
     return Url::fromRoute('<current>');
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Set the CSV file URI.
@@ -522,11 +522,11 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
     return $options;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Batch functions.
   // Using static method to prevent the service container from being serialized.
   // "Prevents exception 'AssertionError' with message 'The container was serialized.'."
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Batch API; Initialize batch operations.

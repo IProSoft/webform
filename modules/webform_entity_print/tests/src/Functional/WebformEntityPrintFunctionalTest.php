@@ -28,9 +28,9 @@ class WebformEntityPrintFunctionalTest extends WebformEntityPrintFunctionalTestB
 
     $this->drupalLogin($this->rootUser);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // PDF link default.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $webform = Webform::load('test_entity_print');
     $sid = $this->postSubmissionTest($webform);
@@ -100,9 +100,9 @@ body {
     $this->drupalGet("/admin/structure/webform/manage/test_entity_print/submission/$sid");
     $this->assertNoLink('Download PDF');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Exporter.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     /** @var \Drupal\webform\WebformSubmissionExporterInterface $submission_exporter */
     $submission_exporter = \Drupal::service('webform_submission.exporter');
@@ -119,9 +119,9 @@ body {
     $files = $this->getArchiveContents($submission_exporter->getArchiveFilePath());
     $this->assertEquals(["submission-$sid.pdf" => "submission-$sid.pdf"], $files);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // PDF link custom.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $webform = Webform::load('test_entity_print_custom');
     $sid = $this->postSubmissionTest($webform);

@@ -27,7 +27,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = WebformSubmission::create(['webform_id' => 'contact']);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $form = $entity_form_builder->getForm($webform_submission, 'add');
 

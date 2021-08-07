@@ -204,9 +204,9 @@ actions:
     $translation_element = $translation_manager->getElements($webform, 'fr', TRUE);
     $this->assertEqual(['textfield' => ['#title' => 'French']], $translation_element);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Submissions.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check English table headers are not translated.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/results/submissions');
@@ -234,9 +234,9 @@ actions:
     $this->assertNoRaw('Site name: Sitio web de prueba');
     $this->assertNoRaw('Site name: Sitio web de prueba');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Site wide language.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Make sure the site language is English (en).
     \Drupal::configFactory()->getEditable('system.site')->set('default_langcode', 'en')->save();
@@ -270,7 +270,7 @@ actions:
     $this->drupalGet('/webform/test_translation', ['language' => $language_manager->getLanguage('fr')]);
     $this->assertRaw('<label for="edit-textfield">French</label>');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Make sure the site language is English (en).
     \Drupal::configFactory()->getEditable('system.site')->set('default_langcode', 'en')->save();

@@ -42,9 +42,9 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
   public function testTermReference() {
     $webform = Webform::load('test_element_term_reference');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Term checkboxes
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet('/webform/test_element_term_reference');
 
@@ -98,9 +98,9 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
     // Publish term: 2
     Term::load(2)->setPublished()->save();
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Term select.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet('/webform/test_element_term_reference');
 

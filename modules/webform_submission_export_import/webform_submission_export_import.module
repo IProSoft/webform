@@ -42,10 +42,10 @@ function webform_submission_export_import_local_tasks_alter(&$local_tasks) {
   }
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // The below code is copy of _file_save_upload_single() which allows imported
 // files to be securely created.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Saves a file upload to a new location.

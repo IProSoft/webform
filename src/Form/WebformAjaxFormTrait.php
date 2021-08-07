@@ -386,14 +386,14 @@ trait WebformAjaxFormTrait {
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Drupal.announce handling.
   //
   // Announcements are stored in the user session because the $form_state
   // is already serialized (and can't be altered) when announcements
   // are added to Ajax response.
   // @see \Drupal\webform\Form\WebformAjaxFormTrait::submitAjaxForm
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Queue announcement with Ajax response.

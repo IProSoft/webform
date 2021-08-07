@@ -26,8 +26,9 @@ function webform_test_test_element_html_escape() {
  *   An array of elements.
  */
 function _webform_test_test_element_html_escape_recursive(array &$elements) {
+  $properties = ['#title', '#field_prefix', '#field_suffix'];
   foreach ($elements as $key => &$property) {
-    if (is_string($property) && is_string($key) && in_array($key, ['#title', '#field_prefix', '#field_suffix'])) {
+    if (is_string($property) && is_string($key) && in_array($key, $properties)) {
       $property .= ' | <script>alert(\'This markup is not escaped properly!!!\') </script>';
     }
 

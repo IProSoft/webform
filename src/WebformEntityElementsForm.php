@@ -182,9 +182,9 @@ class WebformEntityElementsForm extends BundleEntityFormBase {
     $this->messenger()->addStatus($this->t('Webform %label elements saved.', $t_args));
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Webform type prefix add and remove methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Get elements without 'webform_' #type prefix.

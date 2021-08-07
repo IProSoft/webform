@@ -244,9 +244,9 @@ function _webform_form_config_translate_add_form_alter_yaml_element(array &$elem
   $element['#attached']['library'][] = 'webform/webform.admin.translation';
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // Lingotek integration.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Implements hook_lingotek_config_entity_document_upload().
@@ -391,9 +391,9 @@ function webform_lingotek_config_object_translation_presave(array &$data, $confi
   $data['webform.settings']['test.names'] = Yaml::encode($data['webform.settings']['test.names']);
 }
 
-/******************************************************************************/
+/* ************************************************************************** */
 // Lingotek decode/encode token functions.
-/******************************************************************************/
+/* ************************************************************************** */
 
 /**
  * Encode all tokens so that they won't be translated.

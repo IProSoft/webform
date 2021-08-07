@@ -52,9 +52,9 @@ class WebformElementFormatCustomTest extends WebformElementBrowserTestBase {
     $file_size = $file->getSize();
     $file_url = file_create_url($file->getFileUri());
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Custom HTML.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet("admin/structure/webform/manage/test_element_format_custom/submission/$sid");
 
@@ -126,9 +126,9 @@ element.country: {02-country}<br/>
     // Check container custom HTML format.
     $this->assertRaw('<h3>fieldset_custom_children</h3>' . PHP_EOL . '<hr />');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Custom Text.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet("admin/structure/webform/manage/test_element_format_custom/submission/$sid/text");
     $this->assertRaw("textfield_custom: /{textfield_custom}/

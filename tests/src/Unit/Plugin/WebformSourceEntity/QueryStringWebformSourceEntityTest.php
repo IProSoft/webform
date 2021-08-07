@@ -64,7 +64,7 @@ class QueryStringWebformSourceEntityTest extends UnitTestCase {
       'ignored_types' => [],
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $webform = $this->getMockWebform($options);
     list($source_entity, $source_entity_translation) = $this->getMockSourceEntity($options, $webform);
@@ -128,7 +128,7 @@ class QueryStringWebformSourceEntityTest extends UnitTestCase {
     $language_manager->method('getCurrentLanguage')
       ->willReturn(new Language(['id' => 'es']));
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Create QueryStringWebformSourceEntity plugin instance.
     $plugin = new QueryStringWebformSourceEntity([], 'query_string', [], $entity_type_manager, $route_match, $request_stack, $language_manager, $webform_entity_reference_manager);

@@ -39,7 +39,7 @@ class Table extends WebformElementBase {
     return array_merge(parent::defineTranslatableProperties(), ['header']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

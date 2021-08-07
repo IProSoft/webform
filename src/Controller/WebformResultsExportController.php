@@ -199,11 +199,11 @@ class WebformResultsExportController extends ControllerBase implements Container
     return $response;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Batch functions.
   // Using static method to prevent the service container from being serialized.
   // "Prevents exception 'AssertionError' with message 'The container was serialized.'."
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Batch API; Initialize batch operations.

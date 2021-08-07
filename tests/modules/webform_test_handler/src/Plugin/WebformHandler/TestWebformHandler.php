@@ -88,7 +88,8 @@ class TestWebformHandler extends WebformHandlerBase {
   public function validateForm(array &$form, FormStateInterface $form_state, WebformSubmissionInterface $webform_submission) {
     $this->displayMessage(__FUNCTION__);
     $value = $form_state->getValue('element');
-    if ($value && !in_array($value, ['access_allowed', 'submission_access_denied', 'element_access_denied'])) {
+    $allowed_values = ['access_allowed', 'submission_access_denied', 'element_access_denied'];
+    if ($value && !in_array($value, $allowed_values)) {
       $form_state->setErrorByName('element', $this->t('The element must be empty. You entered %value.', ['%value' => $value]));
     }
   }

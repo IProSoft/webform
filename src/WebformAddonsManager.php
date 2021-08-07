@@ -116,9 +116,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     $projects = [];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Applications.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Applications: Academic Applications.
     $projects['academic_applications'] = [
@@ -128,9 +128,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'applications',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Element.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Element: Address.
     $projects['address'] = [
@@ -365,9 +365,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Enhancement.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Enhancement: Dopup.
     $projects['dopup'] = [
@@ -578,9 +578,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Integrations.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Integrations: Webform CiviCRM Integration.
     $projects['webform_civicrm'] = [
@@ -609,7 +609,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Integrations: Ansible.
     $projects['ansible'] = [
@@ -1111,7 +1111,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Integrations: Salesforce Web-to-Lead Webform Data Integration.
     $projects['sfweb2lead_webform'] = [
@@ -1137,9 +1137,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Mail.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Mail: Mail System.
     $projects['mailsystem'] = [
@@ -1245,9 +1245,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'mail',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Multilingual.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Multilingual: Lingotek Translation.
     $projects['lingotek'] = [
@@ -1265,9 +1265,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'multilingual',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Migrate.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Migrate: Webform Migrate.
     $projects['webform_migrate'] = [
@@ -1278,9 +1278,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Spam.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Spam: Antibot.
     $projects['antibot'] = [
@@ -1319,7 +1319,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'spam',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Spam: CleanTalk.
     $projects['cleantalk'] = [
@@ -1369,9 +1369,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'spam',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Submissions.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Submissions: Webform Analysis.
     $projects['webform_analysis'] = [
@@ -1409,7 +1409,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Submissions: Protected Submissions.
     $projects['protected_submissions'] = [
@@ -1547,9 +1547,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'submission',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Utility.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Utility: IMCE.
     $projects['imce'] = [
@@ -1580,7 +1580,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Utility: Calendar Links Token.
     $projects['calendar_links_token'] = [
@@ -1647,9 +1647,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'utility',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Validation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Validation: Clientside Validation.
     $projects['clientside_validation'] = [
@@ -1684,9 +1684,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'validation',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Web services.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Web services: Decoupled Kit.
     $projects['decoupled_kit'] = [
@@ -1728,9 +1728,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'web_services',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Workflow.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Workflow: Config Entity Revisions.
     $projects['config_entity_revisions'] = [
@@ -1759,9 +1759,9 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Development.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Devel: Maillog / Mail Developer.
     $projects['maillog'] = [

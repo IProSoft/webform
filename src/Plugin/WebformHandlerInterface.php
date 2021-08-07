@@ -350,9 +350,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function checkConditions(WebformSubmissionInterface $webform_submission);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Webform methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Alter webform submission webform elements.
@@ -382,9 +382,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function alterElement(array &$element, FormStateInterface $form_state, array $context);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Webform submission methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Alter/override a webform submission webform settings.
@@ -399,9 +399,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function overrideSettings(array &$settings, WebformSubmissionInterface $webform_submission);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Submission form methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Get configuration form's off-canvas width.
@@ -476,9 +476,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function confirmForm(array &$form, FormStateInterface $form_state, WebformSubmissionInterface $webform_submission);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Submission methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Changes the values of an entity before it is created.
@@ -579,9 +579,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account = NULL);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Preprocessing methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Prepares variables for webform confirmation templates.
@@ -596,9 +596,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function preprocessConfirmation(array &$variables);
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Handler methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Acts on handler after it has been created and added to webform.
@@ -615,9 +615,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    */
   public function deleteHandler();
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Element methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Controls entity operation access to webform submission element.

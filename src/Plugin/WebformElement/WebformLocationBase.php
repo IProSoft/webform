@@ -56,7 +56,7 @@ abstract class WebformLocationBase extends WebformCompositeBase {
     return $properties;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

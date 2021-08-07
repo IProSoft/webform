@@ -106,7 +106,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'access_result_cache_contexts' => [],
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $token = $this->randomMachineName();
 
@@ -206,7 +206,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
         )
       );
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Create webform access control handler.
     $access_handler = new WebformEntityAccessControlHandler($entity_type, $request_stack, $entity_type_manager, $webform_source_entity_manager, $access_rules_manager);
@@ -229,9 +229,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
   public function providerCheckAccess() {
     $tests = [];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "view" HTML operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'view',
@@ -270,9 +270,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'View when has "administer" access rule',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "view" configuration operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'view',
@@ -359,9 +359,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'View when has "access own webform configuration" permission and is owner and request form is NOT HTML',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "test" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'test',
@@ -441,9 +441,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'Test when has "edit own webform" permission and is owner',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "update" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'update',
@@ -521,9 +521,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'Update when has "edit own webform" permission and is owner',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "duplicate" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'duplicate',
@@ -616,9 +616,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'Duplicate when has "create webform" and "edit own webform" permissions and is owner',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "delete" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'delete',
@@ -698,9 +698,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'Delete when has "delete own webform" permission and is owner',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "purge" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'submission_purge',
@@ -728,9 +728,9 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'Purge when has "purge_any" access rule',
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // The "view" operation.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $tests[] = [
       'submission_view_any',

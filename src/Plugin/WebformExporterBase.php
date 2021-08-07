@@ -373,9 +373,9 @@ abstract class WebformExporterBase extends PluginBase implements WebformExporter
     return $this->configFactory->get('webform.settings')->get('batch.default_batch_export_size') ?: 500;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Archive helper methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Add file, directory, or content to Tar archive.

@@ -184,9 +184,9 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
     $form_state->setResponse($response);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper functions.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Set webform elements default values using test data.

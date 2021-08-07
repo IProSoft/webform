@@ -58,7 +58,6 @@
 
           $select.select2(options);
         });
-
     }
   };
 
@@ -97,6 +96,5 @@
       };
     }
   });
-
 
 })(jQuery, Drupal);

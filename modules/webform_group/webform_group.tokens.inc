@@ -78,7 +78,7 @@ function webform_group_token_info() {
 
   $tokens['webform_group'] = $webform_group;
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   return ['types' => $types, 'tokens' => $tokens];
 }

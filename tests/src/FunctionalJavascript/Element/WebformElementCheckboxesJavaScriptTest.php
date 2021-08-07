@@ -27,7 +27,7 @@ class WebformElementCheckboxesJavaScriptTest extends WebformWebDriverTestBase {
     $session = $this->getSession();
     $assert_session = $this->assertSession();
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet('/webform/test_element_checkboxes_all_none');
 

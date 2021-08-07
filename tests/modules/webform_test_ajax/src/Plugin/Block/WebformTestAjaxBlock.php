@@ -76,13 +76,18 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
     $webforms = Webform::loadMultiple();
 
     // Ajax links.
+    $webform_ids = [
+      'test_ajax_confirmation_page',
+      'test_ajax_confirmation_url',
+      'test_ajax_confirmation_url_msg',
+    ];
     $ajax_links = [];
     foreach ($webforms as $webform_id => $webform) {
       if (strpos($webform_id, 'test_ajax') !== 0 && $webform_id !== 'test_form_wizard_long_100') {
         continue;
       }
 
-      if (!in_array($webform_id, ['test_ajax_confirmation_page', 'test_ajax_confirmation_url', 'test_ajax_confirmation_url_msg'])) {
+      if (!in_array($webform_id, $webform_ids)) {
         // Add destination to Ajax webform that don't redirect to confirmation
         // page or URL.
         $route_options = ['query' => $this->redirectDestination->getAsArray()];
@@ -118,7 +123,12 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
     ];
     $inline_links['source_entity'] = [
       'title' => $this->t('Open Contact with Source Entity'),
-      'url' => $webform->toUrl('canonical', ['query' => ['source_entity_type' => 'ENTITY_TYPE', 'source_entity_id' => 'ENTITY_ID']]),
+      'url' => $webform->toUrl('canonical', [
+        'query' => [
+          'source_entity_type' => 'ENTITY_TYPE',
+          'source_entity_id' => 'ENTITY_ID',
+        ],
+      ]),
       'attributes' => [
         'class' => ['webform-dialog', 'webform-dialog-normal'],
       ],

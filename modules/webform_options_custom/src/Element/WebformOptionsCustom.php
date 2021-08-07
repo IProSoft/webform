@@ -244,9 +244,9 @@ class WebformOptionsCustom extends FormElement implements WebformOptionsCustomIn
     $form_state->setValueForElement($element, $value);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Set a custom options element #options property.

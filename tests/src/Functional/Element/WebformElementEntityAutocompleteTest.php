@@ -45,7 +45,7 @@ class WebformElementEntityAutocompleteTest extends WebformElementBrowserTestBase
     ]);
     $term_1->save();
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $webform = Webform::load('test_element_entity_autocomplete');
 

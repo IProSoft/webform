@@ -43,9 +43,9 @@ class WebformSettingsLimitUniqueTest extends WebformNodeBrowserTestBase {
     $manage_own_user = $this->drupalCreateUser(['view own webform submission', 'edit own webform submission']);
     $edit_user_only = $this->drupalCreateUser(['edit own webform submission']);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Total unique. (webform)
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check that access is denied for anonymous users.
     $this->drupalGet('/webform/test_form_limit_total_unique');
@@ -99,9 +99,9 @@ class WebformSettingsLimitUniqueTest extends WebformNodeBrowserTestBase {
     $this->assertFieldByName('name', 'John Smith');
     $this->assertRaw("<div><b>Submission ID:</b> $sid</div>");
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Total unique. (node)
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalLogout();
 
@@ -154,9 +154,9 @@ class WebformSettingsLimitUniqueTest extends WebformNodeBrowserTestBase {
     $this->assertFieldByName('name', 'John Lennon');
     $this->assertRaw("<div><b>Submission ID:</b> $sid</div>");
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // User unique. (webform)
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalLogout();
 
@@ -217,7 +217,7 @@ class WebformSettingsLimitUniqueTest extends WebformNodeBrowserTestBase {
     $this->drupalGet('/webform/test_form_limit_user_unique');
     $this->assertFieldByName('name', '');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check that name is still empty for new submission for root user.
     $this->drupalLogin($this->rootUser);

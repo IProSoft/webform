@@ -75,7 +75,7 @@ class WebformLikert extends WebformElementBase {
     return array_merge(parent::defineTranslatableProperties(), ['questions', 'answers', 'na_answer_text']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}
