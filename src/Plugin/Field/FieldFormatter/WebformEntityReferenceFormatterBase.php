@@ -102,13 +102,20 @@ abstract class WebformEntityReferenceFormatterBase extends EntityReferenceFormat
 
       // Only override an open webform.
       if ($entity->isOpen()) {
-        // Directly call set override to prevent the altered webform from
-        // being saved.
-        $entity
-          ->setOverride()
-          ->set('open', $item->open)
-          ->set('close', $item->close)
-          ->setStatus($item->status);
+        if (isset($item->open)) {
+          $entity->set('open', $item->open);
+        }
+        if (isset($item->close)) {
+          $entity->set('close', $item->close);
+        }
+        if (isset($item->status)) {
+          $entity->setStatus($item->status);
+        }
+        // Directly call set override to prevent the altered webform from being
+        // saved.
+        if (isset($item->open) || isset($item->close) || isset($item->status)) {
+          $entity->setOverride();
+        }
       }
     }
     return $entities;
