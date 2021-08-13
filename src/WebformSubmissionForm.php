@@ -9,6 +9,8 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -477,6 +479,24 @@ class WebformSubmissionForm extends ContentEntityForm {
     // when this form is embedded in an iframe.
     if ($this->isSharePage() && !$webform->getSetting('ajax', TRUE)) {
       $webform->setSettingOverride('ajax', TRUE);
+    }
+
+    // Apply source entity open/close state to the webform before
+    // it is rendered.
+    $source_entity = $webform_submission->getSourceEntity();
+    if ($webform->isOpen() && $source_entity && $source_entity instanceof FieldableEntityInterface) {
+      foreach ($source_entity->getFieldDefinitions() as $fieldName => $fieldDefinition) {
+        if ($fieldDefinition->getType() === 'webform') {
+          $item = $source_entity->get($fieldName);
+          if ($item->target_id === $webform->id()) {
+            $webform
+              ->setOverride()
+              ->set('open', $item->open)
+              ->set('close', $item->close)
+              ->setStatus($item->status);
+          }
+        }
+      }
     }
   }
 
