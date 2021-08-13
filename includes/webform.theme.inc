@@ -484,12 +484,13 @@ function webform_preprocess_fieldset(&$variables) {
     $variables['attributes']['class'][] = 'webform-type-' . Html::getClass($element['#type']);
   }
 
-  // Remove invalid 'required' and 'aria-required' attributes from fieldset.
+  // Remove invalid 'required' attributes from fieldset.
+  //
+  // Issue #3174459: W3C Validation: required attribute not allowed on
+  // fieldset tag.
+  // @see https://www.drupal.org/project/drupal/issues/3174459
   if (isset($element['#webform_key'])) {
-    unset(
-      $variables['attributes']['required'],
-      $variables['attributes']['aria-required']
-    );
+    unset($variables['attributes']['required']);
   }
 }
 
