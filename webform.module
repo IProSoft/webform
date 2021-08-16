@@ -436,10 +436,10 @@ function webform_mail($key, &$message, $params) {
     // 'From name' is only used when the 'From mail' contains a single
     // email address.
     $mailbox = new MailboxHeader($params['from_name'], new Address($params['from_mail'], $params['from_name']));
-    $FromNameEmail = $mailbox->getBodyAsString();
+    $from_name_email = $mailbox->getBodyAsString();
 
     $from = (!empty($params['from_name']) && strpos($params['from_mail'], ',') === FALSE)
-    ? $FromNameEmail : $params['from_mail'];
+    ? $from_name_email : $params['from_mail'];
 
     $message['from'] = $message['headers']['From'] = $from;
   }
@@ -476,9 +476,9 @@ function webform_mail($key, &$message, $params) {
   $sender_name = $params['sender_name'] ?: $params['from_name'] ?: '';
   if ($sender_mail) {
     $mailbox2 = new MailboxHeader($sender_name, new Address($sender_mail, $sender_name));
-    $SenderNameEmail = $mailbox2->getBodyAsString();
+    $sender_name_email = $mailbox2->getBodyAsString();
 
-    $message['headers']['Sender'] = ($sender_name) ? $SenderNameEmail : $sender_mail;
+    $message['headers']['Sender'] = ($sender_name) ? $sender_name_email : $sender_mail;
   }
 }
 

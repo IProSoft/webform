@@ -1112,9 +1112,9 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
     if (!empty($message['from_name'])) {
       $mailbox = new MailboxHeader($message['from_name'], new Address($from, $message['from_name']));
-      $FromNameEmail = $mailbox->getBodyAsString();
+      $from_name_email = $mailbox->getBodyAsString();
 
-      $from = $FromNameEmail;
+      $from = $from_name_email;
     }
 
     $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
