@@ -1111,8 +1111,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $message['from_name'] = preg_replace('/[<>]/', '', $message['from_name']);
 
     if (!empty($message['from_name'])) {
-      $mailbox = new MailboxHeader($message['from_name'], new Address($from, $message['from_name']));
-      $from_name_email = $mailbox->getBodyAsString();
+      $from_mailbox = new MailboxHeader($message['from_name'], new Address($from, $message['from_name']));
+      $from_name_email = $from_mailbox->getBodyAsString();
 
       $from = $from_name_email;
     }
