@@ -19,6 +19,8 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Mime\Header\MailboxHeader;
+use Symfony\Component\Mime\Address;
 
 /**
  * Emails a webform submission.
@@ -1109,7 +1111,10 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $message['from_name'] = preg_replace('/[<>]/', '', $message['from_name']);
 
     if (!empty($message['from_name'])) {
-      $from = Mail::formatDisplayName($message['from_name']) . ' <' . $from . '>';
+      $mailbox = new MailboxHeader($message['from_name'], new Address($from, $message['from_name']));
+      $FromNameEmail = $mailbox->getBodyAsString();
+
+      $from = $FromNameEmail;
     }
 
     $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
