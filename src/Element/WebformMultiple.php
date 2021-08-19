@@ -17,8 +17,6 @@ use Drupal\webform\Utility\WebformElementHelper;
  */
 class WebformMultiple extends FormElement {
 
-  use WebformCompositeFormElementTrait;
-
   /**
    * Value indicating a element accepts an unlimited number of values.
    */
@@ -60,9 +58,7 @@ class WebformMultiple extends FormElement {
       '#process' => [
         [$class, 'processWebformMultiple'],
       ],
-      '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
-      ],
+      '#theme_wrappers' => ['form_element'],
       // Add '#markup' property to add an 'id' attribute to the form element.
       // @see template_preprocess_form_element()
       '#markup' => '',
