@@ -4075,11 +4075,20 @@ function _webform_filter_values($string, $node = NULL, $submission = NULL, $emai
  *   purposes (default values, etc.). If TRUE, the tokens only are sanitized by
  *   token_replace. Otherwise $sanitize is the machine name of an import filter
  *   to be used with check_markup().
+ * @param bool $trim
+ *   When TRUE, run trim() on each string before returning it.
  */
-function webform_replace_tokens($string, $node = NULL, $submission = NULL, $email = NULL, $sanitize = FALSE) {
+function webform_replace_tokens($string, $node = NULL, $submission = NULL, $email = NULL, $sanitize = FALSE, $trim = FALSE) {
+  if (is_array($string)) {
+    foreach ($string as $key => $value) {
+      $string[$key] = webform_replace_tokens($value, $node, $submission, $email, $sanitize, $trim);
+    }
+    return $string;
+  }
+
   // Don't do any filtering if the string is empty.
   if (!strlen(trim($string)) || !webform_variable_get('webform_token_access')) {
-    return $string;
+    return $trim ? trim($string) : $string;
   }
 
   $token_data = array();
@@ -4097,7 +4106,7 @@ function webform_replace_tokens($string, $node = NULL, $submission = NULL, $emai
   if (!$clear) {
     $string = webform_replace_tokens_clear(check_markup($string, $sanitize));
   }
-  return $string;
+  return $trim ? trim($string) : $string;
 }
 
 /**
@@ -4165,9 +4174,7 @@ function webform_replace_url_tokens($redirect_url, $node = NULL, $submission = N
   // Replace tokens in each component.
   $parsed_redirect_url['path'] = webform_replace_tokens($parsed_redirect_url['path'], $node, $submission);
   if (!empty($parsed_redirect_url['query'])) {
-    foreach ($parsed_redirect_url['query'] as $key => $value) {
-      $parsed_redirect_url['query'][$key] = trim(webform_replace_tokens($value, $node, $submission));
-    }
+    $parsed_redirect_url['query'] = webform_replace_tokens($parsed_redirect_url['query'], $node, $submission, NULL, FALSE, TRUE);
   }
   $parsed_redirect_url['fragment'] = webform_replace_tokens($parsed_redirect_url['fragment'], $node, $submission);
   // Determine whether the path is internal or external. Paths which contain the
