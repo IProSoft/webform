@@ -16,6 +16,7 @@ use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
+use Drupal\webform\Plugin\WebformSourceEntityManager;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -808,6 +809,10 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
       $source_entity = \Drupal::entityTypeManager()
         ->getStorage($values['entity_type'])
         ->load($values['entity_id']);
+
+      if ($source_entity && $source_entity->getEntityTypeId() === 'paragraph') {
+        $source_entity = WebformSourceEntityManager::getMainSourceEntity($source_entity);
+      }
 
       /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
       $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
