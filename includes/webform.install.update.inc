@@ -4240,3 +4240,10 @@ function webform_update_8623() {
   _webform_update_actions();
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3216928: Allow Base64 encoded file data to be excluded from remote posts.
+ */
+function webform_update_8214() {
+  _webform_update_webform_handler_settings();
+}
