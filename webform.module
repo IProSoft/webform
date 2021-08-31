@@ -272,8 +272,7 @@ function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableD
     $query = \Drupal::request()->query->all();
     $has_test_tab = FALSE;
     foreach ($route_names as $test_route_name => $view_route_name) {
-      if (isset($data['tabs'][0][$test_route_name])
-        && isset($data['tabs'][0][$test_route_name])) {
+      if (isset($data['tabs'][0][$test_route_name])) {
         $has_test_tab = TRUE;
         if ($query) {
           $data['tabs'][0][$test_route_name]['#link']['url']
