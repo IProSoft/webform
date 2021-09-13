@@ -23,7 +23,7 @@ interface WebformElementAttachmentInterface {
    *
    * @return array
    *   An array containing email attachments which include an attachments
-   *   'filename', 'filemime', 'filepath', and 'filecontent'.
+   *   'filename', 'filemime', and 'filecontent'.
    *
    * @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::getMessageAttachments
    * @see \Drupal\mimemail\Utility\MimeMailFormatHelper::mimeMailHtmlBody
@@ -46,7 +46,7 @@ interface WebformElementAttachmentInterface {
    *
    * @return array
    *   An array containing email attachments which include an attachments
-   *   'filename', 'filemime', 'filepath', and 'filecontent'.
+   *   'filename', 'filemime', and 'filecontent'.
    *
    * @see \Drupal\webform\WebformSubmissionExporter::writeRecords
    */
