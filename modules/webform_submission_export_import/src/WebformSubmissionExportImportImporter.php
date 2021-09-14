@@ -578,7 +578,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
 
     // Set source entity.
     // Load or convert the source entity id to an internal ID.
-    if ($source_entity) {
+    if ($source_entity && !isset($record['entity_type']) && !isset($record['entity_id'])) {
       $record['entity_type'] = $source_entity->getEntityTypeId();
       $record['entity_id'] = $source_entity->id();
     }
