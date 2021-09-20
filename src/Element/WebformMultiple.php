@@ -35,9 +35,9 @@ class WebformMultiple extends FormElement {
       '#header_label' => '',
       '#element' => [
         '#type' => 'textfield',
-        '#title' => t('Item value'),
+        '#title' => $this->t('Item value'),
         '#title_display' => 'invisible',
-        '#placeholder' => t('Enter value…'),
+        '#placeholder' => $this->t('Enter value…'),
       ],
       '#cardinality' => FALSE,
       '#min_items' => NULL,
