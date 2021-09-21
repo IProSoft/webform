@@ -89,12 +89,8 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
    */
   public function css(Request $request, WebformInterface $webform) {
     $assets = $webform->getAssets();
-    if ($webform->access('update')) {
-      return new WebformUncacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']);
-    }
-    else {
-      return new CacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']);
-    }
+    return (new CacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']))
+      ->addCacheableDependency($webform);
   }
 
   /**
@@ -110,12 +106,8 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
    */
   public function javascript(Request $request, WebformInterface $webform) {
     $assets = $webform->getAssets();
-    if ($webform->access('update')) {
-      return new WebformUncacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
-    }
-    else {
-      return new CacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
-    }
+    return (new CacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']))
+      ->addCacheableDependency($webform);
   }
 
   /**
