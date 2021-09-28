@@ -303,7 +303,7 @@ function webform_module_implements_alter(&$implementations, $hook) {
  * Implements hook_token_info_alter().
  */
 function webform_token_info_alter(&$data) {
-  module_load_include('inc', 'webform', 'webform.tokens.inc');
+  module_load_include('inc', 'webform', 'webform.tokens');
 
   // Append learn more about token suffixes to all webform token descriptions.
   // @see \Drupal\webform\WebformTokenManager::replace
