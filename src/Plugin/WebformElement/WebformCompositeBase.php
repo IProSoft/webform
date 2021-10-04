@@ -1534,9 +1534,6 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         'filecontent' => file_get_contents($file->getFileUri()),
         'filename' => $file->getFilename(),
         'filemime' => $file->getMimeType(),
-        // File URIs that are not supported return FALSE, when this happens
-        // still use the file's URI as the file's path.
-        'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
         // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
         '_fileurl' => file_create_url($file->getFileUri()),
