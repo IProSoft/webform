@@ -266,7 +266,7 @@ abstract class WebformCompositeBase extends FormElement implements WebformCompos
         $composite_element += array_intersect_key($element, $select_properties);
       }
 
-      if ($element_plugin->hasMultipleValues($composite_element)) {
+      if ($element_plugin->hasMultipleValues($composite_element) && !in_array($composite_element['#type'], ['checkboxes', 'webform_checkboxes_other', 'select', 'webform_select_other'])) {
         throw new \Exception('Multiple elements are not supported within composite elements.');
       }
       if ($element_plugin->isComposite()) {
