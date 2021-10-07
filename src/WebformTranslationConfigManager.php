@@ -437,7 +437,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       // NOTE: It is possible that all the below code could be moved into
       // the WebformElement plugin but this would create more abstraction.
       // For now, it is easier to keep all the logic in this one class/service.
-      if (is_array($property_value) && !WebformArrayHelper::isMultidimensional($property_value)) {
+      if (is_array($property_value) && !WebformArrayHelper::isMultidimensional($property_value) && !Element::properties($property_value)) {
         // Options.
         $elements[$property_key] = $this->buildConfigWebformFormOptionsPropertyElement(
           $element,
