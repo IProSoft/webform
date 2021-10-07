@@ -1204,9 +1204,6 @@ class WebformCliService implements WebformCliServiceInterface {
             'url' => $dist_url,
             'type' => $dist_type,
           ],
-          'require' => [
-            'composer/installers' => '~1.0',
-          ],
         ],
       ];
 
