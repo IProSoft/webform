@@ -418,9 +418,6 @@
                 "dist": {
                     "url": "https://github.com/cferdinandi/tabby/archive/v12.0.3.zip",
                     "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
                 }
             }
         },
@@ -436,9 +433,6 @@
                 "dist": {
                     "url": "https://unpkg.com/tippy.js@5.2.1/dist/tippy-bundle.iife.min.js",
                     "type": "file"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
                 }
             }
         },
@@ -454,9 +448,6 @@
                 "dist": {
                     "url": "https://unpkg.com/tippy.js@6.2.6/dist/tippy-bundle.umd.min.js",
                     "type": "file"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
                 }
             }
         }
