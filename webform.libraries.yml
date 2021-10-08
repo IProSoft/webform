@@ -343,6 +343,12 @@ webform.theme.bartik:
     theme:
       css/webform.theme.bartik.css: {}
 
+webform.theme.gin:
+  version: VERSION
+  css:
+    theme:
+      css/webform.theme.gin.css: {}
+
 webform.theme.seven:
   version: VERSION
   css:
@@ -779,6 +785,12 @@ webform.element.message:
   dependencies:
     - core/drupal
     - core/jquery.once
+
+webform.element.message.info:
+  version: VERSION
+  css:
+    component:
+      css/webform.element.message.info.css: {}
 
 webform.element.multiple:
   version: VERSION
