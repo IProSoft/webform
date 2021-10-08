@@ -514,8 +514,6 @@ function webform_menu_links_discovered_alter(&$links) {
     /** @var \Drupal\Core\Menu\LocalTaskManager $local_task_manager */
     $local_task_manager = \Drupal::service('plugin.manager.menu.local_task');
     $definitions = $local_task_manager->getDefinitions();
-    // Prevent recursions by remove the 'entity.webform.collection' definition.
-    unset($definitions['entity.webform.collection']);
 
     // Set default definition.
     $default_definition = [
@@ -530,15 +528,15 @@ function webform_menu_links_discovered_alter(&$links) {
     $menu_links = [];
     foreach ($definitions as $task_name => $definition) {
       if (isset($definition['base_route']) && $definition['base_route'] === 'entity.webform.collection') {
-        $menu_links[$task_name] = $default_definition
+        $menu_links[$task_name . '.item'] = $default_definition
           + array_intersect_key($definition, $keys_to_copy)
           + ['parent' => 'entity.webform.collection'];
       }
     }
     foreach($menu_links as $sub_link_task_name => $sub_link) {
       foreach ($definitions as $task_name => $definition) {
-        if (isset($definition['parent_id']) && $definition['parent_id'] === $sub_link_task_name) {
-          $menu_links[$task_name] = $default_definition
+        if (isset($definition['parent_id']) && $definition['parent_id'] === preg_replace('/\.item$/', '', $sub_link_task_name)) {
+          $menu_links[$task_name . '.item'] = $default_definition
             + array_intersect_key($definition, $keys_to_copy)
             + ['parent' => $sub_link_task_name];
         }
