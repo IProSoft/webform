@@ -4254,3 +4254,10 @@ function webform_update_8623() {
 function webform_update_8624() {
   _webform_update_webform_handler_settings();
 }
+
+/**
+ * Issue #3240393: Allow the number of webform per page to configurable.
+ */
+function webform_update_8215() {
+  _webform_update_actions();
+}
