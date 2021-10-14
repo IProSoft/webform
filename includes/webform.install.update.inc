@@ -3318,7 +3318,7 @@ function webform_update_8179() {
 
     // Try to decode elements.
     try {
-      $elements = Yaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
@@ -3465,7 +3465,7 @@ function webform_update_8186() {
 
     // Try to decode elements.
     try {
-      $elements = Yaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
