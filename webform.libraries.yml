@@ -185,7 +185,6 @@ webform.confirmation.modal:
     - core/drupal.dialog
     - core/drupal.dialog.position
     - core/jquery.once
-    - core/jquery.ui.dialog
     - webform/webform.confirmation
 
 # Contextual
@@ -718,7 +717,6 @@ webform.element.image_file.modal:
     - core/drupalSettings
     - core/drupal.dialog.ajax
     - core/jquery.once
-    - core/jquery.ui.dialog
 
 webform.element.inputmask:
   version: VERSION
@@ -905,8 +903,8 @@ webform.element.states:
     js/webform.element.states.js: {}
   dependencies:
     - core/drupal
+    - core/drupal.autocomplete
     - core/jquery.once
-    - core/jquery.ui.autocomplete
 
 webform.element.telephone:
   version: VERSION
@@ -934,7 +932,6 @@ webform.element.terms_of_service:
     - core/drupal
     - core/drupal.dialog.ajax
     - core/jquery.once
-    - core/jquery.ui.dialog
 
 webform.element.text_format:
   version: VERSION
@@ -994,14 +991,15 @@ webform.composite.telephone:
   dependencies:
     - webform/webform.composite
 
-# jQuery UI.
+# jQuery UI. Can be removed if the replacement library doesn't need these
+# alterations anymore.
 
 jquery.ui.dialog:
   version: VERSION
   js:
     js/webform.jquery.ui.dialog.js: {}
   dependencies:
-    - core/jquery.ui.dialog
+    - core/drupal.dialog
 
 # Contrib Module.
 
