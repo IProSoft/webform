@@ -44,7 +44,7 @@ webform.admin.dialog:
     js/webform.admin.js: {}
   dependencies:
     - core/drupal.dialog.ajax
-    - webform/jquery.ui.dialog
+    - webform/drupal.dialog
     - webform/webform.ajax
     - webform/webform.form
     - webform/webform.form.tabs
@@ -204,7 +204,14 @@ webform.dialog:
     js/webform.dialog.js: {}
   dependencies:
     - core/drupal.dialog.ajax
-    - webform/jquery.ui.dialog
+    - webform/drupal.dialog
+
+drupal.dialog:
+  version: VERSION
+  js:
+    js/webform.drupal.dialog.js: {}
+  dependencies:
+    - core/drupal.dialog
 
 # Help.
 
@@ -990,16 +997,6 @@ webform.composite.telephone:
       css/webform.composite.telephone.css: {}
   dependencies:
     - webform/webform.composite
-
-# jQuery UI. Can be removed if the replacement library doesn't need these
-# alterations anymore.
-
-jquery.ui.dialog:
-  version: VERSION
-  js:
-    js/webform.jquery.ui.dialog.js: {}
-  dependencies:
-    - core/drupal.dialog
 
 # Contrib Module.
 
