@@ -319,7 +319,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The current state of the form.
    */
   protected function alterConfigWebformFormHandlers($config_name, &$config_element, &$form, $form_state) {
-    $handlers =& $config_element['handlers'];
+    $handlers = &$config_element['handlers'];
     // Verify if the webform has any handler.
     if(!isset($handlers)){
       return;
@@ -375,7 +375,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $source_elements = $this->translationManager->getSourceElements($webform);
     $translation_elements = $this->translationManager->getTranslationElements($webform, $translation_langcode);
 
-    $elements =& $config_element['elements'];
+    $elements = &$config_element['elements'];
 
     // Remove the #theme and source properties so that just the
     // translation details element is rendered.
@@ -854,8 +854,8 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
         continue;
       }
 
-      $element =& $elements[$element_key];
-      $schema =& $schema_mapping[$element_key];
+      $element = &$elements[$element_key];
+      $schema = &$schema_mapping[$element_key];
 
       if (isset($schema['type']) && $schema['type'] === 'mapping') {
         $this->alterSchemaElementsRecursive($element, $schema['mapping']);
