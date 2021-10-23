@@ -2346,7 +2346,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       $pages = $this->getWebform()->getPages($this->operation);
       foreach ($pages as $page_key => $page) {
         if (isset($form['elements'][$page_key])) {
-          $page_element =& $form['elements'][$page_key];
+          $page_element = &$form['elements'][$page_key];
           $page_element_plugin = $this->elementManager->getElementInstance($page_element);
           if ($page_element_plugin instanceof WebformElementWizardPageInterface) {
             if ($page_key != $current_page) {

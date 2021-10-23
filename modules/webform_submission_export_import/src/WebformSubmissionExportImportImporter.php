@@ -425,8 +425,8 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       // Track row specific warnings and errors.
       $stats['warnings'][$index] = [];
       $stats['errors'][$index] = [];
-      $row_warnings =& $stats['warnings'][$index];
-      $row_errors =& $stats['errors'][$index];
+      $row_warnings = &$stats['warnings'][$index];
+      $row_errors = &$stats['errors'][$index];
 
       // Make sure expected number of columns and values are equal.
       if (count($column_names) !== count($values)) {
