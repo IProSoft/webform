@@ -135,7 +135,7 @@ trait WebformAjaxFormTrait {
         continue;
       }
 
-      $actions =& $form[$element_key];
+      $actions = &$form[$element_key];
       foreach (Element::children($actions) as $action_key) {
         if (WebformElementHelper::isType($actions[$action_key], 'submit')) {
           $actions[$action_key]['#ajax'] = [

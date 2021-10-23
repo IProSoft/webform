@@ -362,7 +362,7 @@ class WebformMultiple extends FormElement {
     /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
     $element_manager = \Drupal::service('plugin.manager.webform.element');
     foreach ($child_keys as $child_key) {
-      $sub_element =& $sub_elements[$child_key];
+      $sub_element = &$sub_elements[$child_key];
 
       $element_plugin = $element_manager->getElementInstance($sub_element);
 
