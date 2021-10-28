@@ -2,6 +2,7 @@
 
 namespace Drupal\webform;
 
+use Drupal\block\Entity\Block;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\TypedConfigManagerInterface;
@@ -109,7 +110,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       if ($config_name === 'webform.settings') {
         $this->alterConfigSettingsForm($config_name, $config_element);
       }
-      elseif ($config_name === 'block.block.webform') {
+      elseif (strpos($config_name, 'block.block.') === 0) {
         $this->alterConfigBlockForm($config_name, $config_element);
       }
       elseif (strpos($config_name, 'field.field.') === 0) {
@@ -151,6 +152,11 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    *   The webform block configuration element.
    */
   protected function alterConfigBlockForm($config_name, array &$config_element) {
+    $block = Block::load(str_replace('block.block.', '', $config_name));
+    if (!$block || $block->getPluginId() !== 'webform_block') {
+      return;
+    }
+
     $this->alterTypedConfigElements($config_element['settings'], "block.settings.webform_block");
   }
 
@@ -926,6 +932,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       '#mode' => $mode,
       '#value' => $source_value,
       '#disabled' => TRUE,
+      '#skip_validation' => TRUE,
       '#attributes' => ['readonly' => TRUE],
     ];
     unset($element['source']['#markup']);
