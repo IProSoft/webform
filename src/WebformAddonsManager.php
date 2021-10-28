@@ -269,6 +269,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Javascript Field.
+    $projects['webform_javascript_field'] = [
+      'title' => $this->t('Webform Javascript Field'),
+      'description' => $this->t('Provides ability to specify JavaScript snippet for Webform components.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_javascript_field'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Layout Container.
     $projects['webform_layout_container'] = [
       'title' => $this->t('Webform Layout Container'),
