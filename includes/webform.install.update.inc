@@ -3051,7 +3051,7 @@ function webform_update_8160() {
   }
 
   // Remove nested calculation elements.
-  $elements = WebformWebformYaml::decode($config->get('elements'));
+  $elements = WebformYaml::decode($config->get('elements'));
   if (isset($elements['calculation']) && isset($elements['calculation']['calculation'])) {
     $path = drupal_get_path('module', 'webform') . '/modules/webform_examples/config/install/webform.webform.example_computed_elements.yml';
     $data = WebformYaml::decode(file_get_contents($path));
@@ -3226,7 +3226,7 @@ function webform_update_8173() {
     if (strpos($data['elements'], 'webform_flexbox') !== FALSE
       && strpos($data['elements'], 'webform_email_confirm') !== FALSE
     ) {
-      $elements = WebformWebformYaml::decode($data['elements']);
+      $elements = WebformYaml::decode($data['elements']);
       _webform_update_8173($elements);
       $data['elements'] = WebformYaml::encode($elements);
       $webform_config->setData($data)->save();
@@ -3317,7 +3317,7 @@ function webform_update_8179() {
 
     // Try to decode elements.
     try {
-      $elements = WebformWebformYaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
@@ -3464,7 +3464,7 @@ function webform_update_8186() {
 
     // Try to decode elements.
     try {
-      $elements = WebformWebformYaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
@@ -3780,7 +3780,7 @@ function webform_update_8198() {
 
     // Try to decode elements.
     try {
-      $elements = WebformWebformYaml::decode($elements);
+      $elements = WebformYaml::decode($elements);
     }
     catch (\Exception $exception) {
       continue;
