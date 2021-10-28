@@ -118,8 +118,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         continue;
       }
 
-      $library_exists = $this->exists($library_name);
-      $library_path = ($library_exists) ? '/' . $this->find($library_name) : '/libraries/' . $library_name;
+      $library_exists = $this->exists($library['name']);
+      $library_path = ($library_exists) ? '/' . $this->find($library['name']) : '/libraries/' . $library['name'];
 
       $t_args = [
         '@title' => $library['title'],
@@ -549,19 +549,22 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Sort libraries by key.
     ksort($libraries);
 
-    // Map ckeditor plugin libraries and support CKEditor plugins without
-    // the ckeditor.* prefix.
+    // Update ckeditor plugin libraries to support CKEditor plugins installed
+    // without the ckeditor.* prefix.
     // @see https://www.drupal.org/project/fakeobjects
     // @see https://www.drupal.org/project/anchor_link
     foreach ($libraries as $library_name => $library) {
+      // Add name to all libraries, so that it can be modified if a ckeditor
+      // plugin is installed without the ckeditor.* prefix.
+      $libraries[$library_name]['name'] = $library_name;
       if (strpos($library_name, 'ckeditor.') === 0) {
-        $library_path = $this->find($library_name)
-          ?: $this->find(str_replace('ckeditor.', '', $library_name));
+        $ckeditor_library_name = str_replace('ckeditor.', '', $library_name);
+        $library_path = $this->find($ckeditor_library_name);
         if ($library_path) {
+          $libraries[$library_name]['name'] = $ckeditor_library_name;
           $libraries[$library_name]['plugin_path'] = str_replace('libraries/' . $library_name, $library_path, $library['plugin_path']);
         }
       }
-
     }
 
     // Move deprecated libraries last.
