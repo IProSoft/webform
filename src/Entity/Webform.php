@@ -718,9 +718,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function isResultsDisabled() {
-    $elements = $this->getElementsDecoded();
-    $settings = $this->getSettings();
-    return (!empty($settings['results_disabled']) || !empty($elements['#method'])) ? TRUE : FALSE;
+    return ($this->getSetting('results_disabled') || $this->getSetting('form_method')) ? TRUE : FALSE;
   }
 
   /**
@@ -1101,6 +1099,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'form_access_denied_message' => '',
       'form_access_denied_attributes' => [],
       'form_file_limit' => '',
+      'form_method' => '',
+      'form_action' => '',
+      'form_attributes' => [],
       'share' => FALSE,
       'share_node' => FALSE,
       'share_theme_name' => '',

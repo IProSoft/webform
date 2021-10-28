@@ -4257,6 +4257,40 @@ function webform_update_8624() {
 /**
  * Issue #3240393: Allow the number of webform per page to configurable.
  */
-function webform_update_8215() {
+function webform_update_8625() {
   _webform_update_actions();
+}
+
+/**
+ * Issue #3240399: Move form #method, #action, and #attributes from properties to settings
+ */
+function webform_update_8626() {
+  // Add new method, action, and attributes settings to all webforms.
+  _webform_update_webform_settings();
+
+  // Move properties to settings.
+  $properties = [
+    '#method' => 'form_method',
+    '#action' => 'form_action',
+    '#attributes' => 'form_attributes',
+  ];
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+    $elements = WebformYaml::decode($data['elements']);
+    $has_property = FALSE;
+    foreach ($properties as $property_name => $setting_name) {
+      if (isset($elements[$property_name])) {
+        $data['settings'][$setting_name] = $elements[$property_name];
+        unset($elements[$property_name]);
+        $has_property = TRUE;
+      }
+    }
+    if ($has_property) {
+      $data['elements'] = WebformYaml::encode($elements);
+      $webform_config->setData($data);
+      $webform_config->save();
+    }
+  }
 }

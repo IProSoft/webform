@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: open
 dependencies:
@@ -63,6 +64,7 @@ elements: |
       '#default_value': |
         {textarea line 1}
         {textarea line 2}
+        
     textfield:
       '#type': textfield
       '#title': textfield
@@ -237,7 +239,7 @@ elements: |
       '#default_value':
         - 1
         - 2
-
+  
 css: ''
 javascript: ''
 settings:
@@ -279,6 +281,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
