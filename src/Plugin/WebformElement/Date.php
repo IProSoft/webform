@@ -84,6 +84,14 @@ class Date extends DateBase {
       // Must manually set 'data-drupal-date-format' to trigger date picker.
       // @see \Drupal\Core\Render\Element\Date::processDate
       $element['#attributes']['data-drupal-date-format'] = [$element['#date_date_format']];
+
+      if ($this->moduleHandler->moduleExists('jquery_ui_datepicker')) {
+        $element['#attached']['library'][] = 'jquery_ui_datepicker/datepicker';
+      }
+      else {
+        // If D8, use the old core libarary.
+        $element['#attached']['library'][] = 'core/drupal.date';
+      }
     }
   }
 
