@@ -5,7 +5,7 @@ namespace Drupal\Tests\webform_ui\FunctionalJavascript;
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
 /**
- * Tests webform UI element JavasScript.
+ * Tests webform UI element JavaScript.
  *
  * @group webform_ui
  */
