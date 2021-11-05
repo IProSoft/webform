@@ -120,6 +120,7 @@ function hook_webform_element_configuration_form_alter(array &$form, \Drupal\Cor
     '#type' => 'textfield',
     '#title' => t('Custom data'),
     '#description' => t("The custom data value will be added to the \$element's render array attributes."),
+    // The element #default_value is auto-populated upstream and should NOT be set here.
   ];
 }
 
