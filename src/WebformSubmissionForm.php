@@ -561,8 +561,11 @@ class WebformSubmissionForm extends ContentEntityForm {
       ];
     }
 
-    // Only prepopulate data when a webform is initially loaded.
-    if (!$form_state->isRebuilding()) {
+    // Only prepopulate data when a webform is initially loaded or ajax is
+    // triggering a restart.
+    if (!$form_state->isRebuilding() || $form_state->get('is_ajax_restart')) {
+      $form_state->set('is_ajax_restart', FALSE);
+
       $data = $webform_submission->getData();
       $this->prepopulateData($data);
       $webform_submission->setData($data);
@@ -1855,6 +1858,11 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Rebuild or reset the form if reloading the current form via AJAX.
     if ($this->isAjax()) {
+      // Track that Ajax is restarting the form so that the submission
+      // can be prepopulated.
+      // @see \Drupal\webform\WebformSubmissionForm::buildForm
+      $form_state->set('is_ajax_restart', TRUE);
+
       // On update, rebuild and display message unless ?destination= is set.
       // @see \Drupal\webform\WebformSubmissionForm::setConfirmation
       if ($state === WebformSubmissionInterface::STATE_UPDATED) {
