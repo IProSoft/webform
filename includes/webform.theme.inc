@@ -492,6 +492,22 @@ function webform_preprocess_fieldset(&$variables) {
   if (isset($element['#webform_key'])) {
     unset($variables['attributes']['required']);
   }
+
+  // Add role="radiogroup" on fieldsets containing radiobuttons.
+  // Add aria-required="true" only on fieldsets containing required
+  // radiobuttons.
+  //
+  // Issue #3240249: Aria-required on fieldset trigger accessibility fails.
+  // @see https://www.drupal.org/project/webform/issues/3240249
+  if ($variables['element']['#type'] === 'radios') {
+    $variables['attributes']['role'] = 'radiogroup';
+    $id = $variables['attributes']['id'] . '-legend';
+    $variables['legend']['attributes']['id'] = $id;
+    $variables['attributes']['aria-labelledby'] = $id;
+  }
+  elseif (isset($variables['attributes']['aria-required'])) {
+    unset($variables['attributes']['aria-required']);
+  }
 }
 
 /******************************************************************************/
