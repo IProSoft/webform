@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
@@ -111,10 +111,10 @@ class WebformExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscriber {
   /**
    * Handles a 403 error for HTML.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
-   *   The exception event to process.
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+   *   The event to process.
    */
-  public function on403(ExceptionEvent $event) {
+  public function on403(GetResponseForExceptionEvent $event) {
     if ($event->getRequestType() !== HttpKernelInterface::MASTER_REQUEST) {
       return;
     }
@@ -126,13 +126,13 @@ class WebformExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscriber {
   /**
    * Redirect to user login when access is denied to private webform file.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
-   *   The exception event to process.
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+   *   The event to process.
    *
    * @see webform_file_download()
    * @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::accessFileDownload
    */
-  public function on403RedirectPrivateFileAccess(ExceptionEvent $event) {
+  public function on403RedirectPrivateFileAccess(GetResponseForExceptionEvent $event) {
     $path = $event->getRequest()->getPathInfo();
     // Make sure the user is trying to access a private webform file upload.
     if (strpos($path, '/system/files/webform/') !== 0) {
@@ -157,10 +157,10 @@ class WebformExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscriber {
   /**
    * Redirect to user login when access is denied for webform or submission.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
-   *   The exception event to process.
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+   *   The event to process.
    */
-  public function on403RedirectEntityAccess(ExceptionEvent $event) {
+  public function on403RedirectEntityAccess(GetResponseForExceptionEvent $event) {
     $url = Url::fromUserInput($event->getRequest()->getPathInfo());
     if (!$url) {
       return;
@@ -260,7 +260,7 @@ class WebformExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscriber {
   /**
    * {@inheritdoc}
    */
-  public function onException(ExceptionEvent $event) {
+  public function onException(GetResponseForExceptionEvent $event) {
     // Only handle 403 exception.
     // @see \Drupal\webform\EventSubscriber\WebformExceptionHtmlSubscriber::on403
     $exception = $event->getException();
@@ -282,14 +282,14 @@ class WebformExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscriber {
   /**
    * Redirect to user login with destination and display custom message.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
-   *   The exception event to process.
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+   *   The event to process.
    * @param null|string $message
    *   (Optional) Message to be display on user login.
    * @param null|\Drupal\Core\Entity\EntityInterface $entity
    *   (Optional) Entity to be used when replacing tokens.
    */
-  protected function redirectToLogin(ExceptionEvent $event, $message = NULL, EntityInterface $entity = NULL) {
+  protected function redirectToLogin(GetResponseForExceptionEvent $event, $message = NULL, EntityInterface $entity = NULL) {
     // Display message.
     if ($message) {
       $this->setMessage($message, $entity);
