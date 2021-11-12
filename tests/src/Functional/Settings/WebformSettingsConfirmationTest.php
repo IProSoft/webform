@@ -191,6 +191,16 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $this->postSubmission($webform_confirmation_url);
     $this->assertUrl('/some-absolute-path');
 
+    // Check confirmation URL using absolute path with querystring
+    $webform_confirmation_url
+      ->setSetting('confirmation_url', '/some-absolute-path?some=parameter')
+      ->setSetting('confirmation_exclude_token', TRUE)
+      ->save();
+    $this->postSubmission($webform_confirmation_url);
+    $this->assertEqual( parse_url($this->getSession()->getCurrentUrl(), PHP_URL_QUERY), 'some=parameter');
+    $this->postSubmission($webform_confirmation_url, [], NULL, ['query' => ['test' => 'parameter']]);
+    $this->assertEqual( parse_url($this->getSession()->getCurrentUrl(), PHP_URL_QUERY), 'some=parameter&test=parameter');
+
     // Check confirmation URL using invalid path.
     $webform_confirmation_url
       ->setSetting('confirmation_url', 'invalid')
