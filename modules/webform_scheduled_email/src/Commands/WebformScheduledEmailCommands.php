@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:ignoreFile
+
 namespace Drupal\webform_scheduled_email\Commands;
 
 use Consolidation\AnnotatedCommand\CommandData;

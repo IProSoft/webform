@@ -196,7 +196,7 @@ interface WebformScheduledEmailManagerInterface {
    * @param string $handler_id
    *   The webform handler ID.
    *
-   * @return \stdClass|null
+   * @return object|null
    *   The scheduled email record or NULL
    */
   public function load(WebformSubmissionInterface $webform_submission, $handler_id);

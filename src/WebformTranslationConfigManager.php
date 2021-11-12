@@ -677,7 +677,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
 
     /** @var \Drupal\webform\Plugin\WebformElement\WebformCustomComposite $webform_element */
     $webform_element = $this->elementManager->getElementInstance($element);
-    $webform_element->initializeCompositeElements($element);;
+    $webform_element->initializeCompositeElements($element);
     $composite_elements = $element['#webform_composite_elements'];
 
     $property_value = $translation_element[$property_name];
@@ -891,7 +891,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     // Undo nl2br() so that the HTML markup's spacing is correct.
     // @see \Drupal\config_translation\FormElement\FormElementBase::getSourceElement
     // @see https://stackoverflow.com/questions/2494754/opposite-of-nl2br-is-it-str-replace
-    $element['source']['#markup'] = preg_replace("#<br />$#m","", (string) $element['source']['#markup']);
+    $element['source']['#markup'] = preg_replace("#<br />$#m", "", (string) $element['source']['#markup']);
     $element['translation']['#type'] = 'webform_html_editor';
   }
 

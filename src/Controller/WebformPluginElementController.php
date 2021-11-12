@@ -88,7 +88,7 @@ class WebformPluginElementController extends ControllerBase implements Container
       'access_update_users',
       'access_view_roles',
       'access_view_users',
-    ];;
+    ];
     $default_properties = array_combine($default_properties, $default_properties);
 
     // Test element is only enabled if the Webform Devel and UI module are

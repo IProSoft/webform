@@ -212,13 +212,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
   }
 
   /**
-   * Determine if a library's directory exist.
-   *
-   * @param string $name
-   *   The library's directory name.
-   *
-   * @return bool
-   *   TRUE if the library's directory exist.
+   * {@inheritdoc}
    */
   public function exists($name) {
     // @todo Inject dependency once Drupal 8.9.x is only supported.
@@ -231,14 +225,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
   }
 
   /**
-   * Finds files that are located in the supported 'libraries' directories.
-   *
-   * @param string $path
-   *   The path for the library file to find.
-   *
-   * @return string|false
-   *   The real path to the library file relative to the root directory. If the
-   *   library cannot be found then FALSE.
+   * {@inheritdoc}
    */
   public function find($name) {
     if (\Drupal::hasService('library.libraries_directory_file_finder')) {

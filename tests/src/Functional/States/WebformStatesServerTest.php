@@ -459,7 +459,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $webform = Webform::load('test_states_server_file');
 
     // Check required error.
-    $files = $this->getTestFiles('text');;
+    $files = $this->getTestFiles('text');
     $edit = [
       'files[trigger_file]' => \Drupal::service('file_system')->realpath($files[0]->uri),
     ];

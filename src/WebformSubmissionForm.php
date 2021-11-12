@@ -637,7 +637,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     return $form;
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -1569,6 +1568,8 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   An associative array containing the structure of the form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
+   * @param bool $skip_preview
+   *   Skips the preview page.
    */
   public function next(array &$form, FormStateInterface $form_state, $skip_preview = FALSE) {
     if ($form_state->getErrors()) {
@@ -2078,7 +2079,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Webform functions
+  // Webform functions.
   /* ************************************************************************ */
 
   /**
@@ -2113,7 +2114,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Wizard page functions
+  // Wizard page functions.
   /* ************************************************************************ */
 
   /**
@@ -2301,7 +2302,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Webform state functions
+  // Webform state functions.
   /* ************************************************************************ */
 
   /**
@@ -2440,7 +2441,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       // Get redirect URL from special paths: '<front>' and '<none>'.
       $redirect_url = $this->pathValidator->getUrlIfValid($confirmation_url);
     }
-    else  {
+    else {
       // Get redirect URL by validating the Drupal relative path which does not
       // begin with a forward slash (/).
       $confirmation_url = $this->aliasManager->getPathByAlias('/' . $confirmation_url);
@@ -2481,7 +2482,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Elements functions
+  // Elements functions.
   /* ************************************************************************ */
 
   /**
@@ -2777,7 +2778,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Account related functions
+  // Account related functions.
   /* ************************************************************************ */
 
   /**
@@ -2964,7 +2965,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /* ************************************************************************ */
-  // Helper functions
+  // Helper functions.
   /* ************************************************************************ */
 
   /**

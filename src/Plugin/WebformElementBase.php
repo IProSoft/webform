@@ -3388,7 +3388,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('Properties do not have to be prepended with a hash (#) character, the hash character will be automatically added to the custom properties.') .
         '<br /><br />' .
         $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
-      '#default_value' => $custom_properties ,
+      '#default_value' => $custom_properties,
       '#parents' => ['properties', 'custom'],
     ];
 

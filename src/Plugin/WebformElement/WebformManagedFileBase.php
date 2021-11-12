@@ -958,8 +958,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         '#type' => 'webform_message',
         '#message_message' => '<strong>' . $this->t('Saving of results is disabled.') . '</strong> ' .
           $this->t('Uploaded files will be temporarily stored on the server and referenced in the database for %interval.', ['%interval' => $temporary_interval]) . ' ' .
-          $this->t('Uploaded files should be attached to an email and/or remote posted to an external server.')
-        ,
+          $this->t('Uploaded files should be attached to an email and/or remote posted to an external server.'),
         '#message_type' => 'warning',
         '#access' => TRUE,
       ];

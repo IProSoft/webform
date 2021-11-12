@@ -1518,8 +1518,8 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // Cleanup sids because drafts could have been purged or the webform
     // submission could have been deleted.
     $_SESSION['webform_submissions'] = $this->getQuery()
-      // Disable access check because user having 'sid' in his $_SESSION already
-      // implies he has access to it.
+      // Disable access check because user having 'sid' in their $_SESSION already
+      // implies they have access to it.
       ->accessCheck(FALSE)
       ->condition('sid', $_SESSION['webform_submissions'], 'IN')
       ->sort('sid')

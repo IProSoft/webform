@@ -136,7 +136,6 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    * "LogicException: The database connection is not serializable." exceptions
    * from being thrown when a form is serialized via an Ajax callback and/or
    * form build.
-   *
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = new static($configuration, $plugin_id, $plugin_definition);

@@ -162,7 +162,8 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
 
     // Runs Reschedule yesterday submissions which includes all submissions.
     $stats = $scheduled_manager->cron();
-    $this->assertNotEqual($stats['sent'], 6);$this->assertEqual($stats['sent'], 3);
+    $this->assertNotEqual($stats['sent'], 6);
+    $this->assertEqual($stats['sent'], 3);
     $this->assertEqual($scheduled_manager->stats($webform_schedule), [
       'total' => 3,
       'waiting' => 0,
