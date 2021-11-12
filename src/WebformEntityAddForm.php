@@ -184,6 +184,11 @@ class WebformEntityAddForm extends BundleEntityFormBase {
       }
     }
 
+    // Reset webform categories cache.
+    /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+    $webform_storage = $this->entityTypeManager->getStorage('webform');
+    $webform_storage->resetCategoriesCache();
+
     $form_state->setRedirectUrl(Url::fromRoute('entity.webform.edit_form', ['webform' => $this->getEntity()->id()]));
   }
 
