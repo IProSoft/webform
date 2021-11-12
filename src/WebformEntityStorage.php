@@ -339,19 +339,18 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
    *   results for specified webform
    */
   public function getTotalNumberOfResults($webform_id = NULL) {
-    if (!isset($this->totals)) {
+    if ($webform_id) {
+      $query = $this->database->select('webform_submission', 'ws');
+      $query->condition('webform_id', $webform_id);
+      $query->addExpression('COUNT(sid)', 'results');
+      return $query->execute()->fetchField() ?: 0;
+    }
+    else {
       $query = $this->database->select('webform_submission', 'ws');
       $query->fields('ws', ['webform_id']);
       $query->addExpression('COUNT(sid)', 'results');
       $query->groupBy('webform_id');
-      $this->totals = array_map('intval', $query->execute()->fetchAllKeyed());
-    }
-
-    if ($webform_id) {
-      return (isset($this->totals[$webform_id])) ? $this->totals[$webform_id] : 0;
-    }
-    else {
-      return $this->totals;
+      return array_map('intval', $query->execute()->fetchAllKeyed());
     }
   }
 
