@@ -90,14 +90,14 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
   public function css(Request $request, WebformInterface $webform) {
     $assets = $webform->getAssets();
     if ($webform->access('update')) {
-      $response = new WebformUncacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']);
+      return new WebformUncacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']);
     }
     else {
       $response = new CacheableResponse($assets['css'], 200, ['Content-Type' => 'text/css']);
+      return $response
+        ->addCacheableDependency($webform)
+        ->addCacheableDependency($this->config('webform.settings'));
     }
-    return $response
-      ->addCacheableDependency($webform)
-      ->addCacheableDependency($this->config('webform.settings'));
   }
 
   /**
@@ -114,14 +114,14 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
   public function javascript(Request $request, WebformInterface $webform) {
     $assets = $webform->getAssets();
     if ($webform->access('update')) {
-      $response = new WebformUncacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
+      return new WebformUncacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
     }
     else {
       $response = new CacheableResponse($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
+      return $response
+        ->addCacheableDependency($webform)
+        ->addCacheableDependency($this->config('webform.settings'));
     }
-    return $response
-      ->addCacheableDependency($webform)
-      ->addCacheableDependency($this->config('webform.settings'));
   }
 
   /**
