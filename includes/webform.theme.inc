@@ -43,6 +43,9 @@ function webform_theme() {
     'webform_actions' => [
       'render element' => 'element',
     ],
+    'webform_access_denied' => [
+      'variables' => ['message' => '', 'attributes' => []],
+    ],
 
     'webform_handler_action_summary' => [
       'variables' => ['settings' => NULL, 'handler' => NULL],
