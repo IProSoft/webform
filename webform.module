@@ -542,6 +542,14 @@ function webform_menu_links_discovered_alter(&$links) {
       }
     }
 
+    // Make sure weight are integers and not floats which throw fatal errors
+    // for PostgreSQL.
+    // @see https://www.drupal.org/project/webform/issues/3247861
+    // @see https://www.drupal.org/project/drupal/issues/3248199
+    foreach($menu_links as &$menu_link) {
+      $menu_link['weight'] = (int) $menu_link['weight'];
+    }
+
     $links += $menu_links;
   }
 }
