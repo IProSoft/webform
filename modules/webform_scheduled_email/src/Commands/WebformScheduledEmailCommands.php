@@ -72,6 +72,7 @@ class WebformScheduledEmailCommands extends DrushCommands {
    *   The handler ID you want the cron task to be executed for
    * @option schedule_limit
    *   The maximum number of emails to be scheduled. If set to 0 no emails will be scheduled. (Default 1000)
+   *
    * @option send_limit
    *   The maximum number of emails to be sent. If set to 0 no emails will be sent. (Default 500)
    * @aliases wfsec,webform-scheduled-email-cron

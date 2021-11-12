@@ -1095,9 +1095,8 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
         /** @var \Drupal\webform\Plugin\WebformElementAttachmentInterface $attachment_element_plugin */
         $attachment_element_plugin = $this->elementManager->getElementInstance($attachment_element);
         $attachment_batch_limit = $attachment_element_plugin->getExportAttachmentsBatchLimit();
-        if ($attachment_batch_limit
-          && $attachment_batch_limit < $batch_limit)  {
-            $batch_limit = $attachment_batch_limit;
+        if ($attachment_batch_limit && $attachment_batch_limit < $batch_limit) {
+          $batch_limit = $attachment_batch_limit;
         }
       }
     }

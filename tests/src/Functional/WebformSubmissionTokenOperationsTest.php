@@ -73,7 +73,6 @@ class WebformSubmissionTokenOperationsTest extends WebformBrowserTestBase {
     $this->assertNoRaw('Submission information');
     $this->assertNoRaw('<label>textfield</label>');
 
-
     /**************************************************************************/
     /* Update */
     /**************************************************************************/

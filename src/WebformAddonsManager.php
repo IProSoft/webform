@@ -157,7 +157,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
-   // Element: OpenLayers.
+    // Element: OpenLayers.
     $projects['openlayersd8'] = [
       'title' => $this->t('OpenLayers'),
       'description' => $this->t('Provides an example that shows how to create a Webform composite.'),
@@ -488,7 +488,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'url' => Url::fromUri('https://www.drupal.org/project/webform_feedback'),
       'category' => 'enhancement',
     ];
-
 
     // Enhancement: Webform GeoIP Restriction.
     $projects['webform_geoip_restriction'] = [
@@ -1779,7 +1778,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'url' => Url::fromUri('https://www.drupal.org/project/webform_workflows_element'),
       'category' => 'workflow',
     ];
-
 
     /**************************************************************************/
     // Development.

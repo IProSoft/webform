@@ -64,7 +64,6 @@
           }
         }
 
-
         /**
          * Reset the filtering
          *

@@ -58,7 +58,7 @@
         // @see http://stackoverflow.com/questions/16702398/convert-a-php-date-format-to-a-jqueryui-datepicker-date-format
         // @see http://php.net/manual/en/function.date.php
         options.dateFormat = dateFormat
-        // Year.
+          // Year.
           .replace('Y', 'yy') // A full numeric representation of a year, 4 digits (1999 or 2003)
           .replace('y', 'y') // A two digit representation of a year (99 or 03)
           // Month.

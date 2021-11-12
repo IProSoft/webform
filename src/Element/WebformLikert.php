@@ -157,7 +157,7 @@ class WebformLikert extends FormElement {
         // Add required attributes to input without setting the <label>
         // to required.
         if ($element['#required']) {
-          $answer_attributes['required'] ='required';
+          $answer_attributes['required'] = 'required';
           $answer_attributes['aria-required'] = 'true';
         }
 

@@ -12,10 +12,7 @@ use Drupal\webform\Utility\WebformElementHelper;
 /**
  * Test element callback that should be ignored.
  *
- * @param array $element
- *   An element.
- *
- * @return array
+ * @param mixed $element
  *   An element.
  */
 function webform_test_ignored_element_callback($element = NULL) {

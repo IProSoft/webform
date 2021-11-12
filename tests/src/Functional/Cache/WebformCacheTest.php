@@ -48,7 +48,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the name element does not have #cache because the
     // '[current-user:mail]' is set via
-    // \Drupal\webform\WebformSubmissionForm::setEntity
+    // \Drupal\webform\WebformSubmissionForm::setEntity.
     $this->assertFalse(isset($form['elements']['email']['#cache']));
     $this->assertEqual($form['elements']['email']['#default_value'], '');
 

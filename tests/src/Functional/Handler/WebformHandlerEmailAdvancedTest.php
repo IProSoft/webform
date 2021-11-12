@@ -12,6 +12,11 @@ use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
  */
 class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
 
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
   public static $modules = ['filter', 'file', 'webform'];
 
   /**

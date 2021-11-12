@@ -332,14 +332,13 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    */
   public function isOverridden();
 
-
   /**
    * Sets the webform updating state.
    *
    * Setting the updating state to TRUE ensure that translated elements are
    * not overridden
    *
-   * @param bool $override
+   * @param bool $updating
    *   The updating state of the Webform.
    *
    * @return $this

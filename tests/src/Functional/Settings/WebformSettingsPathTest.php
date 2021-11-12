@@ -14,6 +14,11 @@ use Drupal\webform\WebformInterface;
  */
 class WebformSettingsPathTest extends WebformBrowserTestBase {
 
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
   public static $modules = ['path', 'webform', 'node'];
 
   /**

@@ -39,10 +39,11 @@ abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
    *
    * @param array $settings
    *   Webform settings.
-   * @param $entity_type_id
+   * @param string $entity_type_id
    *   The entity type id. (webform or webform_submission)
    *
    * @return array
+   *   Bulk operation settings.
    */
   protected function buildBulkOperations(array $settings, $entity_type_id) {
     $element = [
@@ -108,7 +109,7 @@ abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
     return $element;
   }
 
-    /**
+  /**
    * Form API callback. Validate bulk form actions.
    */
   public static function validateBulkFormActions(array &$element, FormStateInterface $form_state) {

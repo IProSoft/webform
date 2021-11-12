@@ -4063,7 +4063,7 @@ function webform_update_8606() {
 
     if ($path_changed) {
       $webform_config->setData($data)->save();
-      /** @var WebformInterface $webform */
+      /** @var \Drupal\webform\WebformInterface $webform */
       $webform = Webform::load($data['id']);
       $webform->setSetting('page_submit_path', $data['settings']['page_submit_path']);
       $webform->setSetting('page_confirm_path', $data['settings']['page_confirm_path']);
@@ -4206,7 +4206,7 @@ function webform_update_8620() {
   webform_update_8209();
 }
 
-  /**
+/**
  * Issue #3158114: Delete own submission with secure token not working.
  */
 function webform_update_8621() {
@@ -4262,7 +4262,7 @@ function webform_update_8625() {
 }
 
 /**
- * Issue #3240399: Move form #method, #action, and #attributes from properties to settings
+ * Issue #3240399: Move form #method, #action, and #attributes.
  */
 function webform_update_8626() {
   // Add new method, action, and attributes settings to all webforms.

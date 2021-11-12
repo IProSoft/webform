@@ -65,7 +65,6 @@ function webform_form_config_translation_add_form_alter(&$form, FormStateInterfa
   $translation_config_manager->alterForm($form, $form_state);
 }
 
-
 /**
  * Implements hook_form_FORM_ID_alter() for config translation edit form.
  */
