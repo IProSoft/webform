@@ -1,0 +1,30 @@
+<ruleset name="coding-style">
+
+  <description>Webform coding styles</description>
+
+  <!-- Use Drupal coding standards -->
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+
+  <!-- Test all the Drupal PHP file extensions -->
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,js,css" />
+
+  <!-- Issue #3185082: Drupal.Arrays.Array.LongLineDeclaration make me write less readable code -->
+  <rule ref="Drupal.Arrays.Array.LongLineDeclaration">
+    <exclude-pattern>*</exclude-pattern>
+  </rule>
+
+  <!-- Issue #3173782: Increase line length limit -->
+  <rule ref="Drupal.Files.LineLength">
+    <properties>
+      <property name="lineLimit" value="120" />
+      <property name="absoluteLineLimit" value="0" />
+    </properties>
+  </rule>
+
+  <rule ref="Drupal.Strings.UnnecessaryStringConcat">
+    <exclude-pattern>*</exclude-pattern>
+  </rule>
+
+</ruleset>
+
