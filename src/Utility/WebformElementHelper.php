@@ -684,18 +684,18 @@ class WebformElementHelper {
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Validate callbacks to trigger or suppress validation.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // ISSUE: Hidden elements still need to call #element_validate because
   // certain elements, including managed_file, checkboxes, password_confirm,
   // etc…, will also massage the submitted values via #element_validate.
   //
   // SOLUTION: Call #element_validate for all hidden elements but suppresses
   // #element_validate errors.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Set element validate callback.

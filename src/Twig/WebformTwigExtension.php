@@ -138,12 +138,12 @@ class WebformTwigExtension extends \Twig_Extension {
     return (WebformHtmlHelper::containsHtml($value)) ? ['#markup' => $value, '#allowed_tags' => WebformXss::getAdminTagList()] : $value;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Token methods used by the 'WebformComputedTwig' and 'EmailWebformHandler'.
   //
   // @see \Drupal\webform\Plugin\WebformElement\WebformComputedTwig
   // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Build reusable Twig help.

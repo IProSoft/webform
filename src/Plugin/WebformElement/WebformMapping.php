@@ -93,7 +93,7 @@ class WebformMapping extends WebformElementBase {
     return array_merge(parent::defineTranslatableProperties(), ['source', 'destination']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

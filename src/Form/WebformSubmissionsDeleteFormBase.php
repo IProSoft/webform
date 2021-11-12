@@ -118,9 +118,9 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
     return $this->t('Webform submissions cleared.');
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Batch API.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Batch API; Initialize batch operations.

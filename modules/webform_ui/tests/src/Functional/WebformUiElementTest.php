@@ -45,9 +45,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
 
     $webform_contact = Webform::load('contact');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Multiple.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check multiple enabled before submission.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/name/edit');
@@ -61,9 +61,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->assertRaw('<select data-drupal-selector="edit-properties-multiple-container-cardinality" disabled="disabled" id="edit-properties-multiple-container-cardinality" name="properties[multiple][container][cardinality]" class="form-select">');
     $this->assertRaw('<em>There is data for this element in the database. This setting can no longer be changed.</em>');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Reordering.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check original contact element order.
     $this->assertEqual(['name', 'email', 'subject', 'message', 'actions'], array_keys($webform_contact->getElementsDecodedAndFlattened()));
@@ -83,9 +83,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $webform_contact = Webform::load('contact');
     $this->assertEqual(['message', 'subject', 'email', 'name', 'actions'], array_keys($webform_contact->getElementsDecodedAndFlattened()));
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Hierarchy.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Create a simple test form.
     $values = ['id' => 'test'];
@@ -126,9 +126,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->assertRaw('Parent <em class="placeholder">details_01</em> key is not valid.');
     $this->assertRaw('Parent <em class="placeholder">details_02</em> key is not valid.');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Required.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check name is required.
     $this->drupalGet('/admin/structure/webform/manage/contact');
@@ -141,9 +141,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalPostForm('/admin/structure/webform/manage/contact', $edit, 'Save elements');
     $this->assertNoFieldChecked('edit-webform-ui-elements-name-required');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Notes.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Add admin notes to contact name element.
     $edit = [
@@ -152,9 +152,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalPostForm('/admin/structure/webform/manage/contact/element/name/edit', $edit, 'Save');
     $this->assertRaw('<span data-drupal-selector="edit-webform-ui-elements-name-title-notes" class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Your Name" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Your Name&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is an admin note.&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // CRUD
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check that 'Save + Add element' is only visible in dialogs.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/textfield');
@@ -215,9 +215,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/password');
     $this->assertResponse(403);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Change type
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check create element.
     $this->drupalPostForm('/admin/structure/webform/manage/contact/element/add/textfield', ['key' => 'test', 'properties[title]' => 'Test'], 'Save');
@@ -261,9 +261,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/manage/contact/element/test_color/change');
     $this->assertResponse(404);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Date
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check GNU Date Input Format validation.
     $edit = [
@@ -272,9 +272,9 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->drupalPostForm('/admin/structure/webform/manage/test_element_date/element/date_min_max_dynamic/edit', $edit, 'Save');
     $this->assertRaw('The Default value could not be interpreted in <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>.');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Off-canvas width.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Check add off-canvas element width is 800.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add');

@@ -197,9 +197,9 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
 
     $webform = Webform::load('test_element_managed_file');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Test immediately delete file.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Upload files.
     $sid = $this->postSubmissionTest($webform);
@@ -217,9 +217,9 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     $managed_file_single = $this->fileLoad($submission->getElementData('managed_file_single'));
     $this->assertNull($managed_file_single);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Test disabling immediately deleted temporary managed files.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Disable deleting of temporary files.
     $config = \Drupal::configFactory()->getEditable('webform.settings');
@@ -236,9 +236,9 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     $this->assertNotNull($managed_file_single);
     $this->assertTrue($managed_file_single->isTemporary());
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Test disabling unused files marked temporary.
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Disable deleting of temporary files.
     $config = \Drupal::configFactory()->getEditable('webform.settings');
@@ -284,9 +284,9 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     $this->assertEqual(0, \Drupal::database()->query('SELECT COUNT(fid) AS total FROM {file_usage}')->fetchField());
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper functions. From: \Drupal\file\Tests\FileFieldTestBase::getTestFile
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Check file upload.

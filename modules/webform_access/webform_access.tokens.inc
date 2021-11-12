@@ -67,7 +67,7 @@ function webform_access_token_info() {
   }
   $tokens['webform_access'] = $webform_access;
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   return ['types' => $types, 'tokens' => $tokens];
 }

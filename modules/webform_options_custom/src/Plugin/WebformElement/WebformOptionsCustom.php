@@ -49,7 +49,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
     return $properties;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

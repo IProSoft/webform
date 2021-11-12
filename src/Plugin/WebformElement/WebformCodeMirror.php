@@ -45,7 +45,7 @@ class WebformCodeMirror extends WebformElementBase {
     return array_merge(parent::defineTranslatableProperties(), ['default_value']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

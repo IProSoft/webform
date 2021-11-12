@@ -35,9 +35,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
   public function testFormat() {
     $this->drupalLogin($this->rootUser);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     /* Format (single) element as HTML and text */
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load('test_element_format');
@@ -111,9 +111,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       $this->assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));
     }
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     /* Format managed file element as HTML and text */
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $sid = $this->postSubmissionTest($webform);
     /** @var \Drupal\webform\WebformSubmissionInterface $submission */
@@ -159,9 +159,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       $this->assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));
     }
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     /* Format multiple element as HTML and text */
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     /** @var \Drupal\webform\WebformInterface $webforms */
     $webforms = Webform::load('test_element_format_multiple');
@@ -224,9 +224,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       $this->assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));
     }
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     /* Format element using tokens */
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     /** @var \Drupal\webform\WebformInterface $webform_format_token */
     $webform_format_token = Webform::load('test_element_format_token');

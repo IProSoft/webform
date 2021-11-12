@@ -77,7 +77,7 @@ class Telephone extends TextBase {
     return array_merge(parent::defineTranslatableProperties(), ['international_initial_country']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

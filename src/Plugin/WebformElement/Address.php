@@ -111,7 +111,7 @@ class Address extends WebformCompositeBase {
     return $properties;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}
@@ -345,9 +345,9 @@ class Address extends WebformCompositeBase {
       '#title' => $this->t('Address settings'),
     ];
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // Copied from: \Drupal\address\Plugin\Field\FieldType\AddressItem::fieldSettingsForm
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $languages = $this->languageManager->getLanguages(LanguageInterface::STATE_ALL);
     $language_options = [];

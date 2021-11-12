@@ -28,7 +28,7 @@ class WebformNodeAccessClosedTest extends WebformNodeBrowserTestBase {
 
     $account = $this->drupalCreateUser(['access content']);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalLogin($account);
 

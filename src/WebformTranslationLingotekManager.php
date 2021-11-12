@@ -179,9 +179,9 @@ class WebformTranslationLingotekManager implements WebformTranslationLingotekMan
     $data['webform.settings']['test.names'] = Yaml::encode($data['webform.settings']['test.names']);
   }
 
-  /******************************************************************************/
+  /* ************************************************************************** */
   // Lingotek decode/encode token functions.
-  /******************************************************************************/
+  /* ************************************************************************** */
 
   /**
    * Encode all tokens so that they won't be translated.

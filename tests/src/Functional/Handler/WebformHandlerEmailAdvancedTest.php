@@ -51,7 +51,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load('test_handler_email_advanced');
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Generate a test submission with a file upload.
     $this->drupalLogin($this->rootUser);

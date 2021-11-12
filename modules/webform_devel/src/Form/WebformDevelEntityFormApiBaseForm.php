@@ -77,9 +77,9 @@ abstract class WebformDevelEntityFormApiBaseForm extends EntityForm {
     $this->translatableProperties = $translatable_properties;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper functions.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Cleanup webform elements.

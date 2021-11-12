@@ -71,7 +71,7 @@ class DateTime extends DateBase {
     return array_merge(parent::defineTranslatableProperties(), ['date_date_placeholder', 'date_time_placeholder']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

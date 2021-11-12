@@ -447,13 +447,13 @@ trait WebformEntityReferenceTrait {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
     // IMPORTANT: Most of the below code and #ajax tweaks compensate for the
     // fact that the EntityReferenceSelection plugin specifically targets
     // entity references managed via the Field API.
     // @see \Drupal\webform\Plugin\WebformElementBase::setConfigurationFormDefaultValueRecursive
     // @see \Drupal\webform\Plugin\WebformElementBase::buildConfigurationForm
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // Get element properties.
     $element_properties = $form_state->get('element_properties');
@@ -506,7 +506,7 @@ trait WebformEntityReferenceTrait {
     $element_properties['selection_settings'] = $selection_settings;
     $form_state->set('element_properties', $element_properties);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     // @see \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem
     $selection_plugins = $this->selectionManager->getSelectionGroups($target_type);
@@ -644,9 +644,9 @@ trait WebformEntityReferenceTrait {
     $form_state->setValues($values);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Form/Ajax helpers and callbacks.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Build an ajax elements trigger.
@@ -668,9 +668,9 @@ trait WebformEntityReferenceTrait {
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Display submission value methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

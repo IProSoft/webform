@@ -599,9 +599,9 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
     return $message;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Helper methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Recurse through elements and collect an associative array of deleted element keys.

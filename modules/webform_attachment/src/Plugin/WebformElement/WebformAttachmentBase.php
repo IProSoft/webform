@@ -77,7 +77,7 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
     return array_merge(parent::defineTranslatableProperties(), ['filename', 'link_title']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

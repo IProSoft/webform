@@ -855,9 +855,9 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     return $this->isDraftEnabled() && ($this->getWebform()->getSetting('form_convert_anonymous') === TRUE);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Debug and exception handlers.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Display debugging information.

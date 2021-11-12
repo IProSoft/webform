@@ -38,7 +38,7 @@ class WebformLocationGeocomplete extends WebformLocationBase {
       + $this->defineDefaultBaseProperties();
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

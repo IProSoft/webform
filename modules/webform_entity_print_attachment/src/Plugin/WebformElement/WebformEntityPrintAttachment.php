@@ -51,7 +51,7 @@ class WebformEntityPrintAttachment extends WebformAttachmentBase {
     return $properties;
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

@@ -117,7 +117,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     return array_merge(parent::defineTranslatableProperties(), ['file_placeholder']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

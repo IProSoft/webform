@@ -38,7 +38,7 @@ class WebformStatesRequiredJavaScriptTest extends WebformWebDriverTestBase {
     $session = $this->getSession();
     $page = $session->getPage();
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $this->drupalGet('/webform/test_states_client_required');
 

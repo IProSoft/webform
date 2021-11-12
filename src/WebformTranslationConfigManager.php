@@ -307,9 +307,9 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $form_state->setValues($values);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Handler alteration methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Alter the webform configuration form handlers.
@@ -357,9 +357,9 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Form and element alteration methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Alter the webform configuration form elements.
@@ -828,7 +828,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     }
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Alter the webform configuration form using type config schema.
@@ -943,9 +943,9 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $element['#attached']['library'][] = 'webform/webform.admin.translation';
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
   // Utility methods.
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * Flatten a nested array of elements.

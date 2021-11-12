@@ -51,7 +51,7 @@ class Checkboxes extends OptionsBase {
     return array_merge(parent::defineTranslatableProperties(), ['options_all_text', 'options_none_text']);
   }
 
-  /****************************************************************************/
+  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

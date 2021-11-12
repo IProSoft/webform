@@ -40,7 +40,7 @@ class WebformBubbleableMetadataTest extends UnitTestCase {
     $container->set('cache_contexts_manager', $cache_contexts_manager);
     \Drupal::setContainer($container);
 
-    /**************************************************************************/
+    /* ********************************************************************** */
 
     $bubbleable_metadata->appendTo($build);
     $this->assertEquals($expected, $build);
