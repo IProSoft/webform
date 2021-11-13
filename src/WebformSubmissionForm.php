@@ -2417,7 +2417,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   }
 
   /**
-   * Get the webform's confrmation URL.
+   * Get the webform's confirmation URL.
    *
    * @return \Drupal\Core\Url|false
    *   The url object, or FALSE if the path is not valid.

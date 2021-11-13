@@ -60,34 +60,9 @@ Steps for creating a new release
     yarn install
 
     # Update dictionary. (core/misc/cspell/dictionary.txt)
-    algolia
-    Algolia
-    Antibot
-    ANTIBOT
-    codemirror
-    CodeMirror
-    imce
-    IMCE
-    inputmask
-    Inputmask
-    likert
-    Likert
-    lingotek
-    Lingotek
-    maillog
-    Maillog
-    Rockowitz
-    screencast
-    Screencast
-    unstarred
-    UNSTARRED
-    webform
-    Webform
-    webforms
-    Webforms
-    webform's
-    Webform's
-    wkhtmltopdf
+
+    cd ~/Sites/drupal_webform/web/
+    cat modules/sandbox/webform/cspell/dictionary.txt >> core/misc/cspell/dictionary.txt
 
     cd ~/Sites/drupal_webform/web/core
     yarn run spellcheck ../modules/sandbox/webform/**/* > ~/webform-spell-check.txt

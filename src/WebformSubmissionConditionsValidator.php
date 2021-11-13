@@ -436,10 +436,10 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    * @param array $data
    *   A webform submission's data.
    * @param bool $check_access
-   *   Flag that determine if the currrent form element's access
+   *   Flag that determine if the current form element's access
    *   should be checked.
    * @param bool $visible
-   *   Flag that determine if the currrent form elements are visible.
+   *   Flag that determine if the current form elements are visible.
    */
   protected function processFormRecursive(array $elements, WebformSubmissionInterface $webform_submission, array &$data, $check_access, $visible = TRUE) {
     foreach ($elements as $key => &$element) {

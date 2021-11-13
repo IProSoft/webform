@@ -653,7 +653,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Integrations: Domain Webform.
     $projects['domain_webform'] = [
       'title' => $this->t('Domain Webform'),
-      'description' => $this->t('Domain intergration for the Webform module.'),
+      'description' => $this->t('Domain integration for the Webform module.'),
       'url' => Url::fromUri('https://github.com/h3rj4n/domain_webform'),
       'category' => 'integration',
     ];
