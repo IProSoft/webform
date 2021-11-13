@@ -152,7 +152,6 @@ class WebformSubmissionLogController extends ControllerBase {
       $row['operation'] = $log->operation;
       $row['message'] = [
         'data' => [
-          // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
           '#markup' => $this->t($log->message, $log->variables),
         ],
       ];

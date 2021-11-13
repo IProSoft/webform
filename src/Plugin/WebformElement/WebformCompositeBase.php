@@ -976,7 +976,6 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
    *   A renderable array container the composite elements settings table.
    */
   protected function buildCompositeElementsTable(array $form, FormStateInterface $form_state) {
-    // phpcs:disable Drupal.Semantics.FunctionT.ConcatString
     $labels_help = [
       'help' => [
         '#type' => 'webform_help',
@@ -998,7 +997,6 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         '#help_title' => $this->t('Settings'),
       ],
     ];
-    // phpcs:enable Drupal.Semantics.FunctionT.ConcatString
 
     $header = [
       'visible' => $this->t('Visible'),

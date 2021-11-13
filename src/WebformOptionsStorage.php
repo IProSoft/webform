@@ -96,7 +96,6 @@ class WebformOptionsStorage extends ConfigEntityStorage implements WebformOption
 
     $likert_options = [];
     foreach ($webform_options as $id => $webform_option) {
-      // phpcs:ignore Drupal.Semantics.FunctionT.ConcatString
       $likert_options[$id] = str_replace($this->t('Likert') . ': ', '', $webform_option->label());
     }
     return $likert_options;

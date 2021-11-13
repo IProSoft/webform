@@ -1071,7 +1071,6 @@ abstract class OptionsBase extends WebformElementBase {
       '#type' => 'webform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Options properties'),
-      // phpcs:disable Drupal.Semantics.FunctionT.ConcatString
       '#description' => $this->t("Custom options properties must include the 'Option value' followed by option (element) properties prepended with a hash (#) character.") .
         "<pre>option_value:
   '#wrapper_attributes':
@@ -1080,7 +1079,6 @@ abstract class OptionsBase extends WebformElementBase {
   '#disabled': true</pre>" .
         '<br /><br />' .
         $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
-      // phpcs:enable Drupal.Semantics.FunctionT.ConcatString
     ];
 
     return $form;

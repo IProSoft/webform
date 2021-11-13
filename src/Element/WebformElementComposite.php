@@ -10,8 +10,6 @@ use Drupal\webform\Plugin\WebformElement\WebformCompositeBase as WebformComposit
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformYaml;
 
-// phpcs:disable Drupal.Semantics.FunctionT.ConcatString
-
 /**
  * Provides a element for the composite elements.
  *

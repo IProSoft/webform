@@ -665,7 +665,6 @@ function webform_preprocess_file_upload_help(&$variables) {
         $arguments = $description->getArguments();
         if (is_string($arguments['@extensions']) && strpos($arguments['@extensions'], ',') === FALSE) {
           $arguments['@extensions'] = preg_replace('/ +/', ', ', $arguments['@extensions']);
-          // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
           $variables['descriptions'][$index] = new TranslatableMarkup($description->getUntranslatedString(), $arguments);
         }
       }

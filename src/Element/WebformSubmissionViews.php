@@ -53,11 +53,9 @@ class WebformSubmissionViews extends WebformMultiple {
     $element['#element']['name_title_view'] = [
       '#type' => 'container',
       '#title' => t('View / Name / Title'),
-      // phpcs:disable Drupal.Semantics.FunctionT.ConcatString
       '#help' => '<b>' . t('View') . ':</b> ' . t('A webform submission embed display. The selected view should also include contextual filters. {webform_id}/{source_entity_type}/{source_entity_id}/{account_id}/{in_draft}') .
         '<hr/>' . '<b>' . t('Name') . ':</b> ' . t('The name to be displayed in the URL when there are multiple submission views available.') .
         '<hr/>' . '<b>' . t('Options') . ':</b> ' . t('The title to be display in the dropdown menu when there are multiple submission views available.'),
-      // phpcs:enable Drupal.Semantics.FunctionT.ConcatString
       'view' => [
         '#type' => 'select',
         '#title' => t('View'),
