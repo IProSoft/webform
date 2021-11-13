@@ -129,10 +129,6 @@ Run PHPStan with memory limit increased
 
 Pa11y is your automated accessibility testing pal.
 
-Notes
-- Requires node 8.x+
-
-
     # Enable accessibility examples.
     drush en -y webform_examples_accessibility
 
