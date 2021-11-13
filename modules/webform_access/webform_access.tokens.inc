@@ -8,6 +8,8 @@
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\webform_access\Entity\WebformAccessType;
 
+// phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
+
 /**
  * Implements hook_token_info().
  */

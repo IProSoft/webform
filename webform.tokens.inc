@@ -886,6 +886,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
 function _webform_token_get_submission_value($value_token, array $options, WebformSubmissionInterface $webform_submission, WebformElementManagerInterface $element_manager, BubbleableMetadata $bubbleable_metadata) {
   $submission_data = $webform_submission->getData();
 
+  // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
   // Formats:
   // [html]
   // [values:{element_key}:{format}]
@@ -896,6 +897,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
   // [values:{element_key}:{format}:{items}:urlencode]
   // [values:{element_key}:{delta}:{format}]
   // [values:{element_key}:{delta}:{sub-element}]
+  // phpcs:enable Drupal.Commenting.InlineComment.InvalidEndChar
   $keys = explode(':', $value_token);
   $element_key = array_shift($keys);
 

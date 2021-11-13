@@ -43,7 +43,7 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
     $webform = Webform::load('test_element_term_reference');
 
     /* ********************************************************************** */
-    // Term checkboxes
+    // Term checkboxes.
     /* ********************************************************************** */
 
     $this->drupalGet('/webform/test_element_term_reference');
@@ -95,7 +95,7 @@ class WebformElementTermReferenceTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<option value="3">Parent 1 › Parent 1: Child 2</option>');
     $this->assertRaw('<option value="4">Parent 1 › Parent 1: Child 3</option>');
 
-    // Publish term: 2
+    // Publish term: 2.
     Term::load(2)->setPublished()->save();
 
     /* ********************************************************************** */

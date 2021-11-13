@@ -17,6 +17,11 @@ use Drupal\webform\WebformSubmissionInterface;
  */
 class WebformTwigExtension extends \Twig_Extension {
 
+  /**
+   * Twig options.
+   *
+   * @var string[]
+   */
   protected static $options = [
     'html' => 'webform_token_options_html',
     'email' => 'webform_token_options_email',

@@ -25,7 +25,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $this->drupalGet('/webform/test_element_other');
 
     /* ********************************************************************** */
-    // select_other
+    // select_other.
     /* ********************************************************************** */
 
     // Check basic select_other.
@@ -54,7 +54,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<input data-drupal-selector="edit-select-other-zero-other" type="text" id="edit-select-other-zero-other" name="select_other_zero[other]" value="0" size="60" maxlength="255" placeholder="Enter other…" class="form-text" />');
 
     /* ********************************************************************** */
-    // checkboxes_other
+    // checkboxes_other.
     /* ********************************************************************** */
 
     // Check basic checkboxes.
@@ -71,7 +71,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<label for="edit-checkboxes-other-advanced-checkboxes-one" class="option">One<span class="webform-element-help js-webform-element-help"');
 
     /* ********************************************************************** */
-    // radios_other
+    // radios_other.
     /* ********************************************************************** */
 
     // Check basic radios_other.
@@ -88,7 +88,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<label for="edit-radios-other-advanced-radios-one" class="option">One<span class="webform-element-help js-webform-element-help"');
 
     /* ********************************************************************** */
-    // wrapper_type
+    // wrapper_type.
     /* ********************************************************************** */
 
     // Check form_item wrapper type.
@@ -131,7 +131,7 @@ wrapper_other_form_element: ''
 wrapper_other_container: ''");
 
     /* ********************************************************************** */
-    // select_other
+    // select_other.
     /* ********************************************************************** */
 
     // Check select other is required when selected.
@@ -208,7 +208,7 @@ wrapper_other_container: ''");
     $this->assertNoRaw('This is a custom required error message.');
 
     /* ********************************************************************** */
-    // radios_other
+    // radios_other.
     /* ********************************************************************** */
 
     // Check radios other required when checked.
@@ -254,7 +254,7 @@ wrapper_other_container: ''");
     $this->assertNoRaw('radios_other_advanced: Five');
 
     /* ********************************************************************** */
-    // checkboxes_other
+    // checkboxes_other.
     /* ********************************************************************** */
 
     // Check checkboxes other required when checked.

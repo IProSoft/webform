@@ -18,6 +18,11 @@ use Drupal\webform\Utility\WebformElementHelper;
  */
 class WebformActions extends Container {
 
+  /**
+   * Buttons.
+   *
+   * @var string[]
+   */
   public static $buttons = [
     'submit',
     'reset',

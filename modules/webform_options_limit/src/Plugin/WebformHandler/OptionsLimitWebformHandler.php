@@ -404,6 +404,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         '#states' => [
           'visible' => [
             ':input[name="settings[option_message_display]"]' => ['value' => WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_DESCRIPTION],
+            // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified
             $tableselect_states,
           ],
         ],

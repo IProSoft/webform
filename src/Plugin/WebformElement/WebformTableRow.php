@@ -275,6 +275,7 @@ class WebformTableRow extends WebformElementBase {
     }
 
     // This is the only way to get the row key for a new element.
+    // phpcs:ignore DrupalPractice.Variables.GetRequestData.SuperglobalAccessedWithVar
     $key = $_POST['key'];
     $parent_key = \Drupal::request()->query->get('parent');
     if (!$form_object->isNew() || !$parent_key) {

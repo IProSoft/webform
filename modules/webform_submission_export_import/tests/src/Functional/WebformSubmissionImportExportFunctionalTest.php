@@ -343,7 +343,6 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
       ],
     ];
     // Unset YAML warning which can vary from server to server.
-
     unset(
       $expected_stats['warnings'][2][1],
       $actual_stats['warnings'][2][1]

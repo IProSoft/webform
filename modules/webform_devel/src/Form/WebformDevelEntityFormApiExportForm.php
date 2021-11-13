@@ -195,8 +195,6 @@ class WebformDevelEntityFormApiExportForm extends WebformDevelEntityFormApiBaseF
    *   An render array representing elements.
    */
   protected function setDefaultValues(array &$elements) {
-    /** @var \Drupal\webform\WebformInterface $webform */
-    $webform = $this->getEntity();
     $flattened_elements =& WebformFormHelper::flattenElements($elements);
     foreach ($flattened_elements as $element_key => &$element) {
       $element_plugin = $this->elementManager->getElementInstance($element);

@@ -2067,9 +2067,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         $access_operation = (in_array($operation, ['default', 'add'])) ? 'create' : 'update';
         if ($element_plugin->checkAccessRules($access_operation, $element)) {
           $pages[$key] = array_intersect_key($element, $wizard_properties) + [
-              '#type' => 'page',
-              '#access' => TRUE,
-            ];
+            '#type' => 'page',
+            '#access' => TRUE,
+          ];
         }
       }
     }
@@ -2315,7 +2315,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     // Because webform are not fieldable, when a webform is saved not all
     // config/content entity related caches need to be cleared.
-    // parent::postSave($storage, $update);
+    // parent::postSave($storage, $update);.
     /* ********************************************************************** */
 
     $this->invalidateTagsOnSave($update);

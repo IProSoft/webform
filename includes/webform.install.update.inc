@@ -2872,7 +2872,7 @@ function webform_update_8154() {
 }
 
 /* ************************************************************************** */
-// Webform-8.x-5.0-rc28 - December 7, 2018
+// Webform-8.x-5.0-rc28 - December 7, 2018.
 /* ************************************************************************** */
 
 /**
@@ -4011,9 +4011,6 @@ function webform_update_8603() {
  * Issue #3144019: Move webform_editorial to webform_test_editorial.
  */
 function webform_update_8604() {
-  // Remove the webform_editorial.module which has changed to the
-  // webform_test_editorial.module, which is now a test module.
-
   // Remove 'webform_editorial' from core.extensions.
   $extension_config = \Drupal::configFactory()->getEditable('core.extension');
   $module = $extension_config->get('module');

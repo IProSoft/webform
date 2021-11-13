@@ -346,7 +346,8 @@ class Address extends WebformCompositeBase {
     ];
 
     /* ********************************************************************** */
-    // Copied from: \Drupal\address\Plugin\Field\FieldType\AddressItem::fieldSettingsForm
+    // Copied from: AddressItem::fieldSettingsForm.
+    // @see \Drupal\address\Plugin\Field\FieldType\AddressItem::fieldSettingsForm
     /* ********************************************************************** */
 
     $languages = $this->languageManager->getLanguages(LanguageInterface::STATE_ALL);

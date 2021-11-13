@@ -332,7 +332,7 @@ trait WebformSubmissionDevelGenerateTrait {
   /**
    * {@inheritdoc}
    */
-  public function _validateDrushParams($args) {
+  public function _validateDrushParams($args) { // phpcs:ignore
     $webform_id = array_shift($args);
     $webform_ids = [$webform_id => $webform_id];
     $values = [

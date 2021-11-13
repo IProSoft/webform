@@ -580,9 +580,11 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
    */
   public static function validateMaxFilesize($element, FormStateInterface $form_state) {
     // Issue #2359675: File field's Maximum upload size always passes validation.
+    // phpcs:disable
     // if (class_exists('\Drupal\file\Plugin\Field\FieldType\FileItem')) {
     //   FileItem::validateMaxFilesize($element, $form_state);
     // }
+    // phpcs:enable
     // @see \Drupal\file\Plugin\Field\FieldType\FileItem::validateMaxFilesize
     if (!empty($element['#value']) && !Bytes::toInt($element['#value'])) {
       $form_state->setError($element, t('The "@name" option must contain a valid value. You may either leave the text field empty or enter a string like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes).', ['@name' => $element['#title']]));

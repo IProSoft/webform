@@ -134,6 +134,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
       'minlength_hidden_dependent' => 'X',
     ];
     $this->postSubmission($webform, $edit);
+    //  phpcs:ignore
     // $this->assertRaw('<em class="placeholder">minlength_hidden_dependent</em> cannot be less than <em class="placeholder">5</em> characters');
 
     /* ********************************************************************** */

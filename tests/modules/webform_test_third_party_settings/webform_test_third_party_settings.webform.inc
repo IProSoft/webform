@@ -87,7 +87,7 @@ function _webform_test_third_party_settings_form_validate(&$form, FormStateInter
  * Implements hook_webform_submission_form_alter().
  */
 function webform_test_third_party_settings_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (!empty($_POST)) {
+  if (!\Drupal::request()->request->all()) {
     return;
   }
 

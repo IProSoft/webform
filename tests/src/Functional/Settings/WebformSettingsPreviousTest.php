@@ -52,7 +52,7 @@ class WebformSettingsPreviousTest extends WebformBrowserTestBase {
     /* ********************************************************************** */
 
     // Create second submission.
-    $sid_2 = $this->postSubmissionTest($webform);
+    $this->postSubmissionTest($webform);
 
     // Check default global previous submissions message.
     $this->drupalGet('/webform/contact');

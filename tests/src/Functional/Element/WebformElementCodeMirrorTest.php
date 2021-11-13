@@ -22,7 +22,7 @@ class WebformElementCodeMirrorTest extends WebformElementBrowserTestBase {
   public function testCodeMirror() {
 
     /* ********************************************************************** */
-    // code:text
+    // code:text.
     /* ********************************************************************** */
 
     // Check Text.
@@ -36,7 +36,7 @@ class WebformElementCodeMirrorTest extends WebformElementBrowserTestBase {
     $this->assertRaw('<textarea data-drupal-selector="edit-text-basic-no-wrap" wrap="off" class="js-webform-codemirror webform-codemirror text form-textarea" data-webform-codemirror-mode="text/plain" id="edit-text-basic-no-wrap" name="text_basic_no_wrap" rows="5" cols="60">');
 
     /* ********************************************************************** */
-    // code:yaml
+    // code:yaml.
     /* ********************************************************************** */
 
     // Check YAML.
@@ -73,7 +73,7 @@ yaml_decode_value:
     $this->assertNoRaw('<em class="placeholder">yaml_basic</em> is not valid.');
 
     /* ********************************************************************** */
-    // code:html
+    // code:html.
     /* ********************************************************************** */
 
     // Check HTML.
@@ -98,7 +98,7 @@ yaml_decode_value:
     $this->assertNoRaw('expected &#039;&gt;&#039;');
 
     /* ********************************************************************** */
-    // code:twig
+    // code:twig.
     /* ********************************************************************** */
 
     // Check disabled Twig editor.

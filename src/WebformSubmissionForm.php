@@ -346,12 +346,13 @@ class WebformSubmissionForm extends ContentEntityForm {
           // This allows the webform's public facing URL to be used instead of
           // the admin URL of the webform.
           $webform_submission_token = $this->getStorage()->loadFromToken($token, $webform, $source_entity, $account);
+          $request_token = $this->requestStack->getCurrentRequest()->request->get('webform_submission_token');
           if ($webform_submission_token && $webform_submission_token->isDraft()) {
             $entity = $webform_submission_token;
             $data = $entity->getRawData();
           }
-          elseif (isset($_POST['webform_submission_token'])) {
-            $webform_submission_token = $this->getStorage()->loadFromToken($_POST['webform_submission_token'], $webform, $source_entity, $account);
+          elseif ($request_token) {
+            $webform_submission_token = $this->getStorage()->loadFromToken($request_token, $webform, $source_entity, $account);
             if ($webform_submission_token && $webform_submission_token->isDraft()) {
               $entity = $webform_submission_token;
               $data = $entity->getRawData();

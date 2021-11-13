@@ -287,7 +287,8 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
   }
 
   /* ************************************************************************ */
-  // Helper functions. From: \Drupal\file\Tests\FileFieldTestBase::getTestFile
+  // Helper functions.
+  // @see \Drupal\file\Tests\FileFieldTestBase::getTestFile
   /* ************************************************************************ */
 
   /**

@@ -183,7 +183,7 @@ class WebformResultsExportController extends ControllerBase implements Container
   /* ************************************************************************ */
   // Batch functions.
   // Using static method to prevent the service container from being serialized.
-  // "Prevents exception 'AssertionError' with message 'The container was serialized.'."
+  // Prevents 'AssertionError: The container was serialized.' exception.
   /* ************************************************************************ */
 
   /**

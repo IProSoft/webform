@@ -145,8 +145,10 @@ webform_element_composite_advanced:
 
     // Below tests are only failing on Drupal.org and pass locally.
     // Check radios 'aria-describedby' with individual descriptions.
+    // phpcs:disable
     // $this->assertRaw('<input data-drupal-selector="edit-radios-wrapper-fieldset-element-descriptions-one" aria-describedby="edit-radios-wrapper-fieldset-element-descriptions-one--description" type="radio" id="edit-radios-wrapper-fieldset-element-descriptions-one" name="radios_wrapper_fieldset_element_descriptions" value="One" class="form-radio" />');
     // $this->assertRaw('<div id="edit-radios-wrapper-fieldset-element-descriptions-one--description" class="webform-element-description">This is a radio description</div>');
+    // phpcs:enable
   }
 
 }

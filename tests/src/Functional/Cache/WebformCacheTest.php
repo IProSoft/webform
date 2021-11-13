@@ -85,7 +85,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Add the '[current-user:mail]' to the name elements' description.
     $element = $webform->getElementDecoded('email')
-      + ['#description' => '[current-user:mail]'];
+      + ['#description' => '[current-user:mail]']; // phpcs:ignore
     $webform
       ->setElementProperties('email', $element)
       ->save();

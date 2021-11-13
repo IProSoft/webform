@@ -294,6 +294,7 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
     // The transaction will commit when $transaction goes out-of-scope.
     //
     // @see \Drupal\Core\Database\Transaction
+    // phpcs:ignore DrupalPractice.CodeAnalysis.VariableAnalysis.UnusedVariable
     $transaction = $this->database->startTransaction();
 
     // Get the next_serial value.

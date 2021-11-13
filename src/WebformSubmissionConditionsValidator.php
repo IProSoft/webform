@@ -905,7 +905,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    */
   protected function &getBuildElements(array &$form) {
     if (isset($form['#webform_id']) && isset($form['elements'])) {
-      $form_elements = &$form['elements'];
+      $form_elements = &$form['elements']; // phpcs:ignore
     }
     else {
       $form_elements = &$form;

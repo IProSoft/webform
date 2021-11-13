@@ -294,6 +294,7 @@ class WebformAccessGroupListBuilder extends ConfigEntityListBuilder {
   public static function buildEntities(array $entity_references) {
     $items = [];
     foreach ($entity_references as $entity_reference) {
+      // phpcs:ignore DrupalPractice.CodeAnalysis.VariableAnalysis.UnusedVariable
       list($entity_type, $entity_id, $field_name, $webform_id) = explode(':', $entity_reference);
       $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id);
       $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_id);

@@ -687,8 +687,8 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
    */
   public function getItemFormats() {
     return parent::getItemFormats() + [
-        'list' => $this->t('List'),
-      ];
+      'list' => $this->t('List'),
+    ];
   }
 
   /**
@@ -1212,12 +1212,12 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
             '#required' => TRUE,
             '#attributes' => ['style' => 'width: 100%;'],
             '#states' => $state_disabled + [
-                'invisible' => [
-                  ':input[name="properties[' . $composite_key . '__type]"]' => [
-                    'value' => 'textfield',
-                  ],
+              'invisible' => [
+                ':input[name="properties[' . $composite_key . '__type]"]' => [
+                  'value' => 'textfield',
                 ],
               ],
+            ],
           ];
         }
         else {

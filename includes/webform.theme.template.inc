@@ -753,7 +753,7 @@ function template_preprocess_webform_section(array &$variables) {
 }
 
 /* ************************************************************************** */
-// Composite templates
+// Composite templates.
 /* ************************************************************************** */
 
 /**
@@ -856,7 +856,7 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
 }
 
 /* ************************************************************************** */
-// Element templates
+// Element templates.
 /* ************************************************************************** */
 
 /**
