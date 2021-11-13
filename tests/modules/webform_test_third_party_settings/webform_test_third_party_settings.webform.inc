@@ -87,7 +87,8 @@ function _webform_test_third_party_settings_form_validate(&$form, FormStateInter
  * Implements hook_webform_submission_form_alter().
  */
 function webform_test_third_party_settings_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (!\Drupal::request()->request->all()) {
+  // phpcs:ignore DrupalPractice.Variables.GetRequestData.SuperglobalAccessed
+  if (!empty($_POST)) {
     return;
   }
 
