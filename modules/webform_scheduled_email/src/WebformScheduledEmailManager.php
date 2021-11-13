@@ -502,7 +502,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
         $context['@handler'] = $entity->getHandler($handler_id)->label();
         $message = "@entity: Cron task executed '@handler' handler. (@summary)";
       }
-    };
+    }
     $this->getLogger()->notice($message, $context);
     $stats['_message'] = $message;
     $stats['_context'] = $context;

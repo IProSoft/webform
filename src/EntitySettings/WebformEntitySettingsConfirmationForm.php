@@ -18,6 +18,7 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
    * @var \Drupal\webform\WebformTokenManagerInterface
    */
   protected $tokenManager;
+
   /**
    * {@inheritdoc}
    */

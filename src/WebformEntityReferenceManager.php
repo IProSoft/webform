@@ -355,7 +355,7 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
         $webform_field_name = $field_storage_config->getName();
         $tables[$webform_field_table . '__' . $webform_field_name] = $webform_field_name;
         $tables[$webform_field_table . '_revision__' . $webform_field_name] = $webform_field_name;
-      };
+      }
     }
     return $tables;
   }

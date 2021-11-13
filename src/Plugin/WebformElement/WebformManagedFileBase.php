@@ -38,7 +38,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    *
    * @var array
    */
-  static protected $blacklistedMimeTypes = [
+  protected static $blacklistedMimeTypes = [
     'application/pdf',
     'application/xml',
     'image/svg+xml',

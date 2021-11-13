@@ -51,7 +51,7 @@ class Address extends WebformCompositeBase {
   /**
    * The address format repository service.
    *
-   * @var \CommerceGuys\Addressing\AddressFormat\AddressFormatRepositoryInterface $address_format_repository
+   * @var \CommerceGuys\Addressing\AddressFormat\AddressFormatRepositoryInterfacey
    */
   protected $addressFormatRepository;
 

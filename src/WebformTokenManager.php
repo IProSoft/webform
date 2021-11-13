@@ -64,7 +64,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
    *
    * @see webform_token_info_alter()
    */
-  static protected $suffixes = [
+  protected static $suffixes = [
     // Removes the token when not replaced.
     'clear',
     // Decodes HTML entities.

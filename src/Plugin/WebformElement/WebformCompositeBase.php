@@ -1098,7 +1098,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
                 'inline' => $this->t('Inline'),
                 'invisible' => $this->t('Invisible'),
               ],
-              '#empty_option' => $this->t('Select title display… '),
+              '#empty_option' => $this->t('Select title display…'),
               '#states' => $state_disabled,
             ],
           ],

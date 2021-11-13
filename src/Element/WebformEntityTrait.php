@@ -96,14 +96,14 @@ trait WebformEntityTrait {
   }
 
   /**
-   * Set the corresponding entity cache tags on the element
+   * Set the corresponding entity cache tags on the element.
    *
    * @param array $element
-   *   An element
+   *   An element.
    * @param string $target_type
-   *   The target type id
+   *   The target type id.
    * @param array $target_bundles
-   *   The target bundle ids
+   *   The target bundle ids.
    */
   protected static function setCacheTags(array &$element, $target_type, array $target_bundles = []) {
     $list_cache_tag = sprintf('%s_list', $target_type);

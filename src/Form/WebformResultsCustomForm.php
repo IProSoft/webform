@@ -190,7 +190,7 @@ class WebformResultsCustomForm extends FormBase {
     foreach ($sort_columns as $column_name => $column) {
       if (!isset($column['sort']) || $column['sort'] === TRUE) {
         $sort_options[$column_name] = (string) $column['title'];
-      };
+      }
     }
     asort($sort_options);
 

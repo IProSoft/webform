@@ -420,7 +420,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       ];
       $form['submission_data']['managed_file_message_no_data'] = [
         '#type' => 'webform_message',
-        '#message_message' => $this->t('Upload files will include the file\'s id, name and uri.'),
+        '#message_message' => $this->t("Upload files will include the file's id, name and uri."),
         '#message_type' => 'warning',
         '#message_close' => TRUE,
         '#message_id' => 'webform_node.references',
