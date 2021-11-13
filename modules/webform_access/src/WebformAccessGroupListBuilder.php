@@ -231,7 +231,7 @@ class WebformAccessGroupListBuilder extends ConfigEntityListBuilder {
    */
   public function load() {
     $entity_ids = $this->getEntityIds();
-    /* @var $entities \Drupal\webform\WebformInterface[] */
+    /** @var \Drupal\webform\WebformInterface[] $entities */
     $entities = $this->storage->loadMultiple($entity_ids);
 
     // If the user is not a webform admin, check access to each access group.

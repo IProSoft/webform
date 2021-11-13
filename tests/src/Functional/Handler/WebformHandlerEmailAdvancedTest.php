@@ -201,7 +201,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
     // Include empty.
     $email_handler->setSettings([
       'exclude_empty' => FALSE,
-      'exclude_empty_checkbox' => FALSE
+      'exclude_empty_checkbox' => FALSE,
     ]);
     $webform->save();
 

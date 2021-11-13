@@ -34,8 +34,8 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    // @var \Drupal\webform\WebformSubmissionInterface $webform_submission.
-    // @var \Drupal\Core\Entity\EntityInterface $source_entity.
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+    /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
     list($webform_submission, $source_entity) = $this->requestHandler->getWebformSubmissionEntities();
 
     $form['navigation'] = [

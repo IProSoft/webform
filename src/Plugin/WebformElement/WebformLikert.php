@@ -116,7 +116,7 @@ class WebformLikert extends WebformElementBase {
         // HTML emails.
         $header = [];
         $header['likert_question'] = [
-          'data' => WebformAccessibilityHelper::buildVisuallyHidden(t('Questions')),
+          'data' => WebformAccessibilityHelper::buildVisuallyHidden($this->t('Questions')),
           'align' => 'left',
           'width' => '40%',
         ];

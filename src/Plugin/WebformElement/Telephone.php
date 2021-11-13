@@ -210,7 +210,7 @@ class Telephone extends TextBase {
       $form['telephone']['telephone_validation_countries'] = [
         '#type' => 'select',
         '#title' => $this->t('Valid countries'),
-        '#description' => t('If no country selected all countries are valid.'),
+        '#description' => $this->t('If no country selected all countries are valid.'),
         '#options' => $this->telephoneValidator->getCountryList(),
         '#select2' => TRUE,
         '#multiple' => TRUE,

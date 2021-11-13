@@ -67,7 +67,7 @@ function captcha_webform_submission_form_alter(&$form, FormStateInterface $form_
 
   // If the webform already has a CAPTCHA point is already configured, do not
   // do anything.
-  /* @var \Drupal\captcha\CaptchaPointInterface $captcha_point */
+  /** @var \Drupal\captcha\CaptchaPointInterface $captcha_point */
   $captcha_point = \Drupal::entityTypeManager()
     ->getStorage('captcha_point')
     ->load($form_id);

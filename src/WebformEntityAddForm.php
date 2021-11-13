@@ -3,11 +3,9 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Entity\BundleEntityFormBase;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Form\WebformDialogFormTrait;
-use Drupal\Core\Language\LanguageManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

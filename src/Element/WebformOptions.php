@@ -29,8 +29,8 @@ class WebformOptions extends FormElement {
     return [
       '#input' => TRUE,
       '#yaml' => FALSE,
-      '#label' => t('option'),
-      '#labels' => t('options'),
+      '#label' => $this->t('option'),
+      '#labels' => $this->t('options'),
       '#min_items' => 3,
       '#empty_items' => 1,
       '#add_more_items' => 1,

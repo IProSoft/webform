@@ -22,8 +22,8 @@ class WebformImageSelectImages extends FormElement {
     $class = get_class($this);
     return [
       '#input' => TRUE,
-      '#label' => t('image'),
-      '#labels' => t('images'),
+      '#label' => $this->t('image'),
+      '#labels' => $this->t('images'),
       '#min_items' => 3,
       '#empty_items' => 1,
       '#add_more_items' => 1,

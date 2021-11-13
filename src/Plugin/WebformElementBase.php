@@ -1517,7 +1517,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Get items.
     $items = [];
     foreach (array_keys($value) as $delta) {
-      $item = $this->formatTextItem($element, $webform_submission, ['delta' => $delta] + $options);;
+      $item = $this->formatTextItem($element, $webform_submission, ['delta' => $delta] + $options);
       if ($item) {
         $items[] = $item;
       }
@@ -3261,7 +3261,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
             ':input[name="properties[access]"]' => [
               'checked' => TRUE,
             ],
-          ]
+          ],
         ],
       ];
       $form['access']['access_' . $operation]['access_' . $operation . '_roles'] = [

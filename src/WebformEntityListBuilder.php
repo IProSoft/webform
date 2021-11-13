@@ -266,7 +266,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\webform\WebformInterface */
+    /** @var \Drupal\webform\WebformInterface $entity */
 
     // Title.
     //
@@ -375,7 +375,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function getDefaultOperations(EntityInterface $entity, $type = 'edit') {
-    /* @var $entity \Drupal\webform\WebformInterface */
+    /** @var \Drupal\webform\WebformInterface $entity */
 
     $operations = [];
     if ($entity->access('update')) {
@@ -609,7 +609,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    */
   public function load() {
     $entity_ids = $this->getEntityIds();
-    /* @var $entities \Drupal\webform\WebformInterface[] */
+    /** @var \Drupal\webform\WebformInterface[] $entities */
     $entities = $this->storage->loadMultiple($entity_ids);
 
     // If the user is not a webform admin, check access to each webform.

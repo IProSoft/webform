@@ -305,7 +305,7 @@ options:
     $handler = $webform->getHandler('remote_post');
     $handler->setSetting('file_data', FALSE);
     $webform->save();
-    $this->drupalPostForm("/admin/structure/webform/manage/test_handler_remote_post_file/submission/$sid/edit", [], t('Save'));
+    $this->drupalPostForm("/admin/structure/webform/manage/test_handler_remote_post_file/submission/$sid/edit", [], 'Save');
     $this->assertRaw("form_params:
   file: 1
   files:

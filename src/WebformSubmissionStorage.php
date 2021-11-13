@@ -1191,7 +1191,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $this->loggerFactory->get('webform')
         ->notice('Deleted @form: Submission #@id.', [
           '@id' => $entity->id(),
-          '@form' => ($webform) ? $webform->label() : '[' . t('Webform') . ']',
+          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform') . ']',
         ]);
     }
 

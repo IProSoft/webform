@@ -149,7 +149,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $this->postSubmission($webform_confirmation_page);
     $this->assertUrl('webform/test_confirmation_page/confirmation');
 
-    // TODO: (TESTING) Figure out why the inline confirmation link is not including the query string parameters.
+    // @todo: (TESTING) Figure out why the inline confirmation link is not including the query string parameters.
     // $this->assertRaw('<a href="' . $webform_confirmation_page->toUrl()->toString() . '?custom=param">Back to form</a>');.
 
     /* Test confirmation page custom (confirmation_type=page) */
@@ -191,7 +191,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $this->postSubmission($webform_confirmation_url);
     $this->assertUrl('/some-absolute-path');
 
-    // Check confirmation URL using absolute path with querystring
+    // Check confirmation URL using absolute path with querystring.
     $webform_confirmation_url
       ->setSetting('confirmation_url', '/some-absolute-path?some=parameter')
       ->setSetting('confirmation_exclude_token', TRUE)

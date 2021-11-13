@@ -10,7 +10,6 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\FieldableEntityInterface;
-use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -506,7 +505,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   public function copyFormValuesToEntity(EntityInterface $entity, array $form, FormStateInterface $form_state) {
     // NOTE: We are not copying form values to the entity because
     // webform element keys can override webform submission properties.
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $entity;
     $webform = $webform_submission->getWebform();
 
@@ -545,7 +544,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
 
@@ -641,7 +640,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
     $source_entity = $webform_submission->getSourceEntity();
     $webform = $this->getWebform();
@@ -847,7 +846,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   elements should be built.
    */
   protected function getCustomForm(array &$form, FormStateInterface $form_state) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
 
@@ -991,7 +990,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The current state of the form.
    */
   protected function displayMessages(array $form, FormStateInterface $form_state) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
     $source_entity = $this->getSourceEntity();
@@ -1329,12 +1328,11 @@ class WebformSubmissionForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   protected function actions(array $form, FormStateInterface $form_state) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->entity;
 
     $element = parent::actions($form, $form_state);
 
-    /* @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $preview_mode = $this->getWebformSetting('preview');
 
     // Mark the submit action as the primary action, when it appears.
@@ -2743,7 +2741,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The form's render array to update.
    */
   protected function addCacheableDependency(array &$form) {
-    /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $this->getEntity();
 
     // All anonymous submissions are tracked in the $_SESSION.

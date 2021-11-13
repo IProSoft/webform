@@ -2931,11 +2931,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     if ($webform_submission) {
       // Make sure webform submission is associated with this webform.
       if ($webform_submission->getWebform()->id() !== $this->id()) {
-        $t_args = [
-          '@sid' => $webform_submission->id(),
-          '@webform_id' => $this->id(),
-        ];
-        throw new \Exception($this->t('Variants can not be applied because the #@sid submission was not created using @webform_id', $t_args));
+        throw new \Exception("Variants can not be applied because the #{$webform_submission->id()} submission was not created using {$this->id()}.");
       }
       $variants += $this->getVariantsData($webform_submission);
     }

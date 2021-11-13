@@ -10,11 +10,28 @@ use Drupal\webform\Plugin\WebformElement\TableSelect;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformHandlerManager;
 use Drupal\webform\Utility\WebformElementHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base webform admin settings form.
  */
 abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -73,7 +90,7 @@ abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
     $options = [];
     $default_actions = [];
     /** @var \Drupal\system\ActionConfigEntityInterface[] $actions */
-    $actions = \Drupal::entityTypeManager()->getStorage('action')->loadMultiple();
+    $actions = $this->entityTypeManager->getStorage('action')->loadMultiple();
     foreach ($actions as $action) {
       if ($action->getType() === $entity_type_id) {
         $options[$action->id()] = ['label' => $action->label()];
