@@ -152,7 +152,7 @@ class WebformActions extends Container {
           else {
             $element[$button_name]['#attributes'][$attribute_name] = $attribute_value;
           }
-        };
+        }
       }
 
       if (Element::isVisibleElement($element[$button_name])) {

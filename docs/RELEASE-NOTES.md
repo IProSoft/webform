@@ -18,7 +18,11 @@ Steps for creating a new release
 
 [PHP](https://www.drupal.org/node/1587138)
 
-    # Check Drupal PHP coding standards and  best practices.
+    # EXPERIMENTAL: Copy phpcs.xml.dist from Drupal core and use core standards which are list restrictive
+    cd ~/Sites/drupal_webform/web
+    cp core/phpcs.xml.dist modules/sandbox/webform/
+
+    # Check Drupal PHP coding standards and best practices.
     phpcs .
 
     # Show sniff codes in all reports.

@@ -91,6 +91,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     $this->assertFieldByName('files[managed_file_multiple_two][]');
     $this->assertFieldByName('managed_file_multiple_two_upload_button');
 
+    // phpcs:disable
     // Check that only two files can be uploaded.
     // @todo Determine how to submit multiple files.
     /*
@@ -108,6 +109,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     $this->assertNoFieldByName('files[managed_file_multiple_two][]');
     $this->assertNoFieldByName('managed_file_multiple_two_upload_button');
     */
+    // phpcs:enable
 
     /* File placeholder */
 

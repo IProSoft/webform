@@ -101,13 +101,11 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
       /* ******************************************************************** */
       // DO NOT USE IF UPLOADED FILE.
       /* ******************************************************************** */
-      /*
       // Final check that this is a valid upload, if it isn't, use the
       // default error handler.
-      if (is_uploaded_file($file_info->getRealPath())) {
-        break;
-      }
-      */
+      // if (is_uploaded_file($file_info->getRealPath())) {
+      //   break;
+      // }
       break;
 
     default:

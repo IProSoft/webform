@@ -71,11 +71,13 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Date (Default short date)' => '06/18/1942 - 00:00',
       'Time (Value)' => '09:00',
       'Time (Raw value)' => '09:00:00',
+// phpcs:disable
 //      'Entity autocomplete (Raw value)' => 'user:1',
 //      'Entity autocomplete (Link)' => '<a href="http://localhost/webform/user/1" hreflang="en">admin</a>',
 //      'Entity autocomplete (Entity ID)' => '1',
 //      'Entity autocomplete (Label)' => 'admin',
 //      'Entity autocomplete (Label (ID))' => 'admin (1)',
+// phpcs:enable
     ];
     foreach ($elements as $label => $value) {
       $this->assertStringContainsString('<b>' . $label . '</b><br />' . $value, $body, new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));

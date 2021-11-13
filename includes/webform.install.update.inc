@@ -8,6 +8,7 @@
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Uuid\Php as Uuid;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Database\SchemaObjectExistsException;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Render\Element;
@@ -2944,7 +2945,7 @@ function webform_update_8156() {
     try {
       \Drupal::service('module_installer')->install(['webform_submission_log']);
     }
-    catch (\Drupal\Core\Database\SchemaObjectExistsException $exception) {
+    catch (SchemaObjectExistsException $exception) {
       // This is actually expected. The table {webform_submission_log} would exist
       // from webform submission entity schema.
     }

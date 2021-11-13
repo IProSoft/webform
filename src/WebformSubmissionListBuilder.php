@@ -566,7 +566,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       && !$this->account
       && $this->webform
       && $this->webform->access('submission_update_any')) {
-        $build['table'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformSubmissionBulkForm', $build['table'], $this->webform->access('submission_delete_any'));
+      $build['table'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformSubmissionBulkForm', $build['table'], $this->webform->access('submission_delete_any'));
     }
 
     // Must preload libraries required by (modal) dialogs.

@@ -306,6 +306,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     $form['additional']['cast'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Cast posted element value and custom data'),
+      // phpcs:disable Drupal.Strings.UnnecessaryStringConcat.Found
       '#description' => $this->t('If checked, posted element values will be cast to integers, floats, and booleans as needed. Custom data can be cast by placing the desired type in parentheses before the value or token. (i.e. "(int) [webform_submission:value:total]" or "(int) 100")') .
         '<br/>' .
         '<br/>' .
@@ -315,6 +316,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(float), (double), (real)', '@type' => 'float']) . '</li>' .
         '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(bool), (boolean)', '@type' => 'boolean']) . '</li>' .
         '</ul>',
+      // phpcs:enable Drupal.Strings.UnnecessaryStringConcat.Found
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['cast'],
     ];

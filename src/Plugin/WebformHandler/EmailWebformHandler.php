@@ -1135,6 +1135,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // Don't send the message if the From address is not valid.
     if (class_exists('\Symfony\Component\Mime\Address')) {
       try {
+        // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
         \Symfony\Component\Mime\Address::create($from);
       }
       catch (\Exception $exception) {

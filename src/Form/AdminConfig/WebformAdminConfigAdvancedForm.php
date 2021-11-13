@@ -297,11 +297,13 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
     $form['repair']['action']['repair_configuration'] = [
       '#type' => 'submit',
       '#value' => $this->t('Repair configuration'),
+      // phpcs:disable Drupal.Semantics.FunctionT.ConcatString
       '#attributes' => [
         'onclick' => 'return confirm("' . $this->t('Are you sure you want to repair and remove older webform configuration?')
           . PHP_EOL
           . $this->t('This cannot be undone!!!') . '");',
       ],
+      // phpcs:enable Drupal.Semantics.FunctionT.ConcatString
     ];
 
     return parent::buildForm($form, $form_state);

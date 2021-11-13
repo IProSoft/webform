@@ -1,5 +1,8 @@
 <?php
 
+// phpcs:disable Drupal.Semantics.FunctionT.ConcatString
+// phpcs:disable Drupal.Strings.UnnecessaryStringConcat.Found
+
 namespace Drupal\webform;
 
 use Drupal\Component\Utility\Xss;
@@ -1776,6 +1779,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       '@webform-libraries-download' => 'webform-libraries-download',
       '@webform-composer-update' => 'webform-composer-update',
     ];
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
     $drush_version = (class_exists('\Drush\Drush')) ? \Drush\Drush::getMajorVersion() : 8;
     if ($drush_version >= 9) {
       foreach ($t_args as $command_name => $command) {
@@ -1797,7 +1801,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '<p>' . $this->t('There are several ways to download the needed third-party libraries.') . '</p>' .
         '<p><strong>' . $this->t('Recommended') . '</strong></p>' .
         '<ul>' .
-        '<li>' . $this->t('Use the <a href="https://github.com/wikimedia/composer-merge-plugin">Composer Merge plugin</a> to include the Webform module\'s <a href="https://cgit.drupalcode.org/webform/tree/composer.libraries.json">composer.libraries.json</a> or generate a custom file using <code>drush @webform-libraries-composer &gt; DRUPAL_ROOT/composer.libraries.json</code>.', $t_args) . '<br/><strong>' . $this->t('<a href="https://www.drupal.org/node/3003140">Learn more &raquo;</a>') . '</strong>'. '</li>' .
+        '<li>' . $this->t('Use the <a href="https://github.com/wikimedia/composer-merge-plugin">Composer Merge plugin</a> to include the Webform module\'s <a href="https://cgit.drupalcode.org/webform/tree/composer.libraries.json">composer.libraries.json</a> or generate a custom file using <code>drush @webform-libraries-composer &gt; DRUPAL_ROOT/composer.libraries.json</code>.', $t_args) . '<br/><strong>' . $this->t('<a href="https://www.drupal.org/node/3003140">Learn more &raquo;</a>') . '</strong>' . '</li>' .
         '</ul>' .
         '<p><strong>' . $this->t('Alternatives') . '</strong></p>' .
         '<ul>' .

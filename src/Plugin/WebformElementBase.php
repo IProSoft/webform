@@ -2963,9 +2963,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         'form_element' => $this->t('Form element'),
         'container' => $this->t('Container'),
       ],
+      // phpcs:disable
       '#description' => '<b>' . $this->t('Fieldset') . ':</b> ' . $this->t('Wraps inputs in a fieldset.') . ' <strong>' . $this->t('Recommended') . '</strong>' .
         '<br/><br/><b>' . $this->t('Form element') . ':</b> ' . $this->t('Wraps inputs in a basic form element with title and description.') .
         '<br/><br/><b>' . $this->t('Container') . ':</b> ' . $this->t('Wraps inputs in a basic div with no title or description.'),
+      // phpcs:enable
     ];
     // Hide element description and display when using a container wrapper.
     if ($this->hasProperty('wrapper_type')) {

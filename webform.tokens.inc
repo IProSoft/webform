@@ -25,6 +25,8 @@ use Drupal\webform\Utility\WebformLogicHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
+// phpcs:disable Drupal.Strings.UnnecessaryStringConcat.Found
+
 /**
  * Implements hook_token_info().
  */
