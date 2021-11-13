@@ -19,10 +19,10 @@ Steps for creating a new release
 [PHP](https://www.drupal.org/node/1587138)
 
     # Check Drupal PHP coding standards and  best practices.
-    phpcs -qnw .
+    phpcs .
 
     # Show sniff codes in all reports.
-    phpcs -qns .
+    phpcs -s .
 
     # Install PHP version compatibility (One-time)
     cd ~/Sites/drupal_webform
