@@ -229,6 +229,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Dropzonejs Webform.
+    $projects['dropzonejs_webform'] = [
+      'title' => $this->t('Dropzonejs Webform'),
+      'description' => $this->t('Creates a new DropzoneJS element that you can add to webforms. It provides a user-friendly way for users to upload multiple files in a form field.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/dropzonejs_webform'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Dynamic Autocomplete.
     $projects['webform_dynamic_autocomplete'] = [
       'title' => $this->t('Webform Dynamic Autocomplete'),
@@ -242,6 +250,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Entity View'),
       'description' => $this->t('Provides an Entity Reference Webform element that can be picked in the build of a webform and will be rendered in the view.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_entity_view'),
+      'category' => 'element',
+    ];
+
+    // Element: Webform GMap Field.
+    $projects['webform_gmap_field'] = [
+      'title' => $this->t('Webform GMap Field'),
+      'description' => $this->t('Adds a "Map location" component to a webform, which gives users the ability to pick a location from the map by dragging a marker.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_gmap_field'),
       'category' => 'element',
     ];
 
@@ -282,6 +298,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Layout Container'),
       'description' => $this->t("Provides a layout container element to add to a webform, which uses old fashion floats to support legacy browsers that don't support CSS Flexbox (IE9 and IE10)."),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_layout_container'),
+      'category' => 'element',
+    ];
+
+    // Element: Webform Location HTML5.
+    $projects['webform_location_html5'] = [
+      'title' => $this->t('Webform Location HTML5'),
+      'description' => $this->t('Provides a webform field, that when the page loads it autofills with the user location, using the browser Geolocation API.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_location_html5'),
       'category' => 'element',
     ];
 
@@ -1037,6 +1061,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform Octoa.
+    $projects['webform_octoa'] = [
+      'title' => $this->t('OS Tickets Webform Handler'),
+      'description' => $this->t('Sends webform submissions into the Octoa Lead API'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_octoa'),
+      'category' => 'integration',
+    ];
+
     // Integrations: OS Tickets Webform Handler.
     $projects['ostickets'] = [
       'title' => $this->t('OS Tickets Webform Handler'),
@@ -1110,6 +1142,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Webform Paypal (Smart Buttons).
+    $projects['webform_paypal_smart'] = [
+      'title' => $this->t('Webform Paypal (Smart Buttons)'),
+      'description' => $this->t('Enables Smart Paypal buttons on Webform submissions.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_paypal_smart'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Webform User Registration.
     $projects['webform_user_registration'] = [
       'title' => $this->t('Webform User Registration'),
@@ -1147,8 +1187,16 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Integrations: Salesforce: Webform to Salesforce Leads.
     $projects['webform_to_leads'] = [
       'title' => $this->t('Salesforce: Webform to Salesforce Leads'),
-      'description' => $this->t('Extends the Webform module to allow the creation of a webform that feeds to your Salesforce.com Account'),
+      'description' => $this->t('Extends the Webform module to allow the creation of a webform that feeds to your Salesforce.com Account.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_to_leads'),
+      'category' => 'integration',
+    ];
+
+    // Integrations: Salesforce: Webform to Salesforce DEManager.
+    $projects['webform_sf_demanager'] = [
+      'title' => $this->t('Salesforce: Webform to Salesforce DEManager'),
+      'description' => $this->t('Allows a webform to send information to Salesforce Marketing Cloud trough DEManager.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_sf_demanager'),
       'category' => 'integration',
     ];
 
