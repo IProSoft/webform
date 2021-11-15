@@ -468,6 +468,7 @@ class WebformElementStates extends FormElement {
       '#type' => 'textfield',
       '#title' => t('Value'),
       '#title_display' => 'invisible',
+      '#maxlength' => NULL,
       '#size' => 25,
       '#default_value' => $condition['value'],
       '#placeholder' => t('Enter value…'),
