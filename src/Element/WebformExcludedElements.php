@@ -97,7 +97,7 @@ class WebformExcludedElements extends WebformExcludedBase {
       $options[$key] = [
         'title' => $form_element['#admin_title'] ?: $form_element['#title'] ?: $key,
         'key' => $key,
-        'type' => isset($form_element['#type']) ? $form_element['#type'] : '',
+        'type' => $form_element['#type'] ?? '',
         'private' => empty($form_element['#private']) ? t('No') : t('Yes'),
         'access' => $roles ? WebformArrayHelper::toString($roles) : t('All roles'),
       ];

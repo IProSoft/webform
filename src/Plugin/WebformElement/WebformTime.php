@@ -65,7 +65,7 @@ class WebformTime extends WebformElementBase {
 
     $format = $this->getItemFormat($element);
     if ($format === 'value') {
-      $time_format = (isset($element['#time_format'])) ? $element['#time_format'] : 'H:i';
+      $time_format = $element['#time_format'] ?? 'H:i';
       return static::formatTime($time_format, strtotime($value));
     }
 

@@ -46,7 +46,7 @@ trait WebformEntityTrait {
       return;
     }
 
-    $selection_settings = isset($element['#selection_settings']) ? $element['#selection_settings'] : [];
+    $selection_settings = $element['#selection_settings'] ?? [];
     $selection_handler_options = [
       'target_type' => $element['#target_type'],
       'handler' => $element['#selection_handler'],

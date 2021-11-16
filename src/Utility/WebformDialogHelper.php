@@ -93,7 +93,7 @@ class WebformDialogHelper {
       static::DIALOG_NORMAL => 800,
       static::DIALOG_NARROW => 700,
     ];
-    $width = (isset($dialog_widths[$width])) ? $dialog_widths[$width] : $width;
+    $width = $dialog_widths[$width] ?? $width;
 
     $class[] = 'webform-ajax-link';
     return [
@@ -134,7 +134,7 @@ class WebformDialogHelper {
       static::DIALOG_NORMAL => 600,
       static::DIALOG_NARROW => 550,
     ];
-    $width = (isset($dialog_widths[$width])) ? $dialog_widths[$width] : $width;
+    $width = $dialog_widths[$width] ?? $width;
 
     $class[] = 'webform-ajax-link';
     return [

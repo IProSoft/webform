@@ -986,8 +986,8 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     }
     else {
       // Sort by created and sid in ASC or DESC order.
-      $query->sort('created', isset($export_options['order']) ? $export_options['order'] : 'ASC');
-      $query->sort('sid', isset($export_options['order']) ? $export_options['order'] : 'ASC');
+      $query->sort('created', $export_options['order'] ?? 'ASC');
+      $query->sort('sid', $export_options['order'] ?? 'ASC');
     }
 
     // Do not check access to submission since the exporter UI and Drush

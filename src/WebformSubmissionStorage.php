@@ -1299,7 +1299,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
 
     $rows = [];
     foreach ($data as $name => $item) {
-      $element = (isset($elements[$name])) ? $elements[$name] : ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
+      $element = $elements[$name] ?? ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
 
       // Check if this is a computed element which is not
       // stored in the database.
@@ -1394,7 +1394,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         /** @var \Drupal\webform\WebformInterface $webform */
         $webform = $webform_submissions[$sid]->getWebform();
         $elements = ($webform) ? $webform->getElementsInitializedFlattenedAndHasValue() : [];
-        $element = (isset($elements[$name])) ? $elements[$name] : ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
+        $element = $elements[$name] ?? ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
 
         if ($element['#webform_composite']) {
           if ($element['#webform_multiple']) {

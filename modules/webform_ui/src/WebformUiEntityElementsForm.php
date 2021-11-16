@@ -187,7 +187,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
           }
 
           $parent_keys[] = $current_parent_key;
-          $current_parent_key = (isset($webform_ui_elements[$current_parent_key]['parent_key'])) ? $webform_ui_elements[$current_parent_key]['parent_key'] : NULL;
+          $current_parent_key = $webform_ui_elements[$current_parent_key]['parent_key'] ?? NULL;
         }
       }
 
@@ -484,7 +484,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
 
     // Add element key and type.
     $row['#attributes']['data-webform-key'] = $element['#webform_key'];
-    $row['#attributes']['data-webform-type'] = (isset($element['#type'])) ? $element['#type'] : '';
+    $row['#attributes']['data-webform-type'] = $element['#type'] ?? '';
 
     $row['#attributes']['class'] = $row_class;
 

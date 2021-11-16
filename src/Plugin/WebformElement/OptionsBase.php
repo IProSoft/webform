@@ -646,7 +646,7 @@ abstract class OptionsBase extends WebformElementBase {
    * {@inheritdoc}
    */
   public function buildExportRecord(array $element, WebformSubmissionInterface $webform_submission, array $export_options) {
-    $element_options = (isset($element['#options'])) ? $element['#options'] : [];
+    $element_options = $element['#options'] ?? [];
     $options_format = ($element['#webform_multiple'] ? $export_options['options_multiple_format'] : $export_options['options_single_format']);
     if ($options_format === 'separate') {
       $value = $this->getRawValue($element, $webform_submission);

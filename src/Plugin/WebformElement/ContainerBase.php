@@ -132,7 +132,7 @@ abstract class ContainerBase extends WebformElementBase {
     }
 
     // Build format attributes.
-    $attributes = (isset($element['#format_attributes'])) ? $element['#format_attributes'] : [];
+    $attributes = $element['#format_attributes'] ?? [];
     $attributes += ['class' => []];
 
     switch ($format) {

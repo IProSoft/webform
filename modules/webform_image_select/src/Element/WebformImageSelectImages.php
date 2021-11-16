@@ -100,7 +100,7 @@ class WebformImageSelectImages extends FormElement {
       ],
       '#error_no_message' => TRUE,
       '#add_more_input_label' => t('more images'),
-      '#default_value' => (isset($element['#default_value'])) ? $element['#default_value'] : [],
+      '#default_value' => $element['#default_value'] ?? [],
     ];
 
     if (function_exists('imce_process_url_element')) {

@@ -288,7 +288,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
           break;
 
         default:
-          $value = (isset($submission_data[$field_name])) ? $submission_data[$field_name] : '';
+          $value = $submission_data[$field_name] ?? '';
           break;
       }
       $record[] = $this->exportValue($value);
@@ -325,7 +325,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
         $value = $element_plugin->getValue($element, $webform_submission);
         $question_keys = array_keys($element['#questions']);
         foreach ($question_keys as $question_key) {
-          $question_value = (isset($value[$question_key])) ? $value[$question_key] : '';
+          $question_value = $value[$question_key] ?? '';
           $record[] = $this->exportValue($question_value);
         }
       }
@@ -334,7 +334,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
         $value = $element_plugin->getValue($element, $webform_submission);
         $composite_element_keys = array_keys($element_plugin->getCompositeElements());
         foreach ($composite_element_keys as $composite_element_key) {
-          $composite_value = (isset($value[$composite_element_key])) ? $value[$composite_element_key] : '';
+          $composite_value = $value[$composite_element_key] ?? '';
           $record[] = $this->exportValue($composite_value);
         }
       }
@@ -712,7 +712,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     $element_plugin->prepare($element, $this->getSubmissionStorage()->create(['webform_id' => $webform->id()]));
 
     // Get file destination.
-    $file_destination = isset($element['#upload_location']) ? $element['#upload_location'] : NULL;
+    $file_destination = $element['#upload_location'] ?? NULL;
     if (isset($file_destination) && !$this->fileSystem->prepareDirectory($file_destination, FileSystemInterface::CREATE_DIRECTORY)) {
       $this->loggerFactory->get('file')
         ->notice('The upload directory %directory for the file element %name could not be created or is not accessible. A newly uploaded file could not be saved in this directory as a consequence, and the upload was canceled.', [

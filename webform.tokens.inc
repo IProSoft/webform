@@ -831,7 +831,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
 
     if (($handler_tokens = $token_service->findWithPrefix($tokens, 'handler'))) {
       foreach ($handler_tokens as $key => $original) {
-        $webform_handler = isset($data['webform_handler']) ? $data['webform_handler'] : [];
+        $webform_handler = $data['webform_handler'] ?? [];
         $parents = explode(':', $key);
         $key_exists = NULL;
         $value = NestedArray::getValue($webform_handler, $parents, $key_exists);
@@ -986,7 +986,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
         'taxonomy_term' => 'term',
         'taxonomy_vocabulary' => 'vocabulary',
       ];
-      $entity_token_name = (isset($entity_token_names[$entity_type])) ? $entity_token_names[$entity_type] : $entity_type;
+      $entity_token_name = $entity_token_names[$entity_type] ?? $entity_type;
       $entity_token = implode(':', $keys);
       $token_value = Markup::create(\Drupal::token()->replace(
         "[$entity_token_name:$entity_token]",

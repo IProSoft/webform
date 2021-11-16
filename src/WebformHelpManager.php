@@ -152,7 +152,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    */
   public function getGroup($id = NULL) {
     if ($id !== NULL) {
-      return (isset($this->groups[$id])) ? $this->groups[$id] : NULL;
+      return $this->groups[$id] ?? NULL;
     }
     else {
       return $this->groups;
@@ -164,7 +164,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    */
   public function getHelp($id = NULL) {
     if ($id !== NULL) {
-      return (isset($this->help[$id])) ? $this->help[$id] : NULL;
+      return $this->help[$id] ?? NULL;
     }
     else {
       return $this->help;
@@ -176,7 +176,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    */
   public function getVideo($id = NULL) {
     if ($id !== NULL) {
-      return (isset($this->videos[$id])) ? $this->videos[$id] : NULL;
+      return $this->videos[$id] ?? NULL;
     }
     else {
       return $this->videos;
@@ -223,7 +223,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
   public function getNotifications($type = NULL) {
     $notifications = $this->state->get('webform_help_notifications', []);
     if ($type) {
-      return (isset($notifications[$type])) ? $notifications[$type] : [];
+      return $notifications[$type] ?? [];
     }
     else {
       return $notifications;
@@ -365,7 +365,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       // Content.
       $row['content'] = ['data' => []];
       $row['content']['data']['title'] = [
-        '#markup' => $video['title'] . ' | ' . (isset($video['owner']) ? $video['owner'] : $this->t('Jacob Rockowitz')),
+        '#markup' => $video['title'] . ' | ' . ($video['owner'] ?? $this->t('Jacob Rockowitz')),
         '#prefix' => '<h3>',
         '#suffix' => '</h3>',
       ];

@@ -155,7 +155,7 @@ class TestEntityMappingWebformHandler extends WebformHandlerBase {
     $element_options = [];
     $elements = $this->webform->getElementsInitializedFlattenedAndHasValue();
     foreach ($elements as $element_key => $element) {
-      $element_options[$element_key] = (isset($element['#title'])) ? $element['#title'] : $element_key;
+      $element_options[$element_key] = $element['#title'] ?? $element_key;
     }
 
     // Get field options.

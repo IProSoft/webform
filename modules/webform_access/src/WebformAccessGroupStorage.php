@@ -53,7 +53,7 @@ class WebformAccessGroupStorage extends ConfigEntityStorage implements WebformAc
       $admins[$record['group_id']][] = $record['uid'];
     }
     foreach ($webform_access_groups as $group_id => $webform_access_group) {
-      $webform_access_group->setAdminIds((isset($admins[$group_id])) ? $admins[$group_id] : []);
+      $webform_access_group->setAdminIds($admins[$group_id] ?? []);
     }
 
     // Load users.
@@ -68,7 +68,7 @@ class WebformAccessGroupStorage extends ConfigEntityStorage implements WebformAc
       $users[$record['group_id']][] = $record['uid'];
     }
     foreach ($webform_access_groups as $group_id => $webform_access_group) {
-      $webform_access_group->setUserIds((isset($users[$group_id])) ? $users[$group_id] : []);
+      $webform_access_group->setUserIds($users[$group_id] ?? []);
     }
 
     // Load entities.
@@ -84,7 +84,7 @@ class WebformAccessGroupStorage extends ConfigEntityStorage implements WebformAc
       $entities[$group_id][] = implode(':', $record);
     }
     foreach ($webform_access_groups as $group_id => $webform_access_group) {
-      $webform_access_group->setEntityIds((isset($entities[$group_id])) ? $entities[$group_id] : []);
+      $webform_access_group->setEntityIds($entities[$group_id] ?? []);
     }
 
     return $webform_access_groups;

@@ -372,7 +372,7 @@ class WebformResultsCustomForm extends FormBase {
         '#markup' => $column['title'],
       ],
       'key' => [
-        '#markup' => (isset($column['key'])) ? $column['key'] : $column['name'],
+        '#markup' => $column['key'] ?? $column['name'],
       ],
       'weight' => [
         '#type' => 'weight',

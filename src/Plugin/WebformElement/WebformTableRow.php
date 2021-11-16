@@ -82,7 +82,7 @@ class WebformTableRow extends WebformElementBase {
     $webform = $webform_submission->getWebform();
     $parent_key = $element['#webform_parent_key'];
     $parent_element = $webform->getElement($parent_key);
-    $parent_format = (isset($parent_element['#format'])) ? $parent_element['#format'] : 'table';
+    $parent_format = $parent_element['#format'] ?? 'table';
 
     // Remove #states.
     unset($element['#states']);

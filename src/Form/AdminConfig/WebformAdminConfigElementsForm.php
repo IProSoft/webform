@@ -471,7 +471,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       // Item format.
       $item_formats = WebformOptionsHelper::appendValueToText($element_plugin->getItemFormats());
       $item_default_format = $element_plugin->getItemDefaultFormat();
-      $item_default_format_label = (isset($item_formats[$item_default_format])) ? $item_formats[$item_default_format] : $item_default_format;
+      $item_default_format_label = $item_formats[$item_default_format] ?? $item_default_format;
       $row['item'] = [
         '#type' => 'select',
         '#title' => $this->t('Item format'),

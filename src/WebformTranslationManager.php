@@ -209,7 +209,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   protected function removeUnTranslatablePropertiesFromElement(array &$element) {
 
-    $element_type = (isset($element['#type'])) ? $element['#type'] : NULL;
+    $element_type = $element['#type'] ?? NULL;
     $translatable_properties = $this->getTranslatableProperties($element_type);
     $element_plugin = $this->elementManager->getElementInstance($element);
     foreach ($element as $property_key => $property_value) {

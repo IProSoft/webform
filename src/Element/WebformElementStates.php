@@ -976,7 +976,7 @@ class WebformElementStates extends FormElement {
         $index++;
         $states[$index] = [
           'state' => $value['state'],
-          'operator' => (isset($value['operator'])) ? $value['operator'] : 'and',
+          'operator' => $value['operator'] ?? 'and',
           'conditions' => [],
         ];
       }

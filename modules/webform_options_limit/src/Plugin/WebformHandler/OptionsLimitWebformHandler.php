@@ -1182,7 +1182,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       $limit = (isset($this->configuration['limits'][$option_key]))
         ? $this->configuration['limits'][$option_key]
         : $default_limit;
-      $total = (isset($totals[$option_key])) ? $totals[$option_key] : 0;
+      $total = $totals[$option_key] ?? 0;
       $limits[$option_key] = $this->getLimitInformation($option_label, $limit, $total);
     }
     return $limits;

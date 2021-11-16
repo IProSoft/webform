@@ -505,7 +505,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $element_property = $this->getWebformElementProperty($webform_element->getPluginId(), $property_name);
 
     $property_value = $translation_element[$property_name];
-    $property_title = (isset($element_property['#title'])) ? $element_property['#title'] : $property_name;
+    $property_title = $element_property['#title'] ?? $property_name;
 
     // Options (key/value pairs).
     $translation_options = $property_value;
@@ -581,7 +581,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $element_property = $this->getWebformElementProperty($webform_element->getPluginId(), $property_name);
 
     $property_value = $translation_element[$property_name];
-    $property_title = (isset($element_property['#title'])) ? $element_property['#title'] : $property_name;
+    $property_title = $element_property['#title'] ?? $property_name;
 
     // Images.
     $translation_images = $property_value;
@@ -726,8 +726,8 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $element_property = $this->getWebformElementProperty($webform_element->getPluginId(), $property_name);
 
     $property_value = $translation_element[$property_name];
-    $property_title = (isset($element_property['#title'])) ? $element_property['#title'] : $property_name;
-    $property_type = (isset($element_property['#type'])) ? $element_property['#type'] : NULL;
+    $property_title = $element_property['#title'] ?? $property_name;
+    $property_type = $element_property['#type'] ?? NULL;
 
     $property_translation_element = [
       '#title' => $property_title,
@@ -985,7 +985,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   protected function getWebformElementProperty($type, $property_name) {
     $property_key = ltrim($property_name, '#');
     $properties = $this->getWebformElementProperties($type);
-    return (isset($properties[$property_key])) ? $properties[$property_key] : NULL;
+    return $properties[$property_key] ?? NULL;
 
   }
 

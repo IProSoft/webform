@@ -57,7 +57,7 @@ class WebformExcludedColumns extends WebformExcludedBase {
       $options[$key] = [
         'title' => $element['#admin_title'] ?: $element['#title'] ?: $key,
         'name' => $key,
-        'type' => isset($element['#type']) ? $element['#type'] : '',
+        'type' => $element['#type'] ?? '',
       ];
     }
     return $options;

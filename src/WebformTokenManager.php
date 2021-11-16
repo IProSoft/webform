@@ -337,7 +337,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
    * Element is not being based by reference since the #value is being altered.
    */
   public static function validateElement($element, FormStateInterface $form_state, &$complete_form) {
-    $value = isset($element['#value']) ? $element['#value'] : $element['#default_value'];
+    $value = $element['#value'] ?? $element['#default_value'];
 
     if (!mb_strlen($value)) {
       return $element;

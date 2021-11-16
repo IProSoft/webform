@@ -444,7 +444,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
 
       $composite_element = $composite_elements[$composite_key];
       $header[$composite_key] = [
-        'data' => (isset($composite_element['#title'])) ? $composite_element['#title'] : $composite_key,
+        'data' => $composite_element['#title'] ?? $composite_key,
         'bgcolor' => '#eee',
       ];
     }
@@ -800,7 +800,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         $record[] = WebformOptionsHelper::getOptionText($value[$composite_key], $composite_element['#options']);
       }
       else {
-        $record[] = (isset($value[$composite_key])) ? $value[$composite_key] : NULL;
+        $record[] = $value[$composite_key] ?? NULL;
       }
     }
     return $record;
@@ -1017,8 +1017,8 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $rows = [];
     $composite_elements = $this->getCompositeElements();
     foreach ($composite_elements as $composite_key => $composite_element) {
-      $title = (isset($composite_element['#title'])) ? $composite_element['#title'] : $composite_key;
-      $type = isset($composite_element['#type']) ? $composite_element['#type'] : NULL;
+      $title = $composite_element['#title'] ?? $composite_key;
+      $type = $composite_element['#type'] ?? NULL;
       $t_args = ['@title' => $title];
       $state_disabled = [
         'disabled' => [
@@ -1183,7 +1183,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         /** @var \Drupal\webform_ui\Form\WebformUiElementEditForm $form_object */
         $form_object = $form_state->getFormObject();
         $element = $form_object->getElement();
-        $composite_options_default_value = (isset($element['#' . $composite_key . '__options'])) ? $element['#' . $composite_key . '__options'] : NULL;
+        $composite_options_default_value = $element['#' . $composite_key . '__options'] ?? NULL;
         if ($composite_options_default_value && (is_array($composite_options_default_value) || !isset($composite_options[$composite_options_default_value]))) {
           $webform = $form_object->getWebform();
           if ($this->currentUser->hasPermission('edit webform source')
@@ -1331,7 +1331,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
   public function getInitializedCompositeElement(array $element, $composite_key = NULL) {
     $composite_elements = $element['#webform_composite_elements'];
     if (isset($composite_key)) {
-      return (isset($composite_elements[$composite_key])) ? $composite_elements[$composite_key] : NULL;
+      return $composite_elements[$composite_key] ?? NULL;
     }
     else {
       return $composite_elements;

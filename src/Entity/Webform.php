@@ -987,7 +987,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function getSetting($key, $default = FALSE) {
     $settings = $this->getSettings();
-    $value = (isset($settings[$key])) ? $settings[$key] : NULL;
+    $value = $settings[$key] ?? NULL;
     if ($default) {
       return $value ?: \Drupal::config('webform.settings')->get('settings.default_' . $key);
     }
@@ -1828,7 +1828,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function getElement($key, $include_children = FALSE) {
     $elements_flattened = $this->getElementsInitializedAndFlattened();
-    $element = (isset($elements_flattened[$key])) ? $elements_flattened[$key] : NULL;
+    $element = $elements_flattened[$key] ?? NULL;
     if ($element && $include_children) {
       $elements = $this->getElementsInitialized();
       return NestedArray::getValue($elements, $element['#webform_parents']);
@@ -1843,7 +1843,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function getElementDecoded($key) {
     $elements = $this->getElementsDecodedAndFlattened();
-    return (isset($elements[$key])) ? $elements[$key] : NULL;
+    return $elements[$key] ?? NULL;
   }
 
   /**
@@ -1851,7 +1851,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function getElementInitialized($key) {
     $elements = $this->getElementsInitializedAndFlattened();
-    return (isset($elements[$key])) ? $elements[$key] : NULL;
+    return $elements[$key] ?? NULL;
   }
 
   /**
@@ -2111,7 +2111,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function getPage($operation, $key) {
     $pages = $this->getPages($operation);
-    return (isset($pages[$key])) ? $pages[$key] : NULL;
+    return $pages[$key] ?? NULL;
   }
 
   /**
@@ -3098,7 +3098,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function getState($key, $default = NULL) {
     $namespace = 'webform.webform.' . $this->id();
     $values = \Drupal::state()->get($namespace, []);
-    return (isset($values[$key])) ? $values[$key] : $default;
+    return $values[$key] ?? $default;
   }
 
   /**
@@ -3142,7 +3142,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     /** @var \Drupal\user\UserDataInterface $user_data */
     $user_data = \Drupal::service('user.data');
     $values = $user_data->get('webform', $account->id(), $this->id());
-    return (isset($values[$key])) ? $values[$key] : $default;
+    return $values[$key] ?? $default;
   }
 
   /**

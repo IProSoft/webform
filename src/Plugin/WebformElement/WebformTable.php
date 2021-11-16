@@ -90,7 +90,7 @@ class WebformTable extends WebformElementBase {
 
     foreach ($element['#header'] as $index => $header) {
       if (is_array($header) && isset($header['title'])) {
-        $attributes = (isset($header['attributes'])) ? $header['attributes'] : [];
+        $attributes = $header['attributes'] ?? [];
         $element['#header'][$index] = [
           'data' => ['#markup' => $header['title']],
         ] + $attributes;

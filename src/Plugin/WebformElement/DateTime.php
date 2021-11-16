@@ -89,7 +89,7 @@ class DateTime extends DateBase {
 
     /* Date */
 
-    $date_element = (isset($element['#date_date_element'])) ? $element['#date_date_element'] : 'date';
+    $date_element = $element['#date_date_element'] ?? 'date';
 
     // Unset unsupported date format for date elements that are not
     // text or datepicker.

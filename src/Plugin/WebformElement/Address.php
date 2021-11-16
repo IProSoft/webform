@@ -391,7 +391,7 @@ class Address extends WebformCompositeBase {
       '#access' => TRUE,
     ];
     foreach (LabelHelper::getGenericFieldLabels() as $field_name => $label) {
-      $override = isset($field_overrides[$field_name]) ? $field_overrides[$field_name] : '';
+      $override = $field_overrides[$field_name] ?? '';
       $form['address']['field_overrides'][$field_name] = [
         '#access' => TRUE,
         'field_label' => [

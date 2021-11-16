@@ -362,7 +362,7 @@ function webform_preprocess_table(&$variables) {
 
       // Get language from edit link.
       $route_parameters = $row['cells'][1]['content']['#links']['edit']['url']->getRouteParameters();
-      $langcode = (isset($route_parameters['langcode'])) ? $route_parameters['langcode'] : NULL;
+      $langcode = $route_parameters['langcode'] ?? NULL;
       $language = \Drupal::languageManager()->getLanguage($langcode);
 
       // Convert the first cell in the row to a link.
@@ -631,8 +631,8 @@ function webform_preprocess_file_managed_file(&$variables) {
   $label = [
     '#type' => 'html_tag',
     '#tag' => 'label',
-    '#value' => (isset($element['#button__title'])) ? $element['#button__title'] : (empty($element['#multiple']) ? t('Choose file') : t('Choose files')),
-    '#attributes' => (isset($element['#button__attributes'])) ? $element['#button__attributes'] : [],
+    '#value' => $element['#button__title'] ?? (empty($element['#multiple']) ? t('Choose file') : t('Choose files')),
+    '#attributes' => $element['#button__attributes'] ?? [],
   ];
 
   // Add 'for' attribute.
@@ -759,7 +759,7 @@ function _webform_preprocess_options(array &$variables) {
  */
 function _webform_preprocess_element(array &$variables, $title_parents = ['title']) {
   $element = &$variables['element'];
-  $type = (isset($element['#type'])) ? $element['#type'] : '';
+  $type = $element['#type'] ?? '';
 
   // Fix details 'description' property which does not have description.content.
   // @see template_preprocess_details
@@ -868,13 +868,13 @@ function _webform_preprocess_description_help(array &$variables) {
  */
 function _webform_preprocess_help(array &$variables, $title_parents = ['title']) {
   $element = &$variables['element'];
-  $type = (isset($element['#type'])) ? $element['#type'] : '';
+  $type = $element['#type'] ?? '';
 
   if (empty($element['#help'])) {
     return;
   }
 
-  $help_display = (isset($element['#help_display'])) ? $element['#help_display'] : 'title_after';
+  $help_display = $element['#help_display'] ?? 'title_after';
 
   // Determine target variable (aka render element).
   $targets = [

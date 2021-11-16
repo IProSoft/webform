@@ -1155,7 +1155,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
     $name = str_replace(['][', '[', ']'], ['|', '|', ''], $name);
     $array = explode('|', $name);
     if ($index !== NULL) {
-      return isset($array[$index]) ? $array[$index] : NULL;
+      return $array[$index] ?? NULL;
     }
     else {
       return $array;

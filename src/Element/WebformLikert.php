@@ -126,7 +126,7 @@ class WebformLikert extends FormElement {
         list($question_title, $question_description) = WebformOptionsHelper::splitOption($question);
       }
 
-      $value = (isset($element['#value'][$question_key])) ? $element['#value'][$question_key] : NULL;
+      $value = $element['#value'][$question_key] ?? NULL;
 
       // Get question id.
       // @see \Drupal\Core\Form\FormBuilder::doBuildForm

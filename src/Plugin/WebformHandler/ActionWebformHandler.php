@@ -178,7 +178,7 @@ class ActionWebformHandler extends WebformHandlerBase {
     foreach ($elements as $element_key => $element) {
       $elements_rows[] = [
         $element_key,
-        (isset($element['#title']) ? $element['#title'] : ''),
+        ($element['#title'] ?? ''),
       ];
     }
     $form['actions']['elements'] = [

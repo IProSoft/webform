@@ -149,7 +149,7 @@ class WebformDateHelper {
   public static function getIntervalText($interval) {
     $interval = ((string) $interval) ?: '';
     $intervals = self::getIntervalOptionsFlattened();
-    return (isset($intervals[$interval])) ? $intervals[$interval] : $intervals[''];
+    return $intervals[$interval] ?? $intervals[''];
   }
 
   /**

@@ -176,7 +176,7 @@ class WebformPluginElementController extends ControllerBase implements Container
         // Element info.
         $element_info_definitions = [
           'input' => (empty($webform_element_info['#input'])) ? $this->t('No') : $this->t('Yes'),
-          'theme' => (isset($webform_element_info['#theme'])) ? $webform_element_info['#theme'] : 'N/A',
+          'theme' => $webform_element_info['#theme'] ?? 'N/A',
           'theme_wrappers' => (isset($webform_element_info['#theme_wrappers'])) ? implode('; ', $webform_element_info['#theme_wrappers']) : 'N/A',
         ];
         $element_info = [];

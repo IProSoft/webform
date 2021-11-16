@@ -115,7 +115,7 @@ class WebformTestEditorialController extends ControllerBase implements Container
       $groups[$group_name] = [];
     }
     foreach ($help as $name => $info) {
-      $group_name = (isset($info['group'])) ? $info['group'] : (string) $this->t('General');
+      $group_name = $info['group'] ?? (string) $this->t('General');
       $groups[$group_name][$name] = $info;
     }
     $groups = array_filter($groups);

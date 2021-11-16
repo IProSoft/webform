@@ -360,7 +360,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    * {@inheritdoc}
    */
   public function getElementProperty(array $element, $property_name) {
-    return (isset($element["#$property_name"])) ? $element["#$property_name"] : $this->getDefaultProperty($property_name);
+    return $element["#$property_name"] ?? $this->getDefaultProperty($property_name);
   }
 
   /**
@@ -466,7 +466,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    * {@inheritdoc}
    */
   public function getDefaultKey() {
-    return (isset($this->pluginDefinition['default_key'])) ? $this->pluginDefinition['default_key'] : NULL;
+    return $this->pluginDefinition['default_key'] ?? NULL;
   }
 
   /**
@@ -1117,7 +1117,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       return $element;
     }
 
-    $flex = (isset($element['#flex'])) ? $element['#flex'] : 1;
+    $flex = $element['#flex'] ?? 1;
     $element += ['#prefix' => '', '#suffix' => ''];
     $element['#prefix'] = '<div class="webform-flex webform-flex--' . $flex . '"><div class="webform-flex--container">' . $element['#prefix'];
     $element['#suffix'] = $element['#suffix'] . '</div></div>';
@@ -1171,7 +1171,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     foreach ($multiple_properties as $multiple_property => $multiple_value) {
       if (strpos($multiple_property, 'multiple__') === 0) {
         $property_name = str_replace('multiple__', '', $multiple_property);
-        $element["#$property_name"] = (isset($element["#$multiple_property"])) ? $element["#$multiple_property"] : $multiple_value;
+        $element["#$property_name"] = $element["#$multiple_property"] ?? $multiple_value;
       }
     }
 
@@ -1483,7 +1483,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
           'comma' => ', ',
           'space' => ' ',
         ];
-        $delimiter = (isset($delimiters[$format])) ? $delimiters[$format] : $format;
+        $delimiter = $delimiters[$format] ?? $format;
 
         $total = count($items);
 
@@ -1561,7 +1561,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
           'comma' => ', ',
           'space' => ' ',
         ];
-        $delimiter = (isset($delimiters[$format])) ? $delimiters[$format] : $format;
+        $delimiter = $delimiters[$format] ?? $format;
         return implode($delimiter, $items);
     }
   }
@@ -1702,7 +1702,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       return $element['#value'];
     }
 
-    $webform_key = (isset($options['webform_key'])) ? $options['webform_key'] : $element['#webform_key'];
+    $webform_key = $options['webform_key'] ?? $element['#webform_key'];
     $value = $webform_submission->getElementData($webform_key);
     // Is value is NULL and there is a #default_value, then use it.
     if ($value === NULL && isset($element['#default_value'])) {
@@ -1714,13 +1714,13 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       // Return $options['delta'] which is used by tokens.
       // @see _webform_token_get_submission_value()
       if (isset($options['delta'])) {
-        $value = (isset($value[$options['delta']])) ? $value[$options['delta']] : NULL;
+        $value = $value[$options['delta']] ?? NULL;
       }
 
       // Return $options['composite_key'] which is used by composite elements.
       // @see \Drupal\webform\Plugin\WebformElement\WebformCompositeBase::formatTableColumn
       if ($value && isset($options['composite_key'])) {
-        $value = (isset($value[$options['composite_key']])) ? $value[$options['composite_key']] : NULL;
+        $value = $value[$options['composite_key']] ?? NULL;
       }
     }
 
@@ -3077,7 +3077,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('Select how a single value is displayed.'),
       '#options' => WebformOptionsHelper::appendValueToText($this->getItemFormats()),
     ];
-    $format = isset($element_properties['format']) ? $element_properties['format'] : NULL;
+    $format = $element_properties['format'] ?? NULL;
     $format_custom = ($has_edit_twig_access || $format === 'custom');
     if ($format_custom) {
       $form['display']['item']['format']['#options'] += ['custom' => $this->t('Custom…')];
@@ -3150,7 +3150,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('Select how multiple values are displayed.'),
       '#options' => WebformOptionsHelper::appendValueToText($this->getItemsFormats()),
     ];
-    $format_items = isset($element_properties['format_items']) ? $element_properties['format_items'] : NULL;
+    $format_items = $element_properties['format_items'] ?? NULL;
     $format_items_custom = ($has_edit_twig_access || $format_items === 'custom');
     if ($format_items_custom) {
       $form['display']['items']['format_items']['#options'] += ['custom' => $this->t('Custom…')];
@@ -3544,7 +3544,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    */
   protected function setConfigurationFormDefaultValue(array &$form, array &$element_properties, array &$property_element, $property_name) {
     $default_value = $element_properties[$property_name];
-    $type = (isset($property_element['#type'])) ? $property_element['#type'] : NULL;
+    $type = $property_element['#type'] ?? NULL;
 
     switch ($type) {
       case 'entity_autocomplete':

@@ -786,7 +786,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
   protected function buildHeaderColumn(array $column) {
     $name = $column['name'];
     if ($this->format['header_format'] === 'key') {
-      $title = isset($column['key']) ? $column['key'] : $column['name'];
+      $title = $column['key'] ?? $column['name'];
     }
     else {
       $title = $column['title'];

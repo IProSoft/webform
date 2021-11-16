@@ -262,7 +262,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       '#upload_validators' => $upload_validators,
       '#cardinality' => (empty($element['#multiple'])) ? 1 : $element['#multiple'],
     ];
-    $file_help = (isset($element['#file_help'])) ? $element['#file_help'] : 'description';
+    $file_help = $element['#file_help'] ?? 'description';
     if ($file_help !== 'none') {
       if (isset($element["#$file_help"])) {
         if (is_array($element["#$file_help"])) {
@@ -501,10 +501,10 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $original_data = $webform_submission->getOriginalData();
     $data = $webform_submission->getData();
 
-    $value = isset($data[$key]) ? $data[$key] : [];
+    $value = $data[$key] ?? [];
     $fids = (is_array($value)) ? $value : [$value];
 
-    $original_value = isset($original_data[$key]) ? $original_data[$key] : [];
+    $original_value = $original_data[$key] ?? [];
     $original_fids = (is_array($original_value)) ? $original_value : [$original_value];
 
     // Delete the old file uploads.

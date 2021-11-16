@@ -285,7 +285,7 @@ trait WebformEntityReferenceTrait {
   public function buildExportHeader(array $element, array $options) {
     if (!$this->hasMultipleValues($element)) {
       $default_options = $this->getExportDefaultOptions();
-      $header = isset($options['entity_reference_items']) ? $options['entity_reference_items'] : $default_options['entity_reference_items'];
+      $header = $options['entity_reference_items'] ?? $default_options['entity_reference_items'];
       if ($options['header_format'] === 'label') {
         foreach ($header as $index => $column) {
           switch ($column) {
@@ -316,7 +316,7 @@ trait WebformEntityReferenceTrait {
   public function buildExportRecord(array $element, WebformSubmissionInterface $webform_submission, array $export_options) {
     $value = $this->getValue($element, $webform_submission);
     $default_options = $this->getExportDefaultOptions();
-    $entity_reference_items = isset($export_options['entity_reference_items']) ? $export_options['entity_reference_items'] : $default_options['entity_reference_items'];
+    $entity_reference_items = $export_options['entity_reference_items'] ?? $default_options['entity_reference_items'];
 
     if (!$this->hasMultipleValues($element)) {
       $entity_type = $this->getTargetType($element);

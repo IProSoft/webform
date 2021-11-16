@@ -436,7 +436,7 @@ function template_preprocess_webform_element_base_html(array &$variables) {
   if (empty($variables['options']['email']) && isset($element['#type'])) {
     $type = $element['#type'];
 
-    $attributes = (isset($element['#format_attributes'])) ? $element['#format_attributes'] : [];
+    $attributes = $element['#format_attributes'] ?? [];
     $attributes += ['class' => []];
     // Use wrapper attributes for the id instead of #id,
     // this stops the <label> from having a 'for' attribute.
@@ -618,8 +618,8 @@ function _template_preprocess_webform_progress(array &$variables) {
   foreach ($pages as $key => $page) {
     $variables['progress'][] = [
       'name' => $key,
-      'title' => (isset($page['#title'])) ? $page['#title'] : '',
-      'type' => (isset($page['#type'])) ? $page['#type'] : 'page',
+      'title' => $page['#title'] ?? '',
+      'type' => $page['#type'] ?? 'page',
     ];
   }
 }
@@ -714,13 +714,13 @@ function template_preprocess_webform_section(array &$variables) {
   $element = $variables['element'];
   Element::setAttributes($element, ['id']);
   RenderElement::setAttributes($element);
-  $variables['attributes'] = isset($element['#attributes']) ? $element['#attributes'] : [];
-  $variables['prefix'] = isset($element['#field_prefix']) ? $element['#field_prefix'] : NULL;
-  $variables['suffix'] = isset($element['#field_suffix']) ? $element['#field_suffix'] : NULL;
-  $variables['title_display'] = isset($element['#title_display']) ? $element['#title_display'] : NULL;
-  $variables['title_tag'] = isset($element['#title_tag']) ? $element['#title_tag'] : 'h2';
-  $variables['title_attributes'] = isset($element['#title_attributes']) ? $element['#title_attributes'] : [];
-  $variables['description_display'] = isset($element['#description_display']) ? $element['#description_display'] : 'before';
+  $variables['attributes'] = $element['#attributes'] ?? [];
+  $variables['prefix'] = $element['#field_prefix'] ?? NULL;
+  $variables['suffix'] = $element['#field_suffix'] ?? NULL;
+  $variables['title_display'] = $element['#title_display'] ?? NULL;
+  $variables['title_tag'] = $element['#title_tag'] ?? 'h2';
+  $variables['title_attributes'] = $element['#title_attributes'] ?? [];
+  $variables['description_display'] = $element['#description_display'] ?? 'before';
   $variables['children'] = $element['#children'];
   $variables['required'] = !empty($element['#required']) ? $element['#required'] : NULL;
 
@@ -774,7 +774,7 @@ function _template_preprocess_webform_composite(array &$variables) {
   }
 
   // Set flexbox variable used for multi column element layout.
-  $variables['flexbox'] = (isset($element['#flexbox'])) ? $element['#flexbox'] : FALSE;
+  $variables['flexbox'] = $element['#flexbox'] ?? FALSE;
 }
 
 /**
@@ -871,7 +871,7 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
  *   - attributes: The help attributes.
  */
 function template_preprocess_webform_element_help(array &$variables) {
-  $attributes = (isset($variables['attributes'])) ? $variables['attributes'] : [];
+  $attributes = $variables['attributes'] ?? [];
   $attributes['class'][] = 'webform-element-help';
   $attributes['class'][] = 'js-webform-element-help';
   $attributes['role'] = 'tooltip';

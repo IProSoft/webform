@@ -184,7 +184,7 @@ class WebformEmailConfirm extends FormElement {
         // NOTE: Only mail_1 needs to be validated since mail_2 is the same value.
         // Verify the required value.
         if ($mail_element['mail_1']['#required'] && empty($mail_1)) {
-          $required_error_title = (isset($mail_element['mail_1']['#title'])) ? $mail_element['mail_1']['#title'] : NULL;
+          $required_error_title = $mail_element['mail_1']['#title'] ?? NULL;
           WebformElementHelper::setRequiredError($element, $form_state, $required_error_title);
         }
         // Verify that the value is not longer than #maxlength.

@@ -104,7 +104,7 @@ class WebformMapping extends FormElement {
     // Build rows.
     $rows = [];
     foreach ($sources as $source_key => $source) {
-      $default_value = (isset($element['#default_value'][$source_key])) ? $element['#default_value'][$source_key] : NULL;
+      $default_value = $element['#default_value'][$source_key] ?? NULL;
 
       // Source element.
       $source_element = ['data' => []];
