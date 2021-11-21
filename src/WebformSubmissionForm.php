@@ -15,6 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\webform\Cache\WebformBubbleableMetadata;
@@ -413,11 +414,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->operation === 'add'
       && $entity->isNew()
       && $webform->getSetting('autofill')) {
-      if ($last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE])) {
-        $excluded_elements = $webform->getSetting('autofill_excluded_elements') ?: [];
-        $last_submission_data = array_diff_key($last_submission->getRawData(), $excluded_elements);
-        $data = $last_submission_data + $data;
-      }
+      $data = $this->getLastSubmissionData($webform, $source_entity, $account) + $data;
     }
 
     // Get default data and append it to the submission's data.
@@ -437,6 +434,52 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform->setOperation($this->operation);
 
     return parent::setEntity($entity);
+  }
+
+  /**
+   * Get last submission data with excluded elements.
+   *
+   * @param \Drupal\webform\WebformInterface $webform
+   *   A webform.
+   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
+   *   (optional) A webform submission source entity.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   The current user account.
+   *
+   * @return array
+   *   An associative array containing last submission data
+   *   with excluded elements.
+   */
+  protected function getLastSubmissionData(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+    $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE]);
+    if (!$last_submission) {
+      return [];
+    }
+
+    $data = $last_submission->getRawData();
+    $excluded_elements = $webform->getSetting('autofill_excluded_elements') ?: [];
+    foreach ($excluded_elements as $excluded_element_key) {
+      // Unset excluded element.
+      unset($data[$excluded_element_key]);
+
+      // Unset excluded composite sub-element.
+      if (strpos($excluded_element_key, '__') !== FALSE) {
+        [$excluded_parent_key, $excluded_composite_key] = explode('__', $excluded_element_key);
+        if (isset($data[$excluded_parent_key]) && is_array($data[$excluded_parent_key])) {
+          if (WebformArrayHelper::isSequential($data[$excluded_parent_key])) {
+            // Multi-value composite.
+            foreach (array_keys($data[$excluded_parent_key]) as $delta) {
+              unset($data[$excluded_parent_key][$delta][$excluded_composite_key]);
+            }
+          }
+          else {
+            // Single-value composite.
+            unset($data[$excluded_parent_key][$excluded_composite_key]);
+          }
+        }
+      }
+    }
+    return $data;
   }
 
   /**
