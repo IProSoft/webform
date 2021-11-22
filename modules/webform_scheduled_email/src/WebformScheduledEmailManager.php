@@ -536,7 +536,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
       return $stats;
     }
 
-    list($webform, $webform_submission, $source_entity) = $this->getEntities($entity);
+    [$webform, $webform_submission, $source_entity] = $this->getEntities($entity);
 
     $query = $this->database->select('webform_scheduled_email', 'w')
       ->fields('w', ['eid', 'sid', 'webform_id', 'entity_type', 'entity_id', 'handler_id', 'state', 'send'])
@@ -623,7 +623,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
       return $stats;
     }
 
-    list($webform, $webform_submission, $source_entity) = $this->getEntities($entity);
+    [$webform, $webform_submission, $source_entity] = $this->getEntities($entity);
 
     // IMPORTANT: Only scheduled emails with state = ::SUBMISSION_SEND will
     // be sent.
@@ -777,7 +777,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
    * {@inheritdoc}
    */
   public function total(EntityInterface $entity = NULL, $handler_id = NULL, $state = FALSE) {
-    list($webform, $webform_submission, $source_entity) = $this->getEntities($entity);
+    [$webform, $webform_submission, $source_entity] = $this->getEntities($entity);
 
     $query = $this->database->select('webform_scheduled_email', 'w');
     $this->addQueryConditions($query, $webform, $webform_submission, $source_entity, $handler_id, $state);

@@ -61,7 +61,7 @@ class WebformResultsExportController extends ControllerBase implements Container
    *   A response that renders or redirects to the CSV file.
    */
   public function index(Request $request) {
-    list($webform, $source_entity) = $this->requestHandler->getWebformEntities();
+    [$webform, $source_entity] = $this->requestHandler->getWebformEntities();
     $this->submissionExporter->setWebform($webform);
     $this->submissionExporter->setSourceEntity($source_entity);
 
@@ -131,7 +131,7 @@ class WebformResultsExportController extends ControllerBase implements Container
    *   A response that renders or redirects to the CSV file.
    */
   public function file(Request $request, $filename) {
-    list($webform, $source_entity) = $this->requestHandler->getWebformEntities();
+    [$webform, $source_entity] = $this->requestHandler->getWebformEntities();
     $this->submissionExporter->setWebform($webform);
     $this->submissionExporter->setSourceEntity($source_entity);
 

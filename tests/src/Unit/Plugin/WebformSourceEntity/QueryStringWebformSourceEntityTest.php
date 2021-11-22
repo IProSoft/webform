@@ -68,7 +68,7 @@ class QueryStringWebformSourceEntityTest extends UnitTestCase {
     /* ********************************************************************** */
 
     $webform = $this->getMockWebform($options);
-    list($source_entity, $source_entity_translation) = $this->getMockSourceEntity($options, $webform);
+    [$source_entity, $source_entity_translation] = $this->getMockSourceEntity($options, $webform);
 
     // Mock source entity storage.
     $source_entity_storage = $this->getMockBuilder(EntityStorageInterface::class)

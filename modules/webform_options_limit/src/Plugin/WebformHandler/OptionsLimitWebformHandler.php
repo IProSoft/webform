@@ -664,9 +664,9 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
           $option = &$options[$option_value][0];
           switch ($message_display) {
             case WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_DESCRIPTION:
-              list(
+              [
                 $option['value'],
-                $option['webform_options_limit']) = explode(' --', $label);
+                $option['webform_options_limit']] = explode(' --', $label);
               break;
 
             case WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_LABEL:

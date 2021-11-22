@@ -811,7 +811,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
           $element_property = 'title';
         }
         else {
-          list($element_key, $element_property) = explode(':', $key);
+          [$element_key, $element_property] = explode(':', $key);
         }
         $element_property = $element_property ?: 'title';
         $element = $webform->getElement($element_key);

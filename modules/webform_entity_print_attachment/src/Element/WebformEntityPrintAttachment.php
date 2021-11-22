@@ -96,7 +96,7 @@ class WebformEntityPrintAttachment extends WebformAttachmentBase {
       return $element['#export_type'];
     }
     else {
-      list(, $export_type_id) = explode(':', $element['#type']);
+      [, $export_type_id] = explode(':', $element['#type']);
       return $export_type_id;
     }
   }

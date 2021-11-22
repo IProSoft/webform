@@ -607,7 +607,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       }
 
       // Get element and composite key and confirm that the element exists.
-      list($element_key, $composite_key) = explode('__', $name);
+      [$element_key, $composite_key] = explode('__', $name);
       if (!isset($elements[$element_key])) {
         continue;
       }

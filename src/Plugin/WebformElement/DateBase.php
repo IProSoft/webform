@@ -627,7 +627,7 @@ abstract class DateBase extends WebformElementBase {
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     $format = DateFormat::load('html_datetime')->getPattern();
     if (!empty($element['#date_year_range'])) {
-      list($min, $max) = static::datetimeRangeYears($element['#date_year_range']);
+      [$min, $max] = static::datetimeRangeYears($element['#date_year_range']);
     }
     else {
       $min = !empty($element['#date_date_min']) ? strtotime($element['#date_date_min']) : strtotime('-10 years');
@@ -655,7 +655,7 @@ abstract class DateBase extends WebformElementBase {
   protected static function datetimeRangeYears($string, $date = NULL) {
     $datetime = new DrupalDateTime();
     $this_year = $datetime->format('Y');
-    list($min_year, $max_year) = explode(':', $string);
+    [$min_year, $max_year] = explode(':', $string);
 
     // Valid patterns would be -5:+5, 0:+1, 2008:2010.
     $plus_pattern = '@[\+|\-][0-9]{1,4}@';

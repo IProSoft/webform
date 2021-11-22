@@ -91,7 +91,7 @@ class WebformResultsCustomForm extends FormBase {
     $instance = parent::create($container);
     $instance->entityTypeManager = $container->get('entity_type.manager');
     $instance->requestHandler = $container->get('webform.request');
-    list($instance->webform, $instance->sourceEntity) = $instance->requestHandler->getWebformEntities();
+    [$instance->webform, $instance->sourceEntity] = $instance->requestHandler->getWebformEntities();
     return $instance;
   }
 

@@ -263,7 +263,7 @@ class WebformOptions extends FormElement {
     $values = [];
     foreach ($options as $value => $text) {
       if ($options_description && WebformOptionsHelper::hasOptionDescription($text)) {
-        list($text, $description) = WebformOptionsHelper::splitOption($text);
+        [$text, $description] = WebformOptionsHelper::splitOption($text);
         $values[$value] = ['text' => $text, 'description' => $description];
       }
       else {

@@ -203,7 +203,7 @@ class WebformHeight extends FormElement {
     // Apply custom properties to feet and inches elements.
     foreach ($element as $key => $value) {
       if (strpos($key, '__') !== FALSE) {
-        list($element_key, $property_key) = explode('__', ltrim($key, '#'));
+        [$element_key, $property_key] = explode('__', ltrim($key, '#'));
         if (isset($element['container'][$element_key])) {
           $element['container'][$element_key]["#$property_key"] = $value;
         }

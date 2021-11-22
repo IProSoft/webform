@@ -140,7 +140,7 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
   public function confirmation(Request $request, WebformInterface $webform = NULL, WebformSubmissionInterface $webform_submission = NULL) {
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
     if (!$webform) {
-      list($webform, $source_entity) = $this->requestHandler->getWebformEntities();
+      [$webform, $source_entity] = $this->requestHandler->getWebformEntities();
     }
     else {
       $source_entity = $this->requestHandler->getCurrentSourceEntity('webform');
@@ -342,7 +342,7 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
   public function title(WebformInterface $webform = NULL) {
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
     if (!$webform) {
-      list($webform, $source_entity) = $this->requestHandler->getWebformEntities();
+      [$webform, $source_entity] = $this->requestHandler->getWebformEntities();
     }
     else {
       $source_entity = $this->requestHandler->getCurrentSourceEntity('webform');

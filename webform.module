@@ -958,7 +958,7 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
         continue;
       }
 
-      list($title, $description) = WebformOptionsHelper::splitOption($title);
+      [$title, $description] = WebformOptionsHelper::splitOption($title);
       $element[$key]['#title'] = $title;
       $element[$key]['#webform_element'] = TRUE;
       $element[$key][$description_property_name] = $description;

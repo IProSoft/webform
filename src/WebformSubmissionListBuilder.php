@@ -301,7 +301,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     $this->state = $this->request->query->get('state');
     $this->sourceEntityTypeId = $this->request->query->get('entity');
 
-    list($this->webform, $this->sourceEntity) = $this->requestHandler->getWebformEntities();
+    [$this->webform, $this->sourceEntity] = $this->requestHandler->getWebformEntities();
 
     $this->messageManager->setWebform($this->webform);
     $this->messageManager->setSourceEntity($this->sourceEntity);
@@ -469,7 +469,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     $settings = $this->submissionViews[$this->submissionView];
 
     // Get view name and display id.
-    list($name, $display_id) = explode(':', $settings['view']);
+    [$name, $display_id] = explode(':', $settings['view']);
 
     // Load the view and set custom property used to fix the exposed
     // filter action.
@@ -660,7 +660,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       elseif ($this->sourceEntityTypeId && strpos($this->sourceEntityTypeId, ':') !== FALSE) {
         $source_entity_options = $this->webform;
         try {
-          list($source_entity_type, $source_entity_id) = explode(':', $this->sourceEntityTypeId);
+          [$source_entity_type, $source_entity_id] = explode(':', $this->sourceEntityTypeId);
           $source_entity = $this->entityTypeManager->getStorage($source_entity_type)->load($source_entity_id);
           $source_entity_default_value = $source_entity->label() . " ($source_entity_type:$source_entity_id)";
         }
@@ -1261,7 +1261,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         continue;
       }
 
-      list($view_name, $view_display_id) = explode(':', $submission_view['view']);
+      [$view_name, $view_display_id] = explode(':', $submission_view['view']);
       $view = Views::getView($view_name);
       if (!$view || !$view->access($view_display_id)) {
         unset($submission_views[$name]);
@@ -1415,7 +1415,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
 
     // Filter by source entity.
     if ($source_entity && strpos($source_entity, ':') !== FALSE) {
-      list($entity_type, $entity_id) = explode(':', $source_entity);
+      [$entity_type, $entity_id] = explode(':', $source_entity);
       $query->condition('entity_type', $entity_type);
       $query->condition('entity_id', $entity_id);
     }

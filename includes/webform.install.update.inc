@@ -3022,7 +3022,7 @@ function webform_update_8159() {
       continue;
     }
 
-    list($entity_type, $field_name) = explode('.', $field_storage_config->getConfigTarget());
+    [$entity_type, $field_name] = explode('.', $field_storage_config->getConfigTarget());
     $bundles = $field_storage_config->getBundles();
     foreach ($bundles as $bundle) {
       $config = \Drupal::configFactory()
