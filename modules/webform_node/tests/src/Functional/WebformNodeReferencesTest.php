@@ -35,7 +35,7 @@ class WebformNodeReferencesTest extends WebformNodeBrowserTestBase {
     // Check references tab's empty message.
     $this->drupalGet('/admin/structure/webform/manage/contact/references');
     $this->assertRaw('There are no webform node references.');
-    $this->assertLink('Add Webform');
+    $this->linkExists('Add Webform');
     $this->assertLinkByHref($base_path . 'node/add/webform?webform_id=contact');
 
     // Create webform node.
@@ -49,7 +49,7 @@ class WebformNodeReferencesTest extends WebformNodeBrowserTestBase {
     $this->assertNoRaw('There are no webform node references.');
 
     // Check references tabs includes webform node.
-    $this->assertLink($node->label());
+    $this->linkExists($node->label());
 
     // Check references tab local actions.
     $this->assertRaw('<li><a href="' . $base_path . 'node/add/webform?webform_id=contact" class="button button-action" data-drupal-link-query="{&quot;webform_id&quot;:&quot;contact&quot;}" data-drupal-link-system-path="node/add/webform">Add Webform</a></li>');
@@ -65,7 +65,7 @@ class WebformNodeReferencesTest extends WebformNodeBrowserTestBase {
     // Check webform with variants.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/references');
     $this->assertNoLinkByHref($base_path . 'node/add/webform?webform_id=test_variant_multiple');
-    $this->assertLink('Add reference');
+    $this->linkExists('Add reference');
     $this->assertLinkByHref($base_path . 'admin/structure/webform/manage/test_variant_multiple/references/add');
 
     // Check that add reference form redirects to the create content form.

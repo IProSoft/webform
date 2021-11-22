@@ -111,8 +111,8 @@ body {
     ];
     $this->drupalPostForm('/admin/structure/webform/config', $edit, 'Save configuration');
     $this->drupalGet("/admin/structure/webform/manage/test_entity_print/submission/$sid");
-    $this->assertNoLink('Download PDF');
-    $this->assertLink('Generate PDF');
+    $this->linkNotExists('Download PDF');
+    $this->linkExists('Generate PDF');
 
     // Check PDF link disabled.
     $edit = [
@@ -120,7 +120,7 @@ body {
     ];
     $this->drupalPostForm('/admin/structure/webform/config', $edit, 'Save configuration');
     $this->drupalGet("/admin/structure/webform/manage/test_entity_print/submission/$sid");
-    $this->assertNoLink('Download PDF');
+    $this->linkNotExists('Download PDF');
 
     /* ********************************************************************** */
     // Exporter.

@@ -134,13 +134,13 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
 
     // Check form builder is not translated.
     $this->drupalGet('/es/admin/structure/webform/manage/test_translation');
-    $this->assertLink('Text field');
-    $this->assertNoLink('Campo de texto');
+    $this->linkExists('Text field');
+    $this->linkNotExists('Campo de texto');
 
     // Check form builder is not translated when reset.
     $this->drupalPostForm('/es/admin/structure/webform/manage/test_translation', [], 'Reset');
-    $this->assertLink('Text field');
-    $this->assertNoLink('Campo de texto');
+    $this->linkExists('Text field');
+    $this->linkNotExists('Campo de texto');
 
     // Check element edit form is not translated.
     $this->drupalGet('/es/admin/structure/webform/manage/test_translation/element/textfield/edit');

@@ -327,7 +327,7 @@ class WebformNodeTest extends WebformNodeBrowserTestBase {
 
     // Check 'Register' link.
     $this->drupalGet('/node/' . $node->id());
-    $this->assertLink('Register');
+    $this->linkExists('Register');
 
     // Check that link include source_entity_type and source_entity_id.
     $this->assertLinkByHref($webform_contact->toUrl('canonical', $source_entity_options)->toString());

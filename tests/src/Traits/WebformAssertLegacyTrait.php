@@ -24,35 +24,35 @@ trait WebformAssertLegacyTrait {
   /**
    * @see \Drupal\simpletest\TestBase::assertEqual()
    */
-  protected function assertEqual($expected, $actual, $message = '') {
+  protected function assertEqual($expected, $actual, $message = ''): void {
     $this->assertEquals($expected, $actual, $message);
   }
 
   /**
    * @see \Drupal\simpletest\TestBase::assertNotEqual()
    */
-  protected function assertNotEqual($expected, $actual, $message = '') {
+  protected function assertNotEqual($expected, $actual, $message = ''): void {
     $this->assertNotEquals($expected, $actual, $message);
   }
 
   /**
    * @see \Drupal\simpletest\TestBase::assertIdentical()
    */
-  protected function assertIdentical($expected, $actual, $message = '') {
+  protected function assertIdentical($expected, $actual, $message = ''): void {
     $this->assertSame($expected, $actual, $message);
   }
 
   /**
    * @see \Drupal\simpletest\TestBase::assertNotIdentical()
    */
-  protected function assertNotIdentical($expected, $actual, $message = '') {
+  protected function assertNotIdentical($expected, $actual, $message = ''): void {
     $this->assertNotSame($expected, $actual, $message);
   }
 
   /**
    * @see \Drupal\simpletest\TestBase::assertIdenticalObject()
    */
-  protected function assertIdenticalObject($expected, $actual, $message = '') {
+  protected function assertIdenticalObject($expected, $actual, $message = ''): void {
     // Note: ::assertSame checks whether its the same object. ::assertEquals
     // though compares
     $this->assertEquals($expected, $actual, $message);
@@ -82,7 +82,7 @@ trait WebformAssertLegacyTrait {
    * @param string $css_selector
    *   The CSS selector identifying the element to check.
    */
-  protected function assertElementPresent($css_selector) {
+  protected function assertElementPresent($css_selector): void {
     $this->assertSession()->elementExists('css', $css_selector);
   }
 
@@ -92,7 +92,7 @@ trait WebformAssertLegacyTrait {
    * @param string $css_selector
    *   The CSS selector identifying the element to check.
    */
-  protected function assertElementNotPresent($css_selector) {
+  protected function assertElementNotPresent($css_selector): void {
     $this->assertSession()->elementNotExists('css', $css_selector);
   }
 
@@ -105,7 +105,7 @@ trait WebformAssertLegacyTrait {
    * @param string $text
    *   Plain text to look for.
    */
-  protected function assertText($text) {
+  protected function assertText($text): void {
     // Cast MarkupInterface to string.
     $text = (string) $text;
 
@@ -129,7 +129,7 @@ trait WebformAssertLegacyTrait {
    * @param string $text
    *   Plain text to look for.
    */
-  protected function assertNoText($text) {
+  protected function assertNoText($text): void {
     // Cast MarkupInterface to string.
     $text = (string) $text;
 
@@ -187,7 +187,7 @@ trait WebformAssertLegacyTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages with t(). If left blank, a default message will be displayed.
    */
-  protected function assertUniqueText($text, $message = NULL) {
+  protected function assertUniqueText($text, $message = NULL): void {
     // Cast MarkupInterface objects to string.
     $text = (string) $text;
 
@@ -210,7 +210,7 @@ trait WebformAssertLegacyTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages with t(). If left blank, a default message will be displayed.
    */
-  protected function assertNoUniqueText($text, $message = '') {
+  protected function assertNoUniqueText($text, $message = ''): void {
     // Cast MarkupInterface objects to string.
     $text = (string) $text;
 
@@ -227,7 +227,7 @@ trait WebformAssertLegacyTrait {
    *   Response code. For example 200 is a successful page request. For a list
    *   of all codes see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html.
    */
-  protected function assertResponse($code) {
+  protected function assertResponse($code): void {
     $this->assertSession()->statusCodeEquals($code);
   }
 
@@ -241,7 +241,7 @@ trait WebformAssertLegacyTrait {
    *   to skip checking the actual value, while still checking that the field
    *   exists.
    */
-  protected function assertFieldByName($name, $value = NULL) {
+  protected function assertFieldByName($name, $value = NULL): void {
     $this->assertFieldByXPath($this->constructFieldXpath('name', $name), $value);
   }
 
@@ -256,7 +256,7 @@ trait WebformAssertLegacyTrait {
    *   value, while still checking that the field does not exist. However, the
    *   default value ('') asserts that the field value is not an empty string.
    */
-  protected function assertNoFieldByName($name, $value = '') {
+  protected function assertNoFieldByName($name, $value = ''): void {
     $this->assertNoFieldByXPath($this->constructFieldXpath('name', $name), $value);
   }
 
@@ -273,7 +273,7 @@ trait WebformAssertLegacyTrait {
    *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
-  protected function assertFieldById($id, $value = '') {
+  protected function assertFieldById($id, $value = ''): void {
     $this->assertFieldByXPath($this->constructFieldXpath('id', $id), $value);
   }
 
@@ -283,7 +283,7 @@ trait WebformAssertLegacyTrait {
    * @param string $field
    *   Name or ID of field to assert.
    */
-  protected function assertField($field) {
+  protected function assertField($field): void {
     $this->assertFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field));
   }
 
@@ -293,7 +293,7 @@ trait WebformAssertLegacyTrait {
    * @param string $field
    *   Name or ID of field to assert.
    */
-  protected function assertNoField($field) {
+  protected function assertNoField($field): void {
     $this->assertNoFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field));
   }
 
@@ -305,7 +305,7 @@ trait WebformAssertLegacyTrait {
    * @param string $raw
    *   Raw (HTML) string to look for.
    */
-  protected function assertRaw($raw) {
+  protected function assertRaw($raw): void {
     $actual = $this->getRawContent();
     $message = sprintf('The string "%s" was not found anywhere in the HTML response of the current page.', $raw);
 
@@ -320,7 +320,7 @@ trait WebformAssertLegacyTrait {
    * @param string $raw
    *   Raw (HTML) string to look for.
    */
-  protected function assertNoRaw($raw) {
+  protected function assertNoRaw($raw): void {
     $actual = $this->getRawContent();
     $message = sprintf('The string "%s" was not found anywhere in the HTML response of the current page.', $raw);
 
@@ -333,7 +333,7 @@ trait WebformAssertLegacyTrait {
    * @param string $expected_title
    *   The string the page title should be.
    */
-  protected function assertTitle($expected_title) {
+  protected function titleEquals($expected_title) {
     // Cast MarkupInterface to string.
     $expected_title = (string) $expected_title;
     return $this->assertSession()->titleEquals($expected_title);
@@ -349,7 +349,7 @@ trait WebformAssertLegacyTrait {
    * @param int $index
    *   Link position counting from zero.
    */
-  protected function assertLink($label, $index = 0) {
+  protected function linkExists($label, $index = 0) {
     return $this->assertSession()->linkExists($label, $index);
   }
 
@@ -359,7 +359,7 @@ trait WebformAssertLegacyTrait {
    * @param string|\Drupal\Component\Render\MarkupInterface $label
    *   Text between the anchor tags.
    */
-  protected function assertNoLink($label) {
+  protected function linkNotExists($label) {
     return $this->assertSession()->linkNotExists($label);
   }
 
@@ -371,7 +371,7 @@ trait WebformAssertLegacyTrait {
    * @param int $index
    *   Link position counting from zero.
    */
-  protected function assertLinkByHref($href, $index = 0) {
+  protected function assertLinkByHref($href, $index = 0): void {
     $this->assertSession()->linkByHrefExists($href, $index);
   }
 
@@ -381,7 +381,7 @@ trait WebformAssertLegacyTrait {
    * @param string $href
    *   The full or partial value of the 'href' attribute of the anchor tag.
    */
-  protected function assertNoLinkByHref($href) {
+  protected function assertNoLinkByHref($href): void {
     $this->assertSession()->linkByHrefNotExists($href);
   }
 
@@ -398,7 +398,7 @@ trait WebformAssertLegacyTrait {
    *
    * @throws \Behat\Mink\Exception\ExpectationException
    */
-  protected function assertNoFieldById($id, $value = '') {
+  protected function assertNoFieldById($id, $value = ''): void {
     $this->assertNoFieldByXPath($this->constructFieldXpath('id', $id), $value);
   }
 
@@ -408,32 +408,20 @@ trait WebformAssertLegacyTrait {
    * @param \Drupal\Core\Url|string $path
    *   The expected system path or URL.
    */
-  protected function assertUrl($path) {
+  protected function assertUrl($path): void {
     $this->assertSession()->addressEquals($path);
   }
 
   /**
-   * Asserts that a select option in the current page exists.
+   * Asserts that a select option or text in the current page exists.
    *
    * @param string $id
    *   ID of select field to assert.
    * @param string $option
    *   Option to assert.
    */
-  protected function assertOption($id, $option) {
+  protected function optionExists(string $id, string $option) {
     return $this->assertSession()->optionExists($id, $option);
-  }
-
-  /**
-   * Asserts that a select option with the visible text exists.
-   *
-   * @param string $id
-   *   The ID of the select field to assert.
-   * @param string $text
-   *   The text for the option tag to assert.
-   */
-  protected function assertOptionByText($id, $text) {
-    return $this->assertSession()->optionExists($id, $text);
   }
 
   /**
@@ -444,7 +432,7 @@ trait WebformAssertLegacyTrait {
    * @param string $option
    *   Option to assert.
    */
-  protected function assertNoOption($id, $option) {
+  protected function optionNotExists(string $id, string $option) {
     return $this->assertSession()->optionNotExists($id, $option);
   }
 
@@ -459,7 +447,7 @@ trait WebformAssertLegacyTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages with t(). If left blank, a default message will be displayed.
    */
-  protected function assertOptionSelected($id, $option, $message = NULL) {
+  protected function assertOptionSelected(string $id, string $option, string $message = NULL): void {
     $option_field = $this->assertSession()->optionExists($id, $option);
     $message = $message ?: "Option $option for field $id is selected.";
     $this->assertTrue($option_field->hasAttribute('selected'), $message);
@@ -471,7 +459,7 @@ trait WebformAssertLegacyTrait {
    * @param string $id
    *   ID of field to assert.
    */
-  protected function assertFieldChecked($id) {
+  protected function assertFieldChecked(string $id): void {
     $this->assertSession()->checkboxChecked($id);
   }
 
@@ -481,7 +469,7 @@ trait WebformAssertLegacyTrait {
    * @param string $id
    *   ID of field to assert.
    */
-  protected function assertNoFieldChecked($id) {
+  protected function assertNoFieldChecked(string $id): void {
     $this->assertSession()->checkboxNotChecked($id);
   }
 
@@ -498,7 +486,7 @@ trait WebformAssertLegacyTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages with t().
    */
-  protected function assertFieldByXPath($xpath, $value = NULL, $message = '') {
+  protected function assertFieldByXPath(string $xpath, string $value = NULL, string $message = ''): void {
     $fields = $this->xpath($xpath);
 
     $this->assertFieldsByValue($fields, $value, $message);
@@ -518,7 +506,7 @@ trait WebformAssertLegacyTrait {
    *
    * @throws \Behat\Mink\Exception\ExpectationException
    */
-  protected function assertNoFieldByXPath($xpath, $value = NULL, $message = '') {
+  protected function assertNoFieldByXPath(string $xpath, string $value = NULL, string $message = ''): void {
     $fields = $this->xpath($xpath);
 
     if (!empty($fields)) {
@@ -553,7 +541,7 @@ trait WebformAssertLegacyTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages with t().
    */
-  protected function assertFieldsByValue($fields, $value = NULL, $message = '') {
+  protected function assertFieldsByValue(array $fields, string $value = NULL, string $message = ''): void {
     // If value specified then check array for match.
     $found = TRUE;
     if (isset($value)) {
@@ -598,7 +586,7 @@ trait WebformAssertLegacyTrait {
    * @param string $raw
    *   Raw (HTML) string to look for.
    */
-  protected function assertEscaped($raw) {
+  protected function assertEscaped(string $raw): void {
     $this->assertSession()->assertEscaped($raw);
   }
 
@@ -610,7 +598,7 @@ trait WebformAssertLegacyTrait {
    * @param string $raw
    *   Raw (HTML) string to look for.
    */
-  protected function assertNoEscaped($raw) {
+  protected function assertNoEscaped(string $raw): void {
     $this->assertSession()->assertNoEscaped($raw);
   }
 
@@ -620,7 +608,7 @@ trait WebformAssertLegacyTrait {
    * @param string $pattern
    *   Perl regex to look for including the regex delimiters.
    */
-  protected function assertPattern($pattern) {
+  protected function assertPattern(string $pattern): void {
     $this->assertSession()->responseMatches($pattern);
   }
 
@@ -632,7 +620,7 @@ trait WebformAssertLegacyTrait {
    *
    * @see https://www.drupal.org/node/2864262
    */
-  protected function assertNoPattern($pattern) {
+  protected function assertNoPattern(string $pattern): void {
     $this->assertSession()->responseNotMatches($pattern);
   }
 
@@ -642,7 +630,7 @@ trait WebformAssertLegacyTrait {
    * @param string $expected_cache_tag
    *   The expected cache tag.
    */
-  protected function assertCacheTag($expected_cache_tag) {
+  protected function assertCacheTag(string $expected_cache_tag): void {
     $this->assertSession()->responseHeaderContains('X-Drupal-Cache-Tags', $expected_cache_tag);
   }
 
@@ -654,7 +642,7 @@ trait WebformAssertLegacyTrait {
    *
    * @see https://www.drupal.org/node/2864029
    */
-  protected function assertNoCacheTag($cache_tag) {
+  protected function assertNoCacheTag(string $cache_tag): void {
     $this->assertSession()->responseHeaderNotContains('X-Drupal-Cache-Tags', $cache_tag);
   }
 
@@ -666,7 +654,7 @@ trait WebformAssertLegacyTrait {
    * @param string $value
    *   Value of the header to assert.
    */
-  protected function assertHeader($name, $value) {
+  protected function assertHeader(string $name, string $value): void {
     $this->assertSession()->responseHeaderEquals($name, $value);
   }
 

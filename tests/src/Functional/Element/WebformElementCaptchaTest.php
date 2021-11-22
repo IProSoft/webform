@@ -38,7 +38,7 @@ class WebformElementCaptchaTest extends WebformElementBrowserTestBase {
     $this->assertRaw('{captcha_math_description}');
 
     // Check CAPTCHA image refresh link.
-    $this->assertLink('Get new captcha!');
+    $this->linkExists('Get new captcha!');
 
     // Enable CAPTCHA admin mode.
     \Drupal::configFactory()

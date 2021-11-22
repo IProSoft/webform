@@ -49,11 +49,11 @@ class WebformVariantOperationsTest extends WebformBrowserTestBase {
 
     // Check that the 'a' variant is available on the view multiple form.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/variants/view');
-    $this->assertOption('edit-variants-letter', 'a');
+    $this->optionExists('edit-variants-letter', 'a');
 
     // Check that the 'a' variant is selected on the apply multiple form.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/variants/apply', $route_options);
-    $this->assertOption('edit-variants-letter', 'a');
+    $this->optionExists('edit-variants-letter', 'a');
     $this->assertOptionSelected('edit-variants-letter', 'a');
 
     // Disable the 'a' variant.
@@ -78,11 +78,11 @@ class WebformVariantOperationsTest extends WebformBrowserTestBase {
 
     // Check that the 'a' variant is not available ont the view multiple form.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/variants/view');
-    $this->assertNoOption('edit-variants-letter', 'a');
+    $this->optionNotExists('edit-variants-letter', 'a');
 
     // Check that the 'a' variant is still selected on the apply multiple form.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/variants/apply', $route_options);
-    $this->assertOption('edit-variants-letter', 'a');
+    $this->optionExists('edit-variants-letter', 'a');
     $this->assertOptionSelected('edit-variants-letter', 'a');
 
     // Reenable the 'a' variant and now disable '#prepopulate' for the

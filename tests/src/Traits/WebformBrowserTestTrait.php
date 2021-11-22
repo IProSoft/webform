@@ -434,8 +434,13 @@ trait WebformBrowserTestTrait {
 
   /**
    * Passes if the CSS selector IS found on the loaded page, fail otherwise.
+   *
+   * @param string $selector
+   *   The CSS selector identifying the element to check.
+   * @param string $message
+   *   Optional message to show alongside the assertion.
    */
-  protected function assertCssSelect($selector, $message = '') {
+  protected function assertCssSelect($selector, $message = ''): void {
     $element = $this->cssSelect($selector);
     if (!$message) {
       $message = new FormattableMarkup('Found @selector', ['@selector' => $selector]);
@@ -445,8 +450,13 @@ trait WebformBrowserTestTrait {
 
   /**
    * Passes if the CSS selector IS NOT found on the loaded page, fail otherwise.
+   *
+   * @param string $selector
+   *   The CSS selector identifying the element to check.
+   * @param string $message
+   *   Optional message to show alongside the assertion.
    */
-  protected function assertNoCssSelect($selector, $message = '') {
+  protected function assertNoCssSelect(string $selector, string $message = ''): void {
     $element = $this->cssSelect($selector);
     $this->assertEmpty($element, $message);
   }
@@ -459,7 +469,7 @@ trait WebformBrowserTestTrait {
    * @param string $message
    *   Optional message to show alongside the assertion.
    */
-  protected function assertElementVisible($css_selector, $message = '') {
+  protected function assertElementVisible(string $css_selector, $message = ''): void {
     $this->assertTrue($this->getSession()->getDriver()->isVisible($this->cssSelectToXpath($css_selector)), $message);
   }
 
@@ -471,7 +481,7 @@ trait WebformBrowserTestTrait {
    * @param string $message
    *   Optional message to show alongside the assertion.
    */
-  protected function assertElementNotVisible($css_selector, $message = '') {
+  protected function assertElementNotVisible(string $css_selector, string $message = ''): void {
     $this->assertFalse($this->getSession()->getDriver()->isVisible($this->cssSelectToXpath($css_selector)), $message);
   }
 
