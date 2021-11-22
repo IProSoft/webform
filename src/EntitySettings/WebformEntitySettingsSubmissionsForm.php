@@ -715,7 +715,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
     ];
     $form['autofill_settings']['autofill_container']['autofill_source_entity'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Autofill with previous submission using the source entity'),
+      '#title' => $this->t('Autofill with previous submission data using the source entity'),
       '#description' => $this->t('If checked, the form will be autofilled only using previous submissions from the current source entity.'),
       '#return_value' => TRUE,
       '#default_value' => $settings['autofill_source_entity'],
