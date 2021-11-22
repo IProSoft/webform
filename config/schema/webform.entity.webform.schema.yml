@@ -301,6 +301,9 @@
         autofill:
           type: boolean
           label: 'Autofill with previous submission'
+        autofill_source_entity:
+          type: boolean
+          label: 'Autofill with previous submission using the source entity'
         autofill_message:
           type: text
           label: 'Autofill with previous submission message'

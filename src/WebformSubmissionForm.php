@@ -451,6 +451,11 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   with excluded elements.
    */
   protected function getLastSubmissionData(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+    // If autofill, using the source entity is not set, unset the source entity.
+    if (empty($webform->getSetting('autofill_source_entity'))) {
+      $source_entity = NULL;
+    }
+
     $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE]);
     if (!$last_submission) {
       return [];

@@ -4292,3 +4292,10 @@ function webform_update_8626() {
     }
   }
 }
+
+/**
+ * Issue #3239258: Autofill: add support for current/any source entity.
+ */
+function webform_update_8627() {
+  _webform_update_webform_settings();
+}
