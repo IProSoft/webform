@@ -3,6 +3,7 @@
 
 namespace Drupal\Tests\webform\Traits;
 
+use Behat\Mink\Exception\ExpectationException;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
 
@@ -400,6 +401,111 @@ trait WebformAssertLegacyTrait {
   }
 
   /**
+   * Asserts that a field exists in the current page by the given XPath.
+   *
+   * @param string $xpath
+   *   XPath used to find the field.
+   * @param string $value
+   *   (optional) Value of the field to assert. You may pass in NULL (default)
+   *   to skip checking the actual value, while still checking that the field
+   *   exists.
+   * @param string $message
+   *   (optional) A message to display with the assertion. Do not translate
+   *   messages with t().
+   */
+  protected function assertFieldByXPath($xpath, $value = NULL, $message = '') {
+    $fields = $this->xpath($xpath);
+
+    $this->assertFieldsByValue($fields, $value, $message);
+  }
+
+  /**
+   * Asserts that a field does not exist or its value does not match, by XPath.
+   *
+   * @param string $xpath
+   *   XPath used to find the field.
+   * @param string $value
+   *   (optional) Value of the field, to assert that the field's value on the
+   *   page does not match it.
+   * @param string $message
+   *   (optional) A message to display with the assertion. Do not translate
+   *   messages with t().
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  protected function assertNoFieldByXPath($xpath, $value = NULL, $message = '') {
+    $fields = $this->xpath($xpath);
+
+    if (!empty($fields)) {
+      if (isset($value)) {
+        $found = FALSE;
+        try {
+          $this->assertFieldsByValue($fields, $value);
+          $found = TRUE;
+        }
+        catch (\Exception $e) {
+        }
+
+        if ($found) {
+          throw new ExpectationException(sprintf('The field resulting from %s was found with the provided value %s.', $xpath, $value), $this->getSession()->getDriver());
+        }
+      }
+      else {
+        throw new ExpectationException(sprintf('The field resulting from %s was found.', $xpath), $this->getSession()->getDriver());
+      }
+    }
+  }
+
+  /**
+   * Asserts that a field exists in the current page with a given Xpath result.
+   *
+   * @param \Behat\Mink\Element\NodeElement[] $fields
+   *   Xml elements.
+   * @param string $value
+   *   (optional) Value of the field to assert. You may pass in NULL (default) to skip
+   *   checking the actual value, while still checking that the field exists.
+   * @param string $message
+   *   (optional) A message to display with the assertion. Do not translate
+   *   messages with t().
+   */
+  protected function assertFieldsByValue($fields, $value = NULL, $message = '') {
+    // If value specified then check array for match.
+    $found = TRUE;
+    if (isset($value)) {
+      $found = FALSE;
+      if ($fields) {
+        foreach ($fields as $field) {
+          if ($field->getAttribute('type') == 'checkbox') {
+            if (is_bool($value)) {
+              $found = $field->isChecked() == $value;
+            }
+            else {
+              $found = TRUE;
+            }
+          }
+          elseif ($field->getAttribute('value') == $value) {
+            // Input element with correct value.
+            $found = TRUE;
+          }
+          elseif ($field->find('xpath', '//option[@value = ' . (new Escaper())->escapeLiteral($value) . ' and @selected = "selected"]')) {
+            // Select element with an option.
+            $found = TRUE;
+          }
+          elseif ($field->getTagName() === 'textarea' && $field->getValue() == $value) {
+            // Text area with correct text. Use getValue() here because
+            // getText() would remove any newlines in the value.
+            $found = TRUE;
+          }
+          elseif ($field->getTagName() !== 'input' && $field->getText() == $value) {
+            $found = TRUE;
+          }
+        }
+      }
+    }
+    $this->assertTrue($fields && $found, $message);
+  }
+
+  /**
    * Triggers a pass if the Perl regex pattern is not found in the raw content.
    *
    * @param string $pattern
@@ -421,6 +527,30 @@ trait WebformAssertLegacyTrait {
    *   A new web-assert option for asserting the presence of elements with.
    */
   abstract public function assertSession($name = NULL);
+
+  /**
+   * Builds an XPath query.
+   *
+   * Builds an XPath query by replacing placeholders in the query by the value
+   * of the arguments.
+   *
+   * XPath 1.0 (the version supported by libxml2, the underlying XML library
+   * used by PHP) doesn't support any form of quotation. This function
+   * simplifies the building of XPath expression.
+   *
+   * @param string $xpath
+   *   An XPath query, possibly with placeholders in the form ':name'.
+   * @param array $args
+   *   An array of arguments with keys in the form ':name' matching the
+   *   placeholders in the query. The values may be either strings or numeric
+   *   values.
+   *
+   * @return string
+   *   An XPath query with arguments replaced.
+   */
+  protected function buildXPathQuery($xpath, array $args = []) {
+    return $this->assertSession()->buildXPathQuery($xpath, $args);
+  }
 
   /**
    * Helper: Constructs an XPath for the given set of attributes and value.
