@@ -952,7 +952,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     }
 
     // Filter by UID.
-    if ($export_options['uid'] !== '') {
+    if (!is_null($export_options['uid']) && $export_options['uid'] !== '') {
       $query->condition('uid', $export_options['uid'], '=');
     }
 
