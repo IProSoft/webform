@@ -71,10 +71,10 @@
 }
 
 .webform-multiple-table td .container-inline select,
-.form-type-webform-multiple.webform-has-field-prefix td select,
-.form-type-webform-multiple.webform-has-field-suffix td select,
-.form-type-webform-multiple.webform-has-field-prefix td input,
-.form-type-webform-multiple.webform-has-field-suffix td input {
+.webform-multiple-table td.webform-has-field-prefix select,
+.webform-multiple-table td.webform-has-field-suffix select,
+.webform-multiple-table td.webform-has-field-prefix input,
+.webform-multiple-table td.webform-has-field-suffix input {
   width: auto;
 }
 
