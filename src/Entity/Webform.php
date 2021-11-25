@@ -3033,8 +3033,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * submission webform and not the back-end 'edit-form'.
    */
   public function url($rel = 'canonical', $options = []) {
+    @trigger_error('Webform::url() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toUrl() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
     // Do not remove this override: the default value of $rel is different.
-    return parent::url($rel, $options);
+    return parent::toUrl($rel, $options);
   }
 
   /**
@@ -3054,7 +3055,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * submission webform and not the back-end 'edit-form'.
    */
   public function urlInfo($rel = 'canonical', array $options = []) {
-    return parent::urlInfo($rel, $options);
+    @trigger_error('Webform::urlInfo() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toUrl() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
+    return parent::toUrl($rel, $options);
   }
 
   /**
@@ -3074,7 +3076,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * webform and not the back-end 'edit-form'.
    */
   public function link($text = NULL, $rel = 'canonical', array $options = []) {
-    return parent::link($text, $rel, $options);
+    @trigger_error('Webform::link() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toLink() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
+    return parent::toLink($text, $rel, $options);
   }
 
   /* ************************************************************************ */
