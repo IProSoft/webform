@@ -552,14 +552,16 @@ function webform_preprocess_form_element(&$variables) {
   // Add missing classes to the Claro theme's form elements.
   // @see core/modules/system/templates/form-element.html.twig
   // @see claro/templates/form-element.html.twig
-  // @todo Once Claro is stable determine if this code should removed.
+  // @todo Once Claro and Oliver are stable determine if this code is needed.
   static $is_claro_theme;
+  static $is_olivero_theme;
   if (!isset($is_claro_theme)) {
     /** @var \Drupal\webform\WebformThemeManagerInterface $theme_manager */
     $theme_manager = \Drupal::service('webform.theme_manager');
     $is_claro_theme = $theme_manager->isActiveTheme('claro');
+    $is_olivero_theme = $theme_manager->isActiveTheme('olivero');
   }
-  if ($is_claro_theme) {
+  if ($is_claro_theme || $is_olivero_theme) {
     // Add system .form-type-TYPE class.
     if (!empty($variables['type'])) {
       $variables['attributes']['class'][] = 'form-type-' . Html::getClass($variables['type']);

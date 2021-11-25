@@ -126,7 +126,7 @@ class WebformHeight extends FormElement {
     // Container.
     $element['container'] = [
       '#type' => 'container',
-      '#attributes' => ['class' => ['form--inline']],
+      '#attributes' => ['class' => ['form--inline', 'clearfix']],
     ];
 
     $t_args = [

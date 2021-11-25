@@ -355,6 +355,12 @@ webform.theme.gin:
     theme:
       css/webform.theme.gin.css: {}
 
+webform.theme.olivero:
+  version: VERSION
+  css:
+    theme:
+      css/webform.theme.olivero.css: {}
+
 webform.theme.seven:
   version: VERSION
   css:
