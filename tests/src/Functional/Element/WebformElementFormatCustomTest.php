@@ -89,7 +89,10 @@ class WebformElementFormatCustomTest extends WebformElementBrowserTestBase {
     $this->assertRaw("item['raw']: $file_url<br/>");
     $this->assertRaw("item['link']:");
     // @todo Remove once Drupal 9.1.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 9.1) {
+    if (floatval(\Drupal::VERSION) >= 9.3) {
+      $this->assertRaw('<span class="file file--mime-image-png file--image"><a href="' . $file->createFileUrl() . '" type="image/png">' . $file_name . '</a></span>');
+    }
+    elseif (floatval(\Drupal::VERSION) >= 9.1) {
       $this->assertRaw('<span class="file file--mime-image-png file--image"><a href="' . $file_url . '" type="image/png">' . $file_name . '</a></span>');
     }
     else {

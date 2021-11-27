@@ -340,7 +340,10 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
       $this->assertRaw('<ul>');
     }
     // @todo Remove once Drupal 9.1.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 9.1) {
+    if (floatval(\Drupal::VERSION) >= 9.3) {
+      $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . $file->createFileUrl() . '" type="text/plain">' . $file->getFilename() . '</a></span>');
+    }
+    elseif (floatval(\Drupal::VERSION) >= 9.1) {
       $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . file_create_url($file->getFileUri()) . '" type="text/plain">' . $file->getFilename() . '</a></span>');
     }
     else {

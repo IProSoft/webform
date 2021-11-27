@@ -33,7 +33,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the form includes 'user.roles:authenticated' because the
     // '[current-user:mail]' token.
-    $this->assertEqual($form['#cache'], [
+    $this->assertEqualsCanonicalizing($form['#cache'], [
       'contexts' => [
         'user.roles:authenticated',
       ],
@@ -66,7 +66,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the form includes 'user.roles:authenticated' because the
     // '[current-user:mail]' token.
-    $this->assertEqual($form['#cache'], [
+    $this->assertEqualsCanonicalizing($form['#cache'], [
       'contexts' => [
         'user',
         'user.roles:authenticated',
@@ -94,7 +94,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the 'email' element does have '#cache' property because the
     // '#description' is using the '[current-user:mail]' token.
-    $this->assertEqual($form['elements']['email']['#cache'], [
+    $this->assertEqualsCanonicalizing($form['elements']['email']['#cache'], [
       'contexts' => [
         'user',
       ],

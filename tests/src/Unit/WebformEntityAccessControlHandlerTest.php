@@ -224,8 +224,8 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
     // Check expected results.
     $this->assertEquals($expected['access_result_is_allowed'], $access_result->isAllowed(), $assert_message);
     $this->assertEquals(Cache::PERMANENT, $access_result->getCacheMaxAge(), $assert_message . ': cache max age');
-    $this->assertArrayEquals($expected['access_result_cache_contexts'], $access_result->getCacheContexts(), $assert_message . ': cache contexts');
-    $this->assertArrayEquals($expected['access_result_cache_tags'], $access_result->getCacheTags(), $assert_message . ': cache tags');
+    $this->assertEqualsCanonicalizing($expected['access_result_cache_contexts'], $access_result->getCacheContexts(), $assert_message . ': cache contexts');
+    $this->assertEqualsCanonicalizing($expected['access_result_cache_tags'], $access_result->getCacheTags(), $assert_message . ': cache tags');
   }
 
   /**

@@ -43,7 +43,7 @@ class WebformBubbleableMetadataTest extends UnitTestCase {
     /* ********************************************************************** */
 
     $bubbleable_metadata->appendTo($build);
-    $this->assertEquals($expected, $build);
+    $this->assertEqualsCanonicalizing($expected, $build);
   }
 
   /**

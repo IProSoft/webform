@@ -126,8 +126,8 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     $elements = [
       'File (Value)' => $this->getSubmissionFileUrl($submission, 'managed_file_value'),
       'File (Raw value)' => $this->getSubmissionFileUrl($submission, 'managed_file_raw'),
-      'File (File)' => '<div><span class="file file--mime-text-plain file--text"><a href="' . $this->getSubmissionFileUrl($submission, 'managed_file_file') . '" type="text/plain; length=43">managed_file_file.txt</a></span>',
-      'File (Link)' => '<span class="file file--mime-text-plain file--text"><a href="' . $this->getSubmissionFileUrl($submission, 'managed_file_link') . '" type="text/plain; length=43">managed_file_link.txt</a></span>',
+      'File (File)' => '<div><span class="file file--mime-text-plain file--text"><a href="' . $this->getSubmissionFileUrl($submission, 'managed_file_file', floatval(\Drupal::VERSION) >= 9.3) . '" type="text/plain; length=43">managed_file_file.txt</a></span>',
+      'File (Link)' => '<span class="file file--mime-text-plain file--text"><a href="' . $this->getSubmissionFileUrl($submission, 'managed_file_link', floatval(\Drupal::VERSION) >= 9.3) . '" type="text/plain; length=43">managed_file_link.txt</a></span>',
       'File (File ID)' => $submission->getElementData('managed_file_id'),
       'File (File name)' => 'managed_file_name.txt',
       'File (File base name (no extension))' => 'managed_file_basename',
@@ -310,13 +310,19 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
    *   A webform submission.
    * @param string $element_key
    *   The element key.
+   * @param bool $relative
+   *   Whether to return a relative. Used for testing on Drupal 9.3 due to
+   *    https://www.drupal.org/node/3223515.
    *
    * @return string
    *   A submission element's file URL.
    */
-  protected function getSubmissionFileUrl(WebformSubmissionInterface $submission, $element_key) {
+  protected function getSubmissionFileUrl(WebformSubmissionInterface $submission, $element_key, $relative = FALSE) {
     $fid = $submission->getElementData($element_key);
     $file = File::load($fid);
+    if ($relative) {
+      return $file->createFileUrl();
+    }
     return file_create_url($file->getFileUri());
   }
 
