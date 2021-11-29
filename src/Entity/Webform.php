@@ -3035,7 +3035,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function url($rel = 'canonical', $options = []) {
     @trigger_error('Webform::url() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toUrl() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
     // Do not remove this override: the default value of $rel is different.
-    return parent::toUrl($rel, $options);
+    if ($this->id() === NULL || !$this->hasLinkTemplate($rel)) {
+      return '';
+    }
+    $uri = $this->toUrl($rel);
+    $options += $uri->getOptions();
+    $uri->setOptions($options);
+    return $uri->toString();
   }
 
   /**
@@ -3077,7 +3083,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function link($text = NULL, $rel = 'canonical', array $options = []) {
     @trigger_error('Webform::link() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toLink() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
-    return parent::toLink($text, $rel, $options);
+    return parent::toLink($text, $rel, $options)->toString();
   }
 
   /* ************************************************************************ */
