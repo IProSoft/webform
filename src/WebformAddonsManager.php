@@ -417,6 +417,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
+    // Enhancement: Webform Anonymizer.
+    $projects['webform_anonymizer'] = [
+      'title' => $this->t('Webform Anonymizer'),
+      'description' => $this->t('Anonymizes submissions even when the user is logged in.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_anonymizer'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Webform Bulk Emails.
     $projects['webform_bulk_email'] = [
       'title' => $this->t('Webform Bulk Emails'),
@@ -1822,8 +1830,16 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Workflow: Webform Workflows Element.
     $projects['webform_workflows_element'] = [
       'title' => $this->t('Webform Workflows Element'),
-      'description' => $this->t('provides a new element type for Webforms (D8+) that uses the core Workflows functionality to move submissions through a webform.'),
+      'description' => $this->t('Provides a new element type for Webforms (D8+) that uses the core Workflows functionality to move submissions through a webform.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_workflows_element'),
+      'category' => 'workflow',
+    ];
+
+    // Workflow: Webform Revision UI.
+    $projects['webform_revision_ui'] = [
+      'title' => $this->t('Webform Revision UI'),
+      'description' => $this->t('Adds Webform Revision UI.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_revision_ui'),
       'category' => 'workflow',
     ];
 
