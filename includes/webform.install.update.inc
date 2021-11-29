@@ -4262,9 +4262,11 @@ function webform_update_8625() {
 /**
  * Issue #3240399: Move form #method, #action, and #attributes.
  */
-function webform_update_8626() {
+function webform_update_8636() {
   // Add new method, action, and attributes settings to all webforms.
   _webform_update_webform_settings();
+
+  $messages = [];
 
   // Move properties to settings.
   $properties = [
@@ -4276,7 +4278,13 @@ function webform_update_8626() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->getEditable($webform_config_name);
     $data = $webform_config->getRawData();
-    $elements = WebformYaml::decode($data['elements']);
+    try {
+      $elements = WebformYaml::decode($data['elements']);
+    }
+    catch (\Exception $exception) {
+      $messages[] = $webform_config_name . ' - ' . $exception->getMessage();
+      continue;
+    }
     $has_property = FALSE;
     foreach ($properties as $property_name => $setting_name) {
       if (isset($elements[$property_name])) {
@@ -4291,4 +4299,6 @@ function webform_update_8626() {
       $webform_config->save();
     }
   }
+
+  return implode(PHP_EOL, $messages);
 }
