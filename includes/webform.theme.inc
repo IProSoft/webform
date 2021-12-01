@@ -12,6 +12,8 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\webform\Element\WebformSelectOther;
+use Drupal\webform\Plugin\WebformElement\Radios as WebformRadios;
+use Drupal\webform\Plugin\WebformElement\WebformEntityRadios;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 
@@ -502,7 +504,11 @@ function webform_preprocess_fieldset(&$variables) {
   //
   // Issue #3240249: Aria-required on fieldset trigger accessibility fails.
   // @see https://www.drupal.org/project/webform/issues/3240249
-  if ($variables['element']['#type'] === 'radios') {
+  /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
+  $element_manager = \Drupal::service('plugin.manager.webform.element');
+  $element_plugin = $element_manager->getElementInstance($element);
+  $is_radios = ($element_plugin instanceof WebformRadios || $element_plugin instanceof WebformEntityRadios);
+  if ($is_radios) {
     $variables['attributes']['role'] = 'radiogroup';
     $id = $variables['attributes']['id'] . '-legend';
     $variables['legend']['attributes']['id'] = $id;
