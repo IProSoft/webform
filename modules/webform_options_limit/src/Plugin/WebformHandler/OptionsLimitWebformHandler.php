@@ -652,7 +652,6 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
    *   An options element's option limits.
    */
   protected function alterOptionsElementLabels(array &$options, array $limits) {
-    $message_display = $this->configuration['option_message_display'];
     foreach ($options as $option_value => $option_text) {
       if ($this->isTableSelectElement()) {
         if (isset($limits[$option_value])) {
