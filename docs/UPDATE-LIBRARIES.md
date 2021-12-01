@@ -73,7 +73,7 @@ Update libraries.zip
     # Create libraries.zip
     cd ~/Sites/drupal_webform/web/
     zip -r libraries.zip libraries
-    mv libraries.zip ~/Sites/drupal_webfor/mweb/modules/sandbox/webform_libraries/libraries.zip
+    mv libraries.zip ~/Sites/drupal_webform/web/modules/sandbox/webform_libraries/libraries.zip
 
 Commit changes
 
