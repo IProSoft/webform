@@ -14,7 +14,7 @@
  * Remove webform scale element's label padding.
  */
 [dir="ltr"] .webform-scale-options input[type="radio"] + label,
-[dir="rtl"] .webform-scale-options input[type="radio"] + label{
+[dir="rtl"] .webform-scale-options input[type="radio"] + label {
   padding: 0;
 }
 
