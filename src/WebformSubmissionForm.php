@@ -623,6 +623,10 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Add the webform as a cacheable dependency.
     $this->renderer->addCacheableDependency($form, $webform);
 
+    if ($source_entity = $this->getSourceEntity()) {
+      $this->renderer->addCacheableDependency($form, $source_entity);
+    }
+
     // Kill page cache for scheduled webforms.
     // @todo Remove once bubbling of element's max-age to page cache is fixed.
     // @see https://www.drupal.org/project/webform/issues/3015760
