@@ -2783,7 +2783,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    */
   protected function addCacheableDependency(array &$form) {
     $webform = $this->getWebform();
-    $source_entity = $this->getSourceEntity()
+    $source_entity = $this->getSourceEntity();
 
     // Add the webform as a cacheable dependency.
     $this->renderer->addCacheableDependency($form, $webform);
