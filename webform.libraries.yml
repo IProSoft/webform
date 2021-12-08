@@ -636,7 +636,6 @@ webform.element.date:
     - core/drupal.date
     - core/modernizr
     - core/jquery.once
-    - jquery_ui_datepicker/datepicker
 
 webform.element.datelist:
   version: VERSION
