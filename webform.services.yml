@@ -138,6 +138,13 @@ services:
     tags:
       - { name: event_subscriber }
 
+  # Caching
+  cache_context.webform_source_entity:
+    class: Drupal\webform\Cache\WebformSourceEntityCacheContext
+    arguments: ['@plugin.manager.webform.source_entity']
+    tags:
+      - { name: cache.context }
+
   # Route context.
 
   webform.webform_route_context:

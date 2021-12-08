@@ -193,6 +193,11 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
       '#type' => 'webform',
       '#webform' => $webform,
       '#default_data' => WebformYaml::decode($this->configuration['default_data']),
+      '#cache' => [
+        'contexts' => [
+          'webform_source_entity',
+        ],
+      ],
     ];
 
     // If redirect, set the #action property on the form.
