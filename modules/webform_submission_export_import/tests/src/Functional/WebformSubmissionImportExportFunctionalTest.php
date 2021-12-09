@@ -32,7 +32,7 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
     $this->drupalLogin($this->rootUser);
 
     $export_csv_uri = 'public://test_submission_export_import-export.csv';
-    $export_csv_url = file_create_url('public://test_submission_export_import-export.csv');
+    $export_csv_url = \Drupal::service('file_url_generator')->generateAbsoluteString('public://test_submission_export_import-export.csv');
 
     $webform = Webform::load('test_submission_export_import');
 
@@ -94,8 +94,8 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
     return;
 
     // Deleted the third submission.
-    $file_uri = file_create_url(File::load($submissions[2]->getElementData('file'))->getFileUri());
-    $files_uri = file_create_url(File::load($submissions[2]->getElementData('files')[0])->getFileUri());
+    $file_uri = \Drupal::service('file_url_generator')->generateAbsoluteString(File::load($submissions[2]->getElementData('file'))->getFileUri());
+    $files_uri = \Drupal::service('file_url_generator')->generateAbsoluteString(File::load($submissions[2]->getElementData('files')[0])->getFileUri());
     $submissions[2]->delete();
     unset($submissions[2]);
 
@@ -153,8 +153,8 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
   public function testSubmissionImport() {
     $this->drupalLogin($this->rootUser);
 
-    $webform_csv_url = file_create_url('public://test_submission_export_import-webform.csv');
-    $external_csv_url = file_create_url('public://test_submission_export_import-external.csv');
+    $webform_csv_url = \Drupal::service('file_url_generator')->generateAbsoluteString('public://test_submission_export_import-webform.csv');
+    $external_csv_url = \Drupal::service('file_url_generator')->generateAbsoluteString('public://test_submission_export_import-external.csv');
 
     $webform = Webform::load('test_submission_export_import');
 

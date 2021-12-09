@@ -1539,7 +1539,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
         // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
-        '_fileurl' => file_create_url($file->getFileUri()),
+        '_fileurl' => \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()),
       ];
     }
     return $attachments;

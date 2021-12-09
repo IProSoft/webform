@@ -293,7 +293,7 @@ class WebformSignature extends WebformElementBase {
     $unsafe_image_hash = Crypt::hmacBase64($value, Settings::getHashSalt());
     $unsafe_image_uri = "$image_directory/signature-$unsafe_image_hash.png";
     if (file_exists($unsafe_image_uri)) {
-      return file_create_url($unsafe_image_uri);
+      return \Drupal::service('file_url_generator')->generateAbsoluteString($unsafe_image_uri);
     }
 
     $image_hash = Crypt::hmacBase64('webform-signature-' . $value, Settings::getHashSalt());
@@ -313,7 +313,7 @@ class WebformSignature extends WebformElementBase {
       }
     }
 
-    return file_create_url($image_uri);
+    return \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
   }
 
 }

@@ -62,7 +62,7 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
     $this->assertSignature('not a png', FALSE);
 
     // Check invalid when PNG has color.
-    $image = file_get_contents(drupal_get_path('module', 'webform') . '/tests/files/sample.png');
+    $image = file_get_contents(\Drupal::service('extension.list.module')->getPath('webform') . '/tests/files/sample.png');
     $this->assertSignature('data:image/png;base64,' . base64_encode($image), FALSE);
 
     /* ********************************************************************** */

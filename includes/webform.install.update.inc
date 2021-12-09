@@ -418,7 +418,7 @@ function webform_update_8021() {
 
   // Get WebformOptions category from config/install.
   $webform_options = WebformOptions::loadMultiple();
-  $config_install_path = drupal_get_path('module', 'webform') . '/config/install';
+  $config_install_path = \Drupal::service('extension.list.module')->getPath('webform') . '/config/install';
   foreach ($webform_options as $id => $webform_option) {
     if (!$webform_option->get('category')) {
       if (file_exists("$config_install_path/webform.webform_options.$id.yml")) {
@@ -2601,7 +2601,7 @@ function webform_update_8141() {
   // Copied from: redirect_update_8103()
   $message = NULL;
   if (\Drupal::moduleHandler()->moduleExists('views') && !View::load('webform_submissions')) {
-    $config_path = drupal_get_path('module', 'webform') . '/config/optional/views.view.webform_submissions.yml';
+    $config_path = \Drupal::service('extension.list.module')->getPath('webform') . '/config/optional/views.view.webform_submissions.yml';
     $data = ['uuid' => (new Uuid())->generate()] + WebformYaml::decode(file_get_contents($config_path));
     \Drupal::configFactory()->getEditable('views.view.webform_submissions')->setData($data)->save(TRUE);
     $message = 'The new webform submissions view has been created.';
@@ -3054,7 +3054,7 @@ function webform_update_8160() {
   // Remove nested calculation elements.
   $elements = WebformYaml::decode($config->get('elements'));
   if (isset($elements['calculation']) && isset($elements['calculation']['calculation'])) {
-    $path = drupal_get_path('module', 'webform') . '/modules/webform_examples/config/install/webform.webform.example_computed_elements.yml';
+    $path = \Drupal::service('extension.list.module')->getPath('webform') . '/modules/webform_examples/config/install/webform.webform.example_computed_elements.yml';
     $data = WebformYaml::decode(file_get_contents($path));
     $config->set('elements', $data['elements'])->save();
   }

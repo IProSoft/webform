@@ -255,7 +255,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // file upload help only.
     $upload_validators = $element['#upload_validators'];
     if ($file_limit) {
-      $upload_validators['webform_file_limit'] = [Bytes::toInt($file_limit)];
+      $upload_validators['webform_file_limit'] = [Bytes::toNumber($file_limit)];
     }
     $file_upload_help = [
       '#theme' => 'file_upload_help',
@@ -399,7 +399,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       case 'value':
       case 'raw':
       default:
-        return file_create_url($file->getFileUri());
+        return \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
   }
 
@@ -565,7 +565,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     }
 
     // Copy sample file or generate a new temp file that can be uploaded.
-    $sample_file = drupal_get_path('module', 'webform') . '/tests/files/sample.' . $file_extension;
+    $sample_file = \Drupal::service('extension.list.module')->getPath('webform') . '/tests/files/sample.' . $file_extension;
     if (file_exists($sample_file)) {
       $file_uri = $this->fileSystem->copy($sample_file, $file_destination);
     }
@@ -594,9 +594,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    */
   protected function getMaxFileSize(array $element) {
     $max_filesize = $this->configFactory->get('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize();
-    $max_filesize = Bytes::toInt($max_filesize);
+    $max_filesize = Bytes::toNumber($max_filesize);
     if (!empty($element['#max_filesize'])) {
-      $max_filesize = min($max_filesize, Bytes::toInt($element['#max_filesize'] . 'MB'));
+      $max_filesize = min($max_filesize, Bytes::toNumber($element['#max_filesize'] . 'MB'));
     }
     return $max_filesize;
   }
@@ -916,7 +916,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $file_limit = $webform_submission->getWebform()->getSetting('form_file_limit')
       ?: \Drupal::config('webform.settings')->get('settings.default_form_file_limit')
       ?: '';
-    $file_limit = Bytes::toInt($file_limit);
+    $file_limit = Bytes::toNumber($file_limit);
 
     // Track file size across all file upload elements.
     static $total_file_size = 0;
@@ -998,7 +998,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     }
 
     $max_filesize = \Drupal::config('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize();
-    $max_filesize = Bytes::toInt($max_filesize);
+    $max_filesize = Bytes::toNumber($max_filesize);
     $max_filesize = ($max_filesize / 1024 / 1024);
     $form['file']['file_help'] = [
       '#type' => 'select',
@@ -1447,7 +1447,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
         // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
-        '_fileurl' => file_create_url($file->getFileUri()),
+        '_fileurl' => \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()),
       ];
     }
     return $attachments;

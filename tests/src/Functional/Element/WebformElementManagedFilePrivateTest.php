@@ -63,13 +63,13 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
     $this->assertEqual($file->getFileUri(), 'private://webform/test_element_managed_file/' . $sid . '/' . $this->files[0]->filename);
 
     // Check private file access allowed.
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet(\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()));
     $this->assertResponse(200);
 
     $this->drupalLogout();
 
     // Check private file access redirects to user login page with destination.
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet(\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()));
     $this->assertResponse(200);
 
     $destination_url = Url::fromUri('base://system/files', [
@@ -89,7 +89,7 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
     ];
     $this->drupalPostForm('/webform/' . $webform->id(), $edit, 'Preview');
 
-    $temp_file_uri = file_create_url('private://webform/test_element_managed_file/_sid_/' . basename($this->files[1]->uri));
+    $temp_file_uri = \Drupal::service('file_url_generator')->generateAbsoluteString('private://webform/test_element_managed_file/_sid_/' . basename($this->files[1]->uri));
 
     // Check that temp file is not linked.
     $this->assertNoRaw('<span class="file file--mime-text-plain file--text"><a href="' . $temp_file_uri . '" type="text/plain; length=16384">text-1.txt</a></span>');
@@ -112,7 +112,7 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
 
     // Check private file access redirects to user login page with destination.
     $this->drupalLogout();
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet(\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()));
     $this->assertResponse(403);
     $this->assertUrl('system/files/webform/test_element_managed_file/' . $sid . '/' . $this->files[0]->filename);
   }

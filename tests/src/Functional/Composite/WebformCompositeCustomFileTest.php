@@ -57,7 +57,7 @@ class WebformCompositeCustomFileTest extends WebformElementManagedFileTestBase {
 
     // Check the composite file is attached to the email.
     $this->assertRaw('<label>Attachments</label>');
-    $this->assertRaw('<strong><a href="' . file_create_url($file->getFileUri()) . '">' . $file->getFileName() . '</a></strong> (text/plain) - 1 KB');
+    $this->assertRaw('<strong><a href="' . \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) . '">' . $file->getFileName() . '</a></strong> (text/plain) - 1 KB');
 
     // Check file permanent.
     $this->assertTrue($file->isPermanent());
