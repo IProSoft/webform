@@ -1372,6 +1372,15 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'recommended' => TRUE,
     ];
 
+    // Spam: reCAPTCHA.
+    $projects['recaptcha'] = [
+      'title' => $this->t('reCAPTCHA'),
+      'description' => $this->t('Uses the Google <a href=":href">reCAPTCHA</a> web service to improve the CAPTCHA system.', [':href' => 'https://www.google.com/recaptcha/about/']),
+      'url' => Url::fromUri('https://www.drupal.org/project/recaptcha'),
+      'category' => 'spam',
+      'recommended' => TRUE,
+    ];
+
     // Spam: Honeypot.
     $projects['honeypot'] = [
       'title' => $this->t('Honeypot'),
