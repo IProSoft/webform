@@ -58,6 +58,13 @@
         $errorMessages.insertAfter($container);
       });
 
+      // Move all select2 and chosen errors to appear after the parent container.
+      $(this.currentForm).find('.webform-select2 ~ .select2, .webform-chosen ~ .chosen-container').each(function () {
+        var $container = $(this);
+        var $errorMessages = $container.prev('strong.error.form-item--error-message');
+        $errorMessages.insertAfter($container);
+      });
+
       // Move checkbox errors to appear as the last item in the
       // parent container.
       $(this.currentForm).find('.form-type-checkbox').each(function () {
