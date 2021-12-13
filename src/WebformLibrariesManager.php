@@ -617,12 +617,11 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Get CKEditor semantic version number from the JS file.
     // @see core/core.libraries.yml
     $definition = $this->libraryDiscovery->getLibraryByName('core', 'ckeditor');
-    //
     if (!$definition) {
       return NULL;
     }
 
-    $ckeditor_version = $definition['version'];
+    $ckeditor_version = $definition['js'][0]['version'];
 
     // Parse CKEditor semantic version number from security patches
     // (i.e. 4.8.0+2018-04-18-security-patch).
