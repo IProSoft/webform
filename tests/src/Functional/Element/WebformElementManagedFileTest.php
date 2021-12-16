@@ -344,10 +344,10 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
       $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . $file->createFileUrl() . '" type="text/plain">' . $file->getFilename() . '</a></span>');
     }
     elseif (floatval(\Drupal::VERSION) >= 9.1) {
-      $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . file_create_url($file->getFileUri()) . '" type="text/plain">' . $file->getFilename() . '</a></span>');
+      $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) . '" type="text/plain">' . $file->getFilename() . '</a></span>');
     }
     else {
-      $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . file_create_url($file->getFileUri()) . '" type="text/plain; length=' . $file->getSize() . '">' . $file->getFilename() . '</a></span>');
+      $this->assertRaw('<span class="file file--mime-text-plain file--text"><a href="' . \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) . '" type="text/plain; length=' . $file->getSize() . '">' . $file->getFilename() . '</a></span>');
     }
 
     // Remove the uploaded file.

@@ -109,7 +109,7 @@ trait WebformEntityReferenceTrait {
                 return [
                   '#type' => 'link',
                   '#title' => $entity->label(),
-                  '#url' => UrlGenerator::fromUri(file_create_url($entity->getFileUri())),
+                  '#url' => UrlGenerator::fromUri(\Drupal::service('file_url_generator')->generateAbsoluteString($entity->getFileUri())),
                 ];
               }
               else {

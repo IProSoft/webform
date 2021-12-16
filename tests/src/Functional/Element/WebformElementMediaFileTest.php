@@ -120,7 +120,7 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
       $this->assertRaw('<label>managed_file_multiple</label>');
       $this->assertRaw('<div class="item-list">');
     }
-    $this->assertRaw('<span class="file file--mime-text-plain file--text"> <a href="' . file_create_url($file->getFileUri()) . '" type="text/plain; length=' . $file->getSize() . '">' . $file->getFilename() . '</a></span>');
+    $this->assertRaw('<span class="file file--mime-text-plain file--text"> <a href="' . \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) . '" type="text/plain; length=' . $file->getSize() . '">' . $file->getFilename() . '</a></span>');
 
     // Remove the uploaded file.
     if ($type === 'multiple') {
