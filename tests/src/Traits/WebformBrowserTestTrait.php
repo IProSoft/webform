@@ -39,7 +39,7 @@ trait WebformBrowserTestTrait {
    *   Test module name.
    */
   protected function placeWebformBlocks($module_name) {
-    $config_directory = drupal_get_path('module', 'webform') . '/tests/modules/' . $module_name . '/config';
+    $config_directory = __DIR__ . '/../../modules/' . $module_name . '/config';
     $config_files = \Drupal::service('file_system')->scanDirectory($config_directory, '/block\..*/');
     foreach ($config_files as $config_file) {
       $data = Yaml::decode(file_get_contents($config_file->uri));
@@ -164,13 +164,13 @@ trait WebformBrowserTestTrait {
     else {
       $config_name = 'webform.webform.' . $id;
       if (strpos($id, 'test_') === 0) {
-        $config_directory = drupal_get_path('module', 'webform') . '/tests/modules/webform_test/config/install';
+        $config_directory = __DIR__ . '/../../modules/webform_test/config/install';
       }
       elseif (strpos($id, 'example_') === 0) {
-        $config_directory = drupal_get_path('module', 'webform') . '/modules/webform_examples/config/install';
+        $config_directory =  __DIR__ . '/../../../modules/webform_examples/config/install';
       }
       elseif (strpos($id, 'template_') === 0) {
-        $config_directory = drupal_get_path('module', 'webform') . '/modules/webform_templates/config/install';
+        $config_directory =  __DIR__ . '/../../../modules/webform_templates/config/install';
       }
       else {
         throw new \Exception("Webform $id not valid");

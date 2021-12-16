@@ -603,7 +603,7 @@ function _webform_page_attachments(array &$attachments) {
   $theme_manager = \Drupal::service('webform.theme_manager');
   $active_theme_names = $theme_manager->getActiveThemeNames();
   foreach ($active_theme_names as $active_theme_name) {
-    if (file_exists(drupal_get_path('module', 'webform') . "/css/webform.theme.$active_theme_name.css")) {
+    if (file_exists(__DIR__ . "/css/webform.theme.$active_theme_name.css")) {
       $attachments['#attached']['library'][] = "webform/webform.theme.$active_theme_name";
     }
   }

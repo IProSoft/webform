@@ -1875,7 +1875,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     // Add logos.
     global $base_url;
-    $addon_paths = drupal_get_path('module', 'webform') . '/images/addons';
+    $addon_paths = __DIR__ . '/../images/addons';
     $addon_extensions = ['png', 'svg'];
     foreach ($projects as $project_name => $project) {
       foreach ($addon_extensions as $addon_extension) {

@@ -565,7 +565,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     }
 
     // Copy sample file or generate a new temp file that can be uploaded.
-    $sample_file = drupal_get_path('module', 'webform') . '/tests/files/sample.' . $file_extension;
+    $sample_file = __DIR__ . '/../../../tests/files/sample.' . $file_extension;
     if (file_exists($sample_file)) {
       $file_uri = $this->fileSystem->copy($sample_file, $file_destination);
     }
