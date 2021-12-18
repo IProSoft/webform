@@ -167,10 +167,10 @@ trait WebformBrowserTestTrait {
         $config_directory = __DIR__ . '/../../modules/webform_test/config/install';
       }
       elseif (strpos($id, 'example_') === 0) {
-        $config_directory =  __DIR__ . '/../../../modules/webform_examples/config/install';
+        $config_directory = __DIR__ . '/../../../modules/webform_examples/config/install';
       }
       elseif (strpos($id, 'template_') === 0) {
-        $config_directory =  __DIR__ . '/../../../modules/webform_templates/config/install';
+        $config_directory = __DIR__ . '/../../../modules/webform_templates/config/install';
       }
       else {
         throw new \Exception("Webform $id not valid");

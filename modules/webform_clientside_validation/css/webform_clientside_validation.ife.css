@@ -10,6 +10,6 @@
 
 .select2.error .select2-selection,
 .chosen-container.error .chosen-single,
-.chosen-container.error .chosen-choices{
+.chosen-container.error .chosen-choices {
   border: 1px solid #d72222;
 }
