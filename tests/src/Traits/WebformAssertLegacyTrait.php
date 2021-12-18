@@ -3,9 +3,7 @@
 
 namespace Drupal\Tests\webform\Traits;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ExpectationException;
-use Behat\Mink\Selector\Xpath\Escaper;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
 
@@ -40,22 +38,6 @@ trait WebformAssertLegacyTrait {
    */
   protected function assertIdentical($expected, $actual, $message = '') {
     $this->assertSame($expected, $actual, $message);
-  }
-
-  /**
-   * @see \Drupal\simpletest\TestBase::assertNotIdentical()
-   */
-  protected function assertNotIdentical($expected, $actual, $message = '') {
-    $this->assertNotSame($expected, $actual, $message);
-  }
-
-  /**
-   * @see \Drupal\simpletest\TestBase::assertIdenticalObject()
-   */
-  protected function assertIdenticalObject($expected, $actual, $message = '') {
-    // Note: ::assertSame checks whether its the same object. ::assertEquals
-    // though compares
-    $this->assertEquals($expected, $actual, $message);
   }
 
   /**
@@ -198,29 +180,6 @@ trait WebformAssertLegacyTrait {
   }
 
   /**
-   * Passes if the text is found MORE THAN ONCE on the text version of the page.
-   *
-   * The text version is the equivalent of what a user would see when viewing
-   * through a web browser. In other words the HTML has been filtered out of
-   * the contents.
-   *
-   * @param string|\Drupal\Component\Render\MarkupInterface $text
-   *   Plain text to look for.
-   * @param string $message
-   *   (optional) A message to display with the assertion. Do not translate
-   *   messages with t(). If left blank, a default message will be displayed.
-   */
-  protected function assertNoUniqueText($text, $message = '') {
-    // Cast MarkupInterface objects to string.
-    $text = (string) $text;
-
-    $message = $message ?: "'$text' found more than once on the page";
-    $page_text = $this->getSession()->getPage()->getText();
-    $nr_found = substr_count($page_text, $text);
-    $this->assertGreaterThan(1, $nr_found, $message);
-  }
-
-  /**
    * Asserts the page responds with the specified response code.
    *
    * @param int $code
@@ -278,26 +237,6 @@ trait WebformAssertLegacyTrait {
   }
 
   /**
-   * Asserts that a field exists with the given name or ID.
-   *
-   * @param string $field
-   *   Name or ID of field to assert.
-   */
-  protected function assertField($field) {
-    $this->assertFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field));
-  }
-
-  /**
-   * Asserts that a field does NOT exist with the given name or ID.
-   *
-   * @param string $field
-   *   Name or ID of field to assert.
-   */
-  protected function assertNoField($field) {
-    $this->assertNoFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field));
-  }
-
-  /**
    * Passes if the raw text IS found on the loaded page, fail otherwise.
    *
    * Raw text refers to the raw HTML that the page generated.
@@ -325,18 +264,6 @@ trait WebformAssertLegacyTrait {
     $message = sprintf('The string "%s" was not found anywhere in the HTML response of the current page.', $raw);
 
     $this->assertSame(strpos($actual, (string) $raw), false, $message);
-  }
-
-  /**
-   * Pass if the page title is the given string.
-   *
-   * @param string $expected_title
-   *   The string the page title should be.
-   */
-  protected function assertTitle($expected_title) {
-    // Cast MarkupInterface to string.
-    $expected_title = (string) $expected_title;
-    return $this->assertSession()->titleEquals($expected_title);
   }
 
   /**
@@ -422,18 +349,6 @@ trait WebformAssertLegacyTrait {
    */
   protected function assertOption($id, $option) {
     return $this->assertSession()->optionExists($id, $option);
-  }
-
-  /**
-   * Asserts that a select option with the visible text exists.
-   *
-   * @param string $id
-   *   The ID of the select field to assert.
-   * @param string $text
-   *   The text for the option tag to assert.
-   */
-  protected function assertOptionByText($id, $text) {
-    return $this->assertSession()->optionExists($id, $text);
   }
 
   /**
@@ -591,40 +506,6 @@ trait WebformAssertLegacyTrait {
   }
 
   /**
-   * Passes if the raw text IS found escaped on the loaded page, fail otherwise.
-   *
-   * Raw text refers to the raw HTML that the page generated.
-   *
-   * @param string $raw
-   *   Raw (HTML) string to look for.
-   */
-  protected function assertEscaped($raw) {
-    $this->assertSession()->assertEscaped($raw);
-  }
-
-  /**
-   * Passes if the raw text is not found escaped on the loaded page.
-   *
-   * Raw text refers to the raw HTML that the page generated.
-   *
-   * @param string $raw
-   *   Raw (HTML) string to look for.
-   */
-  protected function assertNoEscaped($raw) {
-    $this->assertSession()->assertNoEscaped($raw);
-  }
-
-  /**
-   * Triggers a pass if the Perl regex pattern is found in the raw content.
-   *
-   * @param string $pattern
-   *   Perl regex to look for including the regex delimiters.
-   */
-  protected function assertPattern($pattern) {
-    $this->assertSession()->responseMatches($pattern);
-  }
-
-  /**
    * Triggers a pass if the Perl regex pattern is not found in the raw content.
    *
    * @param string $pattern
@@ -634,40 +515,6 @@ trait WebformAssertLegacyTrait {
    */
   protected function assertNoPattern($pattern) {
     $this->assertSession()->responseNotMatches($pattern);
-  }
-
-  /**
-   * Asserts whether an expected cache tag was present in the last response.
-   *
-   * @param string $expected_cache_tag
-   *   The expected cache tag.
-   */
-  protected function assertCacheTag($expected_cache_tag) {
-    $this->assertSession()->responseHeaderContains('X-Drupal-Cache-Tags', $expected_cache_tag);
-  }
-
-  /**
-   * Asserts whether an expected cache tag was absent in the last response.
-   *
-   * @param string $cache_tag
-   *   The cache tag to check.
-   *
-   * @see https://www.drupal.org/node/2864029
-   */
-  protected function assertNoCacheTag($cache_tag) {
-    $this->assertSession()->responseHeaderNotContains('X-Drupal-Cache-Tags', $cache_tag);
-  }
-
-  /**
-   * Checks that current response header equals value.
-   *
-   * @param string $name
-   *   Name of header to assert.
-   * @param string $value
-   *   Value of the header to assert.
-   */
-  protected function assertHeader($name, $value) {
-    $this->assertSession()->responseHeaderEquals($name, $value);
   }
 
   /**
@@ -810,19 +657,6 @@ trait WebformAssertLegacyTrait {
    */
   protected function getRawContent() {
     return $this->getSession()->getPage()->getContent();
-  }
-
-  /**
-   * Get all option elements, including nested options, in a select.
-   *
-   * @param \Behat\Mink\Element\NodeElement $element
-   *   The element for which to get the options.
-   *
-   * @return \Behat\Mink\Element\NodeElement[]
-   *   Option elements in select.
-   */
-  protected function getAllOptions(NodeElement $element) {
-    return $element->findAll('xpath', '//option');
   }
 
 }
