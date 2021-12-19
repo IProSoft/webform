@@ -543,7 +543,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       // Add name to all libraries, so that it can be modified if a ckeditor
       // plugin is installed without the ckeditor.* prefix.
       $libraries[$library_name]['name'] = $library_name;
-      if (strpos($library_name, 'ckeditor.') === 0) {
+      if (strpos($library_name, 'ckeditor.') === 0 && !$this->find($library_name)) {
         $ckeditor_library_name = str_replace('ckeditor.', '', $library_name);
         $library_path = $this->find($ckeditor_library_name);
         if ($library_path) {
