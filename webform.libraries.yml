@@ -1047,6 +1047,7 @@ libraries.choices:
 
 libraries.codemirror.text:
   remote: https://github.com/codemirror/codemirror
+  download: https://github.com/components/codemirror
   version: &webform_codemirror_version '5.61.1'
   license: &webform_codemirror_license
     name: MIT
