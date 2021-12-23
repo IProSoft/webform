@@ -24,6 +24,9 @@ use Drupal\webform\Plugin\WebformElement\ManagedFile;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformInterface;
+use Symfony\Component\Mime\Header\MailboxHeader;
+use Symfony\Component\Mime\Address;
+
 
 require_once __DIR__ . '/includes/webform.date.inc';
 require_once __DIR__ . '/includes/webform.editor.inc';
@@ -431,9 +434,12 @@ function webform_mail($key, &$message, $params) {
   if (!empty($params['from_mail'])) {
     // 'From name' is only used when the 'From mail' contains a single
     // email address.
+    $from_mailbox = new MailboxHeader($params['from_name'], new Address($params['from_mail'], $params['from_name']));
+    $from_name_email = $from_mailbox->getBodyAsString();
+
     $from = (!empty($params['from_name']) && strpos($params['from_mail'], ',') === FALSE)
-      ? Mail::formatDisplayName($params['from_name']) . ' <' . $params['from_mail'] . '>'
-      : $params['from_mail'];
+    ? $from_name_email : $params['from_mail'];
+
     $message['from'] = $message['headers']['From'] = $from;
   }
 
@@ -468,7 +474,10 @@ function webform_mail($key, &$message, $params) {
   $sender_mail = $params['sender_mail'] ?: '';
   $sender_name = $params['sender_name'] ?: $params['from_name'] ?: '';
   if ($sender_mail) {
-    $message['headers']['Sender'] = ($sender_name) ? Mail::formatDisplayName($sender_name) . ' <' . $sender_mail . '>' : $sender_mail;
+    $sender_mailbox = new MailboxHeader($sender_name, new Address($sender_mail, $sender_name));
+    $sender_name_email = $sender_mailbox->getBodyAsString();
+
+    $message['headers']['Sender'] = ($sender_name) ? $sender_name_email : $sender_mail;
   }
 }
 

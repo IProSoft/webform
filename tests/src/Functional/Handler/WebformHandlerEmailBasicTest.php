@@ -116,7 +116,7 @@ class WebformHandlerEmailBasicTest extends WebformBrowserTestBase {
     ];
     $this->postSubmission($webform, $edit);
     $sent_email = $this->getLastEmail();
-    $this->assertEqual($sent_email['reply-to'], '"first_name\\" \\"last_name" <from@example.com>');
+    $this->assertEqual($sent_email['reply-to'], '"first_name" "last_name" <from@example.com>');
     $this->assertEqual($sent_email['subject'], 'This has  & "special" \'characters\'');
     // NOTE:
     // Drupal's PhpMail::format function calls
