@@ -88,7 +88,7 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
    * @param bool $is_valid
    *   Is Signature valid.
    */
-  protected function assertSignature($value, $is_valid = TRUE) {
+  protected function assertSignature(string $value, bool $is_valid = TRUE): void {
     // Must manually set hidden values because ::submitForm only set visible
     // element values and ignores hidden elements.
     // @see \Drupal\Tests\UiHelperTrait::submitForm

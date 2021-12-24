@@ -37,8 +37,8 @@ class WebformHandlerExcludedTest extends WebformBrowserTestBase {
 
     // Check add mail and handler plugin.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers');
-    $this->assertLink('Add email');
-    $this->assertLink('Add handler');
+    $this->linkExists('Add email');
+    $this->linkExists('Add handler');
 
     // Check add mail accessible.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers/add/email');
@@ -49,8 +49,8 @@ class WebformHandlerExcludedTest extends WebformBrowserTestBase {
 
     // Check add mail hidden.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers');
-    $this->assertNoLink('Add email');
-    $this->assertLink('Add handler');
+    $this->linkNotExists('Add email');
+    $this->linkExists('Add handler');
 
     // Check add mail access denied.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers/add/email');
@@ -61,8 +61,8 @@ class WebformHandlerExcludedTest extends WebformBrowserTestBase {
 
     // Check add mail and handler hidden.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers');
-    $this->assertNoLink('Add email');
-    $this->assertNoLink('Add handler');
+    $this->linkNotExists('Add email');
+    $this->linkNotExists('Add handler');
 
     // Check handler definitions.
     $definitions = $handler_manager->getDefinitions();

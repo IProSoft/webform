@@ -28,11 +28,11 @@ class WebformAccessTest extends WebformAccessBrowserTestBase {
 
     // Check that employee and manager groups exist.
     $this->drupalGet('/admin/structure/webform/access/group/manage');
-    $this->assertLink('employee_group');
-    $this->assertLink('manager_group');
+    $this->linkExists('employee_group');
+    $this->linkExists('manager_group');
 
     // Check that webform node is assigned to groups.
-    $this->assertLink($this->nodes['contact_01']->label());
+    $this->linkExists($this->nodes['contact_01']->label());
 
     // Check that employee and manager users can't access webform results.
     foreach ($this->users as $account) {
@@ -142,11 +142,11 @@ class WebformAccessTest extends WebformAccessBrowserTestBase {
     $this->drupalLogin($this->rootUser);
     $this->drupalGet('/admin/structure/webform/access/group/manage');
     $this->assertRaw('manager_type');
-    $this->assertLink('manager_group');
-    $this->assertLink('manager_user');
-    $this->assertLink('employee_user');
-    $this->assertLink('contact_01');
-    $this->assertLink('contact_02');
+    $this->linkExists('manager_group');
+    $this->linkExists('manager_user');
+    $this->linkExists('employee_user');
+    $this->linkExists('contact_01');
+    $this->linkExists('contact_02');
 
     // Reset caches.
     \Drupal::entityTypeManager()->getStorage('webform_access_group')->resetCache();
@@ -168,22 +168,22 @@ class WebformAccessTest extends WebformAccessBrowserTestBase {
 
     // Check that manager type has been removed.
     $this->drupalGet('/admin/structure/webform/access/group/manage');
-    $this->assertNoLink('manager_user');
-    $this->assertNoLink('employee_user');
+    $this->linkNotExists('manager_user');
+    $this->linkNotExists('employee_user');
 
     // Delete contact 2.
     $this->nodes['contact_02']->delete();
 
     // Check that contact_02 has been removed.
     $this->drupalGet('/admin/structure/webform/access/group/manage');
-    $this->assertNoLink('contact_02');
+    $this->linkNotExists('contact_02');
 
     // Delete webform field config.
     FieldConfig::loadByName('node', 'webform', 'webform')->delete();
 
     // Check that contact_02 has been removed.
     $this->drupalGet('/admin/structure/webform/access/group/manage');
-    $this->assertNoLink('contact_02');
+    $this->linkNotExists('contact_02');
   }
 
   /**
@@ -223,8 +223,8 @@ class WebformAccessTest extends WebformAccessBrowserTestBase {
     // Check access allowed to 'Access' tab for administrator.
     $this->drupalGet('/admin/structure/webform/access/group/manage');
     $this->assertResponse(200);
-    $this->assertLink('Manage');
-    $this->assertNoLink('Edit');
+    $this->linkExists('Manage');
+    $this->linkNotExists('Edit');
 
     // Click 'manager_group' link and move to the group edit form.
     $this->clickLink('manager_group');

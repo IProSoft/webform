@@ -54,7 +54,7 @@ class WebformFieldTest extends WebformBrowserTestBase {
     // Check that webform select menu is visible.
     $this->drupalGet('/node/add/page');
     $this->assertNoCssSelect('#edit-field-webform-0-target-id optgroup');
-    $this->assertOption('edit-field-webform-0-target-id', 'contact');
+    $this->optionExists('edit-field-webform-0-target-id', 'contact');
 
     // Add category to 'contact' webform.
     /** @var \Drupal\webform\WebformInterface $webform */
@@ -71,8 +71,8 @@ class WebformFieldTest extends WebformBrowserTestBase {
 
     // Check that webform 2 is included in the select menu.
     $this->drupalGet('/node/add/page');
-    $this->assertOption('edit-field-webform-0-target-id', 'contact');
-    $this->assertOption('edit-field-webform-0-target-id', $webform_2->id());
+    $this->optionExists('edit-field-webform-0-target-id', 'contact');
+    $this->optionExists('edit-field-webform-0-target-id', $webform_2->id());
 
     // Limit the webform select menu to only the contact form.
     $this->drupalGet('/admin/structure/types/manage/page/form-display');
@@ -81,8 +81,8 @@ class WebformFieldTest extends WebformBrowserTestBase {
 
     // Check that webform 2 is NOT included in the select menu.
     $this->drupalGet('/node/add/page');
-    $this->assertOption('edit-field-webform-0-target-id', 'contact');
-    $this->assertNoOption('edit-field-webform-0-target-id', $webform_2->id());
+    $this->optionExists('edit-field-webform-0-target-id', 'contact');
+    $this->optionNotExists('edit-field-webform-0-target-id', $webform_2->id());
   }
 
 }

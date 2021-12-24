@@ -35,7 +35,7 @@ class WebformUiElementActionsTest extends WebformBrowserTestBase {
 
     // Check that submit buttons are customizable.
     $this->drupalGet('/admin/structure/webform/manage/test');
-    $this->assertLink('Customize');
+    $this->linkExists('Customize');
 
     // Disable actions element.
     \Drupal::configFactory()->getEditable('webform.settings')
@@ -44,7 +44,7 @@ class WebformUiElementActionsTest extends WebformBrowserTestBase {
 
     // Check that submit buttons are not customizable.
     $this->drupalGet('/admin/structure/webform/manage/test');
-    $this->assertNoLink('Customize');
+    $this->linkNotExists('Customize');
   }
 
 }

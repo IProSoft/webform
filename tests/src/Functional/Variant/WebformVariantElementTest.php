@@ -47,13 +47,13 @@ class WebformVariantElementTest extends WebformBrowserTestBase {
     // 'edit webform variants' permission.
     $this->drupalLogin($variant_user);
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add');
-    $this->assertLink('Variant');
+    $this->linkExists('Variant');
 
     // Check that the variant element is hidden to users without
     // 'edit webform variants' permission.
     $this->drupalLogin($admin_user);
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add');
-    $this->assertNoLink('Variant');
+    $this->linkNotExists('Variant');
 
     // Check that hidden variant element is still available.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/webform_variant');
@@ -80,7 +80,7 @@ class WebformVariantElementTest extends WebformBrowserTestBase {
 
     // Check that 'Variants' tab is not visible.
     $this->drupalGet('/admin/structure/webform/manage/contact');
-    $this->assertNoLink('Variants');
+    $this->linkNotExists('Variants');
 
     // Add a variant element to contact form.
     $edit = [
@@ -92,7 +92,7 @@ class WebformVariantElementTest extends WebformBrowserTestBase {
 
     // Check that the 'Variants' tab is visible.
     $this->drupalGet('/admin/structure/webform/manage/contact');
-    $this->assertLink('Variants');
+    $this->linkExists('Variants');
 
     // Check that the 'Variants' tab message is displayed.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/webform_variant');
@@ -107,7 +107,7 @@ class WebformVariantElementTest extends WebformBrowserTestBase {
 
     // Check that the 'Variants' tab is also not visible.
     $this->drupalGet('/admin/structure/webform/manage/contact');
-    $this->assertNoLink('Variants');
+    $this->linkNotExists('Variants');
 
     // Check that the 'Variant type' can not be changed once variants have created.
     $this->drupalGet('/admin/structure/webform/manage/test_variant_multiple/element/letter/edit');

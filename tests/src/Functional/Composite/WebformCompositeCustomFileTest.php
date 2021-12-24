@@ -80,12 +80,12 @@ class WebformCompositeCustomFileTest extends WebformElementManagedFileTestBase {
 
     // Check that the file exists on the submission edit form.
     $this->drupalGet("/admin/structure/webform/manage/test_composite_custom_file/submission/$sid/edit");
-    $this->assertLink($file->getFileName());
+    $this->linkExists($file->getFileName());
 
     // Check that test file still exists as more items are be added to the
     // composite element.
     $this->drupalPostForm(NULL, [], 'webform_custom_composite_file_table_add');
-    $this->assertLink($file->getFileName());
+    $this->linkExists($file->getFileName());
   }
 
 }

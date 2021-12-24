@@ -30,7 +30,7 @@ abstract class WebformWizardTestBase extends WebformBrowserTestBase {
    * @param string $page
    *   The name (key) of the current page.
    */
-  protected function assertCurrentPage($title, $page) {
+  protected function assertCurrentPage(string $title, string $page): void {
     $this->assertPattern('|<li data-webform-page="' . $page . '" class="webform-progress-bar__page webform-progress-bar__page--current"><b>' . $title . '</b>|');
   }
 
