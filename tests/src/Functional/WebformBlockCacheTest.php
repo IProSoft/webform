@@ -55,8 +55,10 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
    * Test that an anonymous can visit the webform block and the page is cacheable.
    */
   public function testAnonymousVisitIsCacheable() {
+    $assert_session = $this->assertSession();
+
     $this->drupalGet('/node/1');
-    $this->assertSession()->responseContains('Contact');
+    $assert_session->responseContains('Contact');
     $this->assertEquals('MISS', $this->drupalGetHeader('X-Drupal-Cache'));
     $this->drupalGet('/node/1');
     $this->assertEquals('HIT', $this->drupalGetHeader('X-Drupal-Cache'));
@@ -66,10 +68,12 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
    * Test that admin user can visit the page and the it is cacheable.
    */
   public function testAuthenticatedVisitIsCacheable() {
+    $assert_session = $this->assertSession();
+
     $this->drupalLogin($this->authenticatedUser);
 
     $this->drupalGet('/node/1');
-    $this->assertSession()->responseContains('Contact');
+    $assert_session->responseContains('Contact');
     $this->assertEquals('MISS', $this->drupalGetHeader('X-Drupal-Dynamic-Cache'));
     $this->drupalGet('/node/1');
     $this->assertEquals('HIT', $this->drupalGetHeader('X-Drupal-Dynamic-Cache'));
@@ -79,6 +83,8 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
    * Test that if an Webform is access restricted the page can still be cached.
    */
   public function testAuthenticatedAndRestrictedVisitIsCacheable() {
+    $assert_session = $this->assertSession();
+
     /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
     $access_rules_manager = \Drupal::service('webform.access_rules_manager');
     $default_access_rules = $access_rules_manager->getDefaultAccessRules();
@@ -96,7 +102,7 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
     $this->drupalLogin($this->authenticatedUser);
 
     $this->drupalGet('/node/1');
-    $this->assertSession()->responseContains('Contact');
+    $assert_session->responseContains('Contact');
     $this->assertEquals('MISS', $this->drupalGetHeader('X-Drupal-Dynamic-Cache'));
     $this->drupalGet('/node/1');
     $this->assertEquals('HIT', $this->drupalGetHeader('X-Drupal-Dynamic-Cache'));

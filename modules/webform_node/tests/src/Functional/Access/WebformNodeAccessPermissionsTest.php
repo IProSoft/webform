@@ -27,6 +27,8 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
   public function testAccessPermissions() {
     global $base_path;
 
+    $assert_session = $this->assertSession();
+
     // Own webform submission user.
     $submission_own_account = $this->drupalCreateUser([
       'view own webform submission',
@@ -72,37 +74,37 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
 
     // Check view own previous submission message.
     $this->drupalGet("node/{$nid}");
-    $this->assertRaw('You have already submitted this webform.');
-    $this->assertRaw("<a href=\"{$base_path}node/{$nid}/webform/submissions/{$sid_1}\">View your previous submission</a>.");
+    $assert_session->responseContains('You have already submitted this webform.');
+    $assert_session->responseContains("<a href=\"{$base_path}node/{$nid}/webform/submissions/{$sid_1}\">View your previous submission</a>.");
 
     // Check 'view own submission' permission.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check 'edit own submission' permission.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/edit");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check 'delete own submission' permission.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/delete");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     $sid_2 = $this->postNodeSubmission($node, $edit);
 
     // Check view own previous submissions message.
     $this->drupalGet("node/{$nid}");
-    $this->assertRaw('You have already submitted this webform.');
-    $this->assertRaw("<a href=\"{$base_path}node/{$nid}/webform/submissions\">View your previous submissions</a>");
+    $assert_session->responseContains('You have already submitted this webform.');
+    $assert_session->responseContains("<a href=\"{$base_path}node/{$nid}/webform/submissions\">View your previous submissions</a>");
 
     // Check view own previous submissions.
     $this->drupalGet("node/{$nid}/webform/submissions");
-    $this->assertResponse(200);
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submissions/{$sid_1}");
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submissions/{$sid_2}");
+    $assert_session->statusCodeEquals(200);
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submissions/{$sid_1}");
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submissions/{$sid_2}");
 
     // Check submission user duplicate returns access denied.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_2}/duplicate");
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     // Enable submission user duplicate.
     $webform->setSetting('submission_user_duplicate', TRUE);
@@ -110,11 +112,11 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
 
     // Check submission user duplicate returns access allows.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_2}/duplicate");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check webform results access denied.
     $this->drupalGet("node/{$nid}/webform/results/submissions");
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     /* ********************************************************************** */
     // Any submission permissions.
@@ -125,13 +127,13 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
 
     // Check webform results access allowed.
     $this->drupalGet("node/{$nid}/webform/results/submissions");
-    $this->assertResponse(200);
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
+    $assert_session->statusCodeEquals(200);
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
 
     // Check webform submission access allowed.
     $this->drupalGet("node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     /* ********************************************************************** */
     // Own submission node permissions.
@@ -142,21 +144,21 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
 
     // Check webform results access allowed.
     $this->drupalGet("node/{$nid}/webform/results/submissions");
-    $this->assertResponse(200);
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
+    $assert_session->statusCodeEquals(200);
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
 
     // Check webform submission access allowed.
     $this->drupalGet("node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check webform submission edit allowed.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/edit");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check webform submission delete allowed.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/delete");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     /* ********************************************************************** */
     // Any submission node permissions.
@@ -167,21 +169,21 @@ class WebformNodeAccessPermissionsTest extends WebformNodeBrowserTestBase {
 
     // Check webform results access allowed.
     $this->drupalGet("node/{$nid}/webform/results/submissions");
-    $this->assertResponse(200);
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertLinkByHref("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
+    $assert_session->statusCodeEquals(200);
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_1}");
+    $assert_session->linkByHrefExists("{$base_path}node/{$nid}/webform/submission/{$sid_2}");
 
     // Check webform submission access allowed.
     $this->drupalGet("node/{$nid}/webform/submission/{$sid_1}");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check webform submission edit allowed.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/edit");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check webform submission delete allowed.
     $this->drupalGet("node/{$nid}/webform/submissions/{$sid_1}/delete");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
   }
 
 }

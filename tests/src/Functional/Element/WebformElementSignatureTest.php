@@ -23,6 +23,8 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
    * Test signature element.
    */
   public function testSignature() {
+    $assert_session = $this->assertSession();
+
     $this->drupalLogin($this->rootUser);
 
     $webform = Webform::load('test_element_signature');
@@ -32,22 +34,22 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
     // Check signature display.
     $this->drupalGet('/webform/test_element_signature');
-    $this->assertRaw('<input data-drupal-selector="edit-signature" aria-describedby="edit-signature--description" type="hidden" name="signature" value="" class="js-webform-signature form-webform-signature" data-drupal-states="{&quot;disabled&quot;:{&quot;.webform-submission-test-element-signature-add-form :input[name=\u0022disable\u0022]&quot;:{&quot;checked&quot;:true}},&quot;readonly&quot;:{&quot;.webform-submission-test-element-signature-add-form :input[name=\u0022readonly\u0022]&quot;:{&quot;checked&quot;:true}}}" />');
-    $this->assertRaw('<input type="submit" name="op" value="Reset" class="button js-form-submit form-submit" />');
-    $this->assertRaw('<canvas></canvas>');
-    $this->assertRaw('</div>');
-    $this->assertRaw('<div id="edit-signature--description" class="webform-element-description">Sign above</div>');
+    $assert_session->responseContains('<input data-drupal-selector="edit-signature" aria-describedby="edit-signature--description" type="hidden" name="signature" value="" class="js-webform-signature form-webform-signature" data-drupal-states="{&quot;disabled&quot;:{&quot;.webform-submission-test-element-signature-add-form :input[name=\u0022disable\u0022]&quot;:{&quot;checked&quot;:true}},&quot;readonly&quot;:{&quot;.webform-submission-test-element-signature-add-form :input[name=\u0022readonly\u0022]&quot;:{&quot;checked&quot;:true}}}" />');
+    $assert_session->responseContains('<input type="submit" name="op" value="Reset" class="button js-form-submit form-submit" />');
+    $assert_session->responseContains('<canvas></canvas>');
+    $assert_session->responseContains('</div>');
+    $assert_session->responseContains('<div id="edit-signature--description" class="webform-element-description">Sign above</div>');
 
     // Check signature preview image.
     $this->postSubmissionTest($webform, [], 'Preview');
-    $this->assertRaw("$signature_path/signature-");
-    $this->assertRaw(' alt="Signature" class="webform-signature-image" />');
+    $assert_session->responseContains("$signature_path/signature-");
+    $assert_session->responseContains(' alt="Signature" class="webform-signature-image" />');
     $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
 
     // Check signature saved image.
     $sid = $this->postSubmissionTest($webform);
     $webform_submission = WebformSubmission::load($sid);
-    $this->assertRaw("$signature_path/$sid/signature-");
+    $assert_session->responseContains("$signature_path/$sid/signature-");
     $this->assertFileExists("$signature_directory/$sid");
     $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
 
@@ -89,18 +91,20 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
    *   Is Signature valid.
    */
   protected function assertSignature($value, $is_valid = TRUE) {
+    $assert_session = $this->assertSession();
+
     // Must manually set hidden values because ::submitForm only set visible
     // element values and ignores hidden elements.
     // @see \Drupal\Tests\UiHelperTrait::submitForm
     $this->drupalGet('/webform/test_element_signature');
-    $field = $this->assertSession()->hiddenFieldExists('signature');
+    $field = $assert_session->hiddenFieldExists('signature');
     $field->setValue($value);
     $this->submitForm([], 'Submit');
     if ($is_valid) {
-      $this->assertNoRaw('signature contains an invalid signature.');
+      $assert_session->responseNotContains('signature contains an invalid signature.');
     }
     else {
-      $this->assertRaw('signature contains an invalid signature.');
+      $assert_session->responseContains('signature contains an invalid signature.');
     }
   }
 

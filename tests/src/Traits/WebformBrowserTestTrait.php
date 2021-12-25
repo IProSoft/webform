@@ -267,7 +267,8 @@ trait WebformBrowserTestTrait {
    */
   protected function postSubmission(WebformInterface $webform, array $edit = [], $submit = NULL, array $options = []) {
     $submit = $this->getWebformSubmitButtonLabel($webform, $submit);
-    $this->drupalPostForm('/webform/' . $webform->id(), $edit, $submit, $options);
+    $this->drupalGet('/webform/' . $webform->id(), $options);
+    $this->submitForm($edit, $submit);
     return $this->getLastSubmissionId($webform);
   }
 
@@ -288,7 +289,8 @@ trait WebformBrowserTestTrait {
    */
   protected function postSubmissionTest(WebformInterface $webform, array $edit = [], $submit = NULL, array $options = []) {
     $submit = $this->getWebformSubmitButtonLabel($webform, $submit);
-    $this->drupalPostForm('/webform/' . $webform->id() . '/test', $edit, $submit, $options);
+    $this->drupalGet('/webform/' . $webform->id() . '/test', $options);
+    $this->submitForm($edit, $submit);
     return $this->getLastSubmissionId($webform);
   }
 
@@ -478,6 +480,23 @@ trait WebformBrowserTestTrait {
   /* ************************************************************************ */
   // Debug.
   /* ************************************************************************ */
+
+  /**
+   * Logs a verbose message in a text file.
+   *
+   * The link to the verbose message will be placed in the test results as a
+   * passing assertion with the text '[verbose message]'.
+   *
+   * @param string $message
+   *   The verbose message to be stored.
+   */
+  protected function verbose($message) {
+    if (in_array('--debug', $_SERVER['argv'], TRUE)) {
+      // Write directly to STDOUT to not produce unexpected test output.
+      // The STDOUT stream does not obey output buffering.
+      fwrite(STDOUT, $message . "\n");
+    }
+  }
 
   /**
    * Logs verbose (debug) message in a text file.
