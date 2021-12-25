@@ -914,7 +914,7 @@ label:
   admin_notes: ''
   admin_title: ''
   attributes: {  }
-  description: ''
+  display_on: form
   flex: 1
   private: false
   required: false
