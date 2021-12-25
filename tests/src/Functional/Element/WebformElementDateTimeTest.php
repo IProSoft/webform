@@ -18,7 +18,7 @@ class WebformElementDateTimeTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['jquery_ui_datepicker'];
+  protected static $modules = ['jquery_ui_datepicker'];
 
   /**
    * Webforms to load.

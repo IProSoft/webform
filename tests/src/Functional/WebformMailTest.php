@@ -14,7 +14,7 @@ class WebformMailTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform'];
+  protected static $modules = ['webform'];
 
   /**
    * Checks the From: and Reply-to: headers.

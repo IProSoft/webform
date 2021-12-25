@@ -17,7 +17,7 @@ class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase 
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'address',
     'captcha',
     'image',
