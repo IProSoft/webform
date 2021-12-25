@@ -1317,20 +1317,20 @@ libraries.tabby:
   js:
     /libraries/tabby/dist/js/tabby.min.js: {}
 
-# Tippy.js 5.x is compatible with Drupal 8.x.
-# Library info is altered to switch to Tippy.js 6.x for Drupal 9.x compatibility.
-# @see webform_library_info_alter()
 libraries.tippyjs:
   remote: https://github.com/atomiks/tippyjs
-  version: '5.2.1'
+  version: '6.2.6'
   license:
     name: MIT
     url: https://github.com/atomiks/tippyjs/blob/master/LICENSE
     gpl-compatible: true
-  directory: tippyjs/5.x
+  directory: tippyjs/6.x
   cdn:
-    /libraries/tippyjs/5.x/: https://unpkg.com/tippy.js@5.2.1/dist/
+    /libraries/tippyjs/6.x/: https://unpkg.com/tippy.js@6.2.6/dist/
   js:
-    /libraries/tippyjs/5.x/tippy-bundle.iife.min.js: {}
+    /libraries/tippyjs/6.x/tippy.umd.min.js: { minified: true }
+  css:
+    component:
+      /libraries/tippyjs/6.x/tippy.css: {}
   dependencies:
     - core/popperjs
