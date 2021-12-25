@@ -90,7 +90,7 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
    * @param bool $is_valid
    *   Is Signature valid.
    */
-  protected function assertSignature($value, $is_valid = TRUE) {
+  protected function assertSignature($value, $is_valid = TRUE): void {
     $assert_session = $this->assertSession();
 
     // Must manually set hidden values because ::submitForm only set visible

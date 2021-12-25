@@ -283,7 +283,7 @@ class WebformListBuilderTest extends WebformBrowserTestBase {
    * @throws \Exception
    *   When the row can't be found.
    */
-  protected function assertLinkNotInRow($row_text, $link) {
+  protected function assertLinkNotInRow($row_text, $link): void {
     $row = $this->getSession()->getPage()->find('css', sprintf('table tr:contains("%s")', $row_text));
     if (!$row) {
       throw new \Exception($this->getSession()->getDriver(), 'table row', 'value', $row_text);

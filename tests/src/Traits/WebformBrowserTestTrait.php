@@ -437,7 +437,7 @@ trait WebformBrowserTestTrait {
   /**
    * Passes if the CSS selector IS found on the loaded page, fail otherwise.
    */
-  protected function assertCssSelect($selector, $message = '') {
+  protected function assertCssSelect($selector, $message = ''): void {
     $element = $this->cssSelect($selector);
     if (!$message) {
       $message = new FormattableMarkup('Found @selector', ['@selector' => $selector]);
@@ -448,7 +448,7 @@ trait WebformBrowserTestTrait {
   /**
    * Passes if the CSS selector IS NOT found on the loaded page, fail otherwise.
    */
-  protected function assertNoCssSelect($selector, $message = '') {
+  protected function assertNoCssSelect($selector, $message = ''): void {
     $element = $this->cssSelect($selector);
     $this->assertEmpty($element, $message);
   }
@@ -461,7 +461,7 @@ trait WebformBrowserTestTrait {
    * @param string $message
    *   Optional message to show alongside the assertion.
    */
-  protected function assertElementVisible($css_selector, $message = '') {
+  protected function assertElementVisible($css_selector, $message = ''): void {
     $this->assertTrue($this->getSession()->getDriver()->isVisible($this->cssSelectToXpath($css_selector)), $message);
   }
 
@@ -473,7 +473,7 @@ trait WebformBrowserTestTrait {
    * @param string $message
    *   Optional message to show alongside the assertion.
    */
-  protected function assertElementNotVisible($css_selector, $message = '') {
+  protected function assertElementNotVisible($css_selector, $message = ''): void {
     $this->assertFalse($this->getSession()->getDriver()->isVisible($this->cssSelectToXpath($css_selector)), $message);
   }
 

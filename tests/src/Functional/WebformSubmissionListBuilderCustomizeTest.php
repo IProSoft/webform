@@ -400,7 +400,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
    * @param string|null $label
    *   Column label.
    */
-  protected function assertTableHeaderSort($order, $sort = 'asc', $label = NULL) {
+  protected function assertTableHeaderSort($order, $sort = 'asc', $label = NULL): void {
     global $base_path;
 
     $assert_session = $this->assertSession();
