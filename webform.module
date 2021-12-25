@@ -21,6 +21,7 @@ use Drupal\file\FileInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
+use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformInterface;
@@ -786,7 +787,18 @@ function webform_file_access(FileInterface $file, $operation, AccountInterface $
  * Implements hook_file_download().
  */
 function webform_file_download($uri) {
-  return ManagedFile::accessFileDownload($uri);
+  /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $webform_element_manager */
+  $webform_element_manager = \Drupal::service('plugin.manager.webform.element');
+  $webform_elements = $webform_element_manager->getInstances();
+  foreach ($webform_elements as $webform_element) {
+    if ($webform_element->isEnabled() && $webform_element instanceof WebformElementFileDownloadAccessInterface) {
+      $result = $webform_element::accessFileDownload($uri);
+      if ($result !== NULL) {
+        return $result;
+      }
+    }
+  }
+  return NULL;
 }
 
 /**

@@ -29,8 +29,10 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
     $webform = Webform::load('test_element_signature');
 
-    $signature_path = '/webform/test_element_signature/signature';
-    $signature_directory = 'public://webform/test_element_signature/signature';
+    $signature_public_path = '/webform/test_element_signature/signature';
+    $signature_public_directory = 'public://webform/test_element_signature/signature';
+    $signature_private_path = '/webform/test_element_signature/signature_private';
+    $signature_private_directory = 'private://webform/test_element_signature/signature_private';
 
     // Check signature display.
     $this->drupalGet('/webform/test_element_signature');
@@ -42,16 +44,51 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
     // Check signature preview image.
     $this->postSubmissionTest($webform, [], 'Preview');
-    $assert_session->responseContains("$signature_path/signature-");
+    $assert_session->responseContains("$signature_public_path/signature-");
     $assert_session->responseContains(' alt="Signature" class="webform-signature-image" />');
-    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_public_directory, '/^signature-.*\.png$/'));
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_private_directory, '/^signature-.*\.png$/'));
 
-    // Check signature saved image.
+    // Get the submission.
     $sid = $this->postSubmissionTest($webform);
     $webform_submission = WebformSubmission::load($sid);
-    $assert_session->responseContains("$signature_path/$sid/signature-");
-    $this->assertFileExists("$signature_directory/$sid");
-    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
+
+    // Check signature saved image in public directory.
+    $public_files = \Drupal::service('file_system')->scanDirectory($signature_public_directory, '/^signature-.*\.png$/');
+    $public_file_uri = array_key_first($public_files);
+    $public_file_url = file_create_url($public_file_uri);
+    $assert_session->responseContains("$signature_public_path/$sid/signature-");
+    $this->assertFileExists("$signature_public_directory/$sid");
+    $this->assertCount(1, $public_files);
+
+    // Check signature saved image in private directory.
+    $private_files = \Drupal::service('file_system')->scanDirectory($signature_private_directory, '/^signature-.*\.png$/');
+    $private_file_uri = array_key_first($private_files);
+    $private_file_url = file_create_url($private_file_uri);
+    $assert_session->responseContains("$signature_private_path/$sid/signature-");
+    $this->assertFileExists("$signature_private_directory/$sid");
+    $this->assertCount(1, $private_files);
+
+    /* ********************************************************************** */
+    // Access.
+    /* ********************************************************************** */
+
+    // Check public  file access is allowed for root user.
+    $this->drupalGet($public_file_url);
+    $assert_session->statusCodeEquals(200);
+    $this->assertUrl($public_file_url);
+
+    // Check private file access is allowed for root user.
+    $this->drupalGet($private_file_url);
+    $assert_session->statusCodeEquals(200);
+    $this->assertUrl($private_file_url);
+
+    $this->drupalLogout();
+
+    // Check public and private file access is denied.
+    $this->drupalGet($private_file_url);
+    $assert_session->responseContains('Please login to access the uploaded file.');
+    $this->assertUrl('/user/login');
 
     /* ********************************************************************** */
     // Validation.
@@ -73,13 +110,13 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
     // Check deleting the submission deletes submission's signature directory.
     $webform_submission->delete();
-    $this->assertFileExists("$signature_directory");
-    $this->assertFileNotExists("$signature_directory/$sid");
-    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_directory, '/^signature-.*\.png$/'));
+    $this->assertFileExists("$signature_public_directory");
+    $this->assertFileDoesNotExist("$signature_public_directory/$sid");
+    $this->assertCount(1, \Drupal::service('file_system')->scanDirectory($signature_public_directory, '/^signature-.*\.png$/'));
 
     // Check deleting the webform deletes webform's signature directory.
     $webform->delete();
-    $this->assertFileNotExists("$signature_directory");
+    $this->assertFileDoesNotExist("$signature_public_directory");
   }
 
   /**

@@ -78,6 +78,14 @@ body {
     $image_style_token_query = [WEBFORM_ENTITY_PRINT_IMAGE_TOKEN => _webform_entity_print_token_generate($image_style_uri)];
     $assert_session->responseContains('&' . UrlHelper::buildQuery($image_style_token_query));
 
+    // Check signature private image.
+    $this->assertRaw('<label>signature_private</label>');
+    $this->assertRaw("/webform/test_entity_print/signature_private/$sid/signature-");
+
+    // Check signature public image.
+    $this->assertRaw('<label>signature_public</label>');
+    $this->assertRaw("/webform/test_entity_print/signature_public/$sid/signature-");
+
     // Check image access.
     $this->drupalLogout();
     $this->drupalGet($image_uri);

@@ -4507,6 +4507,7 @@ webform_signature:
   unique_error: ''
   unique_user: false
   wrapper_attributes: {  }
+  uri_scheme: 'public'
 webform_table:
   access: true
   access_create_permissions: {  }
