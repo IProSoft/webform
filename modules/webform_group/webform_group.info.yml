@@ -2,7 +2,7 @@ name: 'Webform Group'
 type: module
 description: 'Provides Webform and Group integration.'
 package: 'Webform'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9.2
 dependencies:
   - 'webform:webform'
   - 'webform:webform_node'
