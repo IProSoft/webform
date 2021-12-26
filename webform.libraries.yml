@@ -632,11 +632,7 @@ webform.element.date:
   js:
     js/webform.element.date.js: {}
   dependencies:
-    - core/drupalSettings
     - core/drupal.date
-    - core/modernizr
-    - core/jquery.once
-    - jquery_ui_datepicker/datepicker
 
 webform.element.datelist:
   version: VERSION

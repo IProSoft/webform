@@ -21,7 +21,6 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'address',
     'captcha',
     'image',
-    'jquery_ui_datepicker',
     'taxonomy',
     'webform',
     'webform_attachment',
@@ -30,6 +29,7 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     // Webform module's (optional) dependencies.
     // @see https://www.drupal.org/project/webform/issues/3110478
     // 'webform_entity_print_attachment',
+    'webform_jqueryui_datepicker',
     'webform_image_select',
     'webform_location_geocomplete',
     'webform_options_custom',

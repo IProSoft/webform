@@ -4,146 +4,80 @@ status: open
 dependencies:
   enforced:
     module:
-      - webform_test
+      - webform_jqueryui_datepicker_test
 open: null
 close: null
 weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_datetime
-title: 'Test: Element: Date/time'
-description: 'Test date/time element'
+id: test_element_datepicker
+title: 'Test: Element: datepicker'
+description: 'Test the datepicker element.'
 category: 'Test: Element'
 elements: |
-  datetime_default:
+  date_datepicker:
+    '#type': date
+    '#title': date_datepicker
+    '#datepicker': true
+    '#date_date_format': 'D, m/d/Y'
+    '#default_value': '2009-08-18'
+  date_datepicker_button:
+    '#type': date
+    '#title': date_datepicker_button
+    '#datepicker': true
+    '#datepicker_button': true
+    '#date_date_format': 'D, m/d/Y'
+    '#default_value': '2009-08-18'
+  date_datepicker_custom:
+    '#type': date
+    '#title': date_datepicker_custom
+    '#datepicker': true
+    '#date_date_format': 'l, F j, Y'
+    '#default_value': '2009-08-18'
+  date_datepicker_min_max_dynamic:
+    '#type': date
+    '#title': date_datepicker_min_max_dynamic
+    '#datepicker': true
+    '#date_date_format': 'D, m/d/Y'
+    '#description': '(-1 year to +1 year)'
+    '#date_date_min': '-1 year'
+    '#date_date_max': '+1 year'
+    '#default_value': now
+  date_datepicker_weekend:
+    '#type': date
+    '#title': date_datepicker_weekend
+    '#datepicker': true
+    '#default_value': '2009-08-16'
+    '#date_days':
+      - '0'
+      - '6'
+  date_datepicker_placeholder:
+    '#type': date
+    '#title': date_datepicker_placeholder
+    '#datepicker': true
+    '#placeholder': '{date}'
+  datetime_datepicker:
     '#type': datetime
-    '#title': datetime_default
+    '#title': datetime_datepicker
     '#default_value': '2009-08-18T01:00:00-05:00'
-  datetime_html5_datetime:
+    '#date_date_element': datepicker
+    '#date_date_format': 'D, m/d/Y'
+  datetime_datepicker_button:
     '#type': datetime
-    '#title': datetime_html5_datetime
+    '#title': datetime_datepicker_button
     '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': datetime
-    '#date_time_element': none
-  datetime_html5_datetime_local:
+    '#date_date_element': datepicker
+    '#date_date_datepicker_button': true
+    '#date_date_format': 'D, m/d/Y'
+  datetime_datepicker_min_max:
     '#type': datetime
-    '#title': datetime_html5_datetime_local
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': datetime-local
-    '#date_time_element': none
-  datetime_html5_time:
-    '#type': datetime
-    '#title': datetime_html5_time
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': none
-    '#date_time_element': time
-    '#format': html_time
-  datetime_text_datetime:
-    '#type': datetime
-    '#title': datetime_text_datetime
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': text
-    '#date_time_element': text
-  datetime_year_range:
-    '#type': datetime
-    '#title': datetime_year_range
-    '#description': '(-10:+1)'
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_year_range': '-10:+1'
-  datetime_min_max:
-    '#type': datetime
-    '#title': datetime_min_max
+    '#title': datetime_datepicker_time_min_max
     '#description': '(2009-01-01 to 2009-12-31)'
     '#date_date_min': '2009-01-01'
     '#date_date_max': '2009-12-31'
-    '#default_value': '2009-08-18'
-  datetime_min_max_time:
-    '#type': datetime
-    '#title': datetime_min_max_time
-    '#description': '(2009-01-01 09:00:00 to 2009-12-31 17:00:00)'
-    '#date_min': '2009-01-01 09:00:00'
-    '#date_max': '2009-12-31 17:00:00'
-    '#default_value': '2009-01-01 09:00:00'
-  datetime_timepicker:
-    '#type': datetime
-    '#title': datetime_timepicker
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': text
-    '#date_date_format': 'D, m/d/Y'
-    '#date_time_element': timepicker
-    '#date_time_format': 'g:i A'
-  datetime_time_text:
-    '#type': datetime
-    '#title': datetime_time_text
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_time_element': text
-  datetime_placeholder:
-    '#type': datetime
-    '#title': datetime_placeholder
-    '#date_date_element': text
-    '#date_date_placeholder': '{date}'
-    '#date_time_element': timepicker
-    '#date_time_placeholder': '{time}'
-  datetime_time_min_max:
-    '#type': datetime
-    '#title': datetime_time_min_max
-    '#description': '(2009-01-01 to 2009-12-31 and 09:00:00 to 17:00:00)'
-    '#date_date_min': '2009-01-01'
-    '#date_date_max': '2009-12-31'
-    '#date_time_min': '09:00:00'
-    '#date_time_max': '17:00:00'
-    '#date_time_step': '1800'
+    '#date_date_element': datepicker
     '#default_value': '2009-08-18T18:00:00-05:00'
-  datetime_timepicker_time_min_max:
-    '#type': datetime
-    '#title': datetime_timepicker_time_min_max
-    '#description': '(2009-01-01 to 2009-12-31 and 09:00:00 to 17:00:00)'
-    '#date_date_min': '2009-01-01'
-    '#date_date_max': '2009-12-31'
-    '#date_time_min': '09:00:00'
-    '#date_time_max': '17:00:00'
-    '#date_time_step': '1800'
-    '#date_date_element': text
-    '#date_date_format': 'D, m/d/Y'
-    '#date_time_element': timepicker
-    '#date_time_format': 'g:i A'
-    '#default_value': '2009-08-18T18:00:00-05:00'
-  datetime_no_seconds:
-    '#type': datetime
-    '#title': datetime_no_seconds
-    '#description': |
-      @see <a href="https://www.drupal.org/node/2917107">Issue #2917107: Date and Time validation problem</a><br/>
-      @see <a href="https://www.drupal.org/node/2723159">Issue #2723159: Datetime form element cannot validate when using a format without seconds</a><br/>
-    '#date_time_element': text
-    '#date_time_format': 'H:i'
-    '#date_time_step': '900'
-    '#default_value': '2009-08-18T01:00:00-05:00'
-  datetime_multiple:
-    '#type': datetime
-    '#title': datetime_multiple
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_date_element': text
-    '#date_date_format': 'D, m/d/Y'
-    '#date_time_element': timepicker
-    '#date_time_format': 'g:i A'
-    '#multiple': true
-  datetime_custom_composite:
-    '#type': webform_custom_composite
-    '#title': datetime_custom_composite
-    '#element':
-      datetime:
-        '#type': datetime
-        '#title': datetime
-        '#date_date_element': text
-        '#date_date_format': d/m/Y
-        '#date_time_element': timepicker
-        '#date_time_format': 'g:i A'
-        '#date_time_step': '900'
-        '#autocomplete': 'off'
-    '#default_value':
-      - datetime: '2009-08-18T01:00:00-05:00'
-
 css: ''
 javascript: ''
 settings:
