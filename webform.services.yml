@@ -39,9 +39,6 @@ services:
   webform.addons_manager:
     class: Drupal\webform\WebformAddonsManager
 
-  webform.cli_service:
-    class: Drupal\webform\Commands\WebformCliService
-
   webform.conditions_manager:
     class: Drupal\webform\WebformEntityConditionsManager
     arguments: ['@plugin.manager.webform.element']
