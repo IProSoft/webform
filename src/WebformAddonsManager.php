@@ -1866,7 +1866,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     // Devel: Webform Submissions List Decorator.
-    $projects['maillog'] = [
+    $projects['webform_list_decorator'] = [
       'title' => $this->t('Webform Submissions List Decorator'),
       'description' => $this->t('Override submissions list and allows user hide columns of webform submissions in submissions list.'),
       'url' => Url::fromUri('https://www.drupal.org/sandbox/antonkerbel/3098999'),
@@ -1875,7 +1875,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
 
     // Add logos.
     global $base_url;
-    $addon_paths = __DIR__ . '/../images/addons';
+    $addon_paths = \Drupal::service('extension.list.module')->getPath('webform') . '/images/addons';
     $addon_extensions = ['png', 'svg'];
     foreach ($projects as $project_name => $project) {
       foreach ($addon_extensions as $addon_extension) {
