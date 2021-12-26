@@ -32,6 +32,7 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'webform_jqueryui_datepicker',
     'webform_image_select',
     'webform_location_geocomplete',
+    'webform_location_places',
     'webform_options_custom',
     'webform_toggles',
   ];
