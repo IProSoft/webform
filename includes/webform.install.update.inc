@@ -4302,4 +4302,3 @@ function webform_update_8636() {
 
   return implode(PHP_EOL, $messages);
 }
-

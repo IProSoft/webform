@@ -72,4 +72,3 @@ function webform_post_update_deprecate_location_places() {
   // Save webform.settings configuration.
   $config->save();
 }
-

@@ -3,7 +3,6 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Datetime\Entity\DateFormat;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**

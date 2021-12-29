@@ -57,6 +57,7 @@ class WebformElementDateTimeTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<input data-drupal-selector="edit-datetime-timepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., ' . $now_date . ')." id="edit-datetime-timepicker-date" name="datetime_timepicker[date]" value="Tue, 08/18/2009" size="15" class="form-text" />');
     $assert_session->responseContains('<input data-drupal-selector="edit-datetime-timepicker-time"');
     // Skip time which can change during the tests.
+    // phpcs:ignore
     // $assert_session->responseContains('id="edit-datetime-timepicker-time" name="datetime_timepicker[time]" value="" size="12" maxlength="12" class="form-time webform-time" />');
 
     // Check date/time placeholder attribute.
