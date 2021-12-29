@@ -5,7 +5,6 @@
  * Enables the creation of webforms and questionnaires.
  */
 
-use Drupal\Component\Utility\Mail;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
@@ -23,6 +22,7 @@ use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformMailHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformInterface;
 
@@ -433,7 +433,7 @@ function webform_mail($key, &$message, $params) {
     // 'From name' is only used when the 'From mail' contains a single
     // email address.
     $from = (!empty($params['from_name']) && strpos($params['from_mail'], ',') === FALSE)
-      ? Mail::formatDisplayName($params['from_name']) . ' <' . $params['from_mail'] . '>'
+      ? WebformMailHelper::formatAddress($params['from_mail'], $params['from_name'])
       : $params['from_mail'];
     $message['from'] = $message['headers']['From'] = $from;
   }
@@ -469,7 +469,7 @@ function webform_mail($key, &$message, $params) {
   $sender_mail = $params['sender_mail'] ?: '';
   $sender_name = $params['sender_name'] ?: $params['from_name'] ?: '';
   if ($sender_mail) {
-    $message['headers']['Sender'] = ($sender_name) ? Mail::formatDisplayName($sender_name) . ' <' . $sender_mail . '>' : $sender_mail;
+    $message['headers']['Sender'] = WebformMailHelper::formatAddress($sender_mail, $sender_name);
   }
 }
 
