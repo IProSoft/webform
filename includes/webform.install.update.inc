@@ -3951,7 +3951,7 @@ function webform_update_8600() {
 }
 
 /**
- * Issue #3106961: [Webform 8.x-6.x] Improve token naming conventions.
+ * Issue #3106961: Improve token naming conventions.
  */
 function webform_update_8601() {
   $config_factory = \Drupal::configFactory();

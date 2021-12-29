@@ -25,11 +25,9 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'webform',
     'webform_attachment',
     'webform_cards',
-    // Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the
-    // Webform module's (optional) dependencies.
-    // @see https://www.drupal.org/project/webform/issues/3110478
-    // 'webform_entity_print_attachment',
+    'webform_entity_print_attachment',
     'webform_jqueryui_datepicker',
+    'webform_entity_print_attachment',
     'webform_image_select',
     'webform_location_geocomplete',
     'webform_location_places',
@@ -52,11 +50,6 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     // that there are not unexpected changes to any element's
     // default properties.
     $expected_elements = $this->getExpectedElementDefaultProperties();
-
-    // Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the
-    // Webform module's (optional) dependencies.
-    // @see https://www.drupal.org/project/webform/issues/3110478
-    unset($expected_elements['webform_entity_print_attachment:pdf']);
 
     $actual_elements = $this->getActualElementDefaultProperties();
     $this->htmlOutput('<pre>' . htmlentities(Yaml::encode($actual_elements)) . '</pre>');
@@ -3082,6 +3075,39 @@ webform_entity_checkboxes:
   unique_user: false
   wrapper_attributes: {  }
   wrapper_type: fieldset
+'webform_entity_print_attachment:pdf':
+  access: true
+  access_create_permissions: {  }
+  access_create_roles:
+    - anonymous
+    - authenticated
+  access_create_users: {  }
+  access_update_permissions: {  }
+  access_update_roles:
+    - anonymous
+    - authenticated
+  access_update_users: {  }
+  access_view_permissions: {  }
+  access_view_roles:
+    - anonymous
+    - authenticated
+  access_view_users: {  }
+  admin_notes: ''
+  admin_title: ''
+  display_on: none
+  download: false
+  filename: ''
+  flex: 1
+  label_attributes: {  }
+  link_title: ''
+  private: false
+  sanitize: false
+  states: {  }
+  template: ''
+  title: ''
+  title_display: ''
+  view_mode: html
+  wrapper_attributes: {  }
 webform_entity_radios:
   access: true
   access_create_permissions: {  }
