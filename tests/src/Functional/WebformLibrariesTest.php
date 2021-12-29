@@ -111,10 +111,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     $assert_session->pageTextNotContains('jQuery: Chosen library ');
     $assert_session->pageTextNotContains('jQuery: Timepicker library ');
     $assert_session->pageTextNotContains('jQuery: Text Counter library ');
-    // phpcs:disable
-    // Issue #2934542: Fix broken Webform.Drupal\webform\Tests\WebformLibrariesTest
-    // @see https://www.drupal.org/project/webform/issues/2934542
-    /*
+
     // Exclude element types that require libraries.
     $edit = [
       'excluded_elements[webform_rating]' => FALSE,
@@ -128,13 +125,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
     $assert_session->pageTextNotContains('jQuery: Image Picker library');
     $assert_session->pageTextNotContains('jQuery: RateIt library');
     $assert_session->pageTextNotContains('Signature Pad library');
-    */
-    // phpcs:enable
 
-    // Issue #3110478: [Webform 8.x-6.x] Track the D9 readiness state of the
-    // Webform module's (optional) dependencies.
-    // @see https://www.drupal.org/project/webform/issues/3110478
-    // Check that choices, chosen, and select2 using webform's CDN URLs.
     // Check that choices, chosen, and select2 using webform's CDN URLs.
     $this->drupalGet('/admin/structure/webform/config/libraries');
     $edit = [
