@@ -21,7 +21,7 @@
 ?>
 <?php print $progressbar; ?>
 
-<div class="webform-confirmation">
+<div class="webform-confirmation" role="alert" aria-atomic="true">
   <?php if ($confirmation_message): ?>
     <?php print $confirmation_message ?>
   <?php else: ?>
