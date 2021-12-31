@@ -2,6 +2,8 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -60,6 +62,13 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   protected $entityTypeManager;
 
   /**
+   * The cache backend.
+   *
+   * @var \Drupal\Core\Cache\CacheBackendInterface
+   */
+  protected $cache;
+
+  /**
    * Cache of source entity webforms.
    *
    * @var array
@@ -82,17 +91,20 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    *   The current user.
    * @param \Drupal\user\UserDataInterface $user_data
    *   The user data service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface|null $module_handler
    *   The module handler class to use for loading includes.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface|null $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
+   *   The cache backend.
    */
-  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler = NULL, EntityTypeManagerInterface $entity_type_manager = NULL) {
+  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler = NULL, EntityTypeManagerInterface $entity_type_manager = NULL, CacheBackendInterface $cache = NULL) {
     $this->routeMatch = $route_match;
     $this->currentUser = $current_user;
     $this->userData = $user_data;
     $this->moduleHandler = $module_handler ?: \Drupal::moduleHandler();
     $this->entityTypeManager = $entity_type_manager ?: \Drupal::entityTypeManager();
+    $this->cache = $cache ?: \Drupal::cache();
   }
 
   /* ************************************************************************ */
@@ -228,10 +240,19 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    * {@inheritdoc}
    */
   public function getWebforms(EntityInterface $entity = NULL) {
-    // Cache the source entity's webforms.
-    $entity_id = $entity->getEntityTypeId() . '-' . $entity->id();
-    if (isset($this->webforms[$entity_id])) {
-      return $this->webforms[$entity_id];
+    $cid = 'webform_' . $entity->getEntityTypeId() . '_' . $entity->id() . '_webforms';
+
+    // Cache the source entity's loaded webform ids permanently.
+    $cached = $this->cache->get($cid);
+    if ($cached) {
+      $this->webforms[$cid] = $cached->data
+        ? $this->entityTypeManager->getStorage('webform')->loadMultiple($cached->data)
+        : [];
+    }
+
+    // Cache the source entity's loaded webforms per request.
+    if (isset($this->webforms[$cid])) {
+      return $this->webforms[$cid];
     }
 
     $target_entities = [];
@@ -260,7 +281,8 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       $webforms[$target_id] = $target_entities[$target_id];
     }
 
-    $this->webforms[$entity_id] = $webforms;
+    $this->webforms[$cid] = $webforms;
+    $this->cache->set($cid, array_keys($webforms), Cache::PERMANENT, $entity->getCacheTags());
 
     return $webforms;
   }
