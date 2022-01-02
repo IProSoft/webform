@@ -10,6 +10,7 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\Entity\Webform;
 
@@ -372,6 +373,20 @@ trait WebformBrowserTestTrait {
         ->execute();
       return reset($entity_ids);
     }
+  }
+
+  /**
+   * Get the last submission.
+   *
+   * @param \Drupal\webform\WebformInterface $webform
+   *   A webform.
+   *
+   * @return \Drupal\webform\Entity\WebformSubmission|null
+   *   The last submission. NULL if saving of results is disabled.
+   */
+  protected function getLastSubmission(WebformInterface $webform) {
+    $sid = $this->getLastSubmissionId($webform);
+    return $sid ? WebformSubmission::load($sid) : NULL;
   }
 
   /* ************************************************************************ */
