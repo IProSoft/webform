@@ -3,6 +3,7 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Database\Database;
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -1319,7 +1320,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
                 'name' => $name,
                 'property' => $property,
                 'delta' => $delta,
-                'value' => (string) $value,
+                'value' => (is_array($value)) ? Json::encode($value) : (string) $value,
               ];
             }
           }
@@ -1396,19 +1397,26 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $elements = ($webform) ? $webform->getElementsInitializedFlattenedAndHasValue() : [];
         $element = $elements[$name] ?? ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
 
+        $value = $record['value'];
         if ($element['#webform_composite']) {
+          // JSON decode composite sub element that is storing
+          // multiple values.
+          if (strpos($value, '{') === 0 || strpos($value, '[') === 0) {
+            $data = Json::decode($value);
+            $value = ($data !== NULL) ? $data : $value;
+          }
           if ($element['#webform_multiple']) {
-            $submissions_data[$sid][$name][$record['delta']][$record['property']] = $record['value'];
+            $submissions_data[$sid][$name][$record['delta']][$record['property']] = $value;
           }
           else {
-            $submissions_data[$sid][$name][$record['property']] = $record['value'];
+            $submissions_data[$sid][$name][$record['property']] = $value;
           }
         }
         elseif ($element['#webform_multiple']) {
-          $submissions_data[$sid][$name][$record['delta']] = $record['value'];
+          $submissions_data[$sid][$name][$record['delta']] = $value;
         }
         else {
-          $submissions_data[$sid][$name] = $record['value'];
+          $submissions_data[$sid][$name] = $value;
         }
       }
 

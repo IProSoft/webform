@@ -345,6 +345,8 @@ abstract class WebformOtherBase extends FormElement {
       }
 
       $default_options = array_combine($default_value, $default_value);
+      // Remove empty strings as default options.
+      unset($default_options['']);
       $flattened_options = OptGroup::flattenOptions($element['#options']);
       if ($other_options = array_diff_key($default_options, $flattened_options)) {
         return [
