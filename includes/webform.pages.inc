@@ -162,6 +162,15 @@ function webform_configure_form($form, &$form_state, $node) {
     '#parents' => array('status'),
     '#options' => array(1 => t('Open'), 0 => t('Closed')),
   );
+
+  $form['submission']['closed_message'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Closed message'),
+    '#default_value' => $node->webform['closed_message'],
+    '#description' => t('Message shown when attempting to view a closed form. If left empty, it will default to: "!message"', array('!message' => t('Submissions for this form are closed.'))),
+    '#size' => 120,
+    '#parents' => array('closed_message'),
+  );
   /* End Edit Form */
 
   /* Start per-role submission control */
@@ -446,6 +455,9 @@ function webform_configure_form_submit($form, &$form_state) {
 
   // Overall form status.
   $node->webform['status'] = $form_state['values']['status'];
+
+  // Save the message that appears on closed forms.
+  $node->webform['closed_message'] = $form_state['values']['closed_message'];
 
   // Save roles.
   $node->webform['roles'] = array_keys(array_filter($form_state['values']['roles']));
