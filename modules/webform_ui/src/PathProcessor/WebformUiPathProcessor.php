@@ -19,17 +19,21 @@ class WebformUiPathProcessor implements OutboundPathProcessorInterface {
       return $path;
     }
 
-    if (strpos($request->getQueryString(), '_wrapper_format=') === FALSE) {
+    if (!($querystring = $request->getQueryString())) {
+      return;
+    }
+
+    if (strpos($querystring, '_wrapper_format=') === FALSE) {
       return $path;
     }
 
-    $querystring = [];
-    parse_str($request->getQueryString(), $querystring);
-    if (empty($querystring['destination'])) {
+    $querybag = [];
+    parse_str($querystring, $querybag);
+    if (empty($querybag['destination'])) {
       return $path;
     }
 
-    $destination = $querystring['destination'];
+    $destination = $querybag['destination'];
     $options['query']['destination'] = $destination;
     return $path;
   }
