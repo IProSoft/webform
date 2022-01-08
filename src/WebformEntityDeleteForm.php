@@ -69,17 +69,18 @@ class WebformEntityDeleteForm extends WebformConfigEntityDeleteFormBase {
     $form['#attributes']['class'][] = 'confirmation';
     $form['#theme'] = 'confirm_form';
 
-    // Title.
-    $form['#title'] = $this->getQuestion();
-    // Message.
     $t_args = [
       '%title' => $webform->label(),
       '@total' => $total,
     ];
+    // Title.
+    $form['#title'] = $this->t('Please delete submissions from the %title webform.', $t_args);
+    // Message.
     $form['message'] = [
       '#type' => 'webform_message',
       '#message_type' => 'warning',
-      '#message_message' => $this->t('%title webform has @total submissions. You may not delete %title webform until you have removed all of the %title submissions.', $t_args),
+      '#message_message' => $this->t('%title webform has @total submissions.', $t_args) . '<br/>' .
+      $this->t('You may not delete %title webform until you have removed all of the %title submissions.', $t_args),
     ];
     // Actions.
     $route_name = 'entity.webform.results_clear';

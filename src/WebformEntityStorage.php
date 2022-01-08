@@ -331,7 +331,7 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
   /**
    * Get total number of results for specified webform or all webforms.
    *
-   * @param string|null $webform_id
+   * @param string|array|null $webform_id
    *   (optional) A webform id.
    *
    * @return array|int
@@ -341,10 +341,20 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
    */
   public function getTotalNumberOfResults($webform_id = NULL) {
     if ($webform_id) {
-      $query = $this->database->select('webform_submission', 'ws');
-      $query->condition('webform_id', $webform_id);
-      $query->addExpression('COUNT(sid)', 'results');
-      return $query->execute()->fetchField() ?: 0;
+      if (is_array($webform_id)) {
+        $query = $this->database->select('webform_submission', 'ws');
+        $query->fields('ws', ['webform_id']);
+        $query->condition('webform_id', $webform_id, 'IN');
+        $query->addExpression('COUNT(sid)', 'results');
+        $query->groupBy('webform_id');
+        return array_map('intval', $query->execute()->fetchAllKeyed()) + array_fill_keys($webform_id, 0);
+      }
+      else {
+        $query = $this->database->select('webform_submission', 'ws');
+        $query->condition('webform_id', $webform_id);
+        $query->addExpression('COUNT(sid)', 'results');
+        return $query->execute()->fetchField() ?: 0;
+      }
     }
     else {
       $query = $this->database->select('webform_submission', 'ws');
