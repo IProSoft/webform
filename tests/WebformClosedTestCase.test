@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Webform module submission tests.
+ * Webform module closed form tests.
  */
-class WebformClosedTestCaseTest extends WebformTestCase {
+class WebformClosedTestCase extends WebformTestCase {
 
   /**
    * {@inheritdoc}
