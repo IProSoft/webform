@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Webform module submission tests.
+ */
+class WebformClosedTestCaseTest extends WebformTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Webform closed message'),
+      'description' => t('Checks the default and custom form closed message.'),
+      'group' => t('Webform'),
+    );
+  }
+
+  public function testWebformCustomClosedMessage() {
+    $this->drupalLogin($this->webform_users['admin']);
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+
+    // Set closed form.
+    $settings = ['comment' => '1'];
+    $custom_message = 'Custom closed message';
+    $webform_settings = ['closed_message' => $custom_message];
+    // Create a new Webform test node.
+    $node = $this->webformForm($webform_settings, $settings);
+
+    // Visit the node page.
+    $this->drupalGet('node/' . $node->nid);
+    $this->assertRaw($custom_message);
+  }
+
+  public function testWebformDefaultClosedMessage() {
+    $this->drupalLogin($this->webform_users['admin']);
+    $this->webformReset();
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+
+    // Set closed form.
+    $settings = ['comment' => '1'];
+    $webform_settings = [];
+    // Create a new Webform test node.
+    $node = $this->webformForm($webform_settings, $settings);
+
+    // Visit the node page.
+    $this->drupalGet('node/' . $node->nid);
+    $this->assertRaw(t('Submissions for this form are closed.'));
+  }
+}

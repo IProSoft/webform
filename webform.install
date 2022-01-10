@@ -51,6 +51,12 @@ function webform_schema() {
         'not null' => TRUE,
         'default' => 1,
       ),
+      'closed_message' => array(
+        'description' => 'The closed form message displayed to the user when attempting to view a closed form.',
+        'type' => 'varchar',
+        'length' => 2048,
+        'default' => '',
+      ),
       'block' => array(
         'description' => 'Boolean value for whether this form be available as a block.',
         'type' => 'int',
@@ -2396,4 +2402,20 @@ function webform_update_7431() {
     ->execute();
 
   return t("Disabled progress bar for @count single-page webforms.", array('@count' => $updated_count));
+}
+
+/**
+ * Add column to support the custom closed form message.
+ */
+function webform_update_7432() {
+  // Add closed message to webform table.
+  if (!db_field_exists('webform', 'closed_message')) {
+    $spec = array(
+      'description' => 'The closed form message displayed to the user when attempting to view a closed form.',
+      'type' => 'varchar',
+      'length' => 2048,
+      'default' => '',
+    );
+    db_add_field('webform', 'closed_message', $spec);
+  }
 }
