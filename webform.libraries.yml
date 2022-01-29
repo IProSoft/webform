@@ -629,10 +629,6 @@ webform.element.date:
   css:
     component:
       css/webform.element.date.css: {}
-  js:
-    js/webform.element.date.js: {}
-  dependencies:
-    - core/drupal.date
 
 webform.element.datelist:
   version: VERSION
