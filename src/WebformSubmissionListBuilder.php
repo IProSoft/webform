@@ -3,6 +3,7 @@
 namespace Drupal\webform;
 
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -1362,6 +1363,14 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     $submission_storage = $this->getStorage();
     $query = $submission_storage->getQuery();
     $submission_storage->addQueryConditions($query, $this->webform, $this->sourceEntity, $this->account);
+
+    // If we are viewing all submissions, we want to exclude
+    // any orphaned submissions.
+    if (empty($this->webform)) {
+      /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+      $webform_storage = $this->entityTypeManager->getStorage('webform');
+      $query->condition('webform_id', $webform_storage->getWebformIds(), 'IN');
+    }
 
     // Filter by key(word).
     if ($keys) {
