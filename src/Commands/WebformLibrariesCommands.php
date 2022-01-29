@@ -321,6 +321,35 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    * @hook validate webform:composer:update
    */
   public function composerUpdateValidate(CommandData $commandData) {
+    $options = $commandData->options();
+
+    // Check optional path to the composer.json file.
+    $path = $options['path'] ?? NULL;
+    if ($path) {
+      if (!file_exists($path)) {
+        throw new \Exception(dt('Composer file does not exist'));
+      }
+      $composer_json = $path;
+      $composer_directory = dirname($composer_json) . '/';
+    }
+    // Get composer.json file from the Drupal root.
+    else {
+      $drupal_root = Drush::bootstrapManager()->getRoot();
+      if (file_exists($drupal_root . '/composer.json')) {
+        $composer_json = $drupal_root . '/composer.json';
+        $composer_directory = '';
+      }
+      elseif (file_exists(dirname($drupal_root) . '/composer.json')) {
+        // The "Composer template for Drupal projects" install Drupal in /web'.
+        // @see https://github.com/drupal-composer/drupal-project/blob/8.x/composer.json
+        $composer_json = dirname($drupal_root) . '/composer.json';
+        $composer_directory = basename($drupal_root) . '/';
+      }
+      else {
+        throw new \Exception(dt('Unable to locate composer.json'));
+      }
+    }
+
     $msg = dt('THIS IS AN EXPERIMENTAL DRUSH COMMAND.') . PHP_EOL .
       dt('PLEASE MAKE SURE TO BACKUP YOUR COMPOSER.JSON FILE.') . PHP_EOL .
       dt("Are you sure you want update your Drupal installation's composer.json file?");
@@ -328,31 +357,17 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       throw new UserAbortException();
     }
 
-    $drupal_root = Drush::bootstrapManager()->getRoot();
-    if (file_exists($drupal_root . '/composer.json')) {
-      $composer_json = $drupal_root . '/composer.json';
-      $composer_directory = '';
-    }
-    elseif (file_exists(dirname($drupal_root) . '/composer.json')) {
-      // The "Composer template for Drupal projects" install Drupal in /web'.
-      // @see https://github.com/drupal-composer/drupal-project/blob/8.x/composer.json
-      $composer_json = dirname($drupal_root) . '/composer.json';
-      $composer_directory = basename($drupal_root) . '/';
-    }
-    else {
-      throw new \Exception(dt('Unable to locate composer.json'));
-    }
-
     $this->composer_json = $composer_json;
     $this->composer_directory = $composer_directory;
   }
 
   /**
-   * Updates the Drupal installation's composer.json to include the Webform module's selected libraries as repositories.
+   * Updates the Drupal installation's or a specified composer.json to include the Webform module's selected libraries as repositories.
    *
    * @command webform:composer:update
    *
    * @option disable-tls If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.
+   * @option path Optional path to composer file.
    *
    * @usage webform:composer:update
    *   Updates the Drupal installation's composer.json to include the Webform
@@ -360,7 +375,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    *
    * @aliases wfcu,webform-composer-update
    */
-  public function composerUpdate(array $options = ['disable-tls' => FALSE]) {
+  public function composerUpdate(array $options = ['disable-tls' => FALSE, 'path' => NULL]) {
     $composer_json = $this->composer_json;
     $composer_directory = $this->composer_directory;
 
@@ -370,7 +385,10 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       $data->repositories = (object) [];
     }
     if (!isset($data->require)) {
-      $data->repositories = (object) [];
+      $data->require = (object) [];
+    }
+    if (!isset($data->extra)) {
+      $data->extra = (object) ['installer-paths' => (object) []];
     }
 
     // Add drupal-library to installer paths.
