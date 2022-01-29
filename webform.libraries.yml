@@ -971,6 +971,7 @@ webform.element.time:
     js/webform.element.time.js: {}
   dependencies:
     - core/drupal
+    - core/modernizr
     - webform/libraries.jquery.timepicker
 
 webform.element.video_file:
