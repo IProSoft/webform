@@ -1297,9 +1297,6 @@ libraries.tippyjs:
   cdn:
     /libraries/tippyjs/6.x/: https://unpkg.com/tippy.js@6.2.6/dist/
   js:
-    /libraries/tippyjs/6.x/tippy.umd.min.js: { minified: true }
-  css:
-    component:
-      /libraries/tippyjs/6.x/tippy.css: {}
+    /libraries/tippyjs/6.x/tippy-bundle.umd.min.js: { minified: true }
   dependencies:
     - core/popperjs
