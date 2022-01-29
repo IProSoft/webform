@@ -401,6 +401,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Enhancement.
     /* ********************************************************************** */
 
+    // Enhancement: Config Entity Reference Selection.
+    $projects['config_entity_reference_selection'] = [
+      'title' => $this->t('Config Entity Reference Selection'),
+      'description' => $this->t('Provides an entity reference selection plugin for limiting allowed (webform) onfig entity choices.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/config_entity_reference_selection'),
+      'category' => 'enhancement',
+    ];
+
     // Enhancement: Dopup.
     $projects['dopup'] = [
       'title' => $this->t('Dopup'),
@@ -462,6 +470,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Counter'),
       'description' => $this->t('Provides Submissions Counter feature for webforms.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_counter'),
+      'category' => 'enhancement',
+    ];
+
+    // Enhancement: Webform Creation Date.
+    $projects['webform_creation_date'] = [
+      'title' => $this->t('Webform Creation Date'),
+      'description' => $this->t('Allows to store information about creation/update dates for webforms.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_creation_date'),
       'category' => 'enhancement',
     ];
 
@@ -794,6 +810,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integrations: Maropost Subscription Webform Handler.
+    $projects['maropost_sub_webform_handler'] = [
+      'title' => $this->t('Maropost Subscription Webform Handler'),
+      'description' => $this->t('A simple Webform handler that allows site builders and developers to easily submit new leads to Maropost Subscriptions.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/maropost_sub_webform_handler'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Micro Webform.
     $projects['micro_webform'] = [
       'title' => $this->t('Micro Webform'),
@@ -1010,6 +1034,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Jira Integration'),
       'description' => $this->t('Provides integration for webform submission with Jira.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_jira'),
+      'category' => 'integration',
+    ];
+
+    // Integration: Webform JIRA service desk integration.
+    $projects['webform_jira_service_desk'] = [
+      'title' => $this->t('Webform JIRA service desk integration'),
+      'description' => $this->t('Enables the user to map Webform elements to Jira Service Desk fields and create an issue on Jira by using the REST API.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_jira_service_desk'),
       'category' => 'integration',
     ];
 
@@ -1584,6 +1616,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Submissions Delete'),
       'description' => $this->t('Used to delete webform submissions using start date, end date all at once.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_submissions_delete'),
+      'category' => 'submission',
+    ];
+
+    // Submissions: Timely Webform Reporting.
+    $projects['timely_webform_reporting'] = [
+      'title' => $this->t('Timely Webform Reporting'),
+      'description' => $this->t('Create reports from Webform Submissions on a timely basis.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/timely_webform_reporting'),
       'category' => 'submission',
     ];
 
