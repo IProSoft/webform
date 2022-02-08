@@ -177,7 +177,7 @@ function webform_requirements($phase) {
       break;
     }
   }
-  if ($has_datepicker && !\Drupal::moduleHandler()->moduleExists('webform_jquery_ui_datepicker')) {
+  if ($has_datepicker && !\Drupal::moduleHandler()->moduleExists('webform_jqueryui_datepicker')) {
     $t_args = [
       ':href' => Url::fromRoute('entity.webform.collection', [], ['query' => ['search' => 'datepicker']])->toString(),
     ];
