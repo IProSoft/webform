@@ -324,14 +324,26 @@ class WebformLibrariesCommands extends WebformCommandsBase {
     $options = $commandData->options();
     $drupal_root = Drush::bootstrapManager()->getRoot();
 
+    $drupal_root = Drush::bootstrapManager()->getRoot();
+
     // Check optional path to the composer.json file.
     $path = $options['path'] ? dirname($drupal_root) . '/' . $options['path'] : NULL;
     if ($path) {
-      if (!file_exists($path)) {
+      if (file_exists($path)) {
+        $composer_json = $path;
+        $composer_directory = dirname($composer_json) . '/';
+      }
+      elseif (file_exists($drupal_root . '/' . $path)) {
+        $composer_json = $drupal_root . '/' . $path;
+        $composer_directory = dirname($composer_json) . '/';
+      }
+      elseif (file_exists(dirname($drupal_root) . '/' . $path)) {
+        $composer_json = dirname($drupal_root) . '/' . $path;
+        $composer_directory = dirname($composer_json) . '/';
+      }
+      else {
         throw new \Exception(dt('Composer file does not exist'));
       }
-      $composer_json = $path;
-      $composer_directory = dirname($composer_json) . '/';
     }
     // Get composer.json file from the Drupal root.
     else {
