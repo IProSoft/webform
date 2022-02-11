@@ -42,21 +42,21 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
     }
 
     $properties = [
-        'date_min' => '',
-        'date_max' => '',
-        // Date settings.
-        'date_date_format' => $date_format,
-        'date_date_element' => 'date',
-        'date_year_range' => '1900:2050',
-        'date_date_placeholder' => '',
-        // Time settings.
-        'date_time_format' => $time_format,
-        'date_time_element' => 'time',
-        'date_time_min' => '',
-        'date_time_max' => '',
-        'date_time_step' => '',
-        'date_time_placeholder' => '',
-      ] + parent::defineDefaultProperties();
+      'date_min' => '',
+      'date_max' => '',
+      // Date settings.
+      'date_date_format' => $date_format,
+      'date_date_element' => 'date',
+      'date_year_range' => '1900:2050',
+      'date_date_placeholder' => '',
+      // Time settings.
+      'date_time_format' => $time_format,
+      'date_time_element' => 'time',
+      'date_time_min' => '',
+      'date_time_max' => '',
+      'date_time_step' => '',
+      'date_time_placeholder' => '',
+    ] + parent::defineDefaultProperties();
     return $properties;
   }
 
