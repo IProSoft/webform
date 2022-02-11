@@ -95,7 +95,7 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
     // Unset unsupported date format for date elements that are not
     // text or datepicker.
     if (!in_array($date_element, ['text', 'datepicker'])) {
-      unset($element['date_date_format']);
+      unset($element['#date_date_format']);
     }
 
     // Set date year range.
