@@ -236,7 +236,7 @@
                     "installer-name": "jquery.icheck"
                 },
                 "dist": {
-                    "url": "https://github.com/fronteed/icheck/archive/1.0.2.zip",
+                    "url": "https://github.com/fronteed/icheck/archive/refs/tags/1.0.2.zip",
                     "type": "zip"
                 }
             }
