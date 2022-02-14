@@ -168,6 +168,13 @@ class WebformResultsExportOptionsTest extends WebformBrowserTestBase {
     $assert_session->responseNotContains('Abraham,Lincoln');
     $assert_session->responseNotContains('Hillary,Clinton');
 
+    // Check langcode.
+    $submissions[0]->setOwner($admin_submission_user)->save();
+    $this->getExport($webform, ['langcode' => 'es']);
+    $assert_session->responseNotContains('George,Washington');
+    $assert_session->responseNotContains('Abraham,Lincoln');
+    $assert_session->responseNotContains('Hillary,Clinton');
+
     // Check date range.
     $this->getExport($webform, ['range_type' => 'date', 'range_start' => '2000-01-01', 'range_end' => '2001-01-01']);
     $assert_session->responseContains('George,Washington');

@@ -136,6 +136,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
    * @option range-start The submission ID or start date at which to start exporting.
    * @option range-end The submission ID or end date at which to end exporting.
    * @option uid The ID of the user who submitted the form.
+   * @option langcode The language code of the submission.
    * @option order The submission order "asc" (default) or "desc".
    * @option state Submission state to be included: "completed", "draft" or "all" (default).
    * @option sticky Flagged/starred submission status.
@@ -144,7 +145,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
    *
    * @aliases wfx,webform-export
    */
-  public function export($webform = NULL, array $options = ['exporter' => NULL, 'delimiter' => NULL, 'multiple-delimiter' => NULL, 'file-name' => NULL, 'archive-type' => NULL, 'header-format' => NULL, 'options-item-format' => NULL, 'options-single-format' => NULL, 'options-multiple-format' => NULL, 'entity-reference-items' => NULL, 'excluded-columns' => NULL, 'uuid' => NULL, 'entity-type' => NULL, 'entity-id' => NULL, 'range-type' => NULL, 'range-latest' => NULL, 'range-start' => NULL, 'range-end' => NULL, 'uid' => NULL, 'order' => NULL, 'state' => NULL, 'sticky' => NULL, 'files' => NULL, 'destination' => NULL]) {
+  public function export($webform = NULL, array $options = ['exporter' => NULL, 'delimiter' => NULL, 'multiple-delimiter' => NULL, 'file-name' => NULL, 'archive-type' => NULL, 'header-format' => NULL, 'options-item-format' => NULL, 'options-single-format' => NULL, 'options-multiple-format' => NULL, 'entity-reference-items' => NULL, 'excluded-columns' => NULL, 'uuid' => NULL, 'entity-type' => NULL, 'entity-id' => NULL, 'range-type' => NULL, 'range-latest' => NULL, 'range-start' => NULL, 'range-end' => NULL, 'uid' => NULL, 'langcode' => NULL, 'order' => NULL, 'state' => NULL, 'sticky' => NULL, 'files' => NULL, 'destination' => NULL]) {
     $webform = Webform::load($webform);
     // @todd Determine if we should get source entity from options entity type
     // and id.
