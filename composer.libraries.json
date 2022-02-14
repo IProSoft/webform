@@ -29,6 +29,7 @@
         "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
     },
     "require": {
+        "composer/installers": "*",
         "algolia/places": "*",
         "choices/choices": "*",
         "ckeditor/autogrow": "*",
