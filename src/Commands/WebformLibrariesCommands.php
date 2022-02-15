@@ -370,7 +370,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       $data->repositories = (object) [];
     }
     if (!isset($data->require)) {
-      $data->repositories = (object) [];
+      $data->require = (object) [];
     }
 
     // Add drupal-library to installer paths.
