@@ -86,7 +86,7 @@
                     "installer-name": "choices"
                 },
                 "dist": {
-                    "url": "https://github.com/jshjohnson/Choices/archive/v9.0.1.zip",
+                    "url": "https://github.com/Choices-js/Choices/archive/refs/tags/v9.0.1.zip",
                     "type": "zip"
                 }
             }
@@ -176,7 +176,7 @@
                     "installer-name": "codemirror"
                 },
                 "dist": {
-                    "url": "https://github.com/components/codemirror/archive/5.61.1.zip",
+                    "url": "https://github.com/components/codemirror/archive/refs/tags/5.61.1.zip",
                     "type": "zip"
                 }
             }
@@ -206,7 +206,7 @@
                     "installer-name": "jquery.geocomplete"
                 },
                 "dist": {
-                    "url": "https://github.com/ubilabs/geocomplete/archive/1.7.0.zip",
+                    "url": "https://github.com/ubilabs/geocomplete/archive/refs/tags/1.7.0.zip",
                     "type": "zip"
                 }
             }
@@ -221,7 +221,7 @@
                     "installer-name": "jquery.hotkeys"
                 },
                 "dist": {
-                    "url": "https://github.com/jeresig/jquery.hotkeys/archive/0.2.0.zip",
+                    "url": "https://github.com/jeresig/jquery.hotkeys/archive/refs/tags/0.2.0.zip",
                     "type": "zip"
                 }
             }
@@ -251,7 +251,7 @@
                     "installer-name": "jquery.image-picker"
                 },
                 "dist": {
-                    "url": "https://github.com/rvera/image-picker/archive/0.3.1.zip",
+                    "url": "https://github.com/rvera/image-picker/archive/refs/tags/0.3.1.zip",
                     "type": "zip"
                 }
             }
@@ -266,7 +266,7 @@
                     "installer-name": "jquery.inputmask"
                 },
                 "dist": {
-                    "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/5.0.6.zip",
+                    "url": "https://github.com/RobinHerbots/Inputmask/archive/refs/tags/5.0.6.zip",
                     "type": "zip"
                 }
             }
@@ -281,7 +281,7 @@
                     "installer-name": "jquery.intl-tel-input"
                 },
                 "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip",
+                    "url": "https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v16.1.0.zip",
                     "type": "zip"
                 }
             }
@@ -296,7 +296,7 @@
                     "installer-name": "jquery.rateit"
                 },
                 "dist": {
-                    "url": "https://github.com/gjunge/rateit.js/archive/1.1.3.zip",
+                    "url": "https://github.com/gjunge/rateit.js/archive/refs/tags/1.1.3.zip",
                     "type": "zip"
                 }
             }
@@ -311,7 +311,7 @@
                     "installer-name": "jquery.select2"
                 },
                 "dist": {
-                    "url": "https://github.com/select2/select2/archive/4.0.13.zip",
+                    "url": "https://github.com/select2/select2/archive/refs/tags/4.0.13.zip",
                     "type": "zip"
                 }
             }
@@ -326,7 +326,7 @@
                     "installer-name": "jquery.textcounter"
                 },
                 "dist": {
-                    "url": "https://github.com/ractoon/jQuery-Text-Counter/archive/0.9.0.zip",
+                    "url": "https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.0.zip",
                     "type": "zip"
                 }
             }
@@ -341,7 +341,7 @@
                     "installer-name": "jquery.timepicker"
                 },
                 "dist": {
-                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/1.13.18.zip",
+                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.13.18.zip",
                     "type": "zip"
                 }
             }
@@ -356,7 +356,7 @@
                     "installer-name": "jquery.toggles"
                 },
                 "dist": {
-                    "url": "https://github.com/simontabor/jquery-toggles/archive/v4.0.0.zip",
+                    "url": "https://github.com/simontabor/jquery-toggles/archive/refs/tags/v4.0.0.zip",
                     "type": "zip"
                 }
             }
@@ -371,7 +371,7 @@
                     "installer-name": "progress-tracker"
                 },
                 "dist": {
-                    "url": "https://github.com/NigelOToole/progress-tracker/archive/2.0.7.zip",
+                    "url": "https://github.com/NigelOToole/progress-tracker/archive/refs/tags/2.0.7.zip",
                     "type": "zip"
                 }
             }
@@ -386,7 +386,7 @@
                     "installer-name": "signature_pad"
                 },
                 "dist": {
-                    "url": "https://github.com/szimek/signature_pad/archive/v2.3.0.zip",
+                    "url": "https://github.com/szimek/signature_pad/archive/refs/tags/v2.3.0.zip",
                     "type": "zip"
                 }
             }
@@ -401,7 +401,7 @@
                     "installer-name": "svg-pan-zoom"
                 },
                 "dist": {
-                    "url": "https://github.com/ariutta/svg-pan-zoom/archive/3.6.1.zip",
+                    "url": "https://github.com/bumbu/svg-pan-zoom/archive/refs/tags/3.6.1.zip",
                     "type": "zip"
                 }
             }
@@ -416,7 +416,7 @@
                     "installer-name": "tabby"
                 },
                 "dist": {
-                    "url": "https://github.com/cferdinandi/tabby/archive/v12.0.3.zip",
+                    "url": "https://github.com/cferdinandi/tabby/archive/refs/tags/v12.0.3.zip",
                     "type": "zip"
                 }
             }
