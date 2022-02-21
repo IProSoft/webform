@@ -7,12 +7,12 @@
   display: none;
 }
 
-.webform-element-more--link:before {
+.webform-element-more--title:before {
   content: "► ";
   font-size: 0.8em;
 }
 
-.webform-element-more.is-open .webform-element-more--link:before {
+.webform-element-more.is-open .webform-element-more--title:before {
   content: "▼ ";
 }
 
