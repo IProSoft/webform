@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url as UrlGenerator;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformEntityTrait;
 use Drupal\webform\Entity\WebformSubmission;
@@ -109,7 +108,7 @@ trait WebformEntityReferenceTrait {
                 return [
                   '#type' => 'link',
                   '#title' => $entity->label(),
-                  '#url' => UrlGenerator::fromUri(file_create_url($entity->getFileUri())),
+                  '#url' => \Drupal::service('file_url_generator')->generate($entity->getFileUri()),
                 ];
               }
               else {

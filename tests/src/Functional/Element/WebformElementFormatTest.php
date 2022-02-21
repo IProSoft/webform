@@ -335,7 +335,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     if ($relative) {
       return $file->createFileUrl();
     }
-    return file_create_url($file->getFileUri());
+    return \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
   }
 
 }

@@ -61,17 +61,20 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
     // Check test file 3 file usage.
     $this->assertSame(['webform' => ['webform_submission' => [$sid => '1']]], $this->fileUsage->listUsage($file), 'The file has 3 usage.');
 
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+
     // Check test file 3 uploaded file path.
     $this->assertEquals($file->getFileUri(), 'private://webform/test_element_managed_file/' . $sid . '/' . $this->files[0]->filename);
 
     // Check private file access allowed.
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet($file_url_generator->generateAbsoluteString($file->getFileUri()));
     $assert_session->statusCodeEquals(200);
 
     $this->drupalLogout();
 
     // Check private file access redirects to user login page with destination.
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet($file_url_generator->generateAbsoluteString($file->getFileUri()));
     $assert_session->statusCodeEquals(200);
 
     $destination_url = Url::fromUri('base://system/files', [
@@ -92,7 +95,10 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
     ];
     $this->submitForm($edit, 'Preview');
 
-    $temp_file_uri = file_create_url('private://webform/test_element_managed_file/_sid_/' . basename($this->files[1]->uri));
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+
+    $temp_file_uri = $file_url_generator->generateAbsoluteString('private://webform/test_element_managed_file/_sid_/' . basename($this->files[1]->uri));
 
     // Check that temp file is not linked.
     $assert_session->responseNotContains('<span class="file file--mime-text-plain file--text"><a href="' . $temp_file_uri . '" type="text/plain; length=16384">text-1.txt</a></span>');
@@ -115,7 +121,7 @@ class WebformElementManagedFilePrivateTest extends WebformElementManagedFileTest
 
     // Check private file access redirects to user login page with destination.
     $this->drupalLogout();
-    $this->drupalGet(file_create_url($file->getFileUri()));
+    $this->drupalGet($file_url_generator->generateAbsoluteString($file->getFileUri()));
     $assert_session->statusCodeEquals(403);
     $assert_session->addressEquals('system/files/webform/test_element_managed_file/' . $sid . '/' . $this->files[0]->filename);
   }

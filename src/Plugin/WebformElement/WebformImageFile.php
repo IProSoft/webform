@@ -174,7 +174,7 @@ class WebformImageFile extends WebformManagedFileBase {
       }
       else {
         $file_uri = $file->getFileUri();
-        $file_url = file_create_url($file->getFileUri());
+        $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
       }
       $attachments[] = [
         'filecontent' => file_get_contents($file_uri),
