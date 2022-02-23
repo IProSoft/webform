@@ -334,6 +334,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'plugin_path' => 'libraries/ckeditor.autogrow/',
       'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/autogrow/",
       'version' => $ckeditor_version,
+      'license' => 'GPL-2.0-or-later',
     ];
     $libraries['ckeditor.fakeobjects'] = [
       'title' => $this->t('CKEditor: Fake Objects'),
@@ -344,6 +345,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'plugin_path' => 'libraries/ckeditor.fakeobjects/',
       'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/fakeobjects/",
       'version' => $ckeditor_version,
+      'license' => 'GPL-2.0-or-later',
     ];
     $libraries['ckeditor.image'] = [
       'title' => $this->t('CKEditor: Image'),
@@ -354,6 +356,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'plugin_path' => 'libraries/ckeditor.image/',
       'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/image/",
       'version' => $ckeditor_version,
+      'license' => 'GPL-2.0-or-later',
     ];
     $libraries['ckeditor.link'] = [
       'title' => $this->t('CKEditor: Link'),
@@ -364,6 +367,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'plugin_path' => 'libraries/ckeditor.link/',
       'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/link/",
       'version' => $ckeditor_version,
+      'license' => 'GPL-2.0-or-later',
     ];
     $libraries['ckeditor.codemirror'] = [
       'title' => $this->t('CKEditor: CodeMirror'),
@@ -374,6 +378,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'plugin_path' => 'libraries/ckeditor.codemirror/codemirror/',
       'plugin_url' => "https://cdn.jsdelivr.net/gh/w8tcha/CKEditor-CodeMirror-Plugin@v1.17.12/codemirror/",
       'version' => 'v1.17.12',
+      'license' => 'MIT',
     ];
     $libraries['codemirror'] = [
       'title' => $this->t('Code Mirror'),
@@ -384,6 +389,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/5.61.1.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
       'version' => '5.61.1',
+      'license' => 'MIT',
     ];
     $libraries['algolia.places'] = [
       'title' => $this->t('Algolia Places'),
@@ -405,6 +411,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://robinherbots.github.io/Inputmask/'),
       'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/5.0.6.zip'),
       'version' => '5.0.6',
+      'license' => 'MIT',
     ];
     $libraries['jquery.intl-tel-input'] = [
       'title' => $this->t('jQuery: International Telephone Input'),
@@ -413,6 +420,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
       'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip'),
       'version' => '16.1.0',
+      'license' => 'MIT',
     ];
     $libraries['jquery.rateit'] = [
       'title' => $this->t('jQuery: RateIt'),
@@ -422,6 +430,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/gjunge/rateit.js/archive/1.1.3.zip'),
       'version' => '1.1.3',
       'elements' => ['webform_rating'],
+      'license' => 'MIT',
     ];
     $libraries['jquery.textcounter'] = [
       'title' => $this->t('jQuery: Text Counter'),
@@ -430,6 +439,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter'),
       'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/0.9.0.zip'),
       'version' => '0.9.0',
+      'license' => 'MIT',
     ];
     $libraries['jquery.timepicker'] = [
       'title' => $this->t('jQuery: Timepicker'),
@@ -438,6 +448,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker'),
       'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/1.13.18.zip'),
       'version' => '1.13.18',
+      'license' => 'MIT',
     ];
     $libraries['progress-tracker'] = [
       'title' => $this->t('Progress Tracker'),
@@ -446,6 +457,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('http://nigelotoole.github.io/progress-tracker/'),
       'download_url' => Url::fromUri('https://github.com/NigelOToole/progress-tracker/archive/2.0.7.zip'),
       'version' => '2.0.7',
+      'license' => 'MIT',
     ];
     $libraries['signature_pad'] = [
       'title' => $this->t('Signature Pad'),
@@ -455,6 +467,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/szimek/signature_pad/archive/v2.3.0.zip'),
       'version' => '2.3.0',
       'elements' => ['webform_signature'],
+      'license' => 'MIT',
     ];
     $libraries['tabby'] = [
       'title' => $this->t('Tabby'),
@@ -463,6 +476,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/cferdinandi/tabby'),
       'download_url' => Url::fromUri('https://github.com/cferdinandi/tabby/archive/v12.0.3.zip'),
       'version' => '12.0.3',
+      'license' => 'MIT',
     ];
     // Drupal 8 and 9 supports different version of PopperJS which is a
     // dependency for TipperJS.
@@ -484,6 +498,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://unpkg.com/tippy.js@6.2.6/dist/tippy-bundle.umd.min.js'),
       'version' => '6.2.6',
       'core' => 9,
+      'license' => 'MIT',
     ];
     $libraries['jquery.select2'] = [
       'title' => $this->t('jQuery: Select2'),
@@ -493,6 +508,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/select2/select2/archive/4.0.13.zip'),
       'version' => '4.0.13',
       'module' => $this->moduleHandler->moduleExists('select2') ? 'select2' : '',
+      'license' => 'MIT',
     ];
     $libraries['choices'] = [
       'title' => $this->t('Choices'),
@@ -501,6 +517,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://joshuajohnson.co.uk/Choices/'),
       'download_url' => Url::fromUri('https://github.com/jshjohnson/Choices/archive/v9.0.1.zip'),
       'version' => '9.0.1',
+      'license' => 'MIT',
     ];
     $libraries['jquery.chosen'] = [
       'title' => $this->t('jQuery: Chosen'),
@@ -510,6 +527,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'download_url' => Url::fromUri('https://github.com/harvesthq/chosen/releases/download/v1.8.7/chosen_v1.8.7.zip'),
       'version' => '1.8.7',
       'module' => $this->moduleHandler->moduleExists('chosen') ? 'chosen' : '',
+      'license' => 'MIT',
     ];
 
     // Add webform as the provider to all libraries.
