@@ -92,6 +92,7 @@ Install PHPStan
       mglaman/phpstan-drupal
 
 Run PHPStan with level 2 to catch all deprecations.
+@see <https://phpstan.org/user-guide/rule-levels>
 
     cd ~/Sites/drupal_webform
     ./vendor/bin/phpstan --level=2 analyse web/modules/sandbox/webform > ~/webform-deprecated.txt
