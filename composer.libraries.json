@@ -231,7 +231,7 @@
             "type": "package",
             "package": {
                 "name": "jquery/icheck",
-                "version": "1.0.2 ",
+                "version": "1.0.2",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.icheck"
