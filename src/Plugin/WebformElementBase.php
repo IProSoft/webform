@@ -27,6 +27,7 @@ use Drupal\webform\Plugin\WebformElement\Checkboxes;
 use Drupal\webform\Plugin\WebformElement\ContainerBase;
 use Drupal\webform\Plugin\WebformElement\Details;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
+use Drupal\webform\Plugin\WebformElement\WebformEmailConfirm;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
@@ -739,7 +740,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Add inline title display support.
     // Inline fieldset layout is handled via webform_preprocess_fieldset().
     // @see webform_preprocess_fieldset()
-    if (isset($element['#title_display']) && $element['#title_display'] === 'inline') {
+    if (isset($element['#title_display'])
+      && $element['#title_display'] === 'inline'
+      && !$this instanceof WebformEmailConfirm) {
       // Store reference to unset #title_display.
       $element['#_title_display'] = $element['#title_display'];
       unset($element['#title_display']);
