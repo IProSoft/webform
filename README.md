@@ -13,32 +13,28 @@
 
 The Webform module is a form builder and submission manager for Drupal 8/9.
 
-- The primary use case for this module is to:
-  - **Build** a new webform or duplicate an existing template
-  - **Publish** the webform as a page, node, or block
-  - **Collect** submissions
-  - **Send** confirmations and notifications
-  - **Review** submissions online
-  - **Download** submissions as a CSV
+The primary use case for this module is to:
 
-- Goals:
-  - A comprehensive form and survey building solution for Drupal 8/9.
-  - A stable, maintainable, and tested API for building forms and handling
-    submission.
-  - A pluggable/extensible API for custom form elements and submission handling.
+- **Build** a new webform or duplicate an existing template
+- **Publish** the webform as a page, node, or block
+- **Collect** submissions
+- **Send** confirmations and notifications
+- **Review** submissions online
+- **Download** submissions as a CSV
 
-- Demo:
-  - Video review of the Webform module:
-    http://youtu.be/sQGsfQ_LZJ4
-  - Online evaluate by simplytest.me:
-    https://simplytest.me/project/webform/6.x
+Goals:
 
-- Project status:
-  [Webform Project Board](https://contribkanban.com/board/webform/6.x)
+- A comprehensive form and survey building solution for Drupal 8/9.
+- A stable, maintainable, and tested API for building forms and handling
+  submission.
+- A pluggable/extensible API for custom form elements and submission handling.
 
-- Comparison with other modules:
-  https://www.drupal.org/node/2083353
+Demo:
 
+- Video review of the Webform module:
+  http://youtu.be/sQGsfQ_LZJ4
+- Online evaluate by simplytest.me:
+  https://simplytest.me/project/webform/6.x
 
 ## REQUIREMENTS
 
@@ -49,15 +45,15 @@ This module requires no modules outside of Drupal core.
 
 The installation of this module is like other Drupal modules.
 
- 1. If your site is [managed via Composer](https://www.drupal.org/node/2718229),
-    use Composer to download the webform module running
-    ```composer require "drupal/webform"```. Otherwise copy/upload the webform
-    module to the modules directory of your Drupal installation.
+1. If your site is [managed via Composer](https://www.drupal.org/node/2718229),
+   use Composer to download the webform module running
+   ```composer require "drupal/webform"```. Otherwise copy/upload the webform
+   module to the modules directory of your Drupal installation.
 
- 2. Enable the 'Webform' module and desired sub-modules in 'Extend'.
+2. Enable the 'Webform' module and desired sub-modules in 'Extend'.
    (`/admin/modules`)
 
- 3. Set up user permissions. (`/admin/people/permissions#module-webform`)
+3. Set up user permissions. (`/admin/people/permissions#module-webform`)
 
 
 ## RECOMMENDED MODULES
@@ -94,16 +90,14 @@ The installation of this module is like other Drupal modules.
 
 ## MAINTAINERS
 
-Current maintainers:
- * Jacob Rockowitz (jrockowitz) - https://www.drupal.org/u/jrockowitz
- * Liam Morland - https://www.drupal.org/u/liam-morland
- * Dan Chadwick (DanChadwick) - https://www.drupal.org/u/danchadwick
- * Nate Lampton (quicksketch) - https://www.drupal.org/u/quicksketch
- * Roman Zimmermann (torotil) - https://www.drupal.org/u/torotil
+Current maintainers for Drupal 8/9:
 
- This project has the following Growth Backers:
- * Acquia - https://www.acquia.com/
- * New Relic - https://newrelic.com/
- * nextide - http://www.nextide.ca/
- * Intranet Solutions - https://www.intranets.com.au/
- * TechReviewer - https://techreviewer.co/
+- Jacob Rockowitz (jrockowitz) - https://www.drupal.org/u/jrockowitz
+
+This project has the following Growth Backers:
+
+- Acquia - https://www.acquia.com/
+- New Relic - https://newrelic.com/
+- nextide - http://www.nextide.ca/
+- Intranet Solutions - https://www.intranets.com.au/
+- TechReviewer - https://techreviewer.co/
