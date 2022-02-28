@@ -1239,6 +1239,7 @@ class WebformCliService implements WebformCliServiceInterface {
             'url' => $dist_url,
             'type' => $dist_type,
           ],
+          'license' => $package_license,
         ],
       ];
 
