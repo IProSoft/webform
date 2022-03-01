@@ -441,6 +441,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       '#description' => $this->t('Choose whether to show the element label or element key in each column header.'),
       '#required' => TRUE,
       '#options' => [
+        'none' => $this->t('No header'),
         'label' => $this->t('Element titles (label)'),
         'key' => $this->t('Element keys (key)'),
       ],
