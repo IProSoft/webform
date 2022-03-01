@@ -205,13 +205,13 @@ trait WebformEntityReferenceTrait {
    */
   public function getItemFormats() {
     $formats = parent::getItemFormats() + [
-      'link' => $this->t('Link'),
-      'id' => $this->t('Entity ID'),
-      'label' => $this->t('Label'),
-      'text' => $this->t('Label (ID)'),
-      'teaser' => $this->t('Teaser'),
-      'default' => $this->t('Default'),
-    ];
+        'link' => $this->t('Link'),
+        'id' => $this->t('Entity ID'),
+        'label' => $this->t('Label'),
+        'text' => $this->t('Label (ID)'),
+        'teaser' => $this->t('Teaser'),
+        'default' => $this->t('Default'),
+      ];
     if ($this->hasProperty('breadcrumb')) {
       $formats['breadcrumb'] = $this->t('Breadcrumb');
     }
@@ -285,7 +285,12 @@ trait WebformEntityReferenceTrait {
   public function buildExportHeader(array $element, array $options) {
     if (!$this->hasMultipleValues($element)) {
       $default_options = $this->getExportDefaultOptions();
-      $header = !empty($options['entity_reference_items']) ? explode(',', $options['entity_reference_items']) : $default_options['entity_reference_items'];
+
+      $header = $default_options['entity_reference_items'];
+      if (!empty($options['entity_reference_items'])) {
+        $header = is_array($options['entity_reference_items']) ? $options['entity_reference_items'] : explode(',', $options['entity_reference_items']);
+      }
+
       if ($options['header_format'] === 'label') {
         foreach ($header as $index => $column) {
           switch ($column) {
@@ -316,7 +321,11 @@ trait WebformEntityReferenceTrait {
   public function buildExportRecord(array $element, WebformSubmissionInterface $webform_submission, array $export_options) {
     $value = $this->getValue($element, $webform_submission);
     $default_options = $this->getExportDefaultOptions();
-    $entity_reference_items = !empty($export_options['entity_reference_items']) ? explode(',', $export_options['entity_reference_items']) : $default_options['entity_reference_items'];
+    $entity_reference_items = $default_options['entity_reference_items'];
+
+    if (!empty($export_options['entity_reference_items'])) {
+      $entity_reference_items = is_array($export_options['entity_reference_items']) ? $export_options['entity_reference_items'] : explode(',', $export_options['entity_reference_items']);
+    }
 
     if (!$this->hasMultipleValues($element)) {
       $entity_type = $this->getTargetType($element);
@@ -553,9 +562,9 @@ trait WebformEntityReferenceTrait {
     // Note: The below options are used to populate the #default_value for
     // selection settings.
     $entity_reference_selection_handler = $this->selectionManager->getInstance([
-      'target_type' => $target_type,
-      'handler' => $selection_handler,
-    ] + $selection_settings);
+        'target_type' => $target_type,
+        'handler' => $selection_handler,
+      ] + $selection_settings);
     $form['entity_reference']['selection_settings'] = $entity_reference_selection_handler->buildConfigurationForm([], $form_state);
     $form['entity_reference']['selection_settings']['#tree'] = TRUE;
 
