@@ -258,7 +258,10 @@ class WebformResultsExportController extends ControllerBase implements Container
       $context['results']['source_entity_type'] = ($source_entity) ? $source_entity->getEntityTypeId() : NULL;
       $context['results']['source_entity_id'] = ($source_entity) ? $source_entity->id() : NULL;
       $context['results']['export_options'] = $export_options;
-      $submission_exporter->writeHeader();
+
+      if (!empty($export_options['header_format']) && $export_options['header_format'] !== 'none') {
+        $submission_exporter->writeHeader();
+      }
     }
 
     // Write CSV records.
