@@ -710,7 +710,7 @@ abstract class DateBase extends WebformElementBase {
   }
 
   /**
-   * Determine if the the jQuery UI date picker is supported.
+   * Determine if the jQuery UI date picker is supported.
    *
    * @return bool
    *   TRUE if Drupal 8 or for Drupal 9 support the jQuery UI date picker
