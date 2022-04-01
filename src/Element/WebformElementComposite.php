@@ -7,11 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase as WebformCompositeBaseElement;
+use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformYaml;
 
 /**
- * Provides a element for the composite elements.
+ * Provides an element for the composite elements.
  *
  * @FormElement("webform_element_composite")
  */
@@ -91,6 +92,7 @@ class WebformElementComposite extends FormElement {
 
     $placeholder_elements = [];
     $options_elements = [];
+    $reference_elements = [];
     $type_options = [];
 
     $elements = $element_manager->getInstances();
@@ -114,6 +116,10 @@ class WebformElementComposite extends FormElement {
         }
         if ($element_plugin->hasProperty('placeholder')) {
           $placeholder_elements[$element_type] = $element_type;
+        }
+        if ($element_plugin instanceof WebformElementEntityReferenceInterface
+          && !($element_plugin instanceof WebformManagedFileBase)) {
+          $reference_elements[$element_type] = $element_type;
         }
       }
     }
@@ -195,6 +201,34 @@ class WebformElementComposite extends FormElement {
             '#error_no_message' => TRUE,
           ] : [
             '#type' => 'hidden',
+          ],
+          // Entity reference.
+          'references' => [
+            '#theme' => 'webform_element_more',
+            '#more_title' => t('Entity reference example properties'),
+            '#more' => [
+              '#theme' => 'webform_codemirror',
+              '#type' => 'yaml',
+              '#code' => "# Default reference method
+target_type: node
+selection_handler: 'default:node'
+target_bundles:
+  article: article
+  page: page
+
+# Views reference method
+target_type: node
+selection_handler: views
+selection_settings:
+  view:
+    view_name: my_entity_reference_view
+    display_name: entity_reference
+    arguments:
+      - arg1",
+            ],
+            '#attributes' => [
+              'data-composite-types' => implode(',', $reference_elements),
+            ],
           ],
           // Note: Setting #return_value: TRUE is not returning any value.
           'required' => [
