@@ -2,6 +2,7 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
@@ -150,6 +151,11 @@ class WebformEntityElementsForm extends BundleEntityFormBase {
     $webform = $this->getEntity();
 
     $webform->save();
+
+    Cache::invalidateTags([
+      'webform_list',
+      'webform:' . $webform->id()
+    ]);
 
     $context = [
       '@label' => $webform->label(),
