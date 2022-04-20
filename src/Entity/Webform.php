@@ -1135,6 +1135,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'previous_submission_message' => '',
       'previous_submissions_message' => '',
       'autofill' => FALSE,
+      'autofill_ignore_source' => FALSE,
       'autofill_message' => '',
       'autofill_excluded_elements' => [],
       'wizard_progress_bar' => TRUE,

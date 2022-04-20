@@ -414,6 +414,10 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->operation === 'add'
       && $entity->isNew()
       && $webform->getSetting('autofill')) {
+        // Set source entity to null to load previous submission from any source.
+        if ($webform->getSetting('autofill_ignore_source')) {
+          $source_entity = NULL;
+        }
       $data = $this->getLastSubmissionData($webform, $source_entity, $account) + $data;
     }
 
@@ -1129,9 +1133,14 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->isGet()
       && $this->operation === 'add'
       && $webform_submission->isNew()
-      && $webform->getSetting('autofill')
-      && $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE])) {
-      $this->getMessageManager()->display(WebformMessageManagerInterface::AUTOFILL_MESSAGE);
+      && $webform->getSetting('autofill')) {
+      // Set source entity to null to load previous submission from any source.
+      if ($webform->getSetting('autofill_ignore_source')) {
+        $source_entity = NULL;
+      }
+      if ($this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE,])) {
+        $this->getMessageManager()->display(WebformMessageManagerInterface::AUTOFILL_MESSAGE);
+      }
     }
   }
 

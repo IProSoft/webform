@@ -301,6 +301,9 @@
         autofill:
           type: boolean
           label: 'Autofill with previous submission'
+        autofill_ignore_source:
+          type: boolean
+          label: 'Ignore source entity when auto-filling submission'
         autofill_message:
           type: text
           label: 'Autofill with previous submission message'
