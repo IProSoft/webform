@@ -34,7 +34,7 @@ class Select extends OptionsBase {
       'choices' => FALSE,
       'chosen' => FALSE,
       'placeholder' => '',
-      'autocomplete' => 'on',
+      'autocomplete' => '',
       'help_display' => '',
       'size' => '',
     ] + parent::defineDefaultProperties();
