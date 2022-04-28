@@ -520,6 +520,12 @@
         serial_disabled:
           type: boolean
           label: 'Next submission number disabled'
+        build_elements_pager:
+          type: string
+          label: 'Pager from'
+        build_elements_pager_enabled:
+          type: boolean
+          label: 'Build elements pager'
     access:
       type: sequence
       label: 'Access Rules'
