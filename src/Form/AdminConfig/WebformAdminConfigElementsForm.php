@@ -170,6 +170,30 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('element.default_section_title_tag'),
     ];
 
+    $form['element']['pager_enabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable admin elements pager'),
+      '#description' => $this->t('In case of large forms with lot of elements inside, there is a possibility to paginate the elements on the build settings form. You can configure from how many elements the pager will show up.'),
+      '#return_value' => TRUE,
+      '#default_value' => $config->get('element.pager_enabled'),
+    ];
+    $build_elements_pager_options = [];
+    for ($i = 20; $i <= 150; $i = $i + 10) {
+      $build_elements_pager_options[$i] = $i;
+    }
+    $form['element']['pager_size'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Pager size'),
+      '#return_value' => TRUE,
+      '#states' => [
+        'invisible' => [
+          ':input[name="element[pager_enabled]"]' => ['checked' => FALSE],
+        ],
+      ],
+      '#options' => $build_elements_pager_options,
+      '#default_value' => $config->get('element.pager_size'),
+    ];
+
     // Element: HTML Editor.
     $form['html_editor'] = [
       '#type' => 'details',

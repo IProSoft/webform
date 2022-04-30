@@ -377,6 +377,12 @@ webform.settings:
         excluded_elements:
           type: ignore
           label: 'Excluded types'
+        pager_enabled:
+          type: boolean
+          label: 'Enable admin elements pager'
+        pager_size:
+          type: string
+          label: 'Pager size'
     html_editor:
       type: mapping
       label: 'HTML editor settings'

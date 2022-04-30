@@ -100,9 +100,14 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->getEntity();
 
+    // Load all webform's general element settings.
+    $element_settings = $this
+      ->configFactory()
+      ->getEditable('webform.settings')
+      ->get('element');
     // Get pager configuration.
-    $build_elements_pager_enabled = $webform->getSetting('build_elements_pager_enabled');
-    $build_elements_pager = $webform->getSetting('build_elements_pager');
+    $pager_enabled = $element_settings['pager_enabled'];
+    $pager_size = $element_settings['pager_size'];
 
     $header = $this->getTableHeader();
 
@@ -116,8 +121,8 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $rows = [];
 
     // Build the elements with pager.
-    if ($build_elements_pager_enabled) {
-      $page_rows = $this->pagerArray($elements, $build_elements_pager);
+    if ($pager_enabled) {
+      $page_rows = $this->pagerArray($elements, $pager_size);
 
       foreach ($page_rows as $element) {
         $rows[$element['#webform_key']] = $this->getElementRow($element, $delta, $parent_options);
@@ -159,7 +164,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     }
 
     // Display a pager for the rendered elements.
-    if ($rows && $build_elements_pager_enabled) {
+    if ($rows && $pager_enabled) {
       $form['pager'] = [
         '#type' => 'pager',
         '#pre_render' => [
@@ -210,6 +215,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
 
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->getEntity();
+
+    $element_settings = $this
+      ->configFactory()
+      ->getEditable('webform.settings')
+      ->get('element');
 
     // Get raw flattened elements that will be used to rebuild element's YAML
     // hierarchy.
@@ -286,7 +296,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $this->buildUpdatedElementsRecursive($elements_updated, '', $webform_ui_elements, $elements_flattened);
 
     // Perform the elements form update once there is pager.
-    if ($webform->getSetting('build_elements_pager_enabled')) {
+    if ($element_settings['pager_enabled']) {
       // Merge the updated elements state with the original state.
       $elements = array_merge($elements_original, $elements_updated);
     }

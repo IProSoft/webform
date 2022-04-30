@@ -119,30 +119,6 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#default_value' => $settings['results_disabled'],
     ];
 
-    $form['general_settings']['build_elements_pager_enabled'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Build elements pager'),
-      '#description' => $this->t('In case of large forms with lot of elements inside, there is a possibility to paginate the elements on the build settings form. You can configure from how many elements the pager will show up.'),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['build_elements_pager_enabled'],
-    ];
-    $build_elements_pager_options = [];
-    for ($i = 20; $i <= 100; $i = $i + 10) {
-      $build_elements_pager_options[$i] = $i;
-    }
-    $form['general_settings']['build_elements_pager'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Pager from'),
-      '#return_value' => TRUE,
-      '#states' => [
-        'invisible' => [
-          ':input[name="build_elements_pager_enabled"]' => ['checked' => FALSE],
-        ],
-      ],
-      '#options' => $build_elements_pager_options,
-      '#default_value' => $settings['build_elements_pager'],
-    ];
-
     // Display warning when submission handler requires submissions to be saved
     // to the database.
     $is_submission_required = $webform->getHandlers(NULL, TRUE, NULL, WebformHandlerInterface::SUBMISSION_REQUIRED)->count();

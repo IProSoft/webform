@@ -1202,8 +1202,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'token_update' => FALSE,
       'token_delete' => FALSE,
       'serial_disabled' => FALSE,
-      'build_elements_pager' => 50,
-      'build_elements_pager_enabled' => FALSE,
     ];
   }
 
