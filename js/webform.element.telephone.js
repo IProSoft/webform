@@ -35,7 +35,8 @@
           // @see \Drupal\webform\Plugin\WebformElement\Telephone::prepare
           // @see https://github.com/jackocnr/intl-tel-input
           utilsScript: drupalSettings.webform.intlTelInput.utilsScript,
-          nationalMode: false
+          nationalMode: true,
+          hiddenInput: $telephone.attr('name')
         };
 
         // Parse data attributes.
