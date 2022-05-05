@@ -398,8 +398,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods."),
       'notes' => $this->t('International Telephone Input is used by the Telephone element.'),
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
-      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip'),
-      'version' => '16.1.0',
+      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/v17.0.16.zip'),
+      'version' => '17.0.16',
     ];
     $libraries['jquery.rateit'] = [
       'title' => $this->t('jQuery: RateIt'),

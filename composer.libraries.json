@@ -275,13 +275,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/intl-tel-input",
-                "version": "16.1.0",
+                "version": "17.0.16",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.intl-tel-input"
                 },
                 "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip",
+                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v17.0.16.zip",
                     "type": "zip"
                 }
             }
