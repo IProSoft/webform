@@ -2356,7 +2356,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   A URL object.
    */
   protected function setTrustedRedirectUrl(FormStateInterface $form_state, Url $url) {
-    $form_state->setResponse(new TrustedRedirectResponse($url->setAbsolute()->toString()));
+    $form_state->setResponse(new TrustedRedirectResponse($url->toString()));
   }
 
   /**
