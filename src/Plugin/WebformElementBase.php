@@ -391,10 +391,16 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
 
     if (empty($element[$callback_name])) {
       $element[$callback_name] = $callback_value;
+      return;
     }
-    elseif (!array_intersect($element[$callback_name], $callback_value)) {
-      $element[$callback_name] = array_merge($callback_value, $element[$callback_name]);
+
+    foreach ($callback_value as $callback) {
+      if (in_array($callback, $element[$callback_name], TRUE)) {
+        return;
+      }
     }
+
+    $element[$callback_name] = array_merge($callback_value, $element[$callback_name]);
   }
 
   /**
