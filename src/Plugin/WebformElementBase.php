@@ -756,7 +756,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     }
 
     // Add tooltip description display support.
-    if (isset($element['#description_display']) && $element['#description_display'] === 'tooltip') {
+    if (isset($element['#description_display'])
+      && $element['#description_display'] === 'tooltip'
+      && !empty($element['#description'])) {
       $element['#description_display'] = 'invisible';
       $element[$attributes_property]['class'][] = 'js-webform-tooltip-element';
       $element[$attributes_property]['class'][] = 'webform-tooltip-element';
