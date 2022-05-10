@@ -1368,7 +1368,9 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     if (empty($this->webform)) {
       /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
       $webform_storage = $this->entityTypeManager->getStorage('webform');
-      $query->condition('webform_id', $webform_storage->getWebformIds(), 'IN');
+      if (!empty($webform_storage->getWebformIds())) {
+        $query->condition('webform_id', $webform_storage->getWebformIds(), 'IN');
+      }
     }
 
     // Filter by key(word).
