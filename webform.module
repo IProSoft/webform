@@ -315,6 +315,7 @@ function webform_token_info_alter(&$data) {
   // @see webform_page_attachments()
   $token_suffixes = t('Append the below suffixes to alter the returned value.') .
     '<ul>' .
+    '<li>' . t('<code>:base64encode</code> base64 encodes returned value') . '</li>' .
     '<li>' . t('<code>:clear</code> removes the token when it is not replaced.') . '</li>' .
     '<li>' . t('<code>:urlencode</code> URL encodes returned value.') . '</li>' .
     '<li>' . t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>' .
