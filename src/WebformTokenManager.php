@@ -9,7 +9,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
@@ -66,7 +65,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
    * @see webform_token_info_alter()
    */
   protected static $suffixes = [
-    // Base64 encode the token's value
+    // Base64 encode the token's value.
     // @see https://www.php.net/manual/en/function.base64-encode.php
     'base64encode',
     // Removes the token when not replaced.
@@ -466,7 +465,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
           if (isset($suffixes['xmlencode'])) {
             $replace = htmlspecialchars($replace, ENT_XML1);
           }
-          if(isset($suffixes['base64encode'])) {
+          if (isset($suffixes['base64encode'])) {
             $replace = base64_encode($replace);
           }
         }
