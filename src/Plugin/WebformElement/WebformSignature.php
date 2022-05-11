@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @WebformElement(
  *   id = "webform_signature",
  *   label = @Translation("Signature"),
- *   description = @Translation("Provides a form element to collect electronic signatures from users."),
+ *   description = @Translation("Provides a form element to collect electronic signatures from users. Signature support is provided by the <a href=""https://github.com/szimek/signature_pad"">Signature Pad</a> library."),
  *   category = @Translation("Advanced elements"),
  * )
  */
