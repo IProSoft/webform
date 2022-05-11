@@ -381,7 +381,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
       'homepage_url' => Url::fromUri('http://codemirror.net/'),
       // Issue #3177233: CodeMirror 5.70.0 is displaying vertical scrollbar.
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/5.61.1.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.61.1.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
       'version' => '5.61.1',
     ];
@@ -403,7 +403,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Input masks ensures a predefined format is entered. This can be useful for dates, numerics, phone numbers, etc…'),
       'notes' => $this->t('Input masks are used to ensure predefined and custom formats for text fields.'),
       'homepage_url' => Url::fromUri('https://robinherbots.github.io/Inputmask/'),
-      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/5.0.6.zip'),
+      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.6.zip'),
       'version' => '5.0.6',
     ];
     $libraries['jquery.intl-tel-input'] = [
@@ -411,7 +411,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods."),
       'notes' => $this->t('International Telephone Input is used by the Telephone element.'),
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
-      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip'),
+      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v16.1.0.zip'),
       'version' => '16.1.0',
     ];
     $libraries['jquery.rateit'] = [
@@ -419,7 +419,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("Rating plugin for jQuery. Fast, progressive enhancement, touch support, customizable (just swap out the images, or change some CSS), unobtrusive JavaScript (using HTML5 data-* attributes), RTL support. The Rating plugin supports as many stars as you'd like, and also any step size."),
       'notes' => $this->t('RateIt is used to provide a customizable rating element.'),
       'homepage_url' => Url::fromUri('https://github.com/gjunge/rateit.js'),
-      'download_url' => Url::fromUri('https://github.com/gjunge/rateit.js/archive/1.1.3.zip'),
+      'download_url' => Url::fromUri('https://github.com/gjunge/rateit.js/archive/refs/tags/1.1.3.zip'),
       'version' => '1.1.3',
       'elements' => ['webform_rating'],
     ];
@@ -428,7 +428,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A jQuery plugin for counting and limiting characters/words on text input, or textarea, elements.'),
       'notes' => $this->t('Word or character counting, with server-side validation, is available for text fields and text areas.'),
       'homepage_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter'),
-      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/0.9.0.zip'),
+      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.0.zip'),
       'version' => '0.9.0',
     ];
     $libraries['jquery.timepicker'] = [
@@ -436,7 +436,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A lightweight, customizable javascript timepicker plugin for jQuery, inspired by Google Calendar.'),
       'notes' => $this->t('Timepicker is used to provide a polyfill for HTML 5 time elements.'),
       'homepage_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker'),
-      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/1.13.18.zip'),
+      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.13.18.zip'),
       'version' => '1.13.18',
     ];
     $libraries['progress-tracker'] = [
@@ -444,7 +444,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("A flexible SASS component to illustrate the steps in a multi-step process e.g. a multi-step form, a timeline or a quiz."),
       'notes' => $this->t('Progress Tracker is used by multi-step wizard forms.'),
       'homepage_url' => Url::fromUri('http://nigelotoole.github.io/progress-tracker/'),
-      'download_url' => Url::fromUri('https://github.com/NigelOToole/progress-tracker/archive/2.0.7.zip'),
+      'download_url' => Url::fromUri('https://github.com/NigelOToole/progress-tracker/archive/refs/tags/2.0.7.zip'),
       'version' => '2.0.7',
     ];
     $libraries['signature_pad'] = [
@@ -452,7 +452,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("Signature Pad is a JavaScript library for drawing smooth signatures. It is HTML5 canvas based and uses variable width Bézier curve interpolation. It works in all modern desktop and mobile browsers and doesn't depend on any external libraries."),
       'notes' => $this->t('Signature Pad is used to provide a signature element.'),
       'homepage_url' => Url::fromUri('https://github.com/szimek/signature_pad'),
-      'download_url' => Url::fromUri('https://github.com/szimek/signature_pad/archive/v2.3.0.zip'),
+      'download_url' => Url::fromUri('https://github.com/szimek/signature_pad/archive/refs/tags/v2.3.0.zip'),
       'version' => '2.3.0',
       'elements' => ['webform_signature'],
     ];
@@ -461,7 +461,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("Tabby provides lightweight, accessible vanilla JS toggle tabs."),
       'notes' => $this->t('Tabby is used to display tabs in the administrative UI'),
       'homepage_url' => Url::fromUri('https://github.com/cferdinandi/tabby'),
-      'download_url' => Url::fromUri('https://github.com/cferdinandi/tabby/archive/v12.0.3.zip'),
+      'download_url' => Url::fromUri('https://github.com/cferdinandi/tabby/archive/refs/tags/v12.0.3.zip'),
       'version' => '12.0.3',
     ];
     // Drupal 8 and 9 supports different version of PopperJS which is a
@@ -490,7 +490,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Select2 gives you a customizable select box with support for searching and tagging.'),
       'notes' => $this->t('Select2 is used to improve the user experience for select menus. Select2 is the recommended select menu enhancement library.'),
       'homepage_url' => Url::fromUri('https://select2.github.io/'),
-      'download_url' => Url::fromUri('https://github.com/select2/select2/archive/4.0.13.zip'),
+      'download_url' => Url::fromUri('https://github.com/select2/select2/archive/refs/tags/4.0.13.zip'),
       'version' => '4.0.13',
       'module' => $this->moduleHandler->moduleExists('select2') ? 'select2' : '',
     ];
@@ -499,7 +499,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Choices.js is a lightweight, configurable select box/text input plugin. Similar to Select2 and Selectize but without the jQuery dependency.'),
       'notes' => $this->t('Choices.js is used to improve the user experience for select menus. Choices.js is an alternative to Select2.'),
       'homepage_url' => Url::fromUri('https://joshuajohnson.co.uk/Choices/'),
-      'download_url' => Url::fromUri('https://github.com/jshjohnson/Choices/archive/v9.0.1.zip'),
+      'download_url' => Url::fromUri('https://github.com/jshjohnson/Choices/archive/refs/tags/v9.0.1.zip'),
       'version' => '9.0.1',
     ];
     $libraries['jquery.chosen'] = [
