@@ -783,6 +783,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $this->setElementDefaultCallback($element, 'element_validate');
     $this->prepareElementValidateCallbacks($element, $webform_submission);
 
+    // Replace tokens for all properties.
+    if ($webform_submission) {
+      $this->replaceTokens($element, $webform_submission);
+    }
+
     if ($this->isInput($element)) {
       // Handle #readonly support.
       // @see \Drupal\Core\Form\FormBuilder::handleInputElement
@@ -806,11 +811,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       if (isset($element['#title'])) {
         $element['#title'] = WebformHtmlHelper::toHtmlMarkup($element['#title'], WebformXss::getHtmlTagList());
       }
-    }
-
-    // Replace tokens for all properties.
-    if ($webform_submission) {
-      $this->replaceTokens($element, $webform_submission);
     }
 
     // Check markup properties after token replacement just-in-case markup
