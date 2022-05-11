@@ -370,10 +370,10 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Provides syntax highlighting for the CKEditor with the CodeMirror Plugin.'),
       'notes' => $this->t('Makes it easier to edit the HTML source.'),
       'homepage_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin'),
-      'download_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.12/CKEditor-CodeMirror-Plugin.zip'),
+      'download_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.18.3/CKEditor-CodeMirror-Plugin.zip'),
       'plugin_path' => 'libraries/ckeditor.codemirror/codemirror/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/w8tcha/CKEditor-CodeMirror-Plugin@v1.17.12/codemirror/",
-      'version' => 'v1.17.12',
+      'plugin_url' => "https://cdn.jsdelivr.net/gh/w8tcha/CKEditor-CodeMirror-Plugin@v1.18.3/codemirror/",
+      'version' => 'v1.18.3',
     ];
     $libraries['codemirror'] = [
       'title' => $this->t('Code Mirror'),
@@ -381,33 +381,33 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
       'homepage_url' => Url::fromUri('http://codemirror.net/'),
       // Issue #3177233: CodeMirror 5.70.0 is displaying vertical scrollbar.
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.61.1.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.3.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
-      'version' => '5.61.1',
+      'version' => '5.65.3',
     ];
     $libraries['jquery.inputmask'] = [
       'title' => $this->t('jQuery: Input Mask'),
       'description' => $this->t('Input masks ensures a predefined format is entered. This can be useful for dates, numerics, phone numbers, etc…'),
       'notes' => $this->t('Input masks are used to ensure predefined and custom formats for text fields.'),
       'homepage_url' => Url::fromUri('https://robinherbots.github.io/Inputmask/'),
-      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.6.zip'),
-      'version' => '5.0.6',
+      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.7.zip'),
+      'version' => '5.0.7',
     ];
     $libraries['jquery.intl-tel-input'] = [
       'title' => $this->t('jQuery: International Telephone Input'),
       'description' => $this->t("A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods."),
       'notes' => $this->t('International Telephone Input is used by the Telephone element.'),
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
-      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v16.1.0.zip'),
-      'version' => '16.1.0',
+      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.16.zip'),
+      'version' => '17.0.16',
     ];
     $libraries['jquery.rateit'] = [
       'title' => $this->t('jQuery: RateIt'),
       'description' => $this->t("Rating plugin for jQuery. Fast, progressive enhancement, touch support, customizable (just swap out the images, or change some CSS), unobtrusive JavaScript (using HTML5 data-* attributes), RTL support. The Rating plugin supports as many stars as you'd like, and also any step size."),
       'notes' => $this->t('RateIt is used to provide a customizable rating element.'),
       'homepage_url' => Url::fromUri('https://github.com/gjunge/rateit.js'),
-      'download_url' => Url::fromUri('https://github.com/gjunge/rateit.js/archive/refs/tags/1.1.3.zip'),
-      'version' => '1.1.3',
+      'download_url' => Url::fromUri('https://github.com/gjunge/rateit.js/archive/refs/tags/1.1.5.zip'),
+      'version' => '1.1.5',
       'elements' => ['webform_rating'],
     ];
     $libraries['jquery.textcounter'] = [
@@ -456,8 +456,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
       'notes' => $this->t('Tippy.js is used to provide a tooltips.'),
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
-      'download_url' => Url::fromUri('https://unpkg.com/tippy.js@6.2.6/dist/tippy-bundle.umd.min.js'),
-      'version' => '6.2.6',
+      'download_url' => Url::fromUri('https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js'),
+      'version' => '6.3.7',
       'core' => 9,
     ];
     $libraries['jquery.select2'] = [
