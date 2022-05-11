@@ -184,7 +184,11 @@ function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
   // @todo Remove once Claro theme support offcanvas tray.
   $is_claro_theme = \Drupal::service('webform.theme_manager')->isActiveTheme('claro');
   $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
-  $is_webform_route = preg_match('/(^webform|^entity\.webform|^entity\.node\.webform)/', \Drupal::routeMatch()->getRouteName());
+  $is_webform_route = FALSE;
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name != NULL) {
+    $is_webform_route = preg_match('/(^webform|^entity\.webform|^entity\.node\.webform)/', $route_name);
+  }
   if ($is_claro_theme || ($use_off_canvas && $is_admin_route && $is_webform_route)) {
     foreach ($css as $key => $item) {
       // @see 'core/misc/dialog/off-canvas
