@@ -98,8 +98,8 @@ class WebformTokenSuffixesTest extends WebformBrowserTestBase {
         'site_name' => 'Testing',
         'text' => '[site:name:base64encode]',
         'expected' => 'VGVzdGluZw==',
-        'message' => 'Base64 encode'
-      ]
+        'message' => 'Base64 encode',
+      ],
     ];
     foreach ($tests as $test) {
       // Set default options.
