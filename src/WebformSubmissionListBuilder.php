@@ -974,7 +974,16 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         ];
 
       case 'uid':
-        return ($is_raw) ? $entity->getOwner()->id() : ($entity->getOwner()->getAccountName() ?: $this->t('Anonymous'));
+        $owner = $entity->getOwner();
+        if ($is_raw) {
+          return $owner->id();
+        }
+        elseif ($owner->isAuthenticated() && $owner->access('view')) {
+          return $entity->getOwner()->toLink();
+        }
+        else {
+          return $entity->getOwner()->getAccountName() ?: $this->t('Anonymous');
+        }
 
       case 'uuid':
         return $entity->uuid();
