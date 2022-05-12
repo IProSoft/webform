@@ -356,10 +356,11 @@ class WebformCliService implements WebformCliServiceInterface {
     // Convert dashes to underscores.
     foreach ($export_options as $key => $value) {
       unset($export_options[$key]);
+      $key = str_replace('-', '_', $key);
       if (isset($default_options[$key]) && is_array($default_options[$key])) {
         $value = explode(',', $value);
       }
-      $export_options[str_replace('-', '_', $key)] = $value;
+      $export_options[$key] = $value;
     }
     $export_options += $submission_exporter->getDefaultExportOptions();
     $submission_exporter->setExporter($export_options);
