@@ -60,6 +60,8 @@ class Telephone extends TextBase {
       'international' => FALSE,
       'international_initial_country' => '',
       'international_preferred_countries' => [],
+      'international_excluded_countries' => [],
+      'negate_exclude' => FALSE,
     ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
     // Add support for telephone_validation.module.
     if ($this->moduleHandler->moduleExists('telephone_validation')) {
@@ -99,6 +101,14 @@ class Telephone extends TextBase {
       }
       if (!empty($element['#international_preferred_countries'])) {
         $element['#attributes']['data-webform-telephone-international-preferred-countries'] = Json::encode($element['#international_preferred_countries']);
+      }
+      if (!empty($element['#international_excluded_countries'])) {
+        if($element['#negate_exclude']) {
+          $element['#attributes']['data-webform-telephone-international-only-countries'] = Json::encode($element['#international_excluded_countries']);
+        }
+        else {
+          $element['#attributes']['data-webform-telephone-international-excluded-countries'] = Json::encode($element['#international_excluded_countries']);
+          }
       }
 
       // The utilsScript is fetched when the page has finished loading to
@@ -177,11 +187,36 @@ class Telephone extends TextBase {
     ];
     $this->elementManager->processElement($form['telephone']['international_preferred_countries']);
 
+    $form['telephone']['international_excluded_countries'] = [
+      '#title' => $this->t('Exculded countries'),
+      '#type' => 'select',
+      '#options' => CountryManager::getStandardList(),
+      '#description' => $this->t('Specify the countries which should not appear in the list.'),
+      '#select2' => TRUE,
+      '#multiple' => TRUE,
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
+      ],
+    ];
+    $form['telephone']['negate_exclude'] = [
+      '#type' => 'checkbox',
+      '#default_value' => FALSE,
+      '#title' => $this->t('Negate this condition'),
+      '#description' => $this->t('The exclude condition will be negated and list will only show countries specified in excluded countries field.'),
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
+      ],
+    ];
+    $this->elementManager->processElement($form['telephone']['international_excluded_countries']);
+
+
     if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
       $form['telephone']['#access'] = FALSE;
       $form['telephone']['international']['#access'] = FALSE;
       $form['telephone']['international_initial_country']['#access'] = FALSE;
       $form['telephone']['international_preferred_countries']['#access'] = FALSE;
+      $form['telephone']['international_excluded_countries']['#access'] = FALSE;
+      $form['telephone']['negate_exclude']['#access'] = FALSE;
     }
 
     // Add support for telephone_validation.module.

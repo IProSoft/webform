@@ -45,6 +45,12 @@
         if ($telephone.attr('data-webform-telephone-international-preferred-countries')) {
           options.preferredCountries = JSON.parse($telephone.attr('data-webform-telephone-international-preferred-countries'));
         }
+        if ($telephone.attr('data-webform-telephone-international-only-countries')) {
+          options.onlyCountries = JSON.parse($telephone.attr('data-webform-telephone-international-only-countries'));
+        }
+        if ($telephone.attr('data-webform-telephone-international-excluded-countries')) {
+          options.excludeCountries = JSON.parse($telephone.attr('data-webform-telephone-international-excluded-countries'));
+        }
 
         options = $.extend(options, Drupal.webform.intlTelInput.options);
         $telephone.intlTelInput(options);
