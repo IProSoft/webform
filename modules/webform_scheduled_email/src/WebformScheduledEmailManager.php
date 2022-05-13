@@ -668,7 +668,13 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
         continue;
       }
 
-      if (!$handler->checkConditions($webform_submission)) {
+      if ($handler->isDisabled()) {
+        // Disable sending email.
+        $action = $this->t('skipped (disabled)');
+        $operation = 'scheduled email disabled';
+        $stat = WebformScheduledEmailManagerInterface::EMAIL_SKIPPED;
+      }
+      elseif (!$handler->checkConditions($webform_submission)) {
         // Skip sending email.
         $action = $this->t('skipped (conditions not met)');
         $operation = 'scheduled email skipped';
