@@ -73,6 +73,8 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Date (Default short date)' => '06/18/1942 - 00:00',
       'Time (Value)' => '09:00',
       'Time (Raw value)' => '09:00:00',
+      'Radios (Option description)' => 'This is a description',
+      'Radios (Option text and description)' => 'One' . PHP_EOL . '<div class="description">This is a description</div>',
 // phpcs:disable
 //      'Entity autocomplete (Raw value)' => 'user:1',
 //      'Entity autocomplete (Link)' => '<a href="http://localhost/webform/user/1" hreflang="en">admin</a>',
@@ -110,6 +112,8 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Date (Default short date): 06/18/1942 - 00:00',
       'Time (Value): 09:00',
       'Time (Raw value): 09:00:00',
+      'Radios (Option description): This is a description',
+      'Radios (Option text and description): One - This is a description',
     ];
     foreach ($elements as $value) {
       $this->assertStringContainsString($value, $body, new FormattableMarkup('Found @value', ['@value' => $value]));

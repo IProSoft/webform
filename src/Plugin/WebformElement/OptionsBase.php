@@ -331,6 +331,15 @@ abstract class OptionsBase extends WebformElementBase {
       case 'raw':
         return $value;
 
+      case 'text_description':
+        if (isset($element['#options'])) {
+          $options_description = $this->hasProperty('options_description_display');
+          $text = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
+          $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
+          return ['#markup' => $text . ($description ? PHP_EOL . '<div class="description">' . $description . '</div>' : '')];
+        }
+        return '';
+
       case 'description':
         if (isset($element['#options'])) {
           $options_description = $this->hasProperty('options_description_display');
@@ -374,6 +383,15 @@ abstract class OptionsBase extends WebformElementBase {
       case 'raw':
         return $value;
 
+      case 'text_description':
+        if (isset($element['#options'])) {
+          $options_description = $this->hasProperty('options_description_display');
+          $text = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
+          $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
+          return $text . ($description ? ' - ' . MailFormatHelper::htmlToText($description) : '');
+        }
+        return '';
+
       case 'description':
         if (isset($element['#options'])) {
           $options_description = $this->hasProperty('options_description_display');
@@ -411,9 +429,14 @@ abstract class OptionsBase extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getItemFormats() {
-    return parent::getItemFormats() + [
-      'description' => $this->t('Option description'),
-    ];
+    $formats = parent::getItemFormats();
+    if ($this->hasProperty('options_description_display')) {
+      $formats += [
+        'description' => $this->t('Option description'),
+        'text_description' => $this->t('Option text and description'),
+      ];
+    }
+    return $formats;
   }
 
   /**
