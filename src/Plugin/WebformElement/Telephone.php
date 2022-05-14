@@ -103,12 +103,12 @@ class Telephone extends TextBase {
         $element['#attributes']['data-webform-telephone-international-preferred-countries'] = Json::encode($element['#international_preferred_countries']);
       }
       if (!empty($element['#international_excluded_countries'])) {
-        if($element['#negate_exclude']) {
+        if ($element['#negate_exclude']) {
           $element['#attributes']['data-webform-telephone-international-only-countries'] = Json::encode($element['#international_excluded_countries']);
         }
         else {
           $element['#attributes']['data-webform-telephone-international-excluded-countries'] = Json::encode($element['#international_excluded_countries']);
-          }
+        }
       }
 
       // The utilsScript is fetched when the page has finished loading to
@@ -208,7 +208,6 @@ class Telephone extends TextBase {
       ],
     ];
     $this->elementManager->processElement($form['telephone']['international_excluded_countries']);
-
 
     if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
       $form['telephone']['#access'] = FALSE;
