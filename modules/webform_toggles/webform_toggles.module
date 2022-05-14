@@ -22,6 +22,7 @@ function webform_toggles_webform_libraries_info() {
     'elements' => ['webform_toggle', 'webform_toggles'],
     'optional' => FALSE,
     'deprecated' => t('The Toggles library is not being maintained and has major accessibility issues. It has been <a href=":href">deprecated</a>.', [':href' => 'https://www.drupal.org/project/webform/issues/2890861']),
+    'license' => 'MIT',
   ];
   return $libraries;
 }

@@ -484,6 +484,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
             'url' => $dist_url,
             'type' => $dist_type,
           ],
+          'license' => $library['license'] ?: 'N/A',
         ],
       ];
 

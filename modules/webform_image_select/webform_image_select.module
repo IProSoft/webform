@@ -38,6 +38,7 @@ function webform_image_select_webform_libraries_info() {
     'version' => '0.3.1',
     'elements' => ['webform_image_select'],
     'optional' => FALSE,
+    'license' => 'MIT',
   ];
   return $libraries;
 }
