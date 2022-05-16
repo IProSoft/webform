@@ -91,6 +91,11 @@
           }
         });
 
+        let $next = $(context).find('.webform-button--next');
+        $next.on('click', function () {
+          refresh();
+        });
+
         // Make sure that the signature pad is initialized.
         setTimeout(refresh, 1);
       });
