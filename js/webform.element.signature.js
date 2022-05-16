@@ -92,7 +92,11 @@
         });
 
         let $next = $(context).find('.webform-button--next');
+        let $previous = $(context).find('.webform-button--previous');
         $next.on('click', function () {
+          refresh();
+        });
+        $previous.on('click', function () {
           refresh();
         });
 
