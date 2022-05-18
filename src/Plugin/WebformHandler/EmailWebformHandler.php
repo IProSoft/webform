@@ -687,10 +687,11 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
         ':href_smtp' => 'https://www.drupal.org/project/smtp',
         ':href_mailsystem' => 'https://www.drupal.org/project/mailsystem',
         ':href_swiftmailer' => 'https://www.drupal.org/project/swiftmailer',
+        ':href_symfony_mailer' => 'https://www.drupal.org/project/symfony_mailer',
       ];
       $form['attachments']['attachments_message'] = [
         '#type' => 'webform_message',
-        '#message_message' => $this->t('To send email attachments, please install and configure the <a href=":href_smtp">SMTP Authentication Support</a> module or the <a href=":href_mailsystem">Mail System</a> and <a href=":href_swiftmailer">SwiftMailer</a> module.', $t_args),
+        '#message_message' => $this->t('To send email attachments, please install and configure the <a href=":href_smtp">SMTP Authentication Support</a> module, the <a href=":href_mailsystem">Mail System</a> and <a href=":href_swiftmailer">SwiftMailer</a> module or the <a href=":href_symfony_mailer">Symfony Mailer</a> module.', $t_args),
         '#message_type' => 'warning',
         '#message_close' => TRUE,
         '#message_storage' => WebformMessage::STORAGE_SESSION,
@@ -1434,12 +1435,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       return TRUE;
     }
 
-    // The Mail System module, which supports a variety of mail handlers,
-    // and the SMTP module support attachments.
+    // The Mail System module, which supports a variety of mail handlers, the
+    // SMTP module and Symfony Mailer support attachments.
     $mailsystem_installed = $this->moduleHandler->moduleExists('mailsystem');
     $smtp_enabled = $this->moduleHandler->moduleExists('smtp')
       && $this->configFactory->get('smtp.settings')->get('smtp_on');
-    return $mailsystem_installed || $smtp_enabled;
+    $symfony_mailer_installed = $this->moduleHandler->moduleExists('symfony_mailer');
+    return $mailsystem_installed || $smtp_enabled || $symfony_mailer_installed;
   }
 
   /**
