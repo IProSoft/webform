@@ -403,7 +403,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Enhancement: Config Entity Reference Selection.
     $projects['config_entity_reference_selection'] = [
       'title' => $this->t('Config Entity Reference Selection'),
-      'description' => $this->t('Provides an entity reference selection plugin for limiting allowed (webform) onfig entity choices.'),
+      'description' => $this->t('Provides an entity reference selection plugin for limiting allowed (webform) config entity choices.'),
       'url' => Url::fromUri('https://www.drupal.org/project/config_entity_reference_selection'),
       'category' => 'enhancement',
     ];
@@ -1342,7 +1342,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Mail: Webform Entity Email.
     $projects['webform_entity_email'] = [
       'title' => $this->t('Webform Entity Email'),
-      'description' => $this->t('ovides a webform handler that sends an email rendering a specific entity.'),
+      'description' => $this->t('Provides a webform handler that sends an email rendering a specific entity.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_entity_email'),
       'category' => 'mail',
     ];
