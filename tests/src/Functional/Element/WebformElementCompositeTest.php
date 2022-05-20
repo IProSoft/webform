@@ -131,7 +131,7 @@ webform_element_composite_advanced:
     $assert_session->responseContains('<div data-drupal-selector="edit-radios-wrapper-container" id="edit-radios-wrapper-container--wrapper" class="radios--wrapper fieldgroup form-composite js-form-wrapper form-wrapper">');
 
     // Check radios 'aria-describedby' with wrapper description.
-    $assert_session->responseContains('<input data-drupal-selector="edit-radios-wrapper-fieldset-description-one" aria-describedby="edit-radios-wrapper-fieldset-description--wrapper--description" type="radio" id="edit-radios-wrapper-fieldset-description-one" name="radios_wrapper_fieldset_description" value="One" class="form-radio" />');
+    $assert_session->responseContains('<input data-drupal-selector="edit-radios-wrapper-fieldset-description-one" aria-describedby="edit-radios-wrapper-fieldset-description--wrapper--description" type="radio" id="edit-radios-wrapper-fieldset-description-one" name="radios_wrapper_fieldset_description" value="One" class="form-radio" role="radio" />');
     if (floatval(\Drupal::VERSION) >= 9) {
       $assert_session->responseContains('<div class="description"><div id="edit-radios-wrapper-fieldset-description--wrapper--description" data-drupal-field-elements="description" class="webform-element-description">This is a description</div>');
     }
