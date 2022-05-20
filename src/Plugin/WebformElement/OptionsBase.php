@@ -264,9 +264,11 @@ abstract class OptionsBase extends WebformElementBase {
   public static function processOptionsProperties(&$element, FormStateInterface $form_state, &$complete_form) {
     // Add role="radio" to radio input elements.
     // @see https://www.drupal.org/project/webform/issues/3277192
-    foreach (array_keys($element['#options']) as $optionKey) {
-      if ($element[$optionKey]['#type'] === 'radio') {
-        $element[$optionKey]['#attributes']['role'] = 'radio';
+    if (isset($element['#options'])) {
+      foreach (array_keys($element['#options']) as $optionKey) {
+        if ($element[$optionKey]['#type'] === 'radio') {
+          $element[$optionKey]['#attributes']['role'] = 'radio';
+        }
       }
     }
 
