@@ -445,8 +445,6 @@
                 "license": "MIT"
             }
         },
-<<<<<<< HEAD
-=======
         "tippyjs/5.x": {
             "type": "package",
             "package": {
@@ -463,7 +461,6 @@
                 "license": "MIT"
             }
         },
->>>>>>> 6.x
         "tippyjs/6.x": {
             "type": "package",
             "package": {
