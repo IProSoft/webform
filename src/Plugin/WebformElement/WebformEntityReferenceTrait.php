@@ -20,6 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 trait WebformEntityReferenceTrait {
 
   use WebformAjaxElementTrait;
+  use WebformEntityTrait {
+    setOptions as WebformEntityTraitSetOptions;
+  }
 
   /**
    * The entity repository.
@@ -392,7 +395,7 @@ trait WebformEntityReferenceTrait {
       $this->replaceTokens($element, $settings['webform_submission']);
     }
 
-    WebformEntityTrait::setOptions($element, $settings);
+    $this->WebformEntityTraitSetOptions($element, $settings);
 
     // Set options all after entity options are defined.
     if (!empty($element['#options_all'])) {

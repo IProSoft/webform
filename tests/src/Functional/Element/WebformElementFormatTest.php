@@ -88,7 +88,12 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     }
 
     // Check code format.
-    $this->assertStringContainsString('<pre class="js-webform-codemirror-runmode webform-codemirror-runmode" data-webform-codemirror-mode="text/x-yaml">message: \'Hello World\'</pre>', $body);
+    if (version_compare(phpversion(), '8.1', '>')) {
+      $this->assertStringContainsString('<pre class="js-webform-codemirror-runmode webform-codemirror-runmode" data-webform-codemirror-mode="text/x-yaml">message: &#039;Hello World&#039;</pre>', $body);
+    }
+    else {
+      $this->assertStringContainsString('<pre class="js-webform-codemirror-runmode webform-codemirror-runmode" data-webform-codemirror-mode="text/x-yaml">message: \'Hello World\'</pre>', $body);
+    }
 
     // Check elements formatted as text.
     $body = $this->getMessageBody($submission, 'email_text');
