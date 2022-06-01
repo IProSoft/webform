@@ -236,6 +236,8 @@ class WebformHtmlEditor extends FormElement {
    * @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::getMessage
    */
   public static function checkMarkup($text, array $options = []) {
+    $text = $text ?? '';
+
     $options += [
       'tidy' => \Drupal::config('webform.settings')->get('html_editor.tidy'),
     ];

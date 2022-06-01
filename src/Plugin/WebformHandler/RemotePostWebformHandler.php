@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin\WebformHandler;
 
 use Drupal\Component\Render\MarkupInterface;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
@@ -934,7 +935,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#title' => $this->t('Request options'),
       '#wrapper_attributes' => ['style' => 'margin: 0'],
       'data' => [
-        '#markup' => htmlspecialchars(Yaml::encode($request_options)),
+        '#markup' => Html::escape(Yaml::encode($request_options)),
         '#prefix' => '<pre>',
         '#suffix' => '</pre>',
       ],
@@ -954,7 +955,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '#title' => $this->t('Response header:'),
         '#wrapper_attributes' => ['style' => 'margin: 0'],
         'data' => [
-          '#markup' => htmlspecialchars(Yaml::encode($response->getHeaders())),
+          '#markup' => Html::escape(Yaml::encode($response->getHeaders())),
           '#prefix' => '<pre>',
           '#suffix' => '</pre>',
         ],
@@ -964,7 +965,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '#wrapper_attributes' => ['style' => 'margin: 0'],
         '#title' => $this->t('Response body:'),
         'data' => [
-          '#markup' => htmlspecialchars($response->getBody()),
+          '#markup' => Html::escape($response->getBody()),
           '#prefix' => '<pre>',
           '#suffix' => '</pre>',
         ],
@@ -976,7 +977,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
           '#wrapper_attributes' => ['style' => 'margin: 0'],
           '#title' => $this->t('Response data:'),
           'data' => [
-            '#markup' => Yaml::encode($response_data),
+            '#markup' => Html::escape(Yaml::encode($response_data)),
             '#prefix' => '<pre>',
             '#suffix' => '</pre>',
           ],
@@ -990,7 +991,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
           '#title' => $this->t('Response tokens:'),
           'description' => ['#markup' => $this->t('Below tokens can ONLY be used to insert response data into value and hidden elements.')],
           'data' => [
-            '#markup' => implode(PHP_EOL, $tokens),
+            '#plain_text' => implode(PHP_EOL, $tokens),
             '#prefix' => '<pre>',
             '#suffix' => '</pre>',
           ],

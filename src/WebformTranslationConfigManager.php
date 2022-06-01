@@ -429,7 +429,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
     $elements = [
       '#type' => 'details',
       '#title' => $this->t('@title (@type)', [
-        '@title' => $element['#title'],
+        '@title' => $element['#title'] ?? '',
         '@type' => $webform_element->getPluginId(),
       ]),
       '#open' => TRUE,
