@@ -2075,7 +2075,18 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#theme' => 'item_list',
         '#items' => $file_names,
       ];
-      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
+
+      // Don't set any error if the user is actulally removing files
+      $triggering_element = $form_state->getTriggeringElement();
+      if(strpos($triggering_element["#name"], '_remove_button') !== FALSE){
+        return;
+      }
+
+      $element_keys = $this->getWebform()->getElementsManagedFiles();
+      foreach ($element_keys as $element_key){
+        $form_state->setErrorByName($element_key, $this->renderer->renderPlain($message));
+      }
+      
     }
   }
 
