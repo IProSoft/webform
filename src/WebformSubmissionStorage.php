@@ -1083,38 +1083,6 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       }
       $this->loggerFactory->get('webform_submission')->notice($message, $context);
     }
-    elseif (!$webform->getSetting('results_disabled')) {
-      // Log general events to the 'webform'.
-      switch ($entity->getState()) {
-        case WebformSubmissionInterface::STATE_DRAFT_CREATED:
-          $message = '@title draft created.';
-          break;
-
-        case WebformSubmissionInterface::STATE_DRAFT_UPDATED:
-          $message = '@title draft updated.';
-          break;
-
-        case WebformSubmissionInterface::STATE_UPDATED:
-          $message = '@title updated.';
-          break;
-
-        case WebformSubmissionInterface::STATE_COMPLETED:
-          $message = ($update) ? '@title completed.' : '@title created.';
-          break;
-
-        default:
-          $message = NULL;
-          break;
-      }
-      if ($message) {
-        $context = [
-          '@id' => $entity->id(),
-          '@title' => $entity->label(),
-          'link' => ($entity->id()) ? $entity->toLink($this->t('Edit'), 'edit-form')->toString() : NULL,
-        ];
-        $this->loggerFactory->get('webform')->notice($message, $context);
-      }
-    }
 
     $this->invokeWebformElements('postSave', $entity, $update);
     $this->invokeWebformHandlers('postSave', $entity, $update);
