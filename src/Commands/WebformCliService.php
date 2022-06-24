@@ -674,7 +674,7 @@ class WebformCliService implements WebformCliServiceInterface {
    * {@inheritdoc}
    */
   public function drush_webform_libraries_status() {
-    module_load_include('install', 'webform');
+    \Drupal::moduleHandler()->loadInclude('webform', 'install');
 
     /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
     $libraries_manager = \Drupal::service('webform.libraries_manager');
@@ -841,7 +841,7 @@ class WebformCliService implements WebformCliServiceInterface {
       return $this->drush_user_abort();
     }
 
-    module_load_include('install', 'webform');
+    \Drupal::moduleHandler()->loadInclude('webform', 'install');
 
     $this->drush_print($this->dt('Repairing webform submission storage schema…'));
     _webform_update_webform_submission_storage_schema();
@@ -863,7 +863,7 @@ class WebformCliService implements WebformCliServiceInterface {
 
     if (\Drupal::moduleHandler()->moduleExists('webform_entity_print')) {
       $this->drush_print($this->dt('Repairing webform entity print settings…'));
-      module_load_include('install', 'webform_entity_print');
+      \Drupal::moduleHandler()->loadInclude('webform_entity_print', 'install');
       webform_entity_print_install();
     }
 
