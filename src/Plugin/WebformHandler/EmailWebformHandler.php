@@ -5,6 +5,7 @@ namespace Drupal\webform\Plugin\WebformHandler;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformAjaxElementTrait;
@@ -1672,7 +1673,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $options_element = $this->webform->getElement($token_element_name);
 
       // Set mapping options.
-      $mapping_options = $options_element['#options'];
+      $mapping_options = OptGroup::flattenOptions($options_element['#options']);
       array_walk($mapping_options, function (&$value, $key) {
         $value = '<b>' . $value . '</b>';
       });
