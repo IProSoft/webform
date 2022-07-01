@@ -896,8 +896,29 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Exit if elements are broken, usually occurs when elements YAML is edited
     // directly in the export config file.
-    if (!$webform_submission->getWebform()->getElementsInitialized()) {
-      return $this->getMessageManager()->append($form, WebformMessageManagerInterface::FORM_EXCEPTION_MESSAGE, 'warning');
+    if (!$webform->getElementsInitialized()) {
+      // Display helpful message to user who can add elements to the webform.
+      if (empty($webform->getElementsDecoded()) && $webform->access('update')) {
+        $form['webform_message'][] = [
+          '#type' => 'webform_message',
+          '#message_type' => 'warning',
+          '#message_message' => [
+            'message' => [
+              '#markup' => $this->t('This webform has no elements added to it.'),
+              '#suffix' => '<br/>',
+            ],
+            'link' => [
+              '#type' => 'link',
+              '#title' => $this->t('Please add elements to this webform.'),
+              '#url' => $webform->toUrl('edit-form'),
+            ],
+          ],
+        ];
+        return $form;
+      }
+      else {
+        return $this->getMessageManager()->append($form, WebformMessageManagerInterface::FORM_EXCEPTION_MESSAGE, 'warning');
+      }
     }
 
     // Exit if submission is locked.
