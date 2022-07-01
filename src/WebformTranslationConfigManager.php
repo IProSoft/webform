@@ -744,11 +744,12 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       ];
     }
     elseif ($property_type === 'text_format') {
+      $format = $element['#format'] ?? $element_property['#format'];
       $property_translation_element += [
         '#type' => 'text_format',
         '#title_display' => 'hidden',
-        '#format' => $element_property['#format'],
-        '#allowed_formats' => [$element_property['#format']],
+        '#format' => $format,
+        '#allowed_formats' => [$format],
       ];
     }
     elseif ($property_type) {
