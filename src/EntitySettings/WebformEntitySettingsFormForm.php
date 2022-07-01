@@ -296,7 +296,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          ':input[name="method"]' => ['value' => ''],
+          'select[name="form_method"]' => ['value' => ''],
         ],
       ],
     ];
@@ -511,7 +511,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          ':input[name="method"]' => ['value' => ''],
+          'select[name="form_method"]' => ['value' => ''],
         ],
       ],
     ];
@@ -633,7 +633,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#message_message' => $this->t("Please make sure this webform's action URL or path is setup to handle the webform's submission."),
       '#states' => [
         'invisible' => [
-          ':input[name="method"]' => ['value' => ''],
+          'select[name="form_method"]' => ['value' => ''],
         ],
       ],
     ];
