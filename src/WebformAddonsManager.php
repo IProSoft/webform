@@ -348,19 +348,19 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
-    // Element: Webform Select Collection.
-    $projects['webform_select_collection'] = [
-      'title' => $this->t('Webform Select Collection'),
-      'description' => $this->t('Provides a webform element that groups multiple select elements into single collection.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_select_collection'),
-      'category' => 'element',
-    ];
-
     // Element: Webform RUT.
     $projects['webform_rut'] = [
       'title' => $this->t('Webform RUT'),
       'description' => $this->t("Provides a RUT (A unique identification number assigned to natural or legal persons of Chile) element."),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_rut'),
+      'category' => 'element',
+    ];
+
+    // Element: Webform Select Collection.
+    $projects['webform_select_collection'] = [
+      'title' => $this->t('Webform Select Collection'),
+      'description' => $this->t('Provides a webform element that groups multiple select elements into single collection.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_select_collection'),
       'category' => 'element',
     ];
 
