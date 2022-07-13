@@ -812,7 +812,7 @@ abstract class OptionsBase extends WebformElementBase {
       /** @var \Drupal\webform\Element\WebformOtherBase $class */
       $class = $this->getFormElementClassDefinition();
       $type = $class::getElementType();
-      if (is_array($value) && count($value) === 2 && isset($value[$type]) && isset($value['other'])) {
+      if (is_array($value) && count($value) === 2 && array_key_exists($type, $value) && isset($value['other'])) {
         $value = $class::processValue($element, $value);
       }
 
