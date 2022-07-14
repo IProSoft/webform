@@ -516,8 +516,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'title' => $this->t('Choices'),
       'description' => $this->t('Choices.js is a lightweight, configurable select box/text input plugin. Similar to Select2 and Selectize but without the jQuery dependency.'),
       'notes' => $this->t('Choices.js is used to improve the user experience for select menus. Choices.js is an alternative to Select2.'),
-      'homepage_url' => Url::fromUri('https://joshuajohnson.co.uk/Choices/'),
-      'download_url' => Url::fromUri('https://github.com/jshjohnson/Choices/archive/refs/tags/v9.0.1.zip'),
+      'homepage_url' => Url::fromUri('https://choices-js.github.io/Choices/'),
+      'download_url' => Url::fromUri('https://github.com/Choices-js/Choices/archive/refs/tags/v9.0.1.zip'),
       'version' => '9.0.1',
       'license' => 'MIT',
     ];
