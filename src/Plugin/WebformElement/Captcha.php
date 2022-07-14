@@ -167,18 +167,35 @@ class Captcha extends WebformElementBase {
     // @see \Drupal\captcha\Service\CaptchaService::getAvailableChallengeTypes
     $captcha_types = [];
     $captcha_types['default'] = $this->t('Default challenge type');
-    // We do our own version of Drupal's module_invoke_all() here because
-    // we want to build an array with custom keys and values.
-    foreach ($this->moduleHandler->getImplementations('captcha') as $module) {
-      $result = call_user_func_array($module . '_captcha', ['list']);
-      if (is_array($result)) {
-        foreach ($result as $type) {
-          $captcha_types["$module/$type"] = $this->t('@type (from module @module)', [
-            '@type' => $type,
-            '@module' => $module,
-          ]);
+    // Use ModuleHandler::invokeAllWith() here because we want to build an
+    // array with custom keys and values.
+    if (method_exists($this->moduleHandler, 'invokeAllWith')) {
+      $this->moduleHandler->invokeAllWith('captcha', function (callable $hook, string $module) use (&$captcha_types) {
+        $result = $hook('list');
+        if (is_array($result)) {
+          foreach ($result as $type) {
+            $captcha_types["$module/$type"] = $this->t('@type (from module @module)', [
+              '@type' => $type,
+              '@module' => $module,
+            ]);
+          }
+        }
+      });
+    }
+    else {
+      // @phpstan-ignore-next-line
+      foreach ($this->moduleHandler->getImplementations('captcha') as $module) {
+        $result = call_user_func_array($module . '_captcha', ['list']);
+        if (is_array($result)) {
+          foreach ($result as $type) {
+            $captcha_types["$module/$type"] = $this->t('@type (from module @module)', [
+              '@type' => $type,
+              '@module' => $module,
+            ]);
+          }
         }
       }
+
     }
 
     $form['captcha'] = [
