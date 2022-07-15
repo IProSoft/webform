@@ -938,7 +938,7 @@ function template_preprocess_webform_element_managed_file(array &$variables) {
   if (!empty($variables['file'])) {
     /** @var \Drupal\file\FileInterface $file */
     $file = $variables['file'];
-    $variables['uri'] = file_create_url($file->getFileUri());
+    $variables['uri'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     $variables['extension'] = strtolower(pathinfo($variables['uri'], PATHINFO_EXTENSION));
     $variables['type'] = \Drupal::service('file.mime_type.guesser')->guess($variables['uri']);
     $variables['file_link'] = [
@@ -1003,7 +1003,7 @@ function template_preprocess_webform_element_image_file(array &$variables) {
     $format = $variables['format'];
 
     $uri = $file->getFileUri();
-    $url = Url::fromUri(file_create_url($uri));
+    $url = \Drupal::service('file_url_generator')->generate($uri);
 
     $extension = pathinfo($uri, PATHINFO_EXTENSION);
     $is_image = in_array($extension, ['gif', 'png', 'jpg', 'jpeg']);
