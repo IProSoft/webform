@@ -3,7 +3,7 @@
  * JavaScript behaviors for HTML editor integration.
  */
 
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
 
   'use strict';
 
@@ -23,7 +23,7 @@
         return;
       }
 
-      $(context).find('textarea.js-html-editor').once('webform-html-editor').each(function () {
+      $(once('webform-html-editor', 'textarea.js-html-editor', context)).each(function () {
         var $textarea = $(this);
 
         var allowedContent = drupalSettings['webform']['html_editor']['allowedContent'];
@@ -134,4 +134,4 @@
     }
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);
