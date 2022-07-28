@@ -158,9 +158,9 @@ function webform_node_node_delete(NodeInterface $node) {
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  */
-function webform_node_field_widget_webform_entity_reference_autocomplete_form_alter(&$element, FormStateInterface $form_state, $context) {
+function webform_node_field_widget_single_element_webform_entity_reference_autocomplete_form_alter(&$element, FormStateInterface $form_state, $context) {
   static $once;
   if (!empty($once)) {
     return;
@@ -194,10 +194,10 @@ function webform_node_field_widget_webform_entity_reference_autocomplete_form_al
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  */
-function webform_node_field_widget_webform_entity_reference_select_form_alter(&$element, FormStateInterface $form_state, $context) {
-  webform_node_field_widget_webform_entity_reference_autocomplete_form_alter($element, $form_state, $context);
+function webform_node_field_widget_single_element_webform_entity_reference_select_form_alter(&$element, FormStateInterface $form_state, $context) {
+  webform_node_field_widget_single_element_webform_entity_reference_autocomplete_form_alter($element, $form_state, $context);
 }
 
 /**

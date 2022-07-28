@@ -20,7 +20,7 @@ class WebformNodeUninstallValidatorTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->webformNodeUninstallValidator = $this->getMockBuilder('Drupal\webform_node\WebformNodeUninstallValidator')
       ->disableOriginalConstructor()

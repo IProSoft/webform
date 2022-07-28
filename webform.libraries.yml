@@ -130,7 +130,6 @@ webform.ajax:
     - core/drupal.ajax
     - core/drupal.announce
     - core/jquery.once
-    - core/jquery.form
     - webform/webform.scroll
 
 # Announce.

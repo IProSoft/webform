@@ -79,12 +79,12 @@ body {
     $assert_session->responseContains('&' . UrlHelper::buildQuery($image_style_token_query));
 
     // Check signature private image.
-    $this->assertRaw('<label>signature_private</label>');
-    $this->assertRaw("/webform/test_entity_print/signature_private/$sid/signature-");
+    $this->assertSession()->responseContains('<label>signature_private</label>');
+    $this->assertSession()->responseContains("/webform/test_entity_print/signature_private/$sid/signature-");
 
     // Check signature public image.
-    $this->assertRaw('<label>signature_public</label>');
-    $this->assertRaw("/webform/test_entity_print/signature_public/$sid/signature-");
+    $this->assertSession()->responseContains('<label>signature_public</label>');
+    $this->assertSession()->responseContains("/webform/test_entity_print/signature_public/$sid/signature-");
 
     // Check image access.
     $this->drupalLogout();
