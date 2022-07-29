@@ -37,7 +37,6 @@
     "drupal/address": "~1.0",
     "drupal/bootstrap": "~3.0",
     "drupal/captcha": "~1.0",
-    "drupal/devel": "~3.0",
     "drupal/entity": "~1.0",
     "drupal/mailsystem": "~4.0",
     "drupal/paragraphs": "~1.0",
