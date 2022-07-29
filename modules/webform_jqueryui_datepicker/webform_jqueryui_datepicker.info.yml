@@ -2,7 +2,7 @@ name: 'Webform jQueryUI Datepicker'
 type: module
 description: 'Provides jQueryUI datepicker support for date and datetime elements. jQueryUI is no longer maintained.'
 package: 'Webform [DEPRECATED]'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9.4 || ^10
 dependencies:
   - 'webform:webform'
   - 'jquery_ui_datepicker:jquery_ui_datepicker'
