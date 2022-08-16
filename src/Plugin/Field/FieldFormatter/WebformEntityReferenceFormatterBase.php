@@ -2,7 +2,7 @@
 
 namespace Drupal\webform\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\webform\Plugin\Field\FieldType\WebformEntityReferenceItem;
@@ -57,7 +57,7 @@ abstract class WebformEntityReferenceFormatterBase extends EntityReferenceFormat
   /**
    * {@inheritdoc}
    */
-  protected function getEntitiesToView(EntityReferenceFieldItemListInterface $items, $langcode) {
+  protected function getEntitiesToView(FieldItemListInterface $items, $langcode) {
     /** @var \Drupal\webform\WebformInterface[] $entities */
     $entities = parent::getEntitiesToView($items, $langcode);
     foreach ($entities as $entity) {
