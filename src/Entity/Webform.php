@@ -1681,7 +1681,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       // Set webform, id, key, parent_key, depth, and parent children.
       $element['#webform'] = $this->id();
       $element['#webform_id'] = $this->id() . '--' . $key;
-      $element['#webform_key'] = $key;
+      $element['#webform_key'] = (string) $key;
       $element['#webform_parent_key'] = $parent;
       $element['#webform_parent_flexbox'] = FALSE;
       $element['#webform_depth'] = $depth;
