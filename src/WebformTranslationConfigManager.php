@@ -737,6 +737,12 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       '#parents' => $property_parents,
     ];
 
+    if (is_array($element_property) && array_key_exists("#maxlength", $element_property)) {
+      $property_translation_element += [
+        '#maxlength' => $element_property['#maxlength'],
+      ];
+    }
+
     if (is_array($property_value)) {
       $property_translation_element += [
         '#type' => 'webform_codemirror',
