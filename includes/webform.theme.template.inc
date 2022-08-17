@@ -180,7 +180,7 @@ function template_preprocess_webform_confirmation(array &$variables) {
   }
   elseif ($webform_submission) {
     $source_url = $webform_submission->getSourceUrl();
-    $query = $source_url->getOption('query');
+    $query = $source_url->getOption('query') ?: [];
     unset($query['webform_id'], $query['ajax_form'], $query['_wrapper_format'], $query['token'], $query['page']);
     $source_url->setOption('query', $query);
     $variables['back_url'] = $source_url->toString();
