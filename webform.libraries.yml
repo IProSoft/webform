@@ -1009,15 +1009,15 @@ imce.input:
 # External libraries.
 
 libraries.choices:
-  remote: https://github.com/jshjohnson/Choices
+  remote: https://github.com/Choices-js/Choices
   version: '9.0.1'
   license:
     name: MIT
-    url: https://github.com/jshjohnson/Choices/blob/master/LICENSE
+    url: https://github.com/Choices-js/Choices/blob/master/LICENSE
     gpl-compatible: true
   directory: choices
   cdn:
-    /libraries/choices/: https://cdn.jsdelivr.net/gh/jshjohnson/Choices@v9.0.1/
+    /libraries/choices/: https://cdn.jsdelivr.net/gh/Choices-js/Choices@v9.0.1/
   css:
     component:
       css/webform.choices.base.css: {  }
