@@ -1050,6 +1050,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
             $composite_key . '__title' => [
               '#type' => 'textfield',
               '#title' => $this->t('@title title', $t_args),
+              '#maxlength' => NULL,
               '#title_display' => 'invisible',
               '#description' => $this->t('This is used as a descriptive label when displaying this webform element.'),
               '#description_display' => 'invisible',
