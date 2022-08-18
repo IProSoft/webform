@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Condition\ConditionInterface;
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\webform\Entity\Webform;
 
@@ -70,10 +71,11 @@ function webform_query_webform_submission_access_alter(AlterableInterface $query
 
   // Get webform submission tables which are used to build the alter query.
   $webform_submission_tables = [];
-  foreach ($query->getTables() as $table) {
+  foreach ($query->getTables() as $nalias => $table) {
     if (is_string($table['table']) && $table['table'] === $entity_type->getBaseTable()) {
-      $webform_submission_tables[] = [
+      $webform_submission_tables[$nalias] = [
         'alias' => $table['alias'],
+        'join type' => $table['join type'],
         'condition' => $query->orConditionGroup(),
       ];
     }
@@ -206,13 +208,36 @@ function webform_query_webform_submission_access_alter(AlterableInterface $query
   );
 
   // Apply webform submission table conditions to query.
-  foreach ($webform_submission_tables as $table) {
+  foreach ($webform_submission_tables as $nalias => $table) {
     // If a webform submission table does not have any conditions,
     // we have to block access to the table.
     if (count($table['condition']->conditions()) === 1) {
       $table['condition']->where('1 = 0');
     }
 
-    $query->condition($table['condition']);
+    if (empty($table['join type'])) {
+      $query->condition($table['condition']);
+    }
+    else {
+      /*
+       * If this is a join, add the access check to the join condition.
+       * This requires using $query->getTables() to alter the table
+       * information.
+       */
+      $tables = &$query->getTables();
+      $join_cond = $query
+        ->andConditionGroup()
+        ->condition($table['condition']);
+
+      // Add the existing join conditions into the Condition object.
+      if ($table['condition'] instanceof ConditionInterface) {
+        $join_cond->condition($table['condition']);
+      }
+      else {
+        $join_cond->where($tables[$nalias]['condition'], $tables[$nalias]['arguments']);
+        $tables[$nalias]['arguments'] = [];
+      }
+      $tables[$nalias]['condition'] = $join_cond;
+    }
   }
 }
