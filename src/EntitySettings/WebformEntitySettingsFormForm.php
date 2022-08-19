@@ -419,7 +419,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#title' => $this->t('Display show/hide all wizard pages link'),
       '#description' => $this->t('If checked, a hide/show all elements link will be added to this webform when there are wizard pages.'),
       '#return_value' => TRUE,
-      '#default_value' => $settings['wizard_auto_forward'],
+      '#default_value' => $settings['wizard_toggle'],
       '#access' => FALSE,
     ];
     // Wizard settings: Labels.
