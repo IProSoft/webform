@@ -408,7 +408,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       case 'value':
       case 'raw':
       default:
-        return file_create_url($file->getFileUri());
+        return $file->createFileUrl(FALSE);
     }
   }
 
@@ -1453,7 +1453,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
         // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
-        '_fileurl' => file_create_url($file->getFileUri()),
+        '_fileurl' => $file->createFileUrl(FALSE),
       ];
     }
     return $attachments;
