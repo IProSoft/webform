@@ -784,12 +784,21 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       unset($values['exporters']);
     }
 
-    if (isset($values['range_type'])) {
-      $range_type = $values['range_type'];
-      $values['range_type'] = $range_type;
-      if (isset($values[$range_type])) {
-        $values += $values[$range_type];
-      }
+    // Get select range type's start and end values which are stored in
+    // a nested array.
+    // @code
+    // $values = [
+    //   'range_type' => 'serial',
+    //   'serial' => [
+    //     'range_start' => 0,
+    //     'range_end' => 10,
+    //   ],
+    // ];
+    // @endcode
+    $range_type = $values['range_type'] ?? '';
+    $range_values = $values[$range_type] ?? [];
+    if ($range_values && is_array($range_values)) {
+      $values += $range_values;
     }
 
     // Make sure only support options are returned.
