@@ -495,7 +495,7 @@ class WebformCliService implements WebformCliServiceInterface {
 
     if (!$webform) {
       $submission_total = \Drupal::entityQuery('webform_submission')->count()->accessCheck(FALSE)->execute();
-      $form_total = \Drupal::entityQuery('webform')->count()->execute();
+      $form_total = \Drupal::entityQuery('webform')->count()->accessCheck(FALSE)->execute();
 
       $t_args = [
         '@submission_total' => $submission_total,
