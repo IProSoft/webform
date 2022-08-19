@@ -341,10 +341,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
   protected function getSubmissionFileUrl(WebformSubmissionInterface $submission, $element_key, $relative = FALSE) {
     $fid = $submission->getElementData($element_key);
     $file = File::load($fid);
-    if ($relative) {
-      return $file->createFileUrl();
-    }
-    return file_create_url($file->getFileUri());
+    return $file->createFileUrl($relative);
   }
 
 }
