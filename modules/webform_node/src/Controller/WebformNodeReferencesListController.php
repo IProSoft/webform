@@ -417,6 +417,7 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
    */
   protected function getEntityIds() {
     $query = $this->getStorage()->getQuery()
+      ->accessCheck(TRUE)
       ->sort($this->entityType->getKey('id'));
 
     // Add field names.
@@ -442,6 +443,7 @@ class WebformNodeReferencesListController extends EntityListBuilder implements C
    */
   protected function getTotal() {
     $query = $this->getStorage()->getQuery()
+      ->accessCheck(TRUE)
       ->sort($this->entityType->getKey('id'));
 
     // Add field names.

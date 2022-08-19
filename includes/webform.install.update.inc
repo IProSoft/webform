@@ -2829,6 +2829,7 @@ function webform_update_8153() {
   if (\Drupal::entityTypeManager()->hasDefinition('path_alias')) {
     $storage = \Drupal::entityTypeManager()->getStorage('path_alias');
     $ids = $storage->getQuery()
+      ->accessCheck(FALSE)
       ->condition('path', '/webform/', 'STARTS_WITH')
       ->execute();
 
