@@ -191,6 +191,11 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
       '#webform' => $webform,
       '#source_entity' => $source_entity,
       '#webform_submission' => $webform_submission,
+      '#cache' => [
+        'contexts' => [
+          'url.query_args:token',
+        ],
+      ],
     ];
 
     // Add entities cacheable dependency.
