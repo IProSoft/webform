@@ -2231,7 +2231,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    */
   protected function getCurrentPage(array &$form, FormStateInterface $form_state) {
     if ($form_state->get('current_page') === NULL) {
-      $pages = $this->getWebform()->getPages($this->operation);
+      $pages = $this->getWebform()->getPages($this->operation, $this->entity);
       if (empty($pages)) {
         $form_state->set('current_page', '');
       }
