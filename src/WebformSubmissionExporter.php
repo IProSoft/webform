@@ -784,7 +784,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function generate() {
-    $entity_ids = $this->getQuery()->execute();
+    $entity_ids = $this->getQuery()->accessCheck(TRUE)->execute();
     $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
 
     $this->writeHeader();
@@ -1071,7 +1071,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function getTotal() {
-    return $this->getQuery()->count()->execute();
+    return $this->getQuery()->accessCheck(FALSE)->count()->execute();
   }
 
   /**

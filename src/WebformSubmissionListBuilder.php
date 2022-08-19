@@ -1370,6 +1370,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
     $submission_storage = $this->getStorage();
     $query = $submission_storage->getQuery();
+    $query->accessCheck(TRUE);
     $submission_storage->addQueryConditions($query, $this->webform, $this->sourceEntity, $this->account);
 
     // If we are viewing all submissions, we want to exclude
