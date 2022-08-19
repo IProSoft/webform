@@ -692,16 +692,18 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Add a reference to the webform's id to the $form render array.
     $form['#webform_id'] = $webform->id();
 
-    // Move form settings to properties.
-    $settings_to_properties = [
-      'form_method' => '#method',
-      'form_action' => '#action',
-      'form_attributes' => '#attributes',
-    ];
-    foreach ($settings_to_properties as $setting_name => $property_name) {
-      if ($this->getWebformSetting($setting_name)) {
-        $form[$property_name] = $this->getWebformSetting($setting_name);
-      }
+    // Move form method and action to form properties.
+    $form_method = $this->getWebformSetting('form_method');
+    $form_action = $this->getWebformSetting('form_action');
+    if ($form_method && $form_action) {
+      $form['#method'] = $form_method;
+      $form['#action'] = $form_action;
+    }
+
+    // Move form attributes to form properties.
+    $form_attributes = $this->getWebformSetting('form_attributes');
+    if ($form_attributes) {
+      $form['#attributes'] = $form_attributes;
     }
 
     // Track current page name or index by setting the
