@@ -558,7 +558,9 @@ function template_preprocess_webform_progress(array &$variables) {
   }
 
   if ($webform->getSetting('wizard_progress_percentage')) {
-    $variables['percentage'] = number_format(($current_index / ($total - 1)) * 100, 0) . '%';
+    $variables['percentage'] = ($total > 1)
+      ? number_format(($current_index / ($total - 1)) * 100, 0) . '%'
+      : '0%';
   }
 }
 
