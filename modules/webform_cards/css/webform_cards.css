@@ -49,13 +49,13 @@ html.js .webform-cards .form-actions {
 }
 
 .webform-cards-toggle {
+  background: transparent;
+  border: 0;
+  color: #337ab7;
+  cursor: pointer;
+  font-size: 1em;
   margin-top: 0;
   padding: 0;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  font-size: 1em;
-  color: #337ab7;
   text-decoration: none;
 }
 
