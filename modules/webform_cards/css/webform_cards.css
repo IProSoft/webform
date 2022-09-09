@@ -50,16 +50,13 @@ html.js .webform-cards .form-actions {
 
 .webform-cards-toggle {
   margin-top: 0;
-  padding: 0;
-  cursor: pointer;
-  border: 0;
   background: transparent;
-  font-size: 1em;
-}
-
-.webform-cards-toggle {
-  text-decoration: none;
+  border: 0;
+  padding: 0;
   color: #337ab7;
+  cursor: pointer;
+  font-size: 1em;
+  text-decoration: none;
 }
 
 .webform-cards-toggle:hover,
