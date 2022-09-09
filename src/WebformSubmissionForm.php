@@ -2337,7 +2337,9 @@ class WebformSubmissionForm extends ContentEntityForm {
       $preview_attributes->addClass('webform-preview');
       $form['#title'] = PlainTextOutput::renderFromHtml($this->getWebformSetting('preview_title'));
       $form['preview'] = [
-        '#type' => 'container',
+        '#type' => $this->getWebformSetting('wizard_page_type', 'container'),
+        '#title' => $this->getWebformSetting('preview_label'),
+        '#title_tag' => $this->getWebformSetting('wizard_page_title_tag', ''),
         '#attributes' => $preview_attributes,
         // Progress bar is -20.
         '#weight' => -10,
