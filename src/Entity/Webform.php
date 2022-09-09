@@ -1155,6 +1155,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'wizard_toggle' => FALSE,
       'wizard_toggle_show_label' => '',
       'wizard_toggle_hide_label' => '',
+      'wizard_page_type' => 'container',
+      'wizard_page_title_tag' => \Drupal::config('webform.settings')->get('element.default_section_title_tag'),
       'preview' => DRUPAL_DISABLED,
       'preview_label' => '',
       'preview_title' => '',
