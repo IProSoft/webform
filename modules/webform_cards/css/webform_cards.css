@@ -37,15 +37,12 @@ html.js .webform-cards .form-actions {
  * Toggle.
  */
 .webform-cards-toggle-wrapper {
+  margin-top: 1em;
   text-align: right; /* LTR */
 }
 
 [dir="rtl"] .webform-cards-toggle-wrapper {
   text-align: left;
-}
-
-.webform-cards-toggle-wrapper {
-  margin-top: 1em;
 }
 
 .webform-cards-toggle {
