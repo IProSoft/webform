@@ -241,7 +241,7 @@ class TextFormat extends WebformElementBase {
   protected function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = $this->getValue($element, $webform_submission, $options);
 
-    $format = $value['format'] ?? $this->getItemFormat($element);
+    $format = $this->getItemFormat($element) ?? $value['format'];
     $value = $value['value'] ?? $value;
     switch ($format) {
       case 'raw':
@@ -354,7 +354,7 @@ class TextFormat extends WebformElementBase {
 
     if ($update) {
       $original_data = $webform_submission->getOriginalData();
-      $original_value = isset($original_data[$key]) ? $original_data[$key]['value'] : '';
+      $original_value = isset($original_data[$key]['value']) ? $original_data[$key]['value'] : '';
       $original_uuids = _webform_parse_file_uuids($original_value);
 
       // Detect file usages that should be incremented.
