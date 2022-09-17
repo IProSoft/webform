@@ -4303,3 +4303,10 @@ function webform_update_8636() {
 
   return implode(PHP_EOL, $messages);
 }
+
+/**
+ * Issue #3249092: Disable 'Allow users to post submissions from a dedicated URL' for all webforms.
+ */
+function webform_update_8637() {
+  _webform_update_admin_settings();
+}
