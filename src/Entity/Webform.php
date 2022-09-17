@@ -779,8 +779,12 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function hasPage() {
-    $settings = $this->getSettings();
-    return $settings['page'] ? TRUE : FALSE;
+    if (\Drupal::config('webform.settings')->get('settings.default_page') === FALSE) {
+      return FALSE;
+    }
+    else {
+      return (boolean) $this->getSetting('page');
+    }
   }
 
   /**
@@ -2422,7 +2426,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
 
     // If 'Allow users to post submission from a dedicated URL' is disabled,
     // delete all existing paths.
-    if (empty($this->getSetting('page'))) {
+    if (empty($this->hasPage())) {
       $this->deletePaths();
       return;
     }

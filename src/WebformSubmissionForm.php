@@ -1095,7 +1095,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->isGet()
       && $this->isRoute('webform.canonical')
       && $this->getRouteMatch()->getRawParameter('webform') === $webform->id()
-      && !$this->getWebform()->getSetting('page')) {
+      && !$this->getWebform()->hasPage()) {
       $this->getMessageManager()->display(WebformMessageManagerInterface::ADMIN_PAGE, 'info');
     }
 
