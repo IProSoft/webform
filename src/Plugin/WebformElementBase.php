@@ -2171,8 +2171,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     // Set checked/unchecked states for any element that contains checkboxes.
     if ($this instanceof Checkbox || $this instanceof Checkboxes) {
       $states[$value_optgroup] = [
-        'checked' => $this->t('Checked'),
-        'unchecked' => $this->t('Unchecked'),
+        'checked' => $this->t('Checked', [], ['context' => 'Add check mark']),
+        'unchecked' => $this->t('Unchecked', [], ['context' => 'Remove check mark']),
       ];
     }
 
