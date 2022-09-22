@@ -105,7 +105,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   /**
    * {@inheritdoc}
    */
-  public function alterForm(&$form, FormStateInterface $form_state) {
+  public function alterForm(array &$form, FormStateInterface $form_state) {
     foreach ($form['config_names'] as $config_name => &$config_element) {
       if ($config_name === 'webform.settings') {
         $this->alterConfigSettingsForm($config_name, $config_element);
@@ -271,7 +271,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   /**
    * {@inheritdoc}
    */
-  public static function validateWebformForm(&$form, FormStateInterface $form_state) {
+  public static function validateWebformForm(array &$form, FormStateInterface $form_state) {
     $source_elements = $form_state->get('webform_source_elements');
     if ($form_state::hasAnyErrors() || empty($source_elements)) {
       return;
