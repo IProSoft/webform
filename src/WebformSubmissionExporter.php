@@ -990,8 +990,10 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       $latest_query->sort('sid', 'DESC');
       $latest_query->range(0, (int) $export_options['range_latest']);
       if ($latest_query_entity_ids = $latest_query->execute()) {
-        $query->condition('sid', end($latest_query_entity_ids), '>=');
+        $query->condition('sid', $latest_query_entity_ids, 'IN');
       }
+      $query->sort('created');
+      $query->sort('sid');
     }
     else {
       // Sort by created and sid in ASC or DESC order.
