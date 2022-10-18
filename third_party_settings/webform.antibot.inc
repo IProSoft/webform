@@ -73,7 +73,10 @@ function _webform_antibot_form(array &$form, FormStateInterface $form_state, $an
 }
 
 /**
- * Validate callback; Checks if antibot is disabled and remove it from the third party settings values.
+ * Validate callback.
+ *
+ * Checks if antibot is disabled and remove
+ * it from the third party settings values.
  */
 function _webform_antibot_form_validate(&$form, FormStateInterface $form_state) {
   $third_party_settings = $form_state->getValue('third_party_settings');
@@ -134,8 +137,8 @@ function antibot_webform_third_party_settings_form_alter(&$form, FormStateInterf
  */
 function antibot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Only add an Antibot when a webform is initially load.
-  // After a webform is submitted, via a multi-step webform and/or saving a draft,
-  // we can skip adding an Antibot.
+  // After a webform is submitted, via a multi-step webform and/or saving a
+  // draft, we can skip adding an Antibot.
   if ($form_state->isSubmitted()) {
     return;
   }

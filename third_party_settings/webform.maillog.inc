@@ -63,7 +63,10 @@ function maillog_webform_submission_form_alter(array &$form, FormStateInterface 
 
   // Display warning if the user can view email on page.
   if (\Drupal::currentUser()->hasPermission('view maillog') && $config->get('verbose')) {
-    $build[] = ['#prefix' => ' ', '#markup' => t('Emails will displayed on this page.')];
+    $build[] = [
+      '#prefix' => ' ',
+      '#markup' => t('Emails will displayed on this page.'),
+    ];
   }
 
   // Display warning if no emails are being sent.
