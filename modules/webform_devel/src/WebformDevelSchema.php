@@ -5,8 +5,8 @@ namespace Drupal\webform_devel;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\OptGroup;
-use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Render\Element\Email as EmailElement;
+use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\webform\Plugin\WebformElement\BooleanBase;
 use Drupal\webform\Plugin\WebformElement\DateBase;
@@ -187,7 +187,6 @@ class WebformDevelSchema implements WebformDevelSchemaInterface {
     // Options.
     $data['options_text'] = [];
     $data['options_value'] = [];
-
 
     return $data;
   }

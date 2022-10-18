@@ -45,8 +45,12 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    *   The Guzzle HTTP client.
    * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
    *   The webform libraries manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
    */
-  public function __construct(ClientInterface $http_client, WebformLibrariesManagerInterface $libraries_manager, ModuleHandlerInterface $module_handler) {
+  public function __construct(ClientInterface $http_client,
+  WebformLibrariesManagerInterface $libraries_manager,
+  ModuleHandlerInterface $module_handler) {
     parent::__construct();
     $this->httpClient = $http_client;
     $this->librariesManager = $libraries_manager;
@@ -58,12 +62,13 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   /* ************************************************************************ */
 
   /**
-   * Displays the status of third party libraries required by the Webform module.
+   * Display the status of third party libraries required by the Webform module.
    *
    * @command webform:libraries:status
    *
    * @usage webform:libraries:status
-   *   Displays the status of third party libraries required by the Webform module.
+   *   Displays the status of third party libraries
+   *   required by the Webform module.
    *
    * @aliases wfls,webform-libraries-status
    */
@@ -83,14 +88,16 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   /* ************************************************************************ */
 
   /**
-   * Generates the Webform module's composer.json with libraries as repositories.
+   * Generates the Webform modules composer.json with libraries as repositories.
    *
    * @command webform:libraries:composer
    *
-   * @option disable-tls If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.
+   * @option disable-tls If set to true all HTTPS URLs will be tried with HTTP
+   *   instead and no network level encryption is performed.
    *
    * @usage webform:libraries:composer
-   *   Generates the Webform module's composer.json with libraries as repositories.
+   *   Generates the Webform module's composer.json
+   *   with libraries as repositories.
    *
    * @aliases wflc,webform-libraries-composer
    */
@@ -285,12 +292,13 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   /* ************************************************************************ */
 
   /**
-   * Removes all downloaded third party libraries required by the Webform module.
+   * Remove all downloaded third party libraries required by the Webform module.
    *
    * @command webform:libraries:remove
    *
    * @usage webform:libraries:remove
-   *   Removes all downloaded third party libraries required by the Webform module.
+   *   Removes all downloaded third party libraries
+   *   required by the Webform module.
    *
    * @aliases wflr,webform-libraries-remove
    */
@@ -365,11 +373,15 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   }
 
   /**
-   * Updates the Drupal installation's composer.json to include the Webform module's selected libraries as repositories.
+   * Updates the Drupal installation's composer.json.
+   *
+   * Updates the Drupal installation's composer.json to
+   * include the Webform module's selected libraries as repositories.
    *
    * @command webform:composer:update
    *
-   * @option disable-tls If set to true all HTTPS URLs will be tried with HTTP instead and no network level encryption is performed.
+   * @option disable-tls If set to true all HTTPS URLs will be tried with HTTP
+   *   instead and no network level encryption is performed.
    *
    * @usage webform:composer:update
    *   Updates the Drupal installation's composer.json to include the Webform

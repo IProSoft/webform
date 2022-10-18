@@ -261,7 +261,7 @@ class WebformDateHelper {
       }
     }
 
-    // l = A full textual representation of the day of the week.
+    // L = A full textual representation of the day of the week.
     if (strpos($format, 'l') !== FALSE) {
       $week_days_untranslated = DateHelper::weekDaysUntranslated();
       $week_days_translated = DateHelper::weekDays();

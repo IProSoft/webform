@@ -13,11 +13,11 @@
  * Below functions are copied from editor.module.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\WebformInterface;
-use Drupal\Component\Utility\Html;
 
 /* ************************************************************************** */
 // Webform entity hooks.

@@ -3,8 +3,8 @@
 namespace Drupal\webform_group;
 
 use Drupal\Core\Session\AccountInterface;
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\WebformInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Defines an interface for the webform group manager.

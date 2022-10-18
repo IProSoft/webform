@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_group;
 
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\GroupContentInterface;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
 use Drupal\webform\WebformAccessRulesManagerInterface;
