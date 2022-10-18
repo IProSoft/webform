@@ -70,7 +70,11 @@ function webform_theme() {
     ],
 
     'webform_confirmation' => [
-      'variables' => ['webform' => NULL, 'source_entity' => NULL, 'webform_submission' => NULL],
+      'variables' => [
+        'webform' => NULL,
+        'source_entity' => NULL,
+        'webform_submission' => NULL,
+      ],
     ],
 
     'webform_required' => [
@@ -89,24 +93,48 @@ function webform_theme() {
       'variables' => ['webform_submission' => NULL],
     ],
     'webform_submission_information' => [
-      'variables' => ['webform_submission' => NULL, 'source_entity' => NULL, 'open' => TRUE],
+      'variables' => [
+        'webform_submission' => NULL,
+        'source_entity' => NULL,
+        'open' => TRUE,
+      ],
     ],
     'webform_submission_data' => [
       'render element' => 'elements',
     ],
 
     'webform_element_base_html' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => []],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+      ],
     ],
     'webform_element_base_text' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => []],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+      ],
     ],
 
     'webform_container_base_html' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => []],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+      ],
     ],
     'webform_container_base_text' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => []],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+      ],
     ],
 
     'webform_element_help' => [
@@ -118,29 +146,74 @@ function webform_theme() {
     ],
 
     'webform_element_managed_file' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+        'file' => NULL,
+      ],
     ],
     'webform_element_audio_file' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+        'file' => NULL,
+      ],
     ],
     'webform_element_document_file' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+        'file' => NULL,
+      ],
     ],
     'webform_element_image_file' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL, 'style_name' => NULL, 'format' => NULL],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+        'file' => NULL,
+        'style_name' => NULL,
+        'format' => NULL,
+      ],
     ],
     'webform_element_video_file' => [
-      'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL],
+      'variables' => [
+        'element' => [],
+        'value' => NULL,
+        'webform_submission' => NULL,
+        'options' => [],
+        'file' => NULL,
+      ],
     ],
 
     'webform_email_html' => [
-      'variables' => ['subject' => '', 'body' => '', 'webform_submission' => NULL, 'handler' => NULL],
+      'variables' => [
+        'subject' => '',
+        'body' => '',
+        'webform_submission' => NULL,
+        'handler' => NULL,
+      ],
     ],
     'webform_email_message_html' => [
-      'variables' => ['message' => '', 'webform_submission' => NULL, 'handler' => NULL],
+      'variables' => [
+        'message' => '',
+        'webform_submission' => NULL,
+        'handler' => NULL,
+      ],
     ],
     'webform_email_message_text' => [
-      'variables' => ['message' => '', 'webform_submission' => NULL, 'handler' => NULL],
+      'variables' => [
+        'message' => '',
+        'webform_submission' => NULL,
+        'handler' => NULL,
+      ],
     ],
 
     'webform_html_editor_markup' => [
@@ -238,7 +311,7 @@ function webform_theme_registry_alter(&$theme_registry) {
 /* ************************************************************************** */
 
 /**
- * Implements preprocess_menu_local_action() for single local action link templates.
+ * Implements preprocess_menu_local_action() for local action link templates.
  *
  * Applies custom link attributes to local actions.
  * Custom attributes are used to open Webform UI modals.
@@ -854,7 +927,10 @@ function _webform_preprocess_description_help(array &$variables) {
     && \Drupal::service('webform.request')->isWebformAdminRoute()
     && \Drupal::routeMatch()->getRouteName() !== 'webform.contribute.settings'
     && !isset($element['#help'])
-    && !empty($element['#title']) && (empty($element['#title_display']) || !in_array($element['#title_display'], ['attribute', 'invisible']))
+    && !empty($element['#title']) && (empty($element['#title_display']) || !in_array($element['#title_display'], [
+      'attribute',
+      'invisible',
+    ]))
     && !empty($element['#description']) && (empty($element['#description_display']) || !in_array($element['#description_display'], ['invisible']))
   ) {
     // Render the description.

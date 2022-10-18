@@ -104,7 +104,9 @@ function webform_update_8003() {
 }
 
 /**
- * Issue #2836948: Problem with autocomplete field. Change '#autocomplete_options' to '#autocomplete_items'.
+ * Issue #2836948: Problem with autocomplete field.
+ *
+ * Change '#autocomplete_options' to '#autocomplete_items'.
  */
 function webform_update_8004() {
   $config_factory = \Drupal::configFactory();
@@ -189,7 +191,10 @@ function webform_update_8008() {
 }
 
 /**
- * Issue #2844020: Add admin and form specific setting to allow submit button to be clicked only once.
+ * Issue #2844020: Allow submit button to be clicked only once.
+ *
+ * Add admin and form specific setting to allow
+ * submit button to be clicked only once.
  */
 function webform_update_8009() {
   _webform_update_admin_settings();
@@ -205,7 +210,9 @@ function webform_update_8010() {
 }
 
 /**
- * Issue #2845028: Refactor and rework element formatting to better support multiple values.
+ * Issue #2845028: Refactor and rework element.
+ *
+ * Formatting to better support multiple values.
  */
 function webform_update_8011() {
   // Update admin.settings format to support
@@ -349,14 +356,18 @@ function webform_update_8015() {
 }
 
 /**
- * Issue #2850455: Add lookup_keys to webform config entity. Flush cache entity definitions.
+ * Issue #2850455: Add lookup_keys to webform config entity.
+ *
+ * Flush cache entity definitions.
  */
 function webform_update_8016() {
   drupal_flush_all_caches();
 }
 
 /**
- * Issue #2850455: Add lookup_keys to webform config entity. Update Webform lookup keys.
+ * Issue #2850455: Add lookup_keys to webform config entity.
+ *
+ * Update Webform lookup keys.
  */
 function webform_update_8017() {
   // Must resave all Webform config lookup keys.
@@ -500,7 +511,9 @@ function webform_update_8024() {
 }
 
 /**
- * Issue #2857417: Add support for open and close date/time to Webform nodes. Update database scheme.
+ * Issue #2857417: Add support for open and close date/time to Webform nodes.
+ *
+ * Update database scheme.
  */
 function webform_update_8025() {
   // Issue #2863986: Allow updating modules with new service dependencies.
@@ -570,14 +583,18 @@ function webform_update_8025() {
 }
 
 /**
- * Issue #2857417: Add support for open and close date/time to Webform nodes. Update entity definitions.
+ * Issue #2857417: Add support for open and close date/time to Webform nodes.
+ *
+ * Update entity definitions.
  */
 function webform_update_8026() {
   _webform_update_field_storage_definitions();
 }
 
 /**
- * Issue #2857417: Add support for open and close date/time to Webform nodes. Update field config settings.
+ * Issue #2857417: Add support for open and close date/time to Webform nodes.
+ *
+ * Update field config settings.
  */
 function webform_update_8027() {
   $field_configs = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_type' => 'webform']);
@@ -730,7 +747,9 @@ function webform_update_8032() {
 }
 
 /**
- * Issue #2864851: Allow form builder to opt-in to converting anonymous drafts/submissions to authenticated drafts/submissions.
+ * Issue #2864851: Allow form builder to opt-in to converting anonymous.
+ *
+ * Drafts/submissions to authenticated drafts/submissions.
  */
 function webform_update_8033() {
   _webform_update_webform_settings();
@@ -901,14 +920,18 @@ function webform_update_8042() {
 }
 
 /**
- * Issue #2874555: Add "How can we help you?" link to the Webform module admin pages.
+ * Issue #2874555: Add "How can we help you?" link to.
+ *
+ * The Webform module admin pages.
  */
 function webform_update_8043() {
   _webform_update_admin_settings();
 }
 
 /**
- * Issue #2872464: MultiStep Preview Page - change the Page Title and Progress Bar Title.
+ * Issue #2872464: MultiStep Preview Page - change the Page.
+ *
+ * Title and Progress Bar Title.
  */
 function webform_update_8044() {
   _webform_update_admin_settings();
@@ -916,7 +939,9 @@ function webform_update_8044() {
 }
 
 /**
- * Issue #2878307: webform example module disable causes a customized webform deleted.
+ * Issue #2878307: webform example module disable.
+ *
+ * Causes a customized webform deleted.
  */
 function webform_update_8045() {
   // Remove sub module dependencies copied to new forms.
@@ -967,7 +992,9 @@ function _webform_update_8045_is_submodule_config($webform_config_name) {
 }
 
 /**
- * Issue #2878193: Allow actions (aka submit buttons) to be placed anywhere on a webform.
+ * Issue #2878193: Allow actions (aka submit buttons) to be.
+ *
+ * Placed anywhere on a webform.
  */
 function webform_update_8046() {
   // Change 'default_submit_button_label' to 'default_form_submit_label'.
@@ -1010,7 +1037,7 @@ function webform_update_8046() {
       ->condition('collection', $collections, 'IN');
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {
-      $data = unserialize($record['data']);
+      $data = unserialize($record['data'], ['allowed_classes' => FALSE]);
       $data = _webform_update_8046_convert_data($data);
       \Drupal::database()->update($table_name)
         ->fields(['data' => serialize($data)])
@@ -1022,7 +1049,9 @@ function webform_update_8046() {
 }
 
 /**
- * Convert webform config data from settings.buttons to use the 'webform_actions' element.
+ * Convert webform config data from settings.buttons to use.
+ *
+ * The 'webform_actions' element.
  *
  * @param array $data
  *   Webform config data.
@@ -1212,7 +1241,9 @@ function webform_update_8057() {
 }
 
 /**
- * Issue #2888076: Redirect users to login page when trying to access a protected webform file.
+ * Issue #2888076: Redirect users to login page when trying to.
+ *
+ * Access a protected webform file.
  */
 function webform_update_8058() {
   _webform_update_admin_settings();
@@ -1265,7 +1296,9 @@ function webform_update_8061() {
 }
 
 /**
- * Issue #2871207: Random Multiple Submissions. Populate next serial in webform table.
+ * Issue #2871207: Random Multiple Submissions. Populate next.
+ *
+ * Serial in webform table.
  */
 function webform_update_8062() {
   /** @var \Drupal\webform\WebformInterface[] $webforms */
@@ -1303,7 +1336,9 @@ function webform_update_8063() {
 /* ************************************************************************** */
 
 /**
- * Issue #2878193: Allow actions (aka submit buttons) to be placed anywhere on a webform.
+ * Issue #2878193: Allow actions (aka submit buttons) to be placed.
+ *
+ * Anywhere on a webform.
  */
 function webform_update_8064() {
   // Move disabled HTML editor from ui to element.html_editor.
@@ -1319,7 +1354,9 @@ function webform_update_8064() {
 }
 
 /**
- * Issue #2888717: Option to include empty components in [webform_submission:values] token.
+ * Issue #2888717: Option to include empty components.
+ *
+ * In [webform_submission:values] token.
  */
 function webform_update_8065() {
   _webform_update_webform_settings();
@@ -1542,7 +1579,9 @@ function webform_update_8075() {
 /* ************************************************************************** */
 
 /**
- * Issue #2908080: Allow options single and multiple format to be specified during export.
+ * Issue #2908080: Allow options single and multiple format.
+ *
+ * To be specified during export.
  */
 function webform_update_8076() {
   // Update webform.settings.
@@ -1633,7 +1672,9 @@ function webform_update_8081() {
 }
 
 /**
- * Issue #2912672: Mismatch entity Webform submission caused by langcode changes.
+ * Issue #2912672: Mismatch entity Webform submission.
+ *
+ * Caused by langcode changes.
  */
 function webform_update_8082() {
   // Set webform_submission.langcode to NOT NULL.
@@ -1672,7 +1713,9 @@ function webform_update_8084() {
 }
 
 /**
- * Issue #2908882: Loading next or previous page with AJAX should scroll to top of the window.
+ * Issue #2908882: Loading next or previous page with AJAX.
+ *
+ * Should scroll to top of the window.
  */
 function webform_update_8085() {
   _webform_update_webform_settings();
@@ -1823,7 +1866,9 @@ function webform_update_8095() {
 }
 
 /**
- * Issue #2931888: Add a boolean flag 'use as likert' for options list and remove the machine name pattern matching in likert element.
+ * Issue #2931888: Add a boolean flag 'use as likert' for options.
+ *
+ * List and remove the machine name pattern matching in likert element.
  */
 function webform_update_8096() {
   $config_factory = \Drupal::configFactory();
@@ -1903,7 +1948,9 @@ function webform_update_8099() {
 }
 
 /**
- * Issue #2888862: Provide a mechanism to lock a webform submission. Update handlers.
+ * Issue #2888862: Provide a mechanism to lock a webform submission.
+ *
+ * Update handlers.
  */
 function webform_update_8100() {
   // Add locked to action handler.
@@ -1932,7 +1979,9 @@ function webform_update_8100() {
 }
 
 /**
- * Issue #2935697: Add support for new Off-Canvas dialog tray. Remove quickedit links.
+ * Issue #2935697: Add support for new Off-Canvas dialog tray.
+ *
+ * Remove quickedit links.
  */
 function webform_update_8101() {
   \Drupal::service('cache.discovery')->deleteAll();
@@ -1940,7 +1989,9 @@ function webform_update_8101() {
 }
 
 /**
- * Issue #2939828: Allow site builder to display required indicator on all webforms or a specified webform.
+ * Issue #2939828: Allow site builder to display required.
+ *
+ * Indicator on all webforms or a specified webform.
  */
 function webform_update_8102() {
   _webform_update_admin_settings();
@@ -1948,7 +1999,9 @@ function webform_update_8102() {
 }
 
 /**
- * Issue #2939948: Date fields should respect #min and #max in test-mode. Remove hard-coded test date values.
+ * Issue #2939948: Date fields should respect #min and #max in test-mode.
+ *
+ * Remove hard-coded test date values.
  */
 function webform_update_8103() {
   $test_date_elements = ['date', 'datetime', 'datelist'];
@@ -1979,7 +2032,9 @@ function webform_update_8104() {
 /* ************************************************************************** */
 
 /**
- * Issue #2941174 Notice: Undefined index: administer in WebformEntitySettingsAccessForm.
+ * Issue #2941174 Notice: Undefined index: administer.
+ *
+ * In WebformEntitySettingsAccessForm.
  */
 function webform_update_8105() {
   // Re-execute update hook to make sure RC2 installs have the correct config.
@@ -2158,7 +2213,9 @@ function webform_update_8115() {
 /* ************************************************************************** */
 
 /**
- * Stop #multiple__label and #multiple__labels from being saved with every element.
+ * Stop #multiple__label and #multiple__labels from being.
+ *
+ * Saved with every element.
  */
 function webform_update_8116() {
   _webform_update_elements_clear_properties([
@@ -2212,14 +2269,18 @@ function webform_update_8119() {
 }
 
 /**
- * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
+ * Issue #2953929: Remote handler does not display messages.
+ *
+ * When HTTP status is different than 200.
  */
 function webform_update_8120() {
   _webform_update_webform_handler_settings();
 }
 
 /**
- * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
+ * Issue #2953929: Remote handler does not display messages.
+ *
+ * When HTTP status is different than 200.
  */
 function webform_update_8121() {
   _webform_update_webform_handler_settings();
@@ -2249,7 +2310,9 @@ function webform_update_8122() {
 /* ************************************************************************** */
 
 /**
- * Issue #2962442: Remove [webform-authenticated-user] token and use [current-user] token with clear value option.
+ * Issue #2962442: Remove [webform-authenticated-user] token and.
+ *
+ * Use [current-user] token with clear value option.
  */
 function webform_update_8123() {
   _webform_update_string_replace('[webform-authenticated-user:', '[current-user:');
@@ -2327,14 +2390,18 @@ function webform_update_8128() {
   _webform_update_webform_settings();
 }
 
+// @todo ignore phpcs warnings for constants
+// Need to place below constans in different file.
+// phpcs:disable
 /**
- * Issue #2977378: Add 'exclude unselected checkboxes' from email notification and preview.
+ * Issue #2977378: Add 'exclude unselected checkboxes' From email notification and preview.
  */
 function webform_update_8129() {
   _webform_update_admin_settings();
   _webform_update_webform_settings();
   _webform_update_webform_handler_settings();
 }
+// phpcs:enable
 
 /* ************************************************************************** */
 // Webform-8.x-5.0-rc15 - June 12, 2018.
@@ -2352,7 +2419,9 @@ function webform_update_8130() {
 /* ************************************************************************** */
 
 /**
- * Issue #2980470: Convert email handler "default" settings to use "_default_" to prevent localization issues.
+ * Issue #2980470: Convert email handler "default" settings to.
+ *
+ * Use "_default_" to prevent localization issues.
  */
 function webform_update_8131() {
   // Get all webform handlers that are instances of the email handler.
@@ -2405,13 +2474,16 @@ function webform_update_8131() {
   }
 }
 
+// @todo ignore phpcs warnings for constants
+// Need to place below constans in different file.
+// phpcs:disable
 /**
- * Issue #2980276: Webform assumes the /tmp directory is always the same, but if there are multiple servers, each may have its own /tmp directory.
+ * Issue #2980276: Webform assumes the /tmp directory is always the same, But if there are multiple servers, each may have its own /tmp directory.
  */
 function webform_update_8132() {
   _webform_update_admin_settings();
 }
-
+// phpcs:enable
 /* ************************************************************************** */
 // Webform-8.x-5.0-rc17 - August 6, 2018.
 /* ************************************************************************** */
@@ -2514,7 +2586,9 @@ function _webform_update_8136(array &$element) {
 }
 
 /**
- * Issue #2983137: WYSIWYG editor not saving inline images for advanced html/text editor.
+ * Issue #2983137: WYSIWYG editor not saving inline images.
+ *
+ * For advanced html/text editor.
  */
 function webform_update_8137() {
   _webform_update_admin_settings();
@@ -2559,7 +2633,9 @@ function webform_update_8138() {
 }
 
 /**
- * Issue #2918669: Elements separated by conditional inside multistep wizard are both saved to submission.
+ * Issue #2918669: Elements separated by conditional inside multistep.
+ *
+ * Wizard are both saved to submission.
  */
 function webform_update_8139() {
   $build = [
@@ -2620,7 +2696,9 @@ function webform_update_8142() {
 }
 
 /**
- * Issue #2943879: How to display alternate text when the user is not allowed to create a Webform?
+ * Issue #2943879: How to display alternate text when the user.
+ *
+ * Is not allowed to create a Webform?
  */
 function webform_update_8143() {
   $admin_config = \Drupal::configFactory()->getEditable('webform.settings');
@@ -2675,7 +2753,9 @@ function webform_update_8143() {
 /* ************************************************************************** */
 
 /**
- * Issue #2998239: Swift Mailer no longer working after custom email handler theme option was added.
+ * Issue #2998239: Swift Mailer no longer working after custom email.
+ *
+ * Handler theme option was added.
  */
 function webform_update_8144() {
   $config_factory = \Drupal::configFactory();
@@ -2731,7 +2811,9 @@ function webform_update_8147() {
 }
 
 /**
- * Issue #3007215: Option to retain webform title when source entity is provided.
+ * Issue #3007215: Option to retain webform title.
+ *
+ * When source entity is provided.
  */
 function webform_update_8148() {
   _webform_update_webform_settings();
@@ -2903,7 +2985,11 @@ function webform_update_8155() {
     foreach ($flattened_elements as &$element) {
       // Convert #min/max property to #date_date_(min|max) property.
       // @see \Drupal\webform\Entity\Webform::initElementsRecursive
-      if (isset($element['#type']) && in_array($element['#type'], ['date', 'datetime', 'datelist'])) {
+      if (isset($element['#type']) && in_array($element['#type'], [
+        'date',
+        'datetime',
+        'datelist',
+      ])) {
         $has_date_element = TRUE;
         if (isset($element['#min']) && !isset($element['#date_date_min'])) {
           $element['#date_date_min'] = $element['#min'];
@@ -2947,8 +3033,8 @@ function webform_update_8156() {
       \Drupal::service('module_installer')->install(['webform_submission_log']);
     }
     catch (SchemaObjectExistsException $exception) {
-      // This is actually expected. The table {webform_submission_log} would exist
-      // from webform submission entity schema.
+      // This is actually expected. The table {webform_submission_log} would
+      // exist from webform submission entity schema.
     }
 
     // Because MySQL does not allow default value on blob/text column types and
@@ -3062,7 +3148,9 @@ function webform_update_8160() {
 }
 
 /**
- * Issue #3026068: Ensure the webform submission has the langcode entity key set.
+ * Issue #3026068: Ensure the webform submission has the.
+ *
+ * Langcode entity key set.
  */
 function webform_update_8161() {
   // Installations that were updated from 8.x-5.0-beta10 or older might have a
@@ -3145,14 +3233,18 @@ function webform_update_8168() {
 }
 
 /**
- * Issue #3062308: Add the ability to use admin theme for a webform's canonical route.
+ * Issue #3062308: Add the ability to use admin theme.
+ *
+ * For a webform's canonical route.
  */
 function webform_update_8169() {
   _webform_update_webform_settings();
 }
 
 /**
- * Issue #3064070: Split STATE_DRAFT into STATE_DRAFT_CREATED and STATE_DRAFT_UPDATE.
+ * Issue #3064070: Split STATE_DRAFT into.
+ *
+ * STATE_DRAFT_CREATED and STATE_DRAFT_UPDATE.
  */
 function webform_update_8170() {
   // List of handler is that use webform submission state.
@@ -3204,7 +3296,9 @@ function webform_update_8170() {
 }
 
 /**
- * Issue #3066994: Form elements keys (machine name) to be in all cases not just lowercase.
+ * Issue #3066994: Form elements keys (machine name) to be in all.
+ *
+ * Cases not just lowercase.
  */
 function webform_update_8171() {
   _webform_update_admin_settings();
@@ -3276,7 +3370,7 @@ function webform_update_8175() {
       ->condition('name', 'webform.settings');
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {
-      $data = unserialize($record['data']);
+      $data = unserialize($record['data'], ['allowed_classes' => FALSE]);
       $data['mail']['default_subject'] = str_replace('[webform_submission:source-entity]', '[webform_submission:source-title]', $data['mail']['default_subject']);
       \Drupal::database()->update($table_name)
         ->fields(['data' => serialize($data)])
@@ -3858,7 +3952,9 @@ function webform_update_8204() {
 }
 
 /**
- * Issue #3168333: Allow site builders to customize debug handler data and format.
+ * Issue #3168333: Allow site builders to customize debug.
+ *
+ * Handler data and format.
  */
 function webform_update_8205() {
   _webform_update_webform_handler_settings();
@@ -3932,7 +4028,9 @@ function webform_update_8213() {
 }
 
 /**
- * Issue #3216928: Allow Base64 encoded file data to be excluded from remote posts.
+ * Issue #3216928: Allow Base64 encoded file data to be excluded.
+ *
+ * From remote posts.
  */
 function webform_update_8214() {
   _webform_update_webform_handler_settings();
@@ -4143,7 +4241,9 @@ function webform_update_8614() {
 }
 
 /**
- * Issue #3168333: Allow site builders to customize debug handler data and format.
+ * Issue #3168333: Allow site builders to customize debug handler.
+ *
+ * Data and format.
  */
 function webform_update_8615() {
   _webform_update_webform_handler_settings();
@@ -4247,7 +4347,9 @@ function webform_update_8623() {
 }
 
 /**
- * Issue #3216928: Allow Base64 encoded file data to be excluded from remote posts.
+ * Issue #3216928: Allow Base64 encoded file data to be excluded.
+ *
+ * From remote posts.
  */
 function webform_update_8624() {
   _webform_update_webform_handler_settings();
@@ -4305,7 +4407,9 @@ function webform_update_8636() {
 }
 
 /**
- * Issue #3249092: Disable 'Allow users to post submissions from a dedicated URL' for all webforms.
+ * Issue #3249092: Disable 'Allow users to post submissions.
+ *
+ * From a dedicated URL' for all webforms.
  */
 function webform_update_8637() {
   _webform_update_admin_settings();

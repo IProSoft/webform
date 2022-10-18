@@ -38,8 +38,8 @@ function webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     /** @var \Drupal\Core\Language\LanguageManagerInterface $language_manager */
     $language_manager = \Drupal::service('language_manager');
 
-    // If current webform is translated, load the base (default) webform and apply
-    // the translation to the elements.
+    // If current webform is translated, load the base (default)
+    // webform and apply the translation to the elements.
     if ($webform->getLangcode() !== $language_manager->getCurrentLanguage()->getId()) {
       $original_language = $language_manager->getLanguage($webform->getLangcode());
       if ($original_language) {
@@ -123,7 +123,10 @@ function webform_form_update_manager_update_form_alter(&$form, FormStateInterfac
     'container' => [
       '#type' => 'container',
       '#states' => ['visible' => [':input[name="projects[webform]"]' => ['checked' => TRUE]]],
-      '#attributes' => ['class' => ['js-form-wrapper'], 'style' => 'display:none'],
+      '#attributes' => [
+        'class' => ['js-form-wrapper'],
+        'style' => 'display:none',
+      ],
       'message' => [
         '#type' => 'webform_message',
         '#message_type' => 'warning',

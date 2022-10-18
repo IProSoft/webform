@@ -386,7 +386,10 @@ function template_preprocess_webform_submission_information(array &$variables) {
       '#type' => 'link',
       '#title' => t('Delete submission'),
       '#url' => $url,
-      '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, ['button', 'button--danger']),
+      '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, [
+        'button',
+        'button--danger',
+      ]),
     ];
 
     WebformDialogHelper::attachLibraries($variables['delete']);
@@ -554,7 +557,10 @@ function template_preprocess_webform_progress(array &$variables) {
   }
 
   if ($webform->getSetting('wizard_progress_pages')) {
-    $variables['summary'] = t('@start of @end', ['@start' => $current_index + 1, '@end' => $total]);
+    $variables['summary'] = t('@start of @end', [
+      '@start' => $current_index + 1,
+      '@end' => $total,
+    ]);
   }
 
   if ($webform->getSetting('wizard_progress_percentage')) {
@@ -1050,7 +1056,12 @@ function template_preprocess_webform_element_image_file(array &$variables) {
       switch ($format) {
         case 'modal':
           $variables['image'] += [
-            '#attributes' => ['class' => ['js-webform-image-file-modal', 'webform-image-file-modal']],
+            '#attributes' => [
+              'class' => [
+                'js-webform-image-file-modal',
+                'webform-image-file-modal',
+              ],
+            ],
             '#attached' => ['library' => ['webform/webform.element.image_file.modal']],
           ];
           break;

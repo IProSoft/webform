@@ -27,7 +27,11 @@ function webform_library_info_build() {
       // to prevent JS from being parsed by locale_js_alter()
       // @see locale_js_alter()
       // @see https://www.drupal.org/node/1803330
-      $settings = ['type' => 'external', 'preprocess' => FALSE, 'minified' => FALSE];
+      $settings = [
+        'type' => 'external',
+        'preprocess' => FALSE,
+        'minified' => FALSE,
+      ];
       if ($type === 'css') {
         $libraries["webform.css.$webform_id"] = [
           'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}?{$default_query_string}" => $settings]],
@@ -63,7 +67,10 @@ function webform_library_info_alter(&$libraries, $extension) {
   if (isset($libraries['webform.element.date'])
     && floatval(\Drupal::VERSION) < 9
     && !\Drupal::moduleHandler()->moduleExists('jquery_ui_datepicker')) {
-    $libraries['webform.element.date']['dependencies'] = ['core/drupal.date', 'core/drupalSettings'];
+    $libraries['webform.element.date']['dependencies'] = [
+      'core/drupal.date',
+      'core/drupalSettings',
+    ];
   }
 
   // If old version of the progress tracker (< 2.0.7) is installed
