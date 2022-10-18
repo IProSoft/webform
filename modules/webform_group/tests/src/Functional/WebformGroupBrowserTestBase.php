@@ -20,7 +20,7 @@ abstract class WebformGroupBrowserTestBase extends GroupBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform_group', 'webform_group_test'];
+  protected static $modules = ['webform_group', 'webform_group_test'];
 
   /**
    * {@inheritdoc}
