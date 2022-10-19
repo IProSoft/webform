@@ -101,7 +101,7 @@ class WebformSettingsAccessDeniedTest extends WebformBrowserTestBase {
     /* ********************************************************************** */
 
     // Place block.
-    $this->drupalPlaceBlock('webform_block', [
+    $block = $this->drupalPlaceBlock('webform_block', [
       'webform_id' => 'test_form_access_denied',
     ]);
 
@@ -130,7 +130,7 @@ class WebformSettingsAccessDeniedTest extends WebformBrowserTestBase {
     $this->drupalGet('<front>');
     $assert_session->responseNotContains('<div class="webform-access-denied">');
     $assert_session->responseNotContains('Please login to access <b>Test: Webform: Access Denied</b>.');
-    $assert_session->responseContains('id="webform-submission-test-form-access-denied-user-1-add-form"');
+    $assert_session->responseContains('id="webform-submission-test-form-access-denied-block-' . $block->id() . '-add-form"');
   }
 
   /**
