@@ -5,6 +5,7 @@
  * Enables the creation of webforms and questionnaires.
  */
 
+use Drupal\block\BlockPluginCollection;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
@@ -13,6 +14,8 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\Context\Context;
+use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -1035,6 +1038,29 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_load() for block entities.
+ * 
+ * Attach the block entity as context on webform block plugins;
+ * this should allow setting the source entity of a webform submission form in
+ * a reliable way for the case of webform blocks.
+ */
+function webform_block_load($blocks) {
+  foreach ($blocks as $block) {
+    if ($block->getPluginId() !== 'webform_block' || !isset($block->get('settings')['webform_id'])) {
+      continue;
+    }
+    foreach ($block->getPluginCollections() as $plugin_collection) {
+      if ($plugin_collection instanceof BlockPluginCollection) {
+        if ($plugin_collection->has('webform_block')) {
+          $block_instance = $plugin_collection->get('webform_block');
+          $block_instance->setContext('webform_block_source_entity', new Context(new ContextDefinition('entity:block'), $block));
+        }
+      }
+    }
+  }
 }
 
 /* ************************************************************************** */

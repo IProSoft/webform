@@ -18,7 +18,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *   id = "webform_block",
  *   admin_label = @Translation("Webform"),
- *   category = @Translation("Webform")
+ *   category = @Translation("Webform"),
+ *   context_definitions = {
+ *     "webform_block_source_entity" = @ContextDefinition("entity:block", required = FALSE, label = @Translation("Block"))
+ *   }
  * )
  */
 class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -194,6 +197,15 @@ class WebformBlock extends BlockBase implements ContainerFactoryPluginInterface 
       '#webform' => $webform,
       '#default_data' => WebformYaml::decode($this->configuration['default_data']),
     ];
+
+    // This will effectively propagate all the way down to WebformSubmissionForm::getFormId().
+    // @see https://www.drupal.org/project/drupal/issues/3316194
+    if ($block_entity = $this->getContextValue('webform_block_source_entity')) {
+      $build += [
+        '#entity_id' => $block_entity->id(),
+        '#entity_type' => 'block',
+      ];
+    }
 
     // If redirect, set the #action property on the form.
     if ($this->configuration['redirect']) {
