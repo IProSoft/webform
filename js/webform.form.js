@@ -7,6 +7,8 @@
 
   'use strict';
 
+  var isChrome = (/chrom(e|ium)/.test(window.navigator.userAgent.toLowerCase()));
+
   /**
    * Remove single submit event listener.
    *
@@ -28,6 +30,23 @@
         .on('submit.singleSubmit', 'form.webform-remove-single-submit', onFormSubmit);
     }
   };
+
+  /**
+    * Autocomplete.
+    *
+    * @type {Drupal~behavior}
+    *
+    * @prop {Drupal~behaviorAttach} attach
+    *   Attaches the behavior for the webform autofocusing.
+    */
+    Drupal.behaviors.webformAutocomplete = {
+      attach: function (context) {
+        if (isChrome) {
+          $(context).find('.webform-submission-form input[autocomplete="off"]')
+            .attr('autocomplete', 'chrome-off-' + Math.floor(Math.random() * 100000000));
+        }
+      }
+    };
 
   /**
    * Prevent webform autosubmit on wizard pages.
