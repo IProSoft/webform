@@ -15,7 +15,7 @@ use Drupal\Core\Render\Markup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\Context\Context;
-use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\Plugin\Context\EntityContextDefinition;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -1056,7 +1056,7 @@ function webform_block_load($blocks) {
       if ($plugin_collection instanceof BlockPluginCollection) {
         if ($plugin_collection->has('webform_block')) {
           $block_instance = $plugin_collection->get('webform_block');
-          $block_instance->setContext('webform_block_source_entity', new Context(new ContextDefinition('entity:block'), $block));
+          $block_instance->setContext('webform_block_source_entity', new Context(new EntityContextDefinition('block'), $block));
         }
       }
     }
