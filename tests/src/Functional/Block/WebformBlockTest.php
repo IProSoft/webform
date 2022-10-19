@@ -58,11 +58,11 @@ class WebformBlockTest extends WebformBrowserTestBase {
 
     $assert_session->responseContains('webform-submission-contact-block-' . $block->id() . '-form');
     $form = $assert_session->elementExists('css', '#webform-submission-contact-block-' . $block->id() . '-add-form');
-    $assert_session->fieldValueEquals('edit-name--2', 'John Smith', $form);
+    $assert_session->elementExists('xpath', "//input[@type='text'][@value='John Smith']", $form);
 
     $assert_session->responseContains('webform-submission-contact-block-' . $block_duplicate->id() . '-form');
     $form_duplicate = $assert_session->elementExists('css', '#webform-submission-contact-block-' . $block_duplicate->id() . '-add-form');
-    $assert_session->fieldValueEquals('edit-name--3', 'John Doe', $form_duplicate);
+    $assert_session->elementExists('xpath', "//input[@type='text'][@value='John Doe']", $form_duplicate);
 
     // Check confirmation inline webform.
     $block_duplicate->getPlugin()->setConfigurationValue('webform_id', 'test_confirmation_inline');
