@@ -1049,7 +1049,7 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
  */
 function webform_block_load($blocks) {
   foreach ($blocks as $block) {
-    if ($block->getPluginId() !== 'webform_block' || !isset($block->get('settings')['webform_id'])) {
+    if ($block->getPluginId() !== 'webform_block') {
       continue;
     }
     foreach ($block->getPluginCollections() as $plugin_collection) {
