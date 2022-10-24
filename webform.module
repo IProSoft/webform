@@ -1042,7 +1042,7 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
 
 /**
  * Implements hook_ENTITY_TYPE_load() for block entities.
- * 
+ *
  * Attach the block entity as context on webform block plugins;
  * this should allow setting the source entity of a webform submission form in
  * a reliable way for the case of webform blocks.
