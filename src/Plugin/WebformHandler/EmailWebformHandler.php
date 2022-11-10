@@ -1622,7 +1622,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // Tweak elements.
     switch ($name) {
       case 'from_mail':
-        $element[$name]['#other__description'] = $this->t('Multiple email addresses may be separated by commas.')
+        $element[$name]['#other__description'] = $this->t('Multiple email addresses may be separated by commas. Emails are only sent to cc and bcc addresses if a To email address is provided.')
           . ' '
           . $this->t("If multiple email addresses are entered the '@name' will be not included in the email.", ['@name' => $this->t('From name')]);
         break;
