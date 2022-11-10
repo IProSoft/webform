@@ -120,6 +120,9 @@ class WebformDevelCommands extends WebformCommandsBase {
     $this->output()->writeln(dt('Repairing webform handlers…'));
     _webform_update_webform_handler_settings();
 
+    $this->drush_print($this->dt('Repairing webform actions…'));
+    _webform_update_actions();
+
     $this->output()->writeln(dt('Repairing webform field storage definitions…'));
     _webform_update_field_storage_definitions();
 
