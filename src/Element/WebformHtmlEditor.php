@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\imce\Imce;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
@@ -146,7 +147,7 @@ class WebformHtmlEditor extends FormElement {
     }
 
     // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
-    if (\Drupal::moduleHandler()->moduleExists('imce') && \Drupal\imce\Imce::access()) {
+    if (\Drupal::moduleHandler()->moduleExists('imce') && Imce::access()) {
       $element['#attached']['library'][] = 'imce/drupal.imce.ckeditor';
       $element['#attached']['drupalSettings']['webform']['html_editor']['ImceImageIcon'] = \Drupal::service('file_url_generator')->generateAbsoluteString(\Drupal::service('extension.list.module')->getPath('imce') . '/js/plugins/ckeditor/icons/imceimage.png');
     }

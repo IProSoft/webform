@@ -20,12 +20,12 @@ abstract class WebformGroupBrowserTestBase extends GroupBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform_group', 'webform_group_test'];
+  protected static $modules = ['webform_group', 'webform_group_test'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Allow all roles to view webform nodes.
@@ -40,7 +40,7 @@ abstract class WebformGroupBrowserTestBase extends GroupBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown() {
+  protected function tearDown(): void {
     $this->purgeSubmissions();
     parent::tearDown();
   }

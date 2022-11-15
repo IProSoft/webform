@@ -515,11 +515,23 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     }
 
     // Allow other modules to define webform libraries.
-    foreach ($this->moduleHandler->getImplementations('webform_libraries_info') as $module) {
-      foreach ($this->moduleHandler->invoke($module, 'webform_libraries_info') as $library_name => $library) {
-        $libraries[$library_name] = $library + [
-          'provider' => $module,
-        ];
+    if (method_exists($this->moduleHandler, 'invokeAllWith')) {
+      $this->moduleHandler->invokeAllWith('webform_libraries_info', function (callable $hook, string $module) use (&$libraries) {
+        foreach ($hook() as $library_name => $library) {
+          $libraries[$library_name] = $library + [
+              'provider' => $module,
+            ];
+        }
+      });
+    }
+    else {
+      // @phpstan-ignore-next-line
+      foreach ($this->moduleHandler->getImplementations('webform_libraries_info') as $module) {
+        foreach ($this->moduleHandler->invoke($module, 'webform_libraries_info') as $library_name => $library) {
+          $libraries[$library_name] = $library + [
+              'provider' => $module,
+            ];
+        }
       }
     }
 

@@ -913,12 +913,21 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       'webform' => $webform,
       'webform_submission' => $webform_submission,
     ];
-    $modules = \Drupal::moduleHandler()
-      ->getImplementations('webform_element_access');
-    foreach ($modules as $module) {
-      $hook = $module . '_webform_element_access';
-      $hook_result = $hook($operation, $element, $account, $context);
-      $access_result = $access_result->orIf($hook_result);
+
+    if (method_exists(\Drupal::moduleHandler(), 'invokeAllWith')) {
+      \Drupal::moduleHandler()->invokeAllWith('webform_element_access', function (callable $hook, string $module) use (&$access_result, $operation, $element, $account, $context) {
+        $hook_result = $hook($operation, $element, $account, $context);
+        $access_result = $access_result->orIf($hook_result);
+      });
+    }
+    else {
+      // @phpstan-ignore-next-line
+      $modules = \Drupal::moduleHandler()->getImplementations('webform_element_access');
+      foreach ($modules as $module) {
+        $hook = $module . '_webform_element_access';
+        $hook_result = $hook($operation, $element, $account, $context);
+        $access_result = $access_result->orIf($hook_result);
+      }
     }
 
     // Grant access as provided by webform, webform handler(s) and/or

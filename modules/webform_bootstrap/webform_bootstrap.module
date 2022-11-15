@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\bootstrap\Bootstrap;
 /**
  * @file
  * Helps support Webform to Bootstrap integration.
@@ -52,7 +53,7 @@ function webform_bootstrap_webform_element_alter(array &$element, FormStateInter
   // @see \Drupal\bootstrap\Utility\Element::smartDescription
   static $smart_description_enabled;
   if (!isset($smart_description_enabled)) {
-    $theme = \Drupal\bootstrap\Bootstrap::getTheme();
+    $theme = Bootstrap::getTheme();
     $smart_description_enabled = $theme->getSetting('tooltip_enabled') && $theme->getSetting('forms_smart_descriptions');
   }
 
@@ -128,11 +129,11 @@ function webform_bootstrap_preprocess_input(&$variables) {
     $element['#icon_only'] = TRUE;
     if (strpos($variables['attributes']['src'], '/webform/images/icons/plus.svg') !== FALSE) {
       $element['#title'] = t('Add');
-      $element['#icon'] = \Drupal\bootstrap\Bootstrap::glyphicon('plus-sign');
+      $element['#icon'] = Bootstrap::glyphicon('plus-sign');
     }
     elseif (strpos($variables['attributes']['src'], '/webform/images/icons/minus.svg') !== FALSE) {
       $element['#title'] = t('Remove');
-      $element['#icon'] = \Drupal\bootstrap\Bootstrap::glyphicon('minus-sign');
+      $element['#icon'] = Bootstrap::glyphicon('minus-sign');
     }
   }
 }

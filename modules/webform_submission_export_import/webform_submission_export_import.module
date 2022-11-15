@@ -126,7 +126,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
     'uri' => $file_info->getRealPath(),
     'filesize' => $file_info->getSize(),
   ];
-  $values['filemime'] = \Drupal::service('file.mime_type.guesser')->guess($values['filename']);
+  $values['filemime'] = \Drupal::service('file.mime_type.guesser')->guessMimeType($values['filename']);
   $file = File::create($values);
 
   $extensions = '';

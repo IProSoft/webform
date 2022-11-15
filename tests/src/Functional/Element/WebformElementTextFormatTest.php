@@ -40,7 +40,7 @@ class WebformElementTextFormatTest extends WebformElementBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->fileUsage = $this->container->get('file.usage');

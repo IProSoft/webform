@@ -49,11 +49,19 @@ function webform_library_info_build() {
 function webform_library_info_alter(&$libraries, $extension) {
   // Only alter modules that declare webform libraries.
   // @see hook_webform_libraries_info()
-  $webform_libraries_modules = \Drupal::moduleHandler()->getImplementations('webform_libraries_info');
-  $webform_libraries_modules[] = 'webform';
+  if (method_exists(\Drupal::moduleHandler(), 'hasImplementations')) {
+    if ($extension !== 'webform' && !\Drupal::moduleHandler()->hasImplementations('webform_libraries_info', $extension)) {
+      return;
+    }
+  }
+  else {
+    // @phpstan-ignore-next-line
+    $webform_libraries_modules = \Drupal::moduleHandler()->getImplementations('webform_libraries_info');
+    $webform_libraries_modules[] = 'webform';
 
-  if (!in_array($extension, $webform_libraries_modules)) {
-    return;
+    if (!in_array($extension, $webform_libraries_modules)) {
+      return;
+    }
   }
 
   /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
