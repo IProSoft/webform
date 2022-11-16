@@ -111,7 +111,7 @@ abstract class WebformAttachmentBase extends RenderElement implements WebformAtt
    * {@inheritdoc}
    */
   public static function getFileMimeType(array $element, WebformSubmissionInterface $webform_submission) {
-    /** @var \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $file_mime_type_guesser */
+    /** @var \Symfony\Component\Mime\MimeTypesInterface $file_mime_type_guesser */
     $file_mime_type_guesser = \Drupal::service('file.mime_type.guesser');
     $file_name = static::getFileName($element, $webform_submission);
     return $file_mime_type_guesser->guess($file_name);
