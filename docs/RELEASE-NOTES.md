@@ -109,7 +109,7 @@ Run Drupal Rector
 
     cd ~/Sites/drupal_webform
     ./vendor/bin/rector process web/modules/sandbox/webform --dry-run
-    ./vendor/bin/rector process web/modules/sandbox/schemadotorg
+    ./vendor/bin/rector process web/modules/sandbox/webform
 
 3. Review accessibility
 -----------------------
