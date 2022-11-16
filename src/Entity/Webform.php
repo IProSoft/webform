@@ -2272,6 +2272,10 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       $cache_contexts[] = 'url.query_args';
     }
     else {
+      // Add individual prepopulate fields.
+      foreach ($this->getElementsPrepopulate() as $element_key) {
+        $cache_contexts[] = 'url.query_args:' . $element_key;
+      }
       // Add source entity type and id query string parameters.
       if ($this->getSetting('form_prepopulate_source_entity')) {
         $cache_contexts[] = 'url.query_args:source_entity_type';
