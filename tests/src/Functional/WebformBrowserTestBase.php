@@ -40,7 +40,7 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->loadWebforms(static::$testWebforms);
   }
@@ -48,7 +48,7 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown() {
+  protected function tearDown(): void {
     $this->purgeSubmissions();
     parent::tearDown();
   }
