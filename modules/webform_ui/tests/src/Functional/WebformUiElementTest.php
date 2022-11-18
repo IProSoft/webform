@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\webform_ui\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform\Entity\Webform;
 
@@ -169,13 +170,13 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->submitForm($edit, 'Save');
 
     // Check elements URL contains ?update query string parameter.
-    $assert_session->addressEquals('admin/structure/webform/manage/contact', ['query' => ['update' => 'test']]);
+    $assert_session->addressEquals(Url::fromRoute('entity.webform.edit_form', ['webform' => 'contact'], ['query' => ['update' => 'test']]));
 
     // Check that save elements removes ?update query string parameter.
     $this->submitForm([], 'Save elements');
 
     // Check that save elements removes ?update query string parameter.
-    $assert_session->addressEquals('admin/structure/webform/manage/contact', ['query' => ['update' => 'test']]);
+    $assert_session->addressEquals(Url::fromRoute('entity.webform.edit_form', ['webform' => 'contact'], ['query' => ['update' => 'test']]));
 
     // Create validate unique element.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/textfield');
@@ -194,7 +195,7 @@ class WebformUiElementTest extends WebformBrowserTestBase {
     $this->submitForm($edit, 'Save');
 
     // Check elements URL contains ?update query string parameter.
-    $assert_session->addressEquals('admin/structure/webform/manage/contact', ['query' => ['update' => 'test']]);
+    $assert_session->addressEquals(Url::fromRoute('entity.webform.edit_form', ['webform' => 'contact'], ['query' => ['update' => 'test']]));
 
     // Check element updated.
     $this->drupalGet('/webform/contact');

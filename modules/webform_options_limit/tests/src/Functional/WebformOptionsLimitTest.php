@@ -94,7 +94,7 @@ class WebformOptionsLimitTest extends WebformBrowserTestBase {
     $assert_session->responseContains('<td>U [0 remaining]</td>');
 
     // Check that table select single is available.
-    $assert_session->fieldNotExists('edit-options-limit-tableselect-multiple-x');
+    $assert_session->fieldNotExists('edit-options-limit-tableselect-single-x');
     $assert_session->responseContains('<td>X</td>');
     $assert_session->responseContains('<td> [0 remaining]</td>');
 

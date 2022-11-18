@@ -88,7 +88,7 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
       'language_select' => 'English (en)',
     ];
     foreach ($elements as $label => $value) {
-      $assert_session->responseContains("<label>$label</label>" . PHP_EOL . "        $value", new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));
+      $assert_session->responseContains("<label>$label</label>" . PHP_EOL . "        $value");
     }
 
     // Check details element.

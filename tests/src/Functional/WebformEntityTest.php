@@ -58,7 +58,7 @@ class WebformEntityTest extends WebformBrowserTestBase {
 
     // Check get elements.
     $elements = $webform_test_submissions->getElementsInitialized();
-    $this->assertTrue(is_array($elements));
+    $this->assertIsArray($elements);
 
     // Check getElements.
     $columns = $webform_test_submissions->getElementsInitializedFlattenedAndHasValue();
