@@ -2,9 +2,9 @@
 
 namespace Drupal\webform;
 
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\StringTranslation\PluralTranslatableMarkup;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -203,7 +203,7 @@ class WebformOptionsForm extends EntityForm {
       '#mode' => 'yaml',
       '#title' => $this->t('Options (YAML)'),
       '#description' => $this->t('Key-value pairs MUST be specified as "safe_key: \'Some readable option\'". Use of only alphanumeric characters and underscores is recommended in keys. One option per line. Option groups can be created by using just the group name followed by indented group options.') . ' ' .
-        $this->t("Descriptions, which are only applicable to radios and checkboxes, can be delimited using ' -- '."),
+      $this->t("Descriptions, which are only applicable to radios and checkboxes, can be delimited using ' -- '."),
       '#attributes' => ['style' => 'min-height: 200px'],
       '#default_value' => Yaml::encode($this->getOptions()),
     ];

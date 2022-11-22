@@ -34,7 +34,7 @@ define('WEBFORM_HONEYPOT_DISABLED_WEBFORM', 2);
 define('WEBFORM_HONEYPOT_ENABLED_WEBFORM', 3);
 
 /**
- * Alter webform third party settings webforms to include Honeypot configuration.
+ * Alter webform third party settings forms to include Honeypot configuration.
  *
  * @param array $form
  *   An associative array containing the structure of the form.
@@ -116,7 +116,10 @@ function _webform_honeypot_form(array &$form, FormStateInterface $form_state, $h
 }
 
 /**
- * Validate callback; Checks if honeypot or time_restriction is disabled and removes them from the third party settings values.
+ * Validate callback.
+ *
+ * Checks if honeypot or time_restriction is
+ * disabled and removes them from the third party settings values.
  */
 function _webform_honeypot_form_validate(&$form, FormStateInterface $form_state) {
   $third_party_settings = $form_state->getValue('third_party_settings');
@@ -203,8 +206,8 @@ function honeypot_webform_third_party_settings_form_alter(&$form, FormStateInter
  */
 function honeypot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Only add a Honeypot when a webform is initially load.
-  // After a webform is submitted, via a multi-step webform and/or saving a draft,
-  // we can skip adding a Honeypot.
+  // After a webform is submitted, via a multi-step webform and/or saving a
+  // draft, we can skip adding a Honeypot.
   if ($form_state->isSubmitted()) {
     return;
   }

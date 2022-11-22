@@ -3,8 +3,8 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Asset\LibraryDiscoveryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -195,8 +195,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     if (!$cli && $severity === REQUIREMENT_ERROR) {
       $description['cdn'] = [
         '#markup' => '<hr/>' .
-          $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']) . '<br/>' .
-          $this->t('<a href=":href">Disable CDN warning</a>', [':href' => Url::fromRoute('webform.config.advanced')->toString()]),
+        $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']) . '<br/>' .
+        $this->t('<a href=":href">Disable CDN warning</a>', [':href' => Url::fromRoute('webform.config.advanced')->toString()]),
       ];
     }
     $description['info'] = $info;

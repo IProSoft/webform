@@ -6,9 +6,9 @@
  */
 
 use Drupal\block\Entity\Block;
-use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\group\Entity\GroupInterface;
 
 /**
  * Implements hook_block_access().

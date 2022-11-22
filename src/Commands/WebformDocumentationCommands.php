@@ -89,7 +89,8 @@ class WebformDocumentationCommands extends WebformCommandsBase {
    * @command webform:docs
    *
    * @usage webform:docs
-   *   Generates HTML documentation used by the Webform module's documentation pages.
+   *   Generates HTML documentation used by the Webform
+   *   module's documentation pages.
    *
    * @aliases wfd,webform-docs
    */

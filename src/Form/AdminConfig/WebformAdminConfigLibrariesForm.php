@@ -66,7 +66,7 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
       '#mode' => 'css',
       '#title' => $this->t('CSS'),
       '#description' => $this->t('Enter custom CSS to be attached to all webforms.') . '<br/>' .
-        $this->t("To customize only webform specific elements, you should use the '.webform-submission-form' selector"),
+      $this->t("To customize only webform specific elements, you should use the '.webform-submission-form' selector"),
       '#default_value' => $config->get('assets.css'),
     ];
     $form['assets']['javascript'] = [
@@ -82,7 +82,7 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
       '#type' => 'details',
       '#title' => $this->t('External optional libraries'),
       '#description' => $this->t('Uncheck the below optional external libraries that you do not want to be used by any webforms.') . '</br>' .
-        '<em>' . $this->t('Please note, you can also exclude element types that are dependent on specific libraries.') . '</em>',
+      '<em>' . $this->t('Please note, you can also exclude element types that are dependent on specific libraries.') . '</em>',
       '#open' => TRUE,
     ];
     $libraries_header = [

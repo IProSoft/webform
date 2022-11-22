@@ -209,7 +209,10 @@ function _webform_update_webform_handler_settings() {
   $definitions = $handler_manager->getDefinitions();
   $default_handler_settings = [];
   foreach ($definitions as $plugin_id => $definition) {
-    if (strpos($definition['provider'], 'webform_test_') === 0 || in_array($definition['provider'], ['webform', 'webform_scheduled_email'])) {
+    if (strpos($definition['provider'], 'webform_test_') === 0 || in_array($definition['provider'], [
+      'webform',
+      'webform_scheduled_email',
+    ])) {
       $default_handler_settings[$plugin_id] = $handler_manager->createInstance($plugin_id)->defaultConfiguration();
     }
   }

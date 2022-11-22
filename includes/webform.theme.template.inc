@@ -5,22 +5,22 @@
  * Preprocessors and helper functions to make theming easier.
  */
 
-use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Crypt;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Markup;
-use Drupal\Core\Url;
 use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\webform\Element\WebformCodeMirror;
 use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\webform\WebformMessageManagerInterface;
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\WebformMessageManagerInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Prepares variables for webform help templates.
@@ -386,7 +386,10 @@ function template_preprocess_webform_submission_information(array &$variables) {
       '#type' => 'link',
       '#title' => t('Delete submission'),
       '#url' => $url,
-      '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, ['button', 'button--danger']),
+      '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, [
+        'button',
+        'button--danger',
+      ]),
     ];
 
     WebformDialogHelper::attachLibraries($variables['delete']);
@@ -554,7 +557,10 @@ function template_preprocess_webform_progress(array &$variables) {
   }
 
   if ($webform->getSetting('wizard_progress_pages')) {
-    $variables['summary'] = t('@start of @end', ['@start' => $current_index + 1, '@end' => $total]);
+    $variables['summary'] = t('@start of @end', [
+      '@start' => $current_index + 1,
+      '@end' => $total,
+    ]);
   }
 
   if ($webform->getSetting('wizard_progress_percentage')) {
@@ -1050,7 +1056,12 @@ function template_preprocess_webform_element_image_file(array &$variables) {
       switch ($format) {
         case 'modal':
           $variables['image'] += [
-            '#attributes' => ['class' => ['js-webform-image-file-modal', 'webform-image-file-modal']],
+            '#attributes' => [
+              'class' => [
+                'js-webform-image-file-modal',
+                'webform-image-file-modal',
+              ],
+            ],
             '#attached' => ['library' => ['webform/webform.element.image_file.modal']],
           ];
           break;

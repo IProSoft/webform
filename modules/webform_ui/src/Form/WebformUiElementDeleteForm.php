@@ -8,8 +8,8 @@ use Drupal\webform\Form\WebformDeleteFormBase;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Webform for deleting a webform element.
@@ -108,7 +108,7 @@ class WebformUiElementDeleteForm extends WebformDeleteFormBase {
       '#type' => 'webform_message',
       '#message_type' => 'warning',
       '#message_message' => $this->t('Are you sure you want to delete the %title element?', $t_args) . '<br/>' .
-        '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
+      '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
     ];
   }
 

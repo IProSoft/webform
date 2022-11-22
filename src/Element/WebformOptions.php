@@ -4,9 +4,9 @@ namespace Drupal\webform\Element;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -90,7 +90,7 @@ class WebformOptions extends FormElement {
         '#default_value' => WebformYaml::encode($element['#default_value']),
         '#placeholder' => t('Enter custom options…'),
         '#description' => t('Key-value pairs MUST be specified as "safe_key: \'Some readable options\'". Use of only alphanumeric characters and underscores is recommended in keys. One option per line.') . '<br /><br />' .
-          t('Option groups can be created by using just the group name followed by indented group options.'),
+        t('Option groups can be created by using just the group name followed by indented group options.'),
       ];
       return $element;
     }

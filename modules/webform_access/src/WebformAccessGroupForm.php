@@ -292,8 +292,8 @@ class WebformAccessGroupForm extends EntityForm {
       '#type' => 'webform_entity_select',
       '#title' => $this->t('Administrators'),
       '#description' => $this->t('Administrators will be able to add and remove users and custom email addresses from this group.') .
-        '<br/><br/>' .
-        "<em>Please note: Administrators are not automatically assigned access to this group's webforms and will not receive any emails. If administrators should also be able access this access group's webforms or receive emails, you must explicitly add the administrator as a user or email address to this access group.</em>",
+      '<br/><br/>' .
+      "<em>Please note: Administrators are not automatically assigned access to this group's webforms and will not receive any emails. If administrators should also be able access this access group's webforms or receive emails, you must explicitly add the administrator as a user or email address to this access group.</em>",
       '#target_type' => 'user',
       '#multiple' => TRUE,
       '#selection_handler' => 'default:user',
