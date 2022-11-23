@@ -124,6 +124,7 @@ class WebformShareController extends ControllerBase {
     $content = 'document.write(' . $iframe_script . ');';
     $response = new CacheableResponse($content, 200, ['Content-Type' => 'text/javascript']);
 
+    $response->addCacheableDependency($build);
     $response->addCacheableDependency($webform);
     if ($source_entity) {
       $response->addCacheableDependency($source_entity);
