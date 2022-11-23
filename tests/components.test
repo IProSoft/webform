@@ -11,6 +11,8 @@ include_once dirname(__FILE__) . '/webform.test';
  */
 class WebformComponentsTestCase extends WebformTestCase {
 
+  public $pass;
+
   /**
    * Implements hook.
    */
