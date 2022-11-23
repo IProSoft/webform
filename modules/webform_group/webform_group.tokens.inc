@@ -46,7 +46,7 @@ function webform_group_token_info() {
         ];
         $webform_group["role:$group_role_id"] = [
           'name' => t('@group_type: @group_role (Email addresses) for current group', $t_args),
-          'description' => t('The email addresses of <strong>users</strong> assigned to the %group_type:%group_role group role for the current webform node.', $t_args),
+          'description' => t('The email addresses of <strong>users</strong> assigned to the %group_type:%group_role group role for the current webform group content.', $t_args),
         ];
       }
 
@@ -63,7 +63,7 @@ function webform_group_token_info() {
     ];
     $webform_group["role:$group_role_name"] = [
       'name' => t('Group role: @group_role (Email addresses) for current group', $t_args),
-      'description' => t('The email addresses of <strong>users</strong> assigned to the %group_role group role (all groups) for the current webform node.', $t_args),
+      'description' => t('The email addresses of <strong>users</strong> assigned to the %group_role group role (all groups) for the current webform group content.', $t_args),
     ];
   }
 
