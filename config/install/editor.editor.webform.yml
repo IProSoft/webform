@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.webform
+  module:
+    - ckeditor
+format: webform
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Format
+            - Bold
+            - Italic
+            - Superscript
+            - Subscript
+        -
+          name: Media
+          items:
+            - SpecialChar
+        -
+          name: Linking
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - NumberedList
+            - BulletedList
+        -
+          name: Indentation
+          items:
+            - Outdent
+            - Indent
+        -
+          name: 'Block Formatting'
+          items:
+            - Blockquote
+        -
+          name: Tools
+          items:
+            - Source
+            - Maximize
+  plugins: {  }

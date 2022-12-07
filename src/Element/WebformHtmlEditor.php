@@ -5,6 +5,7 @@ namespace Drupal\webform\Element;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformXss;
@@ -14,7 +15,7 @@ use Drupal\webform\Utility\WebformXss;
  *
  * @FormElement("webform_html_editor")
  */
-class WebformHtmlEditor extends FormElement {
+class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface {
 
   /**
    * {@inheritdoc}
@@ -104,6 +105,7 @@ class WebformHtmlEditor extends FormElement {
         '#type' => 'text_format',
         '#format' => $format,
         '#allowed_formats' => [$format],
+        '#webform_html_editor' => TRUE,
         // Do not allow the text format value to be cleared when the text format
         // is hidden via #states. We must use a wrapper <div> because
         // The TextFormat element does not support #attributes.
@@ -277,6 +279,66 @@ class WebformHtmlEditor extends FormElement {
    */
   public static function stripTags($text) {
     return Xss::filter($text, static::getAllowedTags());
+  }
+
+  /* ************************************************************************ */
+  // Text format callbacks.
+  // @see \webform_element_info_alter()
+  /* ************************************************************************ */
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks() {
+    return ['preRenderTextFormat'];
+  }
+
+  /**
+   * Process text format.
+   *
+   * @param array $element
+   *   An associative array containing the properties and children of the
+   *   radios or checkboxes element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   * @param array $complete_form
+   *   The complete webform structure.
+   *
+   * @return array
+   *   The processed element.
+   */
+  public static function processTextFormat($element, FormStateInterface $form_state, &$complete_form) {
+    // Remove the 'webform' text format from allowed formats.
+    if (empty($element['#allowed_formats'])) {
+      $user = \Drupal::currentUser();
+      $formats = filter_formats($user);
+      if (isset($formats['webform'])) {
+        unset($formats['webform']);
+        $element['#allowed_formats'] = array_keys($formats);
+      }
+    }
+    return $element;
+  }
+
+  /**
+   * Prepares a #type 'text_format'.
+   *
+   * @param array $element
+   *   An associative array containing the properties of the element.
+   *
+   * @return array
+   *   The $element with prepared variables ready for theme_element().
+   */
+  public static function preRenderTextFormat(array $element) {
+    // Remove guidelines and help from the 'webform_html_editor'.
+    // @see \Drupal\webform\Element\WebformHtmlEditor::processWebformHtmlEditor
+    if (!empty($element['#webform_html_editor'])) {
+      unset(
+        $element['format']['guidelines'],
+        $element['format']['help']
+      );
+    }
+    return $element;
   }
 
 }

@@ -5,6 +5,8 @@
  * Post update functions for Webform module.
  */
 
+use Drupal\Core\Config\FileStorage;
+
 /**
  * #3254570: Move jQuery UI datepicker support into dedicated deprecated module.
  */
@@ -71,4 +73,40 @@ function webform_post_update_deprecate_location_places() {
 
   // Save webform.settings configuration.
   $config->save();
+}
+
+/**
+ * Move from custom CKEditor to 'webform' text format with CKEditor.
+ */
+function webform_post_update_ckeditor() {
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+
+  $install_text_format = FALSE;
+
+  // Set 'webform' text format for element and mail HTML editor.
+  if (empty($config->get('element.html_editor.element_format'))) {
+    $config->set('element.html_editor.element_format', 'webform');
+    $install_text_format = TRUE;
+  }
+  if (empty($config->get('element.html_editor.mail_format'))) {
+    $config->set('element.html_editor.mail_format', 'webform');
+    $install_text_format = TRUE;
+  }
+
+  if ($install_text_format) {
+    // Update webform settings.
+    $config->save();
+
+    // Install the 'webform' text format and editor.
+    $config_path = \Drupal::service('extension.list.module')->getPath('webform') . '/config/install';
+    $source = new FileStorage($config_path);
+
+    /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+    $config_storage = \Drupal::service('config.storage');
+
+    $names = ['editor.editor.webform', 'filter.format.webform'];
+    foreach ($names as $name) {
+      $config_storage->write($name, $source->read($name));
+    }
+  }
 }

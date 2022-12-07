@@ -210,8 +210,8 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Element text format'),
       '#description' => $this->t('Leave blank to use the custom and recommended Webform specific HTML editor.'),
-      '#empty_option' => $this->t('- None -'),
       '#options' => $format_options,
+      '#required' => TRUE,
       '#default_value' => $config->get('html_editor.element_format'),
       '#parents' => ['html_editor', 'element_format'],
     ];
@@ -219,15 +219,10 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Mail text format'),
       '#description' => $this->t('Leave blank to use the custom and recommended Webform specific HTML editor.'),
-      '#empty_option' => $this->t('- None -'),
       '#options' => $format_options,
+      '#required' => TRUE,
       '#default_value' => $config->get('html_editor.mail_format'),
       '#parents' => ['html_editor', 'mail_format'],
-      '#states' => [
-        'visible' => [
-          ':input[name="html_editor[disabled]"]' => ['checked' => FALSE],
-        ],
-      ],
     ];
     $form['html_editor']['format_container']['make_unused_managed_files_temporary'] = [
       '#type' => 'checkbox',
@@ -236,26 +231,12 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#return_value' => TRUE,
       '#default_value' => $config->get('html_editor.make_unused_managed_files_temporary'),
       '#parents' => ['html_editor', 'make_unused_managed_files_temporary'],
-      '#states' => [
-        'visible' => [
-          [':input[name="html_editor[element_format]"]' => ['!value' => '']],
-          'or',
-          [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
-        ],
-      ],
     ];
     $form['html_editor']['format_container']['warning_message'] = [
       '#type' => 'webform_message',
       '#message_message' => $this->t('Files uploaded via the CKEditor file dialog to webform elements, settings, and configuration will not be exportable.') . '<br/>' .
         '<strong>' . $this->t('All files must be uploaded to your production environment and then copied to development and local environment.') . '</strong>',
       '#message_type' => 'warning',
-      '#states' => [
-        'visible' => [
-          [':input[name="html_editor[element_format]"]' => ['!value' => '']],
-          'or',
-          [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
-        ],
-      ],
       '#message_close' => TRUE,
       '#message_storage' => WebformMessage::STORAGE_SESSION,
     ];
