@@ -1391,7 +1391,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     }
     // Preload HTML Editor and CodeMirror so that they can be properly
     // initialized when loaded via Ajax.
-    $element['#attached']['library'][] = 'webform/webform.element.html_editor';
     $element['#attached']['library'][] = 'webform/webform.element.codemirror.text';
 
     return $element;

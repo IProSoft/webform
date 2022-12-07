@@ -118,40 +118,10 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
       return $element;
     }
 
-    // Else use textarea with completely custom HTML Editor.
+    // Else use a textarea.
     $element['value'] += [
       '#type' => 'textarea',
     ];
-    $element['value']['#attributes']['class'][] = 'js-html-editor';
-
-    $element['#attached']['library'][] = 'webform/webform.element.html_editor';
-    $element['#attached']['drupalSettings']['webform']['html_editor']['allowedContent'] = static::getAllowedContent();
-
-    /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
-    $libraries_manager = \Drupal::service('webform.libraries_manager');
-    $libraries = $libraries_manager->getLibraries(TRUE);
-    $element['#attached']['drupalSettings']['webform']['html_editor']['plugins'] = [];
-    foreach ($libraries as $library_name => $library) {
-      if (strpos($library_name, 'ckeditor.') === FALSE) {
-        continue;
-      }
-
-      $plugin_name = str_replace('ckeditor.', '', $library_name);
-      $plugin_path = $library['plugin_path'];
-      $plugin_url = $library['plugin_url'];
-      if (file_exists($plugin_path)) {
-        $element['#attached']['drupalSettings']['webform']['html_editor']['plugins'][$plugin_name] = base_path() . $plugin_path;
-      }
-      else {
-        $element['#attached']['drupalSettings']['webform']['html_editor']['plugins'][$plugin_name] = $plugin_url;
-      }
-    }
-
-    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
-    if (\Drupal::moduleHandler()->moduleExists('imce') && \Drupal\imce\Imce::access()) {
-      $element['#attached']['library'][] = 'imce/drupal.imce.ckeditor';
-      $element['#attached']['drupalSettings']['webform']['html_editor']['ImceImageIcon'] = \Drupal::service('file_url_generator')->generateAbsoluteString(\Drupal::service('extension.list.module')->getPath('imce') . '/js/plugins/ckeditor/icons/imceimage.png');
-    }
 
     if (!empty($element['#states'])) {
       WebformFormHelper::processStates($element, '#wrapper_attributes');

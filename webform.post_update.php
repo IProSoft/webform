@@ -84,12 +84,12 @@ function webform_post_update_ckeditor() {
   $install_text_format = FALSE;
 
   // Set 'webform' text format for element and mail HTML editor.
-  if (empty($config->get('element.html_editor.element_format'))) {
-    $config->set('element.html_editor.element_format', 'webform');
+  if (empty($config->get('html_editor.element_format'))) {
+    $config->set('html_editor.element_format', 'webform');
     $install_text_format = TRUE;
   }
-  if (empty($config->get('element.html_editor.mail_format'))) {
-    $config->set('element.html_editor.mail_format', 'webform');
+  if (empty($config->get('html_editor.mail_format'))) {
+    $config->set('html_editor.mail_format', 'webform');
     $install_text_format = TRUE;
   }
 
