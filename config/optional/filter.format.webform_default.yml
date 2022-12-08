@@ -1,5 +1,8 @@
 langcode: en
 status: true
+dependencies:
+  module:
+    - webform
 name: 'Webform (Default)'
 format: webform_default
 weight: 100

@@ -131,7 +131,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
       // @see \Drupal\Core\Mail\MailManager::doMail
       // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
       'subject' => 'This has <removed>"special" \'chararacters\'',
-      'message[value]' => '<p><em>Please enter a message.</em> Test that double "quotes" are not encoded.</p>',
+      'message[value][value]' => '<p><em>Please enter a message.</em> Test that double "quotes" are not encoded.</p>',
       'checkbox' => FALSE,
     ];
     $this->postSubmissionTest($webform, $edit);
@@ -163,7 +163,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
 
     // Check resend webform with custom message.
     $this->drupalGet("admin/structure/webform/manage/test_handler_email_advanced/submission/$sid/resend");
-    $this->submitForm(['message[body][value]' => 'Testing 123…'], 'Resend message');
+    $this->submitForm(['message[body][value][value]' => 'Testing 123…'], 'Resend message');
     $sent_email = $this->getLastEmail();
     $this->assertStringNotContainsString('<b>First name</b><br />John<br /><br />', $sent_email['params']['body']);
     $this->debug($sent_email['params']['body']);
