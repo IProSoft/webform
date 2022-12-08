@@ -40,7 +40,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['filter', 'file', 'webform'];
+  protected static $modules = [ 'file', 'webform'];
 
   /**
    * {@inheritdoc}

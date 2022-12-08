@@ -193,13 +193,11 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('html_editor.disabled'),
     ];
     $format_options = [];
-    if ($this->moduleHandler->moduleExists('filter')) {
-      $format_options[WebformHtmlEditor::DEFAULT_FILTER_FORMAT] = $this->t('- Default -');
-      $filters = filter_formats();
-      unset($filters[WebformHtmlEditor::DEFAULT_FILTER_FORMAT]);
-      foreach ($filters as $filter) {
-        $format_options[$filter->id()] = $filter->label();
-      }
+    $format_options[WebformHtmlEditor::DEFAULT_FILTER_FORMAT] = $this->t('- Default -');
+    $filters = filter_formats();
+    unset($filters[WebformHtmlEditor::DEFAULT_FILTER_FORMAT]);
+    foreach ($filters as $filter) {
+      $format_options[$filter->id()] = $filter->label();
     }
     $form['html_editor']['format_container'] = [
       '#type' => 'container',

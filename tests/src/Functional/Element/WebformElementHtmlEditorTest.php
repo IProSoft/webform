@@ -17,7 +17,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['filter', 'editor', 'ckeditor', 'webform'];
+  protected static $modules = [ 'editor', 'ckeditor', 'webform'];
 
   /**
    * Webforms to load.

@@ -106,9 +106,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
     // If #format or 'webform.settings.html_editor.element_format' is defined return
     // a 'text_format' element.
     $format = $element['#format'] ?: \Drupal::config('webform.settings')->get('html_editor.element_format');
-    if ($format
-      && \Drupal::moduleHandler()->moduleExists('filter')
-      && FilterFormat::load($format)) {
+    if ($format && FilterFormat::load($format)) {
       $element['value'] += [
         '#type' => 'text_format',
         '#format' => $format,
