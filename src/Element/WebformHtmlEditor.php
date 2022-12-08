@@ -123,6 +123,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
         '#suffix' => '</div>',
       ];
       WebformElementHelper::fixStatesWrapper($element);
+      $element['#attached']['library'][] = 'webform/webform.element.html_editor';
       return $element;
     }
 

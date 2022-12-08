@@ -721,6 +721,12 @@ webform.element.help:
     - core/once
     - webform/libraries.tippyjs
 
+webform.element.html_editor:
+  version: VERSION
+  css:
+    component:
+      css/webform.element.html_editor.css: {}
+
 webform.element.horizontal_rule:
   version: VERSION
   css:
