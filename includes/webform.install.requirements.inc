@@ -9,10 +9,17 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 
+// Webform install helper functions.
+include_once __DIR__ . '/webform.install.inc';
+
 /**
  * Implements hook_requirements().
  */
 function webform_requirements($phase) {
+  // Ensure the HTML editor is updated.
+  // @todo Move this to a more appropriate hook.
+  _webform_update_html_editor();
+
   if ($phase !== 'runtime') {
     return [];
   }

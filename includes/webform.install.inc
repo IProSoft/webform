@@ -459,11 +459,11 @@ function _webform_update_html_editor() {
   elseif (\Drupal::moduleHandler()->moduleExists('ckeditor')) {
     $names['optional/ckeditor'] = $file_name;
   }
-  else {
-    \Drupal::configFactory()
-      ->getEditable($file_name)
-      ->delete();
-  }
+
+  // Delete the editor before updating it.
+  \Drupal::configFactory()
+    ->getEditable($file_name)
+    ->delete();
 
   foreach ($names as $directory => $name) {
     $source = new FileStorage("$path/config/$directory");

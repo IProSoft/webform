@@ -4310,10 +4310,3 @@ function webform_update_8636() {
 function webform_update_8637() {
   _webform_update_admin_settings();
 }
-
-/**
- * Issue #3322552: CKEditor 5 support for Drupal 10.x
- */
-function webform_update_10000() {
-  _webform_update_html_editor();
-}
