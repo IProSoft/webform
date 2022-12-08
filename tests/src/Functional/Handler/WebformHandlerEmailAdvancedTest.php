@@ -131,7 +131,7 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
       // @see \Drupal\Core\Mail\MailManager::doMail
       // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
       'subject' => 'This has <removed>"special" \'chararacters\'',
-      'message[value][value]' => '<p><em>Please enter a message.</em> Test that double "quotes" are not encoded.</p>',
+      'message[value]' => '<p><em>Please enter a message.</em> Test that double "quotes" are not encoded.</p>',
       'checkbox' => FALSE,
     ];
     $this->postSubmissionTest($webform, $edit);
