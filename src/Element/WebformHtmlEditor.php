@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Security\TrustedCallbackInterface;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformXss;
@@ -100,7 +101,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
     // If #format or 'webform.settings.html_editor.element_format' is defined return
     // a 'text_format' element.
     $format = $element['#format'] ?: \Drupal::config('webform.settings')->get('html_editor.element_format');
-    if ($format) {
+    if ($format && FilterFormat::load($format)) {
       $element['value'] += [
         '#type' => 'text_format',
         '#format' => $format,
@@ -222,7 +223,28 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
       }
     }
 
-    if ($format = \Drupal::config('webform.settings')->get('html_editor.element_format')) {
+    $format = \Drupal::config('webform.settings')->get('html_editor.element_format');
+
+    // Make sure the filter.module is installed.
+    // This is only applicable for functional tests that do not install
+    // the filter.module.
+    if (!\Drupal::moduleHandler()->moduleExists('filter')) {
+      $format = NULL;
+    }
+
+    // If the filter format is 'webform', check to see if it
+    // has been customized with filter types, if has not been customized then
+    // use the 'webform_html_editor_markup' template with the webform module's
+    // allowed tags.
+    if ($format === 'webform') {
+      /** @var \Drupal\filter\FilterFormatInterface $format */
+      $fiter_format = FilterFormat::load($format);
+      if (empty($fiter_format) || empty($fiter_format->getFilterTypes())) {
+        $format = NULL;
+      }
+    }
+
+    if ($format) {
       return [
         '#type' => 'processed_text',
         '#text' => $text,
@@ -279,6 +301,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
    */
   public static function processTextFormat($element, FormStateInterface $form_state, &$complete_form) {
     // Remove the 'webform' text format from allowed formats.
+    // This is needed because the webform text format DOES NOT filter HTML.
     if (empty($element['#allowed_formats'])) {
       $user = \Drupal::currentUser();
       $formats = filter_formats($user);

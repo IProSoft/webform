@@ -98,7 +98,7 @@ function webform_post_update_ckeditor() {
     $config->save();
 
     // Install the 'webform' text format and editor.
-    $config_path = \Drupal::service('extension.list.module')->getPath('webform') . '/config/install';
+    $config_path = \Drupal::service('extension.list.module')->getPath('webform') . '/config/optional';
     $source = new FileStorage($config_path);
 
     /** @var \Drupal\Core\Config\StorageInterface $config_storage */
