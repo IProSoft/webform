@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Environment;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Plugin\Field\FieldType\FileItem;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -193,7 +194,9 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     ];
     $format_options = [];
     if ($this->moduleHandler->moduleExists('filter')) {
+      $format_options[WebformHtmlEditor::DEFAULT_FILTER_FORMAT] = $this->t('- Default -');
       $filters = filter_formats();
+      unset($filters[WebformHtmlEditor::DEFAULT_FILTER_FORMAT]);
       foreach ($filters as $filter) {
         $format_options[$filter->id()] = $filter->label();
       }

@@ -46,7 +46,7 @@ function webform_filter_format_load($entities) {
  * Implements hook_editor_js_settings_alter().
  */
 function webform_editor_js_settings_alter(array &$settings) {
-  $settings['editor']['formats'][WebformHtmlEditor::DEFAULT_FILTER_FORMAT]['editorSettings']['autoGrow_minHeight'] = '120';
+  $settings['editor']['formats'][WebformHtmlEditor::DEFAULT_FILTER_FORMAT]['editorSettings']['autoGrow_minHeight'] = '80';
 }
 
 /* ************************************************************************** */
