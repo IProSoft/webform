@@ -445,28 +445,52 @@ function _webform_update_elements_clear_properties_recursive(array &$element, ar
  * appropriate configuration file.
  */
 function _webform_update_html_editor() {
+  // Make sure the Webform module is installed, since we do call this function
+  // via webform_requirements().
+  if (!\Drupal::moduleHandler()->moduleExists('webform')) {
+    return;
+  }
+
   /** @var \Drupal\Core\Config\StorageInterface $config_storage */
   $config_storage = \Drupal::service('config.storage');
 
-  $path = \Drupal::service('extension.list.module')->getPath('webform');
-  $file_name = 'editor.editor.' . WebformHtmlEditor::DEFAULT_FILTER_FORMAT;
+  $module_path = \Drupal::service('extension.list.module')->getPath('webform');
+  $ckeditor_file_name = 'editor.editor.' . WebformHtmlEditor::DEFAULT_FILTER_FORMAT;
 
   $names = [];
+
+  // Install the webform default filter format.
   $names['optional'] = 'filter.format.' . WebformHtmlEditor::DEFAULT_FILTER_FORMAT;
+
+  // Get the current CKEditor version.
+  $current_version = \Drupal::config($ckeditor_file_name)->get('editor') ?: NULL;
   if (\Drupal::moduleHandler()->moduleExists('ckeditor5')) {
-    $names['optional/ckeditor5'] = $file_name;
+    $ckeditor_version = 'ckeditor5';
   }
   elseif (\Drupal::moduleHandler()->moduleExists('ckeditor')) {
-    $names['optional/ckeditor'] = $file_name;
+    $ckeditor_version = 'ckeditor';
+  }
+  else {
+    $ckeditor_version = NULL;
   }
 
-  // Delete the editor before updating it.
-  \Drupal::configFactory()
-    ->getEditable($file_name)
-    ->delete();
+  // If the changing or deleting the CKEditor, we need delete the existing file.
+  if ($current_version !== $ckeditor_version) {
+    \Drupal::configFactory()
+      ->getEditable($ckeditor_file_name)
+      ->delete();
+  }
 
+  // Install new CKEditor version.
+  if ($ckeditor_version) {
+    $names["optional/$ckeditor_version"] = $ckeditor_file_name;
+  }
+
+  // Import config files but never overwrite the existing config file.
   foreach ($names as $directory => $name) {
-    $source = new FileStorage("$path/config/$directory");
-    $config_storage->write($name, $source->read($name));
+    $source = new FileStorage("$module_path/config/$directory");
+    if (!$config_storage->exists($name)) {
+      $config_storage->write($name, $source->read($name));
+    }
   }
 }

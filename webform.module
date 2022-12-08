@@ -99,8 +99,11 @@ function webform_modules_installed($modules) {
   $email_provider = \Drupal::service('webform.email_provider');
   $email_provider->check();
 
-  // Switch HTML editor from CKEditor4 to CKEditor5.
-  if (in_array('ckeditor5', $modules)) {
+  // Update Webform HTML editor.
+  if (in_array('ckeditor', $modules)
+    || in_array('ckeditor5', $modules)) {
+
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
     _webform_update_html_editor();
   }
 }
@@ -129,6 +132,13 @@ function webform_modules_uninstalled($modules) {
   /** @var \Drupal\webform\WebformEmailProviderInterface $email_provider */
   $email_provider = \Drupal::service('webform.email_provider');
   $email_provider->check();
+
+  // Update Webform HTML editor.
+  if (in_array('ckeditor', $modules)
+    || in_array('ckeditor5', $modules)) {
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    _webform_update_html_editor();
+  }
 }
 
 /**
