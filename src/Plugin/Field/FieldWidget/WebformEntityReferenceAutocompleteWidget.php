@@ -28,6 +28,7 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
   public static function defaultSettings() {
     return [
       'default_data' => TRUE,
+      'enable_status' => TRUE,
     ] + parent::defaultSettings();
   }
 
@@ -41,6 +42,12 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
       '#title' => $this->t('Enable default submission data (YAML)'),
       '#description' => $this->t('If checked, site builders will be able to define default submission data (YAML)'),
       '#default_value' => $this->getSetting('default_data'),
+    ];
+    $element['enable_status'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable status options'),
+      '#description' => $this->t('If checked, site builders will be able to change the status of this webform instance (open, closed or scheduled)'),
+      '#default_value' => $this->getSetting('enable_status') ?? static::defaultSettings()['enable_status'],
     ];
     return $element;
   }
