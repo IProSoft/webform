@@ -232,27 +232,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
     }
 
     $format = \Drupal::config('webform.settings')->get('html_editor.element_format');
-
-    // Make sure the filter.module is installed.
-    // This is only applicable for functional tests that do not install
-    // the filter.module.
-    if (!\Drupal::moduleHandler()->moduleExists('filter')) {
-      $format = NULL;
-    }
-
-    // If the filter format is 'webform', check to see if it
-    // has been customized with filter types, if has not been customized then
-    // use the 'webform_html_editor_markup' template with the webform module's
-    // allowed tags.
-    if ($format === static::DEFAULT_FILTER_FORMAT) {
-      /** @var \Drupal\filter\FilterFormatInterface $format */
-      $fiter_format = FilterFormat::load($format);
-      if (empty($fiter_format) || empty($fiter_format->getFilterTypes())) {
-        $format = NULL;
-      }
-    }
-
-    if ($format) {
+    if ($format && $format !== static::DEFAULT_FILTER_FORMAT) {
       return [
         '#type' => 'processed_text',
         '#text' => $text,
@@ -308,13 +288,13 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
    *   The processed element.
    */
   public static function processTextFormat($element, FormStateInterface $form_state, &$complete_form) {
-    // Remove the 'webform' text format from allowed formats.
-    // This is needed because the webform text format DOES NOT filter HTML.
+    // Remove the 'webform' default text format from allowed formats.
+    // This is needed because the webform default text format DOES NOT filter HTML.
     if (empty($element['#allowed_formats'])) {
       $user = \Drupal::currentUser();
       $formats = filter_formats($user);
-      if (isset($formats['webform'])) {
-        unset($formats['webform']);
+      if (isset($formats[static::DEFAULT_FILTER_FORMAT])) {
+        unset($formats[static::DEFAULT_FILTER_FORMAT]);
         $element['#allowed_formats'] = array_keys($formats);
       }
     }
