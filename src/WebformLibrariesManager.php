@@ -472,6 +472,11 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Sort libraries by key.
     ksort($libraries);
 
+    // Add name property to all libraries.
+    foreach ($libraries as $library_name => $library) {
+      $libraries[$library_name]['name'] = $library_name;
+    }
+
     // Move deprecated libraries last.
     foreach ($libraries as $library_name => $library) {
       if (!empty($library['deprecated'])) {

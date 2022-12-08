@@ -1,8 +1,5 @@
 langcode: en
 status: true
-dependencies:
-  module:
-    - editor
 name: 'Webform (Default)'
 format: webform_default
 weight: 100
