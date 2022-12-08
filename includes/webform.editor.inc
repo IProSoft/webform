@@ -18,6 +18,29 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\WebformInterface;
 use Drupal\Component\Utility\Html;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\webform\Element\WebformHtmlEditor;
+
+/**
+ * Implements hook_ENTITY_TYPE_load().
+ */
+function webform_filter_format_load($entities) {
+  foreach ($entities as $entity) {
+    if ($entity->id() === WebformHtmlEditor::DEFAULT_FILTER_FORMAT) {
+      $route_name = \Drupal::routeMatch()->getRouteName();
+      $filter_format = \Drupal::routeMatch()->getParameter('filter_format');
+      if ($route_name === 'filter.admin_overview') {
+        // Set status to FALSE which hides the default webform filter format.
+        $entity->set('status',  FALSE);
+      }
+      elseif ($filter_format === WebformHtmlEditor::DEFAULT_FILTER_FORMAT) {
+        // Throw not found exception to prevent the default webform
+        // filter format from being edited.
+        throw new NotFoundHttpException();
+      }
+    }
+  }
+}
 
 /* ************************************************************************** */
 // Webform entity hooks.

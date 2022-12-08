@@ -19,6 +19,11 @@ use Drupal\webform\Utility\WebformXss;
 class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface {
 
   /**
+   * Default webform filter format.
+   */
+  const DEFAULT_FILTER_FORMAT = 'webform_default';
+
+  /**
    * {@inheritdoc}
    */
   public function getInfo() {
@@ -238,7 +243,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
     // has been customized with filter types, if has not been customized then
     // use the 'webform_html_editor_markup' template with the webform module's
     // allowed tags.
-    if ($format === 'webform') {
+    if ($format === static::DEFAULT_FILTER_FORMAT) {
       /** @var \Drupal\filter\FilterFormatInterface $format */
       $fiter_format = FilterFormat::load($format);
       if (empty($fiter_format) || empty($fiter_format->getFilterTypes())) {
