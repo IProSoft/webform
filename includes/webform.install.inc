@@ -5,11 +5,13 @@
  * Webform install helper functions.
  */
 
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\system\Entity\Action;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
+use Drupal\webform\Element\WebformHtmlEditor;
 
 /**
  * Update admin settings to reflect changes in the default settings.
@@ -433,5 +435,36 @@ function _webform_update_elements_clear_properties_recursive(array &$element, ar
     if (is_array($element[$key])) {
       _webform_update_elements_clear_properties_recursive($element[$key], $properties);
     }
+  }
+}
+
+/**
+ * Update the Webform module's default hidden text format and editor.
+ */
+function _webform_update_html_editor() {
+  /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+  $config_storage = \Drupal::service('config.storage');
+
+  $path = \Drupal::service('extension.list.module')->getPath('webform');
+  $names = [];
+  $names['optional'] = 'filter.format.' . WebformHtmlEditor::DEFAULT_FILTER_FORMAT;
+
+  $editor_file_name = 'editor.editor.' . WebformHtmlEditor::DEFAULT_FILTER_FORMAT;
+  if (\Drupal::moduleHandler()->moduleExists('ckeditor5')) {
+    $names['optional/ckeditor5'] = $editor_file_name;
+  }
+  elseif (\Drupal::moduleHandler()->moduleExists('ckeditor5')) {
+    $names['optional/ckeditor'] = $editor_file_name;
+  }
+  else {
+    \Drupal::configFactory()
+      ->getEditable($editor_file_name)
+      ->delete();
+  }
+
+  foreach ($names as $directory => $name) {
+    $config_path = $path . '/config/' . $directory;
+    $source = new FileStorage($config_path);
+    $config_storage->write($name, $source->read($name));
   }
 }
