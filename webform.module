@@ -98,6 +98,11 @@ function webform_modules_installed($modules) {
   /** @var \Drupal\webform\WebformEmailProviderInterface $email_provider */
   $email_provider = \Drupal::service('webform.email_provider');
   $email_provider->check();
+
+  // Switch HTML editor from CKEditor4 to CKEditor5.
+  if (in_array('ckeditor5', $modules)) {
+    _webform_update_html_editor();
+  }
 }
 
 /**
