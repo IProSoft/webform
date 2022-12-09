@@ -16,11 +16,10 @@ include_once __DIR__ . '/webform.install.inc';
  * Implements hook_requirements().
  */
 function webform_requirements($phase) {
-  // Ensure the Webform module's HTML editor is updated.
+  // Ensure that the Webform module's HTML editor is updated.
   // The problem is when upgrading from Drupal 9 to Drupal 10, the ckeditor
   // and RDF module could be missing which prevents hook_modules_installed()
   // from being executed as expected.
-  // @todo Move this to a more appropriate hook.
   _webform_update_html_editor();
 
   if ($phase !== 'runtime') {
