@@ -949,7 +949,10 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     $webform = $this->getWebform();
     $source_entity = $this->getSourceEntity();
 
-    $query = $this->getSubmissionStorage()->getQuery()->condition('webform_id', $webform->id());
+    $query = $this->getSubmissionStorage()
+      ->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('webform_id', $webform->id());
 
     // Filter by source entity or submitted to.
     if ($source_entity) {
