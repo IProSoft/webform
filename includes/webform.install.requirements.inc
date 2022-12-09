@@ -9,19 +9,10 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 
-// Webform install helper functions.
-include_once __DIR__ . '/webform.install.inc';
-
 /**
  * Implements hook_requirements().
  */
 function webform_requirements($phase) {
-  // Ensure that the Webform module's HTML editor is updated.
-  // The problem is when upgrading from Drupal 9 to Drupal 10, the ckeditor
-  // and RDF module could be missing which prevents hook_modules_installed()
-  // from being executed as expected.
-  _webform_update_html_editor();
-
   if ($phase !== 'runtime') {
     return [];
   }

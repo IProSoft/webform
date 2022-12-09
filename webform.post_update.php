@@ -7,6 +7,9 @@
 
 use Drupal\webform\Element\WebformHtmlEditor;
 
+// Webform install helper functions.
+include_once __DIR__ . '/includes/webform.install.inc';
+
 // Webform update hooks.
 include_once __DIR__ . '/includes/webform.install.update.inc';
 
@@ -79,7 +82,7 @@ function webform_post_update_deprecate_location_places() {
 }
 
 /**
- * Move from custom CKEditor to 'webform' text format with CKEditor.
+ * Move from custom CKEditor to hidden 'webform_default' text format.
  */
 function webform_post_update_ckeditor() {
   $config = \Drupal::configFactory()->getEditable('webform.settings');
