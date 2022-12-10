@@ -22,7 +22,7 @@ abstract class WebformWebDriverTestBase extends WebDriverTestBase {
    * @var string
    * @see https://www.drupal.org/node/3083055
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to enable.

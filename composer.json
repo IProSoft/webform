@@ -35,6 +35,7 @@
   },
   "require-dev": {
     "drupal/address": "~1.0",
+    "drupal/bartik": "~1.0",
     "drupal/bootstrap": "~3.0",
     "drupal/captcha": "~1.0",
     "drupal/chosen": "~3.0",
@@ -51,6 +52,7 @@
     "drupal/mailsystem": "~4.0",
     "drupal/paragraphs": "~1.0",
     "drupal/select2": "~1.0",
+    "drupal/seven": "~1.0",
     "drupal/smtp": "~1.0",
     "drupal/styleguide": "~1.0",
     "drupal/telephone_validation": "~2.0",
