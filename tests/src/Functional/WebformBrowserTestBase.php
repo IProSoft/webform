@@ -21,7 +21,7 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stable9';
 
   /**
    * Modules to enable.

@@ -43,7 +43,7 @@ class WebformHandlerEmailRenderingTest extends WebformBrowserTestBase {
 
     // Check that we are currently using the bartik.theme.
     $this->drupalGet('/webform/contact');
-    $assert_session->responseContains('core/themes/bartik/css/base/elements.css');
+    $assert_session->responseContains('bartik/css/base/elements.css');
 
     // Post submission and send emails.
     $edit = [
