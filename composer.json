@@ -42,7 +42,7 @@
     "drupal/devel": "~3.0",
     "drupal/entity": "~1.0",
     "drupal/entity_print": "~2.0",
-    "drupal/group": "~1.0",
+    "drupal/group": "1.0",
     "drupal/hal" : "~2.0",
     "drupal/jquery_ui": "~1.0",
     "drupal/jquery_ui_checkboxradio": "~1.0",
