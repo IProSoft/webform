@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform_devel\Controller;
+namespace Drupal\webform_schema\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
@@ -9,9 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
- * Provides route responses for webform devel schema.
+ * Provides route responses for webform schema.
  */
-class WebformDevelSchemaController extends ControllerBase implements ContainerInjectionInterface {
+class WebformSchemaController extends ControllerBase implements ContainerInjectionInterface {
 
   /**
    * The config factory.
@@ -21,11 +21,11 @@ class WebformDevelSchemaController extends ControllerBase implements ContainerIn
   protected $configFactory;
 
   /**
-   * The webform devel schema generator.
+   * The webform schema manager.
    *
-   * @var \Drupal\webform_devel\WebformDevelSchemaInterface
+   * @var \Drupal\webform_schema\WebformSchemaInterface
    */
-  protected $schema;
+  protected $schemaManager;
 
   /**
    * {@inheritdoc}
@@ -33,7 +33,7 @@ class WebformDevelSchemaController extends ControllerBase implements ContainerIn
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
     $instance->configFactory = $container->get('config.factory');
-    $instance->schema = $container->get('webform_devel.schema');
+    $instance->schemaManager = $container->get('webform_schema.manager');
     return $instance;
   }
 
@@ -54,10 +54,10 @@ class WebformDevelSchemaController extends ControllerBase implements ContainerIn
       $handle = fopen('php://output', 'r+');
 
       // Header.
-      fputcsv($handle, $this->schema->getColumns());
+      fputcsv($handle, $this->schemaManager->getColumns());
 
       // Rows.
-      $elements = $this->schema->getElements($webform);
+      $elements = $this->schemaManager->getElements($webform);
       foreach ($elements as $element) {
         $element['options_text'] = implode($multiple_delimiter, $element['options_text']);
         $element['options_value'] = implode($multiple_delimiter, $element['options_value']);

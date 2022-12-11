@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\webform_devel;
+namespace Drupal\webform_schema;
 
 use Drupal\webform\WebformInterface;
 
 /**
- * Provides an interface defining a webform devel schema.
+ * Provides an interface defining a webform schema manager.
  */
-interface WebformDevelSchemaInterface {
+interface WebformSchemaManagerInterface {
 
   /**
    * Get webform schema columns.

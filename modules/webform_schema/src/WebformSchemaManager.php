@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform_devel;
+namespace Drupal\webform_schema;
 
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -20,9 +20,9 @@ use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\WebformInterface;
 
 /**
- * Provides a webform schema generator.
+ * Provides a webform schema maaager.
  */
-class WebformDevelSchema implements WebformDevelSchemaInterface {
+class WebformSchemaManager implements WebformSchemaManagerInterface {
 
   use StringTranslationTrait;
 
@@ -48,7 +48,7 @@ class WebformDevelSchema implements WebformDevelSchemaInterface {
   protected $elementManager;
 
   /**
-   * Constructs a WebformDevelSchema object.
+   * Constructs a WebformSchema object.
    *
    * @param \Drupal\Core\Render\ElementInfoManagerInterface $element_info
    *   The element info manager.

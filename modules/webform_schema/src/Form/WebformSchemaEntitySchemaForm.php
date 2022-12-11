@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webform_devel\Form;
+namespace Drupal\webform_schema\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -12,23 +12,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Get webform schema.
  */
-class WebformDevelEntitySchemaForm extends EntityForm {
+class WebformSchemaEntitySchemaForm extends EntityForm {
 
   use WebformEntityAjaxFormTrait;
 
   /**
-   * The webform devel scheme service.
+   * The webform scheme manager.
    *
-   * @var \Drupal\webform_devel\WebformDevelSchemaInterface
+   * @var \Drupal\webform_schema\WebformSchemaManagerInterface
    */
-  protected $scheme;
+  protected $schemaManager;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
-    $instance->scheme = $container->get('webform_devel.schema');
+    $instance->schemaManager = $container->get('webform_schema.manager');
     return $instance;
   }
 
@@ -42,14 +42,14 @@ class WebformDevelEntitySchemaForm extends EntityForm {
     $webform = $this->getEntity();
 
     // Header.
-    $header = $this->scheme->getColumns();
+    $header = $this->schemaManager->getColumns();
     if ($webform_ui_exists) {
       $header['operations'] = $this->t('Operations');
     }
 
     // Rows.
     $rows = [];
-    $elements = $this->scheme->getElements($webform);
+    $elements = $this->schemaManager->getElements($webform);
     foreach ($elements as $element_key => $element) {
       $rows[$element_key] = [];
 
@@ -61,7 +61,7 @@ class WebformDevelEntitySchemaForm extends EntityForm {
       }
 
       if ($element['datatype'] === 'Composite') {
-        $rows[$element_key]['#attributes']['class'][] = 'webform-devel-schema-composite';
+        $rows[$element_key]['#attributes']['class'][] = 'webform-schema-composite';
       }
 
       if ($webform_ui_exists) {
@@ -99,12 +99,12 @@ class WebformDevelEntitySchemaForm extends EntityForm {
     $form['schema'] = [
       '#type' => 'table',
       '#header' => $header,
-      '#attributes' => ['class' => ['webform-devel-schema-table']],
+      '#attributes' => ['class' => ['webform-schema-table']],
     ] + $rows;
 
     WebformDialogHelper::attachLibraries($form);
 
-    $form['#attached']['library'][] = 'webform_devel/webform_devel';
+    $form['#attached']['library'][] = 'webform_schema/webform_schema';
 
     return $form;
   }
@@ -124,7 +124,7 @@ class WebformDevelEntitySchemaForm extends EntityForm {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRedirect('webform_devel.schema.export', ['webform' => $this->getEntity()->id()]);
+    $form_state->setRedirect('webform_schema.export', ['webform' => $this->getEntity()->id()]);
   }
 
 }
