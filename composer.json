@@ -48,7 +48,7 @@
     "drupal/jquery_ui": "~1.0",
     "drupal/jquery_ui_checkboxradio": "~1.0",
     "drupal/jquery_ui_datepicker": "~1.0",
-    "drupal/lingotek": "~3.0",
+    "drupal/lingotek": "~4.0",
     "drupal/mailsystem": "~4.0",
     "drupal/paragraphs": "~1.0",
     "drupal/select2": "~1.0",
