@@ -19,7 +19,7 @@
    */
   Drupal.behaviors.webformClientSideValidationAjax = {
     attach: function (context) {
-      $(once('webform-clientside-validation-ajax', 'form.webform-submission-form .form-actions :submit:not([formnovalidate])'))
+      $(once('webform-clientside-validation-ajax', 'form.webform-submission-form .form-actions input[type="submit"]:not([formnovalidate])'))
         .addClass('cv-validate-before-ajax');
     }
   };
