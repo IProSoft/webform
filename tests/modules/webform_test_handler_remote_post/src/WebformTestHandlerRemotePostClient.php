@@ -7,6 +7,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Random;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Extend Guzzle client so that we can override remote posts.
@@ -16,7 +17,7 @@ class WebformTestHandlerRemotePostClient extends Client {
   /**
    * {@inheritdoc}
    */
-  public function request($method, $uri = '', array $options = []) {
+  public function request($method, $uri = '', array $options = []): ResponseInterface {
     if (strpos($uri, 'http://webform-test-handler-remote-post/') === FALSE) {
       return parent::request($method, $uri, $options);
     }
