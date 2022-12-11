@@ -2,6 +2,6 @@ name: 'Webform Algolia Places test'
 type: module
 description: 'Support module for location geocomplete element testing.'
 package: 'Webform Testing'
-core_version_requirement: ^8.8 || ^9
+Fix core_version_requirement: ^9.4
 dependencies:
   - 'webform:webform_location_geocomplete'
