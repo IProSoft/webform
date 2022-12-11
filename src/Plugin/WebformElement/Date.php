@@ -83,7 +83,7 @@ class Date extends DateBase {
    * {@inheritdoc}
    */
   public function getItemFormat(array $element) {
-    $format = $element['#format'];
+    $format = $element['#format'] ?? parent::getItemFormat($element);
     // Drupal's default date fallback includes the time so we need to fallback
     // to the specified or default date only format.
     if ($format === 'fallback') {
