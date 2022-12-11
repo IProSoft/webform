@@ -26,7 +26,7 @@ class WebformTestHandlerRemotePostClient extends Client {
       parse_str(parse_url($uri, PHP_URL_QUERY), $params);
     }
     else {
-      $params = $options['json'] ?? $options['form_params'];
+      $params = $options['json'] ?? $options['form_params'] ?? [];
     }
 
     $response_type = $params['response_type'] ?? 200;
