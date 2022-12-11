@@ -13,11 +13,12 @@
  * Below functions are copied from editor.module.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
+use Drupal\file\FileInterface;
 use Drupal\webform\WebformInterface;
-use Drupal\Component\Utility\Html;
 
 /* ************************************************************************** */
 // Webform entity hooks.
@@ -172,8 +173,8 @@ function _webform_record_file_usage(array $uuids, $type, $id) {
 
   foreach ($uuids as $uuid) {
     if ($file = $entity_repository->loadEntityByUuid('file', $uuid)) {
-      if ($file->status !== FILE_STATUS_PERMANENT) {
-        $file->status = FILE_STATUS_PERMANENT;
+      if ($file->status !== FileInterface::STATUS_PERMANENT) {
+        $file->status = FileInterface::STATUS_PERMANENT;
         $file->save();
       }
       $file_usage->add($file, 'editor', $type, $id);
