@@ -102,6 +102,8 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
         '30' => '30',
         '40' => '40',
         '50' => '50',
+        '75' => '75',
+        '100' => '100',
       ],
       '#parents' => ['form', 'limit'],
       '#default_value' => $config->get('form.limit') ?: 50,
