@@ -2351,8 +2351,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     /* ********************************************************************** */
 
     // Initialize help.
-    foreach ($help as $id => &$help_info) {
-      $help_info += [
+    foreach (array_keys($help) as $id) {
+      $help[$id] += [
         'id' => $id,
         'reset_version' => FALSE,
       ];
