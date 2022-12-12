@@ -22,6 +22,7 @@ Steps for updating libraries
 - Enable all external libraries (admin/structure/webform/config/libraries)
 
 - Manually check for new releases. Only update to stable releases.
+  - @see <https://stackoverflow.com/questions/15035786/download-source-from-npm-without-installing-it>
 
 - Add list of updated external libraries to issue on Drupal.org
 

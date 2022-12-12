@@ -1332,9 +1332,9 @@ libraries.popperjs:
     gpl-compatible: true
   directory: popperjs
   cdn:
-    /libraries/popperjs/: https://unpkg.com/@popperjs/core@2.11.6/dist/umd/
+    /libraries/popperjs/dist/umd/: https://unpkg.com/@popperjs/core@2.11.6/dist/umd/
   js:
-    /libraries/popperjs/popper.min.js: { minified: true }
+    /libraries/popperjs/dist/umd/popper.js: {  }
 
 libraries.tippyjs:
   remote: https://github.com/atomiks/tippyjs
@@ -1345,8 +1345,8 @@ libraries.tippyjs:
     gpl-compatible: true
   directory: tippyjs
   cdn:
-    /libraries/tippyjs/: https://unpkg.com/tippy.js@6.2.6/dist/
+    /libraries/tippyjs/dist/: https://unpkg.com/tippy.js@6.2.6/dist/
   js:
-    /libraries/tippyjs/tippy-bundle.umd.min.js: { minified: true }
+    /libraries/tippyjs/dist/tippy-bundle.umd.js: { }
   dependencies:
     - webform/libraries.popperjs
