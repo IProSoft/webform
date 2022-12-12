@@ -468,7 +468,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     $libraries['popperjs'] = [
       'title' => $this->t('Popper.js'),
       'description' => $this->t("Tippy.js a tiny, low-level library for creating \"floating\" elements like tooltips, popovers, dropdowns, menus, and more."),
-      'notes' => $this->t('Popper.js is used to provide a tooltips.'),
+      'notes' => $this->t('Popper.js is used to provide tooltip behavior for elements.'),
       'homepage_url' => Url::fromUri('https://github.com/floating-ui/floating-ui'),
       'download_url' => Url::fromUri('https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js'),
       'version' => '2.11.6',
@@ -478,7 +478,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     $libraries['tippyjs'] = [
       'title' => $this->t('Tippy.js'),
       'description' => $this->t("Tippy.js is the complete tooltip, popover, dropdown, and menu solution for the web, powered by Popper."),
-      'notes' => $this->t('Tippy.js is used to provide a tooltips.'),
+      'notes' => $this->t('Tippy.js is used to provide tooltip behavior for elements.'),
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
       'download_url' => Url::fromUri('https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js'),
       'version' => '6.3.7',
