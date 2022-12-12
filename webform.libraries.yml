@@ -1323,6 +1323,19 @@ libraries.tabby:
   js:
     /libraries/tabby/dist/js/tabby.min.js: {}
 
+libraries.popperjs:
+  remote: https://github.com/floating-ui/floating-ui
+  version: '2.11.6'
+  license:
+    name: MIT
+    url: https://github.com/floating-ui/floating-ui/blob/v2.x/LICENSE.md
+    gpl-compatible: true
+  directory: popperjs
+  cdn:
+    /libraries/popperjs/: https://unpkg.com/@popperjs/core@2.11.6/dist/umd/
+  js:
+    /libraries/popperjs/popper.min.js: { minified: true }
+
 libraries.tippyjs:
   remote: https://github.com/atomiks/tippyjs
   version: '6.2.6'
@@ -1330,10 +1343,10 @@ libraries.tippyjs:
     name: MIT
     url: https://github.com/atomiks/tippyjs/blob/master/LICENSE
     gpl-compatible: true
-  directory: tippyjs/6.x
+  directory: tippyjs
   cdn:
-    /libraries/tippyjs/6.x/: https://unpkg.com/tippy.js@6.2.6/dist/
+    /libraries/tippyjs/: https://unpkg.com/tippy.js@6.2.6/dist/
   js:
-    /libraries/tippyjs/6.x/tippy-bundle.umd.min.js: { minified: true }
+    /libraries/tippyjs/tippy-bundle.umd.min.js: { minified: true }
   dependencies:
-    - core/popperjs
+    - webform/libraries.popperjs
