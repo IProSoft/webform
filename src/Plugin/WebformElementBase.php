@@ -1400,11 +1400,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $value = $this->getValue($element, $webform_submission, $options);
 
     // Get items.
-    $items = [];
-    $item_function = 'format' . $type . 'Item';
-    foreach (array_keys($value) as $delta) {
-      $items[] = $this->$item_function($element, $webform_submission, ['delta' => $delta] + $options);
-    }
+    $items = $this->getItems($type, $element, $webform_submission, $options);
 
     // Get template.
     $template = trim($element['#format_items_' . $name]);
@@ -1433,17 +1429,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    *   The element's items as HTML.
    */
   protected function formatHtmlItems(array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
-
-    // Get items.
-    $items = [];
-    foreach (array_keys($value) as $delta) {
-      $item = $this->formatHtmlItem($element, $webform_submission, ['delta' => $delta] + $options);
-      if ($item) {
-        $items[] = $item;
-      }
-    }
-
+    $items = $this->getItems('Html', $element, $webform_submission, $options);
     if (empty($items)) {
       return [];
     }
@@ -1524,17 +1510,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    *   The element's items as text.
    */
   protected function formatTextItems(array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
-
-    // Get items.
-    $items = [];
-    foreach (array_keys($value) as $delta) {
-      $item = $this->formatTextItem($element, $webform_submission, ['delta' => $delta] + $options);
-      if ($item) {
-        $items[] = $item;
-      }
-    }
-
+    $items = $this->getItems('Text', $element, $webform_submission, $options);
     if (empty($items)) {
       return '';
     }
@@ -1696,6 +1672,45 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     }
 
     return $value;
+  }
+
+
+  /**
+   * Get element's submission value items.
+   *
+   * @param string $type
+   *   The format type, HTML or Text.
+   * @param array $element
+   *   An element.
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   * @param array $options
+   *   An array of options.
+   *
+   * @return array
+   *   The element's submission value items.
+   */
+  protected function getItems($type, array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    $name = strtolower($type);
+
+    $value = $this->getValue($element, $webform_submission, $options);
+
+    $item_function = 'format' . $type . 'Item';
+
+    $items = [];
+    foreach (array_keys($value) as $delta) {
+      if ($this->getItemFormat($element) === 'custom' && !empty($element['#format_' . $name])) {
+        $item = $this->formatCustomItem($type, $element, $webform_submission, ['delta' => $delta] + $options);
+      }
+      else {
+        $item = $this->$item_function($element, $webform_submission, ['delta' => $delta] + $options);
+      }
+      if ($item) {
+        $items[] = $item;
+      }
+    }
+
+    return $items;
   }
 
   /**

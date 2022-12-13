@@ -75,13 +75,17 @@ class WebformElementFormatCustomTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<em>EXCEPTION</em>');
 
     // Check multiple custom HTML format.
-    $assert_session->responseContains('<label>textfield_custom</label>');
+    $assert_session->responseContains('<label>textfield_custom_value</label>');
+    $assert_session->responseContains('<ul><li><em>One</em></li><li><em>Two</em></li><li><em>Three</em></li><li><em>Four</em></li><li><em>Five</em></li></ul>');
+
+    // Check multiple custom HTML format.
+    $assert_session->responseContains('<label>textfield_custom_value_multiple</label>');
     $assert_session->responseContains('<table>');
-    $assert_session->responseContains('<tr ><td>One</td></tr>');
-    $assert_session->responseContains('<tr style="background-color: #ffc"><td>Two</td></tr>');
-    $assert_session->responseContains('<tr ><td>Three</td></tr>');
-    $assert_session->responseContains('<tr style="background-color: #ffc"><td>Four</td></tr>');
-    $assert_session->responseContains('<tr ><td>Five</td></tr>');
+    $assert_session->responseContains('<tr ><td><em>One</em></td></tr>');
+    $assert_session->responseContains('<tr style="background-color: #ffc"><td><em>Two</em></td></tr>');
+    $assert_session->responseContains('<tr ><td><em>Three</em></td></tr>');
+    $assert_session->responseContains('<tr style="background-color: #ffc"><td><em>Four</em></td></tr>');
+    $assert_session->responseContains('<tr ><td><em>Five</em></td></tr>');
     $assert_session->responseContains('</table>');
 
     // Check image custom HTML format.
@@ -130,12 +134,19 @@ element.country: {02-country}<br/>
     $assert_session->responseContains("textfield_custom: /{textfield_custom}/
 textfield_custom_token: /{textfield_custom_token}/
 textfield_custom_token_exception: /EXCEPTION/
-textfield_custom:
-⦿ One
-⦿ Two
-⦿ Three
-⦿ Four
-⦿ Five
+textfield_custom_value:
+- /One/
+- /Two/
+- /Three/
+- /Four/
+- /Five/
+
+textfield_custom_value_multiple:
+⦿ /One/
+⦿ /Two/
+⦿ /Three/
+⦿ /Four/
+⦿ /Five/
 
 
 image_custom:
