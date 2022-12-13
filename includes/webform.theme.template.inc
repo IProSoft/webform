@@ -501,7 +501,7 @@ function _template_progress_webform_set_title(array &$variables, $strip_tags = F
   }
 
   // Strip all HTML tags from the title.
-  if ($strip_tags) {
+  if ($strip_tags && !empty($variables['title'])) {
     $variables['title'] = strip_tags($variables['title']);
   }
 }
