@@ -289,13 +289,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/intl-tel-input",
-                "version": "17.0.16",
+                "version": "17.0.19",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.intl-tel-input"
                 },
                 "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.16.zip",
+                    "url": "https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.19.zip",
                     "type": "zip"
                 },
                 "license": "MIT"
@@ -353,13 +353,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/timepicker",
-                "version": "1.13.18",
+                "version": "1.14.0",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.timepicker"
                 },
                 "dist": {
-                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.13.18.zip",
+                    "url": "https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.14.0.zip",
                     "type": "zip"
                 },
                 "license": "MIT"
