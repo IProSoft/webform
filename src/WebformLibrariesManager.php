@@ -419,8 +419,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods."),
       'notes' => $this->t('International Telephone Input is used by the Telephone element.'),
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
-      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.16.zip'),
-      'version' => '17.0.16',
+      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.19.zip'),
+      'version' => '17.0.19',
       'license' => 'MIT',
     ];
     $libraries['jquery.rateit'] = [
@@ -447,8 +447,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A lightweight, customizable javascript timepicker plugin for jQuery, inspired by Google Calendar.'),
       'notes' => $this->t('Timepicker is used to provide a polyfill for HTML 5 time elements.'),
       'homepage_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker'),
-      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.13.18.zip'),
-      'version' => '1.13.18',
+      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.14.0.zip'),
+      'version' => '1.14.0',
       'license' => 'MIT',
     ];
     $libraries['progress-tracker'] = [
