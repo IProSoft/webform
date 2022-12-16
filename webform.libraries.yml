@@ -51,7 +51,6 @@ webform.admin.dialog:
     - webform/webform.admin.dropbutton
     - webform/webform.element.codemirror.yaml
     - webform/webform.element.help
-    - webform/webform.element.html_editor
     - webform/webform.element.other
     - webform/webform.element.message
     - webform/webform.element.select2
@@ -727,14 +726,6 @@ webform.element.html_editor:
   css:
     component:
       css/webform.element.html_editor.css: {}
-  js:
-    js/webform.element.html_editor.js: {}
-  dependencies:
-    - core/ckeditor
-    - core/drupal
-    - core/drupalSettings
-    - core/jquery
-    - core/once
 
 webform.element.horizontal_rule:
   version: VERSION

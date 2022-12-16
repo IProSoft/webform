@@ -19,7 +19,7 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['filter', 'node', 'webform'];
+  protected static $modules = [ 'node', 'webform'];
 
   /**
    * Webforms to load.

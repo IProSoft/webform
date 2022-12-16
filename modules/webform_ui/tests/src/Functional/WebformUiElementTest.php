@@ -18,7 +18,7 @@ class WebformUiElementTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['filter', 'webform', 'webform_ui', 'webform_test_element'];
+  protected static $modules = [ 'webform', 'webform_ui', 'webform_test_element'];
 
   /**
    * Webforms to load.
@@ -150,7 +150,7 @@ class WebformUiElementTest extends WebformBrowserTestBase {
 
     // Add admin notes to contact name element.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/name/edit');
-    $edit = ['properties[admin_notes][value]' => 'This is an admin note.'];
+    $edit = ['properties[admin_notes][value][value]' => 'This is an admin note.'];
     $this->submitForm($edit, 'Save');
     $assert_session->responseContains('<span data-drupal-selector="edit-webform-ui-elements-name-title-notes" class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Your Name" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Your Name&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is an admin note.&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 

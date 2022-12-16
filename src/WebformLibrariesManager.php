@@ -322,64 +322,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
    *   An associative array containing libraries.
    */
   protected function initLibraries() {
-    $ckeditor_version = $this->getCkeditorVersion();
-
     $libraries = [];
-    $libraries['ckeditor.autogrow'] = [
-      'title' => $this->t('CKEditor: Autogrow'),
-      'description' => $this->t('Automatically expand and shrink vertically depending on the amount and size of content entered in its editing area.'),
-      'notes' => $this->t('Allows CKEditor to automatically expand and shrink vertically.'),
-      'homepage_url' => Url::fromUri('https://ckeditor.com/addon/autogrow'),
-      'download_url' => Url::fromUri("https://download.ckeditor.com/autogrow/releases/autogrow_$ckeditor_version.zip"),
-      'plugin_path' => 'libraries/ckeditor.autogrow/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/autogrow/",
-      'version' => $ckeditor_version,
-      'license' => 'GPL-2.0-or-later',
-    ];
-    $libraries['ckeditor.fakeobjects'] = [
-      'title' => $this->t('CKEditor: Fake Objects'),
-      'description' => $this->t('Utility required by CKEditor link plugin.'),
-      'notes' => $this->t('Allows CKEditor to use basic image and link dialog.'),
-      'homepage_url' => Url::fromUri('https://ckeditor.com/addon/fakeobjects'),
-      'download_url' => Url::fromUri("https://download.ckeditor.com/fakeobjects/releases/fakeobjects_$ckeditor_version.zip"),
-      'plugin_path' => 'libraries/ckeditor.fakeobjects/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/fakeobjects/",
-      'version' => $ckeditor_version,
-      'license' => 'GPL-2.0-or-later',
-    ];
-    $libraries['ckeditor.image'] = [
-      'title' => $this->t('CKEditor: Image'),
-      'description' => $this->t('Provides a basic image dialog for CKEditor.'),
-      'notes' => $this->t('Allows CKEditor to use basic image dialog, which is not included in Drupal core.'),
-      'homepage_url' => Url::fromUri('https://ckeditor.com/addon/image'),
-      'download_url' => Url::fromUri("https://download.ckeditor.com/image/releases/image_$ckeditor_version.zip"),
-      'plugin_path' => 'libraries/ckeditor.image/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/image/",
-      'version' => $ckeditor_version,
-      'license' => 'GPL-2.0-or-later',
-    ];
-    $libraries['ckeditor.link'] = [
-      'title' => $this->t('CKEditor: Link'),
-      'description' => $this->t('Provides a basic link dialog for CKEditor.'),
-      'notes' => $this->t('Allows CKEditor to use basic link dialog, which is not included in Drupal core.'),
-      'homepage_url' => Url::fromUri('https://ckeditor.com/addon/link'),
-      'download_url' => Url::fromUri("https://download.ckeditor.com/link/releases/link_$ckeditor_version.zip"),
-      'plugin_path' => 'libraries/ckeditor.link/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/ckeditor/ckeditor-dev@$ckeditor_version/plugins/link/",
-      'version' => $ckeditor_version,
-      'license' => 'GPL-2.0-or-later',
-    ];
-    $libraries['ckeditor.codemirror'] = [
-      'title' => $this->t('CKEditor: CodeMirror'),
-      'description' => $this->t('Provides syntax highlighting for the CKEditor with the CodeMirror Plugin.'),
-      'notes' => $this->t('Makes it easier to edit the HTML source.'),
-      'homepage_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin'),
-      'download_url' => Url::fromUri('https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.18.3/CKEditor-CodeMirror-Plugin.zip'),
-      'plugin_path' => 'libraries/ckeditor.codemirror/codemirror/',
-      'plugin_url' => "https://cdn.jsdelivr.net/gh/w8tcha/CKEditor-CodeMirror-Plugin@v1.18.3/codemirror/",
-      'version' => 'v1.18.3',
-      'license' => 'MIT',
-    ];
     $libraries['codemirror'] = [
       'title' => $this->t('Code Mirror'),
       'description' => $this->t('Code Mirror is a versatile text editor implemented in JavaScript for the browser.'),
@@ -539,22 +482,9 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Sort libraries by key.
     ksort($libraries);
 
-    // Update ckeditor plugin libraries to support CKEditor plugins installed
-    // without the ckeditor.* prefix.
-    // @see https://www.drupal.org/project/fakeobjects
-    // @see https://www.drupal.org/project/anchor_link
+    // Add name property to all libraries.
     foreach ($libraries as $library_name => $library) {
-      // Add name to all libraries, so that it can be modified if a ckeditor
-      // plugin is installed without the ckeditor.* prefix.
       $libraries[$library_name]['name'] = $library_name;
-      if (strpos($library_name, 'ckeditor.') === 0 && !$this->find($library_name)) {
-        $ckeditor_library_name = str_replace('ckeditor.', '', $library_name);
-        $library_path = $this->find($ckeditor_library_name);
-        if ($library_path) {
-          $libraries[$library_name]['name'] = $ckeditor_library_name;
-          $libraries[$library_name]['plugin_path'] = str_replace('libraries/' . $library_name, $library_path, $library['plugin_path']);
-        }
-      }
     }
 
     // Move deprecated libraries last.
@@ -609,32 +539,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       return FALSE;
     }
     return WebformArrayHelper::keysExist($excluded_elements, $elements);
-  }
-
-  /**
-   * Get Drupal core's CKEditor version number.
-   *
-   * @return string
-   *   Drupal core's CKEditor version number.
-   */
-  protected function getCkeditorVersion() {
-    // Get CKEditor semantic version number from the JS file.
-    // @see core/core.libraries.yml
-    $definition = $this->libraryDiscovery->getLibraryByName('core', 'ckeditor');
-    if (!$definition) {
-      return NULL;
-    }
-
-    $ckeditor_version = $definition['js'][0]['version'];
-
-    // Parse CKEditor semantic version number from security patches
-    // (i.e. 4.8.0+2018-04-18-security-patch).
-    if (preg_match('/^\d+\.\d+\.\d+/', $ckeditor_version, $match)) {
-      return $match[0];
-    }
-    else {
-      return $ckeditor_version;
-    }
   }
 
 }

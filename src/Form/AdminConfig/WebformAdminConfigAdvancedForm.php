@@ -340,6 +340,9 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       $this->messenger()->addMessage($this->t('Repairing admin configuration…'));
       _webform_update_admin_settings(TRUE);
 
+      $this->messenger()->addMessage($this->t('Repairing webform HTML editor…'));
+      _webform_update_html_editor();
+
       $this->messenger()->addMessage($this->t('Repairing webform settings…'));
       _webform_update_webform_settings();
 

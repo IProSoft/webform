@@ -19,6 +19,43 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\file\FileInterface;
 use Drupal\webform\WebformInterface;
+use Drupal\webform\Element\WebformHtmlEditor;
+use Drupal\filter\FilterFormatInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function webform_filter_format_access(FilterFormatInterface $filter_format, $operation, AccountInterface $account) {
+  if ($filter_format->id() ===  WebformHtmlEditor::DEFAULT_FILTER_FORMAT
+    && $operation !== 'use') {
+    return AccessResult::forbidden('This text format can only be managed by the Webform module.');
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_load().
+ */
+function webform_filter_format_load($entities) {
+  foreach ($entities as $entity) {
+    // Hide the default webform filter format on the filter admin overview page.
+    if ($entity->id() === WebformHtmlEditor::DEFAULT_FILTER_FORMAT
+      && \Drupal::routeMatch()->getRouteName() === 'filter.admin_overview') {
+      // Set status to FALSE which hides the default webform filter format.
+      $entity->set('status',  FALSE);
+    }
+  }
+}
+
+/**
+ * Implements hook_editor_js_settings_alter().
+ */
+function webform_editor_js_settings_alter(array &$settings) {
+  $settings['editor']['formats'][WebformHtmlEditor::DEFAULT_FILTER_FORMAT]['editorSettings']['autoGrow_minHeight'] = '80';
+}
 
 /* ************************************************************************** */
 // Webform entity hooks.

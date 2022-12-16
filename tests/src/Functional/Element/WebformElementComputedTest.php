@@ -17,7 +17,7 @@ class WebformElementComputedTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['filter', 'webform'];
+  protected static $modules = [ 'webform'];
 
   /**
    * Webforms to load.
