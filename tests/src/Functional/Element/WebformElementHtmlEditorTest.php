@@ -63,7 +63,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
     $this->drupalGet('/webform/test_element_html_editor');
 
     // Check that HTML editor is enabled.
-    $assert_session->responseContains('<textarea data-drupal-selector="edit-webform-html-editor-value-value" id="edit-webform-html-editor-value-value" name="webform_html_editor[value][value]" rows="5" cols="60" class="form-textarea required" required="required" aria-required="true">Hello &lt;b&gt;World!!!&lt;/b&gt;</textarea>');
+    $assert_session->responseContains('<textarea data-drupal-selector="edit-webform-html-editor-value-value" class="webform-html-editor-default-filter-format form-textarea required" id="edit-webform-html-editor-value-value" name="webform_html_editor[value][value]" rows="5" cols="60" required="required" aria-required="true">Hello &lt;b&gt;World!!!&lt;/b&gt;</textarea>');
 
     // Check that CodeMirror is displayed when #format: FALSE.
     $assert_session->responseContains('<textarea data-drupal-selector="edit-webform-html-editor-codemirror-value" class="js-webform-codemirror webform-codemirror html required form-textarea" required="required" aria-required="true" data-webform-codemirror-mode="text/html" id="edit-webform-html-editor-codemirror-value" name="webform_html_editor_codemirror[value]" rows="5" cols="60">Hello &lt;b&gt;World!!!&lt;/b&gt;</textarea>');
@@ -123,7 +123,7 @@ class WebformElementHtmlEditorTest extends WebformElementBrowserTestBase {
 
     // Check that HTML editor is used.
     $this->drupalGet('/admin/structure/webform/manage/contact/handlers/email_confirmation/edit');
-    $assert_session->responseContains('<textarea data-drupal-selector="edit-settings-body-custom-html-value-value" id="edit-settings-body-custom-html-value-value" name="settings[body_custom_html][value][value]" rows="5" cols="60" class="form-textarea">');
+    $assert_session->responseContains('<textarea data-drupal-selector="edit-settings-body-custom-html-value-value" class="webform-html-editor-default-filter-format form-textarea" id="edit-settings-body-custom-html-value-value" name="settings[body_custom_html][value][value]" rows="5" cols="60">');
 
     // Enable mail text format.
     $edit = ['html_editor[mail_format]' => 'basic_html'];

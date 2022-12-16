@@ -120,6 +120,9 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
         '#prefix' => '<div data-webform-states-no-clear>',
         '#suffix' => '</div>',
       ];
+      if ($format === static::DEFAULT_FILTER_FORMAT) {
+        $element['value']['#attributes']['class'][] = 'webform-html-editor-default-filter-format';
+      }
       WebformElementHelper::fixStatesWrapper($element);
       $element['#attached']['library'][] = 'webform/webform.element.html_editor';
       return $element;
