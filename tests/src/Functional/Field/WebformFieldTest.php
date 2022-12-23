@@ -68,6 +68,9 @@ class WebformFieldTest extends WebformBrowserTestBase {
     $this->drupalGet('/node/add/page');
     $this->assertCssSelect('#edit-field-webform-0-target-id optgroup[label="{Some category}"]');
 
+    // Check that opening/closing/scheduling options are there.
+    $this->assertCssSelect('#edit-field-webform-0-settings-status--wrapper');
+
     // Create a second webform.
     $webform_2 = $this->createWebform();
 
@@ -76,16 +79,23 @@ class WebformFieldTest extends WebformBrowserTestBase {
     $assert_session->optionExists('edit-field-webform-0-target-id', 'contact');
     $assert_session->optionExists('edit-field-webform-0-target-id', $webform_2->id());
 
-    // Limit the webform select menu to only the contact form.
+    // Limit the webform select menu to only the contact form and hide status options.
     $this->drupalGet('/admin/structure/types/manage/page/form-display');
     $this->drupalGet('/admin/structure/types/manage/page/form-display');
     $this->submitForm([], 'field_webform_settings_edit');
-    $this->submitForm(['fields[field_webform][settings_edit_form][settings][webforms][]' => ['contact']], 'Save');
+    $this->submitForm([
+      'fields[field_webform][settings_edit_form][settings][webforms][]' => ['contact'],
+      'fields[field_webform][settings_edit_form][settings][enable_status]' => FALSE,
+    ], 'Save');
 
     // Check that webform 2 is NOT included in the select menu.
     $this->drupalGet('/node/add/page');
     $assert_session->optionExists('edit-field-webform-0-target-id', 'contact');
     $assert_session->optionNotExists('edit-field-webform-0-target-id', $webform_2->id());
+
+    // Check that there is no status options.
+    $this->assertNoCssSelect('#edit-field-webform-0-settings-status--wrapper');
+
   }
 
 }
