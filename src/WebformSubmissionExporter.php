@@ -278,6 +278,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       'state' => 'all',
       'locked' => '',
       'sticky' => '',
+      'unsticky' => TRUE,
       'download' => TRUE,
       'files' => FALSE,
       'attachments' => FALSE,
@@ -692,6 +693,14 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
         '#default_value' => $export_options['sticky'],
       ];
 
+      $form['export']['download']['unsticky'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('exclude starred/flagged submission submissions'),
+        '#description' => $this->t('If checked, all submissions will downloaded except starred/flagged submissions.'),
+        '#return_value' => TRUE,
+        '#default_value' => $export_options['unsticky'],
+      ];
+
       // If drafts are allowed, provide options to filter download based on
       // submission state.
       $form['export']['download']['state'] = [
@@ -980,6 +989,10 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     // Filter by sticky.
     if ($export_options['sticky']) {
       $query->condition('sticky', 1);
+    }
+
+    if ($export_options['unsticky']) {
+      $query->condition('sticky', 0);
     }
 
     // Filter by latest.
