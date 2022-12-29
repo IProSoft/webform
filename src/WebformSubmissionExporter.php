@@ -864,11 +864,15 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
 
     // Get files directories.
     $files_directories = [];
+    $get_contents_stream_wrappers = ['encrypt'];
     if ($is_archive) {
       $stream_wrappers = array_keys($this->streamWrapperManager->getNames(StreamWrapperInterface::WRITE_VISIBLE));
       foreach ($stream_wrappers as $stream_wrapper) {
-        $files_directory = $this->fileSystem->realpath($stream_wrapper . '://webform/' . $webform->id());
-        $files_directories[] = $files_directory;
+        $files_directory_uri = $stream_wrapper . '://webform/' . $webform->id();
+        $files_directory = $this->fileSystem->realpath($files_directory_uri);
+        if (file_exists($files_directory) && is_dir($files_directory)) {
+          $files_directories[$stream_wrapper] = in_array($stream_wrapper, $get_contents_stream_wrappers) ? $files_directory_uri : $files_directory;
+        }
       }
     }
 
@@ -882,14 +886,29 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
 
         // Add managed file uploads to the archive.
         if ($export_options['files']) {
-          foreach ($files_directories as $files_directory) {
+          foreach ($files_directories as $stream_wrapper => $files_directory) {
             $submission_directory = $files_directory . '/' . $webform_submission->id();
-            if (file_exists($submission_directory) && $export_options['files']) {
-              $this->getExporter()->addToArchive(
-                $submission_directory,
-                $submission_base_name,
-                ['remove_path' => $submission_directory]
-              );
+            if (in_array($stream_wrapper, $get_contents_stream_wrappers)) {
+              // Read each files content so that they are properly decypted
+              $files = $this->fileSystem->scanDirectory($submission_directory, '/.*/');
+              foreach ($files as $file) {
+                $file_name = preg_replace('#^' . $submission_directory . '#', '', $file->uri);
+                $file_name = ltrim($file_name, '/');
+                $this->getExporter()->addToArchive(
+                  file_get_contents($file->uri),
+                  $submission_base_name . '/' . $file_name
+                );
+              }
+            }
+            else {
+              // Bulk upload the whole directory
+              if (file_exists($submission_directory)) {
+                $this->getExporter()->addToArchive(
+                  $submission_directory,
+                  $submission_base_name,
+                  ['remove_path' => $submission_directory]
+                );
+              }
             }
           }
         }
