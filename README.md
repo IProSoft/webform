@@ -1,15 +1,4 @@
-## CONTENTS OF THIS FILE
-
-- Introduction
-- Requirements
-- Installation
-- Recommended modules
-- Configuration
-- Upgrading
-- Maintainers
-
-
-## INTRODUCTION
+# Webform
 
 The Webform module is a form builder and submission manager for Drupal 8/9.
 
@@ -21,6 +10,23 @@ The primary use case for this module is to:
 - **Send** confirmations and notifications
 - **Review** submissions online
 - **Download** submissions as a CSV
+
+For a full description of the module, visit the
+[project page](https://www.drupal.org/project/webform).
+
+Submit bug reports and feature suggestions, or track changes in the
+[issue queue](https://www.drupal.org/project/issues/webform).
+
+
+## CONTENTS OF THIS FILE
+
+- Requirements
+- Installation
+- Recommended modules
+- Configuration
+- Upgrading
+- Maintainers
+
 
 Goals:
 
