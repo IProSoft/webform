@@ -12,11 +12,6 @@
             "role": "Maintainer"
         },
         {
-            "name": "Alexander Trotsenko (bucefal91)",
-            "homepage": "https://www.drupal.org/u/bucefal91",
-            "role": "Co-maintainer"
-        },
-        {
             "name": "Contributors",
             "homepage": "https://www.drupal.org/node/7404/committers",
             "role": "Contributor"
@@ -29,7 +24,6 @@
         "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
     },
     "require": {
-        "composer/installers": "*",
         "algolia/places": "*",
         "choices/choices": "*",
         "ckeditor/autogrow": "*",
@@ -235,7 +229,7 @@
                     "url": "https://github.com/jeresig/jquery.hotkeys/archive/refs/tags/0.2.0.zip",
                     "type": "zip"
                 },
-                "license": "N/A"
+                "license": "MIT"
             }
         },
         "jquery.icheck": {
