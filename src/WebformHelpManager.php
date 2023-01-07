@@ -1797,8 +1797,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     $t_args += [
       ':href_62x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.2.x/libraries.zip',
       ':href_61x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.1.x/libraries.zip',
-      ':href_submodules' => 'https://www.drupal.org/docs/contributed-modules/webform/webform-sub-modules',
-      ':href_addons' => 'https://www.drupal.org/docs/contributed-modules/webform/webform-add-ons',
     ];
     $help['config_libraries_help'] = [
       'group' => 'configuration',
@@ -1807,7 +1805,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         $this->t("It is recommended that these libraries are installed in your Drupal installation's /libraries or /web/libraries directory.") . ' ' .
         $this->t('If these libraries are not installed, they will be automatically loaded from a CDN.') . ' ' .
         $this->t('All libraries are optional and can be excluded via the admin settings form.') . ' ' .
-        $this->t('(Other optional functionality is provided by <a href=":href_submodules">Webform sub-modules</a> and <a href=":href_addons">Webform add-ons</a>.)') .
         '</p>' .
         '<p>' . $this->t('There are several ways to download the needed third-party libraries.') . '</p>' .
         '<p><strong>' . $this->t('Recommended') . '</strong></p>' .
