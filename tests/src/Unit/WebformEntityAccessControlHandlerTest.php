@@ -246,7 +246,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => FALSE,
         'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        'access_result_cache_contexts' => ['access_rules_cache_context', 'url.path', 'request_format'],
       ],
       'View when nobody',
     ];
@@ -289,7 +289,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => FALSE,
         'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        'access_result_cache_contexts' => ['access_rules_cache_context', 'url.path', 'request_format'],
       ],
       'View when has "access any webform configuration" permission and request form is HTML',
     ];
@@ -303,7 +303,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user', 'webform_cache_context', 'url.path', 'request_format', ],
       ],
       'View when has "access any webform configuration" permission and request form is NOT HTML',
     ];
@@ -317,7 +317,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => FALSE,
         'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        'access_result_cache_contexts' => ['access_rules_cache_context', 'url.path', 'request_format'],
       ],
       'View when has "access own webform configuration" permission and is not owner and request form is HTML',
     ];
@@ -332,7 +332,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => FALSE,
         'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        'access_result_cache_contexts' => ['access_rules_cache_context', 'url.path', 'request_format'],
       ],
       'View when has "access own webform configuration" permission and is not owner and request form is NOT HTML',
     ];
@@ -346,7 +346,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => FALSE,
         'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        'access_result_cache_contexts' => ['access_rules_cache_context', 'url.path', 'request_format'],
       ],
       'View when has "access own webform configuration" permission and is owner and request form is HTML',
     ];
@@ -361,7 +361,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => [+    0 => 'user.permissions', 'user', 'webform_cache_context', 'url.path', 'request_format'],
       ],
       'View when has "access own webform configuration" permission and is owner and request form is NOT HTML',
     ];
@@ -415,7 +415,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Test when has "edit any webform" permission',
     ];
@@ -443,7 +443,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Test when has "edit own webform" permission and is owner',
     ];
@@ -496,7 +496,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Update when has "edit any webform" permission',
     ];
@@ -523,7 +523,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Update when has "edit own webform" permission and is owner',
     ];
@@ -591,7 +591,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Duplicate when has "create webform" and "edit any webform" permissions',
     ];
@@ -618,7 +618,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Duplicate when has "create webform" and "edit own webform" permissions and is owner',
     ];
@@ -672,7 +672,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Delete when has "delete any webform" permission',
     ];
@@ -700,7 +700,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'user',  'webform_cache_context'],
       ],
       'Delete when has "delete own webform" permission and is owner',
     ];
@@ -820,7 +820,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       [
         'access_result_is_allowed' => TRUE,
         'access_result_cache_tags' => ['webform_cache_tag', 'webform_submission_cache_tag'],
-        'access_result_cache_contexts' => ['url', 'user.permissions', 'webform_cache_context', 'webform_submission_cache_context'],
+        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context', 'webform_submission_cache_context', 'url'],
       ],
       'Submission page when accessible through token',
     ];

@@ -38,10 +38,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'user.roles:authenticated',
       ],
       'tags' => [
-        'config:core.entity_form_display.webform_submission.contact.add',
-        'config:webform.settings',
         'config:webform.webform.contact',
         'webform:contact',
+        'config:webform.settings',
+        'config:core.entity_form_display.webform_submission.contact.add',
       ],
       'max-age' => -1,
     ]);
@@ -66,17 +66,18 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the form includes 'user.roles:authenticated' because the
     // '[current-user:mail]' token.
+    $form['#cache']['tags'] = array_values($form['#cache']['tags']);
     $this->assertEqual($form['#cache'], [
       'contexts' => [
         'user',
         'user.roles:authenticated',
       ],
       'tags' => [
-        'config:core.entity_form_display.webform_submission.contact.add',
-        'config:webform.settings',
         'config:webform.webform.contact',
-        'user:2',
         'webform:contact',
+        'config:webform.settings',
+        'config:core.entity_form_display.webform_submission.contact.add',
+        'user:2',
       ],
       'max-age' => -1,
     ]);
@@ -99,10 +100,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'user',
       ],
       'tags' => [
-        'config:webform.settings',
         'config:webform.webform.contact',
-        'user:2',
         'webform:contact',
+        'config:webform.settings',
+        'user:2',
       ],
       'max-age' => -1,
     ]);

@@ -67,7 +67,7 @@ class WebformBubbleableMetadataTest extends UnitTestCase {
       [
         (new WebformBubbleableMetadata())->setCacheContexts(['bar', 'foo']),
         ['#cache' => ['contexts' => ['bar']]],
-        ['#cache' => ['contexts' => ['bar', 'foo'], 'tags' => [], 'max-age' => Cache::PERMANENT], '#attached' => []],
+        ['#cache' => ['contexts' => [0 => 'bar', 2 => 'foo'], 'tags' => [], 'max-age' => Cache::PERMANENT], '#attached' => []],
       ],
       [
         (new WebformBubbleableMetadata())->setCacheMaxAge(99),
