@@ -247,7 +247,7 @@ References
 
 [Git Release Notes for Drush](https://www.drupal.org/project/grn)
 
-    drush release-notes --nouser 6.0.0-VERSION 6.x
+    drush release-notes --nouser 6.0.0-VERSION 6.0.x
 
 
 6. Tag and create a new release
@@ -255,7 +255,7 @@ References
 
 [Tag a release](https://www.drupal.org/node/1066342)
 
-    git checkout 6.x
+    git checkout 6.0.x
     git up
     git tag 6.0.0-VERSION
     git push --tags
@@ -283,7 +283,7 @@ References
     git push origin tag 6.0.NEXT-VERSION
 
     # Merge hotfix release with HEAD.
-    git checkout 6.x
+    git checkout 6.0.x
     git merge 6.0.NEXT-VERSION-hotfix
 
     # Delete hotfix release.
