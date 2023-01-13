@@ -22,12 +22,12 @@ class WebformUiPathProcessor implements OutboundPathProcessorInterface {
       return $path;
     }
 
-    if (strpos($request->getQueryString(), '_wrapper_format=') === FALSE) {
+    if (strpos($request->getQueryString() ?? '', '_wrapper_format=') === FALSE) {
       return $path;
     }
 
     $query = [];
-    parse_str($request->getQueryString(), $query);
+    parse_str($request->getQueryString() ?? '', $query);
     if (empty($query['destination'])) {
       return $path;
     }
