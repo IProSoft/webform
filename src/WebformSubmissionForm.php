@@ -2496,8 +2496,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $confirmation_url = trim($this->getWebformSetting('confirmation_url', ''));
 
     if (strpos($confirmation_url, '/') === 0) {
-      // Get redirect URL using an absolute URL for the absolute  path.
-      $redirect_url = Url::fromUri($this->getRequest()->getSchemeAndHttpHost() . $confirmation_url);
+      $redirect_url = $this->pathValidator->getUrlIfValid($confirmation_url);
     }
     elseif (preg_match('#^[a-z]+(?:://|:)#', $confirmation_url)) {
       // Get redirect URL from URI (i.e. http://, https:// or ftp://)
