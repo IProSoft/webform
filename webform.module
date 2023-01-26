@@ -609,18 +609,6 @@ function webform_page_attachments(array &$attachments) {
   if ($route_name === 'help.page' && \Drupal::routeMatch()->getRawParameter('name') === 'token') {
     $attachments['#attached']['library'][] = 'webform/webform.token';
   }
-
-  // Attach meta tag robots noindex directive to all webform confirmation pages.
-  if (!empty(\Drupal::config('webform.settings')->get('settings.default_confirmation_noindex'))
-    && preg_match('/^(entity\.webform\.confirmation|entity\.[a-z-_]+]\.webform\.confirmation)$/', $route_name)) {
-    $attachments['#attached']['html_head'][] = [
-      [
-        '#tag' => 'meta',
-        '#attributes' => ['name' => 'robots', 'content' => 'noindex'],
-      ],
-      'webform_confirmation_noindex',
-    ];
-  }
 }
 
 /**
