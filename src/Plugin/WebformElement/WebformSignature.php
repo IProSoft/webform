@@ -16,6 +16,7 @@ use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 
 /**
  * Provides a 'signature' element.
@@ -306,12 +307,15 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       $image_directory = $image_submission_directory;
     }
 
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+
     // If a signature file was already created and shared using an
     // unsafe image hash, then return it.
     $unsafe_image_hash = Crypt::hmacBase64($value, Settings::getHashSalt());
     $unsafe_image_uri = "$image_directory/signature-$unsafe_image_hash.png";
     if (file_exists($unsafe_image_uri)) {
-      return file_create_url($unsafe_image_uri);
+      return $file_url_generator->generateAbsoluteString($unsafe_image_uri);
     }
 
     $image_hash = Crypt::hmacBase64('webform-signature-' . $value, Settings::getHashSalt());
@@ -331,7 +335,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       }
     }
 
-    return file_create_url($image_uri);
+    return $file_url_generator->generateAbsoluteString($image_uri);
   }
 
   /**
@@ -405,7 +409,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
         'Content-Type' => 'image/png',
         'Content-Length' => $filesize,
         'Cache-Control' => 'private',
-        'Content-Disposition' => 'inline; filename="' . Unicode::mimeHeaderEncode($filename) . '"',
+        'Content-Disposition' => HeaderUtils::makeDisposition(HeaderUtils::DISPOSITION_INLINE, (string) $filename),
       ];
     }
     elseif ($access === FALSE) {

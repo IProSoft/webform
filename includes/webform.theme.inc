@@ -498,21 +498,24 @@ function webform_preprocess_fieldset(&$variables) {
     unset($variables['attributes']['required']);
   }
 
-  // Add role="radiogroup" on fieldsets containing radiobuttons.
   // Add aria-required="true" only on fieldsets containing required
   // radiobuttons.
   //
   // Issue #3240249: Aria-required on fieldset trigger accessibility fails.
   // @see https://www.drupal.org/project/webform/issues/3240249
+  // @see https://www.drupal.org/project/webform/issues/3277192
   /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
   $element_manager = \Drupal::service('plugin.manager.webform.element');
   $element_plugin = $element_manager->getElementInstance($element);
   $is_radios = ($element_plugin instanceof WebformRadios || $element_plugin instanceof WebformEntityRadios);
   if ($is_radios) {
-    $variables['attributes']['role'] = 'radiogroup';
     $id = $variables['attributes']['id'] . '-legend';
     $variables['legend']['attributes']['id'] = $id;
-    $variables['attributes']['aria-labelledby'] = $id;
+
+    if (isset($variables['attributes']['aria-required'])) {
+      // The aria-required is _not_ necessary on a fieldset of radio elements.
+      unset($variables['attributes']['aria-required']);
+    }
   }
   elseif (isset($variables['attributes']['aria-required'])) {
     unset($variables['attributes']['aria-required']);
@@ -845,10 +848,17 @@ function _webform_preprocess_element(array &$variables, $title_parents = ['title
  * Prepares #description and #help properties for form element templates.
  */
 function _webform_preprocess_description_help(array &$variables) {
+  /** @var \Drupal\webform\WebformRequestInterface $webform_request */
+  $webform_request = \Drupal::service('webform.request');
+  /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
+  $libraries_manager = \Drupal::service('webform.libraries_manager');
+
   $element = &$variables['element'];
+
   // Move #description to #help for webform admin routes.
   if (\Drupal::config('webform.settings')->get('ui.description_help')
-    && \Drupal::service('webform.request')->isWebformAdminRoute()
+    && $webform_request->isWebformAdminRoute()
+    && $libraries_manager->isIncluded('tippyjs')
     && \Drupal::routeMatch()->getRouteName() !== 'webform.contribute.settings'
     && !isset($element['#help'])
     && !empty($element['#title']) && (empty($element['#title_display']) || !in_array($element['#title_display'], ['attribute', 'invisible']))

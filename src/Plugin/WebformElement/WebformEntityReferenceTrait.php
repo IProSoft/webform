@@ -6,10 +6,10 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url as UrlGenerator;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformEntityTrait;
 use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -112,7 +112,7 @@ trait WebformEntityReferenceTrait {
                 return [
                   '#type' => 'link',
                   '#title' => $entity->label(),
-                  '#url' => UrlGenerator::fromUri(file_create_url($entity->getFileUri())),
+                  '#url' => \Drupal::service('file_url_generator')->generate($entity->getFileUri()),
                 ];
               }
               else {
@@ -660,7 +660,7 @@ trait WebformEntityReferenceTrait {
    *   The elements to trigger the Ajax update.
    */
   protected function buildAjaxElementTriggerRecursive($id, array &$element) {
-    $element['#access'] = TRUE;
+    $element += ['#access' => TRUE];
     foreach (Element::children($element) as $key) {
       // Replace #ajax = TRUE with custom ajax element trigger attribute.
       if (isset($element[$key]['#ajax']) && $element[$key]['#ajax'] === TRUE) {

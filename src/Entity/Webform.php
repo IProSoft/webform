@@ -779,8 +779,12 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function hasPage() {
-    $settings = $this->getSettings();
-    return $settings['page'] ? TRUE : FALSE;
+    if (\Drupal::config('webform.settings')->get('settings.default_page') === FALSE) {
+      return FALSE;
+    }
+    else {
+      return (boolean) $this->getSetting('page');
+    }
   }
 
   /**
@@ -1155,6 +1159,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'wizard_toggle' => FALSE,
       'wizard_toggle_show_label' => '',
       'wizard_toggle_hide_label' => '',
+      'wizard_page_type' => 'container',
+      'wizard_page_title_tag' => \Drupal::config('webform.settings')->get('element.default_section_title_tag'),
       'preview' => DRUPAL_DISABLED,
       'preview_label' => '',
       'preview_title' => '',
@@ -1211,7 +1217,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function getSubmissionForm(array $values = [], $operation = 'add') {
     // Test a single webform variant which is set via
     // ?_webform_handler[ELEMENT_KEY]={variant_id}.
-    $webform_variant = \Drupal::request()->query->get('_webform_variant') ?: [];
+    $query = \Drupal::request()->query->all();
+    $webform_variant = $query['_webform_variant'] ?? [];
     if ($webform_variant) {
       $is_add_operation = ($operation === 'add' && $this->access('update'));
       $is_test_operation = ($operation === 'test' && $this->access('test'));
@@ -1681,7 +1688,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       // Set webform, id, key, parent_key, depth, and parent children.
       $element['#webform'] = $this->id();
       $element['#webform_id'] = $this->id() . '--' . $key;
-      $element['#webform_key'] = $key;
+      $element['#webform_key'] = (string) $key;
       $element['#webform_parent_key'] = $parent;
       $element['#webform_parent_flexbox'] = FALSE;
       $element['#webform_depth'] = $depth;
@@ -2420,7 +2427,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
 
     // If 'Allow users to post submission from a dedicated URL' is disabled,
     // delete all existing paths.
-    if (empty($this->getSetting('page'))) {
+    if (empty($this->hasPage())) {
       $this->deletePaths();
       return;
     }

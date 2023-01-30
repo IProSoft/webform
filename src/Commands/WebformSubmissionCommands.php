@@ -352,7 +352,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
 
     if (!$webform) {
       $submission_total = $submission_storage->getQuery()->count()->accessCheck(FALSE)->execute();
-      $form_total = $webform_storage->getQuery()->count()->execute();
+      $form_total = $webform_storage->getQuery()->count()->accessCheck(FALSE)->execute();
 
       $t_args = [
         '@submission_total' => $submission_total,
