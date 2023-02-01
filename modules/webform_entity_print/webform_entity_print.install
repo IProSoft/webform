@@ -5,6 +5,9 @@
  * Installation information for the 'Webform Entity Print' module.
  */
 
+use Drupal\system\Entity\Action;
+use Drupal\Core\Serialization\Yaml;
+
 /**
  * Implements hook_install().
  */
@@ -45,4 +48,30 @@ body {
     ];
     $third_party_settings_manager->setThirdPartySetting('webform_entity_print', 'export_types', $export_types);
   }
+
+  // Add new submission actions.
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+  $actions = $config->get('settings.webform_submission_bulk_form_actions');
+  $actions[] = 'webform_submission_print_download_action';
+  $config
+    ->set('settings.webform_submission_bulk_form_actions', $actions)
+    ->save();
+}
+
+/**
+ * Issue #3328205: Add print download bulk action
+ */
+function webform_entity_print_8001() {
+  // Add new action.
+  $data = Yaml::decode(file_get_contents(__DIR__ . '/../config/system.action.webform_submission_print_download_action.yml'));
+  $action = Action::create($data);
+  $action->trustData()->save();
+
+  // Add new submission actions.
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+  $actions = $config->get('settings.webform_submission_bulk_form_actions');
+  $actions[] = 'webform_submission_print_download_action';
+  $config
+    ->set('settings.webform_submission_bulk_form_actions', $actions)
+    ->save();
 }
