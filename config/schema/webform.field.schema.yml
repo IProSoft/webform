@@ -103,5 +103,5 @@ field.formatter.settings.webform_entity_reference_link:
       type: ignore
       label: 'Link attributes'
     defaults_in_link:
-      type: bool
+      type: boolean
       label: 'Defaults in link'
