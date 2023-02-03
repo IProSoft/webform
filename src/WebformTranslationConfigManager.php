@@ -261,7 +261,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       'from_name' => ['#maxlength' => 255],
       'sender_name' => ['#maxlength' => 255],
       // Confirmation settings.
-      'confirmation_url' => ['#maxlength' => 255],
+      'confirmation_url' => ['#maxlength' => NULL],
     ];
     $this->alterElements($config_element, $element_alterations);
 
@@ -618,8 +618,8 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
             '#suffix' => '<br/>',
           ],
           'src' => $image_url
-            ? ['#type' => 'link', '#url' => $image_url, '#title' => $image_src]
-            : ['#markup' => $image_src],
+          ? ['#type' => 'link', '#url' => $image_url, '#title' => $image_src]
+          : ['#markup' => $image_src],
         ],
         'translation' => [
           'text' => [
