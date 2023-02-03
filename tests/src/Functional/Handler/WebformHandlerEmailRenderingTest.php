@@ -23,10 +23,10 @@ class WebformHandlerEmailRenderingTest extends WebformBrowserTestBase {
 
     // Make sure we are using distinct default and administrative themes for
     // the duration of these tests.
-    \Drupal::service('theme_installer')->install(['webform_test_bartik', 'seven']);
+    \Drupal::service('theme_installer')->install(['webform_test_bartik', 'claro']);
     $this->config('system.theme')
       ->set('default', 'webform_test_bartik')
-      ->set('admin', 'seven')
+      ->set('admin', 'claro')
       ->save();
   }
 
