@@ -618,8 +618,8 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
             '#suffix' => '<br/>',
           ],
           'src' => $image_url
-          ? ['#type' => 'link', '#url' => $image_url, '#title' => $image_src]
-          : ['#markup' => $image_src],
+            ? ['#type' => 'link', '#url' => $image_url, '#title' => $image_src]
+            : ['#markup' => $image_src],
         ],
         'translation' => [
           'text' => [
