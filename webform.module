@@ -1053,11 +1053,9 @@ function webform_block_load($blocks) {
       continue;
     }
     foreach ($block->getPluginCollections() as $plugin_collection) {
-      if ($plugin_collection instanceof BlockPluginCollection) {
-        if ($plugin_collection->has('webform_block')) {
-          $block_instance = $plugin_collection->get('webform_block');
-          $block_instance->setContext('webform_block_source_entity', new Context(new EntityContextDefinition('block'), $block));
-        }
+      if ($plugin_collection instanceof BlockPluginCollection && $plugin_collection->has('webform_block')) {
+        $block_instance = $plugin_collection->get('webform_block');
+        $block_instance->setContext('webform_block_source_entity', new Context(new EntityContextDefinition('block'), $block));
       }
     }
   }
