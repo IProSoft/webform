@@ -8,6 +8,9 @@
 use Drupal\system\Entity\Action;
 use Drupal\Core\Serialization\Yaml;
 
+// Webform Entity Print install helper functions.
+include_once __DIR__ . '/includes/webform_entity_print.install.inc';
+
 /**
  * Implements hook_install().
  */
@@ -50,11 +53,7 @@ body {
   }
 
   // Add new 'Download PDF' submission action.
-  $config = \Drupal::configFactory()->getEditable('webform.settings');
-  $actions = $config->get('settings.webform_submission_bulk_form_actions') ?: [];
-  $actions[] = 'webform_submission_print_download_action';
-  $config->set('settings.webform_submission_bulk_form_actions', $actions)
-    ->save();
+  _webform_entity_print_update_add_new_download_pdf_submission_action();
 }
 
 /**
@@ -67,9 +66,5 @@ function webform_entity_print_update_8001() {
   $action->trustData()->save();
 
   // Add new 'Download PDF' submission action.
-  $config = \Drupal::configFactory()->getEditable('webform.settings');
-  $actions = $config->get('settings.webform_submission_bulk_form_actions') ?: [];
-  $actions[] = 'webform_submission_print_download_action';
-  $config->set('settings.webform_submission_bulk_form_actions', $actions)
-    ->save();
+  _webform_entity_print_update_add_new_download_pdf_submission_action();
 }
