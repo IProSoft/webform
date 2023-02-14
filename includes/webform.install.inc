@@ -171,10 +171,10 @@ function _webform_update_webform_setting(array $data) {
 function _webform_update_webform_setting_properties(array $properties) {
   // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories
   if (isset($properties['category'])) {
-    $properties += ['categories' => []];
+    $properties['categories'] = [];
     if (!empty($properties['category'])) {
       $properties['categories'] = array_values(array_filter(array_merge(
-        (array) $properties['categories'],
+        $properties['categories'],
         (array) $properties['category']
       )));
     }

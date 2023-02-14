@@ -241,7 +241,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * The webform categories.
    *
-   * @var string
+   * @var array
    */
   protected $categories;
 
