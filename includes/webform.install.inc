@@ -173,10 +173,10 @@ function _webform_update_webform_setting_properties(array $properties) {
   if (isset($properties['category'])) {
     $properties += ['categories' => []];
     if (!empty($properties['category'])) {
-      $properties['categories'] = array_merge(
-        $properties['categories'],
-        [$properties['category']]
-      );
+      $properties['categories'] = array_filter(array_unique(array_merge(
+        (array) $properties['categories'],
+        (array) $properties['category']
+      )));
     }
     unset($properties['category']);
   }
