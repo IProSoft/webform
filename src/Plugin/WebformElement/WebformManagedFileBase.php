@@ -617,7 +617,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    * @param array $element
    *   An element.
    *
-   * @return int
+   * @return string
    *   File extensions.
    */
   protected function getFileExtensions(array $element = NULL) {
@@ -629,7 +629,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
   /**
    * Get the default allowed file extensions.
    *
-   * @return int
+   * @return string
    *   File extensions.
    */
   protected function getDefaultFileExtensions() {
