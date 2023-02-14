@@ -295,6 +295,18 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
       $user = \Drupal::currentUser();
       $formats = filter_formats($user);
       if (isset($formats[static::DEFAULT_FILTER_FORMAT])) {
+        // Remove the fallback format from the list of formats.
+        // @see \Drupal\filter\Element\TextFormat::processFormat
+        $config = \Drupal::config('filter.settings');
+        if (!isset($element['#allowed_formats']) && !$config->get('always_show_fallback_choice')) {
+          $fallback_format = $config->get('fallback_format');
+          if (array_key_exists('#format', $element)
+            && $element['#format'] !== $fallback_format
+            && count($formats) > 1) {
+            unset($formats[$fallback_format]);
+          }
+        }
+        // Remove the 'webform' default format from the list of formats.
         unset($formats[static::DEFAULT_FILTER_FORMAT]);
         $element['#allowed_formats'] = array_keys($formats);
       }
