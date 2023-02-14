@@ -243,7 +243,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *
    * @var array
    */
-  protected $categories;
+  protected $categories = [];
 
   /**
    * The owner's uid.
