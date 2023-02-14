@@ -1,5 +1,6 @@
 settings:
   default_status: open
+  default_categories: {  }
   default_page: true
   default_page_base_path: /form
   default_ajax: false

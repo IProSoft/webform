@@ -116,7 +116,7 @@ function _webform_update_webform_setting(array $data) {
     'id' => '',
     'title' => '',
     'description' => '',
-    'category' => '',
+    'categories' => '',
     'elements' => '',
     'css' => '',
     'javascript' => '',
@@ -138,6 +138,7 @@ function _webform_update_webform_setting(array $data) {
   if (empty($properties['third_party_settings'])) {
     unset($properties['third_party_settings']);
   }
+
   // Set properties.
   $data = $properties;
 
@@ -156,6 +157,31 @@ function _webform_update_webform_setting(array $data) {
   $data['access'] += $access_rules_manager->getDefaultAccessRules();
 
   return $data;
+}
+
+/**
+ * Make sure outdated webform properties are up-to-date.
+ *
+ * @param array $settings
+ *   An associative array of webform properties.
+ *
+ * @return array
+ *   Updated webform properties.
+ */
+function _webform_update_webform_setting_properties(array $properties) {
+  // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories
+  if (isset($properties['category'])) {
+    $properties += ['categories' => []];
+    if (!empty($properties['category'])) {
+      $properties['categories'] = array_merge(
+        $properties['categories'],
+        [$properties['category']]
+      );
+    }
+    unset($properties['category']);
+  }
+
+  return $properties;
 }
 
 /**

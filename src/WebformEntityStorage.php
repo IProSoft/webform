@@ -205,8 +205,9 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
       return $cache_data[$cache_key];
     }
 
+    $categories = $this->configFactory->get('webform.settings')
+      ->get('settings.default_categories') ?? [];
     $webforms = $this->loadMultiple();
-    $categories = [];
     foreach ($webforms as $webform) {
       if ($template !== NULL && $webform->get('template') !== $template) {
         continue;
