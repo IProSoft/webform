@@ -991,8 +991,8 @@ function webform_element_info_alter(array &$info) {
 
   if (isset($info['text_format'])) {
     $info['text_format']['#process'] = array_merge(
-      [['\Drupal\webform\Element\WebformHtmlEditor', 'processTextFormat']],
-      $info['text_format']['#process'] ?? []
+      $info['text_format']['#process'] ?? [],
+      [['\Drupal\webform\Element\WebformHtmlEditor', 'processTextFormat']]
     );
     $info['text_format']['#pre_render'] = array_merge(
       [['\Drupal\webform\Element\WebformHtmlEditor', 'preRenderTextFormat']],
