@@ -752,11 +752,6 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
     $config->set('third_party_settings', $form_state->getValue('third_party_settings') ?: []);
     parent::submitForm($form, $form_state);
 
-    // Clear categories cache.
-    /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
-    $webform_storage = $this->entityTypeManager->getStorage('webform');
-    $webform_storage->resetCategoriesCache();
-
     // Update paths.
     if ($update_paths) {
       /** @var \Drupal\webform\WebformInterface[] $webforms */

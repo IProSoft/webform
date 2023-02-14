@@ -140,7 +140,7 @@ function _webform_update_webform_setting(array $data) {
   }
 
   // Set properties.
-  $data = $properties;
+  $data = _webform_update_webform_setting_properties($properties);
 
   // Always apply the default settings.
   $settings = $default_settings;

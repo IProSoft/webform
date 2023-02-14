@@ -185,7 +185,7 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
   /**
    * {@inheritdoc}
    */
-  public function getCategories($template = NULL) {
+  public function getCategories($template = NULL, $default = FALSE) {
     // Get categories cache key which includes langcode and template type.
     $cache_key = $this->languageManager->getCurrentLanguage()->getId();
     if ($template === FALSE) {
@@ -197,6 +197,9 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
     else {
       $cache_key .= '.all';
     }
+    if ($default) {
+      $cache_key .= '.default';
+    }
 
     // Get categories cached data.
     $cache = $this->cacheBackend->get('webform.categories');
@@ -205,15 +208,25 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
       return $cache_data[$cache_key];
     }
 
-    $categories = $this->configFactory->get('webform.settings')
-      ->get('settings.default_categories') ?? [];
+    $categories = [];
+
+    // Append default categories.
+    if ($default) {
+      $default_categories = $this->configFactory->get('webform.settings')
+        ->get('settings.default_categories');
+      if ($default_categories) {
+        $categories += array_combine($default_categories, $default_categories);
+      }
+    }
+
+    // Append selected categories.
     $webforms = $this->loadMultiple();
     foreach ($webforms as $webform) {
       if ($template !== NULL && $webform->get('template') !== $template) {
         continue;
       }
-      if ($category = $webform->get('category')) {
-        $categories[$category] = $category;
+      if ($webform_categories = $webform->get('categories')) {
+        $categories += array_combine($webform_categories, $webform_categories);
       }
     }
     ksort($categories);

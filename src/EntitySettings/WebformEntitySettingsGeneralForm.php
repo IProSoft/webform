@@ -93,7 +93,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     $form['general_settings']['categories'] = [
       '#type' => 'webform_select_other',
       '#title' => $this->t('Categories'),
-      '#options' => $webform_storage->getCategories(),
+      '#options' => $webform_storage->getCategories(NULL, TRUE),
       '#multiple' => TRUE,
       '#select2' => TRUE,
       '#default_value' => $webform->get('categories'),
