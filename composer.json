@@ -39,7 +39,7 @@
     "drupal/captcha": "1.x-dev",
     "drupal/chosen": "3.0.x-dev",
     "drupal/ckeditor": "1.0.x-dev",
-    "drupal/clientside_validation": "3.0.x-dev",
+    "drupal/clientside_validation": "4.0.x-dev",
     "drupal/devel": "5.x-dev",
     "drupal/entity": "1.x-dev",
     "drupal/entity_print": "2.x-dev",
