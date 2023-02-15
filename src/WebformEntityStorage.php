@@ -264,8 +264,8 @@ class WebformEntityStorage extends ConfigEntityStorage implements WebformEntityS
         continue;
       }
 
-      if ($category = $webform->get('category')) {
-        $categorized_options[$category][$id] = $webform->label();
+      if ($categories = $webform->get('categories')) {
+        $categorized_options[reset($categories) ][$id] = $webform->label();
       }
       else {
         $uncategorized_options[$id] = $webform->label();
