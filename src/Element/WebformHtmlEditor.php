@@ -331,8 +331,16 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
   public static function preRenderProcessedText($element) {
     $format_id = $element['#format'] ?? NULL;
     if ($format_id === static::DEFAULT_FILTER_FORMAT) {
-      $message = "Disabled text format: %format. This text format can not be used outside of the Webform module's HTML editor.";
-      \Drupal::logger('webform')->alert($message, ['%format' => $format_id]);
+      // Determine if this is a CKEditor(4) test format tags to be processed.
+      // (i.e, <h1>TEST</h1>)
+      // @see \Drupal\ckeditor\Plugin\CKEditorPlugin\Internal::generateFormatTagsSetting
+      // @see https://www.drupal.org/project/webform/issues/3331164
+      $is_ckeditor_test = preg_match('#^<([a-z0-9]+)>TEST</\1>$#', $element['#markup'] ?? '');
+      // Log issue, except for CKEditor(4) test format tags
+      if (!$is_ckeditor_test) {
+        $message = t("Disabled text format: %format. This text format can not be used outside of the Webform module's HTML editor.");
+        \Drupal::logger('webform')->alert($message, ['%format' => $format_id]);
+      }
       $element['#markup'] = '';
       return $element;
     }
