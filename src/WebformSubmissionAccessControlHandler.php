@@ -47,19 +47,9 @@ class WebformSubmissionAccessControlHandler extends EntityAccessControlHandler i
   public function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
     /** @var \Drupal\webform\WebformSubmissionInterface $entity */
 
-    // Check 'administer webform' permission.
-    if ($account->hasPermission('administer webform')) {
-      return WebformAccessResult::allowed();
-    }
-
     // Check 'administer webform submission' permission.
     if ($account->hasPermission('administer webform submission')) {
       return WebformAccessResult::allowed();
-    }
-
-    // Check webform 'update' permission.
-    if ($entity->getWebform()->access('update', $account)) {
-      return WebformAccessResult::allowed($entity, TRUE);
     }
 
     // Check view and delete operations token access.
