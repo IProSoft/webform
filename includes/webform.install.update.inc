@@ -4310,3 +4310,11 @@ function webform_update_8636() {
 function webform_update_8637() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories.
+ */
+function webform_update_8648() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}
