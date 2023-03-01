@@ -804,7 +804,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // @see /admin/structure/webform/submissions/manage
     if (empty($webform) && empty($source_entity)) {
       $columns['webform_id'] = [
-        'title' => $this->t('Webform'),
+        'title' => $this->t('Webform', [], ['context' => 'form']),
       ];
       $columns['entity'] = [
         'title' => $this->t('Submitted to'),
@@ -1192,7 +1192,9 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $this->loggerFactory->get('webform')
         ->notice('Deleted @form: Submission #@id.', [
           '@id' => $entity->id(),
-          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform') . ']',
+          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform', [], [
+            'context' => 'form'
+            ]) . ']',
         ]);
     }
 
