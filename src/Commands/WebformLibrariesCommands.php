@@ -398,7 +398,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
     $json = file_get_contents($composer_json);
     $data = json_decode($json, FALSE, static::JSON_ENCODE_FLAGS);
     if (!isset($data->repositories)) {
-      $data->repositories = (object) [];
+      $data->repositories = [];
     }
     if (!isset($data->require)) {
       $data->require = (object) [];
@@ -417,10 +417,11 @@ class WebformLibrariesCommands extends WebformCommandsBase {
     // Remove all existing _webform repositories.
     foreach ($repositories as $repository_name => $repository) {
       if (!empty($repository->_webform)) {
-        $package_name = $repositories->{$repository_name}->package->name;
-        unset($repositories->{$repository_name}, $require->{$package_name});
+        $package_name = $repositories[$repository_name]->package->name;
+        unset($repositories[$repository_name], $require->{$package_name});
       }
     }
+    $repositories = array_values($repositories);
 
     // Set disable tls.
     $this->setComposerDisableTls($data);
@@ -466,9 +467,27 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    */
   protected function setComposerLibraries(&$repositories, &$require) {
     $libraries = $this->librariesManager->getLibraries(TRUE);
+
+    $repository_packages = [];
+    foreach ($repositories as $repository) {
+      if (isset($repository->package->name)) {
+        $repository_packages[] = $repository->package->name;
+      }
+    }
+
     foreach ($libraries as $library_name => $library) {
+      if (strpos($library_name, '/') !== FALSE) {
+        $package_name = $library_name;
+      }
+      elseif (strpos($library_name, '.') !== FALSE) {
+        $package_name = str_replace('.', '/', $library_name);
+      }
+      else {
+        $package_name = "$library_name/$library_name";
+      }
+
       // Never overwrite existing repositories.
-      if (isset($repositories->{$library_name})) {
+      if (in_array($package_name, $repository_packages)) {
         continue;
       }
 
@@ -491,22 +510,12 @@ class WebformLibrariesCommands extends WebformCommandsBase {
 
       $package_version = $library['version'];
 
-      if (strpos($library_name, '/') !== FALSE) {
-        $package_name = $library_name;
-      }
-      elseif (strpos($library_name, '.') !== FALSE) {
-        $package_name = str_replace('.', '/', $library_name);
-      }
-      else {
-        $package_name = "$library_name/$library_name";
-      }
-
-      $repositories->$library_name = [
+      $repositories[] = [
         '_webform' => TRUE,
         'type' => 'package',
         'package' => [
           'name' => $package_name,
-          'version' => $package_version,
+          'version' => $package_version ,
           'type' => 'drupal-library',
           'extra' => [
             'installer-name' => $library_name,
@@ -521,7 +530,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
 
       $require->$package_name = '*';
     }
-    $repositories = WebformObjectHelper::sortByProperty($repositories);
+    ksort($repositories);
     $require = WebformObjectHelper::sortByProperty($require);
   }
 
