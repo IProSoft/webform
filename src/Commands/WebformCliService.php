@@ -702,7 +702,7 @@ class WebformCliService implements WebformCliServiceInterface {
     $this->drush_webform_composer_set_disable_tls($data);
 
     // Set libraries.
-    $data->repositories = (object) [];
+    $data->repositories = [];
     $data->require = (object) [];
     $this->drush_webform_composer_set_libraries($data->repositories, $data->require);
     // Remove _webform property.
@@ -1116,10 +1116,10 @@ class WebformCliService implements WebformCliServiceInterface {
     $json = file_get_contents($composer_json);
     $data = json_decode($json, FALSE, $this->drush_webform_composer_get_json_encode_options());
     if (!isset($data->repositories)) {
-      $data->repositories = (object) [];
+      $data->repositories = [];
     }
     if (!isset($data->require)) {
-      $data->repositories = (object) [];
+      $data->require = (object) [];
     }
 
     // Add drupal-library to installer paths.
@@ -1135,10 +1135,11 @@ class WebformCliService implements WebformCliServiceInterface {
     // Remove all existing _webform repositories.
     foreach ($repositories as $repository_name => $repository) {
       if (!empty($repository->_webform)) {
-        $package_name = $repositories->{$repository_name}->package->name;
-        unset($repositories->{$repository_name}, $require->{$package_name});
+        $package_name = $repositories[$repository_name]->package->name;
+        unset($repositories[$repository_name], $require->{$package_name});
       }
     }
+    $repositories = array_values($repositories);
 
     // Set disable tls.
     $this->drush_webform_composer_set_disable_tls($data);
@@ -1194,9 +1195,27 @@ class WebformCliService implements WebformCliServiceInterface {
     /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
     $libraries_manager = \Drupal::service('webform.libraries_manager');
     $libraries = $libraries_manager->getLibraries(TRUE);
+
+    $repository_packages = [];
+    foreach ($repositories as $repository) {
+      if (isset($repository->package->name)) {
+        $repository_packages[] = $repository->package->name;
+      }
+    }
+
     foreach ($libraries as $library_name => $library) {
       // Never overwrite existing repositories.
-      if (isset($repositories->{$library_name})) {
+      if (strpos($library_name, '/') !== FALSE) {
+        $package_name = $library_name;
+      }
+      elseif (strpos($library_name, '.') !== FALSE) {
+        $package_name = str_replace('.', '/', $library_name);
+      }
+      else {
+        $package_name = "$library_name/$library_name";
+      }
+
+      if (in_array($package_name, $repository_packages)) {
         continue;
       }
 
@@ -1219,17 +1238,7 @@ class WebformCliService implements WebformCliServiceInterface {
 
       $package_version = $library['version'];
 
-      if (strpos($library_name, '/') !== FALSE) {
-        $package_name = $library_name;
-      }
-      elseif (strpos($library_name, '.') !== FALSE) {
-        $package_name = str_replace('.', '/', $library_name);
-      }
-      else {
-        $package_name = "$library_name/$library_name";
-      }
-
-      $repositories->$library_name = [
+      $repositories[] = [
         '_webform' => TRUE,
         'type' => 'package',
         'package' => [
@@ -1249,7 +1258,7 @@ class WebformCliService implements WebformCliServiceInterface {
 
       $require->$package_name = '*';
     }
-    $repositories = WebformObjectHelper::sortByProperty($repositories);
+    ksort($repositories);
     $require = WebformObjectHelper::sortByProperty($require);
   }
 
