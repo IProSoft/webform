@@ -108,6 +108,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         $properties[$composite_key . '__help'] = '';
         $properties[$composite_key . '__required'] = FALSE;
         $properties[$composite_key . '__placeholder'] = '';
+        $properties[$composite_key . '__autocomplete'] = '';
       }
       $properties[$composite_key . '__access'] = TRUE;
     }
@@ -985,6 +986,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
           '<hr/><b>' . $this->t('Description') . ':</b> ' . $this->t('A short description of the element used as help for the user when they use the webform.') .
           '<hr/><b>' . $this->t('Help text') . ':</b> ' . $this->t('A tooltip displayed after the title.') .
           '<hr/><b>' . $this->t('Title display') . ':</b> ' . $this->t('A tooltip displayed after the title.'),
+        '  <hr/><b>' . $this->t('Autocomplete') . ':</b> ' . $this->t('The autocomplete attribute.'),
         '#help_title' => $this->t('Labels'),
       ],
     ];
@@ -1101,6 +1103,15 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
               ],
               '#empty_option' => $this->t('Select title display…'),
               '#states' => $state_disabled,
+            ],
+            $composite_key . '__autocomplete' => [
+              '#type' => 'select',
+              '#title' => $this->t('@title autocomplete', $t_args),
+              '#title_display' => 'invisible',
+              '#description' => $this->t('The autocomplete attribute.'),
+              '#description_display' => 'invisible',
+              '#empty_option' => $this->t('Select autocomplete attribute…'),
+              '#options' => $this->elementManager->getAutocompleteAttributes(),
             ],
           ],
         ];
