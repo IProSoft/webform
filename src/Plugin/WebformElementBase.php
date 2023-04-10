@@ -923,7 +923,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     }
 
     // Allow modules to alter the element's overall access result.
-    $context += [
+    $context = [
+      'webform' => $webform,
+      'webform_submission' => $webform_submission,
       'operation' => $operation,
       'element' => $element,
       'account' => $account,
