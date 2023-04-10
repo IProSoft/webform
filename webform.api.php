@@ -275,6 +275,61 @@ function hook_webform_element_access($operation, array &$element, \Drupal\Core\S
 }
 
 /**
+ * Alter an element's access result.
+ *
+ * Called after hook_webform_element_access().
+ *
+ * @param \Drupal\Core\Access\AccessResultInterface $access_result
+ *   The access result so far.
+ * @param array $context
+ *   The access result's current context which include the webform and
+ *   webform submission entities, and the operation, element, and user account.
+ */
+function hook_webform_element_access_alter(\Drupal\Core\Access\AccessResultInterface &$access_result, array $context): void {
+  $webform = $context['webform'];
+  $webform_submission = $context['webform_submission'];
+  $operation = $context['operation'];
+  $element = $context['element'];
+  $account = $context['account'];
+
+  // This example allows private element access to webform node owners.
+  if (empty($element['#private'])) {
+    return;
+  }
+
+  // Check administer webform submissions.
+  if ($account->hasPermission('administer webform submission')) {
+    $access_result = AccessResult::allowed();
+    return;
+  }
+
+  $short_op = $operation;
+  if ($short_op === 'update' || $short_op === 'create') {
+    $short_op = 'edit';
+  }
+  $any_permission = "$short_op webform submissions any node";
+  if ($account->hasPermission($any_permission)) {
+    $access_result = AccessResult::allowed();
+    return;
+  }
+
+  // Get the webform's nodes and use the first one found to check owner access.
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+    'type' => 'webform',
+    'webform' => $webform->id(),
+    'status' => 1,
+  ]);
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = reset($nodes);
+
+  $own_permission = "$short_op webform submissions own node";
+  if ($account->hasPermission($own_permission) && $node->id() === $account->id()) {
+    $access_result = AccessResult::allowed();
+    return;
+  }
+}
+
+/**
  * Return information about input masks for text based webform elements.
  *
  * @return array

@@ -892,33 +892,47 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       throw new \Exception("Webform entity is required to check and element's access (rules).");
     }
 
+    $access_result = AccessResult::neutral();
+
     // If #private, check that the current user can 'view any submission'.
     if (!empty($element['#private']) && !$webform->access('submission_view_any', $account)) {
-      return FALSE;
+      $access_result = AccessResult::forbidden();
     }
 
-    // Check webform and other modules access results.
-    $access_result = $this->checkAccessRule($element, $operation, $account)
-      ? AccessResult::allowed()
-      : AccessResult::neutral();
+    if (!$access_result->isForbidden()) {
+      // Check webform and other modules access results.
+      $rule_result = $this->checkAccessRule($element, $operation, $account)
+        ? AccessResult::allowed()
+        : AccessResult::neutral();
+      $access_result = $access_result->orIf($rule_result);
 
-    // Allow webform handlers to adjust the access and/or directly set an
-    // element's #access to FALSE.
-    $handler_result = $webform->invokeHandlers('accessElement', $element, $operation, $account, $webform_submission);
-    $access_result = $access_result->orIf($handler_result);
+      // Allow webform handlers to adjust the access and/or directly set an
+      // element's #access to FALSE.
+      $handler_result = $webform->invokeHandlers('accessElement', $element, $operation, $account, $webform_submission);
+      $access_result = $access_result->orIf($handler_result);
 
-    // Allow modules to adjust the element's access.
-    $context = [
-      'webform' => $webform,
-      'webform_submission' => $webform_submission,
+      // Allow modules to adjust the element's access.
+      $context = [
+        'webform' => $webform,
+        'webform_submission' => $webform_submission,
+      ];
+      \Drupal::moduleHandler()->invokeAllWith('webform_element_access', function (callable $hook, string $module) use (&$access_result, $operation, $element, $account, $context) {
+        $hook_result = $hook($operation, $element, $account, $context);
+        $access_result = $access_result->orIf($hook_result);
+      });
+    }
+
+    // Allow modules to alter the element's overall access result.
+    $context += [
+      'operation' => $operation,
+      'element' => $element,
+      'account' => $account,
     ];
-    \Drupal::moduleHandler()->invokeAllWith('webform_element_access', function (callable $hook, string $module) use (&$access_result, $operation, $element, $account, $context) {
-      $hook_result = $hook($operation, $element, $account, $context);
-      $access_result = $access_result->orIf($hook_result);
-    });
+    \Drupal::moduleHandler()->alter('webform_element_access', $access_result, $context);
 
-    // Grant access as provided by webform, webform handler(s) and/or
-    // hook_webform_element_access() implementation.
+    // Grant access as provided by webform, webform handler(s),
+    // hook_webform_element_access() and/or hook_webform_element_access_alter()
+    // implementation.
     return $access_result->isAllowed();
   }
 
