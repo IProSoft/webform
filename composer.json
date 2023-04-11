@@ -46,7 +46,7 @@
     "drupal/group": "1.x-dev",
     "drupal/hal" : "1 - 2",
     "drupal/jquery_ui": "1.x-dev",
-    "drupal/jquery_ui_checkboxradio": "1.x-dev",
+    "drupal/jquery_ui_checkboxradio": "2.x-dev",
     "drupal/jquery_ui_datepicker": "1.x-dev",
     "drupal/lingotek": "4.0.x-dev",
     "drupal/mailsystem": "4.x-dev",
