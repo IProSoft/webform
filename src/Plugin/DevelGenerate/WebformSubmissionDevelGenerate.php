@@ -258,7 +258,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
             '@feedback' => $feedback,
             '@rate' => ($feedback * 60) / ($now - $start),
           ];
-          \Drupal::logger('webform')->notice($this->t('Completed @feedback submissions (@rate submissions/min)', $dt_args));
+          \Drupal::logger('webform')->notice('Completed @feedback submissions (@rate submissions/min)', $dt_args);
           $start = $now;
         }
       }
