@@ -809,7 +809,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       // Convert #title to HTML markup so that it can displayed properly
       // in error messages.
       if (isset($element['#title'])) {
-        $element['#title'] = WebformHtmlHelper::toHtmlMarkup($element['#title'], WebformXss::getHtmlTagList());
+        $element['#title'] = WebformHtmlHelper::toHtmlMarkup($element['#title'], $element['#allowed_tags']);
       }
     }
 
