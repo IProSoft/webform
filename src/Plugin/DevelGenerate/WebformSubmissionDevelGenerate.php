@@ -129,14 +129,14 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
       ];
       $form['webform'] = [
         '#type' => 'item',
-        '#title' => $this->t('Webform'),
+        '#title' => $this->t('Webform', [], ['context' => 'form']),
         '#markup' => $options[$webform_id],
       ];
     }
     else {
       $form['webform_ids'] = [
         '#type' => 'checkboxes',
-        '#title' => $this->t('Webform'),
+        '#title' => $this->t('Webform', [], ['context' => 'form']),
         '#description' => $this->t('Restrict submissions to these webforms.'),
         '#required' => TRUE,
         '#options' => $options,
