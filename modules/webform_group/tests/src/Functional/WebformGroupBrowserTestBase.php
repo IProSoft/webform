@@ -25,7 +25,7 @@ abstract class WebformGroupBrowserTestBase extends GroupBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Allow all roles to view webform nodes.
