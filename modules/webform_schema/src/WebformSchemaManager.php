@@ -8,6 +8,7 @@ use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Render\Element\Email as EmailElement;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Plugin\WebformElement\BooleanBase;
 use Drupal\webform\Plugin\WebformElement\DateBase;
 use Drupal\webform\Plugin\WebformElement\NumericBase;
@@ -80,6 +81,7 @@ class WebformSchemaManager implements WebformSchemaManagerInterface {
       'multiple' => $this->t('Multiple'),
       'options_text' => $this->t('Options text'),
       'options_value' => $this->t('Options value'),
+      'notes' => $this->t('Notes/Comments'),
     ];
   }
 
@@ -319,6 +321,7 @@ class WebformSchemaManager implements WebformSchemaManagerInterface {
       $data['options_value'] = [];
     }
 
+    $data['notes'] = WebformHtmlEditor::checkMarkup($element['#admin_notes'] ?? '');
     return $data;
   }
 

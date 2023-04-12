@@ -19,6 +19,7 @@ elements: |
   textfield:
     '#type': textfield
     '#title': textfield
+    '#admin_notes': '<p>This is a note</p>'
   textarea:
     '#type': textarea
     '#title': textarea
