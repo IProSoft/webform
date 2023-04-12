@@ -9,6 +9,12 @@ webform.settings:
         default_status:
           type: string
           label: 'Default status'
+        default_categories:
+          type: sequence
+          label: 'Default categories'
+          sequence:
+            type: label
+            label: 'Default category'
         default_page:
           type: boolean
           label: 'Default enable page'

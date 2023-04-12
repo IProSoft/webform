@@ -182,6 +182,12 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       ],
       '#options_display' => 'side_by_side',
     ];
+    $form['form_settings']['default_categories'] = [
+      '#type' => 'webform_multiple',
+      '#title' => $this->t('Default webform categories'),
+      '#description' => $this->t('Enter default webform categories that will always be available when users are creating and managing a form.'),
+      '#default_value' => $settings['default_categories'],
+    ];
     $form['form_settings']['default_form_open_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default open message'),
@@ -746,8 +752,7 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
     $config->set('third_party_settings', $form_state->getValue('third_party_settings') ?: []);
     parent::submitForm($form, $form_state);
 
-    /* Update paths */
-
+    // Update paths.
     if ($update_paths) {
       /** @var \Drupal\webform\WebformInterface[] $webforms */
       $webforms = Webform::loadMultiple();
