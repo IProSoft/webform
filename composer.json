@@ -42,7 +42,7 @@
     "drupal/devel": "5.x-dev",
     "drupal/entity": "1.x-dev",
     "drupal/entity_print": "2.x-dev",
-    "drupal/group": "1.x-dev",
+    "drupal/group": "1.5",
     "drupal/jquery_ui": "1.x-dev",
     "drupal/jquery_ui_checkboxradio": "1.x-dev",
     "drupal/jquery_ui_datepicker": "1.x-dev",
