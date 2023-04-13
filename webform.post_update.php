@@ -123,3 +123,11 @@ function webform_post_update_ckeditor01() {
 function webform_post_update_confirmation_page_noindex() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories.
+ */
+function webform_post_update_multiple_categories() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}
