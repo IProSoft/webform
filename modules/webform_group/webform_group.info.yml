@@ -6,5 +6,5 @@ core_version_requirement: ^9.3
 dependencies:
   - 'webform:webform'
   - 'webform:webform_node'
-  - 'group:group'
-  - 'group:gnode'
+  - 'group:group (>=1.5.0)'
+  - 'group:gnode (>=1.5.0)'
