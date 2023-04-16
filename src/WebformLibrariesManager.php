@@ -125,10 +125,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         '@title' => $library['title'],
         '@version' => $library['version'],
         '@path' => $library_path,
-        ':download_href' => $library['download_url']->toString(),
         ':homepage_href' => $library['homepage_url']->toString(),
         ':external_href' => 'https://www.drupal.org/docs/8/theming-drupal-8/adding-stylesheets-css-and-javascript-js-to-a-drupal-8-theme#external',
-        ':install_href' => ($this->moduleHandler->moduleExists('help')) ? Url::fromRoute('help.page', ['name' => 'webform'], ['fragment' => 'libraries'])->toString() : 'https://www.drupal.org/docs/8/modules/webform/webform-libraries',
         ':settings_libraries_href' => Url::fromRoute('webform.config.libraries')->toString(),
         ':settings_elements_href' => Url::fromRoute('webform.config.elements')->toString(),
       ];
@@ -151,7 +149,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
         // Missing.
         $stats['@missing']++;
         $title = $this->t('<span class="color-warning"><strong>@title @version</strong> (CDN).</span>', $t_args);
-        $description = $this->t('Please download the <a href=":homepage_href">@title</a> library from <a href=":download_href">:download_href</a> and copy it to <b>@path</b> or use <a href=":install_href">Drush</a> to install this library.', $t_args);
+        $description = $this->t('The <a href=":homepage_href">@title</a> library is not installed in <b>@path</b>.', $t_args);
         $severity = REQUIREMENT_ERROR;
       }
       else {
@@ -193,10 +191,16 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     // Description.
     $description = [];
     if (!$cli && $severity === REQUIREMENT_ERROR) {
+      $t_args = [':href' => ($this->moduleHandler->moduleExists('help')) ? Url::fromRoute('help.page', ['name' => 'webform'], ['fragment' => 'libraries'])->toString() : 'https://www.drupal.org/docs/8/modules/webform/webform-libraries'];
+      $description['download'] = [
+        '#markup' => '<hr/>' .
+          t('Please download external libaries using one the <a href=":href">recommended methods.', $t_args),
+      ];
+      $t_args = [':href' => Url::fromRoute('webform.config.advanced')->toString()];
       $description['cdn'] = [
         '#markup' => '<hr/>' .
           $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']) . '<br/>' .
-          $this->t('<a href=":href">Disable CDN warning</a>', [':href' => Url::fromRoute('webform.config.advanced')->toString()]),
+          $this->t('<a href=":href">Disable CDN warning</a>', $t_args),
       ];
     }
     $description['info'] = $info;
@@ -419,8 +423,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t("A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods."),
       'notes' => $this->t('International Telephone Input is used by the Telephone element.'),
       'homepage_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input'),
-      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.16.zip'),
-      'version' => '17.0.16',
+      'download_url' => Url::fromUri('https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.19.zip'),
+      'version' => '17.0.19',
       'license' => 'MIT',
     ];
     $libraries['jquery.rateit'] = [
@@ -447,8 +451,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A lightweight, customizable javascript timepicker plugin for jQuery, inspired by Google Calendar.'),
       'notes' => $this->t('Timepicker is used to provide a polyfill for HTML 5 time elements.'),
       'homepage_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker'),
-      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.13.18.zip'),
-      'version' => '1.13.18',
+      'download_url' => Url::fromUri('https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.14.0.zip'),
+      'version' => '1.14.0',
       'license' => 'MIT',
     ];
     $libraries['progress-tracker'] = [

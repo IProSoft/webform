@@ -261,7 +261,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       'from_name' => ['#maxlength' => 255],
       'sender_name' => ['#maxlength' => 255],
       // Confirmation settings.
-      'confirmation_url' => ['#maxlength' => 255],
+      'confirmation_url' => ['#maxlength' => NULL],
     ];
     $this->alterElements($config_element, $element_alterations);
 
@@ -971,7 +971,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       if (!WebformElementHelper::isElement($element, $key)) {
         continue;
       }
-      if (isset($element['#type']) && !in_array($element['#type'], ['fieldset', 'details'])) {
+      if (isset($element['#type']) && !in_array($element['#type'], ['container', 'details', 'fieldset'])) {
         $flattened_elements[$key] = WebformElementHelper::getProperties($element);
       }
       $flattened_elements += $this->getElementsFlattened($element);

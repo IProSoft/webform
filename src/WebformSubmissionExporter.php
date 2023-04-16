@@ -793,7 +793,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function generate() {
-    $entity_ids = $this->getQuery()->accessCheck(TRUE)->execute();
+    $entity_ids = $this->getQuery()->execute();
     $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
 
     $this->writeHeader();
@@ -999,6 +999,13 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       // Sort by created and sid in ASC or DESC order.
       $query->sort('created', $export_options['order'] ?? 'ASC');
       $query->sort('sid', $export_options['order'] ?? 'ASC');
+    }
+
+    // Do not check access to submissions via Drush CLI.
+    // There is already submission access checking being applied.
+    // @see webform_query_webform_submission_access_alter()
+    if (PHP_SAPI === 'cli') {
+      $query->accessCheck(FALSE);
     }
 
     return $query;
