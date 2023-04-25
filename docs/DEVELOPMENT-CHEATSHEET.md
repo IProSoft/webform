@@ -67,7 +67,7 @@ drush webform-libraries-composer > composer.json
 **Manually Execute an Update Hook**
 
 ```bash
-drush php-eval "module_load_include('install', 'webform'); webform_update_8167()";
+drush php-eval "\Drupal::moduleHandler()->loadInclude('webform', 'install'); webform_update_8167()";
 ```
 
 **Import and Export Configuration**
@@ -124,6 +124,8 @@ echo 'true' > modules/webform_options_custom/tests/modules/webform_options_custo
 echo 'true' > modules/webform_options_limit/tests/modules/webform_options_limit_test/webform_options_limit_test.features.yml
 
 echo 'true' > modules/webform_scheduled_email/tests/modules/webform_scheduled_email_test/webform_scheduled_email_test.features.yml
+
+echo 'true' > modules/webform_submission_schema/tests/modules/webform_schema_test/webform_schema_test.features.yml
 
 echo 'true' > modules/webform_submission_export_import/tests/modules/webform_submission_export_import_test/webform_submission_export_import_test.features.yml
 
@@ -208,6 +210,7 @@ drush en -y webform\
   webform_options_custom_entity_test\
   webform_options_limit_test\
   webform_scheduled_email_test\
+  webform_schema_test\
   webform_submission_export_import_test\
   webform_toggles_test;
 
@@ -265,6 +268,7 @@ drush features-export -y webform_options_custom_test
 drush features-export -y webform_options_custom_entity_test
 drush features-export -y webform_options_limit_test
 drush features-export -y webform_scheduled_email_test
+drush features-export -y webform_schema_test
 drush features-export -y webform_submission_export_import_test
 drush features-export -y webform_toggles_test
 
@@ -322,6 +326,7 @@ drush webform:tidy -y --dependencies webform_options_custom_test
 drush webform:tidy -y --dependencies webform_options_custom_entity_test
 drush webform:tidy -y --dependencies webform_options_limit_test
 drush webform:tidy -y --dependencies webform_scheduled_email_test
+drush webform:tidy -y --dependencies webform_schema_test
 drush webform:tidy -y --dependencies webform_submission_export_import_test
 drush webform:tidy -y --dependencies webform_toggles_test
 
@@ -377,6 +382,7 @@ drush features-import -y webform_options_custom_test
 drush features-import -y webform_options_custom_entity_test
 drush features-import -y webform_options_limit_test
 drush features-import -y webform_scheduled_email_test
+drush features-import -y webform_schema_test
 drush features-import -y webform_submission_export_import_test
 drush features-import -y webform_toggles_test
 ```

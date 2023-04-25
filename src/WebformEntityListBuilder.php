@@ -85,9 +85,35 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   protected $database;
 
   /**
+   * The user storage object.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
+   * The result limit.
+   *
+   * @var int
+   */
+  protected $limit;
+
+  /**
+   * The role storage object
+   *
+   * @var \Drupal\user\RoleStorageInterface
+   */
+  protected $roleStorage;
+
+  /**
    * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
+   */
+  protected $submissionStorage;
+
+  /**
+   * {@inheritdoc}
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     /** @var \Drupal\webform\WebformEntityListBuilder $instance */
@@ -232,11 +258,9 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
       'specifier' => 'description',
       'field' => 'description',
     ];
-    $header['category'] = [
-      'data' => $this->t('Category'),
+    $header['categories'] = [
+      'data' => $this->t('Categories'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
-      'specifier' => 'category',
-      'field' => 'category',
     ];
     $header['status'] = [
       'data' => $this->t('Status'),
@@ -282,8 +306,8 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     // Description.
     $row['description']['data'] = WebformHtmlEditor::checkMarkup($entity->get('description'));
 
-    // Category.
-    $row['category']['data']['#markup'] = $entity->get('category');
+    // Categories.
+    $row['categories']['data']['#markup'] = implode('; ', $entity->get('categories') ?: []);
 
     // Status.
     $t_args = ['@label' => $entity->label()];
@@ -395,7 +419,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     if ($entity->access('test')) {
       $operations['test'] = [
         'title' => $this->t('Test'),
-        'url' => $entity->toUrl('canonical'),
+        'url' => $entity->toUrl('test-form'),
         'weight' => 20,
       ];
     }
@@ -541,7 +565,6 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
         ->condition('id', $keys, 'CONTAINS')
         ->condition('title', $keys, 'CONTAINS')
         ->condition('description', $keys, 'CONTAINS')
-        ->condition('category', $keys, 'CONTAINS')
         ->condition('elements', $keys, 'CONTAINS');
 
       // Users and roles we need to scan all webforms.
@@ -582,7 +605,16 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
 
     // Filter by category.
     if ($category) {
-      $query->condition('category', $category);
+      // Collect the webform ids that use the selected category.
+      $webform_ids = [];
+      /** @var \Drupal\webform\WebformInterface $webforms */
+      $webforms = $this->getStorage()->loadMultiple();
+      foreach ($webforms as $webform) {
+        if (in_array($category, (array) $webform->get('categories'))) {
+          $webform_ids[] = $webform->id();
+        }
+      }
+      $query->condition('id', $webform_ids, 'IN');
     }
 
     // Filter by (form) state.

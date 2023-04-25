@@ -50,6 +50,10 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
     $this->submitForm(['default_value' => '{default value}'], 'Update default value');
     $assert_session->fieldValueEquals('properties[default_value]', '{default value}');
 
+    // Check clearing the text field's default value.
+    $this->submitForm([], 'Clear default value');
+    $assert_session->fieldValueEquals('properties[default_value]', '');
+
     /* ********************************************************************** */
     // Multiple text field.
     /* ********************************************************************** */
@@ -68,12 +72,17 @@ class WebformUiElementDefaultValueTest extends WebformBrowserTestBase {
     $this->submitForm(['default_value[items][0][_item_]' => '{default value}'], 'Update default value');
     $assert_session->fieldValueEquals('properties[default_value]', '{default value}');
 
+    // Check clearing the text field's default value.
+    $this->submitForm([], 'Clear default value');
+    $assert_session->fieldValueEquals('properties[default_value]', '');
+
     /* ********************************************************************** */
     // Single address (composite) field.
     /* ********************************************************************** */
 
     // Check set default value generates a single address element.
     $this->drupalGet('/admin/structure/webform/manage/contact/element/add/webform_address');
+    $assert_session->fieldValueEquals('properties[default_value]', '');
     $edit = [
       'key' => 'address',
       'properties[title]' => 'address',
@@ -94,11 +103,20 @@ city: &#039;&#039;
 state_province: &#039;&#039;
 postal_code: &#039;&#039;
 country: &#039;&#039;');
+    $assert_session->fieldValueNotEquals('properties[default_value]', '');
 
     // Check default value is passed set default value form.
     $this->submitForm([], 'Set default value');
     $assert_session->fieldValueEquals('default_value[address]', '{address}');
     $assert_session->fieldValueEquals('default_value[address_2]', '{address_2}');
+
+    // Change back the element edit form.
+    $this->submitForm($edit, 'Update default value');
+    $assert_session->fieldValueNotEquals('properties[default_value]', '');
+
+    // Check clearing default value.
+    $this->submitForm([], 'Clear default value');
+    $assert_session->fieldValueEquals('properties[default_value]', '');
   }
 
 }

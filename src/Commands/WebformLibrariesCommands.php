@@ -3,6 +3,7 @@
 namespace Drupal\webform\Commands;
 
 use Consolidation\AnnotatedCommand\CommandData;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\webform\Utility\WebformObjectHelper;
 use Drupal\webform\WebformLibrariesManagerInterface;
@@ -31,6 +32,27 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   protected $librariesManager;
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The path of composer.json
+   *
+   * @var string
+   */
+  protected $composer_json;
+
+  /**
+   * The directory of composer.json
+   *
+   * @var string
+   */
+  protected $composer_directory;
+
+  /**
    * Constructs WebformLibrariesCommand.
    *
    * @param \GuzzleHttp\ClientInterface $http_client
@@ -38,10 +60,11 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
    *   The webform libraries manager.
    */
-  public function __construct(ClientInterface $http_client, WebformLibrariesManagerInterface $libraries_manager) {
+  public function __construct(ClientInterface $http_client, WebformLibrariesManagerInterface $libraries_manager, ModuleHandlerInterface $module_handler) {
     parent::__construct();
     $this->httpClient = $http_client;
     $this->librariesManager = $libraries_manager;
+    $this->moduleHandler = $module_handler;
   }
 
   /* ************************************************************************ */
@@ -59,7 +82,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    * @aliases wfls,webform-libraries-status
    */
   public function librariesStatus() {
-    module_load_include('install', 'webform');
+    $this->moduleHandler->loadInclude('webform', 'install');
 
     $requirements = $this->librariesManager->requirements();
     $description = $requirements['webform_libraries']['description'];
@@ -246,7 +269,11 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       drush_op('chdir', $cwd);
 
       if (!$return) {
-        throw new \Exception(dt('Unable to extract !filename.' . PHP_EOL . implode(PHP_EOL, $process->getOutput()), ['!filename' => $path]));
+        throw new \Exception(dt('Unable to extract @filename to @destination.<br /><pre>@process_output</pre>', [
+          '@filename' => $path,
+          '@destination' => $destination,
+          '@process_output' => print_r($process->getOutput(), TRUE),
+        ]));
       }
     }
     else {
@@ -257,7 +284,11 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       drush_op('chdir', $cwd);
 
       if (!$return) {
-        throw new \Exception(dt('Unable to extract !filename.' . PHP_EOL . implode(PHP_EOL, $process->getOutput()), ['!filename' => $path]));
+        throw new \Exception(dt('Unable to extract @filename to @destination.<br /><pre>@process_output</pre>', [
+          '@filename' => $path,
+          '@destination' => $destination,
+          '@process_output' => print_r($process->getOutput(), TRUE),
+        ]));
       }
     }
     return $return;
@@ -370,7 +401,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
       $data->repositories = (object) [];
     }
     if (!isset($data->require)) {
-      $data->repositories = (object) [];
+      $data->require = (object) [];
     }
 
     // Add drupal-library to installer paths.
@@ -484,6 +515,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
             'url' => $dist_url,
             'type' => $dist_type,
           ],
+          'license' => $library['license'] ?: 'N/A',
         ],
       ];
 

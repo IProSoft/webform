@@ -37,6 +37,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOptionsLimitHandlerInterface {
 
   use WebformAjaxElementTrait;
+  use WebformEntityTrait;
 
   /**
    * The database object.
@@ -1142,7 +1143,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
     // Set entity options.
     $webform_element = $this->getWebformElement();
     if ($webform_element instanceof WebformElementEntityOptionsInterface) {
-      WebformEntityTrait::setOptions($element);
+      $this->setOptions($element);
     }
 
     return ($element) ? OptGroup::flattenOptions($element['#options']) : [];
@@ -1295,7 +1296,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
   /**
    * Get boolean submission total for the current webform and source entity.
    *
-   * @return int
+   * @return int|null
    *   Boolean totals.
    */
   protected function getBooleanTotal() {
@@ -1343,7 +1344,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         $query->condition('s.uid', $this->currentUser->id());
       }
       else {
-        $sids = $this->submissionStorage->getAnonymousSubmissionIds($this->currentUser);
+        $sids = $this->entityTypeManager->getStorage('webform_submission')->getAnonymousSubmissionIds($this->currentUser);
         if ($sids) {
           $query->condition('s.sid', $sids, 'IN');
           $query->condition('s.uid', 0);
@@ -1380,9 +1381,9 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
     return new FormattableMarkup($message, [
       '@name' => $this->getElementLabel(),
       '@label' => $limit['label'],
-      '@limit' => $limit['limit'],
-      '@total' => $limit['total'],
-      '@remaining' => $limit['remaining'],
+      '@limit' => $limit['limit'] ?? '',
+      '@total' => $limit['total'] ?? '',
+      '@remaining' => $limit['remaining'] ?? '',
     ]);
   }
 

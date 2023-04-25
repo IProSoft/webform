@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Environment;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Plugin\Field\FieldType\FileItem;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -101,8 +102,8 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'webform_radios_other',
       '#title' => $this->t('Allowed tags'),
       '#options' => [
-        'admin' => $this->t('Admin tags Excludes: script, iframe, etc…'),
-        'html' => $this->t('HTML tags: Includes only @html_tags.', ['@html_tags' => WebformArrayHelper::toString(Xss::getHtmlTagList())]),
+        'admin' => $this->t('Admin tags -- Admin tags include %html_tags.', ['%html_tags' => WebformArrayHelper::toString(Xss::getAdminTagList())]),
+        'html' => $this->t('HTML tags -- HTML tags include %html_tags.', ['%html_tags' => WebformArrayHelper::toString(Xss::getHtmlTagList())]),
       ],
       '#other__option_label' => $this->t('Custom tags'),
       '#other__placeholder' => $this->t('Enter multiple tags delimited using spaces'),
@@ -192,11 +193,11 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('html_editor.disabled'),
     ];
     $format_options = [];
-    if ($this->moduleHandler->moduleExists('filter')) {
-      $filters = filter_formats();
-      foreach ($filters as $filter) {
-        $format_options[$filter->id()] = $filter->label();
-      }
+    $format_options[WebformHtmlEditor::DEFAULT_FILTER_FORMAT] = $this->t('- Default -');
+    $filters = filter_formats();
+    unset($filters[WebformHtmlEditor::DEFAULT_FILTER_FORMAT]);
+    foreach ($filters as $filter) {
+      $format_options[$filter->id()] = $filter->label();
     }
     $form['html_editor']['format_container'] = [
       '#type' => 'container',
@@ -210,8 +211,8 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Element text format'),
       '#description' => $this->t('Leave blank to use the custom and recommended Webform specific HTML editor.'),
-      '#empty_option' => $this->t('- None -'),
       '#options' => $format_options,
+      '#required' => TRUE,
       '#default_value' => $config->get('html_editor.element_format'),
       '#parents' => ['html_editor', 'element_format'],
     ];
@@ -219,15 +220,10 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Mail text format'),
       '#description' => $this->t('Leave blank to use the custom and recommended Webform specific HTML editor.'),
-      '#empty_option' => $this->t('- None -'),
       '#options' => $format_options,
+      '#required' => TRUE,
       '#default_value' => $config->get('html_editor.mail_format'),
       '#parents' => ['html_editor', 'mail_format'],
-      '#states' => [
-        'visible' => [
-          ':input[name="html_editor[disabled]"]' => ['checked' => FALSE],
-        ],
-      ],
     ];
     $form['html_editor']['format_container']['make_unused_managed_files_temporary'] = [
       '#type' => 'checkbox',
@@ -236,26 +232,12 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#return_value' => TRUE,
       '#default_value' => $config->get('html_editor.make_unused_managed_files_temporary'),
       '#parents' => ['html_editor', 'make_unused_managed_files_temporary'],
-      '#states' => [
-        'visible' => [
-          [':input[name="html_editor[element_format]"]' => ['!value' => '']],
-          'or',
-          [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
-        ],
-      ],
     ];
     $form['html_editor']['format_container']['warning_message'] = [
       '#type' => 'webform_message',
       '#message_message' => $this->t('Files uploaded via the CKEditor file dialog to webform elements, settings, and configuration will not be exportable.') . '<br/>' .
         '<strong>' . $this->t('All files must be uploaded to your production environment and then copied to development and local environment.') . '</strong>',
       '#message_type' => 'warning',
-      '#states' => [
-        'visible' => [
-          [':input[name="html_editor[element_format]"]' => ['!value' => '']],
-          'or',
-          [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
-        ],
-      ],
       '#message_close' => TRUE,
       '#message_storage' => WebformMessage::STORAGE_SESSION,
     ];
@@ -432,6 +414,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     foreach ($element_plugins as $element_id => $element_plugin) {
       $element_plugin_definition = $element_plugin->getPluginDefinition();
       $element_plugin_label = $element_plugin_definition['label'];
+      $element_plugin_description = $element_plugin_definition['description'];
       $element_plugin_states = [
         'disabled' => [
           ':input[name="excluded_elements[' . $element_id . ']"]' => ['checked' => FALSE],
@@ -441,29 +424,42 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       $row = [];
 
       // Title.
-      $row['title'] = ['#markup' => $element_plugin_label];
+      $row['title'] = [
+        'title' => [
+          '#markup' => $element_plugin_label,
+          '#prefix' => '<strong>',
+          '#suffix' => '</strong>',
+        ],
+        'description' => [
+          '#markup' => $element_plugin_description,
+          '#prefix' => '<div>',
+          '#suffix' => '</div>',
+        ],
+      ];
 
       // ID.
       $row['id'] = ['#markup' => $element_id];
 
       // Item format.
       $item_formats = WebformOptionsHelper::appendValueToText($element_plugin->getItemFormats());
-      $item_default_format = $element_plugin->getItemDefaultFormat();
-      $item_default_format_label = $item_formats[$item_default_format] ?? $item_default_format;
       $row['item'] = [
         '#type' => 'select',
         '#title' => $this->t('Item format'),
         '#title_display' => 'invisible',
-        '#field_suffix' => [
-          '#type' => 'webform_help',
-          '#help' => $this->t('Defaults to: %value', ['%value' => $item_default_format_label]),
-        ],
         '#empty_option' => $this->t('- Default -'),
         '#options' => $item_formats,
         '#default_value' => $config->get("format.$element_id"),
         '#parents' => ['format', $element_id, 'item'],
         '#states' => $element_plugin_states,
       ];
+      $item_default_format = $element_plugin->getItemDefaultFormat();
+      $item_default_format_label = $item_formats[$item_default_format] ?? $item_default_format;
+      if ($item_default_format_label) {
+        $row['item']['#field_suffix'] = [
+          '#type' => 'webform_help',
+          '#help' => $this->t('Defaults to: %value', ['%value' => $item_default_format_label]),
+        ];
+      }
 
       // Items format.
       if ($element_plugin->supportsMultipleValues()) {
@@ -537,6 +533,10 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     $config->set('format', $format);
 
     parent::submitForm($form, $form_state);
+
+    // Make sure the HTML Editor is up-to-date.
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    _webform_update_html_editor();
 
     // Reset libraries cached.
     // @see webform_library_info_build()

@@ -238,6 +238,11 @@ abstract class OptionsBase extends WebformElementBase {
 
     // Process custom options properties.
     if ($this->hasProperty('options__properties')) {
+      // Unset #options__properties that are not array to prevent errors.
+      if (isset($element['#options__properties'])
+        && !is_array($element['#options__properties'])) {
+        unset($element['#options__properties']);
+      }
       $this->setElementDefaultCallback($element, 'process');
       $element['#process'][] = [get_class($this), 'processOptionsProperties'];
     }
@@ -326,6 +331,15 @@ abstract class OptionsBase extends WebformElementBase {
       case 'raw':
         return $value;
 
+      case 'text_description':
+        if (isset($element['#options'])) {
+          $options_description = $this->hasProperty('options_description_display');
+          $text = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
+          $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
+          return ['#markup' => $text . ($description ? PHP_EOL . '<div class="description">' . $description . '</div>' : '')];
+        }
+        return '';
+
       case 'description':
         if (isset($element['#options'])) {
           $options_description = $this->hasProperty('options_description_display');
@@ -369,6 +383,15 @@ abstract class OptionsBase extends WebformElementBase {
       case 'raw':
         return $value;
 
+      case 'text_description':
+        if (isset($element['#options'])) {
+          $options_description = $this->hasProperty('options_description_display');
+          $text = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
+          $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
+          return $text . ($description ? ' - ' . MailFormatHelper::htmlToText($description) : '');
+        }
+        return '';
+
       case 'description':
         if (isset($element['#options'])) {
           $options_description = $this->hasProperty('options_description_display');
@@ -406,9 +429,14 @@ abstract class OptionsBase extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getItemFormats() {
-    return parent::getItemFormats() + [
-      'description' => $this->t('Option description'),
-    ];
+    $formats = parent::getItemFormats();
+    if ($this->hasProperty('options_description_display')) {
+      $formats += [
+        'description' => $this->t('Option description'),
+        'text_description' => $this->t('Option text and description'),
+      ];
+    }
+    return $formats;
   }
 
   /**
@@ -757,7 +785,7 @@ abstract class OptionsBase extends WebformElementBase {
 
     $plugin_id = $this->getPluginId();
     $name = $element['#webform_key'];
-    $options = OptGroup::flattenOptions($element['#options']);
+    $options = isset($element['#options']) ? OptGroup::flattenOptions($element['#options']) : [];
     if ($this->getElementSelectorInputsOptions($element)) {
       $other_type = $this->getOptionsOtherType();
       $multiple = ($this->hasMultipleValues($element) && $other_type === 'select') ? '[]' : '';
@@ -784,7 +812,7 @@ abstract class OptionsBase extends WebformElementBase {
       /** @var \Drupal\webform\Element\WebformOtherBase $class */
       $class = $this->getFormElementClassDefinition();
       $type = $class::getElementType();
-      if (is_array($value) && count($value) === 2 && isset($value[$type]) && isset($value['other'])) {
+      if (is_array($value) && count($value) === 2 && array_key_exists($type, $value) && isset($value['other'])) {
         $value = $class::processValue($element, $value);
       }
 

@@ -172,12 +172,12 @@ function webform_requirements($phase) {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->getEditable($webform_config_name);
     $data = $webform_config->getRawData();
-    if (strpos($data['elements'], 'datepicker')) {
+    if (isset($data['elements']) && strpos($data['elements'], 'datepicker')) {
       $has_datepicker = TRUE;
       break;
     }
   }
-  if ($has_datepicker && !\Drupal::moduleHandler()->moduleExists('webform_jquery_ui_datepicker')) {
+  if ($has_datepicker && !\Drupal::moduleHandler()->moduleExists('webform_jqueryui_datepicker')) {
     $t_args = [
       ':href' => Url::fromRoute('entity.webform.collection', [], ['query' => ['search' => 'datepicker']])->toString(),
     ];

@@ -116,6 +116,13 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   protected $fileSystem;
 
   /**
+   * Webform element types.
+   *
+   * @var array
+   */
+  protected $elementTypes;
+
+  /**
    * Constructs a WebformSubmissionExportImport object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -305,7 +312,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
         $files = $element_plugin->getTargetEntities($element, $webform_submission) ?: [];
         $values = [];
         foreach ($files as $file) {
-          $values[] = file_create_url($file->getFileUri());
+          $values[] = $file->createFileUrl(FALSE);
         }
         $value = implode(',', $values);
         $record[] = $this->exportValue($value);
@@ -730,7 +737,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     $existing_file_uris = [];
     $existing_files = ($webform_submission) ? $element_plugin->getTargetEntities($element, $webform_submission) ?: [] : [];
     foreach ($existing_files as $existing_file) {
-      $existing_file_uri = file_create_url($existing_file->getFileUri());
+      $existing_file_uri = $existing_file->createFileUrl(FALSE);
       $existing_file_uris[$existing_file_uri] = $existing_file->id();
 
       $existing_file_hash = sha1_file($existing_file->getFileUri());
@@ -789,10 +796,9 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       fwrite($handle, $temp_file_contents);
       $temp_file_meta_data = stream_get_meta_data($handle);
       $temp_file_path = $temp_file_meta_data['uri'];
-      $temp_file_size = filesize($temp_file_path);
 
       // Mimic Symfony and Drupal's upload file handling.
-      $temp_file_info = new UploadedFile($temp_file_path, basename($new_file_uri), NULL, $temp_file_size);
+      $temp_file_info = new UploadedFile($temp_file_path, basename($new_file_uri));
       $webform_element_key = $element_plugin->getLabel($element);
       $new_file = _webform_submission_export_import_file_save_upload_single($temp_file_info, $webform_element_key, $file_upload_validators, $file_destination);
       if ($new_file) {

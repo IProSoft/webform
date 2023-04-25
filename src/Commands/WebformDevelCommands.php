@@ -106,7 +106,7 @@ class WebformDevelCommands extends WebformCommandsBase {
       throw new UserAbortException();
     }
 
-    module_load_include('install', 'webform');
+    $this->moduleHandler->loadInclude('webform', 'install');
 
     $this->output()->writeln(dt('Repairing webform submission storage schema…'));
     _webform_update_webform_submission_storage_schema();
@@ -114,11 +114,17 @@ class WebformDevelCommands extends WebformCommandsBase {
     $this->output()->writeln(dt('Repairing admin configuration…'));
     _webform_update_admin_settings(TRUE);
 
+    $this->output()->writeln(dt('Repairing webform HTML editor…'));
+    _webform_update_html_editor();
+
     $this->output()->writeln(dt('Repairing webform settings…'));
     _webform_update_webform_settings();
 
     $this->output()->writeln(dt('Repairing webform handlers…'));
     _webform_update_webform_handler_settings();
+
+    $this->output()->writeln(dt('Repairing webform actions…'));
+    _webform_update_actions();
 
     $this->output()->writeln(dt('Repairing webform field storage definitions…'));
     _webform_update_field_storage_definitions();
@@ -128,7 +134,7 @@ class WebformDevelCommands extends WebformCommandsBase {
 
     if ($this->moduleHandler->moduleExists('webform_entity_print')) {
       $this->output()->writeln(dt('Repairing webform entity print settings…'));
-      module_load_include('install', 'webform_entity_print');
+      $this->moduleHandler->loadInclude('webform_entity_print', 'install');
       webform_entity_print_install();
     }
 

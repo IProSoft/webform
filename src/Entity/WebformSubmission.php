@@ -116,6 +116,13 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
   protected $computedData = [];
 
   /**
+   * The webform view mode twig.
+   *
+   * @var string
+   */
+  protected $_webform_view_mode_twig;
+
+  /**
    * The data hashed.
    *
    * @var string
@@ -494,7 +501,22 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
     if (isset($this->dataHash)) {
       return $this->dataHash;
     }
-    $this->dataHash = Crypt::hmacBase64(serialize($this->getRawData()), Settings::getHashSalt());
+
+    // Anonymous recursive data massaging function.
+    $massage_data = function (array $array) use (&$massage_data) {
+      foreach ($array as $key => $value) {
+        if (is_object($value)) {
+          unset($array[$key]);
+        }
+        elseif (is_array($value)) {
+          $array[$key] = $massage_data($value);
+        }
+      }
+      return $array;
+    };
+
+    $data = $massage_data($this->getRawData());
+    $this->dataHash = Crypt::hmacBase64(serialize($data), Settings::getHashSalt());
     return $this->dataHash;
   }
 
@@ -509,12 +531,11 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    * {@inheritdoc}
    */
   public function getWebform() {
-    if (isset($this->webform_id->entity)) {
-      return $this->webform_id->entity;
+    $webform = static::$webform;
+    if (!$webform && isset($this->webform_id->entity)) {
+      $webform = $this->webform_id->entity;
     }
-    else {
-      return static::$webform;
-    }
+    return $webform;
   }
 
   /**

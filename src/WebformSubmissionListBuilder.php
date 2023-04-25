@@ -270,6 +270,13 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
   protected $submissionViews;
 
   /**
+   * The result limit.
+   *
+   * @var int
+   */
+  protected $limit;
+
+  /**
    * {@inheritdoc}
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
@@ -893,7 +900,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         return [
           'data' => [
             '#type' => 'link',
-            '#title' => new FormattableMarkup('<span class="webform-icon webform-icon-notes webform-icon-notes--@state"></span><span class="visually-hidden">@label</span>', ['@state' => $state, '@label' => $label]),
+            '#title' => new FormattableMarkup('<span class="webform-icon webform-icon-notes webform-icon-notes--@state" title="@label"></span><span class="visually-hidden">@label</span>', ['@state' => $state, '@label' => $label]),
             '#url' => $notes_url,
             '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
           ],
@@ -974,7 +981,16 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         ];
 
       case 'uid':
-        return ($is_raw) ? $entity->getOwner()->id() : ($entity->getOwner()->getAccountName() ?: $this->t('Anonymous'));
+        $owner = $entity->getOwner();
+        if ($is_raw) {
+          return $owner->id();
+        }
+        elseif ($owner->isAuthenticated() && $owner->access('view')) {
+          return $entity->getOwner()->toLink();
+        }
+        else {
+          return $entity->getOwner()->getAccountName() ?: $this->t('Anonymous');
+        }
 
       case 'uuid':
         return $entity->uuid();
@@ -1361,7 +1377,18 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
     $submission_storage = $this->getStorage();
     $query = $submission_storage->getQuery();
+    $query->accessCheck(TRUE);
     $submission_storage->addQueryConditions($query, $this->webform, $this->sourceEntity, $this->account);
+
+    // If we are viewing all submissions, we want to exclude
+    // any orphaned submissions.
+    if (empty($this->webform)) {
+      /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+      $webform_storage = $this->entityTypeManager->getStorage('webform');
+      if (!empty($webform_storage->getWebformIds())) {
+        $query->condition('webform_id', $webform_storage->getWebformIds(), 'IN');
+      }
+    }
 
     // Filter by key(word).
     if ($keys) {

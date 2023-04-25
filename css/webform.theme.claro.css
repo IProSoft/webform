@@ -269,6 +269,13 @@ div.webform-form-filter input.webform-form-filter-text {
 }
 
 /**
+ * jQuery UI content.
+ */
+.ui-widget-content a.button--primary {
+  color: #fff;
+}
+
+/**
  * System tray divider.
  */
 .ui-dialog.ui-dialog-off-canvas .ui-resizable-w {
@@ -306,4 +313,8 @@ div.webform-form-filter input.webform-form-filter-text {
 
 .webform-off-canvas #drupal-off-canvas .form-type--boolean {
   margin-left: 1.6875rem;
+}
+
+.webform-off-canvas #drupal-off-canvas .form-item .form-item__description {
+  color: #55565b;
 }
