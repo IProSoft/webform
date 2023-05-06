@@ -83,6 +83,13 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   protected $fieldNames = [];
 
   /**
+   * Cache of paragraph field names by entity type and bundle.
+   *
+   * @var array
+   */
+  protected $paragraphFieldNames = [];
+
+  /**
    * Constructs a WebformEntityReferenceManager object.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
@@ -199,9 +206,10 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
     }
 
     // Cache the source entity's field names.
-    $entity_id = $entity->getEntityTypeId() . '-' . $entity->id();
-    if (isset($this->fieldNames[$entity_id])) {
-      return $this->fieldNames[$entity_id];
+    $entity_type_id = $entity->getEntityTypeId();
+    $entity_bundle = $entity->bundle();
+    if (isset($this->fieldNames[$entity_type_id][$entity_bundle])) {
+      return $this->fieldNames[$entity_type_id][$entity_bundle];
     }
 
     $field_names = [];
@@ -217,7 +225,7 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
     // Sort fields alphabetically.
     ksort($field_names);
 
-    $this->fieldNames[$entity_id] = $field_names;
+    $this->fieldNames[$entity_type_id][$entity_bundle] = $field_names;
     return $field_names;
   }
 
@@ -242,16 +250,15 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   public function getWebforms(EntityInterface $entity = NULL) {
     $cid = 'webform_' . $entity->getEntityTypeId() . '_' . $entity->id() . '_webforms';
 
-    // Cache the source entity's loaded webform ids permanently.
+    // Avoid a potentially expensive lookup if we can.
+    if (isset($this->webforms[$cid])) {
+      return $this->webforms[$cid];
+    }
     $cached = $this->cache->get($cid);
     if ($cached) {
       $this->webforms[$cid] = $cached->data
         ? $this->entityTypeManager->getStorage('webform')->loadMultiple($cached->data)
         : [];
-    }
-
-    // Cache the source entity's loaded webforms per request.
-    if (isset($this->webforms[$cid])) {
       return $this->webforms[$cid];
     }
 
@@ -281,6 +288,8 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       $webforms[$target_id] = $target_entities[$target_id];
     }
 
+    // Cache the source entity's loaded webforms per request and permanently
+    // for future requests.
     $this->webforms[$cid] = $webforms;
     $this->cache->set($cid, array_keys($webforms), Cache::PERMANENT, $entity->getCacheTags());
 
@@ -345,19 +354,38 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    *   An array of paragraph field names.
    */
   protected function getParagraphFieldNames(EntityInterface $entity) {
+    $entity_type_id = $entity->getEntityTypeId();
+    $cid = 'webform_entity_paragraph_field_names';
+
+    // Try to get a cached value and avoid loading storage config.
+    if (isset($this->paragraphFieldNames[$entity_type_id])) {
+      return $this->paragraphFieldNames[$entity_type_id];
+    }
+    $cached = $this->cache->get($cid);
+    if ($cached) {
+      $this->paragraphFieldNames = $cached->data;
+      return $this->paragraphFieldNames[$entity_type_id] ?? [];
+    }
+
     $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadByProperties([
-      'entity_type' => $entity->getEntityTypeId(),
       'type' => 'entity_reference_revisions',
+      'settings' => [
+        'target_type' => 'paragraph',
+      ],
     ]);
 
     $field_names = [];
     foreach ($fields as $field) {
-      if ($field->getSetting('target_type') === 'paragraph') {
-        $field_name = $field->get('field_name');
-        $field_names[$field_name] = $field_name;
-      }
+      $field_entity_type = $field->getTargetEntityTypeId();
+      $field_name = $field->get('field_name');
+      $field_names[$field_entity_type][] = $field_name;
     }
-    return $field_names;
+
+    // Cache the paragraph field names for this request and permanently for
+    // future requests.
+    $this->paragraphFieldNames = $field_names;
+    $this->cache->set($cid, $field_names, Cache::PERMANENT);
+    return $field_names[$entity_type_id] ?? [];
   }
 
   /* ************************************************************************ */
