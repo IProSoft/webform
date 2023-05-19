@@ -458,7 +458,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
 
     /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
     $file_url_generator = \Drupal::service('file_url_generator');
-    $url = $file_url_generator->generateAbsoluteString($image_uri);
+    $url = $file_url_generator->generateAbsoluteString($uri);
 
     return [[
       'filecontent' => file_get_contents($uri),
