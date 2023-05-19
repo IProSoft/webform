@@ -122,6 +122,9 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
 
       case 'url':
         return $this->getImageUrl($element, $webform_submission, $options);
+      case 'name':
+        $uri = $this->getImageUri($element, $webform_submission, $options);
+        return $this->fileSystem->basename($uri);
     }
 
     return parent::formatTextItem($element, $webform_submission, $options);
@@ -143,6 +146,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       'status' => $this->t('Status'),
       'url' => $this->t('URL'),
       'image' => $this->t('Image'),
+      'name' => $this->t('File name'),
     ];
   }
 
@@ -276,11 +280,10 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
    */
   protected function getImageUrl(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
 
-    if ($this->getImageUri($element, $webform_submission, $options) === '') {
+    $image_uri = $this->getImageUri($element, $webform_submission, $options);
+    if (empty($image_uri)) {
       return '';
     }
-
-    $image_uri = $this->getImageUri($element, $webform_submission, $options);
 
     /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
     $file_url_generator = \Drupal::service('file_url_generator');
@@ -448,12 +451,14 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
    * {@inheritdoc}
    */
   public function getEmailAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-
-    if (empty($this->getImageUri($element, $webform_submission, $options))) {
+    $uri = $this->getImageUri($element, $webform_submission, $options);
+    if (empty($uri)) {
       return [];
     }
 
-    $uri = $this->getImageUri($element, $webform_submission, $options);
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $url = $file_url_generator->generateAbsoluteString($image_uri);
 
     return [[
       'filecontent' => file_get_contents($uri),
@@ -464,7 +469,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       'filepath' => $this->fileSystem->realpath($uri) ?: $uri,
       // URI is used when debugging or resending messages.
       // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
-      '_fileurl' => file_create_url($uri),
+      '_fileurl' => $url,
     ]];
   }
 
