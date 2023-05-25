@@ -171,10 +171,8 @@ function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
   // NOTE: Most admin themes correctly style jQuery UI dialogs because Drupal's
   // admin UI, especially Views, relies on them.
   $use_off_canvas = WebformDialogHelper::useOffCanvas();
-  $route_name = \Drupal::routeMatch()->getRouteName();
-  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
-  $is_webform_route = ($route_name && preg_match('/(^webform|^entity\.webform|^entity\.node\.webform)/', $route_name));
-  if ($use_off_canvas && $is_admin_route && $is_webform_route) {
+  $is_webform_admin_route = \Drupal::service('webform.request')->isWebformAdminRoute();
+  if ($use_off_canvas && $is_webform_admin_route) {
     foreach ($css as $key => $item) {
       // @see core/misc/dialog/off-canvas
       // @see core/themes/stable/css/core/dialog/off-canvas
