@@ -539,7 +539,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    *   The total number of submissions.
    */
   protected function getTotal($keys = '', $category = '', $state = '') {
-    return $this->getQuery($keys, $category, $state)
+    return $this->getQuery($keys, $category, $state)->accessCheck(FALSE)
       ->count()
       ->execute();
   }

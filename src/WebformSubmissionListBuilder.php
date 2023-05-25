@@ -1357,6 +1357,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    */
   protected function getTotal($keys = '', $state = '', $source_entity = '') {
     return $this->getQuery($keys, $state, $source_entity)
+      ->accessCheck(FALSE)
       ->count()
       ->execute();
   }

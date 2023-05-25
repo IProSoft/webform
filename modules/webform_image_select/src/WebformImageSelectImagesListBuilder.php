@@ -112,7 +112,7 @@ class WebformImageSelectImagesListBuilder extends ConfigEntityListBuilder {
    *   A render array representing the information summary.
    */
   protected function buildInfo() {
-    $total = $this->getQuery($this->keys, $this->category)->count()->execute();
+    $total = $this->getQuery($this->keys, $this->category)->accessCheck(FALSE)->count()->execute();
     if (!$total) {
       return [];
     }
