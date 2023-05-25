@@ -5,6 +5,7 @@ namespace Drupal\webform;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
@@ -556,7 +557,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   An entity query.
    */
-  protected function getQuery($keys = '', $category = '', $state = '') {
+  protected function getQuery($keys = '', $category = '', $state = ''): QueryInterface {
     $query = $this->getStorage()->getQuery();
 
     // Filter by key(word).

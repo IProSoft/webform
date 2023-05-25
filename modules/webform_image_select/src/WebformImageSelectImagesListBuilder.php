@@ -5,6 +5,7 @@ namespace Drupal\webform_image_select;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Url;
 use Drupal\webform\EntityListBuilder\WebformEntityListBuilderSortLabelTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
@@ -253,7 +254,7 @@ class WebformImageSelectImagesListBuilder extends ConfigEntityListBuilder {
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   An entity query.
    */
-  protected function getQuery($keys = '', $category = '') {
+  protected function getQuery($keys = '', $category = ''): QueryInterface {
     $query = $this->getStorage()->getQuery();
 
     // Filter by key(word).
