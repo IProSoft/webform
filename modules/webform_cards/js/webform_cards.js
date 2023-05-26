@@ -804,8 +804,8 @@
             return;
           }
 
-          var $firstInput = $activeCard.find(':input:visible').first();
-          if (!inputHasValue($firstInput)) {
+          var $firstInput = $activeCard.find(':input:visible:not([type="submit"])').first();
+          if ($firstInput.length && !inputHasValue($firstInput)) {
             $firstInput.trigger('focus');
           }
         }
