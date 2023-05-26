@@ -542,10 +542,14 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    * {@inheritdoc}
    */
   public function getSourceEntity($translate = FALSE) {
-    if ($this->entity_type->value && $this->entity_id->value) {
-      $entity_type = $this->entity_type->value;
-      $entity_id = $this->entity_id->value;
-      $source_entity = $this->entityTypeManager()->getStorage($entity_type)->load($entity_id);
+    $entity_type = $this->entity_type->value ?? NULL;
+    $entity_id = $this->entity_id->value ?? NULL;
+    if ($entity_type
+      && $entity_id
+      && $this->entityTypeManager()->hasDefinition($entity_type)) {
+      $source_entity = $this->entityTypeManager()
+        ->getStorage($entity_type)
+        ->load($entity_id);
 
       // If translated is set, get the translated source entity.
       if ($translate && $source_entity instanceof ContentEntityInterface) {
