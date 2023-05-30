@@ -722,8 +722,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     //
     // @see js/webform.wizard.track.js
     $track = $this->getWebform()->getSetting('wizard_track');
-    if ($track && $this->getRequest()->isMethod('POST')) {
-      $current_page = $this->getCurrentPage($form, $form_state);
+    $current_page = $this->getCurrentPage($form, $form_state);
+    if ($track && $current_page !== '' && $this->getRequest()->isMethod('POST')) {
       if ($track === 'index') {
         $pages = $this->getWebform()->getPages($this->operation);
         $track_pages = array_flip(array_keys($pages));
