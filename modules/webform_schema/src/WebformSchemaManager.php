@@ -190,7 +190,6 @@ class WebformSchemaManager implements WebformSchemaManagerInterface {
     $data['options_text'] = [];
     $data['options_value'] = [];
 
-
     return $data;
   }
 

@@ -1028,7 +1028,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Integrations: Sendpulse: Online Marketing.
     $projects['sendinblue_api'] = [
       'title' => $this->t('Sendinblue: Digital Marketing Tool'),
-      'description' => $this->t(' Integrates Sendinblue API v3.'),
+      'description' => $this->t('Integrates Sendinblue API v3.'),
       'url' => Url::fromUri('https://www.drupal.org/project/sendinblue_api'),
       'category' => 'integration',
     ];
@@ -1455,7 +1455,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Integrations: SalesForce Web2Lead Webform Handler
+    // Integrations: SalesForce Web2Lead Webform Handler.
     $projects['sf_web2lead_webform_handler'] = [
       'title' => $this->t('SalesForce Web2Lead Webform Handler'),
       'description' => $this->t('Extends the Webform module to allow the creation of a webform that feeds to your Salesforce.com Account.'),
@@ -1498,7 +1498,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'url' => Url::fromUri('https://www.drupal.org/project/mailsystem'),
       'category' => 'mail',
     ];
-
 
     // Mail: Webform Email Confirmation Link.
     $projects['webform_email_confirmation_link'] = [
