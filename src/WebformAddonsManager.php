@@ -372,6 +372,14 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
+    // Element: Webform Quiz Elements.
+    $projects['webform_quiz_elements'] = [
+      'title' => $this->t('Webform Quiz Elements'),
+      'description' => $this->t('Create a simple quiz out of a webform with webform quiz elements module.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_quiz_elements'),
+      'category' => 'element',
+    ];
+
     // Element: Webform Private Elements.
     $projects['webform_private_elements'] = [
       'title' => $this->t('Webform Private Elements'),

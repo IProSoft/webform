@@ -333,9 +333,9 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
       'homepage_url' => Url::fromUri('http://codemirror.net/'),
       // Issue #3177233: CodeMirror 5.70.0 is displaying vertical scrollbar.
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.3.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.13.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
-      'version' => '5.65.3',
+      'version' => '5.65.13',
       'license' => 'MIT',
     ];
     $libraries['jquery.inputmask'] = [
@@ -343,8 +343,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Input masks ensures a predefined format is entered. This can be useful for dates, numerics, phone numbers, etc…'),
       'notes' => $this->t('Input masks are used to ensure predefined and custom formats for text fields.'),
       'homepage_url' => Url::fromUri('https://robinherbots.github.io/Inputmask/'),
-      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.7.zip'),
-      'version' => '5.0.7',
+      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.8.zip'),
+      'version' => '5.0.8',
       'license' => 'MIT',
     ];
     $libraries['jquery.intl-tel-input'] = [
@@ -371,8 +371,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A jQuery plugin for counting and limiting characters/words on text input, or textarea, elements.'),
       'notes' => $this->t('Word or character counting, with server-side validation, is available for text fields and text areas.'),
       'homepage_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter'),
-      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.0.zip'),
-      'version' => '0.9.0',
+      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.1.zip'),
+      'version' => '0.9.1',
       'license' => 'MIT',
     ];
     $libraries['jquery.timepicker'] = [
