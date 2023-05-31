@@ -356,19 +356,19 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'element',
     ];
 
-<<<<<<< HEAD
     // Element: Webform Portuguese NIF.
     $projects['webform_portuguese_nif'] = [
       'title' => $this->t('Webform Portuguese NIF'),
       'description' => $this->t('Provides functionality for collecting, validating and displaying portuguese NIF numbers in a Webform.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_portuguese_nif'),
-=======
+      'category' => 'element',
+    ];
+
     // Element: Webform Quiz Elements.
     $projects['webform_quiz_elements'] = [
       'title' => $this->t('Webform Quiz Elements'),
       'description' => $this->t('Create a simple quiz out of a webform with webform quiz elements module.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_quiz_elements'),
->>>>>>> b0a262314 (Update add-ons)
       'category' => 'element',
     ];
 
