@@ -1164,9 +1164,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
    *   including the option's limit, total, remaining, and status.
    */
   protected function getOptionsLimits(array $values = []) {
-    $default_limit = isset($this->configuration['limits'][WebformOptionsLimitHandlerInterface::DEFAULT_LIMIT])
-      ? $this->configuration['limits'][WebformOptionsLimitHandlerInterface::DEFAULT_LIMIT]
-      : NULL;
+    $default_limit = $this->configuration['limits'][WebformOptionsLimitHandlerInterface::DEFAULT_LIMIT] ?? NULL;
 
     $totals = $this->getOptionsTotals($values);
 
