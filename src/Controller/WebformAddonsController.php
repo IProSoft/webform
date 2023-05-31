@@ -4,7 +4,6 @@ namespace Drupal\webform\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Render\Markup;
 use Drupal\webform\Element\WebformMessage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
