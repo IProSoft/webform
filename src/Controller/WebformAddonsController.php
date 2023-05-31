@@ -140,10 +140,6 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
         if (!empty($project['experimental'])) {
           $project['title'] .= ' [' . $this->t('EXPERIMENTAL') . ']';
         }
-        // Prepend logo to title.
-        if (isset($project['logo'])) {
-          $project['title'] = Markup::create('<img src="' . $project['logo']->toString() . '" alt="' . $project['title'] . '"/>' . $project['title']);
-        }
         $project['description'] .= '<br /><small>' . $project['url']->toString() . '</small>';
 
         // Append recommended to project's description.
