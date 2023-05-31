@@ -231,6 +231,6 @@ function honeypot_webform_submission_form_alter(&$form, FormStateInterface $form
   }
 
   if ($options) {
-    Drupal::service('honeypot') ->addFormProtection($form, $form_state, $options);
+    Drupal::service('honeypot')->addFormProtection($form, $form_state, $options);
   }
 }

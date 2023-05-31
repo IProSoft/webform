@@ -1673,7 +1673,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     return $value;
   }
 
-
   /**
    * Get element's submission value items.
    *

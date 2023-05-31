@@ -162,14 +162,14 @@ function _webform_update_webform_setting(array $data) {
 /**
  * Make sure outdated webform properties are up-to-date.
  *
- * @param array $settings
+ * @param array $properties
  *   An associative array of webform properties.
  *
  * @return array
  *   Updated webform properties.
  */
 function _webform_update_webform_setting_properties(array $properties) {
-  // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories
+  // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories.
   if (isset($properties['category'])) {
     $properties['categories'] = [];
     if (!empty($properties['category'])) {

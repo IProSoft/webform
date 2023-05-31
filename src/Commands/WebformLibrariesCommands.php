@@ -39,14 +39,14 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   protected $moduleHandler;
 
   /**
-   * The path of composer.json
+   * The path of composer.json.
    *
    * @var string
    */
   protected $composer_json;
 
   /**
-   * The directory of composer.json
+   * The directory of composer.json.
    *
    * @var string
    */
@@ -59,6 +59,8 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    *   The Guzzle HTTP client.
    * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
    *   The webform libraries manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
    */
   public function __construct(ClientInterface $http_client, WebformLibrariesManagerInterface $libraries_manager, ModuleHandlerInterface $module_handler) {
     parent::__construct();

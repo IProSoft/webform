@@ -98,7 +98,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#select2' => TRUE,
       '#default_value' => $webform->get('categories'),
     ];
-    WebformElementHelper::process($form['general_settings']['categories'] );
+    WebformElementHelper::process($form['general_settings']['categories']);
     $form['general_settings']['template'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Allow this webform to be used as a template'),

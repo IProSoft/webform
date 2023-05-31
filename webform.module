@@ -102,7 +102,7 @@ function webform_modules_installed($modules) {
   // Update Webform HTML editor.
   if (in_array('ckeditor', $modules)
     || in_array('ckeditor5', $modules)) {
-    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
 }
@@ -135,7 +135,7 @@ function webform_modules_uninstalled($modules) {
   // Update Webform HTML editor.
   if (in_array('ckeditor', $modules)
     || in_array('ckeditor5', $modules)) {
-    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
 }
@@ -1002,7 +1002,7 @@ function webform_element_info_alter(array &$info) {
   if (isset($info['processed_text'])) {
     $info['processed_text']['#pre_render'][] = [
       '\Drupal\webform\Element\WebformHtmlEditor',
-      'preRenderProcessedText'
+      'preRenderProcessedText',
     ];
   }
 }

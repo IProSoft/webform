@@ -18,7 +18,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block',  'webform', 'webform_ui', 'webform_test_translation'];
+  protected static $modules = ['block', 'webform', 'webform_ui', 'webform_test_translation'];
 
   /**
    * {@inheritdoc}

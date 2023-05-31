@@ -3,7 +3,6 @@
 namespace Drupal\Tests\webform_schema\Functional;
 
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
-use Drupal\webform_schema\Element\WebformShareIframe;
 
 /**
  * Webform schema test.

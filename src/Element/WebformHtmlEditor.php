@@ -336,7 +336,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
       // @see \Drupal\ckeditor\Plugin\CKEditorPlugin\Internal::generateFormatTagsSetting
       // @see https://www.drupal.org/project/webform/issues/3331164
       $is_ckeditor_test = preg_match('#^<([a-z0-9]+)>TEST</\1>$#', $element['#markup'] ?? '');
-      // Log issue, except for CKEditor(4) test format tags
+      // Log issue, except for CKEditor(4) test format tags.
       if (!$is_ckeditor_test) {
         $message = "Disabled text format: %format. This text format can not be used outside of the Webform module's HTML editor.";
         \Drupal::logger('webform')->alert($message, ['%format' => $format_id]);

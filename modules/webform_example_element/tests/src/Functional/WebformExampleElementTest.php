@@ -57,7 +57,7 @@ class WebformExampleElementTest extends WebformBrowserTestBase {
     // Login as admin.
     $this->drupalLogin($this->rootUser);
     // Navigate to webform settings.
-    $this->drupalGet('/admin/structure/webform/manage/'.$webform->id().'/element/webform_example_element/edit');
+    $this->drupalGet('/admin/structure/webform/manage/' . $webform->id() . '/element/webform_example_element/edit');
     // Check fieldset is there.
     $assert_session->elementExists('css', '#edit-example-element-fieldset');
     // Check if the Example textarea is there.

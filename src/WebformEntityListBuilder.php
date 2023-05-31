@@ -100,7 +100,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   protected $limit;
 
   /**
-   * The role storage object
+   * The role storage object.
    *
    * @var \Drupal\user\RoleStorageInterface
    */

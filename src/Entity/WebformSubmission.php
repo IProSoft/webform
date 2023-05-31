@@ -128,6 +128,7 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    * @var string
    */
   protected $dataHash;
+
   /**
    * Flag to indicated if submission is being converted from anonymous to authenticated.
    *
