@@ -87,7 +87,7 @@
             "type": "package",
             "package": {
                 "name": "codemirror/codemirror",
-                "version": "5.65.13",
+                "version": "5.65.12",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "codemirror"
