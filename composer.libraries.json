@@ -93,7 +93,7 @@
                     "installer-name": "codemirror"
                 },
                 "dist": {
-                    "url": "https://github.com/components/codemirror/archive/refs/tags/5.65.13.zip",
+                    "url": "https://github.com/components/codemirror/codemirror5/archive/refs/tags/5.65.13.zip",
                     "type": "zip"
                 },
                 "license": "MIT"
