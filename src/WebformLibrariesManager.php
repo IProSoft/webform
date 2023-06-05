@@ -390,9 +390,9 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
       'homepage_url' => Url::fromUri('http://codemirror.net/'),
       // Issue #3177233: CodeMirror 5.70.0 is displaying vertical scrollbar.
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.13.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.12.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
-      'version' => '5.65.13',
+      'version' => '5.65.12',
       'license' => 'MIT',
     ];
     $libraries['algolia.places'] = [
