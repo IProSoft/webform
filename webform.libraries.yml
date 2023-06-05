@@ -1057,15 +1057,15 @@ libraries.choices:
 libraries.codemirror.text:
   remote: https://github.com/codemirror/codemirror
   download: https://github.com/components/codemirror
-  version: &webform_codemirror_version '5.65.13'
+  version: &webform_codemirror_version '5.65.12'
   license: &webform_codemirror_license
     name: MIT
     url: http://codemirror.net/LICENSE
     gpl-compatible: true
   directory: &webform_codemirror_directory codemirror
   cdn: &webform_codemirror_cdn
-    /libraries/codemirror/lib/: https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/
-    /libraries/codemirror/: https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/
+    /libraries/codemirror/lib/: https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/
+    /libraries/codemirror/: https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/
   css:
     component:
       /libraries/codemirror/lib/codemirror.css: {}
