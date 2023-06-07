@@ -823,6 +823,7 @@ function _webform_number_format($component, $value) {
  */
 function webform_number_format_match($value, $point, $separator) {
   $thousands = $separator ? "\\$separator?" : '';
+  $value = $value ? $value : '';
   $decimal = "\\$point";
   return preg_match("/
                     ^               # Start of string
