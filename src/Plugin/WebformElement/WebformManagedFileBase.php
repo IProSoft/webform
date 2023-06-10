@@ -296,8 +296,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // Allow ManagedFile Ajax callback to disable flexbox wrapper.
     // @see \Drupal\file\Element\ManagedFile::uploadAjaxCallback
     // @see \Drupal\webform\Plugin\WebformElementBase::preRenderFixFlexboxWrapper
+    $request_params = \Drupal::request()->request->all();
     if (\Drupal::request()->request->get('_drupal_ajax')
-      && \Drupal::request()->request->get('files')) {
+      && !empty($request_params['files'])) {
       $element['#webform_wrapper'] = FALSE;
     }
 
