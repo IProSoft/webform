@@ -43,6 +43,7 @@ class WebformTranslationLingotekManager implements WebformTranslationLingotekMan
               }
             }
           }
+          unset($field_settings);
           $this->encodeTokens($field_settings);
         }
         break;

@@ -1485,7 +1485,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         $total = count($items);
 
         $build = [];
-        foreach ($items as $index => &$item) {
+        foreach ($items as $index => $item) {
           $build[] = (is_array($item)) ? $item : ['#markup' => $item];
           if ($index !== ($total - 1)) {
             $build[] = ['#markup' => $delimiter];
