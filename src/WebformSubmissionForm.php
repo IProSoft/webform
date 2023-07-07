@@ -3307,8 +3307,13 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Get existing error messages.
     $error_messages = \Drupal::messenger()->messagesByType(MessengerInterface::TYPE_ERROR);
 
-    // Submit the form.
-    \Drupal::formBuilder()->submitForm($form_object, $form_state);
+    // Submit or validate the form.
+    if ($validate_only) {
+      \Drupal::formBuilder()->validateForm($form_object, $form_state);
+    }
+    else {
+      \Drupal::formBuilder()->submitForm($form_object, $form_state);
+    }
 
     // Get the errors but skip drafts.
     $errors = ($webform_submission->isDraft() && !$validate_only) ? [] : $form_state->getErrors();
