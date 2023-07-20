@@ -983,8 +983,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function setSettings(array $settings) {
-    // Always apply the default settings.
-    $this->settings += static::getDefaultSettings();
+    // Always apply the default settings. Settings should not be empty even https://www.drupal.org/node/2880392.
+    $this->settings = (isset($this->settings)) ? $this->settings + static::getDefaultSettings() : static::getDefaultSettings();
 
     // Now apply new settings.
     foreach ($settings as $name => $value) {
