@@ -441,6 +441,7 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
     $this->computedData = $this->data;
     $webform = $this->getWebform();
     if ($webform->hasComputed()) {
+      $webform->applyVariants($this);
       /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
       $element_manager = \Drupal::service('plugin.manager.webform.element');
       $computed_elements = $webform->getElementsComputed();
