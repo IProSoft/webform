@@ -356,6 +356,13 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#return_value' => TRUE,
       '#default_value' => $config->get('file.file_public'),
     ];
+    $form['file']['prevent_submit_while_file_uploading'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Prevent submit while a file is uploading'),
+      '#description' => $this->t('If checked, the prompt that appears when users try to submit while a file is uploading will not allow the user to submit anyway.'),
+      '#return_value' => TRUE,
+      '#default_value' => $config->get('file.prevent_submit_while_file_uploading'),
+    ];
     $form['file']['file_private_redirect'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Redirect anonymous users to login when attempting to access private file uploads'),

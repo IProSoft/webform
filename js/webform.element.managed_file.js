@@ -3,7 +3,7 @@
  * JavaScript behaviors for managed file uploads.
  */
 
-(function ($, Drupal) {
+(function ($, Drupal, drupalSettings) {
 
   'use strict';
 
@@ -100,18 +100,23 @@
       return false;
     }
 
-    var message = Drupal.t('File upload in progress. Uploaded file may be lost.') +
-      '\n' +
-      Drupal.t('Click OK to submit the form without finishing the file upload or cancel to return to form.');
-    var result = !window.confirm(message);
-
-    // If submit once behavior is available, make sure to clear it if the form
-    // can be submitted.
-    if (result && Drupal.behaviors.webformSubmitOnce) {
-      setTimeout(function () {Drupal.behaviors.webformSubmitOnce.clear();});
+    if (drupalSettings.webform.managed_file.prevent_submit_while_file_uploading) {
+      window.alert(Drupal.t('File upload in progress. You cannot submit right now.'));
+      return true;
     }
+    else {
+      var message = Drupal.t('File upload in progress. Uploaded file may be lost.') +
+          '\n' +
+          Drupal.t('Click OK to submit the form without finishing the file upload or cancel to return to form.');
+      var result = !window.confirm(message);
 
-    return result;
+      // If submit once behavior is available, make sure to clear it if the form
+      // can be submitted.
+      if (result && Drupal.behaviors.webformSubmitOnce) {
+        setTimeout(function () {Drupal.behaviors.webformSubmitOnce.clear();});
+      }
+      return result;
+    }
   }
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, drupalSettings);
