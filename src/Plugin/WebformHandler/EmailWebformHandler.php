@@ -1761,7 +1761,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
    *   The element key or NULL if token can not be parsed.
    */
   protected function getElementKeyFromToken($token, $format = 'raw') {
-    if (preg_match('/^\[webform_submission:values:([^:]+):' . $format . '\]$/', $token, $match)) {
+    if ($token && preg_match('/^\[webform_submission:values:([^:]+):' . $format . '\]$/', $token, $match)) {
       return $match[1];
     }
     else {
