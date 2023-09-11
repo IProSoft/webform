@@ -65,7 +65,6 @@ phpunit-d9:
     _TARGET_PHP: "8.1"
   extends:
     - .phpunit-base
-    - .phpunit-local
 
 phpunit-d10:
   needs:
@@ -78,4 +77,3 @@ phpunit-d10:
     _TARGET_PHP: "8.1"
   extends:
     - .phpunit-base
-    - .phpunit-local
