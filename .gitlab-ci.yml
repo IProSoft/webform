@@ -54,26 +54,22 @@ variables:
   _TARGET_CORE: "10.1.3"
   SYMFONY_DEPRECATIONS_HELPER: disabled
 
-phpunit-d9:
-  needs:
-    - job: composer
-      parallel:
-        matrix:
-          - _TARGET_PHP: "8.1"
-            _TARGET_CORE: "9.5.10"
+.phpunit-local:
   variables:
-    _TARGET_PHP: "8.1"
+    DCI_SKIP_PHPUNIT: 0
+    SELENIUM_CHROME_TAG: "105.0"
+
+phpunit-d9:
+  dependencies:
+    # This syntax comes from https://gitlab.com/gitlab-org/gitlab/-/merge_requests/82734/diffs
+    - "composer: [^9]"
   extends:
     - .phpunit-base
+    - .phpunit-local
 
 phpunit-d10:
-  needs:
-    - job: composer
-      parallel:
-        matrix:
-          - _TARGET_PHP: "8.1"
-            _TARGET_CORE: $CORE_STABLE
-  variables:
-    _TARGET_PHP: "8.1"
+  dependencies:
+    - "composer: [^10]"
   extends:
     - .phpunit-base
+    - .phpunit-local
