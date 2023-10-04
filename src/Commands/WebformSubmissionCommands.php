@@ -164,6 +164,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
       $key = str_replace('-', '_', $key);
       if (isset($default_options[$key]) && is_array($default_options[$key])) {
         $value = explode(',', $value);
+        $value = array_combine($value, $value);
       }
       $export_options[$key] = $value;
     }
