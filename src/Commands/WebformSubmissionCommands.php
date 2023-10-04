@@ -168,7 +168,6 @@ class WebformSubmissionCommands extends WebformCommandsBase {
       }
       $export_options[$key] = $value;
     }
-    $export_options += $submission_exporter->getDefaultExportOptions();
     $submission_exporter->setExporter($export_options);
 
     WebformResultsExportController::batchSet($webform, $source_entity, $export_options);
