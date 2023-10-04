@@ -168,6 +168,15 @@ table.webform-states-table td {
 
 table.webform-states-table td.webform-states-table--operator > .form-item > .form-element {
   width: auto;
+  min-width: inherit;
+}
+
+table.webform-states-table td.webform-states-table--selector > .form-item > .form-element--type-select {
+  width: 100%;
+}
+
+table.webform-states-table td.webform-states-table--condition > .form-item > .form-element--type-select {
+  width: 5em;
 }
 
 /*****************************************************************************   */
