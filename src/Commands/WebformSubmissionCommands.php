@@ -158,6 +158,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
     // Get command options as export options.
     $default_options = $submission_exporter->getDefaultExportOptions();
     $export_options = Drush::redispatchOptions();
+    $export_options['access_check'] = FALSE;
     // Convert dashes to underscores.
     foreach ($export_options as $key => $value) {
       unset($export_options[$key]);
