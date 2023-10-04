@@ -404,8 +404,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       '[current-user:account-name]' => 'Current user account name',
       '[webform:author:display-name]' => 'Webform author display name',
       '[webform:author:account-name]' => 'Webform author account name',
-      '[webform_submission:author:display-name]' => 'Webform submission author display name',
-      '[webform_submission:author:account-name]' => 'Webform submission author account name',
+      '[webform_submission:user:display-name]' => 'Webform submission author display name',
+      '[webform_submission:user:account-name]' => 'Webform submission author account name',
     ];
 
     // Disable client-side HTML5 validation which is having issues with hidden
