@@ -4,7 +4,6 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Utility\Environment;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\File\FileSystemInterface;

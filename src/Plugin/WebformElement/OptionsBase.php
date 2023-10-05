@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Mail\MailFormatHelper;

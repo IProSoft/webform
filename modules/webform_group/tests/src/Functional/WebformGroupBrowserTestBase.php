@@ -103,7 +103,7 @@ abstract class WebformGroupBrowserTestBase extends BrowserTestBase {
     $group = $this->entityTypeManager->getStorage('group')->create($values + [
         'type' => 'default',
         'label' => $this->randomMachineName(),
-      ]);
+    ]);
     $group->enforceIsNew();
     $group->save();
     return $group;
