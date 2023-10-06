@@ -1169,13 +1169,13 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   }
 
   /**
-   * Export value so that it can be editted in Excel and Google Sheets.
+   * Export value so that it can be edited in Excel and Google Sheets.
    *
    * @param string $value
    *   A value.
    *
    * @return string
-   *   A value that it can be editted in Excel and Googl Sheets.
+   *   A value that it can be edited in Excel and Google Sheets.
    */
   protected function exportValue($value) {
     // Prevent Excel and Google Sheets from convert string beginning with
