@@ -3310,7 +3310,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Submit or validate the form.
     if ($validate_only) {
       $form_id = $form_object->getFormId();
-      \Drupal::formBuilder()->validateForm($form_id, $form_object, $form_state);
+      $form = \Drupal::formBuilder()->getForm($form_object);
+      \Drupal::formBuilder()->validateForm($form_id, $form, $form_state);
     }
     else {
       \Drupal::formBuilder()->submitForm($form_object, $form_state);
