@@ -1181,7 +1181,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     // Prevent Excel and Google Sheets from convert string beginning with
     // + or - into formulas by adding a space before the string.
     // @see https://stackoverflow.com/questions/4438589/bypass-excel-csv-formula-conversion-on-fields-starting-with-or
-    if (is_string($value) && strpos($value, '+') === 0 || strpos($value, '-') === 0) {
+    if (is_string($value) && in_array(substr($value, 0, 1), ['+', '-'], TRUE)) {
       return ' ' . $value;
     }
     else {
