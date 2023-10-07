@@ -205,6 +205,19 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check default elements.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
 
+    // Check email body's default textfield.
+    $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
+
+    // Enable set body to custom HTML.
+    $handler = $webform->getHandler('email_confirmation');
+    $configuration = $handler->getConfiguration();
+    $configuration['settings']['body'] = '<strong>some HTML</strong>';
+    $handler->setConfiguration($configuration);
+    $webform->save();
+
+    // Check default elements with HTML.
+    $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
+
     // Check custom HTML Editor.
     $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][description][value][value]"]');
 
