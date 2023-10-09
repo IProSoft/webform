@@ -5,6 +5,7 @@ namespace Drupal\webform\Plugin\Field\FieldWidget;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Utility\WebformDateHelper;
@@ -160,7 +161,7 @@ trait WebformEntityReferenceWidgetTrait {
     $element['settings']['scheduled']['open'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Open'),
-      '#default_value' => $items[$delta]->open ? DrupalDateTime::createFromTimestamp(strtotime($items[$delta]->open)) : NULL,
+      '#default_value' => $items[$delta]->open ? new DrupalDateTime($items[$delta]->open, DateTimeItemInterface::STORAGE_TIMEZONE) : NULL,
       '#prefix' => '<div class="container-inline form-item">',
       '#suffix' => '</div>',
       '#help' => FALSE,
@@ -173,7 +174,7 @@ trait WebformEntityReferenceWidgetTrait {
     $element['settings']['scheduled']['close'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Close'),
-      '#default_value' => $items[$delta]->close ? DrupalDateTime::createFromTimestamp(strtotime($items[$delta]->close)) : NULL,
+      '#default_value' => $items[$delta]->close ? new DrupalDateTime($items[$delta]->close, DateTimeItemInterface::STORAGE_TIMEZONE) : NULL,
       '#prefix' => '<div class="container-inline form-item">',
       '#suffix' => '</div>',
       '#help' => FALSE,

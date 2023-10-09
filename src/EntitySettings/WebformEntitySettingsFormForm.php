@@ -5,6 +5,7 @@ namespace Drupal\webform\EntitySettings;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDateHelper;
@@ -92,7 +93,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#title' => $this->t('Open'),
       '#prefix' => '<div class="container-inline form-item">',
       '#suffix' => '</div>',
-      '#default_value' => $webform->get('open') ? DrupalDateTime::createFromTimestamp(strtotime($webform->get('open'))) : NULL,
+      '#default_value' => $webform->get('open') ? new DrupalDateTime($webform->get('open'), DateTimeItemInterface::STORAGE_TIMEZONE) : NULL,
       '#help' => FALSE,
       '#description' => [
         '#type' => 'webform_help',
@@ -112,7 +113,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         '#help' => $this->t('If the close date/time is left blank, this webform will never be closed.'),
         '#help_title' => $this->t('Close'),
       ],
-      '#default_value' => $webform->get('close') ? DrupalDateTime::createFromTimestamp(strtotime($webform->get('close'))) : NULL,
+      '#default_value' => $webform->get('close') ? new DrupalDateTime($webform->get('close'), DateTimeItemInterface::STORAGE_TIMEZONE) : NULL,
     ];
     // If the Webform templates module is enabled and webform is template, hide status and scheduled.
     if ($this->moduleHandler->moduleExists('webform_templates') && $webform->isTemplate()) {
