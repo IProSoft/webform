@@ -516,7 +516,17 @@ function _webform_update_html_editor() {
   foreach ($names as $directory => $name) {
     $source = new FileStorage("$module_path/config/$directory");
     if (!$config_storage->exists($name)) {
-      $config_storage->write($name, $source->read($name));
+      // Use the entity API to create config entities.
+      $entity_type_id = \Drupal::service('config.manager')->getEntityTypeIdByName($name);
+      if ($entity_type_id) {
+        \Drupal::entityTypeManager()
+          ->getStorage($entity_type_id)
+          ->create($source->read($name))
+          ->save();
+      }
+      else {
+        $config_storage->write($name, $source->read($name));
+      }
     }
   }
 }
