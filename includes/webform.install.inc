@@ -9,9 +9,9 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\system\Entity\Action;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\Element\WebformHtmlEditor;
 
 /**
  * Update admin settings to reflect changes in the default settings.
