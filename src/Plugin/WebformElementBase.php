@@ -36,7 +36,6 @@ use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
-use Drupal\webform\Utility\WebformXss;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
@@ -1452,7 +1451,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         }
 
         $build = [];
-        foreach ($items as $index => &$item) {
+        foreach ($items as $index => $item) {
           $build[] = (is_array($item)) ? $item : ['#markup' => $item];
           if ($total === 2 && $index === 0) {
             $build[] = ['#markup' => ' ' . $this->t('and') . ' '];
@@ -1486,7 +1485,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         $total = count($items);
 
         $build = [];
-        foreach ($items as $index => &$item) {
+        foreach ($items as $index => $item) {
           $build[] = (is_array($item)) ? $item : ['#markup' => $item];
           if ($index !== ($total - 1)) {
             $build[] = ['#markup' => $delimiter];
@@ -1673,7 +1672,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
 
     return $value;
   }
-
 
   /**
    * Get element's submission value items.
@@ -2045,9 +2043,18 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     if ($sid = $webform_submission->id()) {
       $query->condition('ws.sid', $sid, '<>');
     }
+    // Get duplicate values to account for case-insensitivity.
+    $duplicate_values = $query->execute()->fetchCol();
+    if (empty($duplicate_values)) {
+      return;
+    }
+    // Determine the duplicate values.
+    $duplicate_values = array_intersect((array) $value, $duplicate_values);
+    if (empty($duplicate_values)) {
+      return;
+    }
     // Get single duplicate value.
-    $query->range(0, 1);
-    $duplicate_value = $query->execute()->fetchField();
+    $duplicate_value = reset($duplicate_values);
 
     // Skip NULL or empty string value.
     if ($duplicate_value === FALSE || $duplicate_value === '') {

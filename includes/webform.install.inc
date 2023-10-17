@@ -9,9 +9,9 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\system\Entity\Action;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\Element\WebformHtmlEditor;
 
 /**
  * Update admin settings to reflect changes in the default settings.
@@ -162,14 +162,14 @@ function _webform_update_webform_setting(array $data) {
 /**
  * Make sure outdated webform properties are up-to-date.
  *
- * @param array $settings
+ * @param array $properties
  *   An associative array of webform properties.
  *
  * @return array
  *   Updated webform properties.
  */
 function _webform_update_webform_setting_properties(array $properties) {
-  // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories
+  // Issue #3339769: Improve Webform categorization to support assigning multiple categories and default categories.
   if (isset($properties['category'])) {
     $properties['categories'] = [];
     if (!empty($properties['category'])) {
@@ -516,7 +516,17 @@ function _webform_update_html_editor() {
   foreach ($names as $directory => $name) {
     $source = new FileStorage("$module_path/config/$directory");
     if (!$config_storage->exists($name)) {
-      $config_storage->write($name, $source->read($name));
+      // Use the entity API to create config entities.
+      $entity_type_id = \Drupal::service('config.manager')->getEntityTypeIdByName($name);
+      if ($entity_type_id) {
+        \Drupal::entityTypeManager()
+          ->getStorage($entity_type_id)
+          ->create($source->read($name))
+          ->save();
+      }
+      else {
+        $config_storage->write($name, $source->read($name));
+      }
     }
   }
 }

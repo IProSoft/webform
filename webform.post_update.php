@@ -6,6 +6,7 @@
  */
 
 use Drupal\webform\Element\WebformHtmlEditor;
+use Drupal\webform\Utility\WebformYaml;
 
 // Webform install helper functions.
 include_once __DIR__ . '/includes/webform.install.inc';

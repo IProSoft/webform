@@ -5,8 +5,8 @@
  * Installation information for the 'Webform Entity Print' module.
  */
 
-use Drupal\system\Entity\Action;
 use Drupal\Core\Serialization\Yaml;
+use Drupal\system\Entity\Action;
 
 // Webform Entity Print install helper functions.
 include_once __DIR__ . '/includes/webform_entity_print.install.inc';
@@ -57,7 +57,7 @@ body {
 }
 
 /**
- * Issue #3328205: Add print download bulk action
+ * Issue #3328205: Add print download bulk action.
  */
 function webform_entity_print_update_8001() {
   // Add new 'Download PDF' action.

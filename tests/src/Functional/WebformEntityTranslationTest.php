@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional;
 
-use Drupal\Core\Language\Language;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\webform\Entity\Webform;
@@ -19,7 +18,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block',  'webform', 'webform_ui', 'webform_test_translation'];
+  protected static $modules = ['block', 'webform', 'webform_ui', 'webform_test_translation'];
 
   /**
    * {@inheritdoc}
@@ -206,18 +205,33 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check default elements.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
 
+    // Check email body's default textfield.
+    $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
+
+    // Enable set body to custom HTML.
+    $handler = $webform->getHandler('email_confirmation');
+    $configuration = $handler->getConfiguration();
+    $configuration['settings']['body'] = '<strong>some HTML</strong>';
+    $handler->setConfiguration($configuration);
+    $webform->save();
+
+    // Check default elements with HTML.
+    $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
+
     // Check custom HTML Editor.
     $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][description][value][value]"]');
 
     // Check email body's HTML Editor.
     $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body][value][value]"]');
 
-    // Check email body's Twig Editor.
+    // Enable twig.
     $handler = $webform->getHandler('email_confirmation');
     $configuration = $handler->getConfiguration();
     $configuration['settings']['twig'] = TRUE;
     $handler->setConfiguration($configuration);
     $webform->save();
+
+    // Check email body's Twig Editor.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
     $this->assertCssSelect('textarea.js-webform-codemirror.twig[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
 

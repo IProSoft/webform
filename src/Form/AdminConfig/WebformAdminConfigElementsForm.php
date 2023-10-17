@@ -535,7 +535,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     parent::submitForm($form, $form_state);
 
     // Make sure the HTML Editor is up-to-date.
-    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install');
     _webform_update_html_editor();
 
     // Reset libraries cached.

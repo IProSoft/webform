@@ -3,8 +3,8 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Asset\LibraryDiscoveryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -194,7 +194,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       $t_args = [':href' => ($this->moduleHandler->moduleExists('help')) ? Url::fromRoute('help.page', ['name' => 'webform'], ['fragment' => 'libraries'])->toString() : 'https://www.drupal.org/docs/8/modules/webform/webform-libraries'];
       $description['download'] = [
         '#markup' => '<hr/>' .
-          t('Please download external libaries using one the <a href=":href">recommended methods.', $t_args),
+          $this->t('Please download external libaries using one the <a href=":href">recommended methods.', $t_args),
       ];
       $t_args = [':href' => Url::fromRoute('webform.config.advanced')->toString()];
       $description['cdn'] = [
@@ -331,11 +331,11 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'title' => $this->t('Code Mirror'),
       'description' => $this->t('Code Mirror is a versatile text editor implemented in JavaScript for the browser.'),
       'notes' => $this->t('Code Mirror is used to provide a text editor for YAML, HTML, CSS, and JavaScript configuration settings and messages.'),
-      'homepage_url' => Url::fromUri('http://codemirror.net/'),
+      'homepage_url' => Url::fromUri('https://codemirror.net/'),
       // Issue #3177233: CodeMirror 5.70.0 is displaying vertical scrollbar.
-      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.3.zip'),
+      'download_url' => Url::fromUri('https://github.com/components/codemirror/archive/refs/tags/5.65.12.zip'),
       'issues_url' => Url::fromUri('https://github.com/codemirror/codemirror/issues'),
-      'version' => '5.65.3',
+      'version' => '5.65.12',
       'license' => 'MIT',
     ];
     $libraries['jquery.inputmask'] = [
@@ -343,8 +343,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('Input masks ensures a predefined format is entered. This can be useful for dates, numerics, phone numbers, etc…'),
       'notes' => $this->t('Input masks are used to ensure predefined and custom formats for text fields.'),
       'homepage_url' => Url::fromUri('https://robinherbots.github.io/Inputmask/'),
-      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.7.zip'),
-      'version' => '5.0.7',
+      'download_url' => Url::fromUri('https://github.com/RobinHerbots/jquery.inputmask/archive/refs/tags/5.0.8.zip'),
+      'version' => '5.0.8',
       'license' => 'MIT',
     ];
     $libraries['jquery.intl-tel-input'] = [
@@ -371,8 +371,8 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'description' => $this->t('A jQuery plugin for counting and limiting characters/words on text input, or textarea, elements.'),
       'notes' => $this->t('Word or character counting, with server-side validation, is available for text fields and text areas.'),
       'homepage_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter'),
-      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.0.zip'),
-      'version' => '0.9.0',
+      'download_url' => Url::fromUri('https://github.com/ractoon/jQuery-Text-Counter/archive/refs/tags/0.9.1.zip'),
+      'version' => '0.9.1',
       'license' => 'MIT',
     ];
     $libraries['jquery.timepicker'] = [
@@ -388,7 +388,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'title' => $this->t('Progress Tracker'),
       'description' => $this->t("A flexible SASS component to illustrate the steps in a multi-step process e.g. a multi-step form, a timeline or a quiz."),
       'notes' => $this->t('Progress Tracker is used by multi-step wizard forms.'),
-      'homepage_url' => Url::fromUri('http://nigelotoole.github.io/progress-tracker/'),
+      'homepage_url' => Url::fromUri('https://nigelotoole.github.io/progress-tracker/'),
       'download_url' => Url::fromUri('https://github.com/NigelOToole/progress-tracker/archive/refs/tags/2.0.7.zip'),
       'version' => '2.0.7',
       'license' => 'MIT',
@@ -414,7 +414,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     ];
     $libraries['popperjs'] = [
       'title' => $this->t('Popper.js'),
-      'description' => $this->t("Tippy.js a tiny, low-level library for creating \"floating\" elements like tooltips, popovers, dropdowns, menus, and more."),
+      'description' => $this->t('Tippy.js a tiny, low-level library for creating "floating" elements like tooltips, popovers, dropdowns, menus, and more.'),
       'notes' => $this->t('Popper.js is used to provide tooltip behavior for elements.'),
       'homepage_url' => Url::fromUri('https://github.com/floating-ui/floating-ui'),
       'download_url' => Url::fromUri('https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz'),

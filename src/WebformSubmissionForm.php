@@ -7,8 +7,8 @@ use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
@@ -722,8 +722,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     //
     // @see js/webform.wizard.track.js
     $track = $this->getWebform()->getSetting('wizard_track');
-    if ($track && $this->getRequest()->isMethod('POST')) {
-      $current_page = $this->getCurrentPage($form, $form_state);
+    $current_page = $this->getCurrentPage($form, $form_state);
+    if ($track && $current_page !== '' && $this->getRequest()->isMethod('POST')) {
       if ($track === 'index') {
         $pages = $this->getWebform()->getPages($this->operation);
         $track_pages = array_flip(array_keys($pages));
@@ -2652,13 +2652,10 @@ class WebformSubmissionForm extends ContentEntityForm {
       $prepopulate_data = $this->getRequest()->query->all();
     }
     else {
-      $prepopulate_data = [];
-      $elements = $this->getWebform()->getElementsPrepopulate();
-      foreach ($elements as $element_key) {
-        if ($this->getRequest()->query->has($element_key)) {
-          $prepopulate_data[$element_key] = $this->getRequest()->query->get($element_key);
-        }
-      }
+      $prepopulate_data = array_intersect_key(
+        $this->getRequest()->query->all(),
+        $this->getWebform()->getElementsPrepopulate()
+      );
     }
 
     // Validate prepopulate data.

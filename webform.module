@@ -9,10 +9,10 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
-use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -102,7 +102,7 @@ function webform_modules_installed($modules) {
   // Update Webform HTML editor.
   if (in_array('ckeditor', $modules)
     || in_array('ckeditor5', $modules)) {
-    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
 }
@@ -135,7 +135,7 @@ function webform_modules_uninstalled($modules) {
   // Update Webform HTML editor.
   if (in_array('ckeditor', $modules)
     || in_array('ckeditor5', $modules)) {
-    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install').
+    \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
 }
@@ -632,6 +632,7 @@ function webform_page_attachments(array &$attachments) {
 function webform_metatags_alter(array &$metatags, array &$context) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (!empty(\Drupal::config('webform.settings')->get('settings.default_confirmation_noindex'))
+    && $route_name
     && preg_match('/^(entity\.webform\.confirmation|entity\.[a-z-_]+\.webform\.confirmation)$/', $route_name)) {
     $robots = (!empty($metatags['robots']))
       ? preg_split('/\s*,\s*/', $metatags['robots'])
@@ -1002,7 +1003,7 @@ function webform_element_info_alter(array &$info) {
   if (isset($info['processed_text'])) {
     $info['processed_text']['#pre_render'][] = [
       '\Drupal\webform\Element\WebformHtmlEditor',
-      'preRenderProcessedText'
+      'preRenderProcessedText',
     ];
   }
 }
