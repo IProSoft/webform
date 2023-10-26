@@ -215,6 +215,7 @@ file:
   default_video_file_extensions: 'avi mov mp4 ogg wav webm'
   make_unused_managed_files_temporary: true
   delete_temporary_managed_files: true
+  prevent_submit_while_file_uploading: true
 format: {  }
 mail:
   default_to_mail: '[site:mail]'

@@ -311,6 +311,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // Add managed file upload tracking.
     if ($this->moduleHandler->moduleExists('file')) {
       $element['#attached']['library'][] = 'webform/webform.element.managed_file';
+      $element['#attached']['drupalSettings']['webform']['managed_file'] = [
+        'prevent_submit_while_file_uploading' => \Drupal::config('webform.settings')->get('file.prevent_submit_while_file_uploading'),
+      ];
     }
   }
 

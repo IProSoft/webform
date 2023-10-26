@@ -437,6 +437,9 @@ webform.settings:
         delete_temporary_managed_files:
           type: boolean
           label: 'Immediately deleted temporary managed webform submission files'
+        prevent_submit_while_file_uploading:
+          type: boolean
+          label: 'Controls whether the user can dismiss the prompt about a file uploading and submit anyway'
     format:
       type: sequence
       label: 'Format default settings'
