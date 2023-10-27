@@ -3,6 +3,7 @@
 namespace Drupal\webform_attachment\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Plugin\WebformElement\WebformDisplayOnTrait;
 use Drupal\webform\Plugin\WebformElementAttachmentInterface;
@@ -261,7 +262,8 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
     $file_content = $attachment_element::getFileContent($element, $webform_submission);
     $file_name = $attachment_element::getFileName($element, $webform_submission);
     $file_mime = $attachment_element::getFileMimeType($element, $webform_submission);
-    $file_url = $attachment_element::getFileUrl($element, $webform_submission);
+    // Symfony mailer does not support using a controller attachment url.
+    $file_url = $this->moduleHandler->moduleExists('symfony_mailer') && isset($element['#url']) ? Url::fromUri($element['#url']) : $attachment_element::getFileUrl($element, $webform_submission);
 
     $attachments = [];
     if ($file_name && $file_content && $file_mime) {

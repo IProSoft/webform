@@ -1110,6 +1110,16 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
         }
       }
     }
+    elseif ($this->moduleHandler->moduleExists('symfony_mailer')) {
+      foreach ($attachments as &$attachment) {
+        if (!empty($attachment['_fileurl']) && empty($attachment['filepath'])) {
+          $attachment['filepath'] = $attachment['_fileurl'];
+        }
+        if (isset($attachment['filecontent'])) {
+          unset($attachment['filecontent']);
+        }
+      }
+    }
 
     return $attachments;
   }
