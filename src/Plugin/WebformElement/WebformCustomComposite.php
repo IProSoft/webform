@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
@@ -35,6 +36,13 @@ class WebformCustomComposite extends WebformCompositeBase {
   }
 
   /* ************************************************************************ */
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOffCanvasWidth() {
+    return WebformDialogHelper::DIALOG_WIDE;
+  }
 
   /**
    * {@inheritdoc}

@@ -1489,7 +1489,6 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
       || $element_plugin->isComposite()
       || $element_plugin->isContainer($element)
       || $element_plugin->hasMultipleValues($element)
-      || ($element_plugin instanceof WebformElementEntityReferenceInterface && !($element_plugin instanceof WebformManagedFileBase))
       || $element_plugin instanceof WebformElementComputedInterface) {
       return FALSE;
     }
