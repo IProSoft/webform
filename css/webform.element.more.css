@@ -7,13 +7,13 @@
   display: none;
 }
 
-.webform-element-more--link:before {
+.webform-element-more--title:before {
   content: "► ";
   font-size: 0.8em;
   cursor: pointer;
 }
 
-.webform-element-more.is-open .webform-element-more--link:before {
+.webform-element-more.is-open .webform-element-more--title:before {
   content: "▼ ";
 }
 
