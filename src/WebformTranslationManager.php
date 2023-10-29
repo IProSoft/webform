@@ -180,7 +180,8 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   public function getTranslationElements(WebformInterface $webform, $langcode) {
     $elements = $this->getSourceElements($webform);
-    $translation_elements = $this->getElements($webform, $langcode);
+    $config_elements = $this->getElements($webform, $langcode);
+    $translation_elements = WebformElementHelper::getFlattened($config_elements);
     if ($elements === $translation_elements) {
       return $elements;
     }
