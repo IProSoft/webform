@@ -2,6 +2,8 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -60,6 +62,13 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   protected $entityTypeManager;
 
   /**
+   * The cache backend.
+   *
+   * @var \Drupal\Core\Cache\CacheBackendInterface
+   */
+  protected $cache;
+
+  /**
    * Cache of source entity webforms.
    *
    * @var array
@@ -74,6 +83,13 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   protected $fieldNames = [];
 
   /**
+   * Cache of paragraph field names by entity type and bundle.
+   *
+   * @var array
+   */
+  protected $paragraphFieldNames = [];
+
+  /**
    * Constructs a WebformEntityReferenceManager object.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
@@ -82,17 +98,20 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    *   The current user.
    * @param \Drupal\user\UserDataInterface $user_data
    *   The user data service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface|null $module_handler
    *   The module handler class to use for loading includes.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface|null $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
+   *   The cache backend.
    */
-  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler = NULL, EntityTypeManagerInterface $entity_type_manager = NULL) {
+  public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user, UserDataInterface $user_data, ModuleHandlerInterface $module_handler = NULL, EntityTypeManagerInterface $entity_type_manager = NULL, CacheBackendInterface $cache = NULL) {
     $this->routeMatch = $route_match;
     $this->currentUser = $current_user;
     $this->userData = $user_data;
     $this->moduleHandler = $module_handler ?: \Drupal::moduleHandler();
     $this->entityTypeManager = $entity_type_manager ?: \Drupal::entityTypeManager();
+    $this->cache = $cache ?: \Drupal::cache();
   }
 
   /* ************************************************************************ */
@@ -187,9 +206,10 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
     }
 
     // Cache the source entity's field names.
-    $entity_id = $entity->getEntityTypeId() . '-' . $entity->id();
-    if (isset($this->fieldNames[$entity_id])) {
-      return $this->fieldNames[$entity_id];
+    $entity_type_id = $entity->getEntityTypeId();
+    $entity_bundle = $entity->bundle();
+    if (isset($this->fieldNames[$entity_type_id][$entity_bundle])) {
+      return $this->fieldNames[$entity_type_id][$entity_bundle];
     }
 
     $field_names = [];
@@ -205,7 +225,7 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
     // Sort fields alphabetically.
     ksort($field_names);
 
-    $this->fieldNames[$entity_id] = $field_names;
+    $this->fieldNames[$entity_type_id][$entity_bundle] = $field_names;
     return $field_names;
   }
 
@@ -228,10 +248,18 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    * {@inheritdoc}
    */
   public function getWebforms(EntityInterface $entity = NULL) {
-    // Cache the source entity's webforms.
-    $entity_id = $entity->getEntityTypeId() . '-' . $entity->id();
-    if (isset($this->webforms[$entity_id])) {
-      return $this->webforms[$entity_id];
+    $cid = 'webform_' . $entity->getEntityTypeId() . '_' . $entity->id() . '_webforms';
+
+    // Avoid a potentially expensive lookup if we can.
+    if (isset($this->webforms[$cid])) {
+      return $this->webforms[$cid];
+    }
+    $cached = $this->cache->get($cid);
+    if ($cached) {
+      $this->webforms[$cid] = $cached->data
+        ? $this->entityTypeManager->getStorage('webform')->loadMultiple($cached->data)
+        : [];
+      return $this->webforms[$cid];
     }
 
     $target_entities = [];
@@ -260,7 +288,10 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       $webforms[$target_id] = $target_entities[$target_id];
     }
 
-    $this->webforms[$entity_id] = $webforms;
+    // Cache the source entity's loaded webforms per request and permanently
+    // for future requests.
+    $this->webforms[$cid] = $webforms;
+    $this->cache->set($cid, array_keys($webforms), Cache::PERMANENT, $entity->getCacheTags());
 
     return $webforms;
   }
@@ -323,19 +354,38 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    *   An array of paragraph field names.
    */
   protected function getParagraphFieldNames(EntityInterface $entity) {
+    $entity_type_id = $entity->getEntityTypeId();
+    $cid = 'webform_entity_paragraph_field_names';
+
+    // Try to get a cached value and avoid loading storage config.
+    if (isset($this->paragraphFieldNames[$entity_type_id])) {
+      return $this->paragraphFieldNames[$entity_type_id];
+    }
+    $cached = $this->cache->get($cid);
+    if ($cached) {
+      $this->paragraphFieldNames = $cached->data;
+      return $this->paragraphFieldNames[$entity_type_id] ?? [];
+    }
+
     $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadByProperties([
-      'entity_type' => $entity->getEntityTypeId(),
       'type' => 'entity_reference_revisions',
+      'settings' => [
+        'target_type' => 'paragraph',
+      ],
     ]);
 
     $field_names = [];
     foreach ($fields as $field) {
-      if ($field->getSetting('target_type') === 'paragraph') {
-        $field_name = $field->get('field_name');
-        $field_names[$field_name] = $field_name;
-      }
+      $field_entity_type = $field->getTargetEntityTypeId();
+      $field_name = $field->get('field_name');
+      $field_names[$field_entity_type][] = $field_name;
     }
-    return $field_names;
+
+    // Cache the paragraph field names for this request and permanently for
+    // future requests.
+    $this->paragraphFieldNames = $field_names;
+    $this->cache->set($cid, $field_names, Cache::PERMANENT);
+    return $field_names[$entity_type_id] ?? [];
   }
 
   /* ************************************************************************ */

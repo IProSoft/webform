@@ -56,7 +56,7 @@ services:
 
   webform.entity_reference_manager:
     class: Drupal\webform\WebformEntityReferenceManager
-    arguments: ['@current_route_match', '@current_user', '@user.data', '@module_handler', '@entity_type.manager']
+    arguments: ['@current_route_match', '@current_user', '@user.data', '@module_handler', '@entity_type.manager', '@cache.data']
 
   webform.help_manager:
     class: Drupal\webform\WebformHelpManager
