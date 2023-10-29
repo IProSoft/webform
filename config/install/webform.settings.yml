@@ -197,6 +197,8 @@ element:
   excluded_elements:
     password: password
     password_confirm: password_confirm
+  pager_enabled: false
+  pager_size: '50'
 html_editor:
   disabled: false
   element_format: ''

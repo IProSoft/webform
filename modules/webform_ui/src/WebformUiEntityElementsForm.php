@@ -9,6 +9,7 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
+use Drupal\webform\Controller\WebformElementController;
 use Drupal\webform\Element\WebformElementStates;
 use Drupal\webform\Form\WebformEntityAjaxFormTrait;
 use Drupal\webform\Plugin\WebformElement\WebformElement;
@@ -73,6 +74,13 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
   protected $tokenManager;
 
   /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -81,6 +89,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $instance->elementInfo = $container->get('plugin.manager.element_info');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
     $instance->elementsValidator = $container->get('webform.elements_validator');
+    $instance->pagerManager = $container->get('pager.manager');
     return $instance;
   }
 
@@ -90,6 +99,15 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->getEntity();
+
+    // Load all webform's general element settings.
+    $element_settings = $this
+      ->configFactory()
+      ->getEditable('webform.settings')
+      ->get('element');
+    // Get pager configuration.
+    $pager_enabled = $element_settings['pager_enabled'];
+    $pager_size = $element_settings['pager_size'];
 
     $header = $this->getTableHeader();
 
@@ -101,8 +119,20 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
 
     // Build table rows for elements.
     $rows = [];
-    foreach ($elements as $element) {
-      $rows[$element['#webform_key']] = $this->getElementRow($element, $delta, $parent_options);
+
+    // Build the elements with pager.
+    if ($pager_enabled) {
+      $page_rows = $this->pagerArray($elements, $pager_size);
+
+      foreach ($page_rows as $element) {
+        $rows[$element['#webform_key']] = $this->getElementRow($element, $delta, $parent_options);
+      }
+    }
+    else {
+      // Build the elements without pager.
+      foreach ($elements as $element) {
+        $rows[$element['#webform_key']] = $this->getElementRow($element, $delta, $parent_options);
+      }
     }
 
     $form['webform_ui_elements'] = [
@@ -133,6 +163,16 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
       $form['webform_ui_elements'] += ['webform_actions_default' => $this->getCustomizeActionsRow()];
     }
 
+    // Display a pager for the rendered elements.
+    if ($rows && $pager_enabled) {
+      $form['pager'] = [
+        '#type' => 'pager',
+        '#pre_render' => [
+          [WebformElementController::class, 'showElementsPager'],
+        ],
+      ];
+    }
+
     // Must preload libraries required by (modal) dialogs.
     WebformDialogHelper::attachLibraries($form);
     $form['#attached']['library'][] = 'webform/webform.admin.tabledrag';
@@ -144,6 +184,30 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
   }
 
   /**
+   * Returns pager array.
+   *
+   * @param array $items
+   *   The items list.
+   * @param int $items_per_page
+   *   The items per page indicator.
+   *
+   * @return array
+   *   The current page items.
+   */
+  public function pagerArray(array $items, int $items_per_page): array {
+    // Get total items count.
+    $total = count($items);
+    // Get the number of the current page.
+    $current_page = $this->pagerManager->createPager($total, $items_per_page)->getCurrentPage();
+    // Split an array into chunks.
+    $chunks = array_chunk($items, $items_per_page);
+    // Return current group item.
+    $current_page_items = $chunks[$current_page];
+
+    return $current_page_items;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -151,6 +215,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
 
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->getEntity();
+
+    $element_settings = $this
+      ->configFactory()
+      ->getEditable('webform.settings')
+      ->get('element');
 
     // Get raw flattened elements that will be used to rebuild element's YAML
     // hierarchy.
@@ -226,8 +295,17 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
 
     $this->buildUpdatedElementsRecursive($elements_updated, '', $webform_ui_elements, $elements_flattened);
 
+    // Perform the elements form update once there is pager.
+    if ($element_settings['pager_enabled']) {
+      // Merge the updated elements state with the original state.
+      $elements = array_merge($elements_original, $elements_updated);
+    }
+    else {
+      // No pager preprocess elements.
+      $elements = $elements_updated;
+    }
     // Update the webform's elements.
-    $webform->setUpdating()->setElements($elements_updated);
+    $webform->setUpdating()->setElements($elements);
 
     // Validate only elements required, hierarchy, and rendering.
     $validate_options = [

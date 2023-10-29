@@ -5,6 +5,7 @@ namespace Drupal\webform\Controller;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\WebformInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Provides route responses for Webform elements.
  */
-class WebformElementController extends ControllerBase {
+class WebformElementController extends ControllerBase implements TrustedCallbackInterface {
 
   /**
    * Returns response for message close using user or state storage.
@@ -218,6 +219,38 @@ class WebformElementController extends ControllerBase {
       }
 
     }
+  }
+
+  /**
+   * The pre render callback for build elements form.
+   *
+   * @param array $pager
+   *   The pager render array.
+   *
+   * @return array
+   *   Returns the pager render array ready to be displayed.
+   *
+   * @see \Drupal\webform_ui\WebformUiEntityElementsForm::buildForm()
+   */
+  public static function showElementsPager(array $pager): array {
+    // Get the current request GET params.
+    $get_params = \Drupal::request()->query;
+
+    // Get rid of the AJAX preprocessings from pager links generation.
+    if ($get_params->has('ajax_form')) {
+      $get_params->remove('ajax_form');
+    }
+    if ($get_params->has('_wrapper_format')) {
+      $get_params->remove('_wrapper_format');
+    }
+    return $pager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks() {
+    return ['showElementsPager'];
   }
 
 }
