@@ -868,11 +868,11 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // @see https://www.drupal.org/project/drupal/issues/3130448
     if (!empty($element['#required_error'])) {
       $errors = $form_state->getErrors();
-      $key = $element['#webform_key'];
-      if (isset($errors[$key])
-        && $errors[$key] instanceof TranslatableMarkup
-        && $errors[$key]->getUntranslatedString() === '@name field is required.') {
-        $errors[$key]->__construct($element['#required_error']);
+      if (isset($element['#webform_key'])
+        && isset($errors[$element['#webform_key']])
+        && $errors[$element['#webform_key']] instanceof TranslatableMarkup
+        && $errors[$element['#webform_key']]->getUntranslatedString() === '@name field is required.') {
+        $errors[$element['#webform_key']]->__construct($element['#required_error']);
       }
     }
 
