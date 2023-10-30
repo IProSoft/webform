@@ -1268,7 +1268,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $webform_submissions = $this->loadMultiple($sids);
 
         $webform->invokeHandlers('prePurge', $webform_submissions);
-        $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', [$webform_submissions]);
+        $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', [&$webform_submissions]);
 
         $this->delete($webform_submissions);
 
