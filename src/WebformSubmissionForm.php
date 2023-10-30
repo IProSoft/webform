@@ -319,14 +319,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($source_entity === $entity) {
       $source_entity = $this->requestHandler->getCurrentSourceEntity(['webform', 'webform_submission']);
     }
-    // Handle paragraph source entity.
-    if ($source_entity && $source_entity->getEntityTypeId() === 'paragraph') {
-      // Disable :clear suffix to prevent webform tokens from being removed.
-      $data = $this->tokenManager->replace($data, $source_entity, [], ['suffixes' => ['clear' => FALSE]], $this->bubbleableMetadata);
-      $source_entity = WebformSourceEntityManager::getMainSourceEntity($source_entity);
-    }
-    // Set source entity.
-    $this->sourceEntity = $source_entity;
 
     // Get account.
     $account = $this->currentUser();
@@ -367,6 +359,16 @@ class WebformSubmissionForm extends ContentEntityForm {
         }
       }
     }
+
+    // Handle paragraph source entity.
+    elseif ($source_entity && $source_entity->getEntityTypeId() === 'paragraph') {
+      // Disable :clear suffix to prevent webform tokens from being removed.
+      $data = $this->tokenManager->replace($data, $source_entity, [], ['suffixes' => ['clear' => FALSE]], $this->bubbleableMetadata);
+      $source_entity = WebformSourceEntityManager::getMainSourceEntity($source_entity);
+    }
+
+    // Set source entity.
+    $this->sourceEntity = $source_entity;
 
     // Set entity before calling get last submission.
     $this->entity = $entity;
