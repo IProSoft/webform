@@ -86,6 +86,7 @@ yaml_decode_value:
     $edit = ['html_basic' => "<b>bold</bold>"];
     $this->submitForm($edit, 'Submit');
     $assert_session->responseContains('<em class="placeholder">html_basic</em> is not valid.');
+    $assert_session->responseContains('Opening and ending tag mismatch: b line 1 and bold');
 
     // Check valid HTML.
     $this->drupalGet('/webform/test_element_codemirror');
