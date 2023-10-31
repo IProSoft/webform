@@ -118,6 +118,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
   protected $elementManager;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManager
+   */
+  protected $entityTypeManager;
+
+  /**
    * Cache of default configuration values.
    *
    * @var array
@@ -136,6 +143,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $instance->themeManager = $container->get('webform.theme_manager');
     $instance->tokenManager = $container->get('webform.token_manager');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
     return $instance;
   }
 
@@ -203,6 +211,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       'exclude_attachments' => FALSE,
       'html' => TRUE,
       'attachments' => FALSE,
+      'default_attachments' => [],
       'twig' => FALSE,
       'debug' => FALSE,
       'reply_to' => '',
@@ -681,7 +690,6 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $form['attachments'] = [
       '#type' => 'details',
       '#title' => $this->t('Attachments'),
-      '#access' => $this->getWebform()->hasAttachments(),
     ];
     if (!$this->supportsAttachments()) {
       $t_args = [
@@ -704,7 +712,17 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       '#description' => $this->t('If checked, only file upload elements selected in the above included email values will be attached to the email.'),
       '#return_value' => TRUE,
       '#disabled' => !$this->supportsAttachments(),
+      '#access' => $this->getWebform()->hasAttachments(),
       '#default_value' => $this->configuration['attachments'],
+    ];
+    $form['attachments']['default_attachments'] = [
+      '#type' => 'managed_file',
+      '#title' => $this->t('Add default attachment files'),
+      '#description' => $this->t('The uploaded files will by default get added to the email as an attachment.'),
+      '#disabled' => !$this->supportsAttachments(),
+      '#upload_location' => 'private://webform/' . $this->getWebform()->id() . '/attachments/',
+      '#multiple' => TRUE,
+      '#default_value' => $this->configuration['default_attachments'],
     ];
 
     // Additional.
@@ -957,7 +975,10 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     }
 
     // Add attachments.
-    $message['attachments'] = $this->getMessageAttachments($webform_submission);
+    $message['attachments'] = array_merge(
+      $this->getDefaultAttachments(),
+      $this->getMessageAttachments($webform_submission),
+    );
 
     // Add webform submission.
     $message['webform_submission'] = $webform_submission;
@@ -1109,6 +1130,31 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
           unset($attachment['filepath']);
         }
       }
+    }
+
+    return $attachments;
+  }
+
+  /**
+   * Get the default file attachments.
+   *
+   * @return array
+   *   An array of the default file attachments.
+   */
+  protected function getDefaultAttachments() {
+    if (!$this->supportsAttachments() || !$this->configuration['default_attachments']) {
+      return [];
+    }
+
+    $attachments = [];
+    $files = $this->entityTypeManager->getStorage('file')->loadMultiple($this->configuration['default_attachments']);
+    foreach ($files as $file) {
+      $attachments[] = [
+        'filecontent' => file_get_contents($file->getFileUri()),
+        'filename' => $file->getFilename(),
+        'filemime' => $file->getMimeType(),
+        'filepath' => $file->getFileUri(),
+      ];
     }
 
     return $attachments;
