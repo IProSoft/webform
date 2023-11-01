@@ -4,6 +4,7 @@ namespace Drupal\Tests\webform\Functional\Handler;
 
 use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\Core\Serialization\Yaml;
 
 /**
  * Tests for advanced email webform handler functionality with HTML and attachments.
