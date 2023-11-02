@@ -4310,3 +4310,10 @@ function webform_update_8636() {
 function webform_update_8637() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3239258: Autofill: add support for current/any source entity.
+ */
+function webform_update_8627() {
+  _webform_update_webform_settings();
+}

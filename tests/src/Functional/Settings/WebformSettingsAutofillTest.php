@@ -2,15 +2,15 @@
 
 namespace Drupal\Tests\webform\Functional\Settings;
 
+use Drupal\Tests\webform_node\Functional\WebformNodeBrowserTestBase;
 use Drupal\webform\Entity\Webform;
-use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform submission form autofill.
  *
  * @group webform
  */
-class WebformSettingsAutofillTest extends WebformBrowserTestBase {
+class WebformSettingsAutofillTest extends WebformNodeBrowserTestBase {
 
   /**
    * Webforms to load.
@@ -133,6 +133,42 @@ class WebformSettingsAutofillTest extends WebformBrowserTestBase {
     $this->drupalGet('/webform/test_form_autofill');
     $assert_session->fieldValueEquals('textfield_autofill', '{textfield_autofill}');
     $assert_session->responseContains('{autofill_message}');
+  }
+
+  /**
+   * Test webform submission form autofill source entity.
+   */
+  public function testAutofillSourceEntity() {
+    $webform = Webform::load('test_form_autofill');
+
+    // Create node A and B.
+    $node_a = $this->createWebformNode('test_form_autofill');
+    $node_b = $this->createWebformNode('test_form_autofill');
+
+    // Autofill node A with A.
+    $this->drupalGet('/node/' . $node_a->id());
+    $this->assertFieldByName('textfield_autofill', '');
+    $this->postNodeSubmission($node_a, ['textfield_autofill' => 'A']);
+    $this->drupalGet('/node/' . $node_a->id());
+    $this->assertFieldByName('textfield_autofill', 'A');
+
+    // Autofill node B with B.
+    $this->drupalGet('/node/' . $node_b->id());
+    $this->assertFieldByName('textfield_autofill', '');
+    $this->postNodeSubmission($node_b, ['textfield_autofill' => 'B']);
+    $this->drupalGet('/node/' . $node_b->id());
+    $this->assertFieldByName('textfield_autofill', 'B');
+
+    // Check that node A is still autofilled with A.
+    $this->drupalGet('/node/' . $node_a->id());
+    $this->assertFieldByName('textfield_autofill', 'A');
+
+    // Disable autofill source entity.
+    $webform->setSetting('autofill_source_entity', FALSE)->save();
+
+    // Check that node A is now autofilled with B.
+    $this->drupalGet('/node/' . $node_a->id());
+    $this->assertFieldByName('textfield_autofill', 'B');
   }
 
 }
