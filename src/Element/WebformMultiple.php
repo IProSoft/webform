@@ -646,6 +646,7 @@ class WebformMultiple extends FormElement {
           static::setElementRowParentsRecursive($row[$child_key], $child_key, $parents);
         }
         $row[$child_key]['#webform_key'] = $child_key . '_' . $row_index;
+        $row[$child_key]['#is_webform_multiple'] = TRUE;
       }
     }
     else {
