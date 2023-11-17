@@ -60,6 +60,12 @@ variables:
   _PHPUNIT_EXTRA: --suppress-deprecations
   OPT_IN_TEST_NEXT_MINOR: '1'
 
+# Test with https://www.drupal.org/project/drupal/issues/3402168, which should fix the test failures on 10.2.
+composer (next minor):
+  after_script:
+    - cd web/core
+    - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5430.diff | patch -p2
+
 ###################################################################################
 #
 #                                        *
