@@ -64,7 +64,10 @@ variables:
 composer (next minor):
   after_script:
     - cd web/core
-    - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5430.diff | patch -p2
+    # Wim's MR.
+    # - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5430.diff | patch -p2
+    # Alex' MR
+    - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5450.diff | patch -p2
 
 ###################################################################################
 #
