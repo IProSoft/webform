@@ -80,8 +80,7 @@ class WebformCheckboxesOther extends Checkboxes implements WebformElementOtherIn
     }
 
     if (isset($element['#default_value']['other']) && isset($element['#default_value']['checkboxes'])) {
-      // Checkboxes element expects to receive flat array
-      // @see Drupal\Core\Render\Element\Checkboxes::valueCallback()".
+      // Checkboxes element expects to receive flat array @see Drupal\Core\Render\Element\Checkboxes::valueCallback()".
       $other_value = $element['#default_value']['other'];
       $element['#default_value'] = array_filter($element['#default_value']['checkboxes']);
       if ($other_value !== '') {

@@ -55,7 +55,7 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
       'webform_example_composite_multiple[items][0][last_name]' => 'Doe',
       'webform_example_composite_multiple[items][0][sex]' => 'Female',
       'webform_example_composite_multiple[items][0][date_of_birth]' => '1920-12-01',
-      'webform_example_composite_multiple[items][0][languages][checkboxes][English]' =>  TRUE,
+      'webform_example_composite_multiple[items][0][languages][checkboxes][English]' => TRUE,
     ];
     $sid = $this->postSubmission($webform, $edit);
     $webform_submission = WebformSubmission::load($sid);

@@ -1739,7 +1739,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       }
     }
 
-
     // Return multiple (delta) value or composite (composite_key) value.
     if (is_array($value)) {
       // Return $options['delta'] which is used by tokens.
