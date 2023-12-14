@@ -29,17 +29,17 @@ elements: |
       '#title': webform_image_select_images_default_value
       '#default_value':
         kitten_1:
-          text: 'Cute Kitten 1'
-          src: 'http://placekitten.com/220/200'
+          text: 'Cute Bear 1'
+          src: 'http://placebear.com/220/200'
         kitten_2:
-          text: 'Cute Kitten 2'
-          src: 'http://placekitten.com/180/200'
+          text: 'Cute Bear 2'
+          src: 'http://placebear.com/180/200'
         kitten_3:
-          text: 'Cute Kitten 3'
-          src: 'http://placekitten.com/130/200'
+          text: 'Cute Bear 3'
+          src: 'http://placebear.com/130/200'
         kitten_4:
-          text: 'Cute Kitten 4'
-          src: 'http://placekitten.com/270/200'
+          text: 'Cute Bear 4'
+          src: 'http://placebear.com/270/200'
   webform_image_select_element_images_elements:
     '#type': details
     '#title': webform_image_select_element_images_elements
@@ -55,17 +55,17 @@ elements: |
       '#required': true
       '#default_value':
         kitten_1:
-          text: 'Cute Kitten 1'
-          src: 'http://placekitten.com/220/200'
+          text: 'Cute Bear 1'
+          src: 'http://placebear.com/220/200'
         kitten_2:
-          text: 'Cute Kitten 2'
-          src: 'http://placekitten.com/180/200'
+          text: 'Cute Bear 2'
+          src: 'http://placebear.com/180/200'
         kitten_3:
-          text: 'Cute Kitten 3'
-          src: 'http://placekitten.com/130/200'
+          text: 'Cute Bear 3'
+          src: 'http://placebear.com/130/200'
         kitten_4:
-          text: 'Cute Kitten 4'
-          src: 'http://placekitten.com/270/200'
+          text: 'Cute Bear 4'
+          src: 'http://placebear.com/270/200'
 css: ''
 javascript: ''
 settings:

@@ -228,16 +228,16 @@ class WebformExampleCustomFormSettingsForm extends ConfigFormBase {
       '#show_label' => TRUE,
       '#images' => [
         'kitten_1' => [
-          'text' => 'Cute Kitten 1',
-          'src' => 'https://placekitten.com/220/200',
+          'text' => 'Cute Bear 1',
+          'src' => 'https://placebear.com/220/200',
         ],
         'kitten_2' => [
-          'text' => 'Cute Kitten 2',
-          'src' => 'https://placekitten.com/180/200',
+          'text' => 'Cute Bear 2',
+          'src' => 'https://placebear.com/180/200',
         ],
         'kitten_3' => [
-          'text' => 'Cute Kitten 3',
-          'src' => 'https://placekitten.com/130/200',
+          'text' => 'Cute Bear 3',
+          'src' => 'https://placebear.com/130/200',
         ],
       ],
       '#default_value' => $config->get('webform_image_select'),

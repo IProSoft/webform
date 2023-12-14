@@ -217,14 +217,14 @@ elements: |
       '#show_label': true
       '#images':
         kitten_1:
-          text: 'Cute Kitten 1'
-          src: 'http://placekitten.com/220/200'
+          text: 'Cute Bear 1'
+          src: 'http://placebear.com/220/200'
         kitten_2:
-          text: 'Cute Kitten 2'
-          src: 'http://placekitten.com/180/200'
+          text: 'Cute Bear 2'
+          src: 'http://placebear.com/180/200'
         kitten_3:
-          text: 'Cute Kitten 3'
-          src: 'http://placekitten.com/130/200'
+          text: 'Cute Bear 3'
+          src: 'http://placebear.com/130/200'
     webform_rating:
       '#type': webform_rating
       '#title': Rating
