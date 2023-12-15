@@ -30,31 +30,31 @@ class WebformImageSelectElementImagesTest extends WebformElementBrowserTestBase 
     $assert_session->responseContains("webform_image_select_images: {  }
 webform_image_select_images_default_value:
   kitten_1:
-    text: 'Cute Bear 1'
-    src: 'http://placebear.com/220/200'
+    text: 'Cute Kitten 1'
+    src: 'http://placekitten.com/220/200'
   kitten_2:
-    text: 'Cute Bear 2'
-    src: 'http://placebear.com/180/200'
+    text: 'Cute Kitten 2'
+    src: 'http://placekitten.com/180/200'
   kitten_3:
-    text: 'Cute Bear 3'
-    src: 'http://placebear.com/130/200'
+    text: 'Cute Kitten 3'
+    src: 'http://placekitten.com/130/200'
   kitten_4:
-    text: 'Cute Bear 4'
-    src: 'http://placebear.com/270/200'
+    text: 'Cute Kitten 4'
+    src: 'http://placekitten.com/270/200'
 webform_image_select_element_images_entity: kittens
 webform_image_select_element_images_custom:
   kitten_1:
-    text: 'Cute Bear 1'
-    src: 'http://placebear.com/220/200'
+    text: 'Cute Kitten 1'
+    src: 'http://placekitten.com/220/200'
   kitten_2:
-    text: 'Cute Bear 2'
-    src: 'http://placebear.com/180/200'
+    text: 'Cute Kitten 2'
+    src: 'http://placekitten.com/180/200'
   kitten_3:
-    text: 'Cute Bear 3'
-    src: 'http://placebear.com/130/200'
+    text: 'Cute Kitten 3'
+    src: 'http://placekitten.com/130/200'
   kitten_4:
-    text: 'Cute Bear 4'
-    src: 'http://placebear.com/270/200'");
+    text: 'Cute Kitten 4'
+    src: 'http://placekitten.com/270/200'");
 
     // Check unique key validation with image src.
     $this->drupalGet('/webform/test_element_images');

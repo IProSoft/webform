@@ -116,7 +116,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check image select translation.
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][webform_image_select][title]', 'Seleccionar imagen');
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][webform_image_select][images][kitten_1][text]', 'Lindo gatito 1');
-    $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][webform_image_select][images][kitten_1][src]', 'http://placebear.com/220/200');
+    $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][webform_image_select][images][kitten_1][src]', 'http://placekitten.com/220/200');
 
     // Check details translation.
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][details][title]', 'Detalles');

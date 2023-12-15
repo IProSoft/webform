@@ -39,17 +39,17 @@ class WebformImageSelectImagesTest extends WebformElementBrowserTestBase {
 
     // Check get element images.
     $kittens = Yaml::decode("kitten_1:
-  text: 'Cute Bear 1'
-  src: 'http://placebear.com/220/200'
+  text: 'Cute Kitten 1'
+  src: 'http://placekitten.com/220/200'
 kitten_2:
-  text: 'Cute Bear 2'
-  src: 'http://placebear.com/180/200'
+  text: 'Cute Kitten 2'
+  src: 'http://placekitten.com/180/200'
 kitten_3:
-  text: 'Cute Bear 3'
-  src: 'http://placebear.com/130/200'
+  text: 'Cute Kitten 3'
+  src: 'http://placekitten.com/130/200'
 kitten_4:
-  text: 'Cute Bear 4'
-  src: 'http://placebear.com/270/200'");
+  text: 'Cute Kitten 4'
+  src: 'http://placekitten.com/270/200'");
     $element = ['#images' => $kittens];
     $this->assertEquals(WebformImageSelectImages::getElementImages($element), $kittens);
     $element = ['#images' => 'kittens'];
