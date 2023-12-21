@@ -662,15 +662,13 @@ function webform_preprocess_file_upload_help(&$variables) {
 
   // Issue #3136578: Comma-separate the list of allowed file extensions.
   // @see https://www.drupal.org/project/drupal/issues/3136578
-  if (isset($upload_validators['webform_file_validate_extensions'])) {
-    foreach ($variables['descriptions'] as $index => $description) {
-      if ($description instanceof TranslatableMarkup
-        && $description->getUntranslatedString() === 'Allowed types: @extensions.') {
-        $arguments = $description->getArguments();
-        if (is_string($arguments['@extensions']) && strpos($arguments['@extensions'], ',') === FALSE) {
-          $arguments['@extensions'] = preg_replace('/ +/', ', ', $arguments['@extensions']);
-          $variables['descriptions'][$index] = new TranslatableMarkup($description->getUntranslatedString(), $arguments);
-        }
+  foreach ($variables['descriptions'] as $index => $description) {
+    if ($description instanceof TranslatableMarkup
+      && $description->getUntranslatedString() === 'Allowed types: @extensions.') {
+      $arguments = $description->getArguments();
+      if (is_string($arguments['@extensions']) && strpos($arguments['@extensions'], ',') === FALSE) {
+        $arguments['@extensions'] = preg_replace('/ +/', ', ', $arguments['@extensions']);
+        $variables['descriptions'][$index] = new TranslatableMarkup($description->getUntranslatedString(), $arguments);
       }
     }
   }
