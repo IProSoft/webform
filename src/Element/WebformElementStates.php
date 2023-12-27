@@ -821,6 +821,23 @@ class WebformElementStates extends FormElement {
     return ['selector' => $selector, 'trigger' => $trigger, 'value' => $value];
   }
 
+
+  protected static function getStatesArrayCondition($selector, $condition) {
+    if (is_array($condition)) {
+        $trigger = key($condition);
+        $value = reset($condition);
+
+        if (is_array($value)) {
+            return static::getStatesArrayCondition($selector, $value);
+        }
+
+        return ['selector' => $selector, 'trigger' => $trigger, 'value' => $value];
+    } else (is_string($condition)) {
+        // Handle string condition, you might need to adjust this based on your requirements.
+        return ['selector' => $selector, 'trigger' => 'value', 'value' => $condition];
+    } 
+}
+
   /**
    * Convert an element's submitted value to Form API #states.
    *
