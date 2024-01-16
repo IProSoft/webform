@@ -2747,6 +2747,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       && $element_plugin instanceof OptionsBase
       && !$element_plugin instanceof WebformElementOtherInterface;
     if ($is_options_element) {
+      $element_plugin->prepare($element);
       $option_values = WebformOptionsHelper::validateOptionValues($element['#options'], (array) $value);
       if (empty($option_values)) {
         return FALSE;
