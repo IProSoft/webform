@@ -38,8 +38,9 @@
   background-color: #333;
 }
 
+.webform-progress-tracker .progress-step.is-active .progress-marker::before,
 .webform-progress-tracker .progress-step.is-active:hover .progress-marker::before {
-  background-color: #2196f3;
+  background-color: #0b78d0;
 }
 
 /**
@@ -68,17 +69,26 @@
 }
 
 .webform-progress-tracker .progress-title[role="link"] {
-  color: #1976d2;
-}
-
-.webform-progress-tracker .progress-title[role="link"]:hover,
-.webform-progress-tracker .progress-title[role="link"]:focus {
   text-decoration: underline;
-  color: #2196f3;
+  color: #767676;
 }
 
-.webform-progress-tracker .progress-step.is-complete:hover .progress-marker[role="link"]:before {
-  background-color: #1976f2;
+.webform-progress-tracker .progress-step.is-complete .progress-title[role='link'] {
+  color: #0b78d0;
+}
+
+.webform-progress-tracker .progress-step .progress-title[role="link"]:hover,
+.webform-progress-tracker .progress-step .progress-title[role="link"]:focus,
+.webform-progress-tracker .progress-step .progress-marker[role="link"]:hover + .progress-text .progress-title[role='link'],
+.webform-progress-tracker .progress-step .progress-marker[role="link"]:focus + .progress-text .progress-title[role='link'] {
+  text-decoration: underline;
+  color: #333;
+}
+
+.webform-progress-tracker .progress-step.is-complete:hover .progress-marker[role="link"]::before,
+.webform-progress-tracker .progress-step.is-complete .progress-marker[role="link"]:hover::before,
+.webform-progress-tracker .progress-step.is-complete .progress-marker[role="link"]:focus::before {
+  background-color: #0b78d0;
 }
 
 .webform-progress-tracker .progress-marker::after {
