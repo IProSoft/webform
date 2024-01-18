@@ -127,6 +127,12 @@ services:
     tags:
       - { name: event_subscriber }
 
+  event_subscriber.webform.prepopulate_data_on_webform_submission_from_query_string:
+    class: Drupal\webform\EventSubscriber\PrepopulateDataOnWebformSubmissionFromQueryStringEventSubscriber
+    arguments: [ '@request_stack', '@config.factory' ]
+    tags:
+      - { name: event_subscriber }
+
   # Route subscriber.
 
   webform.route_subscriber:
