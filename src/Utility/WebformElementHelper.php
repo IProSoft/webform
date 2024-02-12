@@ -550,6 +550,7 @@ class WebformElementHelper {
         unset($options[$key]);
       }
     }
+    unset($option);
     foreach ($source_options as $key => $option) {
       if (is_array($option)) {
         $options[$key] = $option;
