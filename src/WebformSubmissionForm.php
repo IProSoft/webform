@@ -16,7 +16,6 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\webform\Cache\WebformBubbleableMetadata;
@@ -2110,11 +2109,11 @@ class WebformSubmissionForm extends ContentEntityForm {
     $files = $this->entityTypeManager->getStorage('file')->loadMultiple($fids);
     foreach ($files as $file) {
       $total_file_size += (int) $file->getSize();
-      $file_names[] = $file->getFilename() . ' - ' . ByteSizeMarkup::create($file->getSize(), $this->entity->language()->getId());
+      $file_names[] = $file->getFilename() . ' - ' . \Drupal::service('file_system')->formatSize($file->getSize(), $this->entity->language()->getId());
     }
 
     if ($total_file_size > $file_limit) {
-      $t_args = ['%quota' => ByteSizeMarkup::create($file_limit)];
+      $t_args = ['%quota' => \Drupal::service('file_system')->formatSize($file_limit)];
       $message = [];
       $message['content'] = ['#markup' => $this->t("This form's file upload quota of %quota has been exceeded. Please remove some files.", $t_args)];
       $message['files'] = [
