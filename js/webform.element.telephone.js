@@ -35,7 +35,7 @@
           // @see \Drupal\webform\Plugin\WebformElement\Telephone::prepare
           // @see https://github.com/jackocnr/intl-tel-input
           utilsScript: drupalSettings.webform.intlTelInput.utilsScript,
-          nationalMode: false
+          nationalMode: FALSE
         };
 
         // Parse data attributes.
@@ -67,10 +67,10 @@
                 message = Drupal.t('The phone number is not valid.');
               }
               $error.html(message).show();
-              return false;
+              return FALSE;
             }
           }
-          return true;
+          return TRUE;
         };
 
         $telephone.on('blur', function () {

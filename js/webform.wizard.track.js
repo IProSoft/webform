@@ -29,7 +29,7 @@
           // Append the form's current page data attribute to the browser's URL.
           var page = $form.attr('data-webform-wizard-current-page');
           var url = setUrlPageParameter(window.location.toString(), page);
-          window.history.replaceState(null, null, url);
+          window.history.replaceState(NULL, NULL, url);
         }
       }
 

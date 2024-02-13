@@ -102,11 +102,11 @@
         queueUpdate();
 
         // Queue computed element updates using a timer.
-        var timer = null;
+        var timer = NULL;
         function queueUpdate() {
           if (timer) {
             window.clearTimeout(timer);
-            timer = null;
+            timer = NULL;
           }
           timer = window.setTimeout(triggerUpdate, Drupal.webform.computed.delay);
         }

@@ -16,30 +16,30 @@
         groupSeparator: ',',
         alias: 'numeric',
         placeholder: '0',
-        autoGroup: true,
+        autoGroup: TRUE,
         digits: 2,
-        digitsOptional: false,
-        clearMaskOnLostFocus: false
+        digitsOptional: FALSE,
+        clearMaskOnLostFocus: FALSE
       },
       currency_negative: {
         prefix: '$ ',
         groupSeparator: ',',
         alias: 'numeric',
         placeholder: '0',
-        autoGroup: true,
+        autoGroup: TRUE,
         digits: 2,
-        digitsOptional: false,
-        clearMaskOnLostFocus: false
+        digitsOptional: FALSE,
+        clearMaskOnLostFocus: FALSE
       },
       currency_positive_negative: {
         prefix: '$ ',
         groupSeparator: ',',
         alias: 'numeric',
         placeholder: '0',
-        autoGroup: true,
+        autoGroup: TRUE,
         digits: 2,
-        digitsOptional: false,
-        clearMaskOnLostFocus: false
+        digitsOptional: FALSE,
+        clearMaskOnLostFocus: FALSE
       }
     });
   }

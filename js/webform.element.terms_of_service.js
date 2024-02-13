@@ -36,8 +36,8 @@
           }
 
           var options = $.extend({
-            modal: true,
-            autoOpen: false,
+            modal: TRUE,
+            autoOpen: FALSE,
             minWidth: 600,
             maxWidth: 800
           }, Drupal.webform.termsOfServiceModal.options);
@@ -47,7 +47,7 @@
         // Add aria-* attributes.
         if (type !== 'modal') {
           $a.attr({
-            'aria-expanded': false,
+            'aria-expanded': FALSE,
             'aria-controls': $details.attr('id')
           });
         }

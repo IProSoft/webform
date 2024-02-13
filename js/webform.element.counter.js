@@ -32,16 +32,16 @@
           countDownText: $(this).data('counter-maximum-message'),
           inputErrorClass: 'webform-counter-warning',
           counterErrorClass: 'webform-counter-warning',
-          countSpaces: true,
-          twoCharCarriageReturn: true,
-          stopInputAtMaximum: false,
+          countSpaces: TRUE,
+          twoCharCarriageReturn: TRUE,
+          stopInputAtMaximum: FALSE,
           // Don't display min/max message since server-side validation will
           // display these messages.
           minimumErrorText: '',
           maximumErrorText: ''
         };
 
-        options.countDown = (options.max) ? true : false;
+        options.countDown = (options.max) ? TRUE : FALSE;
         if (!options.counterText) {
           options.counterText = (options.type === 'word') ? Drupal.t('%d word(s) entered') : Drupal.t('%d character(s) entered');
         }

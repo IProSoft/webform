@@ -14,10 +14,10 @@
     try {
       localStorage.setItem('webform', 'webform');
       localStorage.removeItem('webform');
-      return true;
+      return TRUE;
     }
     catch (e) {
-      return false;
+      return FALSE;
     }
   }());
 
@@ -28,10 +28,10 @@
     try {
       sessionStorage.setItem('webform', 'webform');
       sessionStorage.removeItem('webform');
-      return true;
+      return TRUE;
     }
     catch (e) {
-      return false;
+      return FALSE;
     }
   }());
 
@@ -77,24 +77,24 @@
 
   function isClosed($element, storage, id) {
     if (!id || !storage) {
-      return false;
+      return FALSE;
     }
 
     switch (storage) {
       case 'local':
         if (hasLocalStorage) {
-          return localStorage.getItem('Drupal.webform.message.' + id) || false;
+          return localStorage.getItem('Drupal.webform.message.' + id) || FALSE;
         }
-        return false;
+        return FALSE;
 
       case 'session':
         if (hasSessionStorage) {
-          return sessionStorage.getItem('Drupal.webform.message.' + id) || false;
+          return sessionStorage.getItem('Drupal.webform.message.' + id) || FALSE;
         }
-        return false;
+        return FALSE;
 
       default:
-        return false;
+        return FALSE;
     }
   }
 
@@ -106,13 +106,13 @@
     switch (storage) {
       case 'local':
         if (hasLocalStorage) {
-          localStorage.setItem('Drupal.webform.message.' + id, true);
+          localStorage.setItem('Drupal.webform.message.' + id, TRUE);
         }
         break;
 
       case 'session':
         if (hasSessionStorage) {
-          sessionStorage.setItem('Drupal.webform.message.' + id, true);
+          sessionStorage.setItem('Drupal.webform.message.' + id, TRUE);
         }
         break;
 
@@ -120,7 +120,7 @@
       case 'state':
       case 'custom':
         $.get($element.find('.js-webform-message__link').attr('href'));
-        return true;
+        return TRUE;
     }
   }
 

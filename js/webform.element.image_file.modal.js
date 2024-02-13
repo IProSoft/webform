@@ -23,11 +23,11 @@
             dialogClass: 'webform-image-file-modal-dialog',
             width: this.width + 60,
             height: this.height + 100,
-            resizable: false,
-            modal: true
+            resizable: FALSE,
+            modal: TRUE
           }).dialog('open');
         };
-        return false;
+        return FALSE;
       });
     }
   };

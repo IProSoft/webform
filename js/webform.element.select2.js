@@ -38,7 +38,7 @@
             options.placeholder = $select.data('placeholder');
             if (!$select.prop('multiple')) {
               // Allow single option to be deselected.
-              options.allowClear = true;
+              options.allowClear = TRUE;
             }
           }
           if ($select.data('limit')) {
@@ -89,7 +89,7 @@
       var ui_dialog_interaction = $.ui.dialog.prototype._allowInteraction;
       $.ui.dialog.prototype._allowInteraction = function (e) {
         if ($(e.target).closest('.select2-dropdown').length) {
-          return true;
+          return TRUE;
         }
         return ui_dialog_interaction.apply(this, arguments);
       };

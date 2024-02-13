@@ -29,7 +29,7 @@
         var $input = $element.find('.webform-location-geocomplete');
 
         // Display a map.
-        var $map = null;
+        var $map = NULL;
         if ($input.attr('data-webform-location-geocomplete-map')) {
           $map = $('<div class="webform-location-geocomplete-map"><div class="webform-location-geocomplete-map--container"></div></div>').insertAfter($input).find('.webform-location-geocomplete-map--container');
         }
@@ -39,11 +39,11 @@
           detailsAttribute: 'data-webform-location-geocomplete-attribute',
           types: ['geocode'],
           map: $map,
-          geocodeAfterResult: false,
-          restoreValueAfterBlur: true,
+          geocodeAfterResult: FALSE,
+          restoreValueAfterBlur: TRUE,
           mapOptions: {
-            disableDefaultUI: true,
-            zoomControl: true
+            disableDefaultUI: TRUE,
+            zoomControl: TRUE
           }
         }, Drupal.webform.locationGeocomplete.options);
 

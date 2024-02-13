@@ -16,7 +16,7 @@
     attach: function (context) {
       $(once('webform-range-output-number', '.js-form-type-range', context)).each(function () {
         // Handle browser that don't support the HTML5 range input.
-        if (Modernizr.inputtypes.range === false) {
+        if (Modernizr.inputtypes.range === FALSE) {
           return;
         }
 
@@ -53,7 +53,7 @@
     attach: function (context) {
       $(once('webform-range-output-bubble', '.js-form-type-range', context)).each(function () {
         // Handle browser that don't support the HTML5 range input.
-        if (Modernizr.inputtypes.range === false) {
+        if (Modernizr.inputtypes.range === FALSE) {
           return;
         }
 

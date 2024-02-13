@@ -51,7 +51,7 @@
 
         var options = $.extend({
           type: 'address',
-          useDeviceLocation: true,
+          useDeviceLocation: TRUE,
           container: $input.get(0)
         }, Drupal.webform.locationPlaces.options);
 

@@ -22,15 +22,15 @@
 
         $authenticated.on('click', function () {
           if ($authenticated.is(':checked')) {
-            $checkboxes.prop('checked', true).attr('disabled', true);
+            $checkboxes.prop('checked', TRUE).attr('disabled', TRUE);
           }
           else {
-            $checkboxes.prop('checked', false).removeAttr('disabled');
+            $checkboxes.prop('checked', FALSE).removeAttr('disabled');
           }
         });
 
         if ($authenticated.is(':checked')) {
-          $checkboxes.prop('checked', true).attr('disabled', true);
+          $checkboxes.prop('checked', TRUE).attr('disabled', TRUE);
         }
       });
     }

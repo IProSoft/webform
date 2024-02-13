@@ -52,13 +52,13 @@
       var $tableRowElements = ['A', 'BUTTON', 'INPUT', 'SELECT', 'LABEL'];
 
       if ($.inArray(event.target.tagName, $tableRowElements) !== -1) {
-        return true;
+        return TRUE;
       }
 
       var $tr = $(this);
       var $checkbox = $tr.find('td input[type="checkbox"]:enabled, td input[type="radio"]:enabled');
       if ($checkbox.length === 0) {
-        return true;
+        return TRUE;
       }
 
       $checkbox.trigger('click');

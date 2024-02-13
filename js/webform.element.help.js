@@ -31,7 +31,7 @@
       // @see https://babeljs.io/repl/
       var hideOnEsc = {
         name: 'hideOnEsc',
-        defaultValue: true,
+        defaultValue: TRUE,
         fn: function fn(_ref) {
           var hide = _ref.hide;
 
@@ -63,8 +63,8 @@
         var options = $.extend({
           content: $link.attr('data-webform-help'),
           delay: 100,
-          allowHTML: true,
-          interactive: true,
+          allowHTML: TRUE,
+          interactive: TRUE,
           plugins: [hideOnEsc]
         }, Drupal.webform.elementHelpIcon.options);
 

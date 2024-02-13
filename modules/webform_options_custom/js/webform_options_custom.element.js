@@ -13,19 +13,19 @@
   Drupal.webformOptionsCustom.tippy = Drupal.webformOptionsCustom.tippy || {};
   Drupal.webformOptionsCustom.tippy.options = Drupal.webformOptionsCustom.tippy.options || {
     delay: 300,
-    allowHTML: true,
-    followCursor: true
+    allowHTML: TRUE,
+    followCursor: TRUE
   };
 
   // @see https://github.com/ariutta/svg-pan-zoom
   Drupal.webformOptionsCustom.panAndZoom = Drupal.webformOptionsCustom.panAndZoom || {};
   Drupal.webformOptionsCustom.panAndZoom.options = Drupal.webformOptionsCustom.panAndZoom.options || {
-    controlIconsEnabled: true,
+    controlIconsEnabled: TRUE,
     // Mouse event must be enable to allow keyboard accessibility to
     // continue to work.
-    preventMouseEventsDefault: false,
+    preventMouseEventsDefault: FALSE,
     // Prevent scroll wheel zoom to allow users to scroll past the SVG graphic.
-    mouseWheelZoomEnabled: false
+    mouseWheelZoomEnabled: FALSE
   };
 
   /**
@@ -111,8 +111,8 @@
               var $next;
               $focusableTemplateOptions.each(function (index) {
                 if (this === event.target) {
-                  $prev = $focusableTemplateOptions[index - 1] ? $($focusableTemplateOptions[index - 1]) : null;
-                  $next = $focusableTemplateOptions [index + 1] ? $($focusableTemplateOptions[index + 1]) : null;
+                  $prev = $focusableTemplateOptions[index - 1] ? $($focusableTemplateOptions[index - 1]) : NULL;
+                  $next = $focusableTemplateOptions [index + 1] ? $($focusableTemplateOptions[index + 1]) : NULL;
                 }
               });
               if (event.which === 37 || event.which === 38) {
@@ -215,7 +215,7 @@
 
           var $templateOption = $template.find('[data-option-value="' + value + '"]');
           if ($templateOption.attr('aria-checked') === 'true') {
-            selectOptions[value].selected = false;
+            selectOptions[value].selected = FALSE;
             $template.find('[data-option-value="' + value + '"]')
               .attr('aria-checked', 'false');
           }
@@ -223,7 +223,7 @@
             if (!hasMultiple) {
               clearTemplateOptions();
             }
-            selectOptions[value].selected = true;
+            selectOptions[value].selected = TRUE;
             $template.find('[data-option-value="' + value + '"]')
               .attr('aria-checked', 'true');
           }

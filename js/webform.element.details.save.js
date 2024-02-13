@@ -14,10 +14,10 @@
     try {
       localStorage.setItem('webform', 'webform');
       localStorage.removeItem('webform');
-      return true;
+      return TRUE;
     }
     catch (e) {
-      return false;
+      return FALSE;
     }
   }());
 
@@ -60,7 +60,7 @@
         }
 
         var open = localStorage.getItem(name);
-        if (open === null) {
+        if (open === NULL) {
           return;
         }
 

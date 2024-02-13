@@ -27,11 +27,11 @@
         var options = {
           dialogClass: 'webform-confirmation-modal',
           minWidth: 600,
-          resizable: false,
+          resizable: FALSE,
           title: $element.find('.webform-confirmation-modal--title').text(),
           close: function (event) {
             Drupal.dialog(event.target).close();
-            Drupal.detachBehaviors(event.target, null, 'unload');
+            Drupal.detachBehaviors(event.target, NULL, 'unload');
             $(event.target).remove();
           }
         };

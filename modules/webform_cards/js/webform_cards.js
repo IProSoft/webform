@@ -107,7 +107,7 @@
                 // Disable auto submit.
                 // @see Drupal.behaviors.webformDisableAutoSubmit
                 event.preventDefault();
-                return false;
+                return FALSE;
               }
             });
 
@@ -142,7 +142,7 @@
             // @see https://stackoverflow.com/questions/21177489/selectionstart-selectionend-on-input-type-number-no-longer-allowed-in-chrome
             if (typeof event.target.value !== 'undefined'
               && typeof event.target.selectionStart !== 'undefined'
-              && event.target.selectionStart !== null) {
+              && event.target.selectionStart !== NULL) {
               if (event.target.value.length !== event.target.selectionStart) {
                 return;
               }
@@ -197,7 +197,7 @@
           if (!$activeCard.length) {
             $activeCard = $allCards.first();
           }
-          setActiveCard($activeCard, true);
+          setActiveCard($activeCard, TRUE);
         }
 
         /**
@@ -229,7 +229,7 @@
           // and conditional logic.
           $activeCard = $allCards.filter('.webform-card--active');
           if ($activeCard.get(0) === $prevCard.get(0)) {
-            initialize = true;
+            initialize = TRUE;
           }
 
           // Show the active card.
@@ -288,7 +288,7 @@
           else {
             url = url + (url.indexOf('?') !== -1 ? '&page=' : '?page=') + page;
           }
-          window.history.replaceState(null, null, url);
+          window.history.replaceState(NULL, NULL, url);
         }
 
         /**
@@ -486,7 +486,7 @@
                     $currentCardInput.val(card);
                     // Click button to return to the 'webform_start' page.
                     $button.trigger('click');
-                    return false;
+                    return FALSE;
                   });
                 $card.append($cardButton).show();
               });
@@ -543,7 +543,7 @@
 
           // Append cards.
           var step = 0;
-          var isComplete = true;
+          var isComplete = TRUE;
           $allCards.each(function () {
             var $card = $(this);
             var key = $card.data('webform-key');
@@ -552,11 +552,11 @@
             // Set active and complete classes.
             var isActive = (activeKey === key);
             if (isActive) {
-              isComplete = false;
+              isComplete = FALSE;
             }
 
             // Hide/show progress based on conditional logic.
-            var isHidden = false;
+            var isHidden = FALSE;
             if (options.progressStates) {
               isHidden = $card.is('[style*="display: none"]');
               if (!isHidden) {
@@ -571,7 +571,7 @@
               type: 'card',
               key: key,
               title: title,
-              step: isHidden ? null : step,
+              step: isHidden ? NULL : step,
               hidden: isHidden,
               active: isActive,
               complete: isComplete
@@ -719,16 +719,16 @@
           $autoForwardInputs.each(function () {
             var name = this.name;
             if (!(name in inputValues)) {
-              inputValues[name] = false;
+              inputValues[name] = FALSE;
             }
             if (this.type === 'radio' && this.checked) {
-              inputValues[name] = true;
+              inputValues[name] = TRUE;
             }
             else if (this.type === 'select-one' && this.selectedIndex !== -1) {
-              inputValues[name] = true;
+              inputValues[name] = TRUE;
             }
             else if (this.type === 'range' && this.value) {
-              inputValues[name] = true;
+              inputValues[name] = TRUE;
             }
           });
 
@@ -753,18 +753,18 @@
          */
         function hideAutoForwardNextButton() {
           if (!options.autoForwardHideNextButton) {
-            return false;
+            return FALSE;
           }
 
           if ($form.hasClass('webform-cards-toggle-show')) {
-            return false;
+            return FALSE;
           }
 
           var $activeCard = $allCards.filter('.webform-card--active');
           var $allInputs = $activeCard.find('input:visible, select:visible, textarea:visible');
           var $autoForwardInputs = $activeCard.find('input[type="radio"], select[data-images]:not([multiple]), input[type="range"].form-webform-rating');
           if (!$autoForwardInputs.length || $allInputs.length !== $autoForwardInputs.length) {
-            return false;
+            return FALSE;
           }
 
           var inputValues = [];
@@ -786,19 +786,19 @@
 
           // Only auto-forward when a single input is visible.
           if (Object.keys(inputValues).length !== 1) {
-            return false;
+            return FALSE;
           }
 
           // Determine if the auto-forward input has a value.
           switch (type) {
             case 'radio':
-              return $('[name="' + name + '"]:checked').length ? false : true;
+              return $('[name="' + name + '"]:checked').length ? FALSE : TRUE;
 
             case 'range':
-              return $('[name="' + name + '"]').val() !== '0' ? false : true;
+              return $('[name="' + name + '"]').val() !== '0' ? FALSE : TRUE;
 
             case 'select-one':
-              return $('[name="' + name + '"]').val() ? false : true;
+              return $('[name="' + name + '"]').val() ? FALSE : TRUE;
           }
         }
 
@@ -856,14 +856,14 @@
           switch (type) {
             case 'checkbox':
             case 'radio':
-              return $('[name="' + name + '"]:checked').length ? true : false;
+              return $('[name="' + name + '"]:checked').length ? TRUE : FALSE;
 
             case 'range':
-              return $('[name="' + name + '"]').val() !== '0' ? true : false;
+              return $('[name="' + name + '"]').val() !== '0' ? TRUE : FALSE;
 
             case 'select-one':
             default:
-              return $('[name="' + name + '"]').val() ? true : false;
+              return $('[name="' + name + '"]').val() ? TRUE : FALSE;
           }
         }
 

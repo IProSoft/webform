@@ -49,7 +49,7 @@
 
         var options = $.extend({
           content: $description.html(),
-          allowHTML: true
+          allowHTML: TRUE
         }, Drupal.webform.tooltipElement.options);
 
         tippy(this, options);
@@ -73,7 +73,7 @@
         if (title) {
           var options = $.extend({
             content: title,
-            allowHTML: true
+            allowHTML: TRUE
           }, Drupal.webform.tooltipLink.options);
 
           tippy(this, options);

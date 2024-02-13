@@ -17,7 +17,7 @@
       $(once('webform-color', '.form-color:not(.form-color-output)', context)).each(function () {
         var $element = $(this);
         // Handle browser that don't support the HTML5 color input.
-        if (Modernizr.inputtypes.color === false) {
+        if (Modernizr.inputtypes.color === FALSE) {
           // Remove swatch sizes.
           $element.removeClass('form-color-small')
             .removeClass('form-color-medium')

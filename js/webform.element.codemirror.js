@@ -37,7 +37,7 @@
 
         var options = $.extend({
           mode: $input.attr('data-webform-codemirror-mode'),
-          lineNumbers: true,
+          lineNumbers: TRUE,
           lineWrapping: ($input.attr('wrap') !== 'off'),
           viewportMargin: Infinity,
           readOnly: !!($input.prop('readonly') || $input.prop('disabled')),
@@ -88,11 +88,11 @@
 
         // Issue #2764443: CodeMirror is not setting submitted value when
         // rendered within a webform UI dialog or within an Ajaxified element.
-        var changeTimer = null;
+        var changeTimer = NULL;
         editor.on('change', function () {
           if (changeTimer) {
             window.clearTimeout(changeTimer);
-            changeTimer = null;
+            changeTimer = NULL;
           }
           changeTimer = setTimeout(function () {editor.save();}, 500);
         });

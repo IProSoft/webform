@@ -27,7 +27,7 @@
           }
           $message.show().delay(1500).fadeOut('slow');
           Drupal.announce(Drupal.t('Code copied to clipboard…'));
-          return false;
+          return FALSE;
         });
       });
     }

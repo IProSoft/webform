@@ -19,8 +19,8 @@
    */
   function toggleOther(show, $element, effect) {
     var $input = $element.find('input');
-    var hideEffect = (effect === false) ? 'hide' : 'slideUp';
-    var showEffect = (effect === false) ? 'show' : 'slideDown';
+    var hideEffect = (effect === FALSE) ? 'hide' : 'slideUp';
+    var showEffect = (effect === FALSE) ? 'show' : 'slideDown';
 
     if (show) {
       // Limit the other inputs width to the parent's container.
@@ -34,11 +34,11 @@
       // Display the element.
       $element[showEffect]();
       // If not initializing, then focus the other element.
-      if (effect !== false) {
+      if (effect !== FALSE) {
         $input.trigger('focus');
       }
       // Require the input.
-      $input.prop('required', true).attr('aria-required', 'true');
+      $input.prop('required', TRUE).attr('aria-required', 'true');
       // Restore the input's value.
       var value = $input.data('webform-value');
       if (typeof value !== 'undefined') {
@@ -63,7 +63,7 @@
         $input.data('webform-value', $input.val());
       }
       // Empty and un-required the input.
-      $input.val('').prop('required', false).removeAttr('aria-required');
+      $input.val('').prop('required', FALSE).removeAttr('aria-required');
     }
   }
 
@@ -90,7 +90,7 @@
         var isOtherSelected = $select
           .find('option[value="_other_"]')
           .is(':selected');
-        toggleOther(isOtherSelected, $input, false);
+        toggleOther(isOtherSelected, $input, FALSE);
       });
     }
   };
@@ -111,7 +111,7 @@
           toggleOther(this.checked, $input);
         });
 
-        toggleOther($checkbox.is(':checked'), $input, false);
+        toggleOther($checkbox.is(':checked'), $input, FALSE);
       });
     }
   };
@@ -133,7 +133,7 @@
           toggleOther(($radios.filter(':checked').val() === '_other_'), $input);
         });
 
-        toggleOther(($radios.filter(':checked').val() === '_other_'), $input, false);
+        toggleOther(($radios.filter(':checked').val() === '_other_'), $input, FALSE);
       });
     }
   };
@@ -157,7 +157,7 @@
           toggleOther(($(this).find(':radio:checked').val() === '_other_'), $input);
         });
 
-        toggleOther(($buttons.filter(':checked').val() === '_other_'), $input, false);
+        toggleOther(($buttons.filter(':checked').val() === '_other_'), $input, FALSE);
       });
     }
   };
