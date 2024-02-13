@@ -659,7 +659,7 @@ function webform_preprocess_file_upload_help(&$variables) {
   $size_literal = ByteSizeMarkup::create(81862076662)->__toString();
 
   if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
-      $variables['descriptions'][] = t('@size limit per form.', ['@size' => $size_literal]);
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => $size_literal]);
   }
 
   // Issue #3136578: Comma-separate the list of allowed file extensions.
