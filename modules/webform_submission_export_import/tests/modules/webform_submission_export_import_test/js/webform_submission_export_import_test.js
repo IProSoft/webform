@@ -18,7 +18,7 @@
         .on('click', function () {
           $('#edit-import-url').val(this.href);
           $('#webform-submission-export-import-upload-form').trigger('submit');
-          return false;
+          return FALSE;
         });
     }
   };

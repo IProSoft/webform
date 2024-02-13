@@ -615,11 +615,11 @@ abstract class OptionsBase extends WebformElementBase {
     // Build format options with help.
     $options_format_options = [
       'compact' => $this->t('Compact, with the option values delimited by commas in one column.') .
-        WebformOptionsHelper::DESCRIPTION_DELIMITER .
-        $this->t('Compact options are more suitable for importing data into other systems.'),
+      WebformOptionsHelper::DESCRIPTION_DELIMITER .
+      $this->t('Compact options are more suitable for importing data into other systems.'),
       'separate' => $this->t('Separate, with each possible option value in its own column.') .
-        WebformOptionsHelper::DESCRIPTION_DELIMITER .
-        $this->t('Separate options are more suitable for building reports, graphs, and statistics in a spreadsheet application. Ranking will be included for sortable option elements.'),
+      WebformOptionsHelper::DESCRIPTION_DELIMITER .
+      $this->t('Separate options are more suitable for building reports, graphs, and statistics in a spreadsheet application. Ranking will be included for sortable option elements.'),
     ];
     $form['options'] = [
       '#type' => 'details',
@@ -1101,20 +1101,20 @@ abstract class OptionsBase extends WebformElementBase {
       '#type' => 'details',
       '#title' => $this->t('Options (custom) properties'),
       '#access' => $this->hasProperty('options__properties')
-        && $this->currentUser->hasPermission('edit webform source'),
+      && $this->currentUser->hasPermission('edit webform source'),
     ];
     $form['options_properties']['options__properties'] = [
       '#type' => 'webform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Options properties'),
       '#description' => $this->t("Custom options properties must include the 'Option value' followed by option (element) properties prepended with a hash (#) character.") .
-        "<pre>option_value:
+      "<pre>option_value:
   '#wrapper_attributes':
     class:
       - disabled
   '#disabled': true</pre>" .
-        '<br /><br />' .
-        $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      '<br /><br />' .
+      $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
     ];
 
     return $form;

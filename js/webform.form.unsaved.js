@@ -7,7 +7,7 @@
 
   'use strict';
 
-  var unsaved = false;
+  var unsaved = FALSE;
 
   /**
    * Unsaved changes.
@@ -21,7 +21,7 @@
     clear: function () {
       // Allow Ajax refresh/redirect to clear unsaved flag.
       // @see Drupal.AjaxCommands.prototype.webformRefresh
-      unsaved = false;
+      unsaved = FALSE;
     },
     get: function () {
       // Get the current unsaved flag state.
@@ -36,7 +36,7 @@
       // a multi-step webform has unsaved data.
       // @see \Drupal\webform\WebformSubmissionForm::buildForm
       if ($(once('data-webform-unsaved', '.js-webform-unsaved[data-webform-unsaved]')).length) {
-        unsaved = true;
+        unsaved = TRUE;
       }
       else {
         $(once('webform-unsaved', $('.js-webform-unsaved :input:not(:button, :submit, :reset, [type="hidden"])'))).on('change keypress', function (event, param1) {
@@ -44,7 +44,7 @@
           // which passes 'webform.states' as param1.
           // @see webform.states.js ::triggerEventHandlers().
           if (param1 !== 'webform.states') {
-            unsaved = true;
+            unsaved = TRUE;
           }
         });
       }
@@ -55,11 +55,11 @@
           // before unload event handler.
           if ($(this).hasClass('webform-button--reset') && unsaved) {
             if (!window.confirm(Drupal.t('Changes you made may not be saved.') + '\n\n' + Drupal.t('Press OK to leave this page or Cancel to stay.'))) {
-              return false;
+              return FALSE;
             }
           }
 
-          unsaved = false;
+          unsaved = FALSE;
         });
 
       // Add submit handler to form.beforeSend.
@@ -67,7 +67,7 @@
       if (typeof Drupal.Ajax !== 'undefined' && typeof Drupal.Ajax.prototype.beforeSubmitWebformUnsavedOriginal === 'undefined') {
         Drupal.Ajax.prototype.beforeSubmitWebformUnsavedOriginal = Drupal.Ajax.prototype.beforeSubmit;
         Drupal.Ajax.prototype.beforeSubmit = function (form_values, element_settings, options) {
-          unsaved = false;
+          unsaved = FALSE;
           return this.beforeSubmitWebformUnsavedOriginal.apply(this, arguments);
         };
       }
@@ -75,10 +75,10 @@
       // Track all CKEditor change events.
       // @see https://ckeditor.com/old/forums/Support/CKEditor-jQuery-change-event
       if (window.CKEDITOR && !CKEDITOR.webformUnsaved) {
-        CKEDITOR.webformUnsaved = true;
+        CKEDITOR.webformUnsaved = TRUE;
         CKEDITOR.on('instanceCreated', function (event) {
           event.editor.on('change', function (evt) {
-            unsaved = true;
+            unsaved = TRUE;
           });
         });
       }
@@ -87,7 +87,7 @@
 
   $(window).on('beforeunload', function () {
     if (unsaved) {
-      return true;
+      return TRUE;
     }
   });
 
@@ -117,7 +117,7 @@
       if (typeof href !== 'undefined' && !(href.match(/^#/) || href.trim() === '')) {
         if ($(window).triggerHandler('beforeunload')) {
           if (!window.confirm(Drupal.t('Changes you made may not be saved.') + '\n\n' + Drupal.t('Press OK to leave this page or Cancel to stay.'))) {
-            return false;
+            return FALSE;
           }
         }
         var target = a.attr('target');
@@ -127,7 +127,7 @@
         else {
           window.location.href = href;
         }
-        return false;
+        return FALSE;
       }
     });
   });

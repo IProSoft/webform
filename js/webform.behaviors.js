@@ -15,15 +15,15 @@
   if (isChrome) {
     // Track back button in navigation.
     // @see https://stackoverflow.com/questions/37838430/detect-if-page-is-load-from-back-button
-    var backButton = false;
+    var backButton = FALSE;
     if (window.performance) {
       var navEntries = window.performance.getEntriesByType('navigation');
       if (navEntries.length > 0 && navEntries[0].type === 'back_forward') {
-        backButton = true;
+        backButton = TRUE;
       }
       else if (window.performance.navigation
         && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-        backButton = true;
+        backButton = TRUE;
       }
     }
 

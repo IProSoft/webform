@@ -38,7 +38,7 @@
    *   TRUE if element is within the webform.
    */
   $.fn.isWebform = function () {
-    return $(this).closest('form.webform-submission-form, form[id^="webform"], form[data-is-webform]').length ? true : false;
+    return $(this).closest('form.webform-submission-form, form[id^="webform"], form[data-is-webform]').length ? TRUE : FALSE;
   };
 
   /**
@@ -48,7 +48,7 @@
    *   TRUE if element is to be treated as a webform element.
    */
   $.fn.isWebformElement = function () {
-    return ($(this).isWebform() || $(this).closest('[data-is-webform-element]').length) ? true : false;
+    return ($(this).isWebform() || $(this).closest('[data-is-webform-element]').length) ? TRUE : FALSE;
   };
 
   /* ************************************************************************ */
@@ -97,7 +97,7 @@
   };
   function _compare2(a, b) {
     if (a === b) {
-      return typeof a === 'undefined' ? a : true;
+      return typeof a === 'undefined' ? a : TRUE;
     }
 
     return typeof a === 'undefined' || typeof b === 'undefined';
@@ -126,20 +126,20 @@
     }
     else if ('between' in reference || '!between' in reference) {
       if (value === '') {
-        return false;
+        return FALSE;
       }
 
       var between = reference['between'] || reference['!between'];
       var betweenParts = between.split(':');
       var greater = betweenParts[0];
-      var less = (typeof betweenParts[1] !== 'undefined') ? betweenParts[1] : null;
-      var isGreaterThan = (greater === null || greater === '' || parseFloat(value) >= parseFloat(greater));
-      var isLessThan = (less === null || less === '' || parseFloat(value) <= parseFloat(less));
+      var less = (typeof betweenParts[1] !== 'undefined') ? betweenParts[1] : NULL;
+      var isGreaterThan = (greater === NULL || greater === '' || parseFloat(value) >= parseFloat(greater));
+      var isLessThan = (less === NULL || less === '' || parseFloat(value) <= parseFloat(less));
       var result = (isGreaterThan && isLessThan);
       return (reference['!between']) ? !result : result;
     }
     else {
-      return reference.indexOf(value) !== false;
+      return reference.indexOf(value) !== FALSE;
     }
   };
 
@@ -179,7 +179,7 @@
           // Remove event handler.
           $checkboxes.off('click', statesCheckboxesRequiredEventHandler);
           // Remove required attribute.
-          toggleRequired($checkboxes, false);
+          toggleRequired($checkboxes, FALSE);
         }
       }
 
@@ -199,7 +199,7 @@
           }
           else {
             $checkboxes.off('click change ', statesCheckboxesRequiredEventHandler);
-            toggleRequired($tbody, false);
+            toggleRequired($tbody, FALSE);
           }
         }
         else {
@@ -299,7 +299,7 @@
         // Remove 'disabled' attribute from fieldset which will block
         // all disabled elements from being submitted.
         if ($(e.target).is('fieldset')) {
-          $(e.target).prop('disabled', false);
+          $(e.target).prop('disabled', FALSE);
         }
         fileElements.removeAttr('disabled');
       }
@@ -452,7 +452,7 @@
           && $input.val() === $input.find("option[selected]").attr('value')) {
           return;
         }
-        $input.data('webform-states-address-initialized', true);
+        $input.data('webform-states-address-initialized', TRUE);
       }
 
       $input
@@ -494,7 +494,7 @@
 
     // Backup required.
     if ($input.prop('required') && !$input.hasData('webform-required')) {
-      $input.data('webform-required', true);
+      $input.data('webform-required', TRUE);
     }
 
     // Backup value.
@@ -539,7 +539,7 @@
           // escaping single quotes.
           // @see https://forum.jquery.com/topic/escape-characters-prior-to-using-selector
           option_value = option_value.replace(/'/g, "\\\'");
-          $input.find("option[value='" + option_value + "']").prop('selected', true);
+          $input.find("option[value='" + option_value + "']").prop('selected', TRUE);
         });
       }
       else if (type !== 'submit' && type !== 'button') {
@@ -552,7 +552,7 @@
     var required = $input.data('webform-required');
     if (typeof required !== 'undefined') {
       if (required) {
-        $input.prop('required', true);
+        $input.prop('required', TRUE);
       }
       $input.removeData('webform-required');
     }
@@ -577,7 +577,7 @@
     var type = input.type;
     var tag = input.tagName.toLowerCase(); // Normalize case.
     if (type === 'checkbox' || type === 'radio') {
-      $input.prop('checked', false);
+      $input.prop('checked', FALSE);
     }
     else if (tag === 'select') {
       if ($input.find('option[value=""]').length) {
@@ -592,7 +592,7 @@
     }
 
     // Clear required.
-    $input.prop('required', false);
+    $input.prop('required', FALSE);
   }
 
   /* ************************************************************************ */

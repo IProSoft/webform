@@ -27,14 +27,14 @@
           var sync = $value.val() === $text.val();
           $value.data('webform_options_sync', sync);
           if (sync) {
-            $text.prop('readonly', true).closest('.js-form-item, .js-form-wrapper').addClass('webform-readonly');
+            $text.prop('readonly', TRUE).closest('.js-form-item, .js-form-wrapper').addClass('webform-readonly');
           }
         });
 
         // On blur, if option value and option text are in-sync remove readonly.
         $value.on('blur', function () {
           if ($value.data('webform_options_sync')) {
-            $text.prop('readonly', false).closest('.js-form-item, .js-form-wrapper').removeClass('webform-readonly');
+            $text.prop('readonly', FALSE).closest('.js-form-item, .js-form-wrapper').removeClass('webform-readonly');
           }
         });
 

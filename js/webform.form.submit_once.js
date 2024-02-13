@@ -45,12 +45,12 @@
 
           // Don't submit if client-side validation has failed.
           if (!$clickedButton.attr('formnovalidate') && $.isFunction(jQuery.fn.valid) && !($form.valid())) {
-            return false;
+            return FALSE;
           }
 
           // Track webform submitted.
           if ($form.data('webform-submitted')) {
-            return false;
+            return FALSE;
           }
           $form.data('webform-submitted', 'true');
 

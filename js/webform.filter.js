@@ -46,7 +46,7 @@
         var args = {
           '@item': $input.data('item-singular') || Drupal.t('item'),
           '@items': $input.data('item-plural') || Drupal.t('items'),
-          '@total': null
+          '@total': NULL
         };
 
         if ($table.length) {
@@ -146,7 +146,7 @@
             var $row = $label.closest(parentSelector);
 
             var textMatch = $label.text().toLowerCase().indexOf(query) !== -1;
-            var isSelected = (selectedSelector && $row.find(selectedSelector).length) ? true : false;
+            var isSelected = (selectedSelector && $row.find(selectedSelector).length) ? TRUE : FALSE;
 
             var isVisible = textMatch || isSelected;
             $row.toggle(isVisible);

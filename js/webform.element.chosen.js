@@ -68,7 +68,7 @@
               // Clear option value so that placeholder is displayed.
               $select.find('option[value=""]').html('');
               // Allow single option to be deselected.
-              options.allow_single_deselect = true;
+              options.allow_single_deselect = TRUE;
             }
           }
           if ($select.data('limit')) {

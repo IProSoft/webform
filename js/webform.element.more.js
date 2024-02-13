@@ -21,7 +21,7 @@
 
         // Add aria-* attributes.
         $a.attr({
-          'aria-expanded': false,
+          'aria-expanded': FALSE,
           'aria-controls': $content.attr('id')
         });
 

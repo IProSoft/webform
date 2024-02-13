@@ -43,11 +43,11 @@
         }
 
         var options = $.extend({
-          hide_select: false
+          hide_select: FALSE
         }, Drupal.webform.imageSelect.options);
 
         if ($select.attr('data-show-label')) {
-          options.show_label = true;
+          options.show_label = TRUE;
         }
 
         $select.imagepicker(options);
@@ -78,7 +78,7 @@
             }
 
             // Aria hide caption since the 'title' attribute will be read aloud.
-            $(this).find('p').attr('aria-hidden', true);
+            $(this).find('p').attr('aria-hidden', TRUE);
           })
           .on('focus', function (event) {
             $(this).addClass('focused');

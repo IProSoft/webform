@@ -20,9 +20,9 @@
           var $form = $(this);
           if ($form.data('webform-auto-file-uploads') > 0 && Drupal.webformManagedFileBlockSubmit($form)) {
             event.preventDefault();
-            return false;
+            return FALSE;
           }
-          return true;
+          return TRUE;
         });
 
       // Add submit handler to form.beforeSend.
@@ -51,8 +51,8 @@
           if ($form.data('webform-auto-file-uploads') > 0 &&
             (isFormActions || (isMultipleUpload && !isManagedUploadButton)) &&
             blockSubmit($form)) {
-            this.ajaxing = false;
-            return false;
+            this.ajaxing = FALSE;
+            return FALSE;
           }
           return this.beforeSubmitWebformManagedFileAutoUploadOriginal.apply(this, arguments);
         };
@@ -60,7 +60,7 @@
 
       $(once('webform-auto-file-upload', 'input[type="file"]', context)).on('change', function () {
         // Track file upload.
-        $(this).data('webform-auto-file-upload', true);
+        $(this).data('webform-auto-file-upload', TRUE);
 
         // Increment form file uploads.
         var $form = $(this.form);
@@ -97,7 +97,7 @@
    */
   Drupal.webformManagedFileBlockSubmit = function (form) {
     if ($(form).data('webform-auto-file-uploads') < 0) {
-      return false;
+      return FALSE;
     }
 
     var message = Drupal.t('File upload in progress. Uploaded file may be lost.') +

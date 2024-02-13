@@ -194,13 +194,13 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       $t_args = [':href' => ($this->moduleHandler->moduleExists('help')) ? Url::fromRoute('help.page', ['name' => 'webform'], ['fragment' => 'libraries'])->toString() : 'https://www.drupal.org/docs/8/modules/webform/webform-libraries'];
       $description['download'] = [
         '#markup' => '<hr/>' .
-          $this->t('Please download external libraries using one the <a href=":href">recommended methods</a>.', $t_args),
+        $this->t('Please download external libraries using one the <a href=":href">recommended methods</a>.', $t_args),
       ];
       $t_args = [':href' => Url::fromRoute('webform.config.advanced')->toString()];
       $description['cdn'] = [
         '#markup' => '<hr/>' .
-          $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']) . '<br/>' .
-          $this->t('<a href=":href">Disable CDN warning</a>', $t_args),
+        $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']) . '<br/>' .
+        $this->t('<a href=":href">Disable CDN warning</a>', $t_args),
       ];
     }
     $description['info'] = $info;

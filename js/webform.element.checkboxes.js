@@ -62,18 +62,18 @@
               // Uncheck options none.
               if ($options_none.is(':checked')) {
                 $options_none
-                  .prop('checked', false)
+                  .prop('checked', FALSE)
                   .trigger('change', ['webform.states']);
               }
               // Check check all unchecked options.
               $options.not(':checked')
-                .prop('checked', true)
+                .prop('checked', TRUE)
                 .trigger('change', ['webform.states']);
             }
             else {
               // Check uncheck all checked options.
               $options.filter(':checked')
-                .prop('checked', false)
+                .prop('checked', FALSE)
                 .trigger('change', ['webform.states']);
             }
           }
@@ -86,7 +86,7 @@
               $checkboxes
                 .not('[value="' + options_none_value + '"]')
                 .filter(':checked')
-                .prop('checked', false)
+                .prop('checked', FALSE)
                 .trigger('change', ['webform.states']);
             }
           }
@@ -106,7 +106,7 @@
             if ($options_none.length
               && isOneChecked) {
               $options_none
-                .prop('checked', false)
+                .prop('checked', FALSE)
                 .trigger('change', ['webform.states']);
             }
           }

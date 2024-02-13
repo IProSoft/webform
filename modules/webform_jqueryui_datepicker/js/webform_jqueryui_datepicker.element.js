@@ -32,13 +32,13 @@
 
         // Skip if date inputs are supported by the browser and input is not a text field.
         // @see \Drupal\webform\Element\WebformDatetime
-        if (window.Modernizr && Modernizr.inputtypes && Modernizr.inputtypes.date === true && $input.attr('type') !== 'text') {
+        if (window.Modernizr && Modernizr.inputtypes && Modernizr.inputtypes.date === TRUE && $input.attr('type') !== 'text') {
           return;
         }
 
         var options = $.extend({
-          changeMonth: true,
-          changeYear: true
+          changeMonth: TRUE,
+          changeYear: TRUE
         }, Drupal.webform.datePicker.options);
 
         // Add datepicker button.
@@ -46,7 +46,7 @@
           options = $.extend({
             showOn: 'both',
             buttonImage: settings.webform.datePicker.buttonImage,
-            buttonImageOnly: true,
+            buttonImageOnly: TRUE,
             buttonText: Drupal.t('Select date')
           }, Drupal.webform.datePicker.options);
         }
@@ -94,7 +94,7 @@
           var days = $input.attr('data-days').split(',');
           options.beforeShowDay = function (date) {
             var day = date.getDay().toString();
-            return [(days.indexOf(day) !== -1) ? true : false];
+            return [(days.indexOf(day) !== -1) ? TRUE : false];
           };
         }
 

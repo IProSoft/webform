@@ -116,7 +116,7 @@ function webform_shortcuts_form_webform_admin_config_advanced_form_alter(&$form,
     '#type' => 'details',
     '#title' => t('Keyboard shortcut settings'),
     '#description' => t('Enter custom keyboard shortcuts for common form builder actions. Leave blank to disable an individual shortcut.') . '<br/>' .
-      t('<a href=":href">Learn more about configuring shortcuts using the jQuery HotKeys library</a>', [':href' => 'https://github.com/jeresig/jquery.hotkeys']),
+    t('<a href=":href">Learn more about configuring shortcuts using the jQuery HotKeys library</a>', [':href' => 'https://github.com/jeresig/jquery.hotkeys']),
     '#open' => TRUE,
     '#tree' => TRUE,
   ];

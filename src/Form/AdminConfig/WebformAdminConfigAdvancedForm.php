@@ -99,8 +99,8 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
         '#type' => 'checkbox',
         '#title' => $this->t('Display element description as help text (tooltip)'),
         '#description' => $this->t("If checked, all element descriptions will be moved to help text (tooltip).")
-          . '<br/><br/><em>'
-          . $this->t('This behavior is disabled when the <a href=":href">Tippy.js library is disabled</a.', [':href' => Url::fromRoute('webform.config.libraries')->toString()]) . '</em>',
+        . '<br/><br/><em>'
+        . $this->t('This behavior is disabled when the <a href=":href">Tippy.js library is disabled</a.', [':href' => Url::fromRoute('webform.config.libraries')->toString()]) . '</em>',
         '#default_value' => $config->get('ui.description_help'),
         '#disabled' => TRUE,
       ];
@@ -156,8 +156,8 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Disable promotions'),
       '#description' => $this->t('If checked, dismissible promotion messages that appear when the Webform module is updated will be disabled.') . ' ' .
-        $this->t('Promotions on the <a href=":href">Webform: Add-ons</a> page will still be displayed.', [':href' => Url::fromRoute('webform.addons')->toString()]) . '<br/>' .
-        $this->t('Note: Promotions are only visible to users who can <em>administer modules</em>.'),
+      $this->t('Promotions on the <a href=":href">Webform: Add-ons</a> page will still be displayed.', [':href' => Url::fromRoute('webform.addons')->toString()]) . '<br/>' .
+      $this->t('Note: Promotions are only visible to users who can <em>administer modules</em>.'),
       '#return_value' => TRUE,
       '#default_value' => $config->get('ui.promotions_disabled'),
     ];
@@ -181,7 +181,7 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Check if CDN is being used for external libraries'),
       '#description' => $this->t('If unchecked, all warnings about missing libraries will be disabled.') . '<br/><br/>' .
-        $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']),
+      $this->t('Relying on a CDN for external libraries can cause unexpected issues with Ajax and BigPipe support. For more information see: <a href=":href">Issue #1988968</a>', [':href' => 'https://www.drupal.org/project/drupal/issues/1988968']),
       '#return_value' => TRUE,
       '#default_value' => $config->get('requirements.cdn'),
     ];
@@ -291,7 +291,7 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#type' => 'webform_message',
       '#message_type' => 'warning',
       '#message_message' => $this->t('Repair and remove older Webform configuration files.') . '<br/>' .
-        '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
+      '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
     ];
     $form['repair'] += [
       'title' => [
@@ -316,8 +316,8 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#value' => $this->t('Repair configuration'),
       '#attributes' => [
         'onclick' => 'return confirm("' . $this->t('Are you sure you want to repair and remove older webform configuration?')
-          . PHP_EOL
-          . $this->t('This cannot be undone!!!') . '");',
+        . PHP_EOL
+        . $this->t('This cannot be undone!!!') . '");',
       ],
     ];
 

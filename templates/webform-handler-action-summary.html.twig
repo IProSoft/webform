@@ -17,4 +17,3 @@
 {% if settings.message %}<b>{{ 'Message:'|t }}</b> {{ settings.message }} ({{ settings.message_type }})<br />{% endif %}
 {% if settings.data %}<b>{{ 'Data (keys):'|t }}</b> {{ settings.data|join('; ') }}<br />{% endif %}
 <b>{{ 'Execute when:'|t }}</b> {{ settings.states|join('; ') }}<br />
-

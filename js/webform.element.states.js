@@ -67,7 +67,7 @@
    *
    * @type {null|boolean}
    */
-  var requiredChecked = null;
+  var requiredChecked = NULL;
 
   /**
    * Toggle the required checkbox when states:state is required or optional.
@@ -79,24 +79,24 @@
     }
 
     // Determine if any states:state is required or optional.
-    var required = false;
+    var required = FALSE;
     $('.webform-states-table--state select').each(function () {
       var value = $(this).val();
       if (value === 'required' || value === 'optional') {
-        required = true;
+        required = TRUE;
       }
     });
 
     if (required) {
       requiredChecked = $input.prop('checked');
-      $input.attr('disabled', true);
-      $input.prop('checked', true);
+      $input.attr('disabled', TRUE);
+      $input.prop('checked', TRUE);
     }
     else {
-      $input.attr('disabled', false);
-      if (requiredChecked !== null) {
+      $input.attr('disabled', FALSE);
+      if (requiredChecked !== NULL) {
         $input.prop('checked', requiredChecked);
-        requiredChecked = null;
+        requiredChecked = NULL;
       }
     }
     $input.trigger('change');

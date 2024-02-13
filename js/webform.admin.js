@@ -44,11 +44,11 @@
       // which row triggers the event.
       $(once('webform-results-table', '.webform-results-table', context)).on('click', function (event) {
         if (event.target.tagName === 'A' || event.target.tagName === 'BUTTON' || event.target.tagName === 'INPUT') {
-          return true;
+          return TRUE;
         }
 
         if ($(event.target).parents('a[href]').length || $(event.target).parents('.dropbutton-widget').length) {
-          return true;
+          return TRUE;
         }
 
         var $input = $(event.target).closest('td').find('input');
@@ -56,16 +56,16 @@
           if ($input.attr('type') === 'checkbox') {
             $input.click();
           }
-          return true;
+          return TRUE;
         }
 
         var $tr = $(event.target).parents('tr[data-webform-href]');
         if (!$tr.length) {
-          return true;
+          return TRUE;
         }
 
         window.location = $tr.attr('data-webform-href');
-        return false;
+        return FALSE;
       });
     }
   };

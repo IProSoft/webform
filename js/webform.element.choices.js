@@ -29,7 +29,7 @@
           var $select = $(this);
           var options = {
             // Disable sorting.
-            shouldSort: false,
+            shouldSort: FALSE,
             // Translate all default strings.
             loadingText: Drupal.t('Loading...'),
             noResultsText: Drupal.t('No results found'),
@@ -52,13 +52,13 @@
           // Enabling the 'remove item buttons' options addresses accessibility
           // issue when deleting multiple options.
           if ($select.attr('multiple')) {
-            options.removeItemButton = true;
+            options.removeItemButton = TRUE;
           }
 
           options = $.extend(options, Drupal.webform.choices.options);
 
           if ($select.data('placeholder')) {
-            options.placeholder = true;
+            options.placeholder = TRUE;
             options.placeholderValue = $select.data('placeholder');
           }
           if ($select.data('limit')) {

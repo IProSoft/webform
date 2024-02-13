@@ -192,14 +192,14 @@
           $('body').append($floatingMessage);
         }
         if ($floatingMessage.is(':animated')) {
-          $floatingMessage.stop(true, true);
+          $floatingMessage.stop(TRUE, TRUE);
         }
         $floatingMessage.html($messages).show().delay(3000).fadeOut(1000);
       }
     }
 
-    updateKey = null; // Reset element update.
-    addElement = null; // Reset add element.
+    updateKey = NULL; // Reset element update.
+    addElement = NULL; // Reset add element.
   };
 
   /**
@@ -244,7 +244,7 @@
     // @see https://stackoverflow.com/questions/6944744/javascript-get-portion-of-url-path
     var a = document.createElement('a');
     a.href = response.url;
-    var forceReload = (response.url.match(/\?reload=([^&]+)($|&)/)) ? RegExp.$1 : null;
+    var forceReload = (response.url.match(/\?reload=([^&]+)($|&)/)) ? RegExp.$1 : NULL;
     if (forceReload) {
       response.url = response.url.replace(/\?reload=([^&]+)($|&)/, '');
       this.redirect(ajax, response, status);
@@ -252,8 +252,8 @@
     }
 
     if (a.pathname === window.location.pathname && $('.webform-ajax-refresh').length) {
-      updateKey = (response.url.match(/[?|&]update=([^&]+)($|&)/)) ? RegExp.$1 : null;
-      addElement = (response.url.match(/[?|&]add_element=([^&]+)($|&)/)) ? RegExp.$1 : null;
+      updateKey = (response.url.match(/[?|&]update=([^&]+)($|&)/)) ? RegExp.$1 : NULL;
+      addElement = (response.url.match(/[?|&]add_element=([^&]+)($|&)/)) ? RegExp.$1 : NULL;
       $('.webform-ajax-refresh').trigger('click');
     }
     else {
@@ -329,7 +329,7 @@
    */
   Drupal.AjaxCommands.prototype.webformConfirmReload = function (ajax, response) {
     if (window.confirm(response.message)) {
-      window.location.reload(true);
+      window.location.reload(TRUE);
     }
   };
 

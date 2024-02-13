@@ -74,7 +74,7 @@
           signaturePad.clear();
           $input.val('');
           $(this).trigger('blur');
-          return false;
+          return FALSE;
         });
 
         // Input onchange clears signature pad if value is empty.

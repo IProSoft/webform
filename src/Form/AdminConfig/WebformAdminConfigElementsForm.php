@@ -82,7 +82,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Element key pattern'),
       '#description' => $this->t('The element key pattern is used to limit the format of element keys.') . '<br/><br/>' .
-        $this->t('Please note: Automatically generated element keys are lowercased letters, numbers, and underscores'),
+      $this->t('Please note: Automatically generated element keys are lowercased letters, numbers, and underscores'),
       '#options' => [
         'a-z0-9_' => $this->t('Lowercase letters, numbers, and underscores. (i.e. element_key)'),
         'a-zA-Z0-9_' => $this->t('Letters, numbers, and underscores. (i.e. element_KEY)'),
@@ -236,7 +236,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     $form['html_editor']['format_container']['warning_message'] = [
       '#type' => 'webform_message',
       '#message_message' => $this->t('Files uploaded via the CKEditor file dialog to webform elements, settings, and configuration will not be exportable.') . '<br/>' .
-        '<strong>' . $this->t('All files must be uploaded to your production environment and then copied to development and local environment.') . '</strong>',
+      '<strong>' . $this->t('All files must be uploaded to your production environment and then copied to development and local environment.') . '</strong>',
       '#message_type' => 'warning',
       '#message_close' => TRUE,
       '#message_storage' => WebformMessage::STORAGE_SESSION,
@@ -276,14 +276,14 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'textfield',
       '#title' => $this->t('Default empty option required'),
       '#description' => $this->t('The label to show for the first default option for a required select menus.') . '<br /><br />' .
-        $this->t('Defaults to: %value', ['%value' => $this->t('- Select -')]),
+      $this->t('Defaults to: %value', ['%value' => $this->t('- Select -')]),
       '#default_value' => $config->get('element.default_empty_option_required'),
     ];
     $form['select']['default_empty_option_optional'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Default empty option optional'),
       '#description' => $this->t('The label to show for the first default option for an optional select menus.') . '<br /><br />' .
-        $this->t('Defaults to: %value', ['%value' => $this->t('- None -')]),
+      $this->t('Defaults to: %value', ['%value' => $this->t('- None -')]),
       '#default_value' => $config->get('element.default_empty_option_optional'),
     ];
 
@@ -312,7 +312,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Allow files to be uploaded to public file system'),
       '#description' => $this->t('Allowing public file uploads is dangerous for webforms that are available to anonymous and/or untrusted users.') . ' ' .
-        $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
+      $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
       '#return_value' => TRUE,
       '#default_value' => $config->get('file.file_public'),
     ];
@@ -338,8 +338,8 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
       '#type' => 'textfield',
       '#title' => $this->t('Default maximum file upload size'),
       '#description' => $this->t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to restrict the allowed file size. If left empty the file sizes will be limited only by PHP\'s maximum post and file upload sizes.')
-        . '<br /><br />'
-        . $this->t('Current limit: %limit', ['%limit' => format_size(Environment::getUploadMaxSize())]),
+      . '<br /><br />'
+      . $this->t('Current limit: %limit', ['%limit' => format_size(Environment::getUploadMaxSize())]),
       '#element_validate' => [[get_class($this), 'validateMaxFilesize']],
       '#size' => 10,
       '#default_value' => $config->get('file.default_max_filesize'),
@@ -392,7 +392,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
           '#type' => 'webform_message',
           '#message_type' => 'warning',
           '#message_message' => $this->t('Webform submissions store passwords as plain text.') . ' ' .
-            $this->t('Any webform that includes this element should enable <a href=":href">encryption</a>.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
+          $this->t('Any webform that includes this element should enable <a href=":href">encryption</a>.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
           '#attributes' => ['class' => ['js-form-wrapper']],
           '#states' => [
             'visible' => [

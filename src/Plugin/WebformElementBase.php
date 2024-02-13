@@ -2394,7 +2394,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('Help title'),
       '#description' => $this->t("The text displayed in Help tooltip after the element's title.") . '<br /><br />' .
-        $this->t("Defaults to the element's title"),
+      $this->t("Defaults to the element's title"),
     ];
     $form['element_description']['help']['help'] = [
       '#type' => 'webform_html_editor',
@@ -2410,7 +2410,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('More title'),
       '#description' => $this->t('The click-able label used to open and close more text.') . '<br /><br />' .
-        $this->t('Defaults to: %value', ['%value' => $this->configFactory->get('webform.settings')->get('element.default_more_title')]),
+      $this->t('Defaults to: %value', ['%value' => $this->configFactory->get('webform.settings')->get('element.default_more_title')]),
     ];
     $form['element_description']['more']['more'] = [
       '#type' => 'webform_html_editor',
@@ -2810,9 +2810,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#title' => $this->t('Clear value(s) when hidden'),
       '#return_value' => TRUE,
       '#description' => ($this instanceof ContainerBase) ?
-        $this->t("When this container is hidden all this container's subelement values will be cleared.")
+      $this->t("When this container is hidden all this container's subelement values will be cleared.")
         :
-        $this->t("When this element is hidden, this element's value will be cleared."),
+      $this->t("When this element is hidden, this element's value will be cleared."),
     ];
     if ($this->hasProperty('states') && $this->hasProperty('required')) {
       $form['conditional_logic']['states_required_message'] = [
@@ -2986,8 +2986,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $form['wrapper_attributes'] = [
       '#type' => 'details',
       '#title' => ($this->hasProperty('wrapper_type')) ?
-        $this->t('Wrapper type and attributes') :
-        $this->t('Wrapper attributes'),
+      $this->t('Wrapper type and attributes') :
+      $this->t('Wrapper attributes'),
     ];
     $form['wrapper_attributes']['wrapper_type'] = [
       '#type' => 'select',
@@ -3249,8 +3249,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('Admin title'),
       '#description' => $this->t('The admin title will always be displayed when managing elements and viewing & downloading submissions.') .
-        '<br/>' .
-        $this->t("If an element's title is hidden, the element's admin title will be displayed when viewing a submission."),
+      '<br/>' .
+      $this->t("If an element's title is hidden, the element's admin title will be displayed when viewing a submission."),
     ];
     $form['admin']['admin_notes'] = [
       '#type' => 'webform_html_editor',
@@ -3340,7 +3340,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         '#type' => 'webform_message',
         '#message_type' => 'warning',
         '#message_message' => $this->t('Webform submissions store passwords as plain text.') . ' ' .
-          $this->t('<a href=":href">Encryption</a> should be enabled for this element.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
+        $this->t('<a href=":href">Encryption</a> should be enabled for this element.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
         '#access' => TRUE,
         '#weight' => -100,
         '#message_close' => TRUE,
@@ -3422,8 +3422,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#mode' => 'yaml',
       '#title' => $this->t('Custom properties'),
       '#description' => $this->t('Properties do not have to be prepended with a hash (#) character, the hash character will be automatically added to the custom properties.') .
-        '<br /><br />' .
-        $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      '<br /><br />' .
+      $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
       '#default_value' => $custom_properties,
       '#parents' => ['properties', 'custom'],
     ];
