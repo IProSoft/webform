@@ -18,7 +18,6 @@ use Drupal\webform\Plugin\WebformElement\WebformEntityRadios;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 
-
 /* ************************************************************************** */
 // Theme hooks.
 /* ************************************************************************** */
