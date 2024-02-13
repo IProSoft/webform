@@ -940,7 +940,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
 
     // If has access and total file size exceeds file limit then display error.
     if (Element::isVisibleElement($element) && $total_file_size > $file_limit) {
-      $t_args = ['%quota' => format_size($file_limit)];
+      $t_args = ['%quota' => \Drupal::service('file_system')->formatSize($file_limit)];
       $message = t("This form's file upload quota of %quota has been exceeded. Please remove some files.", $t_args);
       $form_state->setError($element, $message);
     }

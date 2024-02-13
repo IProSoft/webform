@@ -657,7 +657,7 @@ function webform_preprocess_file_upload_help(&$variables) {
   $upload_validators = $variables['upload_validators'];
 
   if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
-    $variables['descriptions'][] = t('@size limit per form.', ['@size' => format_size($upload_validators['webform_file_limit'][0])]);
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => \Drupal::service('file_system')->formatSize($upload_validators['webform_file_limit'][0])]);
   }
 
   // Issue #3136578: Comma-separate the list of allowed file extensions.
@@ -695,7 +695,7 @@ function webform_preprocess_file_link(&$variables) {
   if (empty($variables['file_size'])
     && $file->getSize()
     && \Drupal::service('webform.theme_manager')->isActiveTheme('claro')) {
-    $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $variables['file_size'] = \Drupal::service('file_system')->formatSize($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
   }
 }
 

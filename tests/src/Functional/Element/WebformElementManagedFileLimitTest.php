@@ -64,7 +64,7 @@ class WebformElementManagedFileLimitTest extends WebformElementManagedFileTestBa
       ->set('settings.default_form_file_limit', ($bytes * 2) . ' bytes')
       ->save();
     $this->drupalGet('/webform/test_element_managed_file_limit');
-    $assert_session->responseContains(format_size($bytes * 2) . ' limit per form.');
+    $assert_session->responseContains(\Drupal::service('file_system')->formatSize($bytes * 2) . ' limit per form.');
 
     // Check valid file upload.
     $edit = [
