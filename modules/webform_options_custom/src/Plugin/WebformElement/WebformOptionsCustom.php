@@ -75,7 +75,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
   public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     // Remove the #template property to make sure people can't inject
     // custom markup.
-    $this->setOptions($element, ['webform_submission' => $webform_submission]);
+    $this->setCustomOptions($element, ['webform_submission' => $webform_submission]);
     parent::prepare($element, $webform_submission);
   }
 
@@ -83,7 +83,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    * {@inheritdoc}
    */
   protected function getElementSelectorInputsOptions(array $element) {
-    $this->setOptions($element);
+    $this->setCustomOptions($element);
     $title = $this->getAdminLabel($element);
     return ['select' => $title . ' [' . $this->t('Select') . ']'];
   }
@@ -92,7 +92,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    * {@inheritdoc}
    */
   public function getElementSelectorSourceValues(array $element) {
-    $this->setOptions($element);
+    $this->setCustomOptions($element);
     return parent::getElementSelectorSourceValues($element);
   }
 
@@ -112,7 +112,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    *   A render array representing an element as text or HTML.
    */
   protected function build($format, array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $this->setOptions($element, ['webform_submission' => $webform_submission]);
+    $this->setCustomOptions($element, ['webform_submission' => $webform_submission]);
     return parent::build($format, $element, $webform_submission, $options);
   }
 
@@ -126,7 +126,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
     /** @var \Drupal\webform_options_custom\WebformOptionsCustomInterface $webform_options_custom */
     $webform_options_custom = $this->entityTypeManager->getStorage('webform_options_custom')->load($webform_options_custom_id);
     $element = $webform_options_custom->getElement();
-    $this->setOptions($element);
+    $this->setCustomOptions($element);
     $rows = [];
     foreach ($element['#options'] as $value => $text) {
       $rows[] = [
@@ -200,7 +200,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    * {@inheritdoc}
    */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
-    $this->setOptions($element);
+    $this->setCustomOptions($element);
     return array_keys($element['#options']);
   }
 
@@ -233,14 +233,14 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
   }
 
   /**
-   * Get element custom options.
+   * Set element custom options.
    *
    * @param array $element
    *   An element.
    * @param array $settings
    *   An array of settings used to limit and randomize options.
    */
-  protected function setOptions(array &$element, array $settings = []) {
+  protected function setCustomOptions(array &$element, array $settings = []) {
     // Set element options.
     if (!empty($element['#options'])) {
       $element['#options'] = WebformOptions::getElementOptions($element);
