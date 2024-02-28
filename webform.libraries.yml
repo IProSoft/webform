@@ -1296,7 +1296,7 @@ libraries.signature_pad:
   cdn:
     /libraries/signature_pad/: https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js/
   js:
-    /libraries/signature_pad/blob/master/docs/js/signature_pad.umd.js: {}
+    /libraries/signature_pad/docs/js/signature_pad.umd.js: {}
 
 libraries.tabby:
   remote: https://github.com/cferdinandi/tabby
