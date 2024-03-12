@@ -17,6 +17,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\file\FileInterface;
+use Drupal\user\UserInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
@@ -951,6 +952,38 @@ function webform_webform_access_rules() {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_user_cancel().
+ *
+ * When user_cancel_reassign method is selected, reassigns webform submissions to anonymous user.
+ */
+function webform_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_reassign':
+      $submissions = \Drupal::entityTypeManager()->getStorage('webform_submission')->loadByProperties(['uid' => $account->id()]);
+      foreach ($submissions as $submission) {
+        /** @var \Drupal\webform\WebformSubmissionInterface $submission */
+        $submission->set('uid', 0);
+        $submission->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ *
+ * Deletes all webform submissions created by user.
+ */
+function webform_user_predelete($account) {
+  $entity_query = \Drupal::entityQuery('webform_submission')->accessCheck(FALSE);
+  $entity_query->condition('uid', $account->id());
+  $submission_ids = $entity_query->execute();
+  $submission_storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
+  $submissions = $submission_storage->loadMultiple($submission_ids);
+  $submission_storage->delete($submissions);
 }
 
 /* ************************************************************************** */
