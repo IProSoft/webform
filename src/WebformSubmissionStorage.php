@@ -1189,11 +1189,14 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // Log deleted.
     foreach ($entities as $entity) {
       $webform = $entity->getWebform();
-      $this->loggerFactory->get('webform')
-        ->notice('Deleted @form: Submission #@id.', [
-          '@id' => $entity->id(),
-          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform', [], ['context' => 'form']) . ']',
-        ]);
+      // Do not log the deleted webform submissions on batch.
+      if (!(\Drupal::routeMatch()->getRouteName() == 'system.batch_page.json')) {
+        $this->loggerFactory->get('webform')
+          ->notice('Deleted @form: Submission #@id.', [
+            '@id' => $entity->id(),
+            '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform', [], ['context' => 'form']) . ']',
+          ]);
+      }
     }
 
     return $return;
