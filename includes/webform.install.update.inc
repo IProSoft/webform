@@ -4310,3 +4310,70 @@ function webform_update_8636() {
 function webform_update_8637() {
   _webform_update_admin_settings();
 }
+
+/**
+ * Issue #3315197: Add an index on webform_submission_data name and property.
+ */
+function webform_update_8638() {
+  $schema = \Drupal::database()->schema();
+  if (
+    !$schema->indexExists('webform_submission_data', 'name_property')
+  ) {
+    // Copied from WebformSubmissionStorageSchema.php.
+    $spec = [
+      'description' => 'Stores all submitted data for webform submissions.',
+      'fields' => [
+        'webform_id' => [
+          'description' => 'The webform id.',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+        ],
+        'sid' => [
+          'description' => 'The unique identifier for this submission.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'name' => [
+          'description' => 'The name of the element.',
+          'type' => 'varchar',
+          'length' => 128,
+          'not null' => TRUE,
+        ],
+        'property' => [
+          'description' => "The property of the element's value.",
+          'type' => 'varchar',
+          'length' => 128,
+          'not null' => TRUE,
+          'default' => '',
+        ],
+        'delta' => [
+          'description' => "The delta of the element's value.",
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'value' => [
+          'description' => "The element's value.",
+          'type' => 'text',
+          'size' => 'medium',
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['sid', 'name', 'property', 'delta'],
+      'indexes' => [
+        'webform_id' => ['webform_id'],
+        'sid_webform_id' => ['sid', 'webform_id'],
+        'name_property' => ['name', 'property'],
+      ],
+    ];
+    $schema->addIndex(
+      'webform_submission_data',
+      'name_property',
+      ['name', 'property'],
+      $spec
+    );
+  }
+}
