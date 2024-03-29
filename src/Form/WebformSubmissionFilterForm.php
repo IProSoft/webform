@@ -96,9 +96,8 @@ class WebformSubmissionFilterForm extends FormBase {
       'entity' => trim($entity),
     ];
     $query = array_filter($query);
-    if (!empty($query['entity']) && preg_match('#\([^()]+\)$#', $query['entity'], $match)) {
-      $result = str_replace(['(', ')'], '', $match[0]);
-      $query['entity'] = $result;
+    if (!empty($query['entity']) && preg_match('#.*\(([^)]+)\)\s*$#', $query['entity'], $match)) {
+      $query['entity'] = $match[1];
     }
     $form_state->setRedirect($this->getRouteMatch()->getRouteName(), $this->getRouteMatch()->getRawParameters()->all(), [
       'query' => $query ,
