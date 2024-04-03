@@ -4315,6 +4315,8 @@ function webform_update_8637() {
  * Issue #3315197: Add an index on webform_submission_data name and property.
  */
 function webform_update_9600() {
+  _webform_update_webform_submission_storage_schema();
+
   $schema = \Drupal::database()->schema();
   if (
     !$schema->indexExists('webform_submission_data', 'name_property')
