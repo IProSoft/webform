@@ -1379,6 +1379,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $filename = $file_system->basename($uri);
       // Fallback name in case file name contains none ASCII characters.
       $filename_fallback = \Drupal::transliteration()->transliterate($filename);
+      // Remove other characters not removed by Transliteration.
+      $illegal_characters = '/[%#&{}\<>*?\/ $!\'":@+`|=]/';
+      $filename_fallback = preg_replace($illegal_characters, '', $filename_fallback);
       // Force blacklisted files to be downloaded instead of opening in the browser.
       if (in_array($headers['Content-Type'], static::$blacklistedMimeTypes)) {
         $headers['Content-Disposition'] = HeaderUtils::makeDisposition(HeaderUtils::DISPOSITION_ATTACHMENT, (string) $filename, $filename_fallback);
