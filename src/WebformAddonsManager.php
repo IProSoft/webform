@@ -1713,10 +1713,10 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     // Spam: Protected Submissions.
-    $projects['protected_submissions'] = [
-      'title' => $this->t('Protected Submissions'),
-      'description' => $this->t('A light-weight, non-intrusive spam protection module that enables rejection of webform submissions which contain preset patterns.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/protected_submissions'),
+    $projects['protected_forms'] = [
+      'title' => $this->t('Protected Forms'),
+      'description' => $this->t('Protected Forms is a light-weight, non-intrusive spam protection module that enables rejection of node, comment, webform, user profile, contact form, private message and revision log submissions which contain undesired language characters or preset patterns.'),
+      'url' => Url::fromUri('https://www.drupal.org/project/protected_forms'),
       'category' => 'spam',
     ];
 
