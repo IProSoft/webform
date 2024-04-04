@@ -107,7 +107,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
 
     // Build library info array.
     $info = [
-      '#prefix' => '<p><hr/></p><dl>',
+      '#prefix' => '<hr class="webform-hr"/><dl>',
       '#suffix' => '</dl>',
     ];
 
