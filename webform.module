@@ -264,7 +264,7 @@ function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableD
   if (strpos($route_name, 'entity.webform_submission.devel_') === 0 || $route_name === 'entity.webform_submission.token_devel') {
     foreach ($data['tabs'] as $tab_level) {
       foreach ($tab_level as $tab) {
-        /** @var Drupal\Core\Url $url */
+        /** @var \Drupal\Core\Url $url */
         $url = $tab['#link']['url'];
         $tab_route_name = $url->getRouteName();
         $tab_route_parameters = $url->getRouteParameters();
