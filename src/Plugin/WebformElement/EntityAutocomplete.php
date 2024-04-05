@@ -49,7 +49,6 @@ class EntityAutocomplete extends WebformElementBase implements WebformElementEnt
 
     if (isset($element['#multiple'])) {
       $element['#default_value'] = (isset($element['#default_value'])) ? (array) $element['#default_value'] : NULL;
-      return;
     }
 
     if (!empty($element['#default_value'])) {
