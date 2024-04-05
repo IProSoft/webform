@@ -188,7 +188,7 @@ wrapper_other_container: ''");
       'select_other_advanced[other]' => 'X',
     ];
     $this->submitForm($edit, 'Submit');
-    $assert_session->responseContains('Other must be longer than <em class="placeholder">4</em> characters but is currently <em class="placeholder">1</em> characters long.');
+    $assert_session->responseContains('Other must be at least <em class="placeholder">4</em> characters but is currently <em class="placeholder">1</em> characters long.');
 
     // Check select other processing w/ other.
     $this->drupalGet('/webform/test_element_other');
