@@ -323,7 +323,7 @@
    */
   Drupal.behaviors.webformCheckboxesRequired = {
     attach: function (context) {
-      $(once('webform-checkboxes-required', '.js-form-type-checkboxes.required, .js-form-type-webform-checkboxes-other.required, .js-webform-type-checkboxes.required, .js-webform-type-webform-checkboxes-other.required, .js-webform-type-webform-radios-other.checkboxes', context))
+      $(once('webform-checkboxes-required', '.js-form-type-checkboxes.required, .webform-term-checkboxes.required, .js-form-type-webform-checkboxes-other.required, .js-webform-type-checkboxes.required, .js-webform-type-webform-checkboxes-other.required, .js-webform-type-webform-radios-other.checkboxes', context))
         .each(function () {
           var $element = $(this);
           $element.find('input[type="checkbox"]').on('click', statesCheckboxesRequiredEventHandler);
@@ -420,7 +420,7 @@
    * @see https://stackoverflow.com/a/37825072/145846
    */
   function statesCheckboxesRequiredEventHandler() {
-    var $element = $(this).closest('.js-webform-type-checkboxes, .js-webform-type-webform-checkboxes-other');
+    var $element = $(this).closest('.js-webform-type-checkboxes, .js-webform-type-webform-checkboxes-other, .js-webform-type-webform-term-checkboxes');
     checkboxesRequired($element);
   }
 
