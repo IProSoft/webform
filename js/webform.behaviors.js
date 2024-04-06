@@ -31,9 +31,9 @@
     if (backButton) {
       var attachBehaviors = Drupal.attachBehaviors;
       Drupal.attachBehaviors = function (context, settings) {
-        setTimeout(function (context, settings) {
+        setTimeout(function () {
           attachBehaviors(context, settings);
-        }(context, settings), 300);
+        }, 300);
       };
     }
   }
