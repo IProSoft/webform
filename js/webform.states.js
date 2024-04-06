@@ -624,6 +624,9 @@
       else {
         $input.removeAttr('required aria-required');
       }
+      // Clear the validation state for the input.
+      // @see Drupal.behaviors.webformRequiredError
+      $input.each(function () {this.setCustomValidity && this.setCustomValidity('')});
     }
   }
 
