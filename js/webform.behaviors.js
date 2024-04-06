@@ -33,7 +33,7 @@
       Drupal.attachBehaviors = function (context, settings) {
         setTimeout(function (context, settings) {
           attachBehaviors(context, settings);
-        }, 300);
+        }(context, settings), 300);
       };
     }
   }
