@@ -14,7 +14,13 @@ use Drupal\webform\Utility\WebformDialogHelper;
  */
 function webform_library_info_build() {
   $base_path = base_path();
-  $default_query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  // @todo Remove once Drupal 10.2.x is only supported.
+  if (floatval(\Drupal::VERSION) < 10.2) {
+    $default_query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  }
+  else {
+    $default_query_string = \Drupal::service('asset.query_string')->get();
+  }
 
   /** @var \Drupal\webform\WebformInterface[] $webforms */
   $webforms = Webform::loadMultiple();
