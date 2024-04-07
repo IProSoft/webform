@@ -79,11 +79,11 @@ webform_options_custom_html_advanced:
   - a');
 
     // Check CSS asset.
-    $this->drupalGet('/webform/css/test_element_options_custom_html');
+    $this->drupalGet('/webform/css/test_element_options_custom_html/custom.css');
     $assert_session->responseContains('.webform-options-custom--test-html-advanced [data-option-value]');
 
     // Check JavaScript asset.
-    $this->drupalGet('/webform/javascript/test_element_options_custom_html');
+    $this->drupalGet('/webform/javascript/test_element_options_custom_html/custom.js');
     $assert_session->responseContains("window.console && window.console.log('Test: HTML advanced loaded.');");
 
     /* ********************************************************************** */

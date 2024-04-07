@@ -36,12 +36,12 @@ function webform_library_info_build() {
       $settings = ['type' => 'external', 'preprocess' => FALSE, 'minified' => FALSE];
       if ($type === 'css') {
         $libraries["webform.css.$webform_id"] = [
-          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}?{$default_query_string}" => $settings]],
+          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}/custom.css?{$default_query_string}" => $settings]],
         ];
       }
       else {
         $libraries["webform.javascript.$webform_id"] = [
-          'js' => ["{$base_path}webform/javascript/{$webform_id}?{$default_query_string}" => $settings],
+          'js' => ["{$base_path}webform/javascript/{$webform_id}/custom.js?{$default_query_string}" => $settings],
         ];
       }
     }
@@ -222,7 +222,7 @@ function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
  */
 function _webform_asset_alter(array &$items, $type) {
   foreach ($items as $key => &$item) {
-    if (strpos($key, "webform/$type/") === 0) {
+    if (strpos($key, "/webform/$type/") === 0) {
       $item['weight'] = 1000;
       $item['group'] = 1000;
     }
