@@ -41,6 +41,12 @@ trait WebformEntityTrait {
       return;
     }
 
+    // If the #options is an empty, do not reset it.
+    // @see \Drupal\webform_options_limit\Plugin\WebformHandler\OptionsLimitWebformHandler::alterOptionsElement
+    if (isset($element['#options']) && $element['#options'] === []) {
+      return;
+    }
+
     // Make sure #target_type is not empty.
     if (empty($element['#target_type'])) {
       $element['#options'] = [];
