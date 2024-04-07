@@ -71,14 +71,6 @@ trait WebformEntityTrait {
       $options += $bundle_options;
     }
 
-    // If the selection handler is not using views, then translate
-    // the entity reference's options.
-    if (!\Drupal::moduleHandler()->moduleExists('views')
-      // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
-      || !($handler instanceof ViewsSelection)) {
-      $options = static::translateOptions($options, $element);
-    }
-
     if ($element['#type'] === 'webform_entity_select') {
       // Strip tags from options since <option> element does
       // not support HTML tags.
@@ -118,36 +110,4 @@ trait WebformEntityTrait {
     $tags = Cache::buildTags($list_cache_tag, $target_bundles);
     $element['#cache']['tags'] = Cache::mergeTags($element['#cache']['tags'] ?? [], $tags);
   }
-
-  /**
-   * Translate the select options.
-   *
-   * @param array $options
-   *   Untranslated options.
-   * @param array $element
-   *   An element.
-   *
-   * @return array
-   *   Translated options.
-   */
-  protected static function translateOptions(array $options, array $element) {
-    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
-    $entity_repository = \Drupal::service('entity.repository');
-
-    foreach ($options as $key => $value) {
-      if (is_array($value)) {
-        $options[$key] = static::translateOptions($value, $element);
-      }
-      else {
-        // Set the entity in the correct language for display.
-        $option = \Drupal::entityTypeManager()
-          ->getStorage($element['#target_type'])
-          ->load($key);
-        $option = $entity_repository->getTranslationFromContext($option);
-        $options[$key] = $option->label();
-      }
-    }
-    return $options;
-  }
-
 }
