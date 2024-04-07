@@ -64,6 +64,14 @@ webform.config.advanced:
   requirements:
     _permission: 'administer webform'
 
+webform.config.repair:
+  path: '/admin/structure/webform/config/repair'
+  defaults:
+    _form: '\Drupal\webform\Form\AdminConfig\WebformAdminConfigRepairForm'
+    _title: 'Webforms: Repair webform configuration'
+  requirements:
+    _permission: 'administer webform'
+
 # Add-ons
 
 webform.addons:
