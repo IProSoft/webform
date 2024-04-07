@@ -2471,7 +2471,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     $path_alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
-    $query = $path_alias_storage->getQuery('OR')->accessCheck();
+    $query = $path_alias_storage->getQuery('OR')->accessCheck(TRUE);
 
     // Delete webform base, confirmation, submissions and drafts paths.
     $path_suffixes = ['', '/confirmation', '/submissions', '/drafts'];
