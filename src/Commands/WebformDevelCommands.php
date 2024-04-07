@@ -114,6 +114,7 @@ class WebformDevelCommands extends WebformCommandsBase {
     $this->output()->writeln(dt('Repairing admin configuration…'));
     _webform_update_admin_settings(TRUE);
 
+
     $this->output()->writeln(dt('Repairing webform HTML editor…'));
     _webform_update_html_editor();
 
@@ -137,6 +138,10 @@ class WebformDevelCommands extends WebformCommandsBase {
       $this->moduleHandler->loadInclude('webform_entity_print', 'install');
       webform_entity_print_install();
     }
+
+    $admin_settings = \Drupal::configFactory()->getEditable('webform.settings')->getRawData();
+    var_export($admin_settings['settings']['webform_submission_bulk_form_actions']);
+    exit;
 
     $this->output()->writeln(dt('Removing (unneeded) webform submission translation settings…'));
     _webform_update_webform_submission_translation();
