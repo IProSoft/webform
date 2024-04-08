@@ -139,10 +139,6 @@ class WebformDevelCommands extends WebformCommandsBase {
       webform_entity_print_install();
     }
 
-    $admin_settings = \Drupal::configFactory()->getEditable('webform.settings')->getRawData();
-    var_export($admin_settings['settings']['webform_submission_bulk_form_actions']);
-    exit;
-
     $this->output()->writeln(dt('Removing (unneeded) webform submission translation settings…'));
     _webform_update_webform_submission_translation();
 
