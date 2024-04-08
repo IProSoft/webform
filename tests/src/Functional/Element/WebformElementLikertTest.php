@@ -60,6 +60,13 @@ class WebformElementLikertTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('{custom error for Question 2}');
     $assert_session->responseContains('{custom error for Question 3}');
 
+    // Check likert with HTMl required error.
+    $this->drupalGet('/webform/test_element_likert');
+    $this->submitForm([], 'Submit');
+    $assert_session->responseContains('Question <strong>1</strong> field is required.');
+    $assert_session->responseContains('Question <strong>2</strong> field is required.');
+    $assert_session->responseContains('Question <strong>3</strong> field is required.');
+
     // Check likert processing.
     $this->drupalGet('/webform/test_element_likert');
     $edit = [
@@ -69,6 +76,9 @@ class WebformElementLikertTest extends WebformElementBrowserTestBase {
       'likert_values[0]' => '0',
       'likert_values[1]' => '1',
       'likert_values[2]' => 'N/A',
+      'likert_html[q1]' => '1',
+      'likert_html[q2]' => '1',
+      'likert_html[q3]' => '1',
     ];
     $this->submitForm($edit, 'Submit');
     $assert_session->responseContains("likert_default:
@@ -87,10 +97,19 @@ likert_help:
   q1: null
   q2: null
   q3: null
+likert_html:
+  q1: '1'
+  q2: '1'
+  q3: '1'
 likert_values:
   - '0'
   - '1'
-  - N/A");
+  - N/A
+likert_trigger_required: 0
+likert_states_required:
+  q1: null
+  q2: null
+  q3: null");
   }
 
 }
