@@ -79,7 +79,7 @@ class QueryStringWebformSourceEntity extends WebformSourceEntityBase {
     }
 
     // Get and check source entity type.
-    $source_entity_type = $webform->getSetting('form_prepopulate_source_entity_type');
+    $source_entity_type = $this->request->query->get('source_entity_type');
     // If the source entity type is not defined, attempt to get the
     // source entity type from the webform's settings.
     if (!$source_entity_type && $webform->getSetting('form_prepopulate_source_entity')) {
