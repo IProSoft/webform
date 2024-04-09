@@ -303,6 +303,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#description' => $this->t('Use x-www-form-urlencoded if unsure, as it is the default format for HTML webforms. You also have the option to post data in <a href="http://www.json.org/">JSON</a> format.'),
       '#options' => [
         'x-www-form-urlencoded' => $this->t('x-www-form-urlencoded'),
+        'multipart/form-data' => $this->t('multipart/form-data'),
         'json' => $this->t('JSON'),
       ],
       '#states' => [
@@ -525,8 +526,18 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         $response = $this->httpClient->get($request_url, $request_options);
       }
       else {
+        $request_params_name = match ($request_type) {
+          'json' => 'json',
+          'multipart/form-data' => 'multipart',
+          default => 'form_params',
+        };
+        $request_data = $this->getRequestData($state, $webform_submission);
+        // Convert form_params to multipart.
+        if ($request_params_name === 'multipart') {
+          $request_data = $this->convertFormParamsToMultipart($request_data);
+        }
+        $request_options[$request_params_name] = $request_data;
         $method = strtolower($request_method);
-        $request_options[($request_type === 'json' ? 'json' : 'form_params')] = $this->getRequestData($state, $webform_submission);
         $response = $this->httpClient->$method($request_url, $request_options);
       }
     }
@@ -1205,6 +1216,37 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   protected function buildTokenTreeElement(array $token_types = ['webform', 'webform_submission'], $description = NULL) {
     $description = $description ?: $this->t('Use [webform_submission:values:ELEMENT_KEY:raw] to get plain text values.');
     return parent::buildTokenTreeElement($token_types, $description);
+  }
+
+  /**
+   * Convert form_params to multipart.
+   */
+  protected function convertFormParamsToMultipart(array $request_data): array {
+    $translated = $this->translatePostValues($request_data);
+    return array_map(static fn ($key) => [
+      'name' => $key,
+      'contents' => $translated[$key],
+    ], array_keys($translated));
+  }
+
+  /**
+   * Transforms a nested array into a flat array suitable for submitForm().
+   *
+   * This is taken directly from BrowserTestBase.
+   *
+   * @see \Drupal\Tests\BrowserTestBase::translatePostValues
+   */
+  protected function translatePostValues(array $values): array {
+    $edit = [];
+    // The easiest and most straightforward way to translate values suitable for
+    // BrowserTestBase::submitForm() is to actually build the POST data
+    // string and convert the resulting key/value pairs back into a flat array.
+    $query = http_build_query($values);
+    foreach (explode('&', $query) as $item) {
+      [$key, $value] = explode('=', $item);
+      $edit[urldecode($key)] = urldecode($value);
+    }
+    return $edit;
   }
 
 }
