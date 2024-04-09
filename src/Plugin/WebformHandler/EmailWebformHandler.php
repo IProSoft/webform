@@ -915,7 +915,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       );
       $this->getWebform()->setElements(
         $this->translationManager->getElements($this->getWebform())
-      );
+      )->applyVariants($this->getWebformSubmission());
     }
 
     $token_options = [
@@ -1013,7 +1013,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       );
       $this->getWebform()->setElements(
         $this->translationManager->getElements($this->getWebform())
-      );
+      )->applyVariants($this->getWebformSubmission());
     }
 
     // Switch back to active theme.
