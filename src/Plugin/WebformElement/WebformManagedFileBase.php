@@ -298,7 +298,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     // @see \Drupal\webform\Plugin\WebformElementBase::preRenderFixFlexboxWrapper
     $request_params = \Drupal::request()->request->all();
     if (\Drupal::request()->request->get('_drupal_ajax')
-      && !empty($request_params['files'])) {
+      && (!empty($request_params['files']) || !empty($request_params[$element['#webform_key']]))) {
       $element['#webform_wrapper'] = FALSE;
     }
 
