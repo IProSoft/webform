@@ -32,8 +32,8 @@ include:
   # As long as you include this, any future includes added by the Drupal Association will be accessible to your pipelines automatically.
   # View these include files at https://git.drupalcode.org/project/gitlab_templates/
   ################
-  - project: $_GITLAB_TEMPLATES_REPO
-    ref: $_GITLAB_TEMPLATES_REF
+  - project: issue/gitlab_templates-3400970
+    ref: 3400970-result-files-concurrent-phpunit
     file:
       - '/includes/include.drupalci.main.yml'
       - '/includes/include.drupalci.variables.yml'
@@ -52,7 +52,22 @@ include:
 variables:
   _TARGET_PHP: "8.1"
   _TARGET_CORE: "10.1.3"
-  SYMFONY_DEPRECATIONS_HELPER: disabled
+  # Commented out because Webform has opted in to the concurrent test runner aka run-tests.sh, which needs the
+  # `--suppress-deprecations` parameter instead to achieve the same.
+  # @see https://www.drupal.org/project/gitlab_templates/issues/3370952
+  # SYMFONY_DEPRECATIONS_HELPER: disabled
+  _PHPUNIT_CONCURRENT: "1"
+  _PHPUNIT_EXTRA: --suppress-deprecations
+  OPT_IN_TEST_NEXT_MINOR: '1'
+
+# Test with https://www.drupal.org/project/drupal/issues/3402168, which should fix the test failures on 10.2.
+composer (next minor):
+  after_script:
+    - cd web/core
+    # Wim's MR.
+    # - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5430.diff | patch -p2
+    # Alex' MR
+    - curl https://git.drupalcode.org/project/drupal/-/merge_requests/5450.diff | patch -p2
 
 ###################################################################################
 #
