@@ -113,6 +113,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
   protected $themeManager;
 
   /**
+   * The webform translation manager.
+   *
+   * @var \Drupal\webform\WebformTranslationManagerInterface
+   */
+  protected $translationManager;
+
+  /**
    * The webform element plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
@@ -137,6 +144,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $instance->mailManager = $container->get('plugin.manager.mail');
     $instance->themeManager = $container->get('webform.theme_manager');
     $instance->tokenManager = $container->get('webform.token_manager');
+    $instance->translationManager = $container->get('webform.translation_manager');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
     return $instance;
   }
@@ -176,6 +184,12 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $settings['theme_name'] = $this->themeManager->getThemeName($settings['theme_name']);
     }
 
+    // Set langcode.
+    if ($settings['langcode']) {
+      $language = $this->languageManager->getLanguage($settings['langcode']);
+      $settings['langcode'] = ($language) ? $language->getName() : $settings['langcode'];
+    }
+
     return [
       '#settings' => $settings,
     ] + parent::getSummary();
@@ -212,6 +226,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       'sender_mail' => '',
       'sender_name' => '',
       'theme_name' => '',
+      'langcode' => '',
       'parameters' => [],
     ];
   }
@@ -251,6 +266,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       'sender_mail' => $webform_settings->get('mail.default_sender_mail') ?: '',
       'sender_name' => $webform_settings->get('mail.default_sender_name') ?: '',
       'theme_name' => '',
+      'langcode' => '',
     ];
 
     return $this->defaultValues;
@@ -766,6 +782,16 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       '#default_value' => $this->configuration['theme_name'],
     ];
 
+    // Setting: Langcode.
+    $form['additional']['langcode'] = [
+      '#type' => 'language_select',
+      '#empty_value' => '',
+      '#empty_option' => $this->t('Current'),
+      '#title' => $this->t('Language to render this email'),
+      '#description' => $this->t('Select the language that will be used to render this email.'),
+      '#default_value' => $this->configuration['langcode'],
+    ];
+
     $form['additional']['parameters'] = [
       '#type' => 'webform_codemirror',
       '#mode' => 'yaml',
@@ -875,10 +901,22 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
    * {@inheritdoc}
    */
   public function getMessage(WebformSubmissionInterface $webform_submission) {
-    $theme_name = $this->configuration['theme_name'];
 
     // Switch to custom or default theme.
+    $theme_name = $this->configuration['theme_name'];
     $this->themeManager->setCurrentTheme($theme_name);
+
+    // Switch to custom language.
+    $custom_langcode = $this->configuration['langcode'];
+    $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
+    if ($custom_langcode) {
+      $this->languageManager->setConfigOverrideLanguage(
+        $this->languageManager->getLanguage($custom_langcode)
+      );
+      $this->getWebform()->setElements(
+        $this->translationManager->getElements($this->getWebform())
+      );
+    }
 
     $token_options = [
       'email' => TRUE,
@@ -967,6 +1005,16 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
     // Add handler.
     $message['handler'] = $this;
+
+    // Switch back to the current language.
+    if ($custom_langcode) {
+      $this->languageManager->setConfigOverrideLanguage(
+        $this->languageManager->getLanguage($current_langcode)
+      );
+      $this->getWebform()->setElements(
+        $this->translationManager->getElements($this->getWebform())
+      );
+    }
 
     // Switch back to active theme.
     $this->themeManager->setActiveTheme();

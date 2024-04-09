@@ -1646,6 +1646,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $this->elementsInitializedAndFlattened = NULL;
     $this->elementsInitializedFlattenedAndHasValue = NULL;
     $this->elementsTranslations = NULL;
+    $this->elementsTranslated = FALSE;
     $this->elementsManagedFiles = [];
     $this->elementsAttachments = [];
     $this->elementsComputed = [];
