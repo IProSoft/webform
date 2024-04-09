@@ -1221,32 +1221,19 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   /**
    * Convert form_params to multipart.
    */
-  protected function convertFormParamsToMultipart(array $request_data): array {
-    $translated = $this->translatePostValues($request_data);
-    return array_map(static fn ($key) => [
-      'name' => $key,
-      'contents' => $translated[$key],
-    ], array_keys($translated));
-  }
-
-  /**
-   * Transforms a nested array into a flat array suitable for submitForm().
-   *
-   * This is taken directly from BrowserTestBase.
-   *
-   * @see \Drupal\Tests\BrowserTestBase::translatePostValues
-   */
-  protected function translatePostValues(array $values): array {
-    $edit = [];
-    // The easiest and most straightforward way to translate values suitable for
-    // BrowserTestBase::submitForm() is to actually build the POST data
-    // string and convert the resulting key/value pairs back into a flat array.
-    $query = http_build_query($values);
-    foreach (explode('&', $query) as $item) {
-      [$key, $value] = explode('=', $item);
-      $edit[urldecode($key)] = urldecode($value);
+  protected function convertFormParamsToMultipart(array $request_data, ?string $parentKey = NULL): array {
+    $result = [];
+    foreach ($request_data as $key => $value) {
+      if (is_array($value)) {
+        $result = array_merge($result, $this->convertFormParamsToMultipart($value, $key));
+        continue;
+      }
+      $result[] = [
+        'name' => ($parentKey !== NULL) ? $parentKey : $key,
+        'contents' => $value,
+      ];
     }
-    return $edit;
+    return $result;
   }
 
 }
