@@ -878,6 +878,17 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function getElementDecoded($key);
 
   /**
+   * Reset a webform's translation.Reset a webform's translation.
+   *
+   * @return $this
+   */
+  public function resetTranslation();
+
+  /* ************************************************************************ */
+  // Pages.
+  /* ************************************************************************ */
+
+  /**
    * Get webform wizard pages.
    *
    * @param string $operation
@@ -907,6 +918,10 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   A webform wizard page element.
    */
   public function getPage($operation, $key);
+
+  /* ************************************************************************ */
+  // Paths.
+  /* ************************************************************************ */
 
   /**
    * Update submit and confirm paths (i.e. URL aliases) associated with this webform.

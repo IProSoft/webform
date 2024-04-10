@@ -910,12 +910,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $custom_langcode = $this->configuration['langcode'];
     $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
     if ($custom_langcode) {
-      $this->languageManager->setConfigOverrideLanguage(
-        $this->languageManager->getLanguage($custom_langcode)
-      );
-      $this->getWebform()->setElements(
-        $this->translationManager->getElements($this->getWebform())
-      )->applyVariants($this->getWebformSubmission());
+      $this->setWebformTranslation($custom_langcode);
     }
 
     $token_options = [
@@ -1008,18 +1003,31 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
 
     // Switch back to the current language.
     if ($custom_langcode) {
-      $this->languageManager->setConfigOverrideLanguage(
-        $this->languageManager->getLanguage($current_langcode)
-      );
-      $this->getWebform()->setElements(
-        $this->translationManager->getElements($this->getWebform())
-      )->applyVariants($this->getWebformSubmission());
+      $this->setWebformTranslation($current_langcode);
     }
 
     // Switch back to active theme.
     $this->themeManager->setActiveTheme();
 
     return $message;
+  }
+
+  /**
+   * Set the webform translation for the email message.
+   *
+   * @param string $langcode
+   *   The langcode.
+   */
+  protected function setWebformTranslation($langcode) {
+    $this->languageManager->setConfigOverrideLanguage(
+      $this->languageManager->getLanguage($langcode)
+    );
+
+    $this->getWebform()
+      ->resetTranslation()
+      ->applyVariants(
+        $this->getWebformSubmission()
+      );
   }
 
   /**
