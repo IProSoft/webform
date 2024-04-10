@@ -107,6 +107,12 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
     $image = file_get_contents(__DIR__ . '/../../../files/sample.png');
     $this->assertSignature('data:image/png;base64,' . base64_encode($image), FALSE);
 
+    // Check that the temp signature files are deleted.
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+    $files = $file_system->scanDirectory($file_system->getTempDirectory(), '/^webform_signature_.*/');
+    $this->assertEmpty($files);
+
     /* ********************************************************************** */
     // Delete.
     /* ********************************************************************** */
