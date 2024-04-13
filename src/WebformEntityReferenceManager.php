@@ -68,13 +68,6 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   protected $webforms = [];
 
   /**
-   * Cache of source entity field names.
-   *
-   * @var array
-   */
-  protected $fieldNames = [];
-
-  /**
    * Constructs a WebformEntityReferenceManager object.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
@@ -187,12 +180,6 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       return [];
     }
 
-    // Cache the source entity's field names.
-    $entity_fields_key = $entity->getEntityTypeId() . '-' . $entity->bundle();
-    if (isset($this->fieldNames[$entity_fields_key])) {
-      return $this->fieldNames[$entity_fields_key];
-    }
-
     $field_names = [];
     $fields = $entity->getFieldDefinitions();
     foreach ($fields as $field_name => $field_definition) {
@@ -204,7 +191,6 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
     // Sort fields alphabetically.
     ksort($field_names);
 
-    $this->fieldNames[$entity_fields_key] = $field_names;
     return $field_names;
   }
 
@@ -322,7 +308,7 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    */
   protected function getParagraphFieldNames(EntityInterface $entity) {
     foreach ($entity->getFieldDefinitions() as $field_definition) {
-      if ($field_definition->getType() == 'entity_reference_revisions' && $field_definition->getFieldStorageDefinition()->getSetting('target_type')) {
+      if ($field_definition->getType() == 'entity_reference_revisions' && $field_definition->getFieldStorageDefinition()->getSetting('target_type') == 'paragraph') {
         yield $field_definition->getName();
       }
     }
