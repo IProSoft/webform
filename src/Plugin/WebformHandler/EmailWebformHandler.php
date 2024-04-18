@@ -1031,6 +1031,13 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       ->loadUnchanged($this->getWebform()->id());
     $webform->applyVariants($webform_submission);
 
+    // Reset the handler configuration.
+    $config = $this->configFactory
+      ->reset($webform->getConfigDependencyName())
+      ->get($webform->getConfigDependencyName());
+    $handler_settings = $config->get('handlers.' . $this->getHandlerId() . '.settings');
+    $this->configuration = $handler_settings;
+
     // Reset the webform in the submission and email handler.
     $webform_submission->setWebform($webform);
     $this->setWebform($webform);
