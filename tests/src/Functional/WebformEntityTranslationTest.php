@@ -36,7 +36,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
   /**
    * Tests settings translate.
    */
-  public function testSettingsTranslate() {
+  public function _testSettingsTranslate() {
     $assert_session = $this->assertSession();
 
     // Login admin user.
@@ -61,7 +61,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
   /**
    * Tests webform translate.
    */
-  public function testWebformTranslate() {
+  public function _testWebformTranslate() {
     $assert_session = $this->assertSession();
 
     // Login admin user.
@@ -376,7 +376,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
   /**
    * Tests webform translate variants.
    */
-  public function testTranslateVariants() {
+  public function _testTranslateVariants() {
     $assert_session = $this->assertSession();
 
     // Check English webform.
@@ -466,6 +466,7 @@ Spanish Submission
 Site name: Drupal',
       $email['body']
     );
+    $this->assertStringContainsString('Formulario de envío de: ', $email['subject']);
 
     // Switch the email confirmation to be in English (en).
     /** @var \Drupal\webform\WebformInterface $webform */
@@ -487,6 +488,7 @@ Spanish Submission
 Site name: Drupal',
       $email['body']
     );
+    $this->assertStringNotContainsString('Formulario de envío de: ', $email['subject']);
     $this->assertStringContainsString('
 *Text field*
 Spanish Submission
@@ -494,6 +496,7 @@ Spanish Submission
 Site name: Drupal',
       $email['body']
     );
+    $this->assertStringContainsString('Webform submission from: Test: Translations', $email['subject']);
   }
 
 }

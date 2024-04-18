@@ -1470,22 +1470,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function resetTranslation() {
-    $this->resetElements();
-    $this->elementsTranslated = FALSE;
-
-    /** @var \Drupal\webform\WebformTranslationManagerInterface $translation_manager */
-    $translation_manager = \Drupal::service('webform.translation_manager');
-    $this->setElements(
-      $translation_manager->getElements($this)
-    );
-
-    return $this;
-  }
-
-  /**
    * Initialize and parse webform elements.
    */
   protected function initElements() {
@@ -2107,9 +2091,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         $access_operation = (in_array($operation, ['default', 'add'])) ? 'create' : 'update';
         if ($element_plugin->checkAccessRules($access_operation, $element)) {
           $pages[$key] = array_intersect_key($element, $wizard_properties) + [
-            '#type' => 'page',
-            '#access' => TRUE,
-          ];
+              '#type' => 'page',
+              '#access' => TRUE,
+            ];
         }
       }
     }
@@ -2439,10 +2423,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $this->setUpdating(FALSE);
   }
 
-  /* ************************************************************************ */
-  // Paths.
-  /* ************************************************************************ */
-
   /**
    * {@inheritdoc}
    */
@@ -2536,10 +2516,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     $path_alias->setAlias($alias);
     $path_alias->save();
   }
-
-  /* ************************************************************************ */
-  // Plugins.
-  /* ************************************************************************ */
 
   /**
    * {@inheritdoc}

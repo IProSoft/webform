@@ -1023,11 +1023,17 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $this->languageManager->getLanguage($langcode)
     );
 
-    $this->getWebform()
-      ->resetTranslation()
-      ->applyVariants(
-        $this->getWebformSubmission()
-      );
+    $webform_submission = $this->getWebformSubmission();
+
+    // Reset the webform's translation.
+    $webform = $this->entityTypeManager
+      ->getStorage('webform')
+      ->loadUnchanged($this->getWebform()->id());
+    $webform->applyVariants($webform_submission);
+
+    // Reset the webform in the submission and email handler.
+    $webform_submission->setWebform($webform);
+    $this->setWebform($webform);
   }
 
   /**
