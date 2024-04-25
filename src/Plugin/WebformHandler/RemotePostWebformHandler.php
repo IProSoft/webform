@@ -28,13 +28,13 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Webform submission remote post handler.
+ * Webform submission remote CRUD operation handler.
  *
  * @WebformHandler(
  *   id = "remote_post",
- *   label = @Translation("Remote post"),
+ *   label = @Translation("Remote CRUD Operations"),
  *   category = @Translation("External"),
- *   description = @Translation("Posts webform submissions to a URL."),
+ *   description = @Translation("Executes a CRUD operation <small>(GET, POST, PUT, or PATCH request methods)</small> to a URL, (optionally) including the webform submissions."),
  *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
  *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
  *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_OPTIONAL,
@@ -102,7 +102,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   /**
    * List of unsupported webform submission properties.
    *
-   * The below properties will not being included in a remote post.
+   * The below properties will not being included in a remote CRUD operation.
    *
    * @var array
    */
@@ -338,7 +338,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#type' => 'webform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Custom data'),
-      '#description' => $this->t('Enter custom data that will be included in all remote post requests.'),
+      '#description' => $this->t('Enter custom data that will be included in all remote CRUD requests.'),
       '#default_value' => $this->configuration['custom_data'],
     ];
     $form['additional']['custom_options'] = [
@@ -490,7 +490,9 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   }
 
   /**
-   * Execute a remote post.
+   * Execute a remote CRUD operation.
+   *
+   * Executes a remote CRUD operation with the selected request method.
    *
    * @param string $state
    *   The state of the webform submission.
@@ -544,7 +546,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     // Display submission exception if response code is not 2xx.
     if ($this->responseHasError($response)) {
       $t_args = ['@status_code' => $this->getStatusCode($response)];
-      $message = $this->t('Remote post request return @status_code status code.', $t_args);
+      $message = $this->t('Remote CRUD request return @status_code status code.', $t_args);
       $this->handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response);
       return;
     }
@@ -553,7 +555,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     }
 
     // If debugging is enabled, display the request and response.
-    $this->debug($this->t('Remote post successful!'), $state, $request_url, $request_method, $request_type, $request_options, $response, 'warning');
+    $this->debug($this->t('Remote CRUD operation successful!'), $state, $request_url, $request_method, $request_type, $request_options, $response, 'warning');
 
     // Replace [webform:handler] tokens in submission data.
     // Data structured for [webform:handler:remote_post:completed:key] tokens.
@@ -890,9 +892,9 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    * @param string $request_url
    *   The remote URL the request is being posted to.
    * @param string $request_method
-   *   The method of remote post.
+   *   The method of remote CRUD operation.
    * @param string $request_type
-   *   The type of remote post.
+   *   The type of remote CRUD operation.
    * @param string $request_options
    *   The requests options including the submission data.
    * @param \Psr\Http\Message\ResponseInterface|null $response
@@ -907,7 +909,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
 
     $build = [
       '#type' => 'details',
-      '#title' => $this->t('Debug: Remote post: @title [@state]', ['@title' => $this->label(), '@state' => $state]),
+      '#title' => $this->t('Debug: Remote CRUD Operation: @title [@state]', ['@title' => $this->label(), '@state' => $state]),
     ];
 
     // State.
@@ -1039,9 +1041,9 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    * @param string $request_url
    *   The remote URL the request is being posted to.
    * @param string $request_method
-   *   The method of remote post.
+   *   The method of remote CRUD operation.
    * @param string $request_type
-   *   The type of remote post.
+   *   The type of remote CRUD operation.
    * @param string $request_options
    *   The requests options including the submission data.
    * @param \Psr\Http\Message\ResponseInterface|null $response
