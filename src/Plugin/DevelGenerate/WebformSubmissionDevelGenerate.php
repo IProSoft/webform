@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Plugin\DevelGenerate;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Serialization\Yaml;
@@ -57,7 +58,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * The webform submission generation service.
