@@ -498,13 +498,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   protected $hasAnonymousSubmissionTrackingHandler;
 
   /**
-   * Track if the webform has message handler.
-   *
-   * @var bool
-   */
-  private $hasMessageHandler;
-
-  /**
    * {@inheritdoc}
    */
   public function getLangcode() {
