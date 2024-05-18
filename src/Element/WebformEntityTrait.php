@@ -4,7 +4,6 @@ namespace Drupal\webform\Element;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\OptGroup;
-use Drupal\views\Plugin\EntityReferenceSelection\ViewsSelection;
 use Drupal\webform\Utility\WebformOptionsHelper;
 
 /**
@@ -110,4 +109,5 @@ trait WebformEntityTrait {
     $tags = Cache::buildTags($list_cache_tag, $target_bundles);
     $element['#cache']['tags'] = Cache::mergeTags($element['#cache']['tags'] ?? [], $tags);
   }
+
 }
