@@ -36,7 +36,7 @@ elements: |
     '#title': Message
     '#type': textarea
     '#required': true
-    '#test': 'Please ignore this email.'
+    '#test': 'Ignore this email.'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
