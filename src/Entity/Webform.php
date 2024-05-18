@@ -502,7 +502,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    *
    * @var bool
    */
-  private $hasMessagehandler;
+  private $hasMessageHandler;
 
   /**
    * {@inheritdoc}
@@ -2553,20 +2553,20 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function hasMessageHandler() {
-    if (isset($this->hasMessagehandler)) {
-      $this->hasMessagehandler;
+    if (isset($this->hasMessageHandler)) {
+      $this->hasMessageHandler;
     }
 
-    $this->hasMessagehandler = FALSE;
+    $this->hasMessageHandler = FALSE;
     $handlers = $this->getHandlers();
     foreach ($handlers as $handler) {
       if ($handler instanceof WebformHandlerMessageInterface) {
-        $this->hasMessagehandler = TRUE;
+        $this->hasMessageHandler = TRUE;
         break;
       }
     }
 
-    return $this->hasMessagehandler;
+    return $this->hasMessageHandler;
   }
 
   /**

@@ -280,7 +280,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * @see \Drupal\Core\Entity\EntityFormBuilder::getForm
    */
   public function setEntity(EntityInterface $entity) {
-    // Create new metadata to be applie when the form is built.
+    // Create new metadata to be applied when the form is built.
     // @see \Drupal\webform\WebformSubmissionForm::buildForm
     $this->bubbleableMetadata = new WebformBubbleableMetadata();
 

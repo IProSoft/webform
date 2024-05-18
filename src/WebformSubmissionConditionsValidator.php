@@ -494,7 +494,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    */
   public static function elementValidate(array &$element, FormStateInterface $form_state) {
     // Element validation is trigger sequentially.
-    // Triggers must be validated before dependants.
+    // Triggers must be validated before dependents.
     //
     // Build webform submission with validated and processed data.
     // Webform submission must be rebuilt every time since the

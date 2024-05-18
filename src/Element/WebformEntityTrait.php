@@ -23,7 +23,7 @@ trait WebformEntityTrait {
   }
 
   /**
-   * Set referencable entities as options for an element.
+   * Set referenceable entities as options for an element.
    *
    * @param array $element
    *   An element.

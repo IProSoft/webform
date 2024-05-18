@@ -88,7 +88,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     $libraries = $this->getLibraries();
 
     // Defined REQUIREMENT constants which may not be loaded.
-    // @see ~/Sites/drupal_webfor/mweb/core/includes/install.inc
+    // @see ~/Sites/drupal_webform/mweb/core/includes/install.inc
     if (!defined('REQUIREMENT_OK')) {
       define('REQUIREMENT_INFO', -1);
       define('REQUIREMENT_OK', 0);

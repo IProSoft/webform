@@ -751,7 +751,7 @@ class WebformElementHelper {
    */
   public static function setElementValidate(array $element, array $element_validate = [WebformElementHelper::class, 'suppressElementValidate']) {
     // Element validation can only overridden once so we need to reset
-    // the #eleemnt_validate callback.
+    // the #element_validate callback.
     if (isset($element['#_element_validate'])) {
       $element['#element_validate'] = $element['#_element_validate'];
       unset($element['#_element_validate']);
@@ -890,7 +890,7 @@ class WebformElementHelper {
   }
 
   /**
-   * Randomoize an associative array of element values and disable page caching.
+   * Randomize an associative array of element values and disable page caching.
    *
    * @param array $values
    *   An associative array of element values.
