@@ -166,6 +166,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'method' => 'POST',
       'type' => 'x-www-form-urlencoded',
       'excluded_data' => $excluded_data,
+      'exclude_without_access' => FALSE,
       'custom_data' => '',
       'custom_options' => '',
       'file_data' => TRUE,
@@ -457,6 +458,12 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#required' => TRUE,
       '#default_value' => $this->configuration['excluded_data'],
     ];
+    $form['submission_data']['exclude_without_access'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Exclude all elements without acces'),
+      '#description' => $this->t('Elements without access are not listed in the \'excluded_data\' configuration, resulting in their automatic inclusion in the request data.'),
+      '#default_value' => $this->configuration['exclude_without_access'],
+    ];
 
     $this->elementTokenValidate($form);
 
@@ -603,6 +610,15 @@ class RemotePostWebformHandler extends WebformHandlerBase {
 
     // Excluded selected submission data.
     $data = array_diff_key($data, $this->configuration['excluded_data']);
+
+    // Remove all 'invisible' fields, the fields without access.
+    if ($this->configuration['exclude_without_access']) {
+      $all_elements = $this->webform->getElementsInitializedFlattenedAndHasValue(NULL);
+      $visible_elements = $this->webform->getElementsInitializedFlattenedAndHasValue('view');
+      $invisible_elements = array_diff_key($all_elements, $visible_elements);
+
+      $data = array_diff_key($data, $invisible_elements);
+    }
 
     // Append uploaded file name, uri, and base64 data to data.
     $webform = $this->getWebform();
