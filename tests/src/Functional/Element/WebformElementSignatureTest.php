@@ -90,7 +90,7 @@ class WebformElementSignatureTest extends WebformElementBrowserTestBase {
 
     // Check public and private file access is denied.
     $this->drupalGet($private_file_url);
-    $assert_session->responseContains('Please login to access the uploaded file.');
+    $assert_session->responseContains('Please log in to access the uploaded file.');
     $assert_session->addressEquals('/user/login');
 
     /* ********************************************************************** */

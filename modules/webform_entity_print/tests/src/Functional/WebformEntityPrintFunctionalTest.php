@@ -89,9 +89,9 @@ body {
     // Check image access.
     $this->drupalLogout();
     $this->drupalGet($image_uri);
-    $assert_session->responseContains('Please login to access the uploaded file.');
+    $assert_session->responseContains('Please log in to access the uploaded file.');
     $this->drupalGet($image_uri, ['query' => $image_token_query]);
-    $assert_session->responseNotContains('Please login to access the uploaded file.');
+    $assert_session->responseNotContains('Please log in to access the uploaded file.');
     $assert_session->statusCodeEquals(200);
     $this->drupalLogin($this->rootUser);
 
