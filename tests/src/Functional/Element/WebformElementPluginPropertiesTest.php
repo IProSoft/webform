@@ -1520,6 +1520,7 @@ tel:
   international: false
   international_initial_country: ''
   international_preferred_countries: {  }
+  international_i18n: ''
   label_attributes: {  }
   maxlength: null
   minlength: null
