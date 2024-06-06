@@ -62,12 +62,13 @@ class Telephone extends TextBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      'input_hide' => FALSE,
-      'multiple' => FALSE,
-      'international' => FALSE,
-      'international_initial_country' => '',
-      'international_preferred_countries' => [],
-    ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
+        'input_hide' => FALSE,
+        'multiple' => FALSE,
+        'international' => FALSE,
+        'international_initial_country' => '',
+        'international_preferred_countries' => [],
+        'international_i18n' => '',
+      ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
     // Add support for telephone_validation.module.
     if ($this->moduleHandler->moduleExists('telephone_validation')) {
       $properties += [
@@ -107,6 +108,9 @@ class Telephone extends TextBase {
       if (!empty($element['#international_preferred_countries'])) {
         $element['#attributes']['data-webform-telephone-international-preferred-countries'] = Json::encode($element['#international_preferred_countries']);
       }
+      if (!empty($element['#international_i18n'])) {
+        $element['#attributes']['data-webform-telephone-international-i18n'] = $element['#international_i18n'];
+      }
 
       // The utilsScript is fetched when the page has finished loading to
       // prevent blocking.
@@ -118,11 +122,14 @@ class Telephone extends TextBase {
         $intl_tel_input_library = $this->libraryDiscovery->getLibraryByName('webform', 'libraries.jquery.intl-tel-input');
         $cdn = reset($intl_tel_input_library['cdn']);
         $utils_script = $cdn . 'build/js/utils.js';
+        $i18n_path = $cdn . 'build/js/i18n/';
       }
       else {
         $utils_script = base_path() . $library_path . '/build/js/utils.js';
+        $i18n_path = base_path() . $library_path . 'build/js/i18n/';
       }
       $element['#attached']['drupalSettings']['webform']['intlTelInput']['utilsScript'] = $utils_script;
+      $element['#attached']['drupalSettings']['webform']['intlTelInput']['i18nPath'] = $i18n_path;
     }
 
     if ($this->moduleHandler->moduleExists('telephone_validation')) {
@@ -183,12 +190,23 @@ class Telephone extends TextBase {
       ],
     ];
     $this->elementManager->processElement($form['telephone']['international_preferred_countries']);
+    $form['telephone']['international_i18n'] = [
+      '#title' => $this->t('Code language for localisation of country names'),
+      '#type' => 'textfield',
+      '#size' => 5,
+      '#description' => $this->t('Specify existing code language from intl-tel-input library.'),
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
+      ],
+    ];
+    $this->elementManager->processElement($form['telephone']['international_i18n']);
 
     if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
       $form['telephone']['#access'] = FALSE;
       $form['telephone']['international']['#access'] = FALSE;
       $form['telephone']['international_initial_country']['#access'] = FALSE;
       $form['telephone']['international_preferred_countries']['#access'] = FALSE;
+      $form['telephone']['international_i18n']['#access'] = FALSE;
     }
 
     // Add support for telephone_validation.module.

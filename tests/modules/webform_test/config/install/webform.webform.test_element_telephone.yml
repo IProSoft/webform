@@ -46,6 +46,11 @@ elements: |
     '#international': true
     '#international_preferred_countries':
       - ZW
+  tel_i18n:
+    '#type': tel
+    '#title': tel_i18n
+    '#international': true
+    '#international_i18n': 'en'
 css: ''
 javascript: ''
 settings:
