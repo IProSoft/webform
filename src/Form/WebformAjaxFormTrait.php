@@ -6,6 +6,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\AnnounceCommand;
+use Drupal\Core\Ajax\FocusFirstCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Form\FormStateInterface;
@@ -197,6 +198,7 @@ trait WebformAjaxFormTrait {
       $response = $this->replaceForm($form, $form_state);
       if ($scroll_top_target) {
         $response->addCommand(new WebformScrollTopCommand('#' . $this->getWrapperId(), $scroll_top_target));
+        $response->addCommand(new FocusFirstCommand('#' . $this->getWrapperId()));
       }
 
       // Announce validation errors.
