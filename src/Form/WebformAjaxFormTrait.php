@@ -6,7 +6,6 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\AnnounceCommand;
-use Drupal\Core\Ajax\FocusFirstCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Form\FormStateInterface;
@@ -164,7 +163,7 @@ trait WebformAjaxFormTrait {
     $form['#form_wrapper_id'] = $wrapper_id;
 
     $form += ['#prefix' => '', '#suffix' => ''];
-    $form['#prefix'] .= '<span id="' . $wrapper_id . '-content"></span>';
+    $form['#prefix'] .= '<span id="' . $wrapper_id . '-content" tabindex="-1"></span>';
     $form['#prefix'] .= '<div' . $wrapper_attributes . '>';
     $form['#suffix'] = '</div>' . $form['#suffix'];
 
@@ -198,7 +197,6 @@ trait WebformAjaxFormTrait {
       $response = $this->replaceForm($form, $form_state);
       if ($scroll_top_target) {
         $response->addCommand(new WebformScrollTopCommand('#' . $this->getWrapperId(), $scroll_top_target));
-        $response->addCommand(new FocusFirstCommand('#' . $this->getWrapperId()));
       }
 
       // Announce validation errors.
