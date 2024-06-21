@@ -191,7 +191,7 @@ class Telephone extends TextBase {
     ];
     $this->elementManager->processElement($form['telephone']['international_preferred_countries']);
     $form['telephone']['international_i18n'] = [
-      '#title' => $this->t('Code language for localisation of country names'),
+      '#title' => $this->t('Code language for localization of country names'),
       '#type' => 'textfield',
       '#size' => 5,
       '#description' => $this->t('Specify existing code language from intl-tel-input library.'),
