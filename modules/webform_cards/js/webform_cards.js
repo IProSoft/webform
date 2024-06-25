@@ -11,6 +11,9 @@
   Drupal.webform.cards = Drupal.webform.cards || {};
   // Autoforward (defaults to 1/4 second delay).
   Drupal.webform.cards.autoForwardDelay = Drupal.webform.cards.autoForwardDelay || 250;
+  if (Drupal.webform.cards.showAllCardsOnError == undefined) {
+    Drupal.webform.cards.showAllCardsOnError = true;
+  }
 
   /**
    * Initialize webform cards.
@@ -79,15 +82,28 @@
         // @see \Drupal\Core\Render\Element\RenderElement::setAttributes
         var $invalidCards = $allCards.filter(':has(.form-item--error-message)');
         if ($invalidCards.length) {
-          // Hide progress.
-          $form.find('.webform-progress').hide();
-          // Hide next and previous and only show the submit button.
-          $previousButton.hide();
-          $nextButton.hide();
-          // Show invalid cards and shake'em.
-          $invalidCards.addClass('webform-card--error');
-          shake($invalidCards);
-          return;
+          if (Drupal.webform.cards.showAllCardsOnError) {
+            // Hide progress.
+            $form.find('.webform-progress').hide();
+            // Hide next and previous and only show the submit button.
+            $previousButton.hide();
+            $nextButton.hide();
+            // Show invalid cards and shake'em.
+            $invalidCards.addClass('webform-card--error');
+            shake($invalidCards);
+            return;
+          }
+          else {
+            // Mark each errored step in the progress bar.
+            $invalidCards.each(function () {
+              var $invalidCard = $(this);
+              var $steps = $progress.find('.progress-step');
+              $steps.eq($invalidCard.index()).addClass('webform-card-progress-error');
+            });
+
+            $currentCardInput.val($invalidCards.first().attr('data-webform-key'));
+            shake($invalidCards);
+          }
         }
 
         // Previous and next buttons.
