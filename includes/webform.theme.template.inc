@@ -624,6 +624,8 @@ function _template_preprocess_webform_progress(array &$variables) {
       'type' => $page['#type'] ?? 'page',
     ];
   }
+
+  $variables['progress_list_label'] = t('Form progress');
 }
 
 /* ************************************************************************** */

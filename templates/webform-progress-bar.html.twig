@@ -10,6 +10,7 @@
  * - current_page: Current wizard page key.
  * - current_index: The current wizard page index.
  * - max_pages: Maximum number of pages to be displayed.
+ * - progress_list_label: The value for the @aria-label of the list of pages.
  *
  * @see template_preprocess_webform_progress_bar()
  *
@@ -19,7 +20,7 @@
 {{ attach_library('webform/webform.progress.bar') }}
 {% apply spaceless %}
 {% if progress|length < max_pages %}
-  <ol class="webform-progress-bar" data-steps="{{ progress|length }}">
+  <ol class="webform-progress-bar" data-steps="{{ progress|length }}" aria-label="{{ progress_list_label }}">
   {% for index, page in progress %}
     {%
       set classes = [
