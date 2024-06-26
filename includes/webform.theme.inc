@@ -457,6 +457,10 @@ function webform_preprocess_fieldset(&$variables) {
   if (isset($element['#title_display']) && $element['#title_display'] === 'none') {
     $variables['legend'] = ['attributes' => new Attribute(['style' => 'display:none'])];
   }
+  elseif (isset($element['#title_attributes'])
+    && $variables['legend']['attributes'] instanceof Attribute) {
+    $variables['legend']['attributes']->merge(new Attribute($element['#title_attributes']));
+  }
 
   // Add .js-webform-form-type-* class to be used JavaScript and #states API.
   // @see js/webform.element.location.geocomplete.js
