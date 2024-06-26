@@ -615,8 +615,8 @@ function _template_preprocess_webform_progress(array &$variables) {
   $current_index = $page_indexes[$current_page];
   $variables['current_index'] = $current_index;
 
-  $title_prefix_completed = t('Completed: ');
-  $title_prefix_current = t('Current: ');
+  $title_prefix_completed = t('Completed:') . ' ';
+  $title_prefix_current = t('Current:') . ' ';
 
   // Reset the pages variable.
   $variables['progress'] = [];
