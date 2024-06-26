@@ -615,12 +615,23 @@ function _template_preprocess_webform_progress(array &$variables) {
   $current_index = $page_indexes[$current_page];
   $variables['current_index'] = $current_index;
 
+  $title_prefix_completed = t('Completed: ');
+  $title_prefix_current = t('Current: ');
+
   // Reset the pages variable.
   $variables['progress'] = [];
   foreach ($pages as $key => $page) {
+    // Determine the title prefix, displayed to screen readers.
+    $title_prefix = match (count($variables['progress']) <=> $current_index) {
+      -1 => $title_prefix_completed,
+      0 => $title_prefix_current,
+      1 => NULL,
+    };
+    // Add variables for this page.
     $variables['progress'][] = [
       'name' => $key,
       'title' => $page['#title'] ?? '',
+      'title_prefix' => $title_prefix,
       'type' => $page['#type'] ?? 'page',
     ];
   }
