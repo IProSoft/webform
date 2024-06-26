@@ -542,9 +542,9 @@ class WebformElementHelper {
    *   An array of options to be merged.
    */
   public static function mergeOptions(array &$options, array $source_options) {
-    foreach ($options as $key => &$option) {
+    foreach ($options as $key => $option) {
       if (isset($source_options[$key]) && is_scalar($option) && gettype($option) === gettype($source_options[$key])) {
-        $option = $source_options[$key];
+        $options[$key] = $source_options[$key];
       }
       elseif (is_array($option)) {
         unset($options[$key]);
