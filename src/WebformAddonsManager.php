@@ -2070,7 +2070,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     ];
 
     // Utility: Webform Config Key Value.
-    $projects['	webform_config_key_value'] = [
+    $projects['webform_config_key_value'] = [
       'title' => $this->t('Webform Config Key Value'),
       'description' => $this->t('Use the KeyValueStorage to save webform config instead of yaml config storage, allowing webforms to be treated more like content than configuration and are excluded from the configuration imports/exports.'),
       'url' => Url::fromUri('https://www.drupal.org/sandbox/thtas/2994250'),
