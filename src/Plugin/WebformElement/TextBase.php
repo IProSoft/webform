@@ -289,6 +289,9 @@ abstract class TextBase extends WebformElementBase {
       "'alias': 'currency'" => '$ 0.00',
       "'alias': 'currency_negative'" => '-$ 0.00',
       "'alias': 'currency_positive_negative'" => '$ 0.00',
+      "'alias': 'decimal'" => '0.0',
+      "'alias': 'decimal_negative'" => '-0.0',
+      "'alias': 'decimal_positive_negative'" => '0.0',
     ];
     return (isset($input_masks[$input_mask]) && $input_masks[$input_mask] === $value) ? TRUE : FALSE;
   }
@@ -384,6 +387,16 @@ abstract class TextBase extends WebformElementBase {
         'title' => $this->t('Decimal'),
         'example' => '1.234',
         'pattern' => '^\d+(\.\d+)?$',
+      ],
+      "'alias': 'decimal_negative'" => [
+        'title' => $this->t('Decimal (-)'),
+        'example' => '-1.234',
+        'pattern' => '^(-\d+(\.\d+)?)$',
+      ],
+      "'alias': 'decimal_positive_negative'" => [
+        'title' => $this->t('Decimal (+/-)'),
+        'example' => '1.234',
+        'pattern' => '^-?\d+(.\d+)?$',
       ],
       "'alias': 'email'" => [
         'title' => $this->t('Email'),
