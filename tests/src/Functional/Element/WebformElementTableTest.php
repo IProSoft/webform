@@ -61,7 +61,12 @@ class WebformElementTableTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<input data-drupal-selector="edit-table-basic-01-first-name" type="text" id="edit-table-basic-01-first-name" name="table_basic_01_first_name" value="" size="60" maxlength="255" class="form-text" />');
 
     // Check webform table advanced rendering.
-    $assert_session->responseContains('<table data-drupal-selector="edit-table-advanced" class="webform-table sticky-enabled responsive-enabled" id="edit-table-advanced" data-striping="1">');
+    DeprecationHelper::backwardsCompatibleCall(
+      currentVersion: \Drupal::VERSION,
+      deprecatedVersion: '10.3',
+      currentCallable: fn() => $assert_session->responseContains('<table data-drupal-selector="edit-table-advanced" class="webform-table sticky-header responsive-enabled" id="edit-table-advanced" data-striping="1">'),
+      deprecatedCallable: fn() => $assert_session->responseContains('<table data-drupal-selector="edit-table-advanced" class="webform-table sticky-enabled responsive-enabled" id="edit-table-advanced" data-striping="1">'),
+    );
     $assert_session->responseMatches('#<th width="50%">Composite</th>\s+<th width="50%">Nested</th>#');
 
     // Check webform table states rendering.
