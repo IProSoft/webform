@@ -27,7 +27,12 @@ class WebformElementLikertTest extends WebformElementBrowserTestBase {
     $this->drupalGet('/webform/test_element_likert');
 
     // Check default likert element.
-    $assert_session->responseContains('<table class="webform-likert-table sticky-enabled responsive-enabled" data-likert-answers-count="3" data-drupal-selector="edit-likert-default-table" id="edit-likert-default-table" data-striping="1">');
+    DeprecationHelper::backwardsCompatibleCall(
+      currentVersion: \Drupal::VERSION,
+      deprecatedVersion: '10.3',
+      currentCallable: fn() => $assert_session->responseContains('<table class="webform-likert-table sticky-header responsive-enabled" data-likert-answers-count="3" data-drupal-selector="edit-likert-default-table" id="edit-likert-default-table" data-striping="1">'),
+      deprecatedCallable: fn() => $assert_session->responseContains('<table class="webform-likert-table sticky-enabled responsive-enabled" data-likert-answers-count="3" data-drupal-selector="edit-likert-default-table" id="edit-likert-default-table" data-striping="1">'),
+    );
     $assert_session->responseMatches('#<tr>\s+<th><span class="visually-hidden">Questions</span></th>\s+<th>Option 1</th>\s+<th>Option 2</th>\s+<th>Option 3</th>\s+</tr>#');
     $assert_session->responseContains('<label>Question 1</label>');
 

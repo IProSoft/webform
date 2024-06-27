@@ -32,7 +32,7 @@ class WebformElementDetailsTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<details data-webform-key="details" data-drupal-selector="edit-details" aria-describedby="edit-details--description" id="edit-details" class="js-form-wrapper form-wrapper required webform-element-help-container--title webform-element-help-container--title-after" open="open">');
     DeprecationHelper::backwardsCompatibleCall(
       currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
+      deprecatedVersion: '10.3',
       currentCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="edit-details" aria-expanded="true" class="js-form-required form-required">details<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="details" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;details&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is help text.&lt;/div&gt;"><span aria-hidden="true">?</span>'),
       deprecatedCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="edit-details" aria-expanded="true" aria-pressed="true" class="js-form-required form-required">details<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="details" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;details&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is help text.&lt;/div&gt;"><span aria-hidden="true">?</span>'),
     );
@@ -42,7 +42,7 @@ class WebformElementDetailsTest extends WebformElementBrowserTestBase {
     // Check details title_display: invisible.
     DeprecationHelper::backwardsCompatibleCall(
       currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
+      deprecatedVersion: '10.3',
       currentCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="edit-details-title-invisible" aria-expanded="false"><span class="visually-hidden">Details title invisible</span></summary>'),
       deprecatedCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="edit-details-title-invisible" aria-expanded="false" aria-pressed="false"><span class="visually-hidden">Details title invisible</span></summary>'),
     );

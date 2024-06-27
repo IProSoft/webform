@@ -94,7 +94,7 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
     // Check details element.
     DeprecationHelper::backwardsCompatibleCall(
       currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
+      deprecatedVersion: '10.3',
       currentCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="test_element--standard_elements" aria-expanded="true">Standard Elements</summary>'),
       deprecatedCallable: fn() => $assert_session->responseContains('<summary role="button" aria-controls="test_element--standard_elements" aria-expanded="true" aria-pressed="true">Standard Elements</summary>'),
     );
