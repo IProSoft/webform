@@ -140,7 +140,7 @@ class WebformCodeMirror extends Textarea {
    */
   public static function validateWebformCodeMirror(&$element, FormStateInterface $form_state, &$complete_form) {
     // If element is disabled then use the #default_value.
-    if (!empty($element['#disable'])) {
+    if (!empty($element['#disable']) || $element['#default_value']) {
       $element['#value'] = $element['#default_value'];
       $form_state->setValueForElement($element, $element['#default_value']);
     }
