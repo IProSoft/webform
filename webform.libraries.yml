@@ -1179,6 +1179,7 @@ libraries.jquery.intl-tel-input:
       /libraries/jquery.intl-tel-input/build/css/intlTelInput.min.css: { minified: true }
   js:
     /libraries/jquery.intl-tel-input/build/js/intlTelInput.min.js: { minified: true }
+    /libraries/jquery.intl-tel-input/build/js/intlTelInputWithUtils.min.js: { minified: true }
 
   dependencies:
     - core/jquery

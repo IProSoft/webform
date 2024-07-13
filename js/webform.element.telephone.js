@@ -45,11 +45,17 @@
         if ($telephone.attr('data-webform-telephone-international-preferred-countries')) {
           options.preferredCountries = JSON.parse($telephone.attr('data-webform-telephone-international-preferred-countries'));
         }
-        if ($telephone.attr('data-webform-telephone-international-i18n')) {
-          var localization = $telephone.attr('data-webform-telephone-international-i18n');
-          const module = await import(drupalSettings.webform.intlTelInput.i18nPath + localization + '/index.js');
-          options.i18n = module.default;
+
+        var localization = 'en';
+        if ($telephone.attr('data-webform-telephone-international-i18n-use-site-language')) {
+          localization = drupalSettings.langcode;
         }
+        else if ($telephone.attr('data-webform-telephone-international-i18n')) {
+          localization = $telephone.attr('data-webform-telephone-international-i18n');
+        }
+
+        const module = await import(drupalSettings.webform.intlTelInput.i18nPath + localization + '/index.js');
+        options.i18n = module.default;
 
         options = $.extend(options, Drupal.webform.intlTelInput.options);
         window.intlTelInput(this, options);
