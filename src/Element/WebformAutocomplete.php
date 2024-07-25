@@ -2,7 +2,9 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Textfield;
+use Drupal\webform\Entity\WebformOptions;
 
 /**
  * Provides a one-line text field with autocompletion webform element.
@@ -19,6 +21,7 @@ class WebformAutocomplete extends Textfield {
 
     $info = parent::getInfo();
     $info['#pre_render'][] = [$class, 'preRenderWebformAutocomplete'];
+    $info['#element_validate'] = [[$class, 'validateWebformAutocomplete']];
     return $info;
   }
 
@@ -43,6 +46,28 @@ class WebformAutocomplete extends Textfield {
    */
   protected function defineTranslatableProperties() {
     return array_merge(parent::defineTranslatableProperties(), ['autocomplete_items']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function validateWebformAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
+    $value = $element['#value'];
+    $options = [];
+
+    if ($value) {
+      // Get allowed options.
+      if (!empty($element['#autocomplete_items'])) {
+        $element['#options'] = $element['#autocomplete_items'];
+        $options = WebformOptions::getElementOptions($element);
+      }
+      if (isset($options[$value])) {
+        $form_state->setValueForElement($element, $value);
+      }
+      else {
+        $form_state->setError($element, t('Please select a valid option for @label.', ['@label' => $element['#title']]));
+      }
+    }
   }
 
 }
