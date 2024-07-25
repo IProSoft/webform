@@ -10,6 +10,7 @@ use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
+use Drupal\Core\Utility\Error;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
@@ -1138,7 +1139,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     }
     catch (\Exception $e) {
       $transaction->rollBack();
-      watchdog_exception($this->entityTypeId, $e);
+      Error::logException($this->loggerFactory->get($this->entityTypeId), $e);
       throw new EntityStorageException($e->getMessage(), $e->getCode(), $e);
     }
   }
