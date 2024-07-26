@@ -46,6 +46,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
       ],
       'max-age' => -1,
     ];
+    // @todo Remove once Drupal 10.3 is required.
     if (version_compare(\Drupal::VERSION, '10.3', '<')) {
       array_shift($expected['tags']);
     }
@@ -86,6 +87,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
       ],
       'max-age' => -1,
     ];
+    // @todo Remove once Drupal 10.3 is required.
     if (version_compare(\Drupal::VERSION, '10.3', '<')) {
       array_shift($expected['tags']);
     }

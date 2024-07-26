@@ -36,23 +36,13 @@ class WebformElementLikertTest extends WebformElementBrowserTestBase {
     $assert_session->responseMatches('#<tr>\s+<th><span class="visually-hidden">Questions</span></th>\s+<th>Option 1</th>\s+<th>Option 2</th>\s+<th>Option 3</th>\s+</tr>#');
     $assert_session->responseContains('<label>Question 1</label>');
 
-    DeprecationHelper::backwardsCompatibleCall(
-      currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
-      currentCallable: fn() => $assert_session->responseContains('<td><div class="js-form-item form-item form-type-radio js-form-type-radio form-item-likert-default-q1 js-form-item-likert-default-q1">'),
-      deprecatedCallable: fn() => $assert_session->responseContains('<td><div class="js-form-item form-item js-form-type-radio form-item-likert-default-q1 js-form-item-likert-default-q1">'),
-    );
+    $assert_session->responseContains('<td><div class="js-form-item form-item form-type-radio js-form-type-radio form-item-likert-default-q1 js-form-item-likert-default-q1">');
     $assert_session->responseContains('<input aria-labelledby="edit-likert-default-table-q1-likert-question" data-drupal-selector="edit-likert-default-q1" type="radio" id="edit-likert-default-q1" name="likert_default[q1]" value="1" class="form-radio" />');
     $assert_session->responseContains('<label for="edit-likert-default-q1" class="option"><span class="webform-likert-label visually-hidden">Option 1</span></label>');
 
     // Check advanced likert element with N/A.
     $assert_session->responseMatches('#<tr>\s+<th><span class="visually-hidden">Questions</span></th>\s+<th>Option 1</th>\s+<th>Option 2</th>\s+<th>Option 3</th>\s+<th>Not applicable</th>\s+</tr>#');
-    DeprecationHelper::backwardsCompatibleCall(
-      currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
-      currentCallable: fn() => $assert_session->responseContains('<td><div class="js-form-item form-item form-type-radio js-form-type-radio form-item-likert-advanced-q1 js-form-item-likert-advanced-q1">'),
-      deprecatedCallable: fn() => $assert_session->responseContains('<td><div class="js-form-item form-item js-form-type-radio form-item-likert-advanced-q1 js-form-item-likert-advanced-q1">'),
-    );
+    $assert_session->responseContains('<td><div class="js-form-item form-item form-type-radio js-form-type-radio form-item-likert-advanced-q1 js-form-item-likert-advanced-q1">');
     $assert_session->responseContains('<input aria-labelledby="edit-likert-advanced-table-q1-likert-question" required="required" data-drupal-selector="edit-likert-advanced-q1" type="radio" id="edit-likert-advanced-q1--4" name="likert_advanced[q1]" value="N/A" class="form-radio" />');
     $assert_session->responseContains('<label for="edit-likert-advanced-q1--4" class="option"><span class="webform-likert-label visually-hidden">Not applicable</span></label>');
 

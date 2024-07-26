@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional;
 
-use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformSubmissionForm;
@@ -49,12 +48,7 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     $this->assertEquals($webform_submission->id(), $this->getLastSubmissionId($contact_webform));
 
     // Check validating a simple webform.
-    $email_validation_error = DeprecationHelper::backwardsCompatibleCall(
-      currentVersion: \Drupal::VERSION,
-      deprecatedVersion: '10.2',
-      currentCallable: fn() => 'The email address <em class="placeholder">invalid</em> is not valid. Use the format user@example.com.',
-      deprecatedCallable: fn() => 'The email address <em class="placeholder">invalid</em> is not valid.',
-    );
+    $email_validation_error = 'The email address <em class="placeholder">invalid</em> is not valid. Use the format user@example.com.';
     $values = [
       'webform_id' => 'contact',
       'data' => [
@@ -147,9 +141,7 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     WebformElementHelper::convertRenderMarkupToStrings($errors);
     // $this->debug($errors);
     $this->assertEquals($errors, [
-      'sex' => (floatval(\Drupal::VERSION) >= 10.1)
-        ? 'The submitted value <em class="placeholder">INVALID</em> in the <em class="placeholder">Sex</em> element is not allowed.'
-        : 'An illegal choice has been detected. Please contact the site administrator.',
+      'sex' => 'The submitted value <em class="placeholder">INVALID</em> in the <em class="placeholder">Sex</em> element is not allowed.',
     ]);
 
     /* ********************************************************************** */
