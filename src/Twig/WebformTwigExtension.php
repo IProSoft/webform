@@ -34,9 +34,9 @@ class WebformTwigExtension extends AbstractExtension {
    */
   public function getFunctions() {
     return [
-      new TwigFunction('webform_html_editor_check_markup', [$this, 'webformHtmlEditorCheckMarkup']),
-      new TwigFunction('webform_debug', [$this, 'webformDebug']),
-      new TwigFunction('webform_token', [$this, 'webformToken']),
+      new TwigFunction('webform_html_editor_check_markup', $this->webformHtmlEditorCheckMarkup(...)),
+      new TwigFunction('webform_debug', $this->webformDebug(...)),
+      new TwigFunction('webform_token', $this->webformToken(...)),
     ];
   }
 

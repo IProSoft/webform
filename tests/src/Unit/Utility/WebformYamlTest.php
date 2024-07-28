@@ -37,7 +37,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testTidy()
    */
-  public function providerTidy() {
+  public static function providerTidy() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",
@@ -87,7 +87,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testDecode()
    */
-  public function providerDecode() {
+  public static function providerDecode() {
     $tests[] = [
       "simple: value",
       ['simple' => 'value'],
@@ -149,7 +149,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testEncode()
    */
-  public function providerEncode() {
+  public static function providerEncode() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",
