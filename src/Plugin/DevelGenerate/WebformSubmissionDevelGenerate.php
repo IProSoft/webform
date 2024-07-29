@@ -429,7 +429,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
 
     $dt_args = ['@entity_type' => $entity_type, '@entity_id' => $entity_id];
 
-    $source_entity = $this->entityTypeManager->getStorage($entity_type)->load($entity_id);
+    $source_entity = $this->getEntityStorage($entity_type)->load($entity_id);
     if (!$source_entity) {
       return $t('Unable to load @entity_type:@entity_id', $dt_args);
     }
