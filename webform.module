@@ -954,30 +954,6 @@ function webform_webform_access_rules() {
 }
 
 /* ************************************************************************** */
-// Devel generate info hooks.
-/* ************************************************************************** */
-
-/**
- * Implements hook_devel_generate_info_alter().
- */
-function webform_devel_generate_info_alter(array &$generators) {
-  if (!isset($generators['webform_submission'])) {
-    return;
-  }
-
-  // Use deprecated generator because the devel_generate.module changed the
-  // DevelGenerateBaseInterface.
-  //
-  // @see \Drupal\webform\Plugin\DevelGenerate\WebformSubmissionDevelGenerateDeprecated
-  // @see https://www.drupal.org/project/webform/issues/3155654
-  // @see https://gitlab.com/drupalspoons/devel/-/issues/324
-  $info = \Drupal::service('extension.list.module')->getExtensionInfo('devel_generate');
-  if (!empty($info['version']) && strpos($info['version'], '8.x-') === 0) {
-    $generators['webform_submission']['class'] = 'Drupal\webform\Plugin\DevelGenerate\WebformSubmissionDevelGenerateDeprecated';
-  }
-}
-
-/* ************************************************************************** */
 // Element info hooks.
 /* ************************************************************************** */
 
