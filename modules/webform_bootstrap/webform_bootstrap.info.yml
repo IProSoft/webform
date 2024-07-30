@@ -1,6 +1,6 @@
 name: 'Webform Bootstrap'
 type: module
-description: 'Helps support Webform to Bootstrap integration.'
+description: 'Helps support Webform to Drupal Bootstrap Theme integration. Note: This is only to be used with the Drupal Bootstrap Theme, NOT with other Bootstrap Framework related Themes (like Radix)'
 package: Webform
 core_version_requirement: ^10.2
 dependencies:
