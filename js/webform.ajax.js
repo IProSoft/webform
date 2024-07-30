@@ -221,7 +221,7 @@
     // Focus on the form wrapper content bookmark if
     // .js-webform-autofocus is not enabled.
     // @see \Drupal\webform\Form\WebformAjaxFormTrait::buildAjaxForm
-    var $form = $(response.selector + '-content').find('form');
+    var $form = $(response.selector).find('form');
     if (!$form.hasClass('js-webform-autofocus')) {
       $(response.selector + '-content').trigger('focus');
     }
