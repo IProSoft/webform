@@ -67,13 +67,6 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
   protected $webformEntityReferenceManager;
 
   /**
-   * The messenger.
-   *
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected $messenger;
-
-  /**
    * The time service.
    *
    * @var \Drupal\Component\Datetime\TimeInterface
