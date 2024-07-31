@@ -80,7 +80,6 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $instance->request = $container->get('request_stack')->getCurrentRequest();
     $instance->database = $container->get('database');
-    $instance->messenger = $container->get('messenger');
     $instance->webformSubmissionGenerate = $container->get('webform_submission.generate');
     $instance->webformEntityReferenceManager = $container->get('webform.entity_reference_manager');
     $instance->time = $container->get('datetime.time');
