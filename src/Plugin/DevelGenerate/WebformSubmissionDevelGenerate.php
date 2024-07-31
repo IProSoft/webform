@@ -84,7 +84,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
-    $instance = new static($configuration, $plugin_id, $plugin_definition);
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $instance->request = $container->get('request_stack')->getCurrentRequest();
     $instance->database = $container->get('database');
     $instance->messenger = $container->get('messenger');
