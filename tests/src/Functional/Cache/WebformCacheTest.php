@@ -46,10 +46,6 @@ class WebformCacheTest extends WebformBrowserTestBase {
       ],
       'max-age' => -1,
     ];
-    // @todo Remove once Drupal 10.3 is required.
-    if (version_compare(\Drupal::VERSION, '10.3', '<')) {
-      array_shift($expected['tags']);
-    }
     $this->assertEqualsCanonicalizing($expected, $form['#cache']);
 
     // Check that the name element does not have #cache because the
@@ -87,10 +83,6 @@ class WebformCacheTest extends WebformBrowserTestBase {
       ],
       'max-age' => -1,
     ];
-    // @todo Remove once Drupal 10.3 is required.
-    if (version_compare(\Drupal::VERSION, '10.3', '<')) {
-      array_shift($expected['tags']);
-    }
     $this->assertEqualsCanonicalizing($expected, $form['#cache']);
     $this->assertFalse(isset($form['elements']['email']['#cache']));
     $this->assertEquals($form['elements']['email']['#default_value'], $account->getEmail());
