@@ -1,0 +1,8 @@
+name: 'Webform Custom Block for prepopulate entity test'
+type: module
+description: 'Support module for webform  prepopulate entity testing.'
+package: 'Webform Testing'
+core_version_requirement: ^9.4 || ^10
+dependencies:
+  - 'drupal:block'
+  - 'webform:webform'
