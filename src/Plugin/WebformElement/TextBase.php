@@ -327,7 +327,7 @@ abstract class TextBase extends WebformElementBase {
     $properties = $this->getConfigurationFormProperties($form, $form_state);
 
     // Validate #pattern's regular expression.
-    // @see \Drupal\Core\Render\Element\FormElement::validatePattern
+    // @see \Drupal\Core\Render\Element\FormElementBase::validatePattern
     // @see http://stackoverflow.com/questions/4440626/how-can-i-validate-regex
     if (!empty($properties['#pattern'])) {
       set_error_handler('_webform_entity_element_validate_rendering_error_handler');

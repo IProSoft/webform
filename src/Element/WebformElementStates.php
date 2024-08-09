@@ -7,7 +7,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
-use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -18,7 +18,7 @@ use Drupal\webform\Utility\WebformYaml;
  *
  * @FormElement("webform_element_states")
  */
-class WebformElementStates extends FormElement {
+class WebformElementStates extends FormElementBase {
 
   /**
    * {@inheritdoc}

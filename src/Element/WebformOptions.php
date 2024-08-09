@@ -5,7 +5,7 @@ namespace Drupal\webform\Element;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -19,7 +19,7 @@ use Drupal\webform\Utility\WebformYaml;
  *
  * @FormElement("webform_options")
  */
-class WebformOptions extends FormElement {
+class WebformOptions extends FormElementBase {
 
   /**
    * {@inheritdoc}
