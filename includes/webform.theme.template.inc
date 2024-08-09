@@ -9,7 +9,7 @@ use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
@@ -715,7 +715,7 @@ function template_preprocess_webform_horizontal_rule(array &$variables) {
 function template_preprocess_webform_section(array &$variables) {
   $element = $variables['element'];
   Element::setAttributes($element, ['id']);
-  RenderElement::setAttributes($element);
+  RenderElementBase::setAttributes($element);
   $variables['attributes'] = $element['#attributes'] ?? [];
   $variables['prefix'] = $element['#field_prefix'] ?? NULL;
   $variables['suffix'] = $element['#field_suffix'] ?? NULL;

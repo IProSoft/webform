@@ -42,7 +42,7 @@ abstract class WebformComputedBase extends FormElement implements WebformCompute
       '#hide_empty' => FALSE,
       // Note: Computed elements do not use the default #ajax wrapper, which is
       // why we can use #ajax as a boolean.
-      // @see \Drupal\Core\Render\Element\RenderElement::preRenderAjaxForm
+      // @see \Drupal\Core\Render\Element\RenderElementBase::preRenderAjaxForm
       '#ajax' => FALSE,
       '#webform_submission' => NULL,
       '#theme_wrappers' => ['form_element'],
