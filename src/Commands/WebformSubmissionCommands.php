@@ -6,6 +6,7 @@ use Consolidation\AnnotatedCommand\AnnotationData;
 use Consolidation\AnnotatedCommand\CommandData;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\webform\Controller\WebformResultsExportController;
@@ -177,7 +178,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
     $file_path = ($submission_exporter->isArchive()) ? $submission_exporter->getArchiveFilePath() : $submission_exporter->getExportFilePath();
     if (isset($export_options['destination'])) {
       $this->output()->writeln(dt('Created @destination', ['@destination' => $export_options['destination']]));
-      $this->fileSystem->copy($file_path, $export_options['destination'], FileSystemInterface::EXISTS_REPLACE);
+      $this->fileSystem->copy($file_path, $export_options['destination'], FileExists::Replace);
     }
     else {
       $this->output()->writeln(file_get_contents($file_path));
