@@ -1023,7 +1023,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#markup' => $message,
     ];
 
-    $this->messenger()->addMessage($this->renderer->renderPlain($build), $type);
+    $this->messenger()->addMessage($this->renderer->renderInIsolation($build), $type);
   }
 
   /**
@@ -1164,7 +1164,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     $build_message = [
       '#markup' => $this->replaceTokens($custom_response_message, $this->getWebform(), $token_data),
     ];
-    $message = \Drupal::service('renderer')->renderPlain($build_message);
+    $message = \Drupal::service('renderer')->renderInIsolation($build_message);
     $type = ($this->responseHasError($response)) ? MessengerInterface::TYPE_ERROR : MessengerInterface::TYPE_STATUS;
     $this->messenger()->addMessage($message, $type);
     return TRUE;

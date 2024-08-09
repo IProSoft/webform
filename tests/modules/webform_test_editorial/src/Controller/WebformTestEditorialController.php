@@ -163,7 +163,7 @@ class WebformTestEditorialController extends ControllerBase implements Container
           $links[] = Link::fromTextAndUrl('Video', Url::fromUri('https://www.youtube.com/watch', ['query' => ['v' => $video['youtube_id']]]))->toString();
         }
         if (is_array($info['content'])) {
-          $info['content'] = $this->renderer->renderPlain($info['content']);
+          $info['content'] = $this->renderer->renderInIsolation($info['content']);
         }
         $rows[] = [
           'data' => [
@@ -489,7 +489,7 @@ class WebformTestEditorialController extends ControllerBase implements Container
    *   a custom response that contains raw HTML markup.
    */
   protected function response(array $build) {
-    $output = $this->renderer->renderPlain($build);
+    $output = $this->renderer->renderInIsolation($build);
     $headers = [
       'Content-Length' => strlen($output),
       'Content-Type' => 'text/html',

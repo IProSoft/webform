@@ -293,7 +293,7 @@ class WebformCodeMirror extends Textarea {
           '#context' => [],
         ];
       }
-      \Drupal::service('renderer')->renderPlain($build);
+      \Drupal::service('renderer')->renderInIsolation($build);
       return NULL;
     }
     catch (\Exception $exception) {

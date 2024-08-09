@@ -249,7 +249,7 @@ class Address extends WebformCompositeBase {
     $format = $this->getItemFormat($element);
     if ($format === 'value') {
       $build = $this->buildAddress($element, $webform_submission, $options);
-      $html = $this->renderer->renderPlain($build);
+      $html = $this->renderer->renderInIsolation($build);
       return trim(MailFormatHelper::htmlToText($html));
     }
     else {

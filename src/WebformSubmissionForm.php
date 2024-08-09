@@ -1095,7 +1095,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         if ($offcanvas) {
           WebformDialogHelper::attachLibraries($form);
         }
-        $this->messenger()->addWarning($this->renderer->renderPlain($build));
+        $this->messenger()->addWarning($this->renderer->renderInIsolation($build));
       }
     }
 
@@ -2121,7 +2121,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#theme' => 'item_list',
         '#items' => $file_names,
       ];
-      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
+      $form_state->setErrorByName(NULL, $this->renderer->renderInIsolation($message));
     }
   }
 

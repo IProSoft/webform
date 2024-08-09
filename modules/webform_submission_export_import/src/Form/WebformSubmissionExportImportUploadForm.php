@@ -698,7 +698,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
             'row' => $row_prefix,
             'message' => ['#markup' => $message],
           ];
-          $message = \Drupal::service('renderer')->renderPlain($build);
+          $message = \Drupal::service('renderer')->renderInIsolation($build);
           if ($is_cli) {
             \Drupal::logger('webform_submission_export_import')->$message_type($message);
           }

@@ -86,7 +86,7 @@ class WebformShareNodeTest extends WebformNodeBrowserTestBase {
       '#webform' => $webform,
       '#source_entity' => $node,
     ];
-    $actual_script_tag = $renderer->renderPlain($build);
+    $actual_script_tag = $renderer->renderInIsolation($build);
 
     $src = $base_url . "/webform/contact/share.js?source_entity_type=node&amp;source_entity_id=$nid";
     $src = preg_replace('#^https?:#', '', $src);

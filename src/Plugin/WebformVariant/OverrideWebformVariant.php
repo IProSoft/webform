@@ -317,7 +317,7 @@ class OverrideWebformVariant extends WebformVariantBase {
       ];
     }
 
-    $this->messenger()->addWarning(\Drupal::service('renderer')->renderPlain($build));
+    $this->messenger()->addWarning(\Drupal::service('renderer')->renderInIsolation($build));
   }
 
 }

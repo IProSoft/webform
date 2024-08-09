@@ -3731,7 +3731,7 @@ function webform_update_8192() {
         '#items' => $links,
       ],
     ];
-    return \Drupal::service('renderer')->renderPlain($build);
+    return \Drupal::service('renderer')->renderInIsolation($build);
   }
 }
 

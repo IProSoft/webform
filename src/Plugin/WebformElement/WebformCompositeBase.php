@@ -574,7 +574,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
 
       $composite_value = $this->formatCompositeText($element, $webform_submission, ['composite_key' => $composite_key] + $options);
       if (is_array($composite_value)) {
-        $composite_value = $this->renderer->renderPlain($composite_value);
+        $composite_value = $this->renderer->renderInIsolation($composite_value);
       }
 
       if ($composite_value !== '') {

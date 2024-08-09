@@ -181,7 +181,7 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    */
   public function display($key, $type = 'status') {
     if ($build = $this->build($key)) {
-      $this->messenger->addMessage($this->renderer->renderPlain($build), $type);
+      $this->messenger->addMessage($this->renderer->renderInIsolation($build), $type);
     }
   }
 
@@ -190,7 +190,7 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    */
   public function render($key) {
     $build = $this->build($key);
-    return ($build) ? $this->renderer->renderPlain($build) : NULL;
+    return ($build) ? $this->renderer->renderInIsolation($build) : NULL;
   }
 
   /**

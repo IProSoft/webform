@@ -152,7 +152,7 @@ class WebformShareTest extends WebformBrowserTestBase {
       '#type' => 'webform_share_script',
       '#webform' => $webform,
     ];
-    $actual_script_tag = $renderer->renderPlain($build);
+    $actual_script_tag = $renderer->renderInIsolation($build);
 
     $src = $base_url . "/webform/contact/share.js";
     $src = preg_replace('#^https?:#', '', $src);

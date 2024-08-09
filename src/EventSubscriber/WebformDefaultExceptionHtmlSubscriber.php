@@ -319,7 +319,7 @@ class WebformDefaultExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscrib
   protected function setMessage($message, EntityInterface $entity = NULL) {
     $message = $this->tokenManager->replace($message, $entity);
     $build = WebformHtmlEditor::checkMarkup($message);
-    $this->messenger->addStatus($this->renderer->renderPlain($build));
+    $this->messenger->addStatus($this->renderer->renderInIsolation($build));
   }
 
 }

@@ -71,7 +71,7 @@ class WebformSchemaController extends ControllerBase implements ContainerInjecti
         $element['options_text'] = implode($multiple_delimiter, $element['options_text']);
         $element['options_value'] = implode($multiple_delimiter, $element['options_value']);
         $element['notes'] = trim(MailFormatHelper::htmlToText(
-          $this->renderer->renderPlain($element['notes'])
+          $this->renderer->renderInIsolation($element['notes'])
         ));
         fputcsv($handle, $element);
       }
