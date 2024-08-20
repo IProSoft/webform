@@ -1555,7 +1555,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           }
           elseif (!empty($this->getWebform()->getSetting('wizard_next_button_label'))) {
             $next_button_label = $this->getWebform()->getSetting('wizard_next_button_label');
-            $previous_button_custom = TRUE;
+            $next_button_custom = TRUE;
           }
           else {
             $next_button_label = $this->config('webform.settings')->get('settings.default_wizard_next_button_label');
