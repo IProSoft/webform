@@ -115,6 +115,9 @@ class Telephone extends TextBase {
       if (!empty($element['#international_i18n'])) {
         $element['#attributes']['data-webform-telephone-international-i18n'] = $element['#international_i18n'];
       }
+      else {
+        $element['#attributes']['data-webform-telephone-international-i18n'] = 'en';
+      }
 
       // The utilsScript is fetched when the page has finished loading to
       // prevent blocking.
