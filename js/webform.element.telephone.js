@@ -45,8 +45,6 @@
         if ($telephone.attr('data-webform-telephone-international-preferred-countries')) {
           options.preferredCountries = JSON.parse($telephone.attr('data-webform-telephone-international-preferred-countries'));
         }
-        const module = await import(drupalSettings.webform.intlTelInput.i18nPath + localization + '/index.js');
-        options.i18n = module.default;
 
         var localization = 'en';
         if ($telephone.attr('data-webform-telephone-international-i18n-use-site-language')) {
