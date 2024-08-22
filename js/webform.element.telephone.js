@@ -19,11 +19,11 @@
    */
   Drupal.behaviors.webformTelephoneInternational = {
     attach: function (context) {
-      if (!$.fn.intlTelInput) {
+      if (!window.intlTelInput) {
         return;
       }
 
-      $(once('webform-telephone-international', 'input.js-webform-telephone-international', context)).each(function () {
+      $(once('webform-telephone-international', 'input.js-webform-telephone-international', context)).each(async function () {
         var $telephone = $(this);
 
         // Add error message container.
@@ -45,9 +45,17 @@
         if ($telephone.attr('data-webform-telephone-international-preferred-countries')) {
           options.preferredCountries = JSON.parse($telephone.attr('data-webform-telephone-international-preferred-countries'));
         }
+        if ($telephone.attr('data-webform-telephone-international-i18n')) {
+          var localization = $telephone.attr('data-webform-telephone-international-i18n');
+        } else {
+          var localization = drupalSettings.langcode;
+        }
+        const module = await import(drupalSettings.webform.intlTelInput.i18nPath + localization + '/index.js');
+        options.i18n = module.default;
 
         options = $.extend(options, Drupal.webform.intlTelInput.options);
-        $telephone.intlTelInput(options);
+        window.intlTelInput(this, options);
+        const iti = intlTelInput.getInstance(this);
 
         var reset = function () {
           $telephone.removeClass('error');
@@ -56,7 +64,7 @@
 
         var validate = function () {
           if ($.trim($telephone.val())) {
-            if (!$telephone.intlTelInput('isValidNumber')) {
+            if (!iti.isValidNumber()) {
               $telephone.addClass('error');
               var placeholder = $telephone.attr('placeholder');
               var message;

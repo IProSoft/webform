@@ -939,7 +939,7 @@ webform.element.states:
 webform.element.telephone:
   version: VERSION
   js:
-    js/webform.element.telephone.js: {}
+    js/webform.element.telephone.js: { attributes: { type: module } }
   dependencies:
     - core/drupal
     - core/jquery
@@ -1166,20 +1166,20 @@ libraries.jquery.inputmask:
 
 libraries.jquery.intl-tel-input:
   remote: https://github.com/jackocnr/intl-tel-input
-  version: 'v17.0.19'
+  version: 'v24.1.1'
   license:
     name: MIT
     url: https://github.com/jackocnr/intl-tel-input/blob/master/LICENSE
     gpl-compatible: true
   directory: jquery.intl-tel-input
   cdn:
-    /libraries/jquery.intl-tel-input/: https://cdn.jsdelivr.net/gh/jackocnr/intl-tel-input@v17.0.19/
+    /libraries/jquery.intl-tel-input/: https://cdn.jsdelivr.net/gh/jackocnr/intl-tel-input@v24.1.1/
   css:
     component:
       /libraries/jquery.intl-tel-input/build/css/intlTelInput.min.css: { minified: true }
   js:
     /libraries/jquery.intl-tel-input/build/js/intlTelInput.min.js: { minified: true }
-    /libraries/jquery.intl-tel-input/build/js/intlTelInput-jquery.min.js: { minified: true }
+    /libraries/jquery.intl-tel-input/build/js/intlTelInputWithUtils.min.js: { minified: true }
 
   dependencies:
     - core/jquery

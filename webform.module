@@ -605,6 +605,9 @@ function webform_page_attachments(array &$attachments) {
     }
   }
 
+  //Send along current langcode for proper translation
+  $attachments['#attached']['drupalSettings']['langcode'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
   // Attach webform more element to token token help.
   // @see webform_token_info_alter()
   if ($route_name === 'help.page' && \Drupal::routeMatch()->getRawParameter('name') === 'token') {
