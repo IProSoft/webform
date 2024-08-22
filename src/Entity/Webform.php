@@ -141,6 +141,13 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   protected $id;
 
   /**
+   * The language type used to render webform.
+   *
+   * @var string
+   */
+  protected $langType;
+
+  /**
    * The webform UUID.
    *
    * @var string
@@ -972,6 +979,14 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
+  public function getLangType() {
+    $this->initLangType();
+    return $this->langType;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getSettings() {
     // Settings should not be empty even.
     // https://www.drupal.org/node/2880392.
@@ -1103,6 +1118,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'form_novalidate' => FALSE,
       'form_disable_inline_errors' => FALSE,
       'form_required' => FALSE,
+      'form_use_content_language' => FALSE,
       'form_unsaved' => FALSE,
       'form_disable_back' => FALSE,
       'form_submit_back' => FALSE,
@@ -1351,6 +1367,18 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   }
 
   /**
+   * Initialize language type used for rendering.
+   */
+  protected function initLangType() {
+    if ($this->getSetting('form_use_content_language', TRUE)) {
+      $this->langType = LanguageInterface::TYPE_CONTENT;
+    }
+    else {
+      $this->langType = LanguageInterface::TYPE_INTERFACE;
+    }
+  }
+
+  /**
    * Check operation access for each element.
    *
    * @param string $operation
@@ -1550,7 +1578,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     // Get the current langcode.
-    $current_langcode = \Drupal::languageManager()->getConfigOverrideLanguage()->getId();
+    $current_langcode = \Drupal::languageManager()->getCurrentLanguage($this->getLangType())->getId();
 
     // If the current langcode is the same as this webform's langcode
     // then return.

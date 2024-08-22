@@ -80,6 +80,9 @@ webform.settings:
         default_form_required_label:
           type: label
           label: 'Display required indicator label'
+        default_form_use_content_language:
+          type: boolean
+          label: 'Use content language to render forms'
         default_form_unsaved:
           type: boolean
           label: 'Warn users about unsaved changes'

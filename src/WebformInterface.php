@@ -546,6 +546,14 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function setJavaScript($javascript);
 
   /**
+   * Returns the language type used for rendering.
+   *
+   * @return string
+   *   The language type.
+   */
+  public function getLangType();
+
+  /**
    * Returns the webform settings.
    *
    * @return array
