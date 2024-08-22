@@ -3313,6 +3313,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Create an empty form state which will be populated when the submission
     // form is submitted.
     $form_state = new FormState();
+    $form_state->setValues($webform_submission->getData());
 
     // Set the triggering element to an empty element to prevent
     // errors from managed files.
