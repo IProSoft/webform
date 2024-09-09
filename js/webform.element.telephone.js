@@ -83,7 +83,9 @@
         // Check for a valid phone number on submit.
         var $form = $(this.form);
         $form.on('submit', function (event) {
-          if (!validate()) {
+          if (validate()) {
+            $telephone.val($telephone.intlTelInput('getNumber'));
+          } else {
             $telephone.focus();
             event.preventDefault();
 
