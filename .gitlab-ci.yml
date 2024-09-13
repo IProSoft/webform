@@ -37,5 +37,6 @@ composer (next major):
     _LENIENT_ALLOW_LIST: "ckeditor,select2,styleguide,clientside_validation"
 
 phpunit (next major):
+  allow_failure: false
   before_script:
     - 'sed -i "s/core_version_requirement.*/core_version_requirement: \^11/" web/modules/contrib/**/*.info.yml'
