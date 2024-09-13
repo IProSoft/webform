@@ -57,46 +57,54 @@ class WebformElementAddressTest extends WebformElementBrowserTestBase {
 
     // Check submitted value.
     $sid = $this->postSubmission($webform);
-    $assert_session->responseContains("address:
-  country_code: US
-  langcode: en
-  given_name: John
-  family_name: Smith
-  organization: 'Google Inc.'
-  address_line1: '1098 Alta Ave'
-  address_line2: ''
-  locality: 'Mountain View'
-  administrative_area: CA
-  postal_code: '94043'
-  additional_name: null
-  sorting_code: null
-  dependent_locality: null
-address_advanced:
-  country_code: US
-  langcode: en
-  address_line1: '1098 Alta Ave'
-  address_line2: ''
-  locality: 'Mountain View'
-  administrative_area: CA
-  postal_code: '94043'
-  given_name: null
-  additional_name: null
-  family_name: null
-  organization: null
-  sorting_code: null
-  dependent_locality: null
-address_none: null
-address_multiple:
-  - country_code: US
-    langcode: en
-    given_name: John
-    family_name: Smith
-    organization: 'Google Inc.'
-    address_line1: '1098 Alta Ave'
-    address_line2: ''
-    locality: 'Mountain View'
-    administrative_area: CA
-    postal_code: '94043'");
+    $submission = $this->loadSubmission($sid);
+    $data = $submission->getData();
+    $this->assertEquals([
+      'additional_name' => '',
+      'address_line1' => '1098 Alta Ave',
+      'address_line2' => '',
+      'address_line3' => '',
+      'administrative_area' => 'CA',
+      'country_code' => 'US',
+      'dependent_locality' => '',
+      'family_name' => 'Smith',
+      'given_name' => 'John',
+      'langcode' => 'en',
+      'locality' => 'Mountain View',
+      'organization' => 'Google Inc.',
+      'postal_code' => '94043',
+      'sorting_code' => '',
+    ], $data['address']);
+    $this->assertEquals([
+      'additional_name' => '',
+      'address_line1' => '1098 Alta Ave',
+      'address_line2' => '',
+      'address_line3' => '',
+      'administrative_area' => 'CA',
+      'country_code' => 'US',
+      'dependent_locality' => '',
+      'family_name' => '',
+      'given_name' => '',
+      'langcode' => 'en',
+      'locality' => 'Mountain View',
+      'organization' => '',
+      'postal_code' => '94043',
+      'sorting_code' => '',
+    ], $data['address_advanced']);
+    $this->assertNull($data['address_none']);
+    $this->assertEquals([[
+      'address_line1' => '1098 Alta Ave',
+      'address_line2' => '',
+      'address_line3' => '',
+      'administrative_area' => 'CA',
+      'country_code' => 'US',
+      'family_name' => 'Smith',
+      'given_name' => 'John',
+      'langcode' => 'en',
+      'locality' => 'Mountain View',
+      'organization' => 'Google Inc.',
+      'postal_code' => '94043',
+    ]], $data['address_multiple']);
 
     // Check text formatting.
     $this->drupalGet("/admin/structure/webform/manage/test_element_address/submission/$sid/text");
