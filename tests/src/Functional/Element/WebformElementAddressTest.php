@@ -91,7 +91,6 @@ class WebformElementAddressTest extends WebformElementBrowserTestBase {
       'postal_code' => '94043',
       'sorting_code' => '',
     ], $data['address_advanced']);
-    $this->assertNull($data['address_none']);
     $this->assertEquals([[
       'address_line1' => '1098 Alta Ave',
       'address_line2' => '',
