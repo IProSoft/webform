@@ -28,9 +28,11 @@ variables:
 #   SKIP_ESLINT: '1'
 #   OPT_IN_TEST_NEXT_MAJOR: '1'
   RUN_JOB_UPGRADE_STATUS: '1'
-#   _CURL_TEMPLATES_REF: 'main'
   _PHPCS_EXTRA: '--ignore=*/modules/webform_bootstap/*'
   _PHPUNIT_CONCURRENT: '1'
+
+phpcs:
+  allow_failure: false
 
 composer (next major):
   variables:

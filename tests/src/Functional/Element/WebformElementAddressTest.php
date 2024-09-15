@@ -91,19 +91,21 @@ class WebformElementAddressTest extends WebformElementBrowserTestBase {
       'postal_code' => '94043',
       'sorting_code' => '',
     ], $data['address_advanced']);
-    $this->assertEquals([[
-      'address_line1' => '1098 Alta Ave',
-      'address_line2' => '',
-      'address_line3' => '',
-      'administrative_area' => 'CA',
-      'country_code' => 'US',
-      'family_name' => 'Smith',
-      'given_name' => 'John',
-      'langcode' => 'en',
-      'locality' => 'Mountain View',
-      'organization' => 'Google Inc.',
-      'postal_code' => '94043',
-    ]], $data['address_multiple']);
+    $this->assertEquals([
+      [
+        'address_line1' => '1098 Alta Ave',
+        'address_line2' => '',
+        'address_line3' => '',
+        'administrative_area' => 'CA',
+        'country_code' => 'US',
+        'family_name' => 'Smith',
+        'given_name' => 'John',
+        'langcode' => 'en',
+        'locality' => 'Mountain View',
+        'organization' => 'Google Inc.',
+        'postal_code' => '94043',
+      ],
+    ], $data['address_multiple']);
 
     // Check text formatting.
     $this->drupalGet("/admin/structure/webform/manage/test_element_address/submission/$sid/text");
@@ -156,7 +158,7 @@ address_multiple:
 
     // Check composite elements maxlength against address schema.
     foreach ($schema['columns'] as $column_name => $column) {
-      // @todo: Add support for address_line3.
+      // @todo Add support for address_line3.
       if ($column_name === 'address_line3') {
         continue;
       }
