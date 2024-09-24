@@ -54,15 +54,14 @@ class WebformAutocomplete extends Textfield {
   public static function validateWebformAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
     $value = $element['#value'];
     $options = [];
-
     if ($value) {
       // Get allowed options.
       if (!empty($element['#autocomplete_items'])) {
         $element['#options'] = $element['#autocomplete_items'];
         $options = WebformOptions::getElementOptions($element);
       }
-      if (isset($options[$value])) {
-        $form_state->setValueForElement($element, $value);
+      if (in_array($value, $options)) {
+        $form_state->setValueForElement($element, $options[array_search($value, $options)]);
       }
       else {
         $form_state->setError($element, t('Please select a valid option for @label.', ['@label' => $element['#title']]));
