@@ -42,7 +42,7 @@
     "drupal/devel": "5.x-dev",
     "drupal/entity": "^1.5",
     "drupal/entity_print": "^2.15",
-    "drupal/group": "3.2.x-dev",
+    "drupal/group": "2.3.x-dev",
     "drupal/hal" : "^2.0",
     "drupal/jquery_ui": "1.x-dev",
     "drupal/jquery_ui_button": "2.x-dev",
