@@ -225,7 +225,7 @@ class WebformOptions extends FormElementBase {
    * @return array
    *   An array of options.
    */
-  public static function convertValuesToOptions(array $values = NULL, $options_description = FALSE) {
+  public static function convertValuesToOptions(?array $values = NULL, $options_description = FALSE) {
     $options = [];
     if ($values && is_array($values)) {
       foreach ($values as $option_value => $option) {

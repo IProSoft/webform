@@ -458,7 +458,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   An associative array containing last submission data
    *   with excluded elements.
    */
-  protected function getLastSubmissionData(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+  protected function getLastSubmissionData(WebformInterface $webform, ?EntityInterface $source_entity = NULL, ?AccountInterface $account = NULL) {
     $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE]);
     if (!$last_submission) {
       return [];
