@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Functional\Access;
 
-use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\webform\Element\WebformHtmlEditor;
 
 /**
