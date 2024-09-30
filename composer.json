@@ -31,33 +31,31 @@
     }
   },
   "require": {
-    "drupal/core": "^10.3"
+    "drupal/core": "^10.3 || ^11"
   },
   "require-dev": {
-    "drupal/address": "1.x-dev",
-    "drupal/bootstrap": "3.x-dev",
-    "drupal/captcha": "^1 || ^2",
-    "drupal/chosen": "3.0.x-dev",
-    "drupal/ckeditor": "1.0.x-dev",
-    "drupal/clientside_validation": "^3 || ^4",
+    "drupal/address": "^2.0",
+    "drupal/bootstrap": "^5.0",
+    "drupal/captcha": "^2.0",
+    "drupal/chosen": "^4.0 || ^5.0",
+    "drupal/clientside_validation": "^4.1",
     "drupal/devel": "5.x-dev",
-    "drupal/entity": "1.x-dev",
-    "drupal/entity_print": "2.x-dev",
-    "drupal/group": "1.x-dev",
-    "drupal/hal" : "1 - 2",
+    "drupal/entity": "^1.5",
+    "drupal/entity_print": "^2.15",
+    "drupal/group": "2.3.x-dev",
+    "drupal/hal" : "^2.0",
     "drupal/jquery_ui": "1.x-dev",
     "drupal/jquery_ui_button": "2.x-dev",
     "drupal/jquery_ui_checkboxradio": "2.x-dev",
     "drupal/jquery_ui_datepicker": "2.x-dev",
     "drupal/mailsystem": "4.x-dev",
-    "drupal/metatag": "1.x-dev",
+    "drupal/metatag": "^2.0",
     "drupal/paragraphs": "1.x-dev",
     "drupal/select2": "1.x-dev",
     "drupal/smtp": "1.x-dev",
     "drupal/styleguide": "^1 || ^2",
     "drupal/telephone_validation": "2.x-dev",
-    "drupal/token": "1.x-dev",
-    "drupal/variationcache": "1.x-dev"
+    "drupal/token": "1.x-dev"
   },
   "suggest": {
     "drupal/jquery_ui_buttons": "Provides jQuery UI Checkboxradio library. Required by the Webform jQueryUI Buttons module. The Webform jQueryUI Buttons module is deprecated because jQueryUI is no longer maintained.",
