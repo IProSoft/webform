@@ -1028,7 +1028,7 @@ function webform_element_info_alter(array &$info) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current state of the form.
  * @param array $complete_form
- *   The complete webform structure.
+ *   The complete form structure.
  *
  * @return array
  *   The processed element.

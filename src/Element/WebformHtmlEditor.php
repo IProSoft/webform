@@ -279,21 +279,31 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
    *
    * @param array $element
    *   An associative array containing the properties and children of the
-   *   radios or checkboxes element.
+   *   text formal element.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    * @param array $complete_form
-   *   The complete webform structure.
+   *   The complete form structure.
    *
    * @return array
    *   The processed element.
+   *
+   * @see \Drupal\filter\Element\TextFormat::processFormat
    */
   public static function processTextFormat($element, FormStateInterface $form_state, &$complete_form) {
     if ($element['format']['format']['#default_value'] !== static::DEFAULT_FILTER_FORMAT) {
+      // Remove the webform default filter format.
       unset(
         $element['format']['format']['#options'][static::DEFAULT_FILTER_FORMAT],
         $element['format']['guidelines'][static::DEFAULT_FILTER_FORMAT]
       );
+
+      // Hide the format select widget is there is now only one available format
+      // and it is the default value.
+      if (count($element['format']['format']['#options']) <= 1
+        && isset($element['format']['format']['#options'][$element['format']['format']['#default_value']])) {
+        $element['format']['format']['#access'] = FALSE;
+      }
     }
     return $element;
   }
