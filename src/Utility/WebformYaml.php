@@ -87,7 +87,7 @@ class WebformYaml implements SerializationInterface {
    * Tidy export YAML includes tweaking array layout and multiline strings.
    *
    * @param string $yaml
-   *   The output generated from \Drupal\Core\Serialization\Yaml::encode.
+   *   The output generated from \Drupal\Component\Serialization\Yaml::encode.
    *
    * @return string
    *   The encoded data.
