@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Plugin\WebformHandler;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Plugin\WebformHandlerBase;
 use Drupal\webform\WebformSubmissionInterface;

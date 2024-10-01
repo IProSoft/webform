@@ -3,6 +3,7 @@
 namespace Drupal\webform\Controller;
 
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\CacheableResponse;
@@ -10,7 +11,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Render\HtmlResponse;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Element\Webform as WebformElement;
 use Drupal\webform\Routing\WebformUncacheableResponse;
 use Drupal\webform\WebformInterface;

@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElementBase;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
 

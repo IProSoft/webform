@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Tests\UnitTestCase;
 use Drupal\webform\Utility\WebformYaml;
 

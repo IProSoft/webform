@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Plugin\WebformVariant;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Plugin\WebformVariantBase;
 use Drupal\webform\Utility\WebformElementHelper;

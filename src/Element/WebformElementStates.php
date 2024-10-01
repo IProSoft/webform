@@ -2,13 +2,13 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Element\FormElementBase;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformYaml;
