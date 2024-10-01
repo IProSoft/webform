@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Plugin\DevelGenerate;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\devel_generate\DevelGenerateBase;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
 use Drupal\webform\Utility\WebformArrayHelper;

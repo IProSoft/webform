@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_devel\Commands;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\State\StateInterface;
 use Drupal\user\UserDataInterface;
 use Drupal\webform\Utility\WebformYaml;
