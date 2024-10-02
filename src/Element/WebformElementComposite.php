@@ -2,10 +2,10 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElementBase;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase as WebformCompositeBaseElement;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformYaml;
