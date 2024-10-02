@@ -279,7 +279,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
    *
    * @param array $element
    *   An associative array containing the properties and children of the
-   *   text formal element.
+   *   text format element.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    * @param array $complete_form
@@ -298,7 +298,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
         $element['format']['guidelines'][static::DEFAULT_FILTER_FORMAT]
       );
 
-      // Hide the format select widget is there is now only one available format
+      // Hide the format select widget if there is now only one available format
       // and it is the default value.
       if (count($element['format']['format']['#options']) <= 1
         && isset($element['format']['format']['#options'][$element['format']['format']['#default_value']])) {
