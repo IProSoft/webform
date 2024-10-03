@@ -28,4 +28,15 @@ variables:
 #   SKIP_ESLINT: '1'
 #   OPT_IN_TEST_NEXT_MAJOR: '1'
   RUN_JOB_UPGRADE_STATUS: '1'
-#   _CURL_TEMPLATES_REF: 'main'
+  _CSPELL_IGNORE_PATHS: 'webform.libraries.yml,
+  config/install/*,
+  config/schema/*,
+  tests/modules/*/config/*,
+  modules/*/js/*,
+  modules/*/tests/modules/*/config/*,
+  modules/*/config/install/*,
+  includes/webform.libraries.inc,
+  js/*, css/*,
+  tests/files/*,
+  modules/*/tests/modules/*/files/*.csv,
+  modules/*/tests/modules/*/style-guide/*'

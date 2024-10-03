@@ -867,7 +867,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
             'url' => 'https://www.webwash.net/moving-forward-webform-drupal-8/ ',
           ],
           [
-            'title' => $this->t('How to Make an Advanced Webform in Drupal 8 | OSTrainging'),
+            'title' => $this->t('How to Make an Advanced Webform in Drupal 8 | OSTraining'),
             'url' => 'https://www.ostraining.com/blog/drupal/how-to-make-a-complex-webform-in-drupal-8/',
           ],
         ],
@@ -884,6 +884,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
           ],
         ],
       ],
+      // cSpell:disable
       'about' => [
         'title' => $this->t('About Webform & the Drupal community'),
         'content' => $this->t('This screencast introduces you to the maintainer and community behind the Webform module.'),
@@ -1601,7 +1602,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         'entity.webform.collection',
       ],
     ];
-
+    // cSpell:enable
     /* ********************************************************************** */
     // Installation.
     /* ********************************************************************** */

@@ -83,7 +83,7 @@ class WebformDevelCommands extends DrushCommands {
         $tidied_yaml = $original_yaml;
         $data = Yaml::decode($tidied_yaml);
 
-        // Skip translated configu files which don't include a langcode.
+        // Skip translated configuration files which don't include a langcode.
         // @see tests/modules/webform_test_translation/config/install/language
         if (empty($data['langcode'])) {
           continue;

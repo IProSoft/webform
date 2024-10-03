@@ -122,7 +122,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
    * @option delimiter Delimiter between columns (defaults to site-wide setting). This option may need to be wrapped in quotes. i.e. --delimiter="\t".
    * @option multiple-delimiter Delimiter between an element with multiple values (defaults to site-wide setting).
    * @option file-name File name used to export submission and uploaded filed. You may use tokens.
-   * @option archive-type Archive file type for submission file uploadeds and generated records. (tar or zip)
+   * @option archive-type Archive file type for submission file uploaded and generated records. (tar or zip)
    * @option header-format Set to "label" (default) or "key"
    * @option options-item-format Set to "label" (default) or "key". Set to "key" to print select list values by their keys instead of labels.
    * @option options-single-format Set to "separate" (default) or "compact" to determine how single select list values are exported.

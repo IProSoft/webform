@@ -681,7 +681,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Server side #states API validation.
     $this->conditionsValidator->buildForm($form, $form_state);
 
-    // Append the bubbleable metadat to the form's render array.
+    // Append the bubbleable metadata to the form's render array.
     // @see \Drupal\webform\WebformSubmissionForm::setEntity
     $this->bubbleableMetadata->appendTo($form);
 

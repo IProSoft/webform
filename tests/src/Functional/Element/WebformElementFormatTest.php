@@ -86,7 +86,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     foreach ($elements as $label => $value) {
       $this->assertStringContainsString('<b>' . $label . '</b><br />' . $value, $body, new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));
     }
-
+    // cspell:disable
     // Check code format.
     // @todo Remove once PHP 8.2 is required.
     if (version_compare(phpversion(), '8.1', '>')) {
@@ -95,7 +95,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     else {
       $this->assertStringContainsString('<pre class="js-webform-codemirror-runmode webform-codemirror-runmode" data-webform-codemirror-mode="text/x-yaml">message: \'Hello World\'</pre>', $body);
     }
-
+    // cspell:enable
     // Check elements formatted as text.
     $body = $this->getMessageBody($submission, 'email_text');
     $elements = [
@@ -180,6 +180,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
 
     // Check elements (single) item formatted as HTML.
     $body = $this->getMessageBody($webforms_submission, 'email_html');
+    // cspell:disable
     $elements = [
       'Text field (Comma)' => 'Loremipsum, Oratione, Dixisset',
       'Text field (Semicolon)' => 'Loremipsum; Oratione; Dixisset',
@@ -193,6 +194,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Checkboxes (Unordered list)' => '<ul><li>One</li><li>Two</li><li>Three</li></ul>',
       'Checkboxes (Checklist (☑/☐))' => '<span style="font-size: 1.4em; line-height: 1em">☑</span> One<br /><span style="font-size: 1.4em; line-height: 1em">☑</span> Two<br /><span style="font-size: 1.4em; line-height: 1em">☑</span> Three<br />',
     ];
+    // cspell:enable
     foreach ($elements as $label => $value) {
       $this->assertStringContainsString('<b>' . $label . '</b><br />' . $value, $body, new FormattableMarkup('Found @label: @value', [
         '@label' => $label,

@@ -360,7 +360,7 @@ abstract class TextBase extends WebformElementBase {
    *
    * @return array
    *   An associative array keyed my input mask contain input mask title,
-   *   example, and patterh.
+   *   example, and pattern.
    */
   protected function getInputMasks() {
     $input_masks = [

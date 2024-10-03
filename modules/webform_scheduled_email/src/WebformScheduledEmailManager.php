@@ -460,7 +460,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
   }
 
   /* ************************************************************************ */
-  // Queuing/sending functions (aka the tumbleweed).
+  // Queueing/sending functions (aka the tumbleweed).
   /* ************************************************************************ */
 
   /**
