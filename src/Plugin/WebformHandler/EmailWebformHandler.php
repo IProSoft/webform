@@ -1066,7 +1066,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $emails = array_filter($emails);
     // Make sure all email addresses are unique.
     $emails = array_unique($emails);
-    // Sort email addresses to make it easier to debug queuing and/or sending
+    // Sort email addresses to make it easier to debug queueing and/or sending
     // issues.
     asort($emails);
 

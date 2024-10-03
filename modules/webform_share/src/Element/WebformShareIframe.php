@@ -8,7 +8,7 @@ use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformSourceEntity\QueryStringWebformSourceEntity;
 
 /**
- * Provides a render element that createa an iframe to share a webform.
+ * Provides a render element that create an iframe to share a webform.
  *
  * @RenderElement("webform_share_iframe")
  */

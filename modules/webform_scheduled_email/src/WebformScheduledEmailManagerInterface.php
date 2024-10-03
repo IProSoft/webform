@@ -264,7 +264,7 @@ interface WebformScheduledEmailManagerInterface {
   public function delete(EntityInterface $entity, $handler_id = NULL);
 
   /* ************************************************************************ */
-  // Queuing/sending functions (aka the tumbleweed).
+  // Queueing/sending functions (aka the tumbleweed).
   /* ************************************************************************ */
 
   /**

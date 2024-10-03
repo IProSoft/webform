@@ -106,6 +106,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][textfield][title]', 'Campo de texto');
 
     // Check select with options translation.
+    // cSpell:disable
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][select_options][title]', 'Seleccione (opciones)');
 
     // Check select with custom options translation.
@@ -438,7 +439,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     $this->drupalGet('/es/webform/test_translation', ['query' => ['variant' => 'test']]);
     $assert_session->responseContains('<label for="edit-textfield">Campo de texto</label>');
     $assert_session->responseContains('<label for="edit-select-options">Seleccione (opciones)</label>');
-
+    // cSpell:enable
     // Check French (not translated) webform.
     $this->drupalGet('/fr/webform/test_translation');
     $assert_session->responseContains('<label for="edit-textfield">Text field</label>');

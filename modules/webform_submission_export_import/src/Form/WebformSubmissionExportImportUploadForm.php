@@ -289,7 +289,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
         $form_state->setRebuild();
       }
       else {
-        $this->messenger()->addError($this->t("Uable to parse CSV file. Please review the CSV file's formatting."));
+        $this->messenger()->addError($this->t("Unable to parse CSV file. Please review the CSV file's formatting."));
       }
     }
   }
