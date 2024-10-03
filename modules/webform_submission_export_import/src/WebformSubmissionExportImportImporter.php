@@ -667,7 +667,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    *   An array of multiple files, single file id, or NULL if file could
    *   not be imported.
    */
-  protected function importElement(array $element, $value, ?WebformSubmissionInterface $webform_submission = NULL, array &$errors) {
+  protected function importElement(array $element, $value, ?WebformSubmissionInterface $webform_submission, array &$errors) {
     $element_plugin = $this->elementManager->getElementInstance($element);
 
     if ($value === '') {
@@ -711,7 +711,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    *   An array of multiple files, single file id, or NULL if file could
    *   not be imported.
    */
-  protected function importManageFileElement(array $element, $value, ?WebformSubmissionInterface $webform_submission = NULL, array &$errors) {
+  protected function importManageFileElement(array $element, $value, ?WebformSubmissionInterface $webform_submission, array &$errors) {
     $webform = $this->getWebform();
     $element_plugin = $this->elementManager->getElementInstance($element);
 
@@ -831,7 +831,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    *   An array of entity ids, a single entity id, or NULL if entity ids
    *   could not be imported.
    */
-  protected function importEntityReferenceElement(array $element, $value, ?WebformSubmissionInterface $webform_submission = NULL, array &$errors) {
+  protected function importEntityReferenceElement(array $element, $value, ?WebformSubmissionInterface $webform_submission, array &$errors) {
     $element_plugin = $this->elementManager->getElementInstance($element);
     $entity_type_id = $element_plugin->getTargetType($element);
     $values = explode(',', $value);
@@ -870,7 +870,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    * @return array
    *   An array of composite element data.
    */
-  protected function importCompositeElement(array $element, $value, ?WebformSubmissionInterface $webform_submission = NULL, array &$errors) {
+  protected function importCompositeElement(array $element, $value, ?WebformSubmissionInterface $webform_submission, array &$errors) {
     try {
       return Yaml::decode($value);
     }
@@ -899,7 +899,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    * @return array
    *   An array of multiple values.
    */
-  protected function importMultipleElement(array $element, $value, ?WebformSubmissionInterface $webform_submission = NULL, array &$errors) {
+  protected function importMultipleElement(array $element, $value, ?WebformSubmissionInterface $webform_submission, array &$errors) {
     $values = preg_split('/\s*,\s*/', $value);
     foreach ($values as $index => $item) {
       $values[$index] = str_replace('%2C', ',', $item);
