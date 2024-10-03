@@ -28,7 +28,6 @@ variables:
 #   SKIP_ESLINT: '1'
 #   OPT_IN_TEST_NEXT_MAJOR: '1'
   RUN_JOB_UPGRADE_STATUS: '1'
-  _PHPUNIT_CONCURRENT: '1'
   _CSPELL_IGNORE_PATHS: 'webform.libraries.yml,
   config/install/*,
   config/schema/*,
