@@ -601,7 +601,6 @@ webform.element.color:
   js:
     js/webform.element.color.js: {}
   dependencies:
-    - core/modernizr
     - webform/webform.element.inputmask
 
 webform.element.composite:
@@ -861,8 +860,6 @@ webform.element.range:
       css/webform.element.range.css: {}
   js:
     js/webform.element.range.js: {}
-  dependencies:
-    - core/modernizr
 
 webform.element.rating:
   version: VERSION
@@ -999,7 +996,6 @@ webform.element.time:
     js/webform.element.time.js: {}
   dependencies:
     - core/drupal
-    - core/modernizr
     - webform/libraries.jquery.timepicker
 
 webform.element.video_file:
