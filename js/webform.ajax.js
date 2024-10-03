@@ -294,11 +294,11 @@
    *   The HTTP status code.
    */
   Drupal.AjaxCommands.prototype.webformCloseDialog = function (ajax, response, status) {
-    if ($('#drupal-off-canvas').length) {
+    if ($('#drupal-off-canvas-wrapper').length) {
       // Close off-canvas system tray which is not triggered by close dialog
       // command.
       // @see Drupal.behaviors.offCanvasEvents
-      $('#drupal-off-canvas').remove();
+      $('#drupal-off-canvas-wrapper').remove();
       $('body').removeClass('js-tray-open');
       // Remove all *.off-canvas events
       $(document).off('.off-canvas');
