@@ -13,5 +13,7 @@
  * @ingroup themeable
  */
 #}
-{{ attach_library('webform/webform.element.help') }}
-<span{{ attributes }}><span aria-hidden="true">?</span></span>
+{%- block help -%}
+  {{ attach_library('webform/webform.element.help') }}
+  <span{{ attributes }}><span aria-hidden="true">?</span></span>
+{%- endblock help -%}
