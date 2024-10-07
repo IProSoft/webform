@@ -51,16 +51,6 @@ abstract class WebformComputedBase extends FormElement implements WebformCompute
 
   /**
    * Processes a Webform computed token element.
-   *
-   * @param array $element
-   *   The element.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array
-   *   The processed element.
    */
   public static function processWebformComputed(&$element, FormStateInterface $form_state, &$complete_form) {
     $webform_submission = static::getWebformSubmission($element, $form_state, $complete_form);
@@ -207,6 +197,7 @@ abstract class WebformComputedBase extends FormElement implements WebformCompute
     $element['hidden']['#type'] = 'hidden';
     $element['hidden']['#value'] = ['#markup' => $value];
     $element['hidden']['#parents'] = $element['#parents'];
+    $element['hidden']['#attributes'] = $element['#attributes'];
   }
 
   /**

@@ -267,7 +267,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         // Using a random value to make sure users can't determine a hidden
         // or computed element's value/result.
         if (!isset($cross_page_values[$target_name])) {
-          $cross_page_values[$target_name] = rand();
+          $cross_page_values[$target_name] = random_int(0, mt_getrandmax());
         }
         $target_value = $cross_page_values[$target_name];
 
@@ -463,7 +463,15 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
 
       // Set data to empty array or string for any webform element that is hidden.
       if (!$element_visible && !empty($element['#webform_key']) && isset($data[$key])) {
-        $data[$key] = (is_array($data[$key])) ? [] : '';
+        switch ($element['#type']) {
+          case 'text_format':
+            $data[$key]['value'] = '';
+            break;
+
+          default:
+            $data[$key] = (is_array($data[$key])) ? [] : '';
+            break;
+        }
       }
 
       $this->processFormRecursive($element, $webform_submission, $data, $check_access, $element_visible);
@@ -486,7 +494,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    */
   public static function elementValidate(array &$element, FormStateInterface $form_state) {
     // Element validation is trigger sequentially.
-    // Triggers must be validated before dependants.
+    // Triggers must be validated before dependents.
     //
     // Build webform submission with validated and processed data.
     // Webform submission must be rebuilt every time since the
@@ -825,7 +833,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
         // escape sequence format.
         // @see \Drupal\webform\Plugin\WebformElement\TextBase::validatePattern
         $pcre_pattern = preg_replace('/\\\\u([a-fA-F0-9]{4})/', '\\x{\\1}', $trigger_value);
-        return preg_match('{' . $pcre_pattern . '}u', $element_value);
+        return preg_match('{' . $pcre_pattern . '}u', $element_value ?? '');
 
       case 'less':
         return ($element_value !== '' && floatval($trigger_value) > floatval($element_value));

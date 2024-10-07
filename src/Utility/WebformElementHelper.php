@@ -368,7 +368,7 @@ class WebformElementHelper {
     foreach ($attributes_properties as $attributes_property) {
       if (isset($element[$attributes_property]) && isset($element[$attributes_property]['class'])) {
         $index = array_search('js-webform-states-hidden', $element[$attributes_property]['class']);
-        if ($index !== FALSE) {
+        if ($index !== FALSE && $index !== NULL) {
           unset($element[$attributes_property]['class'][$index]);
           $attributes['class'][] = 'js-webform-states-hidden';
           break;
@@ -531,6 +531,34 @@ class WebformElementHelper {
   }
 
   /**
+   * Merge element options.
+   *
+   * NOTE: This is a modified version of WebformElementHelper::merge(),
+   * designed to only run when dealing with an #options property. See issue #3320160
+   *
+   * @param array $options
+   *   An array of options.
+   * @param array $source_options
+   *   An array of options to be merged.
+   */
+  public static function mergeOptions(array &$options, array $source_options) {
+    foreach ($options as $key => $option) {
+      if (isset($source_options[$key]) && is_scalar($option) && gettype($option) === gettype($source_options[$key])) {
+        $options[$key] = $source_options[$key];
+      }
+      elseif (is_array($option)) {
+        unset($options[$key]);
+      }
+    }
+    unset($option);
+    foreach ($source_options as $key => $option) {
+      if (is_array($option)) {
+        $options[$key] = $option;
+      }
+    }
+  }
+
+  /**
    * Merge element properties.
    *
    * @param array $elements
@@ -550,7 +578,12 @@ class WebformElementHelper {
       }
 
       if (is_array($element)) {
-        self::merge($element, $source_element);
+        if ($key === '#options') {
+          self::mergeOptions($element, $source_element);
+        }
+        else {
+          self::merge($element, $source_element);
+        }
       }
       elseif (is_scalar($element)) {
         $elements[$key] = $source_element;
@@ -587,7 +620,12 @@ class WebformElementHelper {
       }
 
       if (is_array($value)) {
-        self::merge($value, $translation_value);
+        if ($key === '#options') {
+          self::mergeOptions($value, $translation_value);
+        }
+        else {
+          self::merge($value, $translation_value);
+        }
       }
       elseif (is_scalar($value)) {
         $element[$key] = $translation_value;
@@ -713,7 +751,7 @@ class WebformElementHelper {
    */
   public static function setElementValidate(array $element, array $element_validate = [WebformElementHelper::class, 'suppressElementValidate']) {
     // Element validation can only overridden once so we need to reset
-    // the #eleemnt_validate callback.
+    // the #element_validate callback.
     if (isset($element['#_element_validate'])) {
       $element['#element_validate'] = $element['#_element_validate'];
       unset($element['#_element_validate']);
@@ -852,7 +890,7 @@ class WebformElementHelper {
   }
 
   /**
-   * Randomoize an associative array of element values and disable page caching.
+   * Randomize an associative array of element values and disable page caching.
    *
    * @param array $values
    *   An associative array of element values.

@@ -16,7 +16,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'webform', 'webform_test_submissions'];
+  protected static $modules = ['node', 'webform', 'webform_test_submissions'];
 
   /**
    * Webforms to load.
@@ -242,7 +242,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
     // Check that 'Customize' button and link are visible.
     $this->drupalGet('/admin/structure/webform/manage/test_submissions/results/submissions');
     $assert_session->responseContains('>Customize<');
-    $assert_session->linkByHrefExists("${base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
+    $assert_session->linkByHrefExists("{$base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
 
     // Enabled customized results.
     $webform->setSetting('results_customize', TRUE)->save();
@@ -250,12 +250,12 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
     // Check that 'Customize' button and link are not visible.
     $this->drupalGet('/admin/structure/webform/manage/test_submissions/results/submissions');
     $assert_session->responseNotContains('>Customize<');
-    $assert_session->linkByHrefExists("${base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
+    $assert_session->linkByHrefExists("{$base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
 
     // Check that 'Customize my table' button and link are visible.
     $this->drupalGet('/admin/structure/webform/manage/test_submissions/results/submissions');
     $assert_session->responseContains('>Customize my table<');
-    $assert_session->linkByHrefExists("${base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom/user");
+    $assert_session->linkByHrefExists("{$base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom/user");
 
     // Check that first name is before last name.
     $assert_session->responseMatches('#First name.+Last name#s');
@@ -263,7 +263,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
     // Check that 'Customize default table' button and link are visible.
     $this->drupalGet('/admin/structure/webform/manage/test_submissions/results/submissions/custom/user');
     $assert_session->responseContains('>Customize default table<');
-    $assert_session->linkByHrefExists("${base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
+    $assert_session->linkByHrefExists("{$base_path}admin/structure/webform/manage/test_submissions/results/submissions/custom");
 
     // Switch to admin submission user.
     $this->drupalLogin($admin_submission_user);
@@ -339,7 +339,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
     $this->drupalLogin($own_submission_user);
 
     // Check view own submissions.
-    $this->drupalget('/webform/test_submissions/submissions');
+    $this->drupalGet('/webform/test_submissions/submissions');
     $assert_session->responseContains('<th specifier="serial">');
     $assert_session->responseContains('<th specifier="created" class="priority-medium is-active" aria-sort="descending">');
     $assert_session->responseContains('<th specifier="remote_addr" class="priority-low">');
@@ -349,7 +349,7 @@ class WebformSubmissionListBuilderCustomizeTest extends WebformBrowserTestBase {
       ->save();
 
     // Check view own submissions only include first name and last name.
-    $this->drupalget('/webform/test_submissions/submissions');
+    $this->drupalGet('/webform/test_submissions/submissions');
     $assert_session->responseNotContains('<th specifier="serial">');
     $assert_session->responseNotContains('<th specifier="created" class="priority-medium is-active" aria-sort="descending">');
     $assert_session->responseNotContains('<th specifier="remote_addr" class="priority-low">');

@@ -3,13 +3,13 @@
 namespace Drupal\webform;
 
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
@@ -356,7 +356,8 @@ class WebformMessageManager implements WebformMessageManagerInterface {
     $webform_settings = ($this->webform) ? $this->webform->getSettings() : [];
     if (!empty($webform_settings[$key])) {
       $value = $webform_settings[$key];
-      if ($value === '[none]' || $value === (string) $this->t('[none]')) {
+      $none_value = trim(strip_tags($value));
+      if ($none_value === '[none]' || $none_value === (string) $this->t('[none]')) {
         return FALSE;
       }
       else {

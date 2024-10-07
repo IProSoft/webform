@@ -5,11 +5,11 @@ namespace Drupal\webform\Entity;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
@@ -20,13 +20,13 @@ use Drupal\webform\Plugin\WebformElementAttachmentInterface;
 use Drupal\webform\Plugin\WebformElementComputedInterface;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\Plugin\WebformElementWizardPageInterface;
+use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\Plugin\WebformHandlerMessageInterface;
+use Drupal\webform\Plugin\WebformHandlerPluginCollection;
 use Drupal\webform\Plugin\WebformVariantInterface;
 use Drupal\webform\Plugin\WebformVariantPluginCollection;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
-use Drupal\webform\Plugin\WebformHandlerInterface;
-use Drupal\webform\Plugin\WebformHandlerPluginCollection;
 use Drupal\webform\Utility\WebformTextHelper;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\WebformException;
@@ -113,7 +113,7 @@ use Drupal\webform\WebformSubmissionStorageInterface;
  *     "uuid",
  *     "title",
  *     "description",
- *     "category",
+ *     "categories",
  *     "elements",
  *     "css",
  *     "javascript",
@@ -239,11 +239,11 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   protected $description;
 
   /**
-   * The webform options category.
+   * The webform categories.
    *
-   * @var string
+   * @var array
    */
-  protected $category;
+  protected $categories = [];
 
   /**
    * The owner's uid.
@@ -740,37 +740,51 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
-  public function hasTranslations() {
-    if (isset($this->hasTranslations)) {
-      return $this->hasTranslations;
-    }
-
-    // Make sure the config translation module is enabled.
-    if (!\Drupal::moduleHandler()->moduleExists('config_translation')) {
-      $this->hasTranslations = FALSE;
-      return $this->hasTranslations;
-    }
-
-    /** @var \Drupal\locale\LocaleConfigManager $local_config_manager */
-    $local_config_manager = \Drupal::service('locale.config_manager');
+  public function getTranslationLanguages() {
     $languages = \Drupal::languageManager()->getLanguages();
     foreach ($languages as $langcode => $language) {
-      if ($local_config_manager->hasTranslation('webform.webform.' . $this->id(), $langcode)) {
-        $this->hasTranslations = TRUE;
-        return $this->hasTranslations;
+      if (!$this->hasTranslation($langcode)) {
+        unset($languages[$langcode]);
       }
     }
+    return $languages;
+  }
 
-    $this->hasTranslations = FALSE;
-    return $this->hasTranslations;
+  /**
+   * {@inheritdoc}
+   */
+  public function hasTranslation($langcode) {
+    if ($this->getLangcode() === $langcode) {
+      return TRUE;
+    }
+    elseif (\Drupal::moduleHandler()->moduleExists('config_translation')) {
+      /** @var \Drupal\locale\LocaleConfigManager $local_config_manager */
+      $local_config_manager = \Drupal::service('locale.config_manager');
+      return $local_config_manager->hasTranslation($this->getConfigDependencyName(), $langcode);
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasTranslations() {
+    return (\Drupal::moduleHandler()->moduleExists('config_translation')
+      && count($this->getTranslationLanguages()) > 1);
   }
 
   /**
    * {@inheritdoc}
    */
   public function hasPage() {
-    $settings = $this->getSettings();
-    return $settings['page'] ? TRUE : FALSE;
+    if (\Drupal::config('webform.settings')->get('settings.default_page') === FALSE) {
+      return FALSE;
+    }
+    else {
+      return (boolean) $this->getSetting('page');
+    }
   }
 
   /**
@@ -1145,6 +1159,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       'wizard_toggle' => FALSE,
       'wizard_toggle_show_label' => '',
       'wizard_toggle_hide_label' => '',
+      'wizard_page_type' => 'container',
+      'wizard_page_title_tag' => \Drupal::config('webform.settings')->get('element.default_section_title_tag'),
       'preview' => DRUPAL_DISABLED,
       'preview_label' => '',
       'preview_title' => '',
@@ -1201,7 +1217,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   public function getSubmissionForm(array $values = [], $operation = 'add') {
     // Test a single webform variant which is set via
     // ?_webform_handler[ELEMENT_KEY]={variant_id}.
-    $webform_variant = \Drupal::request()->query->get('_webform_variant') ?: [];
+    $query = \Drupal::request()->query->all();
+    $webform_variant = $query['_webform_variant'] ?? [];
     if ($webform_variant) {
       $is_add_operation = ($operation === 'add' && $this->access('update'));
       $is_test_operation = ($operation === 'test' && $this->access('test'));
@@ -1487,7 +1504,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     catch (\Exception $exception) {
       $link = $this->toLink($this->t('Edit'), 'edit-form')->toString();
       \Drupal::logger('webform')
-        ->notice('%title elements are not valid. @message', [
+        ->error('%title elements are not valid. @message', [
           '%title' => $this->label(),
           '@message' => $exception->getMessage(),
           'link' => $link,
@@ -1533,7 +1550,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     // Get the current langcode.
-    $current_langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $current_langcode = \Drupal::languageManager()->getConfigOverrideLanguage()->getId();
 
     // If the current langcode is the same as this webform's langcode
     // then return.
@@ -1671,7 +1688,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       // Set webform, id, key, parent_key, depth, and parent children.
       $element['#webform'] = $this->id();
       $element['#webform_id'] = $this->id() . '--' . $key;
-      $element['#webform_key'] = $key;
+      $element['#webform_key'] = (string) $key;
       $element['#webform_parent_key'] = $parent;
       $element['#webform_parent_flexbox'] = FALSE;
       $element['#webform_depth'] = $depth;
@@ -2410,7 +2427,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
 
     // If 'Allow users to post submission from a dedicated URL' is disabled,
     // delete all existing paths.
-    if (empty($this->getSetting('page'))) {
+    if (empty($this->hasPage())) {
       $this->deletePaths();
       return;
     }
@@ -2447,7 +2464,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     $path_alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
-    $query = $path_alias_storage->getQuery('OR');
+    $query = $path_alias_storage->getQuery('OR')->accessCheck(TRUE);
 
     // Delete webform base, confirmation, submissions and drafts paths.
     $path_suffixes = ['', '/confirmation', '/submissions', '/drafts'];
@@ -2529,20 +2546,20 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function hasMessageHandler() {
-    if (isset($this->hasMessagehandler)) {
-      $this->hasMessagehandler;
+    if (isset($this->hasMessageHandler)) {
+      $this->hasMessageHandler;
     }
 
-    $this->hasMessagehandler = FALSE;
+    $this->hasMessageHandler = FALSE;
     $handlers = $this->getHandlers();
     foreach ($handlers as $handler) {
       if ($handler instanceof WebformHandlerMessageInterface) {
-        $this->hasMessagehandler = TRUE;
+        $this->hasMessageHandler = TRUE;
         break;
       }
     }
 
-    return $this->hasMessagehandler;
+    return $this->hasMessageHandler;
   }
 
   /**
@@ -3032,36 +3049,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * Overriding so that URLs pointing to webform default to 'canonical'
    * submission webform and not the back-end 'edit-form'.
    */
-  public function url($rel = 'canonical', $options = []) {
-    @trigger_error('Webform::url() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toUrl() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
-    // Do not remove this override: the default value of $rel is different.
-    if ($this->id() === NULL || !$this->hasLinkTemplate($rel)) {
-      return '';
-    }
-    $uri = $this->toUrl($rel);
-    $options += $uri->getOptions();
-    $uri->setOptions($options);
-    return $uri->toString();
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * Overriding so that URLs pointing to webform default to 'canonical'
-   * submission webform and not the back-end 'edit-form'.
-   */
   public function toUrl($rel = 'canonical', array $options = []) {
-    return parent::toUrl($rel, $options);
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * Overriding so that URLs pointing to webform default to 'canonical'
-   * submission webform and not the back-end 'edit-form'.
-   */
-  public function urlInfo($rel = 'canonical', array $options = []) {
-    @trigger_error('Webform::urlInfo() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toUrl() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
     return parent::toUrl($rel, $options);
   }
 
@@ -3073,17 +3061,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    */
   public function toLink($text = NULL, $rel = 'canonical', array $options = []) {
     return parent::toLink($text, $rel, $options);
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * Overriding so that links to webform default to 'canonical' submission
-   * webform and not the back-end 'edit-form'.
-   */
-  public function link($text = NULL, $rel = 'canonical', array $options = []) {
-    @trigger_error('Webform::link() function is deprecated in drupal:8.0.0 and is removed from drupal:9.0.0. Use \Drupal\webform\Entity\Webform::toLink() instead. See https://www.drupal.org/project/webform/issues/3251189', E_USER_DEPRECATED);
-    return parent::toLink($text, $rel, $options)->toString();
   }
 
   /* ************************************************************************ */
@@ -3247,8 +3224,8 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public static function sort(ConfigEntityInterface $a, ConfigEntityInterface $b) {
-    $a_label = $a->get('category') . $a->label();
-    $b_label = $b->get('category') . $b->label();
+    $a_label = $a->label();
+    $b_label = $b->label();
     return strnatcasecmp($a_label, $b_label);
   }
 

@@ -10,7 +10,7 @@ use Drupal\webform\Entity\Webform;
  *
  * These tests proof that the webform block which
  * renders the webform as a block provides the correct
- * cache tags / cache contexts so that cachability works.
+ * cache tags / cache contexts so that cacheability works.
  *
  * @group webform_browser
  */
@@ -19,7 +19,7 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['block', 'webform', 'page_cache', 'dynamic_page_cache', 'node'];
+  protected static $modules = ['block', 'webform', 'page_cache', 'dynamic_page_cache', 'node'];
 
   /**
    * Authenticated user.
@@ -31,7 +31,7 @@ class WebformBlockCacheTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->authenticatedUser = $this->createUser([

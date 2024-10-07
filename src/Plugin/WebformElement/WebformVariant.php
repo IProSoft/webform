@@ -4,9 +4,9 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
@@ -204,7 +204,7 @@ class WebformVariant extends WebformElementBase implements WebformElementDisplay
     ];
     $form['variant']['prepopulate'] = $form['form']['prepopulate'];
     $form['variant']['prepopulate']['#title'] = $this->t('Prepopulate this variant');
-    $form['variant']['prepopulate']['#description'] .= ' ' . $this->t('If checked, variants will be availalbe using query string parameters.');
+    $form['variant']['prepopulate']['#description'] .= ' ' . $this->t('If checked, variants will be available using query string parameters.');
     unset(
       $form['form']['prepopulate'],
       $form['variant']['prepopulate']['#weight']

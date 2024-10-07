@@ -14,7 +14,13 @@ use Drupal\webform\Utility\WebformDialogHelper;
  */
 function webform_library_info_build() {
   $base_path = base_path();
-  $default_query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  // @todo Remove once Drupal 10.2.x is only supported.
+  if (floatval(\Drupal::VERSION) < 10.2) {
+    $default_query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  }
+  else {
+    $default_query_string = \Drupal::service('asset.query_string')->get();
+  }
 
   /** @var \Drupal\webform\WebformInterface[] $webforms */
   $webforms = Webform::loadMultiple();
@@ -30,12 +36,12 @@ function webform_library_info_build() {
       $settings = ['type' => 'external', 'preprocess' => FALSE, 'minified' => FALSE];
       if ($type === 'css') {
         $libraries["webform.css.$webform_id"] = [
-          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}?{$default_query_string}" => $settings]],
+          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}/custom.css?{$default_query_string}" => $settings]],
         ];
       }
       else {
         $libraries["webform.javascript.$webform_id"] = [
-          'js' => ["{$base_path}webform/javascript/{$webform_id}?{$default_query_string}" => $settings],
+          'js' => ["{$base_path}webform/javascript/{$webform_id}/custom.js?{$default_query_string}" => $settings],
         ];
       }
     }
@@ -49,31 +55,12 @@ function webform_library_info_build() {
 function webform_library_info_alter(&$libraries, $extension) {
   // Only alter modules that declare webform libraries.
   // @see hook_webform_libraries_info()
-  $webform_libraries_modules = \Drupal::moduleHandler()->getImplementations('webform_libraries_info');
-  $webform_libraries_modules[] = 'webform';
-
-  if (!in_array($extension, $webform_libraries_modules)) {
+  if ($extension !== 'webform' && !\Drupal::moduleHandler()->hasImplementations('webform_libraries_info', $extension)) {
     return;
   }
 
   /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
   $libraries_manager = \Drupal::service('webform.libraries_manager');
-
-  // Use Tippy.js 6.x which is compatible with Drupal 9.x.
-  if (isset($libraries['libraries.tippyjs']) && floatval(\Drupal::VERSION) >= 9) {
-    $tippyjs_library = $libraries_manager->getLibrary('tippyjs/6.x');
-    $libraries['libraries.tippyjs']['directory'] = 'tippyjs/6.x';
-    $libraries['libraries.tippyjs']['version'] = $tippyjs_library['version'];
-    $libraries['libraries.tippyjs']['cdn'] = ['/libraries/tippyjs/6.x/' => 'https://unpkg.com/tippy.js@' . $tippyjs_library['version'] . '/dist/'];
-    $libraries['libraries.tippyjs']['js'] = ['/libraries/tippyjs/6.x/' . basename($tippyjs_library['download_url']->toString()) => []];
-  }
-
-  // If webform date element in D8 use the old dependency on 'core/drupal.date'.
-  if (isset($libraries['webform.element.date'])
-    && floatval(\Drupal::VERSION) < 9
-    && !\Drupal::moduleHandler()->moduleExists('jquery_ui_datepicker')) {
-    $libraries['webform.element.date']['dependencies'] = ['core/drupal.date', 'core/drupalSettings'];
-  }
 
   // If old version of the progress tracker (< 2.0.7) is installed
   // use the progress-tracker.css in /docs instead of /src.
@@ -184,22 +171,21 @@ function _webform_library_info_alter_recursive(array &$library, array $cdn) {
  * Implements hook_css_alter().
  */
 function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
-  // Remove the stable.theme's off-canvas CSS reset for webform admin routes.
+  // Remove the off-canvas CSS reset for webform admin routes.
   // @see https://www.drupal.org/project/drupal/issues/2826722
-  //
-  // NOTE: Most admin themes correctly style jQuery UI dialogs because Drupal's
-  // admin UI, especially Views, relies on them.
-  $use_off_canvas = WebformDialogHelper::useOffCanvas();
-  // @todo Remove once Claro theme support offcanvas tray.
-  $is_claro_theme = \Drupal::service('webform.theme_manager')->isActiveTheme('claro');
-  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
-  $is_webform_route = preg_match('/(^webform|^entity\.webform|^entity\.node\.webform)/', \Drupal::routeMatch()->getRouteName());
-  if ($is_claro_theme || ($use_off_canvas && $is_admin_route && $is_webform_route)) {
-    foreach ($css as $key => $item) {
-      // @see 'core/misc/dialog/off-canvas
-      // @see core/themes/stable/css/core/dialog/off-canvas
-      if (strpos($key, '/off-canvas.') !== FALSE) {
-        unset($css[$key]);
+  if (WebformDialogHelper::useOffCanvas()) {
+    $has_webform_css = FALSE;
+    foreach (array_keys($css) as $key) {
+      if (str_contains($key, '/webform.admin.css')) {
+        $has_webform_css = TRUE;
+        break;
+      }
+    }
+    if ($has_webform_css) {
+      foreach ($css as $key => $item) {
+        if (str_contains($key, '/off-canvas')) {
+          unset($css[$key]);
+        }
       }
     }
   }
@@ -211,6 +197,16 @@ function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
  * Implements hook_js_alter().
  */
 function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  // Ensure codemirror.js always loads first with weight = -1.
+  // This prevents "Uncaught ReferenceError: CodeMirror is not defined" errors.
+  // If the CKEditor Codemirror module is installed, it will overwrite
+  // the Webform module's codemirror.js weight.
+  // @see ckeditor_codemirror/ckeditor_codemirror.libraries.yml
+  // @see webform/webform.libraries.yml
+  if (isset($javascript['libraries/codemirror/lib/codemirror.js'])) {
+    $javascript['libraries/codemirror/lib/codemirror.js']['weight'] = -1;
+  }
+
   _webform_asset_alter($javascript, 'javascript');
 }
 
@@ -226,7 +222,7 @@ function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
  */
 function _webform_asset_alter(array &$items, $type) {
   foreach ($items as $key => &$item) {
-    if (strpos($key, "webform/$type/") === 0) {
+    if (strpos($key, "/webform/$type/") === 0) {
       $item['weight'] = 1000;
       $item['group'] = 1000;
     }

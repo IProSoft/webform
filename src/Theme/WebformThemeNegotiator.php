@@ -76,6 +76,10 @@ class WebformThemeNegotiator implements ThemeNegotiatorInterface {
    */
   protected function getActiveTheme(RouteMatchInterface $route_match) {
     $route_name = $route_match->getRouteName();
+    if (empty($route_name)) {
+      return '';
+    }
+
     if (strpos($route_name, 'webform') === FALSE) {
       return '';
     }
@@ -95,7 +99,7 @@ class WebformThemeNegotiator implements ThemeNegotiatorInterface {
 
     // If webform route and page is disabled, apply admin theme to
     // the webform routes.
-    if ($is_webform_route && !$webform->getSetting('page')) {
+    if ($is_webform_route && !$webform->hasPage()) {
       return ($this->user->hasPermission('view the administration theme'))
         ? $this->configFactory->get('system.theme')->get('admin')
         : '';

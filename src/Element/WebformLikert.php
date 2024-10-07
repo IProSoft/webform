@@ -8,7 +8,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
+use Drupal\webform\Utility\WebformXss;
 
 /**
  * Provides a webform element for a likert scale.
@@ -128,6 +130,10 @@ class WebformLikert extends FormElement {
 
       $value = $element['#value'][$question_key] ?? NULL;
 
+      // Convert #title to HTML markup so that it can displayed properly
+      // in error messages.
+      $question_title = WebformHtmlHelper::toHtmlMarkup($question_title, WebformXss::getHtmlTagList());
+
       // Get question id.
       // @see \Drupal\Core\Form\FormBuilder::doBuildForm
       $question_id = 'edit-' . implode('-', array_merge($element['#parents'], ['table', $question_key, 'likert_question']));
@@ -158,7 +164,6 @@ class WebformLikert extends FormElement {
         // to required.
         if ($element['#required']) {
           $answer_attributes['required'] = 'required';
-          $answer_attributes['aria-required'] = 'true';
         }
 
         $row[$answer_key] = [
@@ -329,6 +334,9 @@ class WebformLikert extends FormElement {
     foreach ($element['#questions'] as $question_key => $question_title) {
       if (is_null($value[$question_key])) {
         $question_element = &$element['table'][$question_key]['likert_question'];
+        // Convert #title to HTML markup so that it can displayed properly
+        // in error messages.
+        $question_title = WebformHtmlHelper::toHtmlMarkup($question_title, WebformXss::getHtmlTagList());
         $t_args = ['@name' => $question_title];
         if (!empty($element['#required_error'])) {
           $form_state->setError($question_element, new FormattableMarkup($element['#required_error'], $t_args));

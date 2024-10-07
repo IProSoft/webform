@@ -16,7 +16,7 @@ class WebformElementInputMaskTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform_test_element_input_masks'];
+  protected static $modules = ['webform_test_element_input_masks'];
 
   /**
    * Webforms to load.
@@ -35,11 +35,13 @@ class WebformElementInputMaskTest extends WebformElementBrowserTestBase {
 
     // Check default values.
     $this->postSubmission($webform);
-    $assert_session->responseContains("currency: '$ 1.00'
+    $this->assertWebformYaml("currency: '$ 1.00'
 currency_negative: '-$ 1.00'
 currency_positive_negative: '$ 1.00'
 datetime: ''
 decimal: ''
+decimal_negative: ''
+decimal_positive_negative: ''
 email: ''
 ip: ''
 license_plate: ''
@@ -59,6 +61,8 @@ module: ''");
       'email' => 'example@example.com',
       'datetime' => '2007-06-09\'T\'17:46:21',
       'decimal' => '9.9',
+      'decimal_negative' => '-9.999',
+      'decimal_positive_negative' => '-9.999',
       'ip' => '255.255.255.255',
       'currency' => '$ 9.99',
       'currency_negative' => '-$ 9.99',
@@ -75,11 +79,13 @@ module: ''");
       'module' => '999',
     ];
     $this->postSubmission($webform, $edit);
-    $assert_session->responseContains("currency: '$ 9.99'
+    $this->assertWebformYaml("currency: '$ 9.99'
 currency_negative: '-$ 9.99'
 currency_positive_negative: '-$ 9.99'
 datetime: '2007-06-09''T''17:46:21'
 decimal: '9.9'
+decimal_negative: '-9.999'
+decimal_positive_negative: '-9.999'
 email: example@example.com
 ip: 255.255.255.255
 license_plate: 9-AAA-999
@@ -100,6 +106,8 @@ module: '999'");
       'currency_negative' => '-$ 9.9_',
       'currency_positive_negative' => '-$ 9.9_',
       'decimal' => '9._',
+      'decimal_negative' => '-9._',
+      'decimal_positive_negative' => '-9._',
       'ip' => '255.255.255.__',
       'mac' => '99-99-99-99-99-_)',
       'percentage' => '_ %',

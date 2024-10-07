@@ -4,9 +4,9 @@ namespace Drupal\webform\Element;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -34,8 +34,8 @@ class WebformOptions extends FormElement {
       '#min_items' => 3,
       '#empty_items' => 1,
       '#add_more_items' => 1,
-      '#options_value_maxlength' => 255,
-      '#options_text_maxlength' => 255,
+      '#options_value_maxlength' => 512,
+      '#options_text_maxlength' => 512,
       '#options_description' => FALSE,
       '#options_description_maxlength' => NULL,
       '#process' => [
@@ -215,7 +215,7 @@ class WebformOptions extends FormElement {
   /* ************************************************************************ */
 
   /**
-   * Convert values from yamform_multiple element to options.
+   * Convert values from webform_multiple element to options.
    *
    * @param array $values
    *   An array of values.

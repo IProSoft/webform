@@ -71,7 +71,7 @@ class WebformSanitizeSubmissionsCommands extends DrushCommands implements Saniti
         $this->database->truncate('webform_submission_log')->execute();
       }
       $this->entityTypeManager->getStorage('webform_submission')->resetCache();
-      $this->logger()->notice(dt('Webform submission tables truncated.'));
+      $this->logger()->notice('Webform submission tables truncated.');
     }
   }
 
@@ -105,7 +105,7 @@ class WebformSanitizeSubmissionsCommands extends DrushCommands implements Saniti
    *   The enabled options value.
    *
    * @return bool
-   *   TRUE if santize websubmission is enabled.
+   *   TRUE if sanitize websubmission is enabled.
    */
   protected function isEnabled($value) {
     return ($value !== 'no');

@@ -171,7 +171,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Determine if the webform has page or is attached to other entities.
    *
    * @return bool
-   *   TRUE if the webform is a page with dedicated path.
+   *   TRUE if the webform has a page with dedicated path.
    */
   public function hasPage();
 
@@ -455,6 +455,25 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   TRUE if submissions are being logged.
    */
   public function hasSubmissionLog();
+
+  /**
+   * Returns the languages the data is translated to.
+   *
+   * @return \Drupal\Core\Language\LanguageInterface[]
+   *   An associative array of language objects, keyed by language codes.
+   */
+  public function getTranslationLanguages();
+
+  /**
+   * Checks there is a translation for the given language code.
+   *
+   * @param string $langcode
+   *   The language code identifying the translation.
+   *
+   * @return bool
+   *   TRUE if the translation exists, FALSE otherwise.
+   */
+  public function hasTranslation($langcode);
 
   /**
    * Determine if the current webform is translated.
@@ -793,7 +812,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Get webform element's selectors as options.
    *
    * @param array $options
-   *   (Optional) Options to be appled to element selectors.
+   *   (Optional) Options to be applied to element selectors.
    *
    * @return array
    *   Webform elements selectors as options.

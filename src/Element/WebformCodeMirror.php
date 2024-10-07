@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Element;
 
-use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Render\Element\Textarea;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\Textarea;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformYaml;
@@ -141,8 +141,8 @@ class WebformCodeMirror extends Textarea {
   public static function validateWebformCodeMirror(&$element, FormStateInterface $form_state, &$complete_form) {
     // If element is disabled then use the #default_value.
     if (!empty($element['#disable'])) {
-      $element['#value'] = $element['#default_value'];
-      $form_state->setValueForElement($element, $element['#default_value']);
+      $element['#value'] = $element['#default_value'] ?? NULL;
+      $form_state->setValueForElement($element, $element['#default_value'] ?? NULL);
     }
     $errors = static::getErrors($element, $form_state, $complete_form);
     if ($errors) {
@@ -239,16 +239,6 @@ class WebformCodeMirror extends Textarea {
 
   /**
    * Validate HTML.
-   *
-   * @param array $element
-   *   The form element whose value is being validated.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array|null
-   *   An array of error messages.
    */
   protected static function validateHtml($element, FormStateInterface $form_state, $complete_form) {
     // @see: http://stackoverflow.com/questions/3167074/which-function-in-php-validate-if-the-string-is-valid-html
@@ -273,16 +263,6 @@ class WebformCodeMirror extends Textarea {
 
   /**
    * Validate Twig.
-   *
-   * @param array $element
-   *   The form element whose value is being validated.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array|null
-   *   An array of error messages.
    */
   protected static function validateTwig($element, FormStateInterface $form_state, $complete_form) {
     $template = $element['#value'];
@@ -323,16 +303,6 @@ class WebformCodeMirror extends Textarea {
 
   /**
    * Validate YAML.
-   *
-   * @param array $element
-   *   The form element whose value is being validated.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array|null
-   *   An array of error messages.
    */
   protected static function validateYaml($element, FormStateInterface $form_state, $complete_form) {
     try {

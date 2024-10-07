@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_ui\Form;
 
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
@@ -115,7 +115,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
       $form['test']['render_array'] = [
         '#type' => 'details',
         '#title' => $this->t('Render array'),
-        '#desciption' => $this->t("Below is the element's final render array."),
+        '#description' => $this->t("Below is the element's final render array."),
         'source' => [
           '#theme' => 'webform_codemirror',
           '#type' => 'yaml',

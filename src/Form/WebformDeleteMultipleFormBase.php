@@ -47,10 +47,10 @@ abstract class WebformDeleteMultipleFormBase extends DeleteMultipleForm {
         '@item' => $this->entityType->getSingularLabel(),
         '@items' => $this->entityType->getPluralLabel(),
       ]),
-      '#suffix' => '<p><hr/></p>',
+      '#suffix' => '<hr class="webform-hr"/>',
     ];
     $form['description'] = $this->getDescription();
-    $form['hr'] = ['#markup' => '<p><hr/></p>'];
+    $form['hr'] = ['#markup' => '<hr class="webform-hr"/>'];
     $form['confirm_input'] = $this->getConfirmInput();
     return $form;
   }
@@ -98,7 +98,7 @@ abstract class WebformDeleteMultipleFormBase extends DeleteMultipleForm {
   public function getConfirmInput() {
     return [
       '#type' => 'checkbox',
-      '#title' => $this->formatPlural(count($this->selection), 'Yes, I want to delete this @item?', 'Yes, I want to delete these @items?', [
+      '#title' => $this->formatPlural(count($this->selection), 'Yes, I want to delete this @item.', 'Yes, I want to delete these @items.', [
         '@item' => $this->entityType->getSingularLabel(),
         '@items' => $this->entityType->getPluralLabel(),
       ]),

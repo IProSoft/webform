@@ -7,7 +7,7 @@ use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\webform\Entity\Webform;
 
 /**
- * Tests for entity automcomplete element.
+ * Tests for entity autocomplete element.
  *
  * @group webform
  */
@@ -18,7 +18,7 @@ class WebformElementEntityAutocompleteTest extends WebformElementBrowserTestBase
    *
    * @var array
    */
-  public static $modules = ['filter', 'user', 'node', 'taxonomy', 'webform'];
+  protected static $modules = ['user', 'node', 'taxonomy', 'webform'];
 
   /**
    * Webforms to load.

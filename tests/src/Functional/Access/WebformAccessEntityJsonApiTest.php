@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Functional\Access;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Tests for webform entity JSON API access.
@@ -17,10 +17,10 @@ class WebformAccessEntityJsonApiTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'jsonapi'];
+  protected static $modules = ['webform', 'jsonapi'];
 
   /**
-   * Tests webform entity REST acces.
+   * Tests webform entity REST access.
    */
   public function testRestAccess() {
     $assert_session = $this->assertSession();

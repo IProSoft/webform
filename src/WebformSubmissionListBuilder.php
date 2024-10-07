@@ -7,6 +7,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\TableSort;
@@ -268,6 +269,13 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    * @var string
    */
   protected $submissionViews;
+
+  /**
+   * The result limit.
+   *
+   * @var int
+   */
+  protected $limit;
 
   /**
    * {@inheritdoc}
@@ -620,7 +628,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       '#type' => 'operations',
       '#links' => $links,
       '#prefix' => '<div class="webform-dropbutton webform-submission-views-dropbutton">',
-      '#suffix' => '</div>' . ($this->submissionView ? '<p><hr/></p>' : ''),
+      '#suffix' => '</div>' . ($this->submissionView ? '<hr class="webform-hr"/>' : ''),
     ];
     return $build;
   }
@@ -893,7 +901,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         return [
           'data' => [
             '#type' => 'link',
-            '#title' => new FormattableMarkup('<span class="webform-icon webform-icon-notes webform-icon-notes--@state"></span><span class="visually-hidden">@label</span>', ['@state' => $state, '@label' => $label]),
+            '#title' => new FormattableMarkup('<span class="webform-icon webform-icon-notes webform-icon-notes--@state" title="@label"></span><span class="visually-hidden">@label</span>', ['@state' => $state, '@label' => $label]),
             '#url' => $notes_url,
             '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
           ],
@@ -974,7 +982,16 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
         ];
 
       case 'uid':
-        return ($is_raw) ? $entity->getOwner()->id() : ($entity->getOwner()->getAccountName() ?: $this->t('Anonymous'));
+        $owner = $entity->getOwner();
+        if ($is_raw) {
+          return $owner->id();
+        }
+        elseif ($owner->isAuthenticated() && $owner->access('view')) {
+          return $entity->getOwner()->toLink();
+        }
+        else {
+          return $entity->getOwner()->getAccountName() ?: $this->t('Anonymous');
+        }
 
       case 'uuid':
         return $entity->uuid();
@@ -1290,7 +1307,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     // If query is order(ed) by 'element__*' we need to build a custom table
     // sort using hook_query_TAG_alter().
     // @see webform_query_webform_submission_list_builder_alter()
-    if ($order && strpos($order['sql'], 'element__') === 0) {
+    if (!empty($order['sql']) && strpos($order['sql'], 'element__') === 0) {
       $name = $order['sql'];
       $column = $this->columns[$name];
       $query->addTag('webform_submission_list_builder')
@@ -1340,6 +1357,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    */
   protected function getTotal($keys = '', $state = '', $source_entity = '') {
     return $this->getQuery($keys, $state, $source_entity)
+      ->accessCheck(FALSE)
       ->count()
       ->execute();
   }
@@ -1357,11 +1375,22 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   An entity query.
    */
-  protected function getQuery($keys = '', $state = '', $source_entity = '') {
+  protected function getQuery($keys = '', $state = '', $source_entity = ''): QueryInterface {
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
     $submission_storage = $this->getStorage();
     $query = $submission_storage->getQuery();
+    $query->accessCheck(TRUE);
     $submission_storage->addQueryConditions($query, $this->webform, $this->sourceEntity, $this->account);
+
+    // If we are viewing all submissions, we want to exclude
+    // any orphaned submissions.
+    if (empty($this->webform)) {
+      /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+      $webform_storage = $this->entityTypeManager->getStorage('webform');
+      if (!empty($webform_storage->getWebformIds())) {
+        $query->condition('webform_id', $webform_storage->getWebformIds(), 'IN');
+      }
+    }
 
     // Filter by key(word).
     if ($keys) {
