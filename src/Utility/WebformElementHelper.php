@@ -542,9 +542,9 @@ class WebformElementHelper {
    *   An array of options to be merged.
    */
   public static function mergeOptions(array &$options, array $source_options) {
-    foreach ($options as $key => &$option) {
+    foreach ($options as $key => $option) {
       if (isset($source_options[$key]) && is_scalar($option) && gettype($option) === gettype($source_options[$key])) {
-        $option = $source_options[$key];
+        $options[$key] = $source_options[$key];
       }
       elseif (is_array($option)) {
         unset($options[$key]);
@@ -751,7 +751,7 @@ class WebformElementHelper {
    */
   public static function setElementValidate(array $element, array $element_validate = [WebformElementHelper::class, 'suppressElementValidate']) {
     // Element validation can only overridden once so we need to reset
-    // the #eleemnt_validate callback.
+    // the #element_validate callback.
     if (isset($element['#_element_validate'])) {
       $element['#element_validate'] = $element['#_element_validate'];
       unset($element['#_element_validate']);
@@ -890,7 +890,7 @@ class WebformElementHelper {
   }
 
   /**
-   * Randomoize an associative array of element values and disable page caching.
+   * Randomize an associative array of element values and disable page caching.
    *
    * @param array $values
    *   An associative array of element values.
