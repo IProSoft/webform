@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Element;
 
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\file\Entity\File;
 use Drupal\webform\Entity\WebformSubmission;
 
@@ -17,7 +18,7 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
    *
    * @var array
    */
-  public static $modules = ['file', 'image', 'webform'];
+  protected static $modules = ['file', 'image', 'webform'];
 
   /**
    * Webforms to load.
@@ -64,7 +65,12 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
 
     // Check image file link to modal.
     $assert_session->responseContains('/system/files/webform/test_element_media_file/_sid_/image_file_jpg_modal.jpg" class="js-webform-image-file-modal webform-image-file-modal">');
-    $assert_session->responseContains('/system/files/styles/thumbnail/private/webform/test_element_media_file/_sid_/image_file_jpg_modal.jpg?itok=');
+    DeprecationHelper::backwardsCompatibleCall(
+      currentVersion: \Drupal::VERSION,
+      deprecatedVersion: '10.3',
+      currentCallable: fn() => $assert_session->responseContains('/system/files/styles/thumbnail/private/webform/test_element_media_file/_sid_/image_file_jpg_modal.jpg.webp?itok='),
+      deprecatedCallable: fn() => $assert_session->responseContains('/system/files/styles/thumbnail/private/webform/test_element_media_file/_sid_/image_file_jpg_modal.jpg?itok='),
+    );
 
     // Check video file preview.
     $assert_session->responseContains('<source src="' . $this->getAbsoluteUrl('/system/files/webform/test_element_media_file/_sid_/video_file_mp4.mp4') . '" type="video/mp4">');
@@ -159,7 +165,7 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
     $this->assertEquals($submission->getElementData($key), $second, 'Test new file was upload to the current submission');
 
     // Check that test file was deleted from the disk and database.
-    $this->assertFileNotExists($file->getFileUri(), 'Test file deleted from disk');
+    $this->assertFileDoesNotExist($file->getFileUri(), 'Test file deleted from disk');
     $this->assertEquals(0, \Drupal::database()->query('SELECT COUNT(fid) AS total FROM {file_managed} WHERE fid = :fid', [':fid' => $fid])->fetchField(), 'Test file 0 deleted from database');
     $this->assertEquals(0, \Drupal::database()->query('SELECT COUNT(fid) AS total FROM {file_usage} WHERE fid = :fid', [':fid' => $fid])->fetchField(), 'Test file 0 deleted from database');
 
@@ -170,7 +176,7 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
     $submission->delete();
 
     // Check that test file 1 was deleted from the disk and database.
-    $this->assertFileNotExists($new_file->getFileUri(), 'Test new file deleted from disk');
+    $this->assertFileDoesNotExist($new_file->getFileUri(), 'Test new file deleted from disk');
     $this->assertEquals(0, \Drupal::database()->query('SELECT COUNT(fid) AS total FROM {file_managed} WHERE fid = :fid', [':fid' => $new_fid])->fetchField(), 'Test new file deleted from database');
   }
 

@@ -7,8 +7,8 @@ use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
@@ -195,6 +195,13 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $bubbleableMetadata;
 
   /**
+   * Operation value, like 'default', add, edit, test, etc.
+   *
+   * @var string
+   */
+  protected $operation;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -273,7 +280,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * @see \Drupal\Core\Entity\EntityFormBuilder::getForm
    */
   public function setEntity(EntityInterface $entity) {
-    // Create new metadata to be applie when the form is built.
+    // Create new metadata to be applied when the form is built.
     // @see \Drupal\webform\WebformSubmissionForm::buildForm
     $this->bubbleableMetadata = new WebformBubbleableMetadata();
 
@@ -760,31 +767,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     // @see \Drupal\webform\WebformSubmissionForm::addStatesPrefix
     $this->statesPrefix = '.' . end($class);
 
-    // Check for a custom webform, track it, and return it.
-    if ($custom_form = $this->getCustomForm($form, $form_state)) {
-      $custom_form['#custom_form'] = TRUE;
-      return $custom_form;
-    }
-
-    $form = parent::form($form, $form_state);
-
-    /* Information */
-
-    // Prepend webform submission data using the default view without the data.
-    if (!$webform_submission->isNew() && !$webform_submission->isDraft()) {
-      $form['navigation'] = [
-        '#type' => 'webform_submission_navigation',
-        '#webform_submission' => $webform_submission,
-        '#weight' => -20,
-      ];
-      $form['information'] = [
-        '#type' => 'webform_submission_information',
-        '#webform_submission' => $webform_submission,
-        '#source_entity' => $this->sourceEntity,
-        '#weight' => -19,
-      ];
-    }
-
     /* Confirmation */
 
     // Add confirmation modal.
@@ -808,6 +790,31 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#weight' => -1000,
         '#attached' => ['library' => ['webform/webform.confirmation.modal']],
         '#element_validate' => ['::removeConfirmationModal'],
+      ];
+    }
+
+    // Check for a custom webform, track it, and return it.
+    if ($custom_form = $this->getCustomForm($form, $form_state)) {
+      $custom_form['#custom_form'] = TRUE;
+      return $custom_form;
+    }
+
+    $form = parent::form($form, $form_state);
+
+    /* Information */
+
+    // Prepend webform submission data using the default view without the data.
+    if (!$webform_submission->isNew() && !$webform_submission->isDraft()) {
+      $form['navigation'] = [
+        '#type' => 'webform_submission_navigation',
+        '#webform_submission' => $webform_submission,
+        '#weight' => -20,
+      ];
+      $form['information'] = [
+        '#type' => 'webform_submission_information',
+        '#webform_submission' => $webform_submission,
+        '#source_entity' => $this->sourceEntity,
+        '#weight' => -19,
       ];
     }
 
@@ -2085,7 +2092,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $file_limit = $this->getWebform()->getSetting('form_file_limit')
       ?: $this->configFactory->get('webform.settings')->get('settings.default_form_file_limit')
       ?: '';
-    $file_limit = Bytes::toInt($file_limit);
+    $file_limit = Bytes::toNumber($file_limit);
     if (!$file_limit) {
       return;
     }

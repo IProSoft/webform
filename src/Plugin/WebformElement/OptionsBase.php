@@ -6,12 +6,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Markup;
-use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Plugin\WebformElementOtherInterface;
+use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -213,7 +213,7 @@ abstract class OptionsBase extends WebformElementBase {
 
     // Make sure submitted value is not lost if the element's #options were
     // altered after the submission was completed.
-    // This only applies to the main webforom element with a #webform_key
+    // This only applies to the main webform element with a #webform_key
     // and not a webform composite's sub elements.
     $is_completed = $webform_submission && $webform_submission->isCompleted();
     $has_default_value = (isset($element['#default_value']) && $element['#default_value'] !== '' && $element['#default_value'] !== NULL);

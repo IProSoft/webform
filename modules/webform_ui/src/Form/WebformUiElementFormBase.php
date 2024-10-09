@@ -9,11 +9,11 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformMessage;
+use Drupal\webform\Form\WebformDialogFormTrait;
 use Drupal\webform\Plugin\WebformElement\WebformTable;
 use Drupal\webform\Plugin\WebformElement\WebformTableRow;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\webform\Form\WebformDialogFormTrait;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -280,6 +280,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     if (isset($form['properties']['element']['title'])) {
       $form['properties']['element']['key']['#machine_name']['source'] = ['properties', 'element', 'title'];
       $form['properties']['element']['title']['#id'] = 'title';
+      $form['properties']['element']['title']['#weight'] = -98;
     }
 
     // Prefix table row child elements with the table row key.

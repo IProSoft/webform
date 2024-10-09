@@ -99,7 +99,7 @@ function hook_webform_element_translatable_properties_alter(array &$properties, 
  * @ingroup form_api
  */
 function hook_webform_element_configuration_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  /** @var Drupal\webform_ui\Form\WebformUiElementEditForm $form_object */
+  /** @var \Drupal\webform_ui\Form\WebformUiElementEditForm $form_object */
   $form_object = $form_state->getFormObject();
   $element_plugin = $form_object->getWebformElementPlugin();
 
@@ -340,7 +340,7 @@ function hook_webform_options_WEBFORM_OPTIONS_ID_alter(array &$options, array &$
  * @param \Drupal\webform\WebformSubmissionInterface[] $webform_submissions
  *   The webform submissions being purged.
  */
-function hook_webform_submissions_pre_purge(array $webform_submissions) {
+function hook_webform_submissions_pre_purge(array &$webform_submissions) {
 
 }
 

@@ -3,7 +3,7 @@
  * JavaScript behaviors for details element.
  */
 
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
   'use strict';
 
@@ -18,7 +18,7 @@
    */
   Drupal.behaviors.webformDetailsToggle = {
     attach: function (context) {
-      $('.js-webform-details-toggle', context).once('webform-details-toggle').each(function () {
+      $(once('webform-details-toggle', '.js-webform-details-toggle', context)).each(function () {
         var $form = $(this);
         var $tabs = $form.find('.webform-tabs');
 
@@ -44,13 +44,16 @@
           .on('click', function (e) {
             // Get details that are not vertical tabs pane.
             var $details = $form.find('details:not(.vertical-tabs__pane)');
+            var $summary = $details.find('summary');
             var open;
             if (Drupal.webform.detailsToggle.isFormDetailsOpen($form)) {
               $details.removeAttr('open');
+              $summary.attr('aria-expanded', 'false');
               open = 0;
             }
             else {
               $details.attr('open', 'open');
+              $summary.attr('aria-expanded', 'true');
               open = 1;
             }
             Drupal.webform.detailsToggle.setDetailsToggleLabel($form);
@@ -115,4 +118,4 @@
     Drupal.announce(text);
   };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

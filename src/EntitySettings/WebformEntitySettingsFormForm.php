@@ -126,7 +126,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#options' => [
         WebformInterface::TITLE_SOURCE_ENTITY_WEBFORM => $this->t('Source entity: Webform'),
         WebformInterface::TITLE_WEBFORM_SOURCE_ENTITY => $this->t('Webform: Source entity'),
-        WebformInterface::TITLE_WEBFORM => $this->t('Webform'),
+        WebformInterface::TITLE_WEBFORM => $this->t('Webform', [], ['context' => 'form']),
         WebformInterface::TITLE_SOURCE_ENTITY => $this->t('Source entity'),
       ],
       '#required' => TRUE,
@@ -196,7 +196,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     if ($settings['ajax']) {
       $form['form_behaviors']['form_submit_back']['#default'] = TRUE;
       $form['form_behaviors']['form_submit_back']['#disabled'] = TRUE;
-      $form['form_behaviors']['form_submit_back']['#description'] .= '<br/><br/><em>' . $this->t('This behavior is not supoported when Ajax is enabled.') . '</em>';
+      $form['form_behaviors']['form_submit_back']['#description'] .= '<br/><br/><em>' . $this->t('This behavior is not supported when Ajax is enabled.') . '</em>';
     }
     // Disable warning about drafts.
     if ($settings['draft'] !== WebformInterface::DRAFT_NONE) {
@@ -815,7 +815,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'group' => $this->t('Navigation'),
         'title' => $this->t('Submit previous page when browser back button is clicked'),
         'all_description' => $this->t('Browser back button submits the previous page for all forms.'),
-        'form_description' => $this->t("If checked, the browser back button will submit the previous page and navigate back emulating the behaviour of user clicking a wizard or preview page's back button."),
+        'form_description' => $this->t("If checked, the browser back button will submit the previous page and navigate back emulating the behavior of user clicking a wizard or preview page's back button."),
       ],
       'form_unsaved' => [
         'group' => $this->t('Navigation'),

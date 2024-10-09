@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform_attachment\Functional;
 
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform_attachment\Element\WebformAttachmentToken;
 
 /**
@@ -19,7 +19,7 @@ class WebformAttachmentTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['token', 'webform_attachment', 'webform_attachment_test'];
+  protected static $modules = ['token', 'webform_attachment', 'webform_attachment_test'];
 
   /**
    * Tests webform attachment.
@@ -233,11 +233,11 @@ class WebformAttachmentTest extends WebformBrowserTestBase {
     // Sanitize.
     /* ********************************************************************** */
 
-    $webform_attachment_santize = Webform::load('test_attachment_sanitize');
+    $webform_attachment_sanitize = Webform::load('test_attachment_sanitize');
 
-    $sid = $this->postSubmissionTest($webform_attachment_santize, ['textfield' => 'Some text!@#$%^&*)']);
+    $sid = $this->postSubmissionTest($webform_attachment_sanitize, ['textfield' => 'Some text!@#$%^&*)']);
     $webform_submission = WebformSubmission::load($sid);
-    $element = $webform_attachment_santize->getElement('webform_attachment_token');
+    $element = $webform_attachment_sanitize->getElement('webform_attachment_token');
     $this->assertEquals(WebformAttachmentToken::getFileName($element, $webform_submission), 'some-text.txt');
 
     /* ********************************************************************** */
@@ -250,12 +250,12 @@ class WebformAttachmentTest extends WebformBrowserTestBase {
     // Check that attachment is enabled.
     $this->postSubmission($webform_attachment_states, ['attach' => TRUE]);
     $sent_email = $this->getLastEmail();
-    $this->assert(isset($sent_email['params']['attachments'][0]), 'Attachment enabled via #states');
+    $this->assertTrue(isset($sent_email['params']['attachments'][0]), 'Attachment enabled via #states');
 
     // Check that attachment is disabled.
     $this->postSubmission($webform_attachment_states, ['attach' => FALSE]);
     $sent_email = $this->getLastEmail();
-    $this->assert(!isset($sent_email['params']['attachments'][0]), 'Attachment disabled via #states');
+    $this->assertFalse(isset($sent_email['params']['attachments'][0]), 'Attachment disabled via #states');
   }
 
 }

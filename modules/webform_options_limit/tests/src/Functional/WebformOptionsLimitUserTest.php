@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform_options_limit\Functional;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Webform options limit test.
@@ -15,7 +15,7 @@ class WebformOptionsLimitUserTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'webform',
     'webform_options_limit',
     'webform_options_limit_test',
@@ -72,7 +72,7 @@ class WebformOptionsLimitUserTest extends WebformBrowserTestBase {
     // Logout.
     // NOTE:
     // We are are testing anonymous user last because anonymous
-    // submission are transfered to authenticated users when they login.
+    // submission are transferred to authenticated users when they login.
     $this->drupalLogout();
 
     // Check that options limit is not met for anonymous user.

@@ -17,7 +17,7 @@ class WebformElementTest extends WebformElementBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform_test_element'];
+  protected static $modules = ['webform_test_element'];
 
   /**
    * Tests webform element.
@@ -29,6 +29,13 @@ class WebformElementTest extends WebformElementBrowserTestBase {
 
     // Check webform render.
     $this->drupalGet('/webform_test_element');
+    $assert_session->fieldValueEquals('email', '');
+    $assert_session->fieldValueEquals('name', '');
+    $assert_session->fieldValueEquals('subject', '');
+    $assert_session->fieldValueEquals('message', '');
+
+    // Check webform lazy render.
+    $this->drupalGet('/webform_test_element', ['query' => ['lazy' => TRUE]]);
     $assert_session->fieldValueEquals('email', '');
     $assert_session->fieldValueEquals('name', '');
     $assert_session->fieldValueEquals('subject', '');
@@ -67,7 +74,7 @@ class WebformElementTest extends WebformElementBrowserTestBase {
 
     // Check submission access denied message is displayed.
     $this->drupalGet('/webform_test_element', ['query' => ['sid' => $sid]]);
-    $assert_session->responseContains("Please login to access this form.");
+    $assert_session->responseContains("Please log in to access this form.");
 
     // Login as root.
     $this->drupalLogin($this->rootUser);

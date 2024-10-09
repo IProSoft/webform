@@ -24,7 +24,7 @@
         ? $(context)
         : $('form.webform-submission-form', context);
 
-      $forms.once('webform-cards').each(function () {
+      $(once('webform-cards', $forms)).each(function () {
         // Form.
         var $form = $(this);
 
@@ -181,6 +181,13 @@
             }
           });
         }
+
+        // Custom events.
+        // Add support for custom 'webform_cards:set_active_card' event.
+        $allCards.on('webform_cards:set_active_card', function (event) {
+          var $activeCard = $(event.target);
+          setActiveCard($activeCard);
+        });
 
         initialize();
 

@@ -2,8 +2,9 @@
 
 namespace Drupal\Tests\webform\Functional\Wizard;
 
-use Drupal\webform\Entity\Webform;
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Core\Serialization\Yaml;
+use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
 
 /**
@@ -54,8 +55,8 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $edit = ['first_name' => 'Jane'];
     $this->submitForm($edit, 'Next >');
     // Check progress bar is set to 'Contact Information'.
-    $assert_session->responseMatches('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--done"><b>Your Information</b><span></span></li>#');
-    $assert_session->responseMatches('#<li data-webform-page="contact" class="webform-progress-bar__page webform-progress-bar__page--current"><b>Contact Information</b></li>#');
+    $assert_session->responseMatches('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--done"><b class="webform-progress-bar__page-title">Your Information</b><span></span></li>#');
+    $assert_session->responseMatches('#<li data-webform-page="contact" class="webform-progress-bar__page webform-progress-bar__page--current"><b class="webform-progress-bar__page-title">Contact Information</b></li>#');
     // Check progress pages.
     $assert_session->responseContains('2 of 5');
     // Check progress percentage.
@@ -75,7 +76,7 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $edit = ['email' => 'janesmith@example.com'];
     $this->submitForm($edit, '< Previous');
     // Check progress bar is set to 'Your Information'.
-    $assert_session->responseMatches('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--current"><b>Your Information</b><span></span></li>#');
+    $assert_session->responseMatches('#<li data-webform-page="information" class="webform-progress-bar__page webform-progress-bar__page--current"><b class="webform-progress-bar__page-title">Your Information</b><span></span></li>#');
     // Check nosave class.
     $assert_session->responseContains('js-webform-unsaved');
     // Check no nosave attributes.
@@ -155,7 +156,12 @@ class WebformWizardAdvancedTest extends WebformWizardTestBase {
     $assert_session->responseContains('<a href="mailto:janesmith@example.com">janesmith@example.com</a>');
     $assert_session->responseContains('<label>Phone</label>');
     $assert_session->responseContains('<a href="tel:111-111-1111">111-111-1111</a>');
-    $assert_session->responseContains('<div class="webform-element webform-element-type-textarea js-form-item form-item js-form-type-item form-item-comments js-form-item-comments form-no-label" id="test_form_wizard_advanced--comments">');
+    DeprecationHelper::backwardsCompatibleCall(
+      currentVersion: \Drupal::VERSION,
+      deprecatedVersion: '10.2',
+      currentCallable: fn() => $assert_session->responseContains('<div class="webform-element webform-element-type-textarea js-form-item form-item form-type-item js-form-type-item form-item-comments js-form-item-comments form-no-label" id="test_form_wizard_advanced--comments">'),
+      deprecatedCallable: fn() => $assert_session->responseContains('<div class="webform-element webform-element-type-textarea js-form-item form-item js-form-type-item form-item-comments js-form-item-comments form-no-label" id="test_form_wizard_advanced--comments">'),
+    );
     $assert_session->responseContains('This is working fine.');
 
     // Submit the webform.

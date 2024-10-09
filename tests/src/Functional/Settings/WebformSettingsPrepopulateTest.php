@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform\Functional\Settings;
 
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform prepopulate settings.
@@ -19,7 +19,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['block', 'webform'];
+  protected static $modules = ['block', 'webform'];
 
   /**
    * Webforms to load.
@@ -31,7 +31,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->placeBlocks();
   }
@@ -141,7 +141,7 @@ class WebformSettingsPrepopulateTest extends WebformBrowserTestBase {
 
     $this->drupalLogin($this->rootUser);
 
-    // Check query string parameters to be transfered from canonical to test.
+    // Check query string parameters to be transferred from canonical to test.
     // @see webform_menu_local_tasks_alter
     $route_options = ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']];
     $this->drupalGet('/webform/test_form_prepopulate', $route_options);

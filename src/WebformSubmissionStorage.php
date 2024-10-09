@@ -3,9 +3,9 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
 use Drupal\Core\Session\AccountInterface;
@@ -239,12 +239,14 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     if (isset($values['uid'])) {
       $uids = (array) $values['uid'];
       $accounts = User::loadMultiple($uids);
-      $or_condition_group = $entity_query->orConditionGroup();
-      foreach ($accounts as $account) {
-        $this->addQueryConditions($or_condition_group, NULL, NULL, $account);
+      if ($accounts) {
+        $or_condition_group = $entity_query->orConditionGroup();
+        foreach ($accounts as $account) {
+          $this->addQueryConditions($or_condition_group, NULL, NULL, $account);
+        }
+        $entity_query->condition($or_condition_group);
+        unset($values['uid']);
       }
-      $entity_query->condition($or_condition_group);
-      unset($values['uid']);
     }
 
     parent::buildPropertyQuery($entity_query, $values);
@@ -804,7 +806,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // @see /admin/structure/webform/submissions/manage
     if (empty($webform) && empty($source_entity)) {
       $columns['webform_id'] = [
-        'title' => $this->t('Webform'),
+        'title' => $this->t('Webform', [], ['context' => 'form']),
       ];
       $columns['entity'] = [
         'title' => $this->t('Submitted to'),
@@ -1192,7 +1194,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       $this->loggerFactory->get('webform')
         ->notice('Deleted @form: Submission #@id.', [
           '@id' => $entity->id(),
-          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform') . ']',
+          '@form' => ($webform) ? $webform->label() : '[' . $this->t('Webform', [], ['context' => 'form']) . ']',
         ]);
     }
 
@@ -1268,7 +1270,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $webform_submissions = $this->loadMultiple($sids);
 
         $webform->invokeHandlers('prePurge', $webform_submissions);
-        $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', [$webform_submissions]);
+        $this->moduleHandler()->invokeAll('webform_submissions_pre_purge', [&$webform_submissions]);
 
         $this->delete($webform_submissions);
 

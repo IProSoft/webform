@@ -6,15 +6,15 @@
 namespace Drupal\webform;
 
 use Drupal\Component\Utility\Xss;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\State\StateInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
@@ -1582,13 +1582,13 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     // Promotions: Webform.
     $t_args = [
       ':href_involved' => 'https://www.drupal.org/getting-involved',
+      ':href_join' => 'https://www.drupal.org/association',
       ':href_opencollective' => 'https://opencollective.com/webform',
-      ':href_support' => 'https://www.jrockowitz.com',
     ];
     $help['promotion_webform'] = [
       'group' => 'promotions',
       'title' => $this->t('Promotions: Drupal Association'),
-      'content' => $this->t('If you enjoy and value Drupal and the Webform module consider <a href=":href_involved">getting involved in the Drupal community</a>, <a href=":href_opencollective">contributing funds to the Webform module\'s Open Collective</a>, and <a href=":href_support">hiring professional support</a>.', $t_args),
+      'content' => $this->t('If you enjoy and value Drupal and the Webform module consider <a href=":href_involved">getting involved in the Drupal community</a>, <a href=":href_join">joining the Drupal Association</a>, and <a href=":href_opencollective">contributing funds to the Webform module\'s Open Collective</a>.', $t_args),
       'message_type' => 'webform',
       'message_close' => TRUE,
       'message_storage' => WebformMessage::STORAGE_STATE,
@@ -1783,6 +1783,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
 
     // Configuration: Libraries.
     $t_args = [
+      ':href_62x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.2.x/libraries.zip',
+      ':href_61x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.1.x/libraries.zip',
       '@webform-libraries-composer' => 'webform-libraries-composer',
       '@webform-libraries-download' => 'webform-libraries-download',
       '@webform-composer-update' => 'webform-composer-update',
@@ -1794,10 +1796,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         $t_args[$command_name] = str_replace('-', ':', $command);
       }
     }
-    $t_args += [
-      ':href_62x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.2.x/libraries.zip',
-      ':href_61x' => 'https://git.drupalcode.org/sandbox/jrockowitz-2941983/-/raw/6.1.x/libraries.zip',
-    ];
     $help['config_libraries_help'] = [
       'group' => 'configuration',
       'title' => $this->t('Configuration: Libraries: Help'),
@@ -1809,7 +1807,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '<p>' . $this->t('There are several ways to download the needed third-party libraries.') . '</p>' .
         '<p><strong>' . $this->t('Recommended') . '</strong></p>' .
         '<ul>' .
-        '<li>' . $this->t('Use the <a href="https://github.com/wikimedia/composer-merge-plugin">Composer Merge plugin</a> to include the Webform module\'s <a href="https://cgit.drupalcode.org/webform/tree/composer.libraries.json">composer.libraries.json</a> or generate a custom file using <code>drush @webform-libraries-composer &gt; DRUPAL_ROOT/composer.libraries.json</code>.', $t_args) . '<br/><strong>' . $this->t('<a href="https://www.drupal.org/node/3003140">Learn more &raquo;</a>') . '</strong>' . '</li>' .
+        '<li>' . $this->t('Use the <a href="https://github.com/wikimedia/composer-merge-plugin">Composer Merge plugin</a> to include the Webform module\'s <a href="https://cgit.drupalcode.org/webform/tree/composer.libraries.json">composer.libraries.json</a> or generate a custom file using <code>drush webform:libraries:composer &gt; DRUPAL_ROOT/composer.libraries.json</code>.', $t_args) . '<br/><strong>' . $this->t('<a href="https://www.drupal.org/node/3003140">Learn more &raquo;</a>') . '</strong>' . '</li>' .
         '</ul>' .
         '<p><strong>' . $this->t('Alternatives') . '</strong></p>' .
         '<ul>' .

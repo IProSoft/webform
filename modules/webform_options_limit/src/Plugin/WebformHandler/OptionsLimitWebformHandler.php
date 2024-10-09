@@ -1255,6 +1255,10 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
   protected function getOptionsReached(array $limits) {
     $element_key = $this->configuration['element_key'];
     $webform_submission = $this->getWebformSubmission();
+    if (!$webform_submission) {
+      return [];
+    }
+
     $element_values = (array) $webform_submission->getElementOriginalData($element_key) ?: [];
     $reached = [];
     foreach ($limits as $option_value => $limit) {
@@ -1342,7 +1346,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         $query->condition('s.uid', $this->currentUser->id());
       }
       else {
-        $sids = $this->submissionStorage->getAnonymousSubmissionIds($this->currentUser);
+        $sids = $this->entityTypeManager->getStorage('webform_submission')->getAnonymousSubmissionIds($this->currentUser);
         if ($sids) {
           $query->condition('s.sid', $sids, 'IN');
           $query->condition('s.uid', 0);
