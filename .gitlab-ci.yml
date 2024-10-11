@@ -40,3 +40,4 @@ variables:
   tests/files/*,
   modules/*/tests/modules/*/files/*.csv,
   modules/*/tests/modules/*/style-guide/*'
+  _PHPUNIT_CONCURRENT: '1'
