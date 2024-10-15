@@ -1287,14 +1287,14 @@ libraries.progress-tracker:
 
 libraries.signature_pad:
   remote: https://github.com/szimek/signature_pad
-  version: '4.1.7'
+  version: '4.2.0'
   license:
     name: MIT
     url: http://opensource.org/licenses/mit-license.php
     gpl-compatible: true
   directory: signature_pad
   cdn:
-    /libraries/signature_pad/: https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js/
+    /libraries/signature_pad/: https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js
   js:
     /libraries/signature_pad/docs/js/signature_pad.umd.js: {}
 
