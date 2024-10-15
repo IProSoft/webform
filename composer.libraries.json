@@ -327,13 +327,13 @@
             "type": "package",
             "package": {
                 "name": "signature_pad/signature_pad",
-                "version": "4.1.7",
+                "version": "4.2.0",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "signature_pad"
                 },
                 "dist": {
-                    "url": "https://registry.npmjs.org/signature_pad/-/signature_pad-4.1.7.tgz",
+                    "url": "https://registry.npmjs.org/signature_pad/-/signature_pad-4.2.0.tgz",
                     "type": "zip"
                 },
                 "license": "MIT"
