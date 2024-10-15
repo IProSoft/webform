@@ -333,7 +333,7 @@
                     "installer-name": "signature_pad"
                 },
                 "dist": {
-                    "url": "https://github.com/szimek/signature_pad/archive/refs/tags/v4.1.7.zip",
+                    "url": "https://registry.npmjs.org/signature_pad/-/signature_pad-4.1.7.tgz",
                     "type": "zip"
                 },
                 "license": "MIT"
