@@ -24,10 +24,9 @@ include:
 # Uncomment the lines below if you want to override any of the variables. The following is just an example.
 ################
 variables:
-  OPT_IN_TEST_MAX_PHP: '1'
+  OPT_IN_TEST_MAX_PHP: 1
 #   SKIP_ESLINT: '1'
-#   OPT_IN_TEST_NEXT_MAJOR: '1'
-  RUN_JOB_UPGRADE_STATUS: '1'
+  OPT_IN_TEST_NEXT_MAJOR: 1
   _CSPELL_IGNORE_PATHS: 'webform.libraries.yml,
   config/install/*,
   config/schema/*,
@@ -40,3 +39,18 @@ variables:
   tests/files/*,
   modules/*/tests/modules/*/files/*.csv,
   modules/*/tests/modules/*/style-guide/*'
+  _PHPCS_EXTRA: '--ignore=*/modules/webform_bootstap/*'
+
+phpcs:
+  allow_failure: false
+
+composer (next major):
+  variables:
+    _LENIENT_ALLOW_LIST: "ckeditor, select2, styleguide"
+
+phpunit (next major):
+  allow_failure: false
+  before_script:
+    - 'sed -i "s/core_version_requirement.*/core_version_requirement: \^11/" web/modules/contrib/**/*.info.yml'
+    # Replace versions in submodules too.
+    - 'sed -i "s/core_version_requirement.*/core_version_requirement: \^11/" web/modules/contrib/**/**/*.info.yml'

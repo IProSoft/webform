@@ -158,7 +158,7 @@ class WebformShareTest extends WebformBrowserTestBase {
     $src = preg_replace('#^https?:#', '', $src);
     $expected_script_tag = '<script src="' . $src . '"></script>' . PHP_EOL;
 
-    $this->assertEquals($expected_script_tag, $actual_script_tag);
+    $this->assertEquals($expected_script_tag, (string) $actual_script_tag);
   }
 
 }

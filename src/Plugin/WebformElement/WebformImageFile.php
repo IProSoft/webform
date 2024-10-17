@@ -47,7 +47,10 @@ class WebformImageFile extends WebformManagedFileBase {
     $max_resolution = $this->getElementProperty($element, 'max_resolution');
     $min_resolution = $this->getElementProperty($element, 'min_resolution');
     if ($max_resolution || $min_resolution) {
-      $element['#upload_validators']['file_validate_image_resolution'] = [$max_resolution, $min_resolution];
+      $element['#upload_validators']['FileImageDimensions'] = [
+        'maxDimensions' => $max_resolution,
+        'minDimensions' => $min_resolution,
+      ];
     }
   }
 

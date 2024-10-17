@@ -50,6 +50,12 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
 
     // Check (single) elements item formatted as HTML.
     $body = $this->getMessageBody($submission, 'email_html');
+    // Drupal 11 has standardized date formats.
+    // See https://www.drupal.org/node/3467774.
+    $isLessThanDrupal11 = version_compare(\Drupal::VERSION, '11', '<');
+    $longDate = $isLessThanDrupal11 ? 'Thursday, June 18, 1942 - 00:00' : 'Thursday, 18 June 1942 - 00:00';
+    $mediumDate = $isLessThanDrupal11 ? 'Thu, 06/18/1942 - 00:00' : 'Thu, 18 Jun 1942 - 00:00';
+    $shortDate = $isLessThanDrupal11 ? '06/18/1942 - 00:00' : '18 Jun 1942 - 00:00';
     $elements = [
       'Checkbox (Value)' => 'Yes',
       'Color (Color swatch)' => '<font color="#ffffcc">█</font> #ffffcc',
@@ -68,9 +74,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Date (HTML Week)' => '1942-W25',
       'Date (HTML Year)' => '1942',
       'Date (HTML Yearless date)' => '06-18',
-      'Date (Default long date)' => 'Thursday, June 18, 1942 - 00:00',
-      'Date (Default medium date)' => 'Thu, 06/18/1942 - 00:00',
-      'Date (Default short date)' => '06/18/1942 - 00:00',
+      'Date (Default long date)' => $longDate,
+      'Date (Default medium date)' => $mediumDate,
+      'Date (Default short date)' => $shortDate,
       'Time (Value)' => '09:00',
       'Time (Raw value)' => '09:00:00',
       'Radios (Option description)' => 'This is a description',
@@ -84,7 +90,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
 // phpcs:enable
     ];
     foreach ($elements as $label => $value) {
-      $this->assertStringContainsString('<b>' . $label . '</b><br />' . $value, $body, new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));
+      $this->assertStringContainsString('<b>' . $label . '</b><br />' . $value, $body, "Found $label: $value");
     }
     // cspell:disable
     // Check code format.
@@ -113,9 +119,9 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
       'Date (HTML Week): 1942-W25',
       'Date (HTML Year): 1942',
       'Date (HTML Yearless date): 06-18',
-      'Date (Default long date): Thursday, June 18, 1942 - 00:00',
-      'Date (Default medium date): Thu, 06/18/1942 - 00:00',
-      'Date (Default short date): 06/18/1942 - 00:00',
+      'Date (Default long date): ' . $longDate,
+      'Date (Default medium date): ' . $mediumDate,
+      'Date (Default short date): ' . $shortDate,
       'Time (Value): 09:00',
       'Time (Raw value): 09:00:00',
       'Radios (Option description): This is a description',

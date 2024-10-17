@@ -27,6 +27,20 @@ class WebformElementMediaFileTest extends WebformElementManagedFileTestBase {
   protected static $testWebforms = ['test_element_media_file'];
 
   /**
+   * The webform.
+   *
+   * @var \Drupal\webform\WebformInterface
+   */
+  protected $webform;
+
+  /**
+   * Admin submission user.
+   *
+   * @var \Drupal\user\Entity\User
+   */
+  protected $adminSubmissionUser;
+
+  /**
    * Test media file upload elements.
    */
   public function testMediaFileUpload() {

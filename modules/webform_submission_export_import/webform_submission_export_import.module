@@ -132,24 +132,24 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   $file = File::create($values);
 
   $extensions = '';
-  if (isset($validators['file_validate_extensions'])) {
-    if (isset($validators['file_validate_extensions'][0])) {
+  if (isset($validators['FileExtension'])) {
+    if (isset($validators['FileExtension']['extensions'])) {
       // Build the list of non-munged extensions if the caller provided them.
-      $extensions = $validators['file_validate_extensions'][0];
+      $extensions = $validators['FileExtension']['extensions'];
     }
     else {
-      // If 'file_validate_extensions' is set and the list is empty then the
+      // If 'FileExtension' is set and the list is empty then the
       // caller wants to allow any extension. In this case we have to remove the
       // validator or else it will reject all extensions.
-      unset($validators['file_validate_extensions']);
+      unset($validators['FileExtension']);
     }
   }
   else {
     // No validator was provided, so add one using the default list.
     // Build a default non-munged safe list for file_munge_filename().
     $extensions = 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp';
-    $validators['file_validate_extensions'] = [];
-    $validators['file_validate_extensions'][0] = $extensions;
+    $validators['FileExtension'] = [];
+    $validators['FileExtension']['extensions'] = $extensions;
   }
 
   if (!empty($extensions)) {
@@ -171,7 +171,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
     // The .txt extension may not be in the allowed list of extensions. We have
     // to add it here or else the file upload will fail.
     if (!empty($extensions)) {
-      $validators['file_validate_extensions'][0] .= ' txt';
+      $validators['FileExtension']['extensions'] .= ' txt';
       \Drupal::messenger()->addStatus(t('For security reasons, your upload has been renamed to %filename.', ['%filename' => $file->getFilename()]));
     }
   }
@@ -202,10 +202,17 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   }
 
   // Add in our check of the file name length.
-  $validators['file_validate_name_length'] = [];
+  $validators['FileNameLength'] = [];
 
   // Call the validation functions specified by this function's caller.
-  $errors = file_validate($file, $validators);
+  /** @var \Drupal\file\Validation\FileValidatorInterface $file_validator */
+  $file_validator = \Drupal::service('file.validator');
+  /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
+  $violations = $file_validator->validate($file, $validators);
+  $errors = [];
+  foreach ($violations as $violation) {
+    $errors[] = $violation->getMessage();
+  }
 
   // Check for errors.
   if (!empty($errors)) {

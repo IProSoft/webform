@@ -861,9 +861,14 @@ function webform_file_download($uri) {
  *   An empty array if the file name length is smaller than the limit or an
  *   array containing an error message if it's not or is empty.
  *
+ * @deprecated in webform:6.3.0 and is removed from webform:7.0.0. Use
+ *   'FileNameLength' file validator plugin instead.
+ *
+ * @see https://www.drupal.org/node/3475420
  * @see file_validate_name_length()
  */
 function webform_file_validate_name_length(FileInterface $file) {
+  @trigger_error(__FUNCTION__ . "() is deprecated in webform:6.3.0 and is removed from webform:7.0.0. Use 'FileNameLength' file validator plugin instead. See https://www.drupal.org/node/3475420", E_USER_DEPRECATED);
   $errors = [];
   // Don't display error is the file_validate_name_length() has already
   // displayed a warning because the files length is over 240.
