@@ -240,28 +240,24 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     array_splice($element['#element_validate'], 1, 0, $element_validate);
 
     // Upload validators.
-    // @see webform_preprocess_file_upload_help
-    $element['#upload_validators']['file_validate_size'] = [$this->getMaxFileSize($element)];
-    $element['#upload_validators']['file_validate_extensions'] = [$this->getFileExtensions($element)];
-    // Define 'webform_file_validate_extensions' which allows file
-    // extensions within webforms to be comma-delimited. The
-    // 'webform_file_validate_extensions' will be ignored by file_validate().
-    // @see file_validate()
-    // Issue #3136578: Comma-separate the list of allowed file extensions.
-    // @see https://www.drupal.org/project/drupal/issues/3136578
-    $element['#upload_validators']['webform_file_validate_extensions'] = [];
-    $element['#upload_validators']['webform_file_validate_name_length'] = [];
+    $element['#upload_validators']['FileSizeLimit'] = ['fileLimit' => $this->getMaxFileSize($element)];
+    $element['#upload_validators']['FileExtension'] = ['extensions' => $this->getFileExtensions($element)];
+    $element['#upload_validators']['FileNameLength'] = [
+      'maxLength' => 150,
+      'messageTooLong' => "The file's name exceeds the Webform module's 150 characters limit. Please rename the file and try again.",
+    ];
 
     // Add file upload help to the element as #description, #help, or #more.
     // Copy upload validator so that we can add webform's file limit to
     // file upload help only.
-    $upload_validators = $element['#upload_validators'];
-    if ($file_limit) {
-      $upload_validators['webform_file_limit'] = [Bytes::toNumber($file_limit)];
-    }
     $file_upload_help = [
       '#theme' => 'file_upload_help',
-      '#upload_validators' => $upload_validators,
+      '#upload_validators' => $element['#upload_validators'] + ($file_limit ? [
+        // Add a custom "validator" that is just used in
+        // webform_preprocess_file_upload_help to show a "per form" upload
+        // limit. This is validated below in ::validateManagedFileLimit.
+        'webform_file_limit' => Bytes::toNumber($file_limit),
+      ] : []),
       '#cardinality' => (empty($element['#multiple'])) ? 1 : $element['#multiple'],
     ];
     $file_help = $element['#file_help'] ?? 'description';

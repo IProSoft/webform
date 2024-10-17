@@ -258,7 +258,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
    *   The current state of the form.
    */
   public function submitUploadForm(array &$form, FormStateInterface $form_state) {
-    $validators = ['file_validate_extensions' => ['csv']];
+    $validators = ['FileExtension' => ['extensions' => 'csv']];
 
     $import_type = $form_state->getValue('import_type');
 
