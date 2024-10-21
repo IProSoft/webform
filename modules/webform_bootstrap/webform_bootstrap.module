@@ -58,12 +58,12 @@ function webform_bootstrap_webform_element_alter(array &$element, FormStateInter
 
   // We need to set $element['#smart_description'] to false if the element's
   // description_display is set to 'before' or 'after' otherwise Bootstrap will
-  // display as a tooltip regardless of the setting.
+  // display as a tooltip regardless of the setting. The Form API default is to
+  // use 'after'.
   if ($smart_description_enabled
     && isset($element['#description'])
-    && isset($element['#description_display'])
     && empty($element['#smart_description'])
-    && ($element['#description_display'] === 'after' || $element['#description_display'] === 'before')) {
+    && (empty($element['#description_display']) || $element['#description_display'] === 'after' || $element['#description_display'] === 'before')) {
     $element['#smart_description'] = FALSE;
   }
 
