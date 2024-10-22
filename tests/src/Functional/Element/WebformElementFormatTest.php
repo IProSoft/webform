@@ -52,7 +52,7 @@ class WebformElementFormatTest extends WebformElementBrowserTestBase {
     $body = $this->getMessageBody($submission, 'email_html');
     // Drupal 11 has standardized date formats.
     // See https://www.drupal.org/node/3467774.
-    $isLessThanDrupal11 = version_compare(\Drupal::VERSION, '11', '<');
+    $isLessThanDrupal11 = version_compare(\Drupal::VERSION, '11.1', '<');
     $longDate = $isLessThanDrupal11 ? 'Thursday, June 18, 1942 - 00:00' : 'Thursday, 18 June 1942 - 00:00';
     $mediumDate = $isLessThanDrupal11 ? 'Thu, 06/18/1942 - 00:00' : 'Thu, 18 Jun 1942 - 00:00';
     $shortDate = $isLessThanDrupal11 ? '06/18/1942 - 00:00' : '18 Jun 1942 - 00:00';

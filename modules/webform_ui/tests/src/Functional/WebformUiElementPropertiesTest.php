@@ -63,8 +63,8 @@ class WebformUiElementPropertiesTest extends WebformBrowserTestBase {
         $this->drupalGet('/admin/structure/webform/manage/' . $webform_elements->id() . '/element/' . $key . '/edit');
         $this->submitForm([], 'Save');
 
-        // This property didn't exist before D11.
-        if (version_compare(\Drupal::VERSION, '11', '<')) {
+        // This property didn't exist before D11.1.
+        if (version_compare(\Drupal::VERSION, '11.1', '<')) {
           unset($original_element['#selection_settings']['target_bundles']);
         }
         // Check that the original and updated element are equal.
