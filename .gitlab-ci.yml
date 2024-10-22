@@ -26,7 +26,7 @@ include:
 variables:
   OPT_IN_TEST_MAX_PHP: 1
 #   SKIP_ESLINT: '1'
-  OPT_IN_TEST_NEXT_MAJOR: 1
+  OPT_IN_TEST_PREVIOUS_MAJOR: 1
   _CSPELL_IGNORE_PATHS: 'webform.libraries.yml,
   config/install/*,
   config/schema/*,
@@ -44,13 +44,21 @@ variables:
 phpcs:
   allow_failure: false
 
-composer (next major):
+composer:
   variables:
     _LENIENT_ALLOW_LIST: "ckeditor, select2, styleguide"
 
-phpunit (next major):
+composer (max PHP version):
+  variables:
+    _LENIENT_ALLOW_LIST: "ckeditor, select2, styleguide"
+
+# Todo: Remove this workaround once all our dependencies are D11 compatible.
+phpunit:
   allow_failure: false
   before_script:
     - 'sed -i "s/core_version_requirement.*/core_version_requirement: \^11/" web/modules/contrib/**/*.info.yml'
     # Replace versions in submodules too.
     - 'sed -i "s/core_version_requirement.*/core_version_requirement: \^11/" web/modules/contrib/**/**/*.info.yml'
+
+phpunit (previous major):
+  before_script: []
