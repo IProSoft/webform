@@ -98,7 +98,7 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     // text format list page.
     $this->drupalGet('/admin/config/content/formats');
     $assert_session->statusCodeEquals(200);
-    if (version_compare(\Drupal::VERSION, '11', '<')) {
+    if (version_compare(\Drupal::VERSION, '11.1', '<')) {
       $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
     }
     else {
