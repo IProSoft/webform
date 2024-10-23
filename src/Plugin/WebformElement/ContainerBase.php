@@ -120,6 +120,17 @@ abstract class ContainerBase extends WebformElementBase {
     /** @var \Drupal\webform\WebformSubmissionViewBuilderInterface $view_builder */
     $view_builder = $this->entityTypeManager->getViewBuilder('webform_submission');
     $children = $view_builder->buildElements($element, $webform_submission, $options, 'html');
+
+    // Remove any children that are listed as excluded elements.
+    if (!empty($children)) {
+      foreach ($options['excluded_elements'] ?? [] as $excluded_element) {
+        if (isset($children[$excluded_element])) {
+          unset($children[$excluded_element]);
+        }
+      }
+    }
+
+    // No need to format the item if it has no children.
     if (empty($children)) {
       return [];
     }
@@ -191,6 +202,17 @@ abstract class ContainerBase extends WebformElementBase {
     /** @var \Drupal\webform\WebformSubmissionViewBuilderInterface $view_builder */
     $view_builder = $this->entityTypeManager->getViewBuilder('webform_submission');
     $children = $view_builder->buildElements($element, $webform_submission, $options, 'text');
+
+    // Remove any children that are listed as excluded elements.
+    if (!empty($children)) {
+      foreach ($options['excluded_elements'] ?? [] as $excluded_element) {
+        if (isset($children[$excluded_element])) {
+          unset($children[$excluded_element]);
+        }
+      }
+    }
+
+    // No need to format the item if it has no children.
     if (empty($children)) {
       return [];
     }
@@ -222,6 +244,15 @@ abstract class ContainerBase extends WebformElementBase {
       /** @var \Drupal\webform\WebformSubmissionViewBuilderInterface $view_builder */
       $view_builder = $this->entityTypeManager->getViewBuilder('webform_submission');
       $context['children'] = $view_builder->buildElements($element, $webform_submission, $options, $name);
+
+      // Remove any children that are listed as excluded elements.
+      if (!empty($context['children'])) {
+        foreach ($options['excluded_elements'] ?? [] as $excluded_element) {
+          if (isset($context['children'][$excluded_element])) {
+            unset($context['children'][$excluded_element]);
+          }
+        }
+      }
     }
 
     return parent::formatCustomItem($type, $element, $webform_submission, $options, $context);
