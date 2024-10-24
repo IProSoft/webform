@@ -469,6 +469,14 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    *   Composer require.
    */
   protected function setComposerLibraries(&$repositories, &$require) {
+    if (!is_array($repositories)) {
+      $repositories = [];
+    }
+
+    if (!is_object($require)) {
+      $require = (object) $require;
+    }
+
     $libraries = $this->librariesManager->getLibraries(TRUE);
     foreach ($libraries as $library_name => $library) {
       // Never overwrite existing repositories.
@@ -505,7 +513,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
         $package_name = "$library_name/$library_name";
       }
 
-      $repositories->$library_name = [
+      $repository = [
         '_webform' => TRUE,
         'type' => 'package',
         'package' => [
@@ -523,9 +531,9 @@ class WebformLibrariesCommands extends WebformCommandsBase {
         ],
       ];
 
+      $repositories[] = $repository;
       $require->$package_name = '*';
     }
-    $repositories = WebformObjectHelper::sortByProperty($repositories);
     $require = WebformObjectHelper::sortByProperty($require);
   }
 
