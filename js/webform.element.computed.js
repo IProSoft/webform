@@ -42,7 +42,10 @@
           // Exact input match.
           inputs.push(':input[name="' + key + '"]');
           // Sub inputs. (aka #tree)
-          inputs.push(':input[name^="' + key + '["]');
+          // Exclude the "add more" number input. This can cause race conditions
+          // when the add more button is quickly clicked after updatin the value
+          // and it shouldn't be needed as a trigger.
+          inputs.push(':input[name^="' + key + '["]:not([name$="[more_items]"])');
         });
         var triggers = inputs.join(',');
 
