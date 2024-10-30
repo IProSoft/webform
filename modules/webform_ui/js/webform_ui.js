@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, drupalSettings, once) {
-
-  'use strict';
-
   /**
    * Move toggle weight element to the first child of the edit form.
    *
@@ -15,12 +12,18 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformUiElementsToggleWeight = {
-    attach: function (context, settings) {
-      $(once('webform-ui-elements-toggle-weight', 'form.webform-edit-form', context)).each(function () {
-        var $form = $(this);
+    attach(context, settings) {
+      $(
+        once(
+          'webform-ui-elements-toggle-weight',
+          'form.webform-edit-form',
+          context,
+        ),
+      ).each(function () {
+        const $form = $(this);
         $form.find('.tabledrag-toggle-weight-wrapper').prependTo($form);
       });
-    }
+    },
   };
 
   /**
@@ -35,11 +38,17 @@
    * @see webform_ui.module.css
    */
   Drupal.behaviors.webformUiElementsActionsSecondary = {
-    attach: function (context, settings) {
-      $(once('webform-ui-elements-webform-actions-secondary', '.action-links .button--secondary', context)).each(function () {
+    attach(context, settings) {
+      $(
+        once(
+          'webform-ui-elements-webform-actions-secondary',
+          '.action-links .button--secondary',
+          context,
+        ),
+      ).each(function () {
         $(this).removeClass('button--primary');
       });
-    }
+    },
   };
 
   /**
@@ -48,27 +57,35 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformUiElementsKeyboard = {
-    attach: function (context, settings) {
-      var $table = $(once('webform-ui-elements-keyboard', '.webform-ui-elements-table', context));
+    attach(context, settings) {
+      const $table = $(
+        once(
+          'webform-ui-elements-keyboard',
+          '.webform-ui-elements-table',
+          context,
+        ),
+      );
 
       // Disable autosubmit when Enter is pressed on 'Required' checkboxes.
-      $table.find('td input:checkbox')
-        .on('keyup keypress', function (e) {
-          if (e.which === 13) {
-            e.preventDefault();
-            return false;
-          }
-        });
+      $table.find('td input:checkbox').on('keyup keypress', function (e) {
+        if (e.which === 13) {
+          e.preventDefault();
+          return false;
+        }
+      });
 
       // Move keyboard focus up (38) or down (40).
-      $table.find('td:first-child a:not(.tabledrag-handle), td input:checkbox, td .webform-dropbutton li.dropbutton-action a, td .webform-dropbutton button')
+      $table
+        .find(
+          'td:first-child a:not(.tabledrag-handle), td input:checkbox, td .webform-dropbutton li.dropbutton-action a, td .webform-dropbutton button',
+        )
         .on('keydown', function (event) {
           if (event.which === 38 || event.which === 40) {
-            var $cell = $(this).closest('td');
-            var $row = $cell.parent();
-            var direction = (event.which === 38) ? 'prev' : 'next';
-            var index = $cell.index();
-            var tagName = this.tagName;
+            let $cell = $(this).closest('td');
+            let $row = $cell.parent();
+            const direction = event.which === 38 ? 'prev' : 'next';
+            const index = $cell.index();
+            const tagName = this.tagName;
             while ($row[direction]().length) {
               $row = $row[direction]();
               $cell = $row.find('td').eq(index).find(tagName);
@@ -82,23 +99,26 @@
         });
 
       // Move keyboard focus left (37) or right (39).
-      $table.find('td a:not(.tabledrag-handle), td input, td select, td button')
+      $table
+        .find('td a:not(.tabledrag-handle), td input, td select, td button')
         .on('keydown', function (event) {
           if (event.which === 37 || event.which === 39) {
-            var $cell = $(this).closest('td');
-            var direction = (event.which === 37) ? 'prev' : 'next';
-            var $focus;
+            let $cell = $(this).closest('td');
+            const direction = event.which === 37 ? 'prev' : 'next';
+            let $focus;
 
             // Move keyboard focus within operations dropbutton.
             if ($(this).closest('.webform-dropbutton').length) {
-              if (direction === 'next' &&
+              if (
+                direction === 'next' &&
                 this.tagName === 'A' &&
-                $(this).parent('.dropbutton-action').length) {
+                $(this).parent('.dropbutton-action').length
+              ) {
                 $cell.find('button').trigger('focus');
                 event.preventDefault();
                 return;
               }
-              else if (direction === 'prev' && this.tagName === 'BUTTON') {
+              if (direction === 'prev' && this.tagName === 'BUTTON') {
                 $cell.find('a').trigger('focus');
                 event.preventDefault();
                 return;
@@ -115,9 +135,8 @@
               }
             }
           }
-
         });
-    }
+    },
   };
 
   /**
@@ -126,10 +145,12 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformUiElementKey = {
-    attach: function (context) {
-      if (!drupalSettings.webform_ui ||
+    attach(context) {
+      if (
+        !drupalSettings.webform_ui ||
         !drupalSettings.webform_ui.reserved_keys ||
-        !$(context).find(':input[name="key"]').length) {
+        !$(context).find(':input[name="key"]').length
+      ) {
         return;
       }
 
@@ -137,9 +158,9 @@
       // being used.
       // There is no way to capture changes to the key val.
       // @see core/misc/machine-name.js.
-      var currentKey;
+      let currentKey;
       setInterval(function () {
-        var value = $(':input[name="key"]').val();
+        const value = $(':input[name="key"]').val();
         if (value === currentKey) {
           return;
         }
@@ -149,16 +170,16 @@
           // Customize and display the warning message.
           $('[data-drupal-selector="edit-key-warning"]').show();
           $('#webform-ui-reserved-key-warning').html(
-            Drupal.t("Please avoid using the reserved word '@key' as the element's key.", {'@key': value})
+            Drupal.t(
+              "Please avoid using the reserved word '@key' as the element's key.",
+              { '@key': value },
+            ),
           );
-        }
-        else {
+        } else {
           // Hide the warning message.
           $('[data-drupal-selector="edit-key-warning"]').hide();
         }
-
       }, 300);
-    }
+    },
   };
-
 })(jQuery, Drupal, drupalSettings, once);

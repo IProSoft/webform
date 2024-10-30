@@ -4,27 +4,30 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   /**
    * Enhance text format element.
    *
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformTextFormat = {
-    attach: function (context) {
-      $(once('webform-text-format', '.js-text-format-wrapper textarea', context)).each(function () {
+    attach(context) {
+      $(
+        once(
+          'webform-text-format',
+          '.js-text-format-wrapper textarea',
+          context,
+        ),
+      ).each(function () {
         if (!window.CKEDITOR) {
           return;
         }
 
-        var $textarea = $(this);
+        const $textarea = $(this);
         // Update the CKEDITOR when the textarea's value has changed.
         // @see webform.states.js
         $textarea.on('change', function () {
           if (CKEDITOR.instances[$textarea.attr('id')]) {
-            var editor = CKEDITOR.instances[$textarea.attr('id')];
+            const editor = CKEDITOR.instances[$textarea.attr('id')];
             editor.setData($textarea.val());
           }
         });
@@ -33,13 +36,11 @@
         // @see webform.states.js
         $textarea.on('webform:disabled', function () {
           if (CKEDITOR.instances[$textarea.attr('id')]) {
-            var editor = CKEDITOR.instances[$textarea.attr('id')];
+            const editor = CKEDITOR.instances[$textarea.attr('id')];
             editor.setReadOnly($textarea.is(':disabled'));
           }
         });
-
       });
-    }
+    },
   };
-
 })(jQuery, Drupal, once);

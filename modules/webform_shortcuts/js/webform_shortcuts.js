@@ -6,10 +6,7 @@
  */
 
 (function ($, drupalSettings) {
-
-  'use strict';
-
-  var shortcuts = drupalSettings.webform.shortcuts;
+  const shortcuts = drupalSettings.webform.shortcuts;
 
   // Add element.
   if (shortcuts.addElement) {
@@ -35,12 +32,15 @@
   // Save element or elements.
   if (shortcuts.saveElements) {
     $(document).bind('keydown', shortcuts.saveElements, function () {
-      var $dialogSubmit = $('form.webform-ui-element-form [data-drupal-selector="edit-submit"]');
+      const $dialogSubmit = $(
+        'form.webform-ui-element-form [data-drupal-selector="edit-submit"]',
+      );
       if ($dialogSubmit.length) {
         $dialogSubmit.trigger('click');
-      }
-      else {
-        $('form.webform-edit-form [data-drupal-selector="edit-submit"]').trigger('click');
+      } else {
+        $(
+          'form.webform-edit-form [data-drupal-selector="edit-submit"]',
+        ).trigger('click');
       }
     });
   }
@@ -48,7 +48,9 @@
   // Reset elements.
   if (shortcuts.resetElements) {
     $(document).bind('keydown', shortcuts.resetElements, function () {
-      $('form.webform-edit-form [data-drupal-selector="edit-reset"]').trigger('click');
+      $('form.webform-edit-form [data-drupal-selector="edit-reset"]').trigger(
+        'click',
+      );
     });
   }
 
@@ -58,5 +60,4 @@
       $('.tabledrag-toggle-weight').eq(0).trigger('click');
     });
   }
-
 })(jQuery, drupalSettings);

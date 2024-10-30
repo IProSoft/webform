@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // @see https://github.com/Choices-js/Choices
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.choices = Drupal.webform.choices || {};
@@ -19,75 +16,77 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformChoices = {
-    attach: function (context) {
+    attach(context) {
       if (!window.Choices) {
         return;
       }
 
-      $(once('webform-choices', 'select.js-webform-choices, .js-webform-choices select', context))
-        .each(function () {
-          var $select = $(this);
-          var options = {
-            // Disable sorting.
-            shouldSort: false,
-            // Translate all default strings.
-            loadingText: Drupal.t('Loading...'),
-            noResultsText: Drupal.t('No results found'),
-            noChoicesText: Drupal.t('No choices to choose from'),
-            itemSelectText: Drupal.t('Press to select'),
-            addItemText: function addItemText(value) {
-              return Drupal.t(
-                'Press Enter to add <b>@value</b>',
-                {'@value': value}
-              );
-            },
-            maxItemText: function maxItemText(maxItemCount) {
-              return Drupal.t(
-                'Only @max value can be added',
-                {'@max': maxItemCount}
-              );
-            }
-          };
+      $(
+        once(
+          'webform-choices',
+          'select.js-webform-choices, .js-webform-choices select',
+          context,
+        ),
+      ).each(function () {
+        const $select = $(this);
+        let options = {
+          // Disable sorting.
+          shouldSort: false,
+          // Translate all default strings.
+          loadingText: Drupal.t('Loading...'),
+          noResultsText: Drupal.t('No results found'),
+          noChoicesText: Drupal.t('No choices to choose from'),
+          itemSelectText: Drupal.t('Press to select'),
+          addItemText: function addItemText(value) {
+            return Drupal.t('Press Enter to add <b>@value</b>', {
+              '@value': value,
+            });
+          },
+          maxItemText: function maxItemText(maxItemCount) {
+            return Drupal.t('Only @max value can be added', {
+              '@max': maxItemCount,
+            });
+          },
+        };
 
-          // Enabling the 'remove item buttons' options addresses accessibility
-          // issue when deleting multiple options.
-          if ($select.attr('multiple')) {
-            options.removeItemButton = true;
-          }
+        // Enabling the 'remove item buttons' options addresses accessibility
+        // issue when deleting multiple options.
+        if ($select.attr('multiple')) {
+          options.removeItemButton = true;
+        }
 
-          options = $.extend(options, Drupal.webform.choices.options);
+        options = $.extend(options, Drupal.webform.choices.options);
 
-          if ($select.data('placeholder')) {
-            options.placeholder = true;
-            options.placeholderValue = $select.data('placeholder');
-          }
-          if ($select.data('limit')) {
-            options.maxItemCount = $select.data('limit');
-          }
+        if ($select.data('placeholder')) {
+          options.placeholder = true;
+          options.placeholderValue = $select.data('placeholder');
+        }
+        if ($select.data('limit')) {
+          options.maxItemCount = $select.data('limit');
+        }
 
-          var choices = new Choices(this, options);
+        const choices = new Choices(this, options);
 
-          // Store reference to this element's choices instance so that
-          // it can be enabled or disabled.
-          $(this).data('choices', choices);
-        });
-    }
+        // Store reference to this element's choices instance so that
+        // it can be enabled or disabled.
+        $(this).data('choices', choices);
+      });
+    },
   };
 
-  var $document = $(document);
+  const $document = $(document);
 
   // Refresh choices (select) widgets when they are disabled/enabled.
   $document.on('state:disabled', function (e) {
-    var $choices = $(e.target).find('.js-webform-choices');
+    const $choices = $(e.target).find('.js-webform-choices');
     if ($(e.target).hasClass('js-webform-choices')) {
       $choices.add(e.target);
     }
     $choices.each(function () {
-      var choices = $(this).data('choices');
+      const choices = $(this).data('choices');
       if (choices) {
-        choices[(e.value) ? 'disable' : 'enable']();
+        choices[e.value ? 'disable' : 'enable']();
       }
     });
   });
-
 })(jQuery, Drupal, once);

@@ -3,8 +3,4 @@
  * JavaScript behaviors for Webform Bootstrap test module.
  */
 
-(function ($, Drupal) {
-
-  'use strict';
-
-})(jQuery, Drupal);
+(function ($, Drupal) {})(jQuery, Drupal);

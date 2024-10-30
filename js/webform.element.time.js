@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // @see https://github.com/jonthornton/jquery-timepicker#options
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.timePicker = Drupal.webform.timePicker || {};
@@ -21,14 +18,16 @@
    *   Attaches the behavior to time elements.
    */
   Drupal.behaviors.webformTime = {
-    attach: function (context, settings) {
+    attach(context, settings) {
       if (!$.fn.timepicker) {
         return;
       }
 
-      $(once('webformTimePicker', 'input[data-webform-time-format]', context)).each(function () {
-        var $input = $(this);
-        var options = {};
+      $(
+        once('webformTimePicker', 'input[data-webform-time-format]', context),
+      ).each(function () {
+        const $input = $(this);
+        let options = {};
         options.timeFormat = $input.data('webformTimeFormat');
         if ($input.attr('min')) {
           options.minTime = $input.attr('min');
@@ -43,10 +42,9 @@
         // to 1 (second).
         // @see \Drupal\Core\Datetime\Element\Datetime::processDatetime
         // Only use step if it is greater than 60 seconds.
-        if ($input.attr('step') && ($input.attr('step') > 60)) {
+        if ($input.attr('step') && $input.attr('step') > 60) {
           options.step = Math.round($input.attr('step') / 60);
-        }
-        else {
+        } else {
           options.step = 1;
         }
 
@@ -59,7 +57,6 @@
 
         $input.timepicker(options);
       });
-    }
+    },
   };
-
 })(jQuery, Drupal, once);

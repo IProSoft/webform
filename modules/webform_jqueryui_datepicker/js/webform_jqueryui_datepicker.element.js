@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal) {
-
-  'use strict';
-
   // @see http://api.jqueryui.com/datepicker/
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.datePicker = Drupal.webform.datePicker || {};
@@ -25,27 +22,35 @@
    *   Detach the behavior destroying datepickers on effected elements.
    */
   Drupal.behaviors.date = {
-    attach: function (context, settings) {
-      var $context = $(context);
-      $(once('datePicker', $(context).find('input[data-drupal-date-format]'))).each(function () {
-        var $input = $(this);
+    attach(context, settings) {
+      const $context = $(context);
+      $(
+        once('datePicker', $(context).find('input[data-drupal-date-format]')),
+      ).each(function () {
+        const $input = $(this);
 
-        var options = $.extend({
-          changeMonth: true,
-          changeYear: true
-        }, Drupal.webform.datePicker.options);
+        let options = $.extend(
+          {
+            changeMonth: true,
+            changeYear: true,
+          },
+          Drupal.webform.datePicker.options,
+        );
 
         // Add datepicker button.
         if ($input.hasData && $input.hasData('datepicker-button')) {
-          options = $.extend({
-            showOn: 'both',
-            buttonImage: settings.webform.datePicker.buttonImage,
-            buttonImageOnly: true,
-            buttonText: Drupal.t('Select date')
-          }, Drupal.webform.datePicker.options);
+          options = $.extend(
+            {
+              showOn: 'both',
+              buttonImage: settings.webform.datePicker.buttonImage,
+              buttonImageOnly: true,
+              buttonText: Drupal.t('Select date'),
+            },
+            Drupal.webform.datePicker.options,
+          );
         }
 
-        var dateFormat = $input.data('drupalDateFormat');
+        const dateFormat = $input.data('drupalDateFormat');
 
         // The date format is saved in PHP style, we need to convert to jQuery
         // datepicker.
@@ -75,8 +80,12 @@
         }
 
         // Add min/max year to data range.
-        if (!options.yearRange && $input.data('min-year') && $input.data('max-year')) {
-          options.yearRange = $input.data('min-year') + ':' + $input.attr('data-max-year');
+        if (
+          !options.yearRange &&
+          $input.data('min-year') &&
+          $input.data('max-year')
+        ) {
+          options.yearRange = `${$input.data('min-year')}:${$input.attr('data-max-year')}`;
         }
 
         // First day of the week.
@@ -85,20 +94,24 @@
         // Days of the week.
         // @see https://stackoverflow.com/questions/2968414/disable-specific-days-of-the-week-on-jquery-ui-datepicker
         if ($input.attr('data-days')) {
-          var days = $input.attr('data-days').split(',');
+          const days = $input.attr('data-days').split(',');
           options.beforeShowDay = function (date) {
-            var day = date.getDay().toString();
-            return [(days.indexOf(day) !== -1) ? true : false];
+            const day = date.getDay().toString();
+            return [days.indexOf(day) !== -1];
           };
         }
 
         // Disable autocomplete.
-        var off = /chrom(e|ium)/.test(window.navigator.userAgent.toLowerCase()) ? 'chrome-off-' + Math.floor(Math.random() * 100000000) : 'off';
+        const off = /chrom(e|ium)/.test(
+          window.navigator.userAgent.toLowerCase(),
+        )
+          ? `chrome-off-${Math.floor(Math.random() * 100000000)}`
+          : 'off';
         $input.attr('autocomplete', off);
 
         $input.datepicker(options);
       });
-    }
+    },
     // Issue #2983363: Datepicker is being detached when multiple files are
     // uploaded.
     /*
@@ -110,5 +123,4 @@
     }
     */
   };
-
 })(jQuery, Drupal);

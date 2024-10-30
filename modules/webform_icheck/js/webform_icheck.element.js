@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal) {
-
-  'use strict';
-
   // @see http://icheck.fronteed.com/#options
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.iCheck = Drupal.webform.iCheck || {};
@@ -18,32 +15,38 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformICheck = {
-    attach: function (context) {
+    attach(context) {
       if (!$.fn.iCheck) {
         return;
       }
       $('input[data-webform-icheck]', context).each(function () {
-        var $input = $(this);
-        var icheck = $input.attr('data-webform-icheck');
+        const $input = $(this);
+        const icheck = $input.attr('data-webform-icheck');
 
-        var options = $.extend({
-          checkboxClass: 'icheckbox_' + icheck,
-          radioClass: 'iradio_' + icheck
-        }, Drupal.webform.iCheck.options);
+        const options = $.extend(
+          {
+            checkboxClass: `icheckbox_${icheck}`,
+            radioClass: `iradio_${icheck}`,
+          },
+          Drupal.webform.iCheck.options,
+        );
 
         // The line skin requires that the label be added to the options.
         // @see http://icheck.fronteed.com/#skin-line
         if (icheck.indexOf('line') === 0) {
-          var $label = $input.parent().find('label[for="' + $input.attr('id') + '"]');
+          const $label = $input
+            .parent()
+            .find(`label[for="${$input.attr('id')}"]`);
 
           // Set insert with label text.
-          options.insert = '<div class="icheck_line-icon"></div>' + $label.text();
+          options.insert = `<div class="icheck_line-icon"></div>${$label.text()}`;
 
           // Make sure checkbox is outside the label and then remove the label.
           $label.insertAfter($input).remove();
         }
 
-        $input.addClass('js-webform-icheck')
+        $input
+          .addClass('js-webform-icheck')
           .iCheck(options)
           // @see https://github.com/fronteed/iCheck/issues/244
           .on('ifChecked', function (e) {
@@ -53,7 +56,7 @@
             $(e.target).removeAttr('checked').trigger('change');
           });
       });
-    }
+    },
   };
 
   /**
@@ -64,31 +67,44 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformICheckTableSelectAll = {
-    attach: function (context) {
+    attach(context) {
       if (!$.fn.iCheck) {
         return;
       }
 
-      $('table[data-webform-icheck] th.select-all').bind('DOMNodeInserted', function () {
-        $(this).unbind('DOMNodeInserted');
-        $(this).find('input[type="checkbox"]').each(function () {
-          var icheck = $(this).closest('table[data-webform-icheck]').attr('data-webform-icheck');
+      $('table[data-webform-icheck] th.select-all').bind(
+        'DOMNodeInserted',
+        function () {
+          $(this).unbind('DOMNodeInserted');
+          $(this)
+            .find('input[type="checkbox"]')
+            .each(function () {
+              const icheck = $(this)
+                .closest('table[data-webform-icheck]')
+                .attr('data-webform-icheck');
 
-          var options = $.extend({
-            checkboxClass: 'icheckbox_' + icheck,
-            radioClass: 'iradio_' + icheck
-          }, Drupal.webform.iCheck.options);
+              const options = $.extend(
+                {
+                  checkboxClass: `icheckbox_${icheck}`,
+                  radioClass: `iradio_${icheck}`,
+                },
+                Drupal.webform.iCheck.options,
+              );
 
-          $(this).iCheck(options);
-        })
-          .on('ifChanged', function () {
-            var _index = $(this).parents('th').index() + 1;
-            $(this).parents('thead').next('tbody').find('tr td:nth-child(' + _index + ') input')
-              .iCheck(!$(this).is(':checked') ? 'check' : 'uncheck')
-              .iCheck($(this).is(':checked') ? 'check' : 'uncheck');
-          });
-      });
-    }
+              $(this).iCheck(options);
+            })
+            .on('ifChanged', function () {
+              const _index = $(this).parents('th').index() + 1;
+              $(this)
+                .parents('thead')
+                .next('tbody')
+                .find(`tr td:nth-child(${_index}) input`)
+                .iCheck(!$(this).is(':checked') ? 'check' : 'uncheck')
+                .iCheck($(this).is(':checked') ? 'check' : 'uncheck');
+            });
+        },
+      );
+    },
   };
 
   /**
@@ -105,5 +121,4 @@
       $(e.target).iCheck(e.value ? 'disable' : 'enable');
     });
   }
-
 })(jQuery, Drupal);

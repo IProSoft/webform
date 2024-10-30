@@ -4,14 +4,11 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.computed = Drupal.webform.computed || {};
   Drupal.webform.computed.delay = Drupal.webform.computed.delay || 500;
 
-  var computedElements = [];
+  const computedElements = [];
 
   /**
    * Initialize computed elements.
@@ -19,50 +16,52 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformComputed = {
-    attach: function (context) {
+    attach(context) {
       // Find computed elements and build trigger selectors.
-      $(once('webform-computed', '.js-webform-computed', context)).each(function () {
-        // Get computed element and form.
-        var $element = $(this);
-        var $form = $element.closest('form');
+      $(once('webform-computed', '.js-webform-computed', context)).each(
+        function () {
+          // Get computed element and form.
+          const $element = $(this);
+          const $form = $element.closest('form');
 
-        // Get unique id for computed element based on the element name
-        // and form id.
-        var id = $form.attr('id') + '-' + $element.find('input[type="hidden"]').attr('name');
+          // Get unique id for computed element based on the element name
+          // and form id.
+          const id = `${$form.attr('id')}-${$element.find('input[type="hidden"]').attr('name')}`;
 
-        // Get elements that are used by the computed element.
-        var elementKeys = $(this).data('webform-element-keys').split(',');
-        if (!elementKeys) {
-          return;
-        }
+          // Get elements that are used by the computed element.
+          const elementKeys = $(this).data('webform-element-keys').split(',');
+          if (!elementKeys) {
+            return;
+          }
 
-        // Get computed element trigger selectors.
-        var inputs = [];
-        $.each(elementKeys, function (i, key) {
-          // Exact input match.
-          inputs.push(':input[name="' + key + '"]');
-          // Sub inputs. (aka #tree)
-          inputs.push(':input[name^="' + key + '["]');
-        });
-        var triggers = inputs.join(',');
+          // Get computed element trigger selectors.
+          const inputs = [];
+          $.each(elementKeys, function (i, key) {
+            // Exact input match.
+            inputs.push(`:input[name="${key}"]`);
+            // Sub inputs. (aka #tree)
+            inputs.push(`:input[name^="${key}["]`);
+          });
+          const triggers = inputs.join(',');
 
-        // Track computed elements.
-        computedElements.push({
-          id: id,
-          element: $element,
-          form: $form,
-          triggers: triggers
-        });
+          // Track computed elements.
+          computedElements.push({
+            id,
+            element: $element,
+            form: $form,
+            triggers,
+          });
 
-        // Clear computed last values to ensure that a computed element is
-        // always re-computed on page load.
-        $element.attr('data-webform-computed-last', '');
-      });
+          // Clear computed last values to ensure that a computed element is
+          // always re-computed on page load.
+          $element.attr('data-webform-computed-last', '');
+        },
+      );
 
       // Initialize triggers for each computed element.
       $.each(computedElements, function (index, computedElement) {
         // Get trigger from the current context.
-        var $triggers = $(context).find(computedElement.triggers);
+        let $triggers = $(context).find(computedElement.triggers);
         // Make sure current context has triggers.
         if (!$triggers.length) {
           return;
@@ -70,7 +69,12 @@
 
         // Make sure triggers are within the computed element's form
         // and only initialized once.
-        $triggers = $(once('webform-computed-triggers-' + computedElement.id, computedElement.form.find($triggers)));
+        $triggers = $(
+          once(
+            `webform-computed-triggers-${computedElement.id}`,
+            computedElement.form.find($triggers),
+          ),
+        );
         // Double check that there are triggers which need to be initialized.
         if (!$triggers.length) {
           return;
@@ -92,28 +96,32 @@
         $triggers.on('keyup change', queueUpdate);
 
         // Add event handler to computed element tabledrag.
-        var $draggable = $triggers.closest('tr.draggable');
+        const $draggable = $triggers.closest('tr.draggable');
         if ($draggable.length) {
-          $draggable.find('.tabledrag-handle').on('mouseup pointerup touchend',
-            queueUpdate);
+          $draggable
+            .find('.tabledrag-handle')
+            .on('mouseup pointerup touchend', queueUpdate);
         }
 
         // Queue an update to make sure trigger values are computed.
         queueUpdate();
 
         // Queue computed element updates using a timer.
-        var timer = null;
+        let timer = null;
         function queueUpdate() {
           if (timer) {
             window.clearTimeout(timer);
             timer = null;
           }
-          timer = window.setTimeout(triggerUpdate, Drupal.webform.computed.delay);
+          timer = window.setTimeout(
+            triggerUpdate,
+            Drupal.webform.computed.delay,
+          );
         }
 
         function triggerUpdate() {
           // Get computed element wrapper.
-          var $wrapper = $element.find('.js-webform-computed-wrapper');
+          const $wrapper = $element.find('.js-webform-computed-wrapper');
 
           // If computed element is loading, requeue the update and wait for
           // the computed element to be updated.
@@ -124,8 +132,8 @@
 
           // Prevent duplicate computations.
           // @see Drupal.behaviors.formSingleSubmit
-          var formValues = $triggers.serialize();
-          var previousValues = $element.attr('data-webform-computed-last');
+          const formValues = $triggers.serialize();
+          const previousValues = $element.attr('data-webform-computed-last');
           if (previousValues === formValues) {
             return;
           }
@@ -138,7 +146,6 @@
           $element.find('.js-form-submit').trigger('mousedown');
         }
       }
-    }
+    },
   };
-
 })(jQuery, Drupal, once);

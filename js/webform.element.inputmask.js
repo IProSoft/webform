@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // Revert: Set currency prefix to empty by default #2066.
   // @see https://github.com/RobinHerbots/Inputmask/issues/2066
   if (window.Inputmask) {
@@ -19,7 +16,7 @@
         autoGroup: true,
         digits: 2,
         digitsOptional: false,
-        clearMaskOnLostFocus: false
+        clearMaskOnLostFocus: false,
       },
       currency_negative: {
         prefix: '$ ',
@@ -29,7 +26,7 @@
         autoGroup: true,
         digits: 2,
         digitsOptional: false,
-        clearMaskOnLostFocus: false
+        clearMaskOnLostFocus: false,
       },
       currency_positive_negative: {
         prefix: '$ ',
@@ -39,7 +36,7 @@
         autoGroup: true,
         digits: 2,
         digitsOptional: false,
-        clearMaskOnLostFocus: false
+        clearMaskOnLostFocus: false,
       },
       decimal: {
         prefix: '',
@@ -49,7 +46,7 @@
         autoGroup: true,
         digits: 3,
         digitsOptional: true,
-        clearMaskOnLostFocus: false
+        clearMaskOnLostFocus: false,
       },
       decimal_negative: {
         prefix: '',
@@ -59,7 +56,7 @@
         autoGroup: true,
         digits: 3,
         digitsOptional: true,
-        clearMaskOnLostFocus: false
+        clearMaskOnLostFocus: false,
       },
       decimal_positive_negative: {
         prefix: '',
@@ -69,8 +66,8 @@
         autoGroup: true,
         digits: 3,
         digitsOptional: true,
-        clearMaskOnLostFocus: false
-      }
+        clearMaskOnLostFocus: false,
+      },
     });
   }
 
@@ -80,13 +77,14 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformInputMask = {
-    attach: function (context) {
+    attach(context) {
       if (!$.fn.inputmask) {
         return;
       }
 
-      $(once('webform-input-mask', 'input.js-webform-input-mask', context)).inputmask();
-    }
+      $(
+        once('webform-input-mask', 'input.js-webform-input-mask', context),
+      ).inputmask();
+    },
   };
-
 })(jQuery, Drupal, once);

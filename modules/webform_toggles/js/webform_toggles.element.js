@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // @see https://github.com/simontabor/jquery-toggles
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.toggles = Drupal.webform.toggles || {};
@@ -18,57 +15,62 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformToggle = {
-    attach: function (context) {
+    attach(context) {
       if (!$.fn.toggles) {
         return;
       }
 
-      $(once('webform-toggle', '.js-webform-toggle', context)).each(function () {
-        var $toggle = $(this);
-        var $wrapper = $toggle.parent();
-        var $checkbox = $wrapper.find('input[type="checkbox"]');
-        var $label = $wrapper.find('label');
+      $(once('webform-toggle', '.js-webform-toggle', context)).each(
+        function () {
+          const $toggle = $(this);
+          const $wrapper = $toggle.parent();
+          const $checkbox = $wrapper.find('input[type="checkbox"]');
+          const $label = $wrapper.find('label');
 
-        var options = $.extend({
-          checkbox: $checkbox,
-          on: $checkbox.is(':checked'),
-          clicker: $label,
-          text: {
-            on: $toggle.attr('data-toggle-text-on') || '',
-            off: $toggle.attr('data-toggle-text-off') || ''
+          const options = $.extend(
+            {
+              checkbox: $checkbox,
+              on: $checkbox.is(':checked'),
+              clicker: $label,
+              text: {
+                on: $toggle.attr('data-toggle-text-on') || '',
+                off: $toggle.attr('data-toggle-text-off') || '',
+              },
+            },
+            Drupal.webform.toggles.options,
+          );
+
+          $toggle.toggles(options);
+
+          // Trigger change event for #states API.
+          // @see Drupal.states.Trigger.states.checked.change
+          $toggle.on('toggle', function () {
+            $checkbox.trigger('change');
+          });
+
+          // If checkbox is disabled then add the .disabled class to the toggle.
+          if ($checkbox.attr('disabled') || $checkbox.attr('readonly')) {
+            $toggle.addClass('disabled');
           }
-        }, Drupal.webform.toggles.options);
 
-        $toggle.toggles(options);
-
-        // Trigger change event for #states API.
-        // @see Drupal.states.Trigger.states.checked.change
-        $toggle.on('toggle', function () {
-          $checkbox.trigger('change');
-        });
-
-        // If checkbox is disabled then add the .disabled class to the toggle.
-        if ($checkbox.attr('disabled') || $checkbox.attr('readonly')) {
-          $toggle.addClass('disabled');
-        }
-
-        // Add .clearfix to the wrapper.
-        $wrapper.addClass('clearfix');
-      });
-    }
+          // Add .clearfix to the wrapper.
+          $wrapper.addClass('clearfix');
+        },
+      );
+    },
   };
 
   // Track the disabling of a toggle's checkbox using states.
   if ($.fn.toggles) {
     $(document).on('state:disabled', function (event) {
       $('.js-webform-toggle').each(function () {
-        var $toggle = $(this);
-        var $wrapper = $toggle.parent();
-        var $checkbox = $wrapper.find('input[type="checkbox"]');
-        var isDisabled = ($checkbox.attr('disabled') || $checkbox.attr('readonly'));
+        const $toggle = $(this);
+        const $wrapper = $toggle.parent();
+        const $checkbox = $wrapper.find('input[type="checkbox"]');
+        const isDisabled =
+          $checkbox.attr('disabled') || $checkbox.attr('readonly');
         $toggle[isDisabled ? 'disabled' : 'enabled']();
       });
     });
   }
-
 })(jQuery, Drupal, once);
