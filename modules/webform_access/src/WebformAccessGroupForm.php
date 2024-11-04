@@ -343,7 +343,7 @@ class WebformAccessGroupForm extends EntityForm {
     $webform_access_group->setUserIds($form_state->getValue('users'));
     $webform_access_group->setEntityIds($form_state->getValue('entities'));
     $webform_access_group->setEmails($form_state->getValue('emails'));
-    $webform_access_group->save();
+    $status = $webform_access_group->save();
 
     // Log and display message.
     $context = [
@@ -355,6 +355,8 @@ class WebformAccessGroupForm extends EntityForm {
 
     // Redirect to list.
     $form_state->setRedirect('entity.webform_access_group.collection');
+
+    return $status;
   }
 
   /**

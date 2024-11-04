@@ -2484,8 +2484,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
 
     // Remove unsupported title and description display from composite elements.
     if ($this->isComposite()) {
-      unset($form['form']['display_container']['title_display']['#options']['inline']);
-      unset($form['form']['display_container']['description_display']['#options']['tooltip']);
+      unset($form['form']['display_container']['title_display']['#options']['inline'], $form['form']['display_container']['description_display']['#options']['tooltip']);
     }
     // Remove unsupported title display from certain element types.
     $element_types = [

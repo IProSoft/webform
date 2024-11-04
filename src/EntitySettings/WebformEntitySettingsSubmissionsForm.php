@@ -844,7 +844,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
     // Set settings.
     $webform->setSettings($values);
 
-    parent::save($form, $form_state);
+    return parent::save($form, $form_state);
   }
 
 }

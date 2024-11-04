@@ -455,6 +455,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
    */
   public function getQuestion() {
     // Do not alter the form's title.
+    return '';
   }
 
   /**

@@ -67,7 +67,7 @@ class WebformEntitySettingsAssetsForm extends WebformEntitySettingsBaseForm {
     // @see webform_library_info_build()
     Cache::invalidateTags(['library_info']);
 
-    parent::save($form, $form_state);
+    return parent::save($form, $form_state);
   }
 
 }

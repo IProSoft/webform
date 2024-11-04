@@ -1413,6 +1413,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
 
     switch ($message_display) {
       case WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_LABEL:
+      default:
         $t_args = ['@label' => $label, '@message' => $message];
         return $this->t('@label @message', $t_args);
 

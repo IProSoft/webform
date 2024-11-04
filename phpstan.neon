@@ -7,6 +7,7 @@ parameters:
         - install
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
+        - "#^Class Drupal\\\\webform_test_handler_remote_post\\\\WebformTestHandlerRemotePostClient extends @final class GuzzleHttp\\\\Client\\.#"
         - "#^Unsafe usage of new static#"
         # Remove once this is fixed https://www.drupal.org/project/webform/issues/3478049
         - '#\Drupal calls should be avoided in classes, use dependency injection instead#'

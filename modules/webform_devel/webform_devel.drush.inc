@@ -52,7 +52,9 @@ function webform_devel_drush_help($section) {
  * @see \Drupal\webform_devel\Commands\WebformDevelCommands::drush_webform_devel_reset()
  */
 function drush_webform_devel_reset() {
+  // @phpstan-ignore-next-line
   if (!drush_confirm(dt("Are you sure you want reset the Webform module's user data and saved state?"))) {
+    // @phpstan-ignore-next-line
     return drush_user_abort();
   }
 
