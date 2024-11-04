@@ -214,7 +214,7 @@ class WebformElementManager extends DefaultPluginManager implements FallbackPlug
       $this->processElement($element);
 
       // Recurse and prepare nested elements.
-     $this->processElements($element);
+      $this->processElements($element);
     }
   }
 
