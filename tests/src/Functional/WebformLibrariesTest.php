@@ -49,6 +49,7 @@ class WebformLibrariesTest extends WebformBrowserTestBase {
 
     // Check optional libraries are included.
     $this->drupalGet('/webform/test_libraries_optional');
+    $this->assertSame('', $this->getSession()->getPage()->getHtml());
     $assert_session->responseContains('/select2.min.js');
     $assert_session->responseContains('/choices.min.js');
     $assert_session->responseContains('/chosen.jquery.min.js');
