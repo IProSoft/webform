@@ -1625,7 +1625,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'message_type' => 'webform',
       'message_close' => TRUE,
       'message_storage' => WebformMessage::STORAGE_STATE,
-      'access' => $this->currentUser->hasPermission('administer webform'),
+      'access' => $this->currentUser->hasPermission('administer webform')
+        && !$this->configFactory->get('webform.settings')->get('ui.promotions_disabled'),
       'attached' => ['library' => ['webform/webform.promotions']],
       'routes' => [
         // @see /admin/modules
