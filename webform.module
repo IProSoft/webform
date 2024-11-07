@@ -100,8 +100,7 @@ function webform_modules_installed($modules) {
   $email_provider->check();
 
   // Update Webform HTML editor.
-  if (in_array('ckeditor', $modules)
-    || in_array('ckeditor5', $modules)) {
+  if (in_array('ckeditor5', $modules)) {
     \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
@@ -133,8 +132,7 @@ function webform_modules_uninstalled($modules) {
   $email_provider->check();
 
   // Update Webform HTML editor.
-  if (in_array('ckeditor', $modules)
-    || in_array('ckeditor5', $modules)) {
+  if (in_array('ckeditor5', $modules)) {
     \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
