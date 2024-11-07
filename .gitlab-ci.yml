@@ -46,11 +46,11 @@ phpcs:
 
 composer:
   variables:
-    _LENIENT_ALLOW_LIST: "ckeditor, select2, styleguide"
+    _LENIENT_ALLOW_LIST: "select2, styleguide"
 
 composer (max PHP version):
   variables:
-    _LENIENT_ALLOW_LIST: "ckeditor, select2, styleguide"
+    _LENIENT_ALLOW_LIST: "select2, styleguide"
 
 # Todo: Remove this workaround once all our dependencies are D11 compatible.
 phpunit:
