@@ -125,7 +125,7 @@ class WebformTermsOfService extends Checkbox {
 
     // Add accessibility attributes to title and content.
     if ($element['#type'] === static::TERMS_SLIDEOUT) {
-
+      // @todo Implement accessibility attributes.
     }
 
     // Set type to data attribute.
