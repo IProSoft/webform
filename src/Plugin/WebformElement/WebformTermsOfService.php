@@ -167,7 +167,7 @@ class WebformTermsOfService extends Checkbox {
         ],
         'required' => [
           ':input[name="properties[terms_type]"]' => ['value' => WebformTermsOfServiceElement::TERMS_LINK],
-        ]
+        ],
       ],
     ];
     $form['terms_of_service']['terms_link_target'] = [
