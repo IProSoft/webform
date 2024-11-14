@@ -27,6 +27,13 @@ class WebformTermsOfService extends Checkbox {
   const TERMS_MODAL = 'modal';
 
   /**
+   * Provides a link to a terms page.
+   *
+   * @var string
+   */
+  const TERMS_LINK = 'link';
+
+  /**
    * {@inheritdoc}
    */
   public function getInfo() {
@@ -35,6 +42,8 @@ class WebformTermsOfService extends Checkbox {
       '#terms_type' => static::TERMS_MODAL,
       '#terms_title' => '',
       '#terms_content' => '',
+      '#terms_link' => '',
+      '#terms_link_target' => '_self',
     ] + parent::getInfo();
   }
 
@@ -66,6 +75,14 @@ class WebformTermsOfService extends Checkbox {
 
     if (empty($element['#title'])) {
       $element['#title'] = (string) t('I agree to the {terms of service}.');
+    }
+
+    // Link to page if we have a link element.
+    if ($element['#terms_type'] === static::TERMS_LINK) {
+      $element['#title'] = str_replace('{', '<a role="button" href="' . $element['#terms_link'] . '" target="' . $element['#terms_link_target'] .'">', $element['#title']);
+      $element['#title'] = str_replace('}', '</a>', $element['#title']);
+
+      return $element;
     }
 
     $element['#title'] = str_replace('{', '<a role="button" href="#terms">', $element['#title']);
