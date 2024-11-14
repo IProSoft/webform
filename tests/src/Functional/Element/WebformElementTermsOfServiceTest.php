@@ -44,6 +44,9 @@ class WebformElementTermsOfServiceTest extends WebformElementBrowserTestBase {
     // Check slideout.
     $assert_session->responseContains('<label for="edit-terms-of-service-slideout" class="option">I agree to the <a role="button" href="#terms">terms of service</a>. (slideout)</label>');
 
+    // Check link.
+    $assert_session->responseContains('<label for="edit-terms-of-service-link" class="option">I agree to the <a role="button" href="/node/1" target="_blank">terms of service</a>. (link)</label>');
+
     // Check validation.
     $this->drupalGet('/webform/test_element_terms_of_service');
     $this->submitForm([], 'Preview');
@@ -55,11 +58,13 @@ class WebformElementTermsOfServiceTest extends WebformElementBrowserTestBase {
       'terms_of_service_default' => TRUE,
       'terms_of_service_modal' => TRUE,
       'terms_of_service_slideout' => TRUE,
+      'terms_of_service_link' => TRUE,
     ];
     $this->submitForm($edit, 'Preview');
     $assert_session->responseContains('I agree to the terms of service. (default)');
     $assert_session->responseContains('I agree to the terms of service. (modal)');
     $assert_session->responseContains('I agree to the terms of service. (slideout)');
+    $assert_session->responseContains('I agree to the terms of service. (link)');
 
     // Check default title and auto incremented key.
     $this->drupalLogin($this->rootUser);
