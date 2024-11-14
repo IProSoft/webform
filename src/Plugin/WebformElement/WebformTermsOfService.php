@@ -30,7 +30,7 @@ class WebformTermsOfService extends Checkbox {
       'terms_title' => '',
       'terms_content' => '',
       'terms_link' => '',
-      'terms_link_target' => '_self'
+      'terms_link_target' => '_self',
     ] + parent::defineDefaultProperties();
     unset(
       $properties['field_prefix'],
@@ -166,7 +166,7 @@ class WebformTermsOfService extends Checkbox {
           ':input[name="properties[terms_type]"]' => ['value' => WebformTermsOfServiceElement::TERMS_LINK],
         ],
         'required' => [
-          ':input[name="properties[terms_type]"]' => ['value' => WebformTermsOfServiceElement::TERMS_LINK]
+          ':input[name="properties[terms_type]"]' => ['value' => WebformTermsOfServiceElement::TERMS_LINK],
         ]
       ],
     ];
@@ -175,10 +175,10 @@ class WebformTermsOfService extends Checkbox {
       '#title' => $this->t('Terms link target'),
       '#default' => '_self',
       '#options' => [
-        '_self' => t('Current window (_self)'),
-        '_blank' => t('New window (_blank)'),
-        'parent' => t('Parent window (_parent)'),
-        'top' => t('Topmost window (_top)'),
+        '_self' => $this->t('Current window (_self)'),
+        '_blank' => $this->t('New window (_blank)'),
+        'parent' => $this->t('Parent window (_parent)'),
+        'top' => $this->t('Topmost window (_top)'),
       ],
       '#states' => [
         'visible' => [

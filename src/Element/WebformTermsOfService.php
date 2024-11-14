@@ -79,7 +79,7 @@ class WebformTermsOfService extends Checkbox {
 
     // Link to page if we have a link element.
     if ($element['#terms_type'] === static::TERMS_LINK) {
-      $element['#title'] = str_replace('{', '<a role="button" href="' . $element['#terms_link'] . '" target="' . $element['#terms_link_target'] .'">', $element['#title']);
+      $element['#title'] = str_replace('{', '<a role="button" href="' . $element['#terms_link'] . '" target="' . $element['#terms_link_target'] . '">', $element['#title']);
       $element['#title'] = str_replace('}', '</a>', $element['#title']);
 
       return $element;
