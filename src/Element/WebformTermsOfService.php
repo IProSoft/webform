@@ -81,12 +81,11 @@ class WebformTermsOfService extends Checkbox {
     if ($element['#terms_type'] === static::TERMS_LINK) {
       $element['#title'] = str_replace('{', '<a role="button" href="' . $element['#terms_link'] . '" target="' . $element['#terms_link_target'] . '">', $element['#title']);
       $element['#title'] = str_replace('}', '</a>', $element['#title']);
-
-      return $element;
     }
-
-    $element['#title'] = str_replace('{', '<a role="button" href="#terms">', $element['#title']);
-    $element['#title'] = str_replace('}', '</a>', $element['#title']);
+    else {
+      $element['#title'] = str_replace('{', '<a role="button" href="#terms">', $element['#title']);
+      $element['#title'] = str_replace('}', '</a>', $element['#title']);
+    }
 
     // Change description to render array.
     if (isset($element['#description'])) {
