@@ -175,6 +175,9 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     // Bulk operations.
     if ($this->bulkOperations && ($this->currentUser->hasPermission('administer webform') || $this->currentUser->hasPermission('administer webform overview'))) {
       $build['table'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformEntityBulkForm', $build['table']);
+      if (!$this->currentUser->hasPermission('delete any webform')) {
+        unset($build['table']['operations']['action']['#options']['webform_delete_action']);
+      }
     }
 
     // Attachments.
