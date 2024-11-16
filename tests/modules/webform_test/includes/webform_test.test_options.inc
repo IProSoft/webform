@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test options example.
- */
-
 use Drupal\Component\Serialization\Yaml;
 use Drupal\webform\Entity\WebformOptions;
 

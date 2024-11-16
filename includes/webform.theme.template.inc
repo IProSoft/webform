@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Preprocessors and helper functions to make theming easier.
- */
-
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;

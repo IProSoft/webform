@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_submission_export_import_test\Hook\WebformSubmissionExportImportTestHooks:
+    class: Drupal\webform_submission_export_import_test\Hook\WebformSubmissionExportImportTestHooks
+    autowire: true
