@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test elements help displays.
- */
-
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 
 /**
