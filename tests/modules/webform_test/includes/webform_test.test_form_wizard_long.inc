@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate long webform wizards.
- */
-
 use Drupal\webform\WebformInterface;
 
 /**

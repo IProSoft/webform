@@ -1,0 +1,500 @@
+<?php
+
+namespace Drupal\webform_cards\Hook;
+
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\webform\Element\WebformMessage;
+use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformDialogHelper;
+use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\WebformInterface;
+use Drupal\webform\WebformSubmissionInterface;
+use Drupal\Core\Hook\Attribute\Hook;
+/**
+ * Hook implementations for webform_cards.
+ */
+class WebformCardsHooks
+{
+    /**
+     * Implements hook_entity_base_field_info().
+     */
+    #[Hook('entity_base_field_info')]
+    public function entityBaseFieldInfo(EntityTypeInterface $entity_type)
+    {
+        if ($entity_type->id() === 'webform_submission') {
+            $fields = [];
+            $fields['current_card'] = \Drupal\Core\Field\BaseFieldDefinition::create('string')->setLabel(t('Current card'))->setDescription(t('The current card.'))->setSetting('max_length', 128);
+            return $fields;
+        }
+    }
+    /* ************************************************************************** */
+    // Menu hook.
+    /* ************************************************************************** */
+    /**
+     * Implements hook_menu_local_actions_alter().
+     */
+    #[Hook('menu_local_actions_alter')]
+    public function menuLocalActionsAlter(&$local_actions)
+    {
+        if (!\Drupal::moduleHandler()->moduleExists('webform_ui')) {
+            unset($local_actions['entity.webform_ui.element.card']);
+        }
+    }
+    /* ************************************************************************** */
+    // Entity hook.
+    /* ************************************************************************** */
+    /**
+     * Implements hook_ENTITY_TYPE_presave() for webform_submission entities.
+     */
+    #[Hook('webform_submission_presave')]
+    public function webformSubmissionPresave(WebformSubmissionInterface $webform_submission)
+    {
+        if (!$webform_submission->isDraft()) {
+            $webform_submission->set('current_card', NULL);
+        }
+    }
+    /* ************************************************************************** */
+    // Form alter hooks.
+    /* ************************************************************************** */
+    /**
+     * Implements hook_webform_submission_form_alter().
+     */
+    #[Hook('webform_submission_form_alter')]
+    public function webformSubmissionFormAlter(array &$form, FormStateInterface $form_state, $form_id)
+    {
+        /** @var \Drupal\webform\WebformSubmissionForm $form_object */
+        $form_object = $form_state->getFormObject();
+        /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+        $webform_submission = $form_object->getEntity();
+        /** @var \Drupal\webform\WebformInterface $webform */
+        $webform = $webform_submission->getWebform();
+        /** @var \Drupal\webform_cards\WebformCardsManagerInterface $webform_cards_manager */
+        $webform_cards_manager = \Drupal::service('webform_cards.manager');
+        // Check if the webform has cards.
+        $has_cards = $webform_cards_manager->hasCards($webform);
+        if (!$has_cards) {
+            return;
+        }
+        // Check if operation is edit all.
+        if ($form_object->getOperation() === 'edit_all') {
+            return;
+        }
+        // Display quick form submit when testing webform cards.
+        if ($form_object->getOperation() === 'test' && \Drupal::request()->getMethod() === 'GET') {
+            $form_id = \Drupal\Component\Utility\Html::getId($form_object->getFormId());
+            $build = [
+                '#type' => 'link',
+                '#url' => \Drupal\Core\Url::fromRoute('<none>', [
+                ], [
+                    'fragment' => $form_id,
+                ]),
+                '#title' => t('Submit %title form', [
+                    '%title' => $webform->label(),
+                ]),
+                '#attributes' => [
+                    'class' => [
+                        'js-webform-card-test-submit-form',
+                    ],
+                ],
+            ];
+            \Drupal::messenger()->addWarning(\Drupal::service('renderer')->render($build));
+            $form['#attached']['library'][] = 'webform_cards/webform_cards.test';
+        }
+        // Add cards JavaScript.
+        $form['#attached']['library'][] = 'webform_cards/webform_cards';
+        // Track the current card which is used when saving and loading drafts.
+        $current_card = $webform_submission->current_card->value ?: '';
+        $form['current_card'] = ['#type' => 'hidden', '#default_value' => $current_card];
+        // Add .webform-cards class to form with 'webform_card' elements.
+        $form['#attributes']['class'][] = 'webform-cards';
+        // Remove .js-webform-disable-autosubmit class when auto-forward is enabled.
+        if ($webform->getSetting('wizard_auto_forward', TRUE)) {
+            \Drupal\webform\Utility\WebformArrayHelper::removeValue($form['#attributes']['class'], 'js-webform-disable-autosubmit');
+        }
+        // Track the current page.
+        $current_page = $form_state->get('current_page');
+        $form['#attributes']['data-current-page'] = $current_page;
+        // Add settings as data-* attributes.
+        $setting_names = [
+            // Update wizard/cards progress bar's pages based on conditions.
+            'wizard_progress_states',
+            // Link to previous pages in progress bar.
+            'wizard_progress_link',
+            // Link to previous pages in preview.
+            'wizard_preview_link',
+            // Include confirmation page in progress.
+            'wizard_confirmation',
+            // Update wizard/cards progress bar's pages based on conditions.
+            'wizard_progress_states',
+            // Link to previous pages in progress bar.
+            'wizard_progress_link',
+            // Auto forward to next page when the page is completed.
+            'wizard_auto_forward',
+            // Hide the next button when auto-forwarding.
+            'wizard_auto_forward_hide_next_button',
+            // Navigate between cards using left or right arrow keys.
+            'wizard_keyboard',
+            // Link to previous pages in preview.
+            'wizard_preview_link',
+            // Include confirmation page in progress.
+            'wizard_confirmation',
+            // Track wizard/cards progress in the URL.
+            'wizard_track',
+            // Display show/hide all wizard/cards pages link.
+            'wizard_toggle',
+            // Wizard/cards show all elements label.
+            'wizard_toggle_show_label',
+            // Wizard/cards show all elements label.
+            'wizard_toggle_hide_label',
+            // Ajax effect.
+            'ajax_effect',
+            // Ajax speed.
+            'ajax_speed',
+            // Ajax scroll top.
+            'ajax_scroll_top',
+        ];
+        foreach ($setting_names as $setting_name) {
+            if ($value = $webform->getSetting($setting_name, TRUE)) {
+                $attribute_name = str_replace('wizard_', '', $setting_name);
+                $attribute_name = 'data-' . str_replace('_', '-', $attribute_name);
+                $form['#attributes'][$attribute_name] = $value;
+            }
+        }
+        // Add progress bar.
+        if ($current_page !== \Drupal\webform\WebformInterface::PAGE_CONFIRMATION) {
+            $pages = $webform_cards_manager->buildPages($webform);
+            if (!in_array($current_page, [
+                \Drupal\webform\WebformInterface::PAGE_PREVIEW,
+                \Drupal\webform\WebformInterface::PAGE_CONFIRMATION,
+            ])) {
+                $current_page = $current_card ?: key($pages);
+            }
+            $form['progress'] = [
+                '#theme' => 'webform_progress',
+                '#webform' => $webform,
+                '#webform_submission' => $webform_submission,
+                '#pages' => $pages,
+                '#current_page' => $current_page,
+                '#operation' => $form_object->getOperation(),
+                '#weight' => -20,
+            ];
+        }
+        // Don't alter the preview page but apply conditional logic the pages..
+        if ($current_page === \Drupal\webform\WebformInterface::PAGE_PREVIEW) {
+            // Unset JavaScript behaviors for webform wizard pages.
+            // @see Drupal.behaviors.webformWizardPagesLink
+            // @see \Drupal\webform\WebformSubmissionForm::pagesElement
+            if (\Drupal\Component\Utility\NestedArray::keyExists($form, ['pages', '#attached', 'library'])) {
+                \Drupal\webform\Utility\WebformArrayHelper::removeValue($form['pages']['#attached']['library'], 'webform/webform.wizard.pages');
+            }
+            $form['progress']['#pages'] = $webform_cards_manager->applyConditions($pages, $webform_submission);
+            return;
+        }
+        // Add previous and next buttons to form actions.
+        $form['actions']['cards_prev'] = [
+            '#type' => 'submit',
+            '#value' => $webform->getSetting('wizard_prev_button_label', TRUE),
+            '#attributes' => [
+                'class' => [
+                    'webform-button--previous',
+                    'webform-cards-button--previous',
+                ],
+            ],
+            '#weight' => 0,
+            // Cards and previews previous button labels can have the same value.
+            // Issue #1342066 Document that buttons with the same #value need a unique
+            // #name for the Form API to distinguish them, or change the Form API to
+            // assign unique #names automatically.
+            '#name' => $webform->id() . '_card_previous_button',
+        ];
+        $form['actions']['cards_next'] = [
+            '#type' => 'submit',
+            '#value' => $webform->getSetting('wizard_next_button_label', TRUE),
+            '#attributes' => [
+                'class' => [
+                    'webform-button--next',
+                    'webform-cards-button--next',
+                ],
+            ],
+            '#weight' => 1,
+        ];
+        // Add 'data-webform-unsaved-ignore' attribute to forms with unsaved
+        // data warning.
+        // @see webform.form.unsaved.js
+        if ($webform->getSetting('form_unsaved', TRUE)) {
+            $form['actions']['cards_prev']['#attributes']['data-webform-unsaved-ignore'] = TRUE;
+            $form['actions']['cards_next']['#attributes']['data-webform-unsaved-ignore'] = TRUE;
+        }
+        // Process the submitted values before they are stored.
+        $form['#entity_builders'][] = 'webform_cards_webform_submission_builder';
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform UI and source edit form.
+     *
+     * @see \Drupal\webform_ui\WebformUiEntityElementsForm
+     */
+    #[Hook('form_webform_edit_form_alter')]
+    public function formWebformEditFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        if (!isset($form['webform_ui_elements'])) {
+            return;
+        }
+        /** @var \Drupal\webform_ui\WebformUiEntityElementsForm $form_object */
+        $form_object = $form_state->getFormObject();
+        /** @var \Drupal\webform\WebformInterface $webform */
+        $webform = $form_object->getEntity();
+        $wrapper_format = \Drupal::request()->get(\Drupal\Core\EventSubscriber\MainContentViewSubscriber::WRAPPER_FORMAT);
+        $is_ajax_request = $wrapper_format === 'drupal_ajax';
+        if ($webform->hasWizardPages() && !$is_ajax_request) {
+            $form['webform_cards_convert'] = [
+                '#type' => 'webform_message',
+                '#message_message' => [
+                    'message' => [
+                        '#markup' => t("Do you want to convert this webform's wizard pages to cards?"),
+                    ],
+                    'link' => [
+                        '#type' => 'link',
+                        '#title' => t('Convert'),
+                        '#url' => \Drupal\Core\Url::fromRoute('entity.webform.cards_convert_form', [
+                            'webform' => $webform->id(),
+                        ]),
+                        '#attributes' => \Drupal\webform\Utility\WebformDialogHelper::getModalDialogAttributes(\Drupal\webform\Utility\WebformDialogHelper::DIALOG_NARROW, [
+                            'button',
+                            'button--small',
+                        ]),
+                        '#prefix' => ' ',
+                    ],
+                ],
+                '#message_type' => 'info',
+                '#message_close' => TRUE,
+                '#message_storage' => \Drupal\webform\Element\WebformMessage::STORAGE_SESSION,
+                '#message_id' => 'webform_card_convert_' . $webform->id(),
+                '#weight' => -100,
+            ];
+        }
+        $form['#attached']['library'][] = 'webform_cards/webform_cards.admin';
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform configuration:forms.
+     *
+     * @see \Drupal\webform\Form\AdminConfig\WebformAdminConfigFormsForm
+     * @see /admin/structure/webform/config
+     */
+    #[Hook('form_webform_admin_config_forms_form_alter')]
+    public function formWebformAdminConfigFormsFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        _webform_cards_form_alter_elements($form, [
+            'wizard_settings' => [
+                '#title' => t('Form wizard/cards settings'),
+                'default_wizard_prev_button_label' => [
+                    '#title' => t('Default wizard/cards previous page button label'),
+                ],
+                'default_wizard_next_button_label' => [
+                    '#title' => t('Default wizard/cards next page button label'),
+                ],
+                'default_wizard_start_label' => [
+                    '#title' => t('Default wizard/cards start label'),
+                ],
+                'default_wizard_confirmation_label' => [
+                    '#title' => t('Default wizard/cards end label'),
+                ],
+                'default_wizard_toggle_show_label' => [
+                    '#title' => t('Default wizard/cards show all elements label'),
+                ],
+                'default_wizard_toggle_hide_label' => [
+                    '#title' => t('Default wizard/cards hide all elements label'),
+                ],
+            ],
+        ]);
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform configuration:elements.
+     *
+     * @see \Drupal\webform\Form\AdminConfig\WebformAdminConfigElementsForm
+     * @see /admin/structure/webform/config/elements
+     */
+    #[Hook('form_webform_admin_config_elements_form_alter')]
+    public function formWebformAdminConfigElementsFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        _webform_cards_form_alter_elements($form, [
+            'element' => [
+                'default_section_title_tag' => [
+                    '#title' => t('Default section/card title tag'),
+                ],
+            ],
+        ]);
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform settings:form.
+     *
+     * @see \Drupal\webform\EntitySettings\WebformEntitySettingsFormForm
+     * @see /admin/structure/webform/manage/{webform}/settings
+     */
+    #[Hook('form_webform_settings_form_alter')]
+    public function formWebformSettingsFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        $has_cards = _webform_cards_form_state_has_cards($form_state);
+        if (!$has_cards) {
+            return;
+        }
+        // Move hide/show from container to jus the progress type.
+        $form['ajax_settings']['ajax_container']['ajax_progress_type']['#states'] = $form['ajax_settings']['ajax_container']['#states'];
+        $form['ajax_settings']['ajax_container']['#states'] = NULL;
+        // Display info message.
+        $form['ajax_settings']['ajax_container']['ajax_progress_type']['#weight'] = -10;
+        $form['ajax_settings']['ajax_container']['ajax_cards_message'] = [
+            '#type' => 'webform_message',
+            '#message_type' => 'info',
+            '#message_close' => TRUE,
+            '#message_storage' => \Drupal\webform\Element\WebformMessage::STORAGE_SESSION,
+            '#message_message' => t('The below Ajax scroll, effect, and speed settings will also be applied to cards.'),
+            '#weight' => -9,
+        ];
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform settings form.
+     *
+     * @see \Drupal\webform\EntitySettings\WebformEntitySettingsGeneralForm
+     * @see /admin/structure/webform/manage/{webform}/settings/form
+     */
+    #[Hook('form_webform_settings_form_form_alter')]
+    public function formWebformSettingsFormFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        $has_cards = _webform_cards_form_state_has_cards($form_state);
+        if ($has_cards) {
+            unset($form['wizard_settings']['#states']);
+        }
+        _webform_cards_form_alter_elements($form, [
+            'wizard_settings' => [
+                '#title' => t('Form wizard/cards settings'),
+                // Progress.
+                'wizard_progress_bar' => [
+                    '#title' => t('Show wizard/cards progress bar'),
+                ],
+                'wizard_progress_link' => [
+                    '#title' => t('Link to previous pages/cards in progress bar'),
+                    '#description' => t('If checked, previous pages/cards will be link in the progress bar.'),
+                ],
+                'wizard_progress_pages' => [
+                    '#title' => t('Show wizard/cards progress pages'),
+                ],
+                'wizard_progress_percentage' => [
+                    '#title' => t('Show wizard/cards progress percentage'),
+                ],
+                'wizard_preview_link' => [
+                    '#title' => t('Link to previous pages/cards in preview'),
+                    '#description' => t("If checked, the preview page/card will include 'Edit' buttons for each previous page/card.") . '<br/><br/>' . '<em>' . t("This setting is only available when 'Enable preview page/card' is enabled.") . '</em>',
+                ],
+                'wizard_progress_states' => [
+                    '#title' => t("Update wizard/cards progress bar's pages based on conditions"),
+                    '#description' => t("If checked, the wizard/cards progress bar's pages will be hidden or shown based on each pages conditional logic."),
+                ],
+                // Navigation.
+                'wizard_navigation_title' => [
+                    '#access' => TRUE,
+                ],
+                'wizard_auto_forward' => [
+                    '#access' => TRUE,
+                ],
+                'wizard_auto_forward_hide_next_button' => [
+                    '#access' => TRUE,
+                ],
+                'wizard_keyboard' => [
+                    '#access' => TRUE,
+                ],
+                // Pages.
+                'wizard_pages_title' => [
+                    '#states' => [
+                    ],
+                ],
+                'wizard_confirmation' => [
+                    '#title' => t('Include confirmation page/card in progress'),
+                    '#description' => t("If checked, the confirmation page/card will be included in the progress bar."),
+                ],
+                'wizard_toggle' => [
+                    '#title' => t('Display show/hide all wizard/cards pages link'),
+                    '#description' => t('If checked, a hide/show all elements link will be added to this webform when there are wizard/cards pages.'),
+                    '#access' => TRUE,
+                ],
+                // Labels.
+                'wizard_toggle_show_label' => [
+                    '#title' => t('Wizard/cards show all elements label'),
+                    '#access' => TRUE,
+                ],
+                'wizard_toggle_hide_label' => [
+                    '#title' => t('Wizard/card hide all elements label'),
+                    '#access' => TRUE,
+                ],
+                'wizard_start_label' => [
+                    '#title' => t('Wizard/cards start label'),
+                    '#description' => t('The first page label in the progress bar. Subsequent pages are titled by their wizard/card page title.'),
+                ],
+                'wizard_confirmation_label' => [
+                    '#title' => t('Wizard/cards end label'),
+                ],
+                'wizard_prev_button_label' => [
+                    '#title' => t('Wizard/cards previous page button label'),
+                    '#description' => t('This is used for the previous page button within a wizard/cards.'),
+                ],
+                'wizard_next_button_label' => [
+                    '#title' => t('Wizard/cards next page button label'),
+                    '#description' => t('This is used for the next page button within a wizard/cards.'),
+                ],
+                // Tracking.
+                'wizard_track' => [
+                    '#title' => t('Track wizard/cards progress in the URL by'),
+                    '#options' => [
+                        'name' => t("Page/card name (?page=contact)"),
+                        'index' => t("Page/card index (?page=2)"),
+                    ],
+                ],
+            ],
+        ]);
+    }
+    /**
+     * Implements hook_form_FORM_ID_alter() for webform settings submissions.
+     *
+     * @see \Drupal\webform\EntitySettings\WebformEntitySettingsSubmissionsForm
+     * @see /admin/structure/webform/manage/{webform}/settings/form
+     */
+    #[Hook('form_webform_settings_submissions_form_alter')]
+    public function formWebformSettingsSubmissionsFormAlter(array &$form, FormStateInterface $form_state)
+    {
+        $has_cards = _webform_cards_form_state_has_cards($form_state);
+        if ($has_cards) {
+            $form['draft_settings']['draft_container']['draft_multiple']['#weight'] = -1;
+            $form['draft_settings']['draft_container']['draft_auto_save_message'] = [
+                '#type' => 'webform_message',
+                '#message_message' => t('The automatic saving of drafts only applies to previewing when using cards. Please try using the <a href=":href">Webform autosave module</a>.', [
+                    ':href' => 'https://www.drupal.org/project/webformautosave',
+                ]),
+                '#message_type' => 'info',
+                '#message_close' => TRUE,
+                '#message_storage' => \Drupal\webform\Element\WebformMessage::STORAGE_SESSION,
+                '#message_id' => 'webform_card_draft_auto_save',
+                '#weight' => 0,
+            ];
+        }
+    }
+    /* ************************************************************************** */
+    // Theming.
+    /* ************************************************************************** */
+    /**
+     * Implements hook_theme().
+     */
+    #[Hook('theme')]
+    public function theme()
+    {
+        $info = ['webform_card' => ['render element' => 'element']];
+        return $info;
+    }
+}

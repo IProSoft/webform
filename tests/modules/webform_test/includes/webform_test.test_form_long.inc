@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate long webform elements.
- */
-
 use Drupal\webform\WebformInterface;
 
 /**

@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform_cards_test\Hook\WebformCardsTestHooks;
 /**
  * @file
  * Support module for webform cards testing.
@@ -8,19 +10,10 @@
 /**
  * Implements hook_theme().
  */
-function webform_cards_test_theme() {
-  $info = [
-    'webform_progress__test_cards_progress_custom' => [
-      'variables' => [
-        'webform' => NULL,
-        'webform_submission' => NULL,
-        'current_page' => NULL,
-        'operation' => NULL,
-        'pages' => [],
-      ],
-    ],
-  ];
-  return $info;
+#[LegacyHook]
+function webform_cards_test_theme()
+{
+    return \Drupal::service(WebformCardsTestHooks::class)->theme();
 }
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate long webform card elements.
- */
-
 use Drupal\webform\WebformInterface;
 
 /**

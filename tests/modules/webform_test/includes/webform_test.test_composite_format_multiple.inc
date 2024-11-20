@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test composite multiple elements with formatting.
- */
-
 use Drupal\webform\WebformInterface;
 
 \Drupal::moduleHandler()->loadInclude('webform_test', 'inc', 'includes/webform_test.test_element_format');
