@@ -25,7 +25,7 @@
   <?php if ($confirmation_message): ?>
     <?php print $confirmation_message ?>
   <?php else: ?>
-    <p><?php print t('Thank you, your submission has been received.'); ?></p>
+    <p tabindex="0" role="alert"><?php print t('Thank you, your submission has been received.'); ?></p>
   <?php endif; ?>
 </div>
 
