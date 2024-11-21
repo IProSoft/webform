@@ -1734,6 +1734,7 @@ function webform_node_defaults() {
   $defaults = array(
     'confirmation' => '',
     'confirmation_format' => NULL,
+    'closed_message' => '',
     'redirect_url' => '<confirmation>',
     'block' => '0',
     'allow_draft' => '0',
@@ -2019,6 +2020,11 @@ function webform_node_view($node, $view_mode) {
     $allowed_roles = _webform_allowed_roles($node, $enabled);
   }
 
+  // Closed comments.
+  if ($node->comment == 1) {
+    $closed = TRUE;
+  }
+
   // Get a count of previous submissions by this user. Note that the
   // webform_submission_access() function may disable the page cache for
   // anonymous users if they are allowed to edit their own submissions!
@@ -2093,6 +2099,7 @@ function webform_node_view($node, $view_mode) {
 
   // Print out messages for the webform.
   if (empty($node->in_preview) && !isset($node->webform_block) && !$logging_in) {
+
     theme('webform_view_messages', array(
       'node' => $node,
       'page' => $page,
@@ -2188,9 +2195,14 @@ function theme_webform_view_messages(array $variables) {
   $cached = $variables['cached'];
 
   $type = 'warning';
-
+  
+  $closed_message = t('Submissions for this form are closed.');
+  if (!empty($node->webform['closed_message'])) {
+    $closed_message = $node->webform['closed_message'];
+  }
+  
   if ($closed) {
-    $message = t('Submissions for this form are closed.');
+    $message = $closed_message;
   }
   elseif ($node->webform['confidential'] && user_is_logged_in()) {
     $message = t('This form is confidential. You must <a href="!url">Log out</a> to submit it.', array('!url' => url('user/logout', array('query' => drupal_get_destination()))));
@@ -2199,7 +2211,7 @@ function theme_webform_view_messages(array $variables) {
   elseif (array_search(TRUE, $allowed_roles) === FALSE && $user->uid != 1) {
     if (empty($allowed_roles)) {
       // No roles are allowed to submit the form.
-      $message = t('Submissions for this form are closed.');
+      $message = $closed_message;
     }
     elseif ($user->uid == 0) {
       // The user is anonymous, so (at least) needs to log in to view the form.

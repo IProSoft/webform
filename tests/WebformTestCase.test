@@ -990,9 +990,11 @@ class WebformTestCase extends DrupalWebTestCase {
    * Create a sample Webform node.
    *
    * @param array $webform_settings
+   *   Settings to use for this webform. Any unspecified settings will be default.
+   * @param array $extra_settings
    *   Settings to use for this form. Any unspecified settings will be default.
    */
-  public function webformForm(array $webform_settings = array()) {
+  public function webformForm(array $webform_settings = array(), array $extra_settings = array()) {
     if (isset($this->_webform_node)) {
       return $this->_webform_node;
     }
@@ -1014,6 +1016,10 @@ class WebformTestCase extends DrupalWebTestCase {
         'confirmation' => 'Thanks!',
       ) + webform_node_defaults(),
     );
+
+    if(!empty($extra_settings)){
+      $settings = array_merge($settings, $extra_settings);
+    }
 
     $cid = 0;
     foreach ($this->webformComponents() as $key => $component_info) {
