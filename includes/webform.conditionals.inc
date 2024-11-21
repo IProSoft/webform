@@ -113,7 +113,7 @@ function webform_conditionals_form($form, &$form_state, $node) {
     '#title' => t('Weight for new rule group'),
     '#title_display' => 'invisible',
     '#default_value' => $weight + 1,
-    '#delta' => $delta,
+    '#delta' => ($delta > (abs($weight) + 1) ? $delta : abs($weight) + 1),
   );
   $form['conditionals']['new']['new'] = array(
     '#type' => 'submit',
