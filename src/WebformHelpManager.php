@@ -141,16 +141,16 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     $this->addOnsManager = $addons_manager;
     $this->librariesManager = $libraries_manager;
     $this->elementManager = $element_manager;
-
-    $this->groups = $this->initGroups();
-    $this->help = $this->initHelp();
-    $this->videos = $this->initVideos();
   }
 
   /**
    * {@inheritdoc}
    */
   public function getGroup($id = NULL) {
+    if (!isset($this->groups)) {
+      $this->groups = $this->initGroups();
+    }
+
     if ($id !== NULL) {
       return $this->groups[$id] ?? NULL;
     }
@@ -163,6 +163,10 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * {@inheritdoc}
    */
   public function getHelp($id = NULL) {
+    if (!isset($this->help)) {
+      $this->help = $this->initHelp();
+    }
+
     if ($id !== NULL) {
       return $this->help[$id] ?? NULL;
     }
@@ -175,6 +179,10 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * {@inheritdoc}
    */
   public function getVideo($id = NULL) {
+    if (!isset($this->videos)) {
+      $this->videos = $this->initVideos();
+    }
+
     if ($id !== NULL) {
       return $this->videos[$id] ?? NULL;
     }
@@ -252,7 +260,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     $path = preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', Url::fromRouteMatch($route_match)->setAbsolute(FALSE)->toString());
 
     $build = [];
-    foreach ($this->help as $id => $help) {
+    foreach ($this->getHelp() as $id => $help) {
       // Set default values.
       $help += [
         'routes' => [],
@@ -346,7 +354,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     }
 
     $rows = [];
-    foreach ($this->videos as $id => $video) {
+    foreach ($this->getVideo() as $id => $video) {
       if (!empty($video['hidden'])) {
         continue;
       }
