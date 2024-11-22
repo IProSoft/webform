@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Functional;
 
 use Drupal\webform\Entity\Webform;
@@ -71,7 +73,7 @@ class WebformSubmissionTest extends WebformBrowserTestBase {
       WebformSubmission::create();
       $this->fail('Webform id (webform_id) is required to create a webform submission.');
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       // Webform id (webform_id) is required to create a webform submission.
     }
 

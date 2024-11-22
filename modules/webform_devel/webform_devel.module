@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_devel\Hook\WebformDevelHooks;
 use Drupal\Component\Serialization\Yaml;
@@ -10,9 +14,8 @@ use Drupal\webform\Utility\WebformYaml;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_devel_webform_help_info()
-{
-    return \Drupal::service(WebformDevelHooks::class)->webformHelpInfo();
+function webform_devel_webform_help_info() {
+  return \Drupal::service(WebformDevelHooks::class)->webformHelpInfo();
 }
 
 /**
@@ -27,9 +30,8 @@ function webform_devel_entity_type_alter(array &$entity_types) {
  * Implements hook_form_FORM_ID_alter() for config single export form.
  */
 #[LegacyHook]
-function webform_devel_form_config_single_export_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformDevelHooks::class)->formConfigSingleExportFormAlter($form, $form_state);
+function webform_devel_form_config_single_export_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformDevelHooks::class)->formConfigSingleExportFormAlter($form, $form_state);
 }
 
 /**

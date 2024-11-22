@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Functional\Views;
 
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;

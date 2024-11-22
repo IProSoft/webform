@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_element_input_masks\Hook\WebformTestElementInputMasksHooks;
+
 /**
  * @file
  * Support module for webform that provides element plugin tests.
@@ -11,9 +22,8 @@ use Drupal\webform_test_element_input_masks\Hook\WebformTestElementInputMasksHoo
  * Implements hook_webform_element_input_masks().
  */
 #[LegacyHook]
-function webform_test_element_input_masks_webform_element_input_masks()
-{
-    return \Drupal::service(WebformTestElementInputMasksHooks::class)->webformElementInputMasks();
+function webform_test_element_input_masks_webform_element_input_masks() {
+  return \Drupal::service(WebformTestElementInputMasksHooks::class)->webformElementInputMasks();
 }
 
 /**

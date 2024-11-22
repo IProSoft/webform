@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformAntibotHooks;
 use Drupal\Core\Form\FormStateInterface;
@@ -101,25 +105,22 @@ function _webform_antibot_form_validate(&$form, FormStateInterface $form_state) 
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function antibot_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformAntibotHooks::class)->antibotWebformAdminThirdPartySettingsFormAlter($form, $form_state);
+function antibot_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformAntibotHooks::class)->antibotWebformAdminThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function antibot_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformAntibotHooks::class)->antibotWebformThirdPartySettingsFormAlter($form, $form_state);
+function antibot_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformAntibotHooks::class)->antibotWebformThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function antibot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformAntibotHooks::class)->antibotWebformSubmissionFormAlter($form, $form_state, $form_id);
+function antibot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformAntibotHooks::class)->antibotWebformSubmissionFormAlter($form, $form_state, $form_id);
 }

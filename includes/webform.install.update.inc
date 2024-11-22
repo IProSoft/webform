@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformInstallUpdateHooks;
 use Drupal\Component\Uuid\Php as Uuid;
@@ -28,9 +32,8 @@ use Drupal\webform\WebformInterface;
  * Implements hook_update_dependencies().
  */
 #[LegacyHook]
-function webform_update_dependencies()
-{
-    return \Drupal::service(WebformInstallUpdateHooks::class)->updateDependencies();
+function webform_update_dependencies() {
+  return \Drupal::service(WebformInstallUpdateHooks::class)->updateDependencies();
 }
 
 /* ************************************************************************** */
@@ -2779,7 +2782,7 @@ function webform_update_8151() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -2878,7 +2881,7 @@ function webform_update_8155() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -2935,7 +2938,7 @@ function webform_update_8156() {
     try {
       \Drupal::service('module_installer')->install(['webform_submission_log']);
     }
-    catch (SchemaObjectExistsException $exception) {
+    catch (SchemaObjectExistsException) {
       // This is actually expected. The table {webform_submission_log} would exist
       // from webform submission entity schema.
     }
@@ -3310,7 +3313,7 @@ function webform_update_8179() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -3457,7 +3460,7 @@ function webform_update_8186() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -3773,7 +3776,7 @@ function webform_update_8198() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 

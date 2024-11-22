@@ -1,9 +1,12 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_access\Hook\WebformAccessTokensHooks;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\webform_access\Entity\WebformAccessType;
 
 // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
 
@@ -11,18 +14,16 @@ use Drupal\webform_access\Entity\WebformAccessType;
  * Implements hook_token_info().
  */
 #[LegacyHook]
-function webform_access_token_info()
-{
-    return \Drupal::service(WebformAccessTokensHooks::class)->tokenInfo();
+function webform_access_token_info() {
+  return \Drupal::service(WebformAccessTokensHooks::class)->tokenInfo();
 }
 
 /**
  * Implements hook_tokens().
  */
 #[LegacyHook]
-function webform_access_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata)
-{
-    return \Drupal::service(WebformAccessTokensHooks::class)->tokens($type, $tokens, $data, $options, $bubbleable_metadata);
+function webform_access_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  return \Drupal::service(WebformAccessTokensHooks::class)->tokens($type, $tokens, $data, $options, $bubbleable_metadata);
 }
 
 /**

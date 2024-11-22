@@ -1,16 +1,27 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_options_custom_test\Hook\WebformOptionsCustomTestHooks;
+
 /**
  * @file
  * Support module for webform that provides custom options element working examples.
  */
+
 /**
  * Implements hook_ENTITY_TYPE_load() for webform entities.
  */
 #[LegacyHook]
-function webform_options_custom_test_webform_load(array $entities)
-{
-    return \Drupal::service(WebformOptionsCustomTestHooks::class)->webformLoad($entities);
+function webform_options_custom_test_webform_load(array $entities) {
+  return \Drupal::service(WebformOptionsCustomTestHooks::class)->webformLoad($entities);
 }

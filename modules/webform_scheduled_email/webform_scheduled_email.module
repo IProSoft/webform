@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailHooks;
 use Drupal\Core\Entity\EntityInterface;
@@ -19,45 +23,40 @@ function webform_scheduled_email_config_schema_info_alter(&$definitions) {
  * Implements hook_entity_update().
  */
 #[LegacyHook]
-function webform_scheduled_email_entity_update(EntityInterface $entity)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->entityUpdate($entity);
+function webform_scheduled_email_entity_update(EntityInterface $entity) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->entityUpdate($entity);
 }
 
 /**
  * Implements hook_entity_predelete().
  */
 #[LegacyHook]
-function webform_scheduled_email_entity_predelete(EntityInterface $entity)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->entityPredelete($entity);
+function webform_scheduled_email_entity_predelete(EntityInterface $entity) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->entityPredelete($entity);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_delete() for webform entities.
  */
 #[LegacyHook]
-function webform_scheduled_email_webform_delete(WebformInterface $webform)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->webformDelete($webform);
+function webform_scheduled_email_webform_delete(WebformInterface $webform) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->webformDelete($webform);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_delete() for webform_submission entities.
  */
 #[LegacyHook]
-function webform_scheduled_email_webform_submission_delete(WebformSubmissionInterface $webform_submission)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->webformSubmissionDelete($webform_submission);
+function webform_scheduled_email_webform_submission_delete(WebformSubmissionInterface $webform_submission) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->webformSubmissionDelete($webform_submission);
 }
 
 /**
  * Implements hook_cron().
  */
 #[LegacyHook]
-function webform_scheduled_email_cron()
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->cron();
+function webform_scheduled_email_cron() {
+  \Drupal::service(WebformScheduledEmailHooks::class)->cron();
 }
 
 /**
@@ -72,9 +71,8 @@ function webform_scheduled_email_theme() {
  * Implements hook_form_FORM_ID_alter() for webform admin config handlers form.
  */
 #[LegacyHook]
-function webform_scheduled_email_form_webform_admin_config_handlers_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->formWebformAdminConfigHandlersFormAlter($form, $form_state);
+function webform_scheduled_email_form_webform_admin_config_handlers_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->formWebformAdminConfigHandlersFormAlter($form, $form_state);
 }
 
 /**

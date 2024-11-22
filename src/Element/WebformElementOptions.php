@@ -160,7 +160,7 @@ class WebformElementOptions extends FormElementBase {
       try {
         $value = (is_string($custom_value)) ? Yaml::decode($custom_value) : $custom_value;
       }
-      catch (\Exception $exception) {
+      catch (\Exception) {
         // Do nothing since the 'webform_codemirror' element will have already
         // captured the validation error.
       }

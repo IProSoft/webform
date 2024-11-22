@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_image_select\Functional;
 
 use Drupal\Component\Serialization\Yaml;

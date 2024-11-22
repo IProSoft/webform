@@ -1,14 +1,16 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_toggles\Hook\WebformTogglesHooks;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_toggles_webform_libraries_info()
-{
-    return \Drupal::service(WebformTogglesHooks::class)->webformLibrariesInfo();
+function webform_toggles_webform_libraries_info() {
+  return \Drupal::service(WebformTogglesHooks::class)->webformLibrariesInfo();
 }

@@ -1,27 +1,27 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformLibrariesHooks;
 use Drupal\Core\Asset\AttachedAssetsInterface;
-use Drupal\webform\Entity\Webform;
-use Drupal\webform\Utility\WebformDialogHelper;
 
 /**
  * Implements hook_library_info_build().
  */
 #[LegacyHook]
-function webform_library_info_build()
-{
-    return \Drupal::service(WebformLibrariesHooks::class)->libraryInfoBuild();
+function webform_library_info_build() {
+  return \Drupal::service(WebformLibrariesHooks::class)->libraryInfoBuild();
 }
 
 /**
  * Implements hook_library_info_alter().
  */
 #[LegacyHook]
-function webform_library_info_alter(&$libraries, $extension)
-{
-    return \Drupal::service(WebformLibrariesHooks::class)->libraryInfoAlter($libraries, $extension);
+function webform_library_info_alter(&$libraries, $extension) {
+  return \Drupal::service(WebformLibrariesHooks::class)->libraryInfoAlter($libraries, $extension);
 }
 
 /**
@@ -65,18 +65,16 @@ function _webform_library_info_alter_recursive(array &$library, array $cdn) {
  * Implements hook_css_alter().
  */
 #[LegacyHook]
-function webform_css_alter(&$css, AttachedAssetsInterface $assets)
-{
-    \Drupal::service(WebformLibrariesHooks::class)->cssAlter($css, $assets);
+function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
+  \Drupal::service(WebformLibrariesHooks::class)->cssAlter($css, $assets);
 }
 
 /**
  * Implements hook_js_alter().
  */
 #[LegacyHook]
-function webform_js_alter(&$javascript, AttachedAssetsInterface $assets)
-{
-    \Drupal::service(WebformLibrariesHooks::class)->jsAlter($javascript, $assets);
+function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  \Drupal::service(WebformLibrariesHooks::class)->jsAlter($javascript, $assets);
 }
 
 /**

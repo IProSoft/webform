@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Kernel\Breadcrumb;
 
 use Drupal\Core\Entity\EntityInterface;

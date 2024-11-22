@@ -2,6 +2,12 @@
 
 /**
  * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  * Install/uninstall functions for the Webform Export/Import Test module.
  */
 

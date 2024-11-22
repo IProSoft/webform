@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_submission_log\Functional;
 
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;

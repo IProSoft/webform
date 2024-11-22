@@ -1,26 +1,33 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_third_party_settings\Hook\WebformTestThirdPartySettingsWebformHooks;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function webform_test_third_party_settings_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
+function webform_test_third_party_settings_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function webform_test_third_party_settings_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformThirdPartySettingsFormAlter($form, $form_state);
+function webform_test_third_party_settings_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
@@ -38,7 +45,6 @@ function _webform_test_third_party_settings_form_validate(&$form, FormStateInter
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function webform_test_third_party_settings_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
+function webform_test_third_party_settings_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformTestThirdPartySettingsWebformHooks::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
 }

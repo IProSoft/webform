@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformCaptchaHooks;
 use Drupal\Core\Form\FormStateInterface;
@@ -10,18 +14,16 @@ use Drupal\webform\Utility\WebformElementHelper;
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function captcha_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformCaptchaHooks::class)->captchaWebformAdminThirdPartySettingsFormAlter($form, $form_state);
+function captcha_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformCaptchaHooks::class)->captchaWebformAdminThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function captcha_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformCaptchaHooks::class)->captchaWebformSubmissionFormAlter($form, $form_state, $form_id);
+function captcha_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformCaptchaHooks::class)->captchaWebformSubmissionFormAlter($form, $form_state, $form_id);
 }
 
 /**

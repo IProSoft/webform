@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_handler_invoke_alter\Hook\WebformTestHandlerInvokeAlterHooks;
 use Drupal\webform\Plugin\WebformHandlerInterface;
@@ -8,16 +18,14 @@ use Drupal\webform\Plugin\WebformHandlerInterface;
  * Implements hook_webform_handler_invoke_alter().
  */
 #[LegacyHook]
-function webform_test_handler_invoke_alter_webform_handler_invoke_alter(WebformHandlerInterface $handler, $method_name, array $args)
-{
-    \Drupal::service(WebformTestHandlerInvokeAlterHooks::class)->webformHandlerInvokeAlter($handler, $method_name, $args);
+function webform_test_handler_invoke_alter_webform_handler_invoke_alter(WebformHandlerInterface $handler, $method_name, array $args) {
+  \Drupal::service(WebformTestHandlerInvokeAlterHooks::class)->webformHandlerInvokeAlter($handler, $method_name, $args);
 }
 
 /**
  * Implements hook_webform_handler_invoke_METHOD_NAME_alter().
  */
 #[LegacyHook]
-function webform_test_handler_invoke_alter_webform_handler_invoke_pre_create_alter(WebformHandlerInterface $handler, array $args)
-{
-    \Drupal::service(WebformTestHandlerInvokeAlterHooks::class)->webformHandlerInvokePreCreateAlter($handler, $args);
+function webform_test_handler_invoke_alter_webform_handler_invoke_pre_create_alter(WebformHandlerInterface $handler, array $args) {
+  \Drupal::service(WebformTestHandlerInvokeAlterHooks::class)->webformHandlerInvokePreCreateAlter($handler, $args);
 }

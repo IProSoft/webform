@@ -81,7 +81,7 @@ class WebformEntityElementsForm extends BundleEntityFormBase {
       '#mode' => 'yaml',
       '#title' => $this->t('Elements (YAML)'),
       '#description' => $this->t('Enter a <a href=":form_api_href">Form API (FAPI)</a> and/or a <a href=":render_api_href">Render Array</a> as <a href=":yaml_href">YAML</a>.', $t_args) . '<br /><br />' .
-        '<em>' . $this->t('Please note that comments are not supported and will be removed.') . '</em>',
+      '<em>' . $this->t('Please note that comments are not supported and will be removed.') . '</em>',
       '#default_value' => $this->getElementsWithoutWebformTypePrefix($webform->get('elements')),
       '#required' => TRUE,
       '#element_validate' => ['::validateElementsYaml'],

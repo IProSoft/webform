@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_submission_log\Hook\WebformSubmissionLogHooks;
 use Drupal\webform\WebformInterface;
@@ -9,9 +13,8 @@ use Drupal\webform\WebformSubmissionInterface;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_submission_log_webform_help_info()
-{
-    return \Drupal::service(WebformSubmissionLogHooks::class)->webformHelpInfo();
+function webform_submission_log_webform_help_info() {
+  return \Drupal::service(WebformSubmissionLogHooks::class)->webformHelpInfo();
 }
 
 /**

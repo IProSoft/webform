@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_options_limit\Functional;
 
 use Drupal\Tests\webform_node\Functional\WebformNodeBrowserTestBase;

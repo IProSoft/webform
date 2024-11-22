@@ -1,7 +1,12 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_options_limit\Hook\WebformOptionsLimitHooks;
+
 /**
  * @file
  * Allows elements with options (i.e. select, checkboxes, and radios) to have option specific submission limits.
@@ -11,9 +16,8 @@ use Drupal\webform_options_limit\Hook\WebformOptionsLimitHooks;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_options_limit_webform_help_info()
-{
-    return \Drupal::service(WebformOptionsLimitHooks::class)->webformHelpInfo();
+function webform_options_limit_webform_help_info() {
+  return \Drupal::service(WebformOptionsLimitHooks::class)->webformHelpInfo();
 }
 
 /**

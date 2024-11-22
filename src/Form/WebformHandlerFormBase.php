@@ -102,7 +102,7 @@ abstract class WebformHandlerFormBase extends FormBase {
     try {
       $this->webformHandler = $this->prepareWebformHandler($webform_handler);
     }
-    catch (PluginNotFoundException $e) {
+    catch (PluginNotFoundException) {
       throw new NotFoundHttpException("Invalid handler id: '$webform_handler'.");
     }
 

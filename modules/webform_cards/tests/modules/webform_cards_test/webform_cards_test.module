@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_cards_test\Hook\WebformCardsTestHooks;
+
 /**
  * @file
  * Support module for webform cards testing.
@@ -11,9 +22,8 @@ use Drupal\webform_cards_test\Hook\WebformCardsTestHooks;
  * Implements hook_theme().
  */
 #[LegacyHook]
-function webform_cards_test_theme()
-{
-    return \Drupal::service(WebformCardsTestHooks::class)->theme();
+function webform_cards_test_theme() {
+  return \Drupal::service(WebformCardsTestHooks::class)->theme();
 }
 
 /**

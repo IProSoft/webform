@@ -1,20 +1,16 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_cards\Hook\WebformCardsHooks;
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Template\Attribute;
-use Drupal\Core\Url;
-use Drupal\webform\Element\WebformMessage;
-use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -74,9 +70,8 @@ function webform_cards_webform_submission_presave(WebformSubmissionInterface $we
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function webform_cards_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformCardsHooks::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
+function webform_cards_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformCardsHooks::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
 }
 
 /**
@@ -92,9 +87,8 @@ function webform_cards_webform_submission_builder($entity_type, WebformSubmissio
  * @see \Drupal\webform_ui\WebformUiEntityElementsForm
  */
 #[LegacyHook]
-function webform_cards_form_webform_edit_form_alter(array &$form, FormStateInterface $form_state)
-{
-    return \Drupal::service(WebformCardsHooks::class)->formWebformEditFormAlter($form, $form_state);
+function webform_cards_form_webform_edit_form_alter(array &$form, FormStateInterface $form_state) {
+  return \Drupal::service(WebformCardsHooks::class)->formWebformEditFormAlter($form, $form_state);
 }
 
 /**
@@ -126,9 +120,8 @@ function webform_cards_form_webform_admin_config_elements_form_alter(array &$for
  * @see /admin/structure/webform/manage/{webform}/settings
  */
 #[LegacyHook]
-function webform_cards_form_webform_settings_form_alter(array &$form, FormStateInterface $form_state)
-{
-    return \Drupal::service(WebformCardsHooks::class)->formWebformSettingsFormAlter($form, $form_state);
+function webform_cards_form_webform_settings_form_alter(array &$form, FormStateInterface $form_state) {
+  return \Drupal::service(WebformCardsHooks::class)->formWebformSettingsFormAlter($form, $form_state);
 }
 
 /**
@@ -138,9 +131,8 @@ function webform_cards_form_webform_settings_form_alter(array &$form, FormStateI
  * @see /admin/structure/webform/manage/{webform}/settings/form
  */
 #[LegacyHook]
-function webform_cards_form_webform_settings_form_form_alter(array &$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformCardsHooks::class)->formWebformSettingsFormFormAlter($form, $form_state);
+function webform_cards_form_webform_settings_form_form_alter(array &$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformCardsHooks::class)->formWebformSettingsFormFormAlter($form, $form_state);
 }
 
 /**
@@ -150,9 +142,8 @@ function webform_cards_form_webform_settings_form_form_alter(array &$form, FormS
  * @see /admin/structure/webform/manage/{webform}/settings/form
  */
 #[LegacyHook]
-function webform_cards_form_webform_settings_submissions_form_alter(array &$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformCardsHooks::class)->formWebformSettingsSubmissionsFormAlter($form, $form_state);
+function webform_cards_form_webform_settings_submissions_form_alter(array &$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformCardsHooks::class)->formWebformSettingsSubmissionsFormAlter($form, $form_state);
 }
 
 /**
@@ -211,9 +202,8 @@ function _webform_cards_form_alter_elements(array &$form, array $elements) {
  * Implements hook_theme().
  */
 #[LegacyHook]
-function webform_cards_theme()
-{
-    return \Drupal::service(WebformCardsHooks::class)->theme();
+function webform_cards_theme() {
+  return \Drupal::service(WebformCardsHooks::class)->theme();
 }
 
 /**

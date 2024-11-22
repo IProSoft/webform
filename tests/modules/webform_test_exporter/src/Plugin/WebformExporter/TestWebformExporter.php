@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_exporter\Plugin\WebformExporter;
 
 use Drupal\Core\Form\FormStateInterface;

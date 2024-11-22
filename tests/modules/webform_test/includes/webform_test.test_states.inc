@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\webform\Entity\Webform;
 
 /**

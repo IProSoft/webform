@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test\Hook\WebformTestHooks;
-use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformElementHelper;
 
@@ -75,9 +84,8 @@ function webform_test_preprocess_webform_confirmation(array &$variables) {
  * Implements hook_webform_load().
  */
 #[LegacyHook]
-function webform_test_webform_load(array $entities)
-{
-    return \Drupal::service(WebformTestHooks::class)->webformLoad($entities);
+function webform_test_webform_load(array $entities) {
+  return \Drupal::service(WebformTestHooks::class)->webformLoad($entities);
 }
 
 /**

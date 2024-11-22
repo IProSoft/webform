@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_options\Hook\WebformTestOptionsHooks;
+
 /**
  * @file
  * Support module for webform that provides form alter hook for wizard cause tests.

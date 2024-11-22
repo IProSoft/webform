@@ -1,7 +1,12 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_schema\Hook\WebformSchemaHooks;
+
 /**
  * @file
  * Adds a 'Schema' tab to the webform builder UI.
@@ -11,9 +16,8 @@ use Drupal\webform_schema\Hook\WebformSchemaHooks;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_schema_webform_help_info()
-{
-    return \Drupal::service(WebformSchemaHooks::class)->webformHelpInfo();
+function webform_schema_webform_help_info() {
+  return \Drupal::service(WebformSchemaHooks::class)->webformHelpInfo();
 }
 
 /**

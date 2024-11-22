@@ -1,10 +1,18 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_submission_export_import_test\Hook\WebformSubmissionExportImportTestHooks;
-use Drupal\Core\File\FileExists;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\user\Entity\User;
 
 /**
  * Implements hook_form_FORM_ID_alter() for webform submission export import upload form.
@@ -13,7 +21,6 @@ use Drupal\user\Entity\User;
  * external Google Sheet CSV.
  */
 #[LegacyHook]
-function webform_submission_export_import_test_form_webform_submission_export_import_upload_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformSubmissionExportImportTestHooks::class)->formWebformSubmissionExportImportUploadFormAlter($form, $form_state);
+function webform_submission_export_import_test_form_webform_submission_export_import_upload_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformSubmissionExportImportTestHooks::class)->formWebformSubmissionExportImportUploadFormAlter($form, $form_state);
 }

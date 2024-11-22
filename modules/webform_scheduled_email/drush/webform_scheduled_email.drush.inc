@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailDrushHooks;
 use Drupal\webform\Entity\Webform;
@@ -10,9 +14,8 @@ use Drush\Drush;
  * Implements hook_drush_command().
  */
 #[LegacyHook]
-function webform_scheduled_email_drush_command()
-{
-    return \Drupal::service(WebformScheduledEmailDrushHooks::class)->drushCommand();
+function webform_scheduled_email_drush_command() {
+  return \Drupal::service(WebformScheduledEmailDrushHooks::class)->drushCommand();
 }
 
 /**
@@ -64,7 +67,7 @@ function webform_scheduled_email_cron_process($webform_id = NULL, $handler_id = 
     try {
       $handler = $webform->getHandler($handler_id);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       return drush_set_error(dt('Handler @id not recognized.', ['@id' => $handler_id]));
     }
     if (!($handler instanceof ScheduleEmailWebformHandler)) {

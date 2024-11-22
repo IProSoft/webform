@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Functional\Composite;
 
 use Drupal\Tests\webform\Functional\Element\WebformElementManagedFileTestBase;

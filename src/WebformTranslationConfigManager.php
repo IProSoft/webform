@@ -613,7 +613,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
       try {
         $image_url = Url::fromUri($source_images[$image_value]['src']);
       }
-      catch (\Exception $exception) {
+      catch (\Exception) {
         $image_url = NULL;
       }
       $row = [
@@ -1027,7 +1027,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
         $form = $this->formBuilder->getForm('\Drupal\webform_ui\Form\WebformUiElementAddForm', $this->webform, NULL, NULL, $type);
         $this->elementProperties[$type] = $this->getElementsFlattened($form['properties']);
       }
-      catch (\Exception $exception) {
+      catch (\Exception) {
         // If the element type does not exist, do nothing.
       }
     }

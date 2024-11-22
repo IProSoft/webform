@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_bootstrap\Hook\WebformBootstrapHooks;
 use Drupal\bootstrap\Bootstrap;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform_bootstrap\WebformBootstrapRenderCallbacks;
 
 // phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
 
@@ -14,9 +17,8 @@ use Drupal\webform_bootstrap\WebformBootstrapRenderCallbacks;
  * Implements hook_page_attachments().
  */
 #[LegacyHook]
-function webform_bootstrap_page_attachments(array &$attachments)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->pageAttachments($attachments);
+function webform_bootstrap_page_attachments(array &$attachments) {
+  return \Drupal::service(WebformBootstrapHooks::class)->pageAttachments($attachments);
 }
 
 /**
@@ -39,18 +41,16 @@ function webform_bootstrap_webform_element_webform_likert_alter(array &$element,
  * Implements hook_webform_element_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_webform_element_alter(array &$element, FormStateInterface $form_state, array $context)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->webformElementAlter($element, $form_state, $context);
+function webform_bootstrap_webform_element_alter(array &$element, FormStateInterface $form_state, array $context) {
+  return \Drupal::service(WebformBootstrapHooks::class)->webformElementAlter($element, $form_state, $context);
 }
 
 /**
  * Implements hook_link_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_link_alter(&$variables)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->linkAlter($variables);
+function webform_bootstrap_link_alter(&$variables) {
+  return \Drupal::service(WebformBootstrapHooks::class)->linkAlter($variables);
 }
 
 /**
@@ -199,7 +199,7 @@ function _webform_bootstrap_is_active_theme() {
     $theme_manager = \Drupal::service('webform.theme_manager');
     $is_active_theme = $theme_manager->isActiveTheme('bootstrap');
   }
-  catch (\TypeError $error) {
+  catch (\TypeError) {
     $is_active_theme = FALSE;
   }
 

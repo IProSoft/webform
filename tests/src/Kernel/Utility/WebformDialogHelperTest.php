@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Kernel\Utility;
 
 use Drupal\KernelTests\KernelTestBase;

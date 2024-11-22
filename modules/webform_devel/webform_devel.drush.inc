@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_devel\Hook\WebformDevelDrushHooks;
 use Drush\Drush;
@@ -8,9 +12,8 @@ use Drush\Drush;
  * Implements hook_drush_command().
  */
 #[LegacyHook]
-function webform_devel_drush_command()
-{
-    return \Drupal::service(WebformDevelDrushHooks::class)->drushCommand();
+function webform_devel_drush_command() {
+  return \Drupal::service(WebformDevelDrushHooks::class)->drushCommand();
 }
 
 /**

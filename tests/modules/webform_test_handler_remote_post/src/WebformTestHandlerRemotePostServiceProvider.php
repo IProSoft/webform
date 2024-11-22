@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_handler_remote_post;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;

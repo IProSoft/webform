@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_entity_print_attachment\Functional;
 
 use Drupal\Tests\webform_entity_print\Functional\WebformEntityPrintFunctionalTestBase;

@@ -1,31 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_element\Hook;
 
 use Drupal\Core\Hook\Attribute\Hook;
+
 /**
  * Hook implementations for webform_test_element.
  */
-class WebformTestElementHooks
-{
-    /**
-     * @file
-     * Support module for webform that provides element plugin tests.
-     */
-    /**
-     * Implements hook_theme().
-     */
-    #[Hook('theme', module: 'webform_test_element_handler')]
-    public function handlerTheme()
-    {
-        return [
-            'webform_handler_test_summary' => [
-                'variables' => [
-                    'settings' => NULL,
-                    'handler' => [
-                    ],
-                ],
-            ],
-        ];
-    }
+class WebformTestElementHooks {
+  /**
+   * @file
+   * Support module for webform that provides element plugin tests.
+   */
+
+  /**
+   * Implements hook_theme().
+   */
+  #[Hook('theme', module: 'webform_test_element_handler')]
+  public function handlerTheme() {
+    return [
+      'webform_handler_test_summary' => [
+        'variables' => [
+          'settings' => NULL,
+          'handler' => [],
+        ],
+      ],
+    ];
+  }
+
 }

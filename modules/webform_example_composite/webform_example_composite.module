@@ -1,7 +1,12 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_example_composite\Hook\WebformExampleCompositeHooks;
+
 /**
  * @file
  * Provides an example that shows how to create a Webform composite.

@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_handler\Hook\WebformTestHandlerHooks;
-use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Implements hook_theme().
@@ -16,9 +25,8 @@ function webform_test_handler_theme() {
  * Implements hook_webform_submissions_pre_purge().
  */
 #[LegacyHook]
-function webform_test_handler_webform_submissions_pre_purge(array &$webform_submissions)
-{
-    return \Drupal::service(WebformTestHandlerHooks::class)->webformSubmissionsPrePurge($webform_submissions);
+function webform_test_handler_webform_submissions_pre_purge(array &$webform_submissions) {
+  return \Drupal::service(WebformTestHandlerHooks::class)->webformSubmissionsPrePurge($webform_submissions);
 }
 
 /**

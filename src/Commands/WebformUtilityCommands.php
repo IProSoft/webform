@@ -152,7 +152,7 @@ class WebformUtilityCommands extends WebformCommandsBase {
           $elements = WebformYaml::tidy($data['elements']);
           $data['elements'] = $elements;
         }
-        catch (\Exception $exception) {
+        catch (\Exception) {
           // Do nothing.
         }
       }

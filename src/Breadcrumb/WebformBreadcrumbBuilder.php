@@ -94,7 +94,7 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     try {
       $path = Url::fromRouteMatch($route_match)->toString();
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       $path = '';
     }
 

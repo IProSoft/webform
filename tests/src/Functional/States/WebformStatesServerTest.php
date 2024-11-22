@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Functional\States;
 
 use Drupal\Component\Utility\Crypt;
@@ -410,7 +412,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $assert_session->responseContains('dependent_not_between field is required.');
 
     /* ********************************************************************** */
-    // multiple element.
+    // Multiple element.
     /* ********************************************************************** */
 
     $webform = Webform::load('test_states_server_multiple');
@@ -424,7 +426,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $assert_session->responseContains('textfield_multiple field is required.');
 
     /* ********************************************************************** */
-    // composite element.
+    // Composite element.
     /* ********************************************************************** */
 
     $webform = Webform::load('test_states_server_comp');
@@ -469,7 +471,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $assert_session->responseContains('textfield_dependent_required field is required.');
 
     /* ********************************************************************** */
-    // likert element.
+    // Likert element.
     /* ********************************************************************** */
 
     $webform = Webform::load('test_states_server_likert');
@@ -489,7 +491,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $assert_session->responseNotContains('q2 field is required.');
 
     /* ********************************************************************** */
-    // nested containers.
+    // Nested containers.
     /* ********************************************************************** */
 
     $webform = Webform::load('test_states_server_containers');
@@ -535,7 +537,7 @@ class WebformStatesServerTest extends WebformBrowserTestBase {
     $assert_session->responseContains('visible_slide_custom_textfield field is required.');
 
     /* ********************************************************************** */
-    // nested conditions.
+    // Nested conditions.
     /* ********************************************************************** */
 
     $webform = Webform::load('test_states_server_nested');

@@ -39,7 +39,7 @@ class WebformAttachmentUrl extends WebformAttachmentBase {
       }
       $content = (string) \Drupal::httpClient()->get($url)->getBody();
     }
-    catch (RequestException $exception) {
+    catch (RequestException) {
       $content = '';
     }
     return (!empty($element['#trim'])) ? trim($content) : $content;
