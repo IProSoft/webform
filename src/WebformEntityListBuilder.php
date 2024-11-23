@@ -575,7 +575,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
         $access_type = 'users';
         $access_value = $account->id();
       }
-      elseif ($role = $this->getEntityStorage('user_role')->load(iconv('UTF-8', 'ASCII//TRANSLIT', $keys))) {
+      elseif ($role = $this->getEntityStorage('user_role')->load(mb_convert_encoding($keys, 'ASCII', 'UTF-8'))) {
         $access_type = 'roles';
         $access_value = $role->id();
       }

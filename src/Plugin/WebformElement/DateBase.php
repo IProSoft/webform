@@ -194,7 +194,7 @@ abstract class DateBase extends WebformElementBase {
     if ($format === 'raw') {
       return $value;
     }
-    elseif (DateFormat::load($format)) {
+    elseif (DateFormat::load(mb_convert_encoding($format, 'ASCII', 'UTF-8'))) {
       return $this->dateFormatter->format($timestamp, $format);
     }
     else {
