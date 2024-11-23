@@ -1006,6 +1006,11 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
     return $element;
   }
 
+  // Set #webform_element for all options (checkboxes and radios).
+  foreach (Element::children($element) as $key) {
+    $element[$key]['#webform_element'] = TRUE;
+  }
+
   // Description display.
   if (!empty($element['#options_description_display'])) {
     $description_property_name = ($element['#options_description_display'] === 'help') ? '#help' : '#description';
@@ -1018,7 +1023,6 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
 
       [$title, $description] = WebformOptionsHelper::splitOption($title);
       $element[$key]['#title'] = $title;
-      $element[$key]['#webform_element'] = TRUE;
       $element[$key][$description_property_name] = $description;
     }
   }
