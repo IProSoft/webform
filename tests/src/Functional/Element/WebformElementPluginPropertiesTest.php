@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Element;
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
 
 /**
@@ -830,6 +830,7 @@ fieldset:
   states: {  }
   states_clear: true
   title: ''
+  title_attributes: {  }
   title_display: ''
 hidden:
   access_create_permissions: {  }
