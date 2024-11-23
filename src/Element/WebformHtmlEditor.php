@@ -4,7 +4,7 @@ namespace Drupal\webform\Element;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -16,7 +16,7 @@ use Drupal\webform\Utility\WebformXss;
  *
  * @FormElement("webform_html_editor")
  */
-class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface {
+class WebformHtmlEditor extends FormElementBase implements TrustedCallbackInterface {
 
   /**
    * Default webform filter format.
@@ -200,7 +200,7 @@ class WebformHtmlEditor extends FormElement implements TrustedCallbackInterface 
         return WebformXss::getHtmlTagList();
 
       default:
-        return preg_split('/ +/', $allowed_tags);
+        return preg_split('/ +/', (string) $allowed_tags);
     }
   }
 
