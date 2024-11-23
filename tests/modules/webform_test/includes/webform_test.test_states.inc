@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test elements with #states.
- */
-
 use Drupal\webform\Entity\Webform;
 
 /**
