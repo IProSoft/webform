@@ -221,7 +221,7 @@ function webform_email_edit_form($form, $form_state, $node, $email = array(), $c
       case 'email':
         $default_value = NULL;
         $title = t('E-mail to address');
-        $description = t('Form submissions will be e-mailed to this address. Any email, select, or hidden form element may be selected as the recipient address. Multiple e-mail addresses may be separated by commas.');
+        $description = t('Form submissions will be e-mailed to this address. Any email, select, or hidden form element may be selected as the recipient address. Multiple e-mail addresses may be separated by commas. Select components with more than @webform_email_select_max options will not appear. This limit can be changed on the <a href="!url">Webform settings</a> page under "Advanced options", "Select email mapping limit".', array('@webform_email_select_max' => webform_variable_get('webform_email_select_max'), '!url' => url('admin/config/content/webform')));
         break;
 
       case 'subject':
@@ -284,8 +284,9 @@ function webform_email_edit_form($form, $form_state, $node, $email = array(), $c
         }
 
         // To avoid flooding the form with hundreds of textfields, skip select
-        // lists that have huge numbers of options.
-        if (count($options) > webform_variable_get('webform_email_select_max')) {
+        // lists that have huge numbers of options. Do not skip the select list
+        // currently in use.
+        if (count($options) > webform_variable_get('webform_email_select_max') && $cid != $form[$field . '_component']['#default_value']) {
           unset($form[$field . '_component']['#options'][$cid]);
           continue;
         }
