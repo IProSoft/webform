@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_bootstrap_test_module\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

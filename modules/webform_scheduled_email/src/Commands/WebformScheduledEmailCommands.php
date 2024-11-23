@@ -55,7 +55,7 @@ class WebformScheduledEmailCommands extends DrushCommands {
       try {
         $handler = $webform->getHandler($handler_id);
       }
-      catch (\Exception $exception) {
+      catch (\Exception) {
         throw new \Exception(dt('Handler @id not recognized.', ['@id' => $handler_id]));
       }
       if (!($handler instanceof ScheduleEmailWebformHandler)) {

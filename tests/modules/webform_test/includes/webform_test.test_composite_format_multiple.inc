@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Generate test composite multiple elements with formatting.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\webform\WebformInterface;

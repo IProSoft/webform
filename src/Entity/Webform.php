@@ -1266,7 +1266,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       $elements = WebformYaml::decode($this->elementsOriginal);
       return (is_array($elements)) ? $elements : [];
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       return FALSE;
     }
   }

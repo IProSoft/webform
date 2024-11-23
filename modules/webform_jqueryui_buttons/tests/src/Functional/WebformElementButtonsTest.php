@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_jqueryui_buttons\Functional;
 
 use Drupal\Tests\webform\Functional\Element\WebformElementBrowserTestBase;

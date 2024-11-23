@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Webform requirements.
  */
 
 use Drupal\Component\Render\FormattableMarkup;

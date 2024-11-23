@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_variant\Plugin\WebformVariant;
 
 use Drupal\webform\Plugin\WebformVariantBase;

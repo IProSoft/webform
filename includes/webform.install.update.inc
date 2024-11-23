@@ -2,9 +2,10 @@
 
 /**
  * @file
- * Archived Webform update hooks.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform\Hook\WebformInstallUpdateHooks;
 use Drupal\Component\Uuid\Php as Uuid;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Database;
@@ -30,18 +31,9 @@ use Drupal\webform\WebformInterface;
 /**
  * Implements hook_update_dependencies().
  */
+#[LegacyHook]
 function webform_update_dependencies() {
-  // Ensure that system_update_8501() runs before the webform update, so that
-  // the new revision_default field is installed in the correct table.
-  // @see https://www.drupal.org/project/webform/issues/2958102
-  $dependencies['webform'][8099]['system'] = 8501;
-
-  // Ensure that system_update_8805() runs before the webform update, so that
-  // the 'path_alias' module is enabled and configured correctly.
-  // @see https://www.drupal.org/project/webform/issues/3166248
-  $dependencies['webform']['8158']['system'] = 8805;
-
-  return $dependencies;
+  return \Drupal::service(WebformInstallUpdateHooks::class)->updateDependencies();
 }
 
 /* ************************************************************************** */
@@ -2790,7 +2782,7 @@ function webform_update_8151() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -2889,7 +2881,7 @@ function webform_update_8155() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -2946,7 +2938,7 @@ function webform_update_8156() {
     try {
       \Drupal::service('module_installer')->install(['webform_submission_log']);
     }
-    catch (SchemaObjectExistsException $exception) {
+    catch (SchemaObjectExistsException) {
       // This is actually expected. The table {webform_submission_log} would exist
       // from webform submission entity schema.
     }
@@ -3321,7 +3313,7 @@ function webform_update_8179() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -3468,7 +3460,7 @@ function webform_update_8186() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 
@@ -3784,7 +3776,7 @@ function webform_update_8198() {
     try {
       $elements = WebformYaml::decode($elements);
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       continue;
     }
 

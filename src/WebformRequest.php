@@ -353,7 +353,7 @@ class WebformRequest implements WebformRequestInterface {
       $this->routeProvider->getRouteByName($name);
       return TRUE;
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       return FALSE;
     }
   }

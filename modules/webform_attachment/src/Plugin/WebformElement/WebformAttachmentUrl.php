@@ -84,7 +84,7 @@ class WebformAttachmentUrl extends WebformAttachmentBase {
     try {
       \Drupal::httpClient()->head($value);
     }
-    catch (ClientException $e) {
+    catch (ClientException) {
       $form_state->setError($element, t('The URL <a href=":url">@url</a> is not available.', [':url' => $value, '@url' => $value]));
     }
   }

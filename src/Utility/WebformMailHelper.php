@@ -24,7 +24,7 @@ class WebformMailHelper {
       Address::create($address);
       return TRUE;
     }
-    catch (\Exception $exception) {
+    catch (\Exception) {
       return FALSE;
     }
   }

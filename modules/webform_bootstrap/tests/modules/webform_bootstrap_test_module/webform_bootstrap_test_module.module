@@ -2,14 +2,28 @@
 
 /**
  * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform_bootstrap_test_module\Hook\WebformBootstrapTestModuleHooks1;
+
+/**
+ * @file
  * Installs and integrates the Webform Test Bootstrap theme.
  */
 
 /**
  * Implements hook_page_attachments().
  */
+#[LegacyHook]
 function webform_bootstrap_test_module_page_attachments(array &$attachments) {
-  $attachments['#attached']['library'][] = 'webform_bootstrap_test_module/webform_bootstrap_test_module';
+  \Drupal::service(WebformBootstrapTestModuleHooks1::class)->pageAttachments($attachments);
 }
 
 /**

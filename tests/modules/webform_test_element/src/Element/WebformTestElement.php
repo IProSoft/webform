@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_element\Element;
 
 use Drupal\Core\Render\Element\Textfield;

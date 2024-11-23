@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Generate test elements help displays.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;

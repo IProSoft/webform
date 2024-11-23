@@ -2,6 +2,12 @@
 
 /**
  * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  * Support module for webform that provides custom options element working examples.
  */
 

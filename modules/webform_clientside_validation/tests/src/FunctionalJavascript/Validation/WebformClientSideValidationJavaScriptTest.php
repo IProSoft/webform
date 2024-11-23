@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_clientside_validation\FunctionalJavascript\Validation;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;

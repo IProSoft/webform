@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform\Kernel\Entity;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -52,14 +54,14 @@ class WebformEntityTest extends KernelTestBase {
       $webform->save();
       $this->fail('Not possible to save webform with override = TRUE.');
     }
-    catch (WebformException $e) {
+    catch (WebformException) {
     }
 
     try {
       $webform->setOverride(FALSE);
       $webform->save();
     }
-    catch (WebformException $e) {
+    catch (WebformException) {
       $this->fail('Possible to save webform with override = FALSE.');
     }
 

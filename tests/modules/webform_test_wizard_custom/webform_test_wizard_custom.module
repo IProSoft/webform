@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Support module for webform that provides form alter hook for wizard custom tests.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\Core\Form\FormStateInterface;

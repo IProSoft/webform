@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Generate test elements title displays.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;

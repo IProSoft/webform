@@ -423,7 +423,7 @@ class WebformOptionsCustomForm extends EntityForm {
         $response = $this->httpClient->get($url);
         $file_exists = ($response->getStatusCode() === 200);
       }
-      catch (\RangeException $exception) {
+      catch (\RangeException) {
         // Do nothing.
       }
       if (!$file_exists) {

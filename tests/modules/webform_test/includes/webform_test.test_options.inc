@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Generate test options example.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\Component\Serialization\Yaml;

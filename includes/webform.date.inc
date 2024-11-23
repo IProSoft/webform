@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Callback functions for date, datetime, and time elements.
  */
 
 use Drupal\Core\Datetime\DrupalDateTime;

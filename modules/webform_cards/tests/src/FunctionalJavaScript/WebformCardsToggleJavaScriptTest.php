@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\webform_cards\FunctionalJavascript;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;

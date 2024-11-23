@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\webform_test_block_context\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;

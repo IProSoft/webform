@@ -2,59 +2,41 @@
 
 /**
  * @file
- * Webform module editor file upload hooks.
- *
- * Because Webforms are config entities the editor.module's file uploading
- * is not supported.
- *
- * The below code adds file upload support to Webform config entities and
- * 'webform.settings' config.
- *
- * Below functions are copied from editor.module.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform\Hook\WebformEditorHooks;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\file\FileInterface;
 use Drupal\filter\FilterFormatInterface;
-use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\WebformInterface;
 
 /**
  * Implements hook_ENTITY_TYPE_access().
  */
+#[LegacyHook]
 function webform_filter_format_access(FilterFormatInterface $filter_format, $operation, AccountInterface $account) {
-  if ($filter_format->id() === WebformHtmlEditor::DEFAULT_FILTER_FORMAT
-    && $operation !== 'use') {
-    return AccessResult::forbidden('This text format can only be managed by the Webform module.');
-  }
-
-  return AccessResult::neutral();
+  return \Drupal::service(WebformEditorHooks::class)->filterFormatAccess($filter_format, $operation, $account);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_load().
  */
+#[LegacyHook]
 function webform_filter_format_load($entities) {
-  foreach ($entities as $entity) {
-    // Hide the default webform filter format on the filter admin overview page.
-    if ($entity->id() === WebformHtmlEditor::DEFAULT_FILTER_FORMAT
-      && \Drupal::routeMatch()->getRouteName() === 'filter.admin_overview') {
-      // Set status to FALSE which hides the default webform filter format.
-      $entity->set('status', FALSE);
-    }
-  }
+  \Drupal::service(WebformEditorHooks::class)->filterFormatLoad($entities);
 }
 
 /**
  * Implements hook_editor_js_settings_alter().
  */
+#[LegacyHook]
 function webform_editor_js_settings_alter(array &$settings) {
-  $settings['editor']['formats'][WebformHtmlEditor::DEFAULT_FILTER_FORMAT]['editorSettings']['autoGrow_minHeight'] = '80';
+  \Drupal::service(WebformEditorHooks::class)->editorJsSettingsAlter($settings);
 }
 
 /* ************************************************************************** */
@@ -66,9 +48,9 @@ function webform_editor_js_settings_alter(array &$settings) {
  *
  * @see editor_entity_insert()
  */
+#[LegacyHook]
 function webform_webform_insert(WebformInterface $webform) {
-  $uuids = _webform_get_config_entity_file_uuids($webform);
-  _webform_record_file_usage($uuids, $webform->getEntityTypeId(), $webform->id());
+  \Drupal::service(WebformEditorHooks::class)->webformInsert($webform);
 }
 
 /**
@@ -76,17 +58,9 @@ function webform_webform_insert(WebformInterface $webform) {
  *
  * @see editor_entity_update()
  */
+#[LegacyHook]
 function webform_webform_update(WebformInterface $webform) {
-  $original_uuids = _webform_get_config_entity_file_uuids($webform->original);
-  $uuids = _webform_get_config_entity_file_uuids($webform);
-
-  // Detect file usages that should be incremented.
-  $added_files = array_diff($uuids, $original_uuids);
-  _webform_record_file_usage($added_files, $webform->getEntityTypeId(), $webform->id());
-
-  // Detect file usages that should be decremented.
-  $removed_files = array_diff($original_uuids, $uuids);
-  _webform_delete_file_usage($removed_files, $webform->getEntityTypeId(), $webform->id(), 1);
+  \Drupal::service(WebformEditorHooks::class)->webformUpdate($webform);
 }
 
 /**
@@ -94,9 +68,9 @@ function webform_webform_update(WebformInterface $webform) {
  *
  * @see editor_entity_delete()
  */
+#[LegacyHook]
 function webform_webform_delete(WebformInterface $webform) {
-  $uuids = _webform_get_config_entity_file_uuids($webform);
-  _webform_delete_file_usage($uuids, $webform->getEntityTypeId(), $webform->id(), 0);
+  \Drupal::service(WebformEditorHooks::class)->webformDelete($webform);
 }
 
 /* ************************************************************************** */

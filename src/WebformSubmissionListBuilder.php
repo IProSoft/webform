@@ -672,7 +672,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
           $source_entity = $this->entityTypeManager->getStorage($source_entity_type)->load($source_entity_id);
           $source_entity_default_value = $source_entity->label() . " ($source_entity_type:$source_entity_id)";
         }
-        catch (\Exception $exception) {
+        catch (\Exception) {
           $source_entity_default_value = '';
         }
       }

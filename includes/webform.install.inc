@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Webform install helper functions.
  */
 
 use Drupal\Component\Serialization\Yaml;

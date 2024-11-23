@@ -2,6 +2,12 @@
 
 /**
  * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  * Install and uninstall functions for the Webform Test Paragraphs module.
  */
 

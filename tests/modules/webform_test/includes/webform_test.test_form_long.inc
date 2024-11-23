@@ -2,7 +2,12 @@
 
 /**
  * @file
- * Generate long webform elements.
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
  */
 
 use Drupal\webform\WebformInterface;
