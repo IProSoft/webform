@@ -224,7 +224,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
    * @param array $values
    *   The element values from the settings webform.
    */
-  protected function generateSubmissions(array $values) {
+  protected function generateSubmissions(array $values): array {
     static::$generatingSubmissions = TRUE;
     if (!empty($values['kill'])) {
       $this->deleteWebformSubmissions($values['webform_ids'], $values['entity-type'], $values['entity-id']);
