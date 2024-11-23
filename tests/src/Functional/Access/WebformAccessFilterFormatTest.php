@@ -18,7 +18,7 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['webform'];
+  protected static $modules = ['node', 'webform'];
 
   /**
    * Webforms to load.
@@ -122,6 +122,26 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     // Check webform default format is NOT accessible via check_markup().
     // @see \Drupal\webform\Element\WebformHtmlEditor::preRenderText
     $this->assertEquals('', check_markup('<script></script>Test', WebformHtmlEditor::DEFAULT_FILTER_FORMAT));
+
+    /* ********************************************************************** */
+    // Check Text format access.
+    /* ********************************************************************** */
+
+    // Check that a user won't see the text format select menu
+    // when they only have the default or one filter visible.
+    // @covers \Drupal\webform\Element\WebformHtmlEditor::processTextFormat
+    $this->drupalLogout();
+    $this->drupalLogin(
+      $this->drupalCreateUser([
+        'administer nodes',
+        'bypass node access',
+      ])
+    );
+    $this->drupalCreateContentType(['type' => 'page', 'name' => 'Page']);
+    $node = $this->drupalCreateNode();
+    $this->drupalGet('/node/' . $node->id() . '/edit');
+    $assert_session->elementNotExists('css', '[name="body[0][format]"]');
+    $assert_session->responseNotContains('<option value="plain_text" selected="selected">Plain text</option><');
   }
 
 }
