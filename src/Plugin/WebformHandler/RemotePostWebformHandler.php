@@ -166,7 +166,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'method' => 'POST',
       'type' => 'x-www-form-urlencoded',
       'excluded_data' => $excluded_data,
-      'exclude_without_access' => FALSE,
+      'check_access' => FALSE,
       'custom_data' => '',
       'custom_options' => '',
       'file_data' => TRUE,
@@ -458,11 +458,12 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#required' => TRUE,
       '#default_value' => $this->configuration['excluded_data'],
     ];
-    $form['submission_data']['exclude_without_access'] = [
+    $form['submission_data']['check_access'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Exclude all elements without acces'),
-      '#description' => $this->t('Elements without access are not listed in the \'excluded_data\' configuration, resulting in their automatic inclusion in the request data.'),
-      '#default_value' => $this->configuration['exclude_without_access'],
+      '#title' => $this->t('Check if an element is displayed'),
+      '#description' => $this->t("If checked, elements with 'Display element' unchecked (i.e., <code>'#access': false</code> will not included in the request data."),
+      '#default_value' => $this->configuration['check_access'],
+      '#return_value' => TRUE,
     ];
 
     $this->elementTokenValidate($form);
@@ -611,26 +612,25 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     // Excluded selected submission data.
     $data = array_diff_key($data, $this->configuration['excluded_data']);
 
-    // Remove all 'invisible' fields, the fields without access.
-    if ($this->configuration['exclude_without_access']) {
-      $all_elements = $this->webform->getElementsInitializedFlattenedAndHasValue(NULL);
-      $visible_elements = $this->webform->getElementsInitializedFlattenedAndHasValue('view');
-      $invisible_elements = array_diff_key($all_elements, $visible_elements);
-
-      $data = array_diff_key($data, $invisible_elements);
-    }
-
     // Append uploaded file name, uri, and base64 data to data.
     $webform = $this->getWebform();
     foreach ($data as $element_key => $element_value) {
-      // Ignore empty and not equal to zero values.
-      // @see https://stackoverflow.com/questions/732979/php-whats-an-alternative-to-empty-where-string-0-is-not-treated-as-empty
-      if (empty($element_value) && $element_value !== 0 && $element_value !== '0') {
+      $element = $webform->getElement($element_key);
+      if (!$element) {
         continue;
       }
 
-      $element = $webform->getElement($element_key);
-      if (!$element) {
+      // Remove elements with #access set to FALSE.
+      if ($this->configuration['check_access']
+        && isset($element['#access'])
+        && $element['#access'] === FALSE) {
+        unset($data[$element_key]);
+        continue;
+      }
+
+      // Ignore empty and not equal to zero values.
+      // @see https://stackoverflow.com/questions/732979/php-whats-an-alternative-to-empty-where-string-0-is-not-treated-as-empty
+      if (empty($element_value) && $element_value !== 0 && $element_value !== '0') {
         continue;
       }
 
