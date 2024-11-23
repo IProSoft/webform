@@ -43,7 +43,7 @@ class WebformJqueryUiDatepickerTest extends WebformElementBrowserTestBase {
 
     // Check datetime picker.
     $now_date = date('D, m/d/Y', strtotime('now'));
-    $assert_session->responseContains('<input data-drupal-selector="edit-datetime-datepicker-date" title="Date (e.g. ' . $now_date . ')" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., ' . $now_date . ')." id="edit-datetime-datepicker-date" name="datetime_datepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
+    $assert_session->responseContains('<input data-drupal-selector="edit-datetime-datepicker-date" type="text" min="Mon, 01/01/1900" max="Sat, 12/31/2050" data-drupal-date-format="D, m/d/Y" placeholder="YYYY-MM-DD" data-help="Enter the date using the format YYYY-MM-DD (e.g., ' . $now_date . ')." id="edit-datetime-datepicker-date" name="datetime_datepicker[date]" value="Tue, 08/18/2009" size="15" maxlength="128" class="form-text" />');
 
     /* ********************************************************************** */
     // Validate date/datetime elements.

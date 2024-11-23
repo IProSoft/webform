@@ -76,7 +76,7 @@
         }
 
         // Server-side validation errors.
-        // @see \Drupal\Core\Render\Element\RenderElement::setAttributes
+        // @see \Drupal\Core\Render\Element\RenderElementBase::setAttributes
         var $invalidCards = $allCards.filter(':has(.form-item--error-message)');
         if ($invalidCards.length) {
           // Hide progress.
@@ -181,6 +181,13 @@
             }
           });
         }
+
+        // Custom events.
+        // Add support for custom 'webform_cards:set_active_card' event.
+        $allCards.on('webform_cards:set_active_card', function (event) {
+          var $activeCard = $(event.target);
+          setActiveCard($activeCard);
+        });
 
         initialize();
 

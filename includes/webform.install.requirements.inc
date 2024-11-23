@@ -196,11 +196,11 @@ function webform_requirements($phase) {
   if (\Drupal::config('webform.settings')->get('requirements.spam')) {
     $spam_protection = FALSE;
     $installed_projects = [
-      '#prefix' => '<p><hr/></p><dl>',
+      '#prefix' => '<hr class="webform-hr"/><dl>',
       '#suffix' => '</dl>',
     ];
     $available_projects = [
-      '#prefix' => '<p><hr/></p><dl>',
+      '#prefix' => '<hr class="webform-hr"/><dl>',
       '#suffix' => '</dl>',
     ];
 
@@ -231,14 +231,14 @@ function webform_requirements($phase) {
       $requirements['webform_spam'] = [
         'title' => t('Webform: Spam protection'),
         'value' => t('Webform Spam protection module installed.'),
-        'description' => \Drupal::service('renderer')->renderPlain($installed_projects),
+        'description' => \Drupal::service('renderer')->renderInIsolation($installed_projects),
       ];
     }
     else {
       $requirements['webform_spam'] = [
         'title' => t('Webform: Spam protection'),
         'value' => t('Webform <a href=":href">Spam protection module</a> missing. Please install one of the below modules.', [':href' => 'https://www.drupal.org/node/206787']),
-        'description' => \Drupal::service('renderer')->renderPlain($available_projects),
+        'description' => \Drupal::service('renderer')->renderInIsolation($available_projects),
         'severity' => REQUIREMENT_WARNING,
       ];
     }
