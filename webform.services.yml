@@ -49,7 +49,7 @@ services:
 
   webform.email_provider:
     class: Drupal\webform\WebformEmailProvider
-    arguments: ['@config.factory', '@module_handler', '@plugin.manager.mail']
+    arguments: ['@config.factory', '@module_handler', '@plugin.manager.mail', '@extension.list.module']
 
   webform.entity_reference_manager:
     class: Drupal\webform\WebformEntityReferenceManager
