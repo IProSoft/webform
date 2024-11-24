@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\webform\Functional;
 
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\user\Entity\User;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
@@ -19,7 +18,7 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['filter', 'node', 'webform'];
+  protected static $modules = ['node', 'webform'];
 
   /**
    * Webforms to load.
@@ -31,7 +30,7 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create filters.
@@ -42,6 +41,8 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
    * Tests view submissions.
    */
   public function testView() {
+    $assert_session = $this->assertSession();
+
     $admin_submission_user = $this->drupalCreateUser([
       'administer webform submission',
     ]);
@@ -86,14 +87,14 @@ class WebformSubmissionViewTest extends WebformBrowserTestBase {
       'language_select' => 'English (en)',
     ];
     foreach ($elements as $label => $value) {
-      $this->assertRaw("<label>$label</label>" . PHP_EOL . "        $value", new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));
+      $assert_session->responseContains("<label>$label</label>" . PHP_EOL . "        $value");
     }
 
     // Check details element.
-    $this->assertRaw('<summary role="button" aria-controls="test_element--standard_elements" aria-expanded="true" aria-pressed="true">Standard Elements</summary>');
+    $assert_session->responseContains('<summary role="button" aria-controls="test_element--standard_elements" aria-expanded="true">Standard Elements</summary>');
 
     // Check empty details element removed.
-    $this->assertNoRaw('Markup Elements');
+    $assert_session->responseNotContains('Markup Elements');
   }
 
 }

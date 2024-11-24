@@ -10,13 +10,13 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\file\Entity\File;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\Plugin\WebformElementAttachmentInterface;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Plugin\WebformElementCompositeInterface;
 use Drupal\webform\Plugin\WebformElementComputedInterface;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -169,7 +169,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // If #flexbox is not set or an empty string, determine if the
@@ -574,7 +574,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
 
       $composite_value = $this->formatCompositeText($element, $webform_submission, ['composite_key' => $composite_key] + $options);
       if (is_array($composite_value)) {
-        $composite_value = $this->renderer->renderPlain($composite_value);
+        $composite_value = $this->renderer->renderInIsolation($composite_value);
       }
 
       if ($composite_value !== '') {
@@ -914,7 +914,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     $form['composite']['choices'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Choices'),
-      '#description' => $this->t('Replace select element with <a href=":href">Choice.js</a> select box.', [':href' => 'https://joshuajohnson.co.uk/Choices/']),
+      '#description' => $this->t('Replace select element with <a href=":href">Choice.js</a> select box.', [':href' => 'https://choices-js.github.io/Choices/']),
       '#return_value' => TRUE,
       '#states' => [
         'disabled' => [
@@ -1050,6 +1050,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
             $composite_key . '__title' => [
               '#type' => 'textfield',
               '#title' => $this->t('@title title', $t_args),
+              '#maxlength' => NULL,
               '#title_display' => 'invisible',
               '#description' => $this->t('This is used as a descriptive label when displaying this webform element.'),
               '#description_display' => 'invisible',
@@ -1539,7 +1540,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
         // URI is used when debugging or resending messages.
         // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
-        '_fileurl' => file_create_url($file->getFileUri()),
+        '_fileurl' => $file->createFileUrl(FALSE),
       ];
     }
     return $attachments;

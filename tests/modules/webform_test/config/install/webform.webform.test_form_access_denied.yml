@@ -14,12 +14,12 @@ archive: false
 id: test_form_access_denied
 title: 'Test: Webform: Access Denied'
 description: 'Test access denied to form or submission.'
-category: 'Test: Webform'
+categories:
+  - 'Test: Webform'
 elements: |
   textfield:
     '#type': textfield
     '#title': textfield
-  
 css: ''
 javascript: ''
 settings:
@@ -58,7 +58,7 @@ settings:
   form_details_toggle: false
   form_access_denied: login
   form_access_denied_title: 'Webform: Access denied'
-  form_access_denied_message: 'Please login to access <b>[webform:title]</b>.'
+  form_access_denied_message: 'Please log in to access <b>[webform:title]</b>.'
   form_access_denied_attributes: {  }
   form_file_limit: ''
   form_method: ''
@@ -77,7 +77,7 @@ settings:
   submission_user_duplicate: false
   submission_access_denied: login
   submission_access_denied_title: 'Webform submission: Access Denied'
-  submission_access_denied_message: 'Please login to access <b>[webform_submission:label]</b>.'
+  submission_access_denied_message: 'Please log in to access <b>[webform_submission:label]</b>.'
   submission_access_denied_attributes: {  }
   submission_exception_message: ''
   submission_locked_message: ''
@@ -107,6 +107,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

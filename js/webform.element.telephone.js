@@ -3,7 +3,7 @@
  * JavaScript behaviors for Telephone element.
  */
 
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
 
   'use strict';
 
@@ -23,7 +23,7 @@
         return;
       }
 
-      $(context).find('input.js-webform-telephone-international').once('webform-telephone-international').each(function () {
+      $(once('webform-telephone-international', 'input.js-webform-telephone-international', context)).each(function () {
         var $telephone = $(this);
 
         // Add error message container.
@@ -55,7 +55,7 @@
         };
 
         var validate = function () {
-          if ($.trim($telephone.val())) {
+          if ($telephone.val().trim()) {
             if (!$telephone.intlTelInput('isValidNumber')) {
               $telephone.addClass('error');
               var placeholder = $telephone.attr('placeholder');
@@ -99,4 +99,4 @@
     }
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);

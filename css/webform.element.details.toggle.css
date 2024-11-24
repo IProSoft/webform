@@ -6,33 +6,28 @@
  */
 
 .webform-details-toggle-state-wrapper {
+  margin-top: 1em;
   text-align: right; /* LTR */
 }
+
 [dir="rtl"] .webform-details-toggle-state-wrapper {
   text-align: left;
-}
-
-.webform-details-toggle-state-wrapper {
-  margin-top: 1em;
 }
 
 .webform-details-toggle-state-wrapper + details {
   margin-top: 0;
 }
 
+/* Tweak details toggle state. */
 .webform-details-toggle-state {
   margin-top: 0;
   padding: 0;
   cursor: pointer;
+  text-decoration: none;
+  color: #337ab7;
   border: 0;
   background: transparent;
   font-size: 1em;
-}
-
-/* Tweak details toggle state. */
-.webform-details-toggle-state {
-  text-decoration: none;
-  color: #337ab7;
 }
 
 .webform-details-toggle-state:hover,

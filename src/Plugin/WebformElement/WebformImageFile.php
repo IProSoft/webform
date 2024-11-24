@@ -40,14 +40,17 @@ class WebformImageFile extends WebformManagedFileBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Add upload resolution validation.
     $max_resolution = $this->getElementProperty($element, 'max_resolution');
     $min_resolution = $this->getElementProperty($element, 'min_resolution');
     if ($max_resolution || $min_resolution) {
-      $element['#upload_validators']['file_validate_image_resolution'] = [$max_resolution, $min_resolution];
+      $element['#upload_validators']['FileImageDimensions'] = [
+        'maxDimensions' => $max_resolution,
+        'minDimensions' => $min_resolution,
+      ];
     }
   }
 
@@ -174,7 +177,7 @@ class WebformImageFile extends WebformManagedFileBase {
       }
       else {
         $file_uri = $file->getFileUri();
-        $file_url = file_create_url($file->getFileUri());
+        $file_url = $file->createFileUrl(FALSE);
       }
       $attachments[] = [
         'filecontent' => file_get_contents($file_uri),

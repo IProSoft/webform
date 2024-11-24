@@ -19,12 +19,12 @@ class WebformSubmissionStorageTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'user', 'path', 'path_alias', 'field', 'webform'];
+  protected static $modules = ['system', 'user', 'path', 'path_alias', 'field', 'webform'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('path_alias');
     $this->installSchema('webform', ['webform']);
@@ -114,7 +114,7 @@ class WebformSubmissionStorageTest extends KernelTestBase {
    *
    * @see testPurge()
    */
-  public function providerPurge() {
+  public static function providerPurge() {
     // phpcs:disable Drupal.Commenting.InlineComment.SpacingBefore
     // The structure of each test case data is the following:
     // 0: (string) The webform 'purge' setting

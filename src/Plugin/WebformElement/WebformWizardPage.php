@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformElementWizardPageInterface;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\WebformSubmissionInterface;
@@ -115,13 +116,13 @@ class WebformWizardPage extends Details implements WebformElementWizardPageInter
     $form['wizard_page']['prev_button_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Previous page button label'),
-      '#description' => $this->t('This is used for the Next Page button on the page before this page break.') . '<br /><br />' .
+      '#description' => $this->t('This is used for the Previous Page button on the page before this page break.') . '<br /><br />' .
       $this->t('Defaults to: %value', ['%value' => $webform->getSetting('wizard_prev_button_label', TRUE)]),
     ];
     $form['wizard_page']['next_button_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Next page button label'),
-      '#description' => $this->t('This is used for the Previous Page button on the page after this page break.') . '<br /><br />' .
+      '#description' => $this->t('This is used for the Next Page button on the page after this page break.') . '<br /><br />' .
       $this->t('Defaults to: %value', ['%value' => $webform->getSetting('wizard_next_button_label', TRUE)]),
     ];
 
@@ -152,10 +153,22 @@ class WebformWizardPage extends Details implements WebformElementWizardPageInter
    * {@inheritdoc}
    */
   public function showPage(array &$element) {
-    // When showing a wizard page, page render it as container instead of the
-    // default details element.
+    // When showing a wizard page, page render it as a container, fieldset or
+    // section instead of the default details element.
     // @see \Drupal\webform\Element\WebformWizardPage
-    $element['#type'] = 'container';
+    $webform_id = $element['#webform'];
+    $webform = Webform::load($webform_id);
+    $page_type = $webform->getSetting('wizard_page_type') ?: 'container';
+    $element['#type'] = $page_type;
+
+    // Set section title tag.
+    // @see \Drupal\webform\Plugin\WebformElement\WebformSection
+    if ($page_type === 'webform_section') {
+      $element['#title_tag'] = $webform->getSetting('wizard_page_title_tag');
+    }
+
+    // Unset default details properties.
+    unset($element['#open']);
   }
 
   /**

@@ -14,7 +14,8 @@ archive: false
 id: example_style_guide
 title: 'Example: Style Guide'
 description: 'Style Guide containing examples of all elements and layouts.'
-category: Example
+categories:
+  - Example
 elements: |
   introduction:
     '#markup': '<p>Below is a style guide containing examples of all elements and layouts.</p>'
@@ -113,11 +114,6 @@ elements: |
     datelist:
       '#type': datelist
       '#title': 'Date list'
-    date_datepicker:
-      '#type': date
-      '#title': 'Date picker'
-      '#datepicker': true
-      '#date_date_format': 'D, m/d/Y'
     webform_time:
       '#type': webform_time
       '#title': Time
@@ -268,6 +264,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
     entity_autocomplete_tags:
@@ -277,6 +274,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#tags': true
@@ -287,6 +285,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#multiple': true
@@ -297,6 +296,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#options':
@@ -309,6 +309,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#options':
@@ -321,6 +322,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
     webform_entity_select_multiple:
@@ -330,6 +332,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#multiple': true
@@ -651,7 +654,6 @@ elements: |
       '#type': address
       '#title': Address
       '#description': '@see <a href="https://www.drupal.org/project/address">https://www.drupal.org/project/address</a>'
-  
 css: ''
 javascript: ''
 settings:
@@ -739,6 +741,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 1
   preview_label: ''
   preview_title: ''

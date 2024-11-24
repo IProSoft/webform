@@ -258,7 +258,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
    *   The current state of the form.
    */
   public function submitUploadForm(array &$form, FormStateInterface $form_state) {
-    $validators = ['file_validate_extensions' => ['csv']];
+    $validators = ['FileExtension' => ['extensions' => 'csv']];
 
     $import_type = $form_state->getValue('import_type');
 
@@ -275,9 +275,8 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
         file_put_contents($file_path, file_get_contents($import_url));
 
         $form_field_name = $this->t('Submission CSV (Comma Separated Values) file');
-        $file_size = filesize($file_path);
         // Mimic Symfony and Drupal's upload file handling.
-        $file_info = new UploadedFile($file_path, basename($file_path), NULL, $file_size);
+        $file_info = new UploadedFile($file_path, basename($file_path));
         $file = _webform_submission_export_import_file_save_upload_single($file_info, $form_field_name, $validators);
         break;
     }
@@ -290,7 +289,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
         $form_state->setRebuild();
       }
       else {
-        $this->messenger()->addError($this->t("Uable to parse CSV file. Please review the CSV file's formatting."));
+        $this->messenger()->addError($this->t("Unable to parse CSV file. Please review the CSV file's formatting."));
       }
     }
   }
@@ -359,7 +358,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
       '#title' => $this->t('Review import'),
     ];
     // Displaying when no UUID or token is found.
-    if (!isset($source['uuid']) && !isset($source['uuid'])) {
+    if (!isset($source['uuid']) && !isset($source['token'])) {
       $form['review']['warning'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
@@ -538,7 +537,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
    *
    * @see http://www.jeffgeerling.com/blogs/jeff-geerling/using-batch-api-build-huge-csv
    */
-  public static function batchSet(WebformInterface $webform, EntityInterface $source_entity = NULL, $import_uri = '', array $import_options = []) {
+  public static function batchSet(WebformInterface $webform, ?EntityInterface $source_entity = NULL, $import_uri = '', array $import_options = []) {
     $parameters = [
       $webform,
       $source_entity,
@@ -572,7 +571,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
    * @param mixed|array $context
    *   The batch current context.
    */
-  public static function batchProcess(WebformInterface $webform, EntityInterface $source_entity = NULL, $import_uri = '', array $import_options = [], &$context = []) {
+  public static function batchProcess(WebformInterface $webform, ?EntityInterface $source_entity = NULL, $import_uri = '', array $import_options = [], &$context = []) {
     /** @var \Drupal\webform_submission_export_import\WebformSubmissionExportImportImporterInterface $importer */
     $importer = \Drupal::service('webform_submission_export_import.importer');
     $importer->setWebform($webform);
@@ -659,7 +658,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
   }
 
   /**
-   * Disply import status.
+   * Display import status.
    *
    * @param array $stats
    *   Import stats.
@@ -675,7 +674,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
       '@skipped' => $stats['skipped'],
     ];
     if ($is_cli) {
-      \Drupal::logger('webform')->notice(t('Submission import completed. (total: @total; created: @created; updated: @updated; skipped: @skipped)', $t_args));
+      \Drupal::logger('webform')->notice('Submission import completed. (total: @total; created: @created; updated: @updated; skipped: @skipped)', $t_args);
     }
     else {
       \Drupal::messenger()->addStatus(t('Submission import completed. (total: @total; created: @created; updated: @updated; skipped: @skipped)', $t_args));
@@ -699,7 +698,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
             'row' => $row_prefix,
             'message' => ['#markup' => $message],
           ];
-          $message = \Drupal::service('renderer')->renderPlain($build);
+          $message = \Drupal::service('renderer')->renderInIsolation($build);
           if ($is_cli) {
             \Drupal::logger('webform_submission_export_import')->$message_type($message);
           }

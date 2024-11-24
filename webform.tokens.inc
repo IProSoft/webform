@@ -5,8 +5,8 @@
  * Builds placeholder replacement tokens for webforms and submissions.
  */
 
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Render\MarkupInterface;
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -15,13 +15,14 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\webform\Plugin\WebformElementManagerInterface;
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Plugin\WebformElement\WebformComputedBase;
 use Drupal\webform\Plugin\WebformElement\WebformMarkupBase;
+use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
+use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformLogicHelper;
+use Drupal\webform\Utility\WebformUserHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -63,13 +64,21 @@ function webform_token_info() {
     'name' => t('IP address'),
     'description' => t('The IP address that was used when submitting the webform submission.'),
   ];
+  $webform_submission['source-type'] = [
+    'name' => t('Source entity type'),
+    'description' => t('The source entity type.'),
+  ];
+  $webform_submission['source-id'] = [
+    'name' => t('Source entity type'),
+    'description' => t('The source entity type.'),
+  ];
   $webform_submission['source-title'] = [
     'name' => t('Source URL'),
     'description' => t('The Title of the source entity or webform.'),
   ];
   $webform_submission['source-url'] = [
     'name' => t('Source URL'),
-    'description' => t('The URL the user submitted the webform submission.'),
+    'description' => t('The URL where the user submitted the webform submission.'),
     'type' => 'url',
   ];
   $webform_submission['token-view-url'] = [
@@ -273,7 +282,7 @@ function webform_token_info() {
     'type' => 'date',
   ];
   $webform_submission['webform'] = [
-    'name' => t('Webform'),
+    'name' => t('Webform', [], ['context' => 'form']),
     'description' => t('The webform that the webform submission belongs to.'),
     'type' => 'webform',
   ];
@@ -348,6 +357,20 @@ function webform_token_info() {
     'description' => t('The date the webform is closed to new submissions.'),
     'type' => 'date',
   ];
+  $webform['settings'] = [
+    'name' => t('Settings'),
+    'description' => Markup::create(t('Webform settings tokens.') .
+      _webform_token_render_more(t('Learn about Webform settings tokens'),
+        '<ul>' .
+        '<li>confirmation_title</li>' .
+        '<li>confirmation_message</li>' .
+        '<li>form_open_message</li>' .
+        '<li>form_close_message</li>' .
+        '</ul>'
+      )
+    ),
+    'dynamic' => TRUE,
+  ];
   $webform['element'] = [
     'name' => t('Element properties'),
     'description' => Markup::create(t('Webform element property tokens.') .
@@ -394,7 +417,7 @@ function webform_token_info() {
     ];
 
     $webform_role = [];
-    $role_names = array_map('\Drupal\Component\Utility\Html::escape', user_role_names(TRUE));
+    $role_names = array_map('\Drupal\Component\Utility\Html::escape', WebformUserHelper::getRoleNames(TRUE));
     if (!in_array('authenticated', $roles)) {
       $role_names = array_intersect_key($role_names, array_combine($roles, $roles));
     }
@@ -533,6 +556,14 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
 
         case 'language':
           $replacements[$original] = \Drupal::languageManager()->getLanguage($webform_submission->langcode->value)->getName();
+          break;
+
+        case 'source-type':
+          $replacements[$original] = ($source_entity) ? $source_entity->getEntityTypeId() : '';
+          break;
+
+        case 'source-id':
+          $replacements[$original] = ($source_entity) ? $source_entity->id() : '';
           break;
 
         case 'source-title':
@@ -804,6 +835,17 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
 
     /* Dynamic tokens. */
 
+    if (($settings_tokens = $token_service->findWithPrefix($tokens, 'settings'))) {
+      /** @var \Drupal\webform\WebformTokenManagerInterface $token_manager */
+      $token_manager = \Drupal::service('webform.token_manager');
+      foreach ($settings_tokens as $key => $original) {
+        $token_value = $webform->getSetting($key, '');
+        $replacements[$original] = (!is_array($token_value))
+          ? $token_manager->replace($token_value, NULL, $data, $options, $bubbleable_metadata)
+          : '';
+      }
+    }
+
     if (($element_tokens = $token_service->findWithPrefix($tokens, 'element'))) {
       foreach ($element_tokens as $key => $original) {
         if (strpos($key, ':') === FALSE) {
@@ -819,7 +861,7 @@ function webform_tokens($type, $tokens, array $data, array $options, BubbleableM
           $token_value = $element["#$element_property"];
           if (in_array($element_property, ['description', 'help', 'more', 'terms_content'])) {
             $token_value = WebformHtmlEditor::checkMarkup($token_value);
-            $token_value = \Drupal::service('renderer')->renderPlain($token_value);
+            $token_value = \Drupal::service('renderer')->renderInIsolation($token_value);
           }
           else {
             $token_value = WebformHtmlHelper::toHtmlMarkup($token_value);
@@ -941,7 +983,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
     $format_method = (empty($options['html'])) ? 'buildText' : 'buildHtml';
     $element['#display_on'] = WebformMarkupBase::DISPLAY_ON_BOTH;
     $token_value = $element_manager->invokeMethod($format_method, $element, $webform_submission, $options);
-    return \Drupal::service('renderer')->renderPlain($token_value);
+    return \Drupal::service('renderer')->renderInIsolation($token_value);
   }
 
   // Exit if no submission data and form element is not a container.
@@ -1033,7 +1075,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
   if (is_array($token_value)) {
     // Note, tokens can't include CSS and JS libraries since they will
     // can be included in an email.
-    $token_value = \Drupal::service('renderer')->renderPlain($token_value);
+    $token_value = \Drupal::service('renderer')->renderInIsolation($token_value);
   }
   elseif (isset($element['#format']) && $element['#format'] === 'raw') {
     // Make sure raw tokens are always rendered AS-IS.
@@ -1079,7 +1121,7 @@ function _webform_token_get_submission_values(array $options, WebformSubmissionI
 
   // Note, tokens can't include CSS and JS libraries since they can be
   // included in an email.
-  $value = \Drupal::service('renderer')->renderPlain($token_value);
+  $value = \Drupal::service('renderer')->renderInIsolation($token_value);
 
   if (WebformLogicHelper::stopRecursionTracking($token) === FALSE) {
     return '';
@@ -1123,7 +1165,7 @@ function _webform_token_render_more($more_title, $more) {
     return '';
   }
 
-  return (string) \Drupal::service('renderer')->renderPlain($build);
+  return (string) \Drupal::service('renderer')->renderInIsolation($build);
 }
 
 /**
@@ -1144,7 +1186,7 @@ function _webform_token_render_more($more_title, $more) {
  * @return string
  *   Formatted interval wait time.
  */
-function _webform_token_get_interval_wait($interval_setting, BubbleableMetadata $bubbleable_metadata, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+function _webform_token_get_interval_wait($interval_setting, BubbleableMetadata $bubbleable_metadata, ?WebformInterface $webform = NULL, ?EntityInterface $source_entity = NULL, ?AccountInterface $account = NULL) {
   // Get last submission completed time.
   /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
   $submission_storage = \Drupal::entityTypeManager()->getStorage('webform_submission');

@@ -2,12 +2,12 @@
 
 namespace Drupal\webform_options_custom\Entity;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Render\Markup;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\webform_options_custom\Element\WebformOptionsCustom as WebformOptionsCustomElement;
 use Drupal\webform_options_custom\WebformOptionsCustomInterface;
@@ -292,7 +292,7 @@ class WebformOptionsCustom extends ConfigEntityBase implements WebformOptionsCus
     }
     elseif (strpos($url, 'http') !== 0) {
       // Map webform_option_custom/images path.
-      $path = drupal_get_path('module', 'webform_options_custom') . '/images/' . $url;
+      $path = \Drupal::service('extension.list.module')->getPath('webform_options_custom') . '/images/' . $url;
       if (file_exists($path)) {
         $url = $base_url . '/' . $path;
       }

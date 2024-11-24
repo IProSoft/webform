@@ -5,7 +5,7 @@
  * Generate test options example.
  */
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\webform\Entity\WebformOptions;
 
 /**
@@ -99,7 +99,7 @@ function webform_test_test_options() {
     '#options' => 'custom',
   ];
 
-  $yaml = file_get_contents(drupal_get_path('module', 'webform_test') . '/includes/webform_test.test_options.yml');
+  $yaml = file_get_contents(__DIR__ . '/webform_test.test_options.yml');
   $default_elements = Yaml::decode($yaml);
 
   return $data + $default_elements;

@@ -87,13 +87,16 @@ class WebformSubmissionFilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $search = $form_state->getValue('search') ?? '';
+    $state = $form_state->getValue('state') ?? '';
+    $entity = $form_state->getValue('entity') ?? '';
     $query = [
-      'search' => trim($form_state->getValue('search')),
-      'state' => trim($form_state->getValue('state')),
-      'entity' => trim($form_state->getValue('entity')),
+      'search' => trim($search),
+      'state' => trim($state),
+      'entity' => trim($entity),
     ];
     $query = array_filter($query);
-    if (!empty($query['entity']) && preg_match('#\(([^)]+)\)#', $query['entity'], $match)) {
+    if (!empty($query['entity']) && preg_match('#\(([^)]+)\)\s*$#', $query['entity'], $match)) {
       $query['entity'] = $match[1];
     }
     $form_state->setRedirect($this->getRouteMatch()->getRouteName(), $this->getRouteMatch()->getRawParameters()->all(), [

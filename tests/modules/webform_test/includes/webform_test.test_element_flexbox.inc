@@ -5,7 +5,7 @@
  * Generate test elements with Flexbox wrappers.
  */
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 
 /**
  * Generate test elements with Flexbox wrappers.
@@ -57,7 +57,7 @@ function webform_test_test_element_flexbox() {
     ];
   }
 
-  $yaml = file_get_contents(drupal_get_path('module', 'webform_test') . '/includes/webform_test.test_element_flexbox.yml');
+  $yaml = file_get_contents(__DIR__ . '/webform_test.test_element_flexbox.yml');
   $default_elements = Yaml::decode($yaml);
 
   return $data['containers'] + $data['elements'] + $default_elements;

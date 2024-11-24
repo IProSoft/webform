@@ -74,7 +74,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?WebformInterface $webform = NULL) {
     $form['#prefix'] = '<div id="webform-ui-element-type-ajax-wrapper">';
     $form['#suffix'] = '</div>';
 
@@ -226,12 +226,21 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
       '#prefix' => '<span class="webform-form-filter-text-source">',
       '#suffix' => '</span>',
     ];
-    $row['type']['help'] = [
-      '#type' => 'webform_help',
-      '#help' => $webform_element->getPluginDescription(),
-      '#help_title' => $webform_element->getPluginLabel(),
-    ];
+    if ($this->config('webform.settings')->get('ui.description_help')) {
+      $row['type']['help'] = [
+        '#type' => 'webform_help',
+        '#help' => $webform_element->getPluginDescription(),
+        '#help_title' => $webform_element->getPluginLabel(),
+      ];
+    }
+    else {
+      $row['type']['help'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['description']],
+        'description' => ['#markup' => $webform_element->getPluginDescription()],
+      ];
 
+    }
     // Preview.
     if ($this->isPreviewEnabled()) {
       $row['preview'] = $this->buildElementPreview($webform_element);

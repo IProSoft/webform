@@ -139,7 +139,7 @@ class WebformNodeAccess {
    */
   public static function checkWebformSubmissionAccess($operation, $entity_access, NodeInterface $node, WebformSubmissionInterface $webform_submission, AccountInterface $account) {
     $access_result = static::checkAccess($operation, $entity_access, $node, $webform_submission, $account);
-    if ($access_result->isForbidden()) {
+    if (!$access_result->isAllowed()) {
       return $access_result;
     }
 
@@ -177,7 +177,7 @@ class WebformNodeAccess {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public static function checkAccess($operation, $entity_access, NodeInterface $node, WebformSubmissionInterface $webform_submission = NULL, AccountInterface $account = NULL) {
+  public static function checkAccess($operation, $entity_access, NodeInterface $node, ?WebformSubmissionInterface $webform_submission = NULL, ?AccountInterface $account = NULL) {
     /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
     $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
 
@@ -196,8 +196,15 @@ class WebformNodeAccess {
     }
 
     // Determine if this is a group node.
-    $is_group_node = \Drupal::moduleHandler()->moduleExists('webform_group')
-      && \Drupal::entityTypeManager()->getStorage('group_content')->loadByEntity($node);
+    $is_group_node = FALSE;
+    if (\Drupal::moduleHandler()->moduleExists('webform_group')) {
+      if (\Drupal::entityTypeManager()->hasDefinition('group_content')) {
+        $is_group_node = \Drupal::entityTypeManager()->getStorage('group_content')->loadByEntity($node);
+      }
+      elseif (\Drupal::entityTypeManager()->hasDefinition('group_relation')) {
+        $is_group_node = \Drupal::entityTypeManager()->getStorage('group_relation')->loadByEntity($node);
+      }
+    }
 
     // Check the node operation.
     if (!$operation) {

@@ -3,7 +3,7 @@
 namespace Drupal\webform\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\webform\Utility\WebformFormHelper;
 
 /**
@@ -11,7 +11,7 @@ use Drupal\webform\Utility\WebformFormHelper;
  *
  * @FormElement("webform_table_row")
  */
-class WebformTableRow extends RenderElement {
+class WebformTableRow extends RenderElementBase {
 
   /**
    * {@inheritdoc}
@@ -28,18 +28,7 @@ class WebformTableRow extends RenderElement {
   }
 
   /**
-   * Processes a webfrom table row element.
-   *
-   * @param array $element
-   *   An associative array containing the properties and children of the
-   *   container.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array
-   *   The processed element.
+   * Processes a webform table row element.
    */
   public static function processTableRow(&$element, FormStateInterface $form_state, &$complete_form) {
     $element['#attributes']['class'][] = 'webform-table-row';

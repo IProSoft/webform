@@ -3,7 +3,7 @@
  * JavaScript behaviors for jquery.inputmask integration.
  */
 
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
   'use strict';
 
@@ -40,6 +40,36 @@
         digits: 2,
         digitsOptional: false,
         clearMaskOnLostFocus: false
+      },
+      decimal: {
+        prefix: '',
+        groupSeparator: ',',
+        alias: 'numeric',
+        placeholder: '0',
+        autoGroup: true,
+        digits: 3,
+        digitsOptional: true,
+        clearMaskOnLostFocus: false
+      },
+      decimal_negative: {
+        prefix: '',
+        groupSeparator: ',',
+        alias: 'numeric',
+        placeholder: '0',
+        autoGroup: true,
+        digits: 3,
+        digitsOptional: true,
+        clearMaskOnLostFocus: false
+      },
+      decimal_positive_negative: {
+        prefix: '',
+        groupSeparator: ',',
+        alias: 'numeric',
+        placeholder: '0',
+        autoGroup: true,
+        digits: 3,
+        digitsOptional: true,
+        clearMaskOnLostFocus: false
       }
     });
   }
@@ -55,8 +85,8 @@
         return;
       }
 
-      $(context).find('input.js-webform-input-mask').once('webform-input-mask').inputmask();
+      $(once('webform-input-mask', 'input.js-webform-input-mask', context)).inputmask();
     }
   };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

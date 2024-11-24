@@ -76,7 +76,7 @@ class WebformSubmissionLogController extends ControllerBase {
    * @return array
    *   A render array as expected by drupal_render().
    */
-  public function overview(WebformInterface $webform = NULL, WebformSubmissionInterface $webform_submission = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+  public function overview(?WebformInterface $webform = NULL, ?WebformSubmissionInterface $webform_submission = NULL, ?EntityInterface $source_entity = NULL, ?AccountInterface $account = NULL) {
     // Entities.
     if (empty($webform) && !empty($webform_submission)) {
       $webform = $webform_submission->getWebform();
@@ -90,7 +90,7 @@ class WebformSubmissionLogController extends ControllerBase {
     $header = [];
     $header['lid'] = ['data' => $this->t('#'), 'field' => 'log.lid', 'sort' => 'desc'];
     if (empty($webform)) {
-      $header['webform_id'] = ['data' => $this->t('Webform'), 'field' => 'log.webform_id', 'class' => [RESPONSIVE_PRIORITY_MEDIUM]];
+      $header['webform_id'] = ['data' => $this->t('Webform', [], ['context' => 'form']), 'field' => 'log.webform_id', 'class' => [RESPONSIVE_PRIORITY_MEDIUM]];
     }
     if (empty($source_entity) && empty($webform_submission)) {
       $header['entity'] = ['data' => $this->t('Submitted to'), 'class' => [RESPONSIVE_PRIORITY_LOW]];
@@ -180,7 +180,7 @@ class WebformSubmissionLogController extends ControllerBase {
   /**
    * Wrapper that allows the $node to be used as $source_entity.
    */
-  public function nodeOverview(WebformInterface $webform = NULL, WebformSubmissionInterface $webform_submission = NULL, EntityInterface $node = NULL) {
+  public function nodeOverview(?WebformInterface $webform = NULL, ?WebformSubmissionInterface $webform_submission = NULL, ?EntityInterface $node = NULL) {
     return $this->overview($webform, $webform_submission, $node);
   }
 

@@ -16,7 +16,7 @@ class WebformShareTest extends WebformBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'webform',
     'webform_share',
   ];
@@ -26,6 +26,8 @@ class WebformShareTest extends WebformBrowserTestBase {
    */
   public function testShare() {
     global $base_url;
+
+    $assert_session = $this->assertSession();
 
     $library = WebformShareIframe::LIBRARY;
     $version = WebformShareIframe::VERSION;
@@ -44,32 +46,32 @@ class WebformShareTest extends WebformBrowserTestBase {
 
     // Check share page access denied.
     $this->drupalGet('/webform/contact/share');
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     // Check share script access denied.
     $this->drupalGet('/webform/contact/share.js');
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     // Check share page with javascript access denied.
     $this->drupalGet("/webform/contact/share/$library/$version");
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     // Check share preview access denied.
     $this->drupalGet('/admin/structure/webform/manage/contact/share/preview');
-    $this->assertResponse(403);
+    $assert_session->statusCodeEquals(403);
 
     // Enable enable share for all webforms.
     $config->set('settings.default_share', TRUE)->save();
 
     // Check share enabled for all webforms.
     $this->drupalGet('/webform/contact/share');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet('/webform/contact/share.js');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet("/webform/contact/share/$library/$version");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet('/admin/structure/webform/manage/contact/share/preview');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Enable disable share for all webforms.
     $config->set('settings.default_share', FALSE)->save();
@@ -79,31 +81,31 @@ class WebformShareTest extends WebformBrowserTestBase {
 
     // Check share enabled for a single webform.
     $this->drupalGet('/webform/contact/share');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet('/webform/contact/share.js');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet("/webform/contact/share/$library/$version");
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
     $this->drupalGet('/admin/structure/webform/manage/contact/share/preview');
-    $this->assertResponse(200);
+    $assert_session->statusCodeEquals(200);
 
     // Check that query string parameters are included in embed/iframe code.
     $this->drupalGet('/admin/structure/webform/manage/contact/share', ['query' => ['test' => '123']]);
-    $this->assertRaw("/webform/contact/share?test=123");
-    $this->assertRaw('/webform/contact/share.js?test=123');
-    $this->assertRaw("/webform/contact/share/$library/$version?test=123");
+    $assert_session->responseContains("/webform/contact/share?test=123");
+    $assert_session->responseContains('/webform/contact/share.js?test=123');
+    $assert_session->responseContains("/webform/contact/share/$library/$version?test=123");
 
     // Check that iframe page is using the default theme.
     $this->drupalGet('/webform/contact/share');
-    $this->assertRaw('"theme":"' . \Drupal::config('system.theme')->get('default') . '"');
+    $assert_session->responseContains('"theme":"' . \Drupal::config('system.theme')->get('default') . '"');
 
     // Enable the bartik theme and apply to share page.
-    \Drupal::service('theme_installer')->install(['bartik']);
-    $webform->setSetting('share_theme_name', 'bartik')->save();
+    \Drupal::service('theme_installer')->install(['olivero']);
+    $webform->setSetting('share_theme_name', 'olivero')->save();
 
     // Check that iframe page is using the bartik theme.
     $this->drupalGet('/webform/contact/share');
-    $this->assertRaw('"theme":"bartik"');
+    $assert_session->responseContains('"theme":"olivero"');
 
     // Get the share page.
     $this->drupalGet('/webform/contact/share');
@@ -115,7 +117,7 @@ class WebformShareTest extends WebformBrowserTestBase {
     $this->assertCssSelect('body.webform-share-page-body');
 
     // Check page title.
-    $this->assertRaw('<h1 class="title page-title">Contact</h1>');
+    $assert_session->responseContains('<h1 class="title page-title">Contact</h1>');
 
     // Disable the bartik and add custom body attributes.
     $webform
@@ -134,28 +136,29 @@ class WebformShareTest extends WebformBrowserTestBase {
       ->save();
 
     // Check no page title.
-    $this->assertNoRaw('<h1 class="title page-title">Contact</h1>');
+    $this->drupalGet('/webform/contact/share');
+    $assert_session->responseNotContains('<h1>Contact</h1>');
 
     // Check iframe page iFrame-resizer script.
     $this->drupalGet("/webform/contact/share/$library/$version");
-    $this->assertRaw('<script src="//cdn.jsdelivr.net/gh/davidjbradshaw/' . $library . '@v' . $version . '/js/iframeResizer.contentWindow.min.js"></script>');
+    $assert_session->responseContains('<script src="//cdn.jsdelivr.net/gh/davidjbradshaw/' . $library . '@v' . $version . '/js/iframeResizer.contentWindow.min.js"></script>');
 
     // Check share.js.
     $this->drupalGet("/webform/contact/share.js");
-    $this->assertRaw('document.write("');
+    $assert_session->responseContains('document.write("');
 
     // Check share script tag.
     $build = [
       '#type' => 'webform_share_script',
       '#webform' => $webform,
     ];
-    $actual_script_tag = $renderer->renderPlain($build);
+    $actual_script_tag = $renderer->renderInIsolation($build);
 
     $src = $base_url . "/webform/contact/share.js";
     $src = preg_replace('#^https?:#', '', $src);
     $expected_script_tag = '<script src="' . $src . '"></script>' . PHP_EOL;
 
-    $this->assertEqual($expected_script_tag, $actual_script_tag);
+    $this->assertEquals($expected_script_tag, (string) $actual_script_tag);
   }
 
 }

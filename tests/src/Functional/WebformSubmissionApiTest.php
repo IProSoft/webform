@@ -37,6 +37,7 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     $values = [
       'webform_id' => 'contact',
       'data' => [
+        // cspell:ignore Dixisset
         'name' => 'Dixisset',
         'company' => 'Dixisset',
         'email' => 'test@test.com',
@@ -45,9 +46,10 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
       ],
     ];
     $webform_submission = WebformSubmissionForm::submitFormValues($values);
-    $this->assertEqual($webform_submission->id(), $this->getLastSubmissionId($contact_webform));
+    $this->assertEquals($webform_submission->id(), $this->getLastSubmissionId($contact_webform));
 
     // Check validating a simple webform.
+    $email_validation_error = 'The email address <em class="placeholder">invalid</em> is not valid. Use the format user@example.com.';
     $values = [
       'webform_id' => 'contact',
       'data' => [
@@ -56,9 +58,9 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     ];
     $errors = WebformSubmissionForm::validateFormValues($values);
     WebformElementHelper::convertRenderMarkupToStrings($errors);
-    $this->assertEqual($errors, [
+    $this->assertEquals($errors, [
       'name' => 'Your Name field is required.',
-      'email' => 'The email address <em class="placeholder">invalid</em> is not valid.',
+      'email' => $email_validation_error,
       'subject' => 'Subject field is required.',
       'message' => 'Message field is required.',
     ]);
@@ -73,7 +75,7 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     if ($errors) {
       WebformElementHelper::convertRenderMarkupToStrings($errors);
     }
-    $this->assertEqual($errors, [
+    $this->assertEquals($errors, [
       'name' => 'Your Name field is required.',
       'email' => 'Your Email field is required.',
       'subject' => 'Subject field is required.',
@@ -104,11 +106,12 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
         'sex' => 'Male',
         'email' => 'example@example.com',
         'phone' => '123-456-7890',
+        // cspell:disable-next-line
         'comments' => 'Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. Sed haec in pueris; Sed utrum hortandus es nobis, Luci, inquit, an etiam tua sponte propensus es? Sapiens autem semper beatus est et est aliquando in dolore; Immo videri fortasse. Paulum, cum regem Persem captum adduceret, eodem flumine invectio? Et ille ridens: Video, inquit, quid agas;',
       ],
     ];
     $webform_submission = WebformSubmissionForm::submitFormValues($values);
-    $this->assertEqual($webform_submission->id(), $this->getLastSubmissionId($test_form_wizard_advanced_webform));
+    $this->assertEquals($webform_submission->id(), $this->getLastSubmissionId($test_form_wizard_advanced_webform));
 
     // Check validating a multi-step form with required fields.
     $values = [
@@ -120,8 +123,8 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     $errors = WebformSubmissionForm::validateFormValues($values);
     WebformElementHelper::convertRenderMarkupToStrings($errors);
     // $this->debug($errors);
-    $this->assertEqual($errors, [
-      'email' => 'The email address <em class="placeholder">invalid</em> is not valid.',
+    $this->assertEquals($errors, [
+      'email' => $email_validation_error,
     ]);
 
     // Check validating a multi-step form with invalid #options.
@@ -133,14 +136,15 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
         'sex' => 'INVALID',
         'email' => 'example@example.com',
         'phone' => '123-456-7890',
+        // cspell:disable-next-line
         'comments' => 'Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. Sed haec in pueris; Sed utrum hortandus es nobis, Luci, inquit, an etiam tua sponte propensus es? Sapiens autem semper beatus est et est aliquando in dolore; Immo videri fortasse. Paulum, cum regem Persem captum adduceret, eodem flumine invectio? Et ille ridens: Video, inquit, quid agas;',
       ],
     ];
     $errors = WebformSubmissionForm::validateFormValues($values);
     WebformElementHelper::convertRenderMarkupToStrings($errors);
     // $this->debug($errors);
-    $this->assertEqual($errors, [
-      'sex' => 'An illegal choice has been detected. Please contact the site administrator.',
+    $this->assertEquals($errors, [
+      'sex' => 'The submitted value <em class="placeholder">INVALID</em> in the <em class="placeholder">Sex</em> element is not allowed.',
     ]);
 
     /* ********************************************************************** */
@@ -158,15 +162,16 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
     $values = [
       'webform_id' => 'test_form_limit',
       'data' => [
+        // cspell:disable-next-line
         'name' => 'Oratione',
       ],
     ];
     $webform_submission = WebformSubmissionForm::submitFormValues($values);
-    $this->assertEqual($webform_submission->id(), $this->getLastSubmissionId($test_form_limit_webform));
+    $this->assertEquals($webform_submission->id(), $this->getLastSubmissionId($test_form_limit_webform));
 
     // Check that user limit is reached.
     $result = WebformSubmissionForm::isOpen($test_form_limit_webform);
-    $this->assertEqual($result['#markup'], 'You are only allowed to have 1 submission for this webform.');
+    $this->assertEquals($result['#markup'], 'You are only allowed to have 1 submission for this webform.');
 
     // Submit the form 3 more times to trigger the form total limit.
     $this->drupalLogin($this->rootUser);
@@ -176,12 +181,12 @@ class WebformSubmissionApiTest extends WebformBrowserTestBase {
 
     // Check that total limit is reached.
     $result = WebformSubmissionForm::isOpen($test_form_limit_webform);
-    $this->assertEqual($result['#markup'], 'Only 4 submissions are allowed.');
+    $this->assertEquals($result['#markup'], 'Only 4 submissions are allowed.');
 
     // Check form closed message.
     $test_form_limit_webform->setStatus(FALSE)->save();
     $result = WebformSubmissionForm::isOpen($test_form_limit_webform);
-    $this->assertEqual($result['#markup'], 'Sorry… This form is closed to new submissions.');
+    $this->assertEquals($result['#markup'], 'Sorry… This form is closed to new submissions.');
   }
 
 }

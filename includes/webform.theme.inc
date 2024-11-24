@@ -5,12 +5,12 @@
  * Theme hooks, preprocessor, and suggestions.
  */
 
-use Drupal\Core\Render\Element;
-use Drupal\file\Entity\File;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Render\Element;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Template\Attribute;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\file\Entity\File;
 use Drupal\webform\Element\WebformSelectOther;
 use Drupal\webform\Plugin\WebformElement\Radios as WebformRadios;
 use Drupal\webform\Plugin\WebformElement\WebformEntityRadios;
@@ -46,7 +46,7 @@ function webform_theme() {
       'render element' => 'element',
     ],
     'webform_access_denied' => [
-      'variables' => ['message' => '', 'attributes' => []],
+      'variables' => ['message' => '', 'attributes' => [], 'webform' => NULL],
     ],
 
     'webform_handler_action_summary' => [
@@ -446,29 +446,6 @@ function webform_preprocess_fieldset(&$variables) {
 
   $element = &$variables['element'];
 
-  // @todo [Drupal 9.3] Remove the below code
-  // Fieldset elements now respect the #description_display option
-  // @see https://www.drupal.org/node/3143489
-  //
-  // If the description is displayed 'before' we need to move it to the
-  // fieldset's prefix.
-  // @see fieldset.html.twig
-  if (isset($element['#description_display']) && $element['#description_display'] === 'before' && !empty($variables['description']['content'])) {
-    if (isset($variables['prefix'])) {
-      if (is_array($variables['prefix'])) {
-        $variables['prefix'] = ['prefix' => $variables['prefix']];
-      }
-      else {
-        $variables['prefix'] = ['prefix' => ['#markup' => $variables['prefix']]];
-      }
-    }
-    else {
-      $variables['prefix'] = [];
-    }
-    $variables['prefix']['description'] = $variables['description']['content'];
-    unset($variables['description']['content']);
-  }
-
   // Apply inline title defined by radios, checkboxes, and buttons.
   // @see \Drupal\webform\Plugin\WebformElement\OptionsBase::prepare
   if (isset($element['#_title_display'])) {
@@ -498,21 +475,24 @@ function webform_preprocess_fieldset(&$variables) {
     unset($variables['attributes']['required']);
   }
 
-  // Add role="radiogroup" on fieldsets containing radiobuttons.
   // Add aria-required="true" only on fieldsets containing required
   // radiobuttons.
   //
   // Issue #3240249: Aria-required on fieldset trigger accessibility fails.
   // @see https://www.drupal.org/project/webform/issues/3240249
+  // @see https://www.drupal.org/project/webform/issues/3277192
   /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
   $element_manager = \Drupal::service('plugin.manager.webform.element');
   $element_plugin = $element_manager->getElementInstance($element);
   $is_radios = ($element_plugin instanceof WebformRadios || $element_plugin instanceof WebformEntityRadios);
   if ($is_radios) {
-    $variables['attributes']['role'] = 'radiogroup';
     $id = $variables['attributes']['id'] . '-legend';
     $variables['legend']['attributes']['id'] = $id;
-    $variables['attributes']['aria-labelledby'] = $id;
+
+    if (isset($variables['attributes']['aria-required'])) {
+      // The aria-required is _not_ necessary on a fieldset of radio elements.
+      unset($variables['attributes']['aria-required']);
+    }
   }
   elseif (isset($variables['attributes']['aria-required'])) {
     unset($variables['attributes']['aria-required']);
@@ -674,26 +654,12 @@ function webform_preprocess_file_managed_file(&$variables) {
  * @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::prepare
  */
 function webform_preprocess_file_upload_help(&$variables) {
-  $upload_validators = $variables['upload_validators'];
+  $validator_help = $variables['upload_validators'];
 
-  if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
-    $variables['descriptions'][] = t('@size limit per form.', ['@size' => format_size($upload_validators['webform_file_limit'][0])]);
+  if (isset($validator_help['webform_file_limit'])) {
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => ByteSizeMarkup::create($validator_help['webform_file_limit'])]);
   }
 
-  // Issue #3136578: Comma-separate the list of allowed file extensions.
-  // @see https://www.drupal.org/project/drupal/issues/3136578
-  if (isset($upload_validators['webform_file_validate_extensions'])) {
-    foreach ($variables['descriptions'] as $index => $description) {
-      if ($description instanceof TranslatableMarkup
-        && $description->getUntranslatedString() === 'Allowed types: @extensions.') {
-        $arguments = $description->getArguments();
-        if (is_string($arguments['@extensions']) && strpos($arguments['@extensions'], ',') === FALSE) {
-          $arguments['@extensions'] = preg_replace('/ +/', ', ', $arguments['@extensions']);
-          $variables['descriptions'][$index] = new TranslatableMarkup($description->getUntranslatedString(), $arguments);
-        }
-      }
-    }
-  }
 }
 
 /**
@@ -712,8 +678,10 @@ function webform_preprocess_file_link(&$variables) {
   }
 
   // Add file size variable to Claro theme.
-  if (empty($variables['file_size']) && \Drupal::service('webform.theme_manager')->isActiveTheme('claro')) {
-    $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+  if (empty($variables['file_size'])
+    && $file->getSize()
+    && \Drupal::service('webform.theme_manager')->isActiveTheme('claro')) {
+    $variables['file_size'] = ByteSizeMarkup::create($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
   }
 }
 
@@ -724,7 +692,9 @@ function webform_preprocess_file_link(&$variables) {
  */
 function webform_preprocess_image(&$variables) {
   global $base_url;
-  if (isset($variables['attributes']['class']) && in_array('webform-image-file', (array) $variables['attributes']['class'])) {
+  if (isset($variables['attributes']['class'])
+    && in_array('webform-image-file', (array) $variables['attributes']['class'])
+    && !preg_match('#^https?://#', $variables['attributes']['src'])) {
     $variables['attributes']['src'] = $base_url . preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', $variables['attributes']['src']);
   }
 }
@@ -843,10 +813,17 @@ function _webform_preprocess_element(array &$variables, $title_parents = ['title
  * Prepares #description and #help properties for form element templates.
  */
 function _webform_preprocess_description_help(array &$variables) {
+  /** @var \Drupal\webform\WebformRequestInterface $webform_request */
+  $webform_request = \Drupal::service('webform.request');
+  /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
+  $libraries_manager = \Drupal::service('webform.libraries_manager');
+
   $element = &$variables['element'];
+
   // Move #description to #help for webform admin routes.
   if (\Drupal::config('webform.settings')->get('ui.description_help')
-    && \Drupal::service('webform.request')->isWebformAdminRoute()
+    && $webform_request->isWebformAdminRoute()
+    && $libraries_manager->isIncluded('tippyjs')
     && \Drupal::routeMatch()->getRouteName() !== 'webform.contribute.settings'
     && !isset($element['#help'])
     && !empty($element['#title']) && (empty($element['#title_display']) || !in_array($element['#title_display'], ['attribute', 'invisible']))

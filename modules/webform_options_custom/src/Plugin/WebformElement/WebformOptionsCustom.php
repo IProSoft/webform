@@ -62,6 +62,8 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    * {@inheritdoc}
    */
   public function initialize(array &$element) {
+    parent::initialize($element);
+
     // Make sure the #template property is not set by the element
     // since it allows for unfiltered HTML, CSS, and JS.
     unset($element['#template']);
@@ -70,7 +72,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     // Remove the #template property to make sure people can't inject
     // custom markup.
     $this->setOptions($element, ['webform_submission' => $webform_submission]);

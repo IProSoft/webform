@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Utility\WebformFormHelper;
 
 /**
  * Tests webform helper utility.
@@ -38,7 +38,7 @@ class WebformFormHelperTest extends UnitTestCase {
    *
    * @see testCleanupFormStateValues()
    */
-  public function providerCleanupFormStateValues() {
+  public static function providerCleanupFormStateValues() {
     $tests[] = [['key' => 'value'], [], ['key' => 'value']];
     $tests[] = [['key' => 'value', 'form_token' => 'ignored'], [], ['key' => 'value']];
     $tests[] = [['key' => 'value', 'form_token' => 'ignored'], ['key'], []];

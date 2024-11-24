@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\FormElement;
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
 
@@ -13,7 +13,7 @@ use Drupal\webform\Utility\WebformYaml;
  *
  * @FormElement("webform_element_attributes")
  */
-class WebformElementAttributes extends FormElement {
+class WebformElementAttributes extends FormElementBase {
 
   /**
    * {@inheritdoc}
@@ -90,13 +90,15 @@ class WebformElementAttributes extends FormElement {
         '#type' => 'textfield',
         '#title' => t('@title CSS classes', $t_args),
         '#description' => t("Apply classes to the @type.", $t_args),
-        '#default_value' => implode(' ', $element['#default_value']['class']),
+        '#default_value' => (is_array($element['#default_value']['class']))
+          ? implode(' ', $element['#default_value']['class'])
+          : $element['#default_value']['class'],
       ];
     }
 
     // Custom options.
     $element['custom'] = [
-      '#type' => 'texfield',
+      '#type' => 'textfield',
       '#placeholder' => t('Enter custom classes…'),
       '#states' => [
         'visible' => [

@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Element;
 
-use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\webform\WebformSubmissionForm;
 
 /**
@@ -11,7 +11,7 @@ use Drupal\webform\WebformSubmissionForm;
  *
  * @FormElement("webform_variant")
  */
-class WebformVariant extends FormElement {
+class WebformVariant extends FormElementBase {
 
   /**
    * {@inheritdoc}
@@ -31,17 +31,6 @@ class WebformVariant extends FormElement {
 
   /**
    * #process callback for webform variant.
-   *
-   * @param array $element
-   *   An associative array containing the properties and children of the
-   *   generic input element.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   * @param array $complete_form
-   *   The complete form structure.
-   *
-   * @return array
-   *   The processed element.
    */
   public static function processWebformVariant(&$element, FormStateInterface $form_state, &$complete_form) {
     $form_object = $form_state->getFormObject();

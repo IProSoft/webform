@@ -67,7 +67,7 @@ class WebformTemplatesFilterForm extends FormBase {
       '#button_type' => 'primary',
       '#value' => $this->t('Filter'),
     ];
-    if (!empty($search)) {
+    if (!empty($search) || !empty($category)) {
       $form['filter']['reset'] = [
         '#type' => 'submit',
         '#submit' => ['::resetForm'],
@@ -81,9 +81,11 @@ class WebformTemplatesFilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $search = $form_state->getValue('search') ?? '';
+    $category = $form_state->getValue('category') ?? '';
     $query = [
-      'search' => trim($form_state->getValue('search')),
-      'category' => trim($form_state->getValue('category')),
+      'search' => trim($search),
+      'category' => trim($category),
     ];
     $form_state->setRedirect($this->getRouteMatch()->getRouteName(), $this->getRouteMatch()->getRawParameters()->all(), [
       'query' => $query ,

@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Plugin\WebformVariant;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Plugin\WebformVariantBase;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -28,6 +28,13 @@ class OverrideWebformVariant extends WebformVariantBase {
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
+
+  /**
+   * The configuration array.
+   *
+   * @var array
+   */
+  protected $configuration;
 
   /**
    * {@inheritdoc}
@@ -204,7 +211,7 @@ class OverrideWebformVariant extends WebformVariantBase {
           $webform->setElements([$element_key => $element_properties] + $webform->getElementsDecoded());
         }
         else {
-          $element = $webform->getElement($element_key);
+          $element = $webform->getElementDecoded($element_key);
           if (!$element) {
             continue;
           }
@@ -310,7 +317,7 @@ class OverrideWebformVariant extends WebformVariantBase {
       ];
     }
 
-    $this->messenger()->addWarning(\Drupal::service('renderer')->renderPlain($build));
+    $this->messenger()->addWarning(\Drupal::service('renderer')->renderInIsolation($build));
   }
 
 }

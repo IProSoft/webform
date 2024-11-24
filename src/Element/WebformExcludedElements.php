@@ -5,8 +5,8 @@ namespace Drupal\webform\Element;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\Role;
 use Drupal\webform\Entity\Webform as WebformEntity;
-use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Plugin\WebformElement\WebformActions as WebformActionsWebformElement;
+use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\WebformInterface;
 
 /**
@@ -121,7 +121,7 @@ class WebformExcludedElements extends WebformExcludedBase {
    * Get elements with or without markup and composite sub elements.
    *
    * @param array $element
-   *   The exclued elements form element.
+   *   The excluded elements form element.
    * @param \Drupal\webform\WebformInterface $webform
    *   A webform.
    *
@@ -156,12 +156,13 @@ class WebformExcludedElements extends WebformExcludedBase {
     foreach ($form_elements as $key => $form_element) {
       // Append the element.
       $all_form_elements[$key] = $form_element;
-
       // Append composite elements.
       $composite_elements = $form_element['#webform_composite_elements'] ?? [];
       foreach ($composite_elements as $composite_element) {
-        $composite_key = $composite_element['#webform_composite_key'];
-        $all_form_elements[$composite_key] = $composite_element;
+        if (isset($composite_element['#webform_composite_key'])) {
+          $composite_key = $composite_element['#webform_composite_key'];
+          $all_form_elements[$composite_key] = $composite_element;
+        }
       }
     }
 

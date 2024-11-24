@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Utility\WebformReflectionHelper;
 
 /**
  * Tests webform reflection utility.
@@ -39,7 +39,7 @@ class WebformReflectionHelperTest extends UnitTestCase {
    *
    * @see testGetParentClasses()
    */
-  public function providerGetParentClasses() {
+  public static function providerGetParentClasses() {
     $tests[] = [new WebformReflectionTestParent(), '', ['WebformReflectionTestParent']];
     $tests[] = [new WebformReflectionTestChild(), '', ['WebformReflectionTestParent', 'WebformReflectionTestChild']];
     $tests[] = [new WebformReflectionTestGrandChild(), '', ['WebformReflectionTestParent', 'WebformReflectionTestChild', 'WebformReflectionTestGrandChild']];

@@ -6,7 +6,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\webform\Traits\WebformBrowserTestTrait;
-use Drupal\Tests\webform\Traits\WebformAssertLegacyTrait;
 
 /**
  * Defines an abstract test base for webform tests.
@@ -15,7 +14,6 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
 
   use AssertMailTrait;
   use WebformBrowserTestTrait;
-  use WebformAssertLegacyTrait;
   use StringTranslationTrait;
 
   /**
@@ -23,14 +21,14 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stable9';
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['webform'];
+  protected static $modules = ['webform'];
 
   /**
    * Webforms to load.
@@ -42,7 +40,7 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->loadWebforms(static::$testWebforms);
   }
@@ -50,7 +48,7 @@ abstract class WebformBrowserTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown() {
+  protected function tearDown(): void {
     $this->purgeSubmissions();
     parent::tearDown();
   }

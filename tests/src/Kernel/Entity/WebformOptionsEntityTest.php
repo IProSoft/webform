@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Kernel\Entity;
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\webform\Entity\WebformOptions;
 
@@ -19,7 +19,7 @@ class WebformOptionsEntityTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'user', 'webform', 'field'];
+  protected static $modules = ['system', 'user', 'webform', 'field'];
 
   /**
    * Tests some of the methods.

@@ -5,9 +5,9 @@
  * Options alter hooks.
  */
 
-use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\Core\Locale\CountryManager;
+use Drupal\Core\Datetime\TimeZoneFormHelper;
 use Drupal\Core\Language\LanguageManager;
+use Drupal\webform\Utility\WebformOptionsHelper;
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for range options.
@@ -37,7 +37,7 @@ function webform_webform_options_range_alter(array &$options, array $element = [
  */
 function webform_webform_options_time_zones_alter(array &$options, array $element = []) {
   if (empty($options)) {
-    $options = system_time_zones();
+    $options = TimeZoneFormHelper::getOptionsList();
   }
 }
 
@@ -46,7 +46,9 @@ function webform_webform_options_time_zones_alter(array &$options, array $elemen
  */
 function webform_webform_options_country_codes_alter(array &$options, array $element = []) {
   if (empty($options)) {
-    $options = CountryManager::getStandardList();
+    /** @var \Drupal\Core\Locale\CountryManagerInterface $country_manager */
+    $country_manager = \Drupal::service('country_manager');
+    $options = $country_manager->getList();
   }
 }
 
@@ -55,7 +57,9 @@ function webform_webform_options_country_codes_alter(array &$options, array $ele
  */
 function webform_webform_options_country_names_alter(array &$options, array $element = []) {
   if (empty($options)) {
-    $countries = CountryManager::getStandardList();
+    /** @var \Drupal\Core\Locale\CountryManagerInterface $country_manager */
+    $country_manager = \Drupal::service('country_manager');
+    $countries = $country_manager->getList();
     $options = array_combine($countries, $countries);
   }
 }

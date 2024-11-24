@@ -2,11 +2,11 @@
 
 namespace Drupal\webform\Plugin;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 use Drupal\webform\EntityStorage\WebformEntityStorageTrait;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -125,6 +125,13 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    * @var \Drupal\webform\WebformTokenManagerInterface
    */
   protected $tokenManager;
+
+  /**
+   * The configuration array.
+   *
+   * @var array
+   */
+  protected $configuration;
 
   /**
    * {@inheritdoc}
@@ -563,7 +570,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   /**
    * {@inheritdoc}
    */
-  public function prePurge(array $webform_submissions) {}
+  public function prePurge(array &$webform_submissions) {}
 
   /**
    * {@inheritdoc}
@@ -593,7 +600,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   /**
    * {@inheritdoc}
    */
-  public function access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account = NULL) {
+  public function access(WebformSubmissionInterface $webform_submission, $operation, ?AccountInterface $account = NULL) {
     return AccessResult::neutral();
   }
 
@@ -632,7 +639,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
   /**
    * {@inheritdoc}
    */
-  public function accessElement(array &$element, $operation, AccountInterface $account = NULL) {
+  public function accessElement(array &$element, $operation, ?AccountInterface $account = NULL) {
     return AccessResult::neutral();
   }
 
@@ -742,7 +749,7 @@ abstract class WebformHandlerBase extends PluginBase implements WebformHandlerIn
    * @return string|array
    *   Text or array with tokens replaced.
    */
-  protected function replaceTokens($text, EntityInterface $entity = NULL, array $data = [], array $options = []) {
+  protected function replaceTokens($text, ?EntityInterface $entity = NULL, array $data = [], array $options = []) {
     return $this->tokenManager->replaceNoRenderContext($text, $entity, $data, $options);
   }
 

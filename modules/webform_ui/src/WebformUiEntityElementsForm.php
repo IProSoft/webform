@@ -2,20 +2,21 @@
 
 namespace Drupal\webform_ui;
 
-use Drupal\Core\Entity\BundleEntityFormBase;
-use Drupal\Core\Form\OptGroup;
-use Drupal\Core\Render\Markup;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformElementStates;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Form\WebformEntityAjaxFormTrait;
 use Drupal\webform\Plugin\WebformElement\WebformElement;
 use Drupal\webform\Plugin\WebformElement\WebformTable;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformYaml;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -66,11 +67,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
   protected $elementsValidator;
 
   /**
-   * The webform token manager.
+   * The webform libraries manager.
    *
-   * @var \Drupal\webform\WebformTokenManagerInterface
+   * @var \Drupal\webform\WebformLibrariesManagerInterface
    */
-  protected $tokenManager;
+  protected $librariesManager;
 
   /**
    * {@inheritdoc}
@@ -81,6 +82,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $instance->elementInfo = $container->get('plugin.manager.element_info');
     $instance->elementManager = $container->get('plugin.manager.webform.element');
     $instance->elementsValidator = $container->get('webform.elements_validator');
+    $instance->librariesManager = $container->get('webform.libraries_manager');
     return $instance;
   }
 
@@ -217,7 +219,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     // Rebuild elements to reflect new hierarchy.
     $elements_updated = [];
     // Preserve the original elements root properties.
-    $elements_original = Yaml::decode($webform->get('elements')) ?: [];
+    $elements_original = WebformYaml::decode($webform->get('elements'));
     foreach ($elements_original as $key => $value) {
       if (WebformElementHelper::property($key)) {
         $elements_updated[$key] = $value;
@@ -505,16 +507,23 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
           'key' => $key,
         ]),
         '#attributes' => $offcanvas_dialog_attributes,
-        '#prefix' => !empty($indentation) ? $this->renderer->renderPlain($indentation) : '',
+        '#prefix' => !empty($indentation) ? $this->renderer->renderInIsolation($indentation) : '',
       ],
     ];
     if (!empty($element['#admin_notes'])) {
-      $row['title']['notes'] = [
-        '#type' => 'webform_help',
-        '#help_title' => $element['#admin_title'] ?: $element['#title'],
-        '#help' => $element['#admin_notes'],
-        '#weight' => 100,
-      ];
+      if ($this->librariesManager->isIncluded('tippyjs')) {
+        $row['title']['notes'] = [
+          '#type' => 'webform_help',
+          '#help_title' => $element['#admin_title'] ?: $element['#title'],
+          '#help' => $element['#admin_notes'],
+          '#weight' => 100,
+        ];
+      }
+      else {
+        $row['title']['notes'] = WebformHtmlEditor::checkMarkup($element['#admin_notes']) + [
+          '#prefix' => '<br/>',
+        ];
+      }
     }
 
     if ($webform->hasContainer()) {

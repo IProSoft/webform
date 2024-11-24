@@ -60,7 +60,7 @@ class WebformCustomComposite extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Set cardinality.
@@ -95,7 +95,7 @@ class WebformCustomComposite extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  protected function prepareElementPreRenderCallbacks(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  protected function prepareElementPreRenderCallbacks(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepareElementPreRenderCallbacks($element, $webform_submission);
 
     // Set custom wrapper type to theme wrappers.
@@ -193,6 +193,8 @@ class WebformCustomComposite extends WebformCompositeBase {
     $element['#webform_composite_elements'] = [];
     foreach ($element['#element'] as $composite_key => $composite_element) {
       $this->elementManager->initializeElement($composite_element);
+      // Make sure the composite element has a #admin_title, especially markup.
+      $composite_element['#admin_title'] = $composite_element['#admin_title'] ?? $composite_key;
       $element['#webform_composite_elements'][$composite_key] = $composite_element;
     }
     $this->initializeCompositeElementsRecursive($element, $element['#webform_composite_elements']);

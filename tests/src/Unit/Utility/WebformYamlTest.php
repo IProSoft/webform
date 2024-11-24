@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\Core\Serialization\Yaml;
-use Drupal\webform\Utility\WebformYaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Utility\WebformYaml;
 
 /**
  * Tests webform tidy utility.
@@ -37,23 +37,22 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testTidy()
    */
-  public function providerTidy() {
-    $multiline = (floatval(\Drupal::VERSION) >= 9.1) ? '|-' : '|';
+  public static function providerTidy() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",
     ];
     $tests[] = [
       ['returns' => "line 1\nline 2"],
-      "returns: $multiline\n  line 1\n  line 2",
+      "returns: |-\n  line 1\n  line 2",
     ];
     $tests[] = [
       ['one two' => "line 1\nline 2"],
-      "'one two': $multiline\n  line 1\n  line 2",
+      "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
       ['one two' => "line 1\r\nline 2"],
-      "'one two': $multiline\n  line 1\n  line 2",
+      "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
       ['array' => ['one', 'two']],
@@ -88,7 +87,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testDecode()
    */
-  public function providerDecode() {
+  public static function providerDecode() {
     $tests[] = [
       "simple: value",
       ['simple' => 'value'],
@@ -150,19 +149,18 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testEncode()
    */
-  public function providerEncode() {
-    $multiline = (floatval(\Drupal::VERSION) >= 9.1) ? '|-' : '|';
+  public static function providerEncode() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",
     ];
     $tests[] = [
       ['returns' => "line 1\nline 2"],
-      "returns: $multiline\n  line 1\n  line 2",
+      "returns: |-\n  line 1\n  line 2",
     ];
     $tests[] = [
       ['one two' => "line 1\nline 2"],
-      "'one two': $multiline\n  line 1\n  line 2",
+      "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
       ['array' => ['one', 'two']],

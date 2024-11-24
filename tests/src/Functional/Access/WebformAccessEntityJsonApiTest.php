@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Functional\Access;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Tests for webform entity JSON API access.
@@ -17,12 +17,14 @@ class WebformAccessEntityJsonApiTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'jsonapi'];
+  protected static $modules = ['webform', 'jsonapi'];
 
   /**
-   * Tests webform entity REST acces.
+   * Tests webform entity REST access.
    */
   public function testRestAccess() {
+    $assert_session = $this->assertSession();
+
     $webform = Webform::load('contact');
     $uuid = $webform->uuid();
 
@@ -36,26 +38,26 @@ class WebformAccessEntityJsonApiTest extends WebformBrowserTestBase {
 
     // Check anonymous access denied to webform.
     $this->drupalGet("jsonapi/webform/webform/$uuid");
-    $this->assertRaw('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
+    $assert_session->responseContains('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
 
     // Login authenticated user.
     $this->drupalLogin($account);
 
     // Check authenticated access allowed to webform.
     $this->drupalGet('/webform/contact');
-    $this->assertFieldByName('subject');
+    $assert_session->fieldExists('subject');
 
     // Check authenticated access denied to webform via _format=hal_json.
     $this->drupalGet("jsonapi/webform/webform/$uuid");
-    $this->assertRaw('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
+    $assert_session->responseContains('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
 
     // Login rest (permission) user.
     $this->drupalLogin($configuration_account);
 
     // Check rest access allowed to webform.
     $this->drupalGet("jsonapi/webform/webform/$uuid");
-    $this->assertNoRaw('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
-    $this->assertRaw('"title":"Contact",');
+    $assert_session->responseNotContains('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
+    $assert_session->responseContains('"title":"Contact",');
 
     // Allow anonymous role to access webform configuration.
     $access_rules = $webform->getAccessRules();
@@ -68,14 +70,14 @@ class WebformAccessEntityJsonApiTest extends WebformBrowserTestBase {
 
     // Check anonymous access allowed to webform.
     $this->drupalGet("jsonapi/webform/webform/$uuid");
-    $this->assertNoRaw('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
+    $assert_session->responseNotContains('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
 
     // Login authenticated user.
     $this->drupalLogin($account);
 
     // Check authenticated access allowed to webform.
     $this->drupalGet("jsonapi/webform/webform/$uuid");
-    $this->assertNoRaw('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
+    $assert_session->responseNotContains('"title":"Forbidden","status":"403","detail":"The current user is not allowed to GET the selected resource. Access to webform configuration is required."');
   }
 
 }

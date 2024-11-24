@@ -14,7 +14,8 @@ archive: false
 id: test_submission_export_import
 title: 'Test: Submission: Export/Import'
 description: 'Test webform submission export/import.'
-category: 'Test: Element'
+categories:
+  - 'Test: Element'
 elements: |
   summary:
     '#type': textfield
@@ -69,6 +70,7 @@ elements: |
     '#selection_handler': 'default:user'
     '#selection_settings':
       include_anonymous: true
+      target_bundles: null
   entity_references:
     '#type': webform_entity_select
     '#title': entity_references
@@ -76,7 +78,7 @@ elements: |
     '#selection_handler': 'default:user'
     '#selection_settings':
       include_anonymous: true
-  
+      target_bundles: null
 css: ''
 javascript: ''
 settings:
@@ -164,6 +166,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

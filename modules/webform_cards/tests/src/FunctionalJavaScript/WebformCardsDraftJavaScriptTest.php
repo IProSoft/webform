@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform_cards\FunctionalJavaScript;
+namespace Drupal\Tests\webform_cards\FunctionalJavascript;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
@@ -16,7 +16,7 @@ class WebformCardsDraftJavaScriptTest extends WebformWebDriverTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'webform_cards', 'webform_cards_test'];
+  protected static $modules = ['webform', 'webform_cards', 'webform_cards_test'];
 
   /**
    * Test webform cards draft.
@@ -42,7 +42,7 @@ class WebformCardsDraftJavaScriptTest extends WebformWebDriverTestBase {
 
     // Save a draft.
     $page->pressButton('edit-draft');
-    $assert_session->responseContains('Submission saved. You may return to this form later and it will restore the current values.');
+    $this->assertTrue($assert_session->waitForText('Submission saved. You may return to this form later and it will restore the current values.'));
     $this->assertElementNotVisible('[data-webform-key="card_1"]');
     $this->assertElementVisible('[data-webform-key="card_2"]');
 

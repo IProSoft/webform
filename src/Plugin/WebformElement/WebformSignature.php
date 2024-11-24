@@ -6,11 +6,16 @@ use Drupal\Component\Utility\Crypt;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\webform\Element\WebformSignature as WebformSignatureElement;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 
 /**
  * Provides a 'signature' element.
@@ -18,11 +23,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @WebformElement(
  *   id = "webform_signature",
  *   label = @Translation("Signature"),
- *   description = @Translation("Provides a form element to collect electronic signatures from users."),
+ *   description = @Translation("Provides a form element to collect electronic signatures from users. Signature support is provided by the <a href=""https://github.com/szimek/signature_pad"">Signature Pad</a> library."),
  *   category = @Translation("Advanced elements"),
  * )
  */
-class WebformSignature extends WebformElementBase {
+class WebformSignature extends WebformElementBase implements WebformElementFileDownloadAccessInterface {
 
   /**
    * The file system service.
@@ -48,6 +53,7 @@ class WebformSignature extends WebformElementBase {
       // General settings.
       'description' => $this->t('Sign above'),
       'readonly' => FALSE,
+      'uri_scheme' => 'public',
     ] + parent::defineDefaultProperties();
     unset(
       $properties['format_items'],
@@ -62,7 +68,7 @@ class WebformSignature extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     if (empty($element['#description'])) {
       $element['#description'] = $this->t('Sign above');
       $element['#description_display'] = 'after';
@@ -196,13 +202,23 @@ class WebformSignature extends WebformElementBase {
     // Warn people about saving signatures when saving of results is disabled.
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $form_state->getFormObject()->getWebform();
+    $form['signature'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Signature settings'),
+      '#access' => TRUE,
+    ];
+    $scheme_options = static::getVisibleStreamWrappers();
+    $uri_scheme = $this->getDefaultProperty('uri_scheme');
+    $image_directory = $uri_scheme . '://webform/' . $webform->id() . '/{element_key}';
+    $form['signature']['uri_scheme'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Signature upload destination'),
+      '#description' => $this->t('Select where the final Signatures should be stored. Both public and private storage store the signature using a secure hash as the file name. Public files should be adequate for most use cases. Private storage has more overhead than public files, but allows restricted access to files within this element.'),
+      '#options' => $scheme_options,
+      '#access' => TRUE,
+      '#required' => TRUE,
+    ];
     if ($webform->isResultsDisabled()) {
-      $image_directory = 'public://webform/' . $webform->id() . '/{element_key}';
-      $form['signature'] = [
-        '#type' => 'fieldset',
-        '#title' => $this->t('Signature settings'),
-        '#access' => TRUE,
-      ];
       $form['signature']['signature_message'] = [
         '#type' => 'webform_message',
         '#message_message' => '<strong>' . $this->t('Saving of results is disabled.') . '</strong> ' .
@@ -224,7 +240,8 @@ class WebformSignature extends WebformElementBase {
     $sid = $webform_submission->id();
 
     // Delete signature image submission directory.
-    $image_base_directory = 'public://webform/' . $webform->id();
+    $uri_scheme = $this->getElementProperty($element, 'uri_scheme');
+    $image_base_directory = $uri_scheme . '://webform/' . $webform->id();
     $image_directory = "$image_base_directory/$element_key/$sid";
     if (file_exists($image_directory)) {
       $this->fileSystem->deleteRecursive($image_directory);
@@ -242,7 +259,7 @@ class WebformSignature extends WebformElementBase {
   /**
    * Get a signature element's image URL.
    *
-   * Signature image uses the public: file system because the image name is
+   * Signature image uses the public|private file system and the image name is
    * a secure hash and there is no risk of https://www.drupal.org/psa-2016-003.
    *
    * @param array $element
@@ -274,7 +291,8 @@ class WebformSignature extends WebformElementBase {
       : $element['#webform_key'];
     $sid = $webform_submission->id();
 
-    $image_base_directory = 'public://webform/' . $webform->id();
+    $uri_scheme = $this->getElementProperty($element, 'uri_scheme');
+    $image_base_directory = $uri_scheme . '://webform/' . $webform->id();
 
     // Create signature image (no results) directory.
     $image_signature_directory = "$image_base_directory/$element_key";
@@ -288,12 +306,15 @@ class WebformSignature extends WebformElementBase {
       $image_directory = $image_submission_directory;
     }
 
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+
     // If a signature file was already created and shared using an
     // unsafe image hash, then return it.
     $unsafe_image_hash = Crypt::hmacBase64($value, Settings::getHashSalt());
     $unsafe_image_uri = "$image_directory/signature-$unsafe_image_hash.png";
     if (file_exists($unsafe_image_uri)) {
-      return file_create_url($unsafe_image_uri);
+      return $file_url_generator->generateAbsoluteString($unsafe_image_uri);
     }
 
     $image_hash = Crypt::hmacBase64('webform-signature-' . $value, Settings::getHashSalt());
@@ -313,7 +334,89 @@ class WebformSignature extends WebformElementBase {
       }
     }
 
-    return file_create_url($image_uri);
+    return $file_url_generator->generateAbsoluteString($image_uri);
+  }
+
+  /**
+   * Get visible stream wrappers.
+   *
+   * @return array
+   *   An associative array of visible stream wrappers keyed by type.
+   */
+  public static function getVisibleStreamWrappers() {
+    /** @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager */
+    $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+    return $stream_wrapper_manager->getNames(StreamWrapperInterface::WRITE_VISIBLE);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function accessFileDownload($uri) {
+    // Check if signature file.
+    // URI patterns
+    // - private://webform/[webform_id]/[element_key]/[sid]/signature-[hash].png.
+    // - private://webform/[webform_id]/[element_key]/signature-[hash].png.
+    // @see WebformSignature::getImageUrl().
+    /** @var \Drupal\Core\StreamWrapper\StreamWrapperManager $stream_wrapper_manager */
+    $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+    $uri_target = $stream_wrapper_manager->getTarget($uri);
+    if (!preg_match("/^webform\/(.*?)\/(.*?)\/(?:(.*?)\/)?signature-.*\.png$/", $uri_target, $matches)) {
+      return NULL;
+    }
+
+    $webform_id = $matches[1];
+    $element_key = $matches[2];
+    $submission_id = (isset($matches[3])) ? $matches[3] : NULL;
+
+    // Load webform and make sure it exist.
+    /** @var \Drupal\webform\Entity\Webform $webform */
+    $webform = Webform::load($webform_id);
+    if (!$webform) {
+      return NULL;
+    }
+
+    // Load element and make sure it is a signature.
+    $webform_element = $webform->getElement($element_key);
+    if ($webform_element['#type'] !== 'webform_signature') {
+      return NULL;
+    }
+
+    $access = NULL;
+
+    if ($submission_id) {
+      // Check submission view access.
+      $webform_submission = WebformSubmission::load($submission_id);
+      if ($webform_submission && $webform_submission->access('view')) {
+        $access = TRUE;
+      }
+    }
+    else {
+      // Check view any submission access.
+      if ($webform->access('submission_view_any')) {
+        $access = TRUE;
+      }
+    }
+
+    if ($access === TRUE) {
+      // Return file content headers.
+      /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+      $file_system = \Drupal::service('file_system');
+      $filename = $file_system->basename($uri);
+      $filesize = filesize($file_system->realpath($uri));
+      return [
+        'Content-Type' => 'image/png',
+        'Content-Length' => $filesize,
+        'Cache-Control' => 'private',
+        'Content-Disposition' => HeaderUtils::makeDisposition(HeaderUtils::DISPOSITION_INLINE, (string) $filename),
+      ];
+    }
+    elseif ($access === FALSE) {
+      return -1;
+    }
+    else {
+      return NULL;
+    }
   }
 
 }

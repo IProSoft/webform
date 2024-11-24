@@ -14,7 +14,7 @@ class WebformUiElementJavaScriptTest extends WebformWebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['webform', 'webform_ui'];
+  protected static $modules = ['webform', 'webform_ui'];
 
   /**
    * Webforms to load.
@@ -22,6 +22,20 @@ class WebformUiElementJavaScriptTest extends WebformWebDriverTestBase {
    * @var array
    */
   protected static $testWebforms = [];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+
+    // Select2 doesn't currently support jQuery4 which is what D11 uses.
+    // With this library enabled, javascript errors are thrown on element
+    // forms due to various form elements using it.
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('libraries.excluded_libraries', ['jquery.select2'])
+      ->save();
+  }
 
   /**
    * Tests element.
@@ -43,8 +57,8 @@ class WebformUiElementJavaScriptTest extends WebformWebDriverTestBase {
 
     // Check 'form_id' element key warning.
     $title = $page->findField('properties[title]');
-    $title->setValue('destination');
-    $assert_session->waitForText("Please avoid using the reserved word 'destination' as the element's key.");
+    $title->setValue('form_id');
+    $assert_session->waitForText("Please avoid using the reserved word 'form_id' as the element's key.");
   }
 
 }

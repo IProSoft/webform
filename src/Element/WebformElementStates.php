@@ -2,13 +2,13 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Form\OptGroup;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\OptGroup;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -18,7 +18,7 @@ use Drupal\webform\Utility\WebformYaml;
  *
  * @FormElement("webform_element_states")
  */
-class WebformElementStates extends FormElement {
+class WebformElementStates extends FormElementBase {
 
   /**
    * {@inheritdoc}
@@ -546,7 +546,7 @@ class WebformElementStates extends FormElement {
     $operations['add'] = [
       '#type' => 'image_button',
       '#title' => t('Add'),
-      '#src' => drupal_get_path('module', 'webform') . '/images/icons/plus.svg',
+      '#src' => \Drupal::service('extension.list.module')->getPath('webform') . '/images/icons/plus.svg',
       '#limit_validation_errors' => [],
       '#submit' => [[get_called_class(), 'addConditionSubmit']],
       '#ajax' => $ajax_settings,
@@ -556,7 +556,7 @@ class WebformElementStates extends FormElement {
     $operations['remove'] = [
       '#type' => 'image_button',
       '#title' => t('Remove'),
-      '#src' => drupal_get_path('module', 'webform') . '/images/icons/minus.svg',
+      '#src' => \Drupal::service('extension.list.module')->getPath('webform') . '/images/icons/minus.svg',
       '#limit_validation_errors' => [],
       '#submit' => [[get_called_class(), 'removeRowSubmit']],
       '#ajax' => $ajax_settings,
@@ -584,6 +584,10 @@ class WebformElementStates extends FormElement {
     $element =& NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -2));
 
     $values = $element['states']['#value'];
+
+    if (!is_array($values)) {
+      $values = [];
+    }
 
     // Add new state and condition.
     $values[] = [
@@ -1078,8 +1082,8 @@ class WebformElementStates extends FormElement {
         'optional' => t('Optional'),
       ],
       $value_optgroup => [
-        'checked' => t('Checked'),
-        'unchecked' => t('Unchecked'),
+        'checked' => t('Checked', [], ['context' => 'Add check mark']),
+        'unchecked' => t('Unchecked', [], ['context' => 'Remove check mark']),
       ],
     ];
   }
@@ -1094,8 +1098,8 @@ class WebformElementStates extends FormElement {
     return [
       'empty' => t('Empty'),
       'filled' => t('Filled'),
-      'checked' => t('Checked'),
-      'unchecked' => t('Unchecked'),
+      'checked' => t('Checked', [], ['context' => 'Add check mark']),
+      'unchecked' => t('Unchecked', [], ['context' => 'Remove check mark']),
       'value' => t('Value is'),
       '!value' => t('Value is not'),
       'pattern' => t('Pattern'),

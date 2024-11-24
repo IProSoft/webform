@@ -6,8 +6,8 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -65,6 +65,9 @@ class WebformTokenManager implements WebformTokenManagerInterface {
    * @see webform_token_info_alter()
    */
   protected static $suffixes = [
+    // Base64 encode the token's value.
+    // @see https://www.php.net/manual/en/function.base64-encode.php
+    'base64encode',
     // Removes the token when not replaced.
     'clear',
     // Decodes HTML entities.
@@ -101,14 +104,12 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     $this->configFactory = $config_factory;
     $this->moduleHandler = $module_handler;
     $this->token = $token;
-
-    $this->config = $this->configFactory->get('webform.settings');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function replace($text, EntityInterface $entity = NULL, array $data = [], array $options = [], BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function replace($text, ?EntityInterface $entity = NULL, array $data = [], array $options = [], ?BubbleableMetadata $bubbleable_metadata = NULL) {
     // Replace tokens within an array.
     if (is_array($text)) {
       foreach ($text as $key => $token_value) {
@@ -164,7 +165,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function replaceNoRenderContext($text, EntityInterface $entity = NULL, array $data = [], array $options = []) {
+  public function replaceNoRenderContext($text, ?EntityInterface $entity = NULL, array $data = [], array $options = []) {
     // Create BubbleableMetadata object which will be ignored.
     $bubbleable_metadata = new BubbleableMetadata();
     return $this->replace($text, $entity, $data, $options, $bubbleable_metadata);
@@ -254,7 +255,8 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     ];
 
     if ($description) {
-      if ($this->config->get('ui.description_help')) {
+      $config = $this->configFactory->get('webform.settings');
+      if ($config->get('ui.description_help')) {
         return [
           '#type' => 'container',
           'token_tree_link' => $build,
@@ -348,6 +350,11 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     while (preg_match($pattern, $value)) {
       $value = preg_replace($pattern, '[\1]', $value);
     }
+
+    // Remove input names which may contain invalid tokens.
+    // For example, a checkboxes options can include colons.
+    // @see https://www.drupal.org/project/webform/issues/3263195
+    $value = preg_replace('/:input\[name="[^"]+"\]/', '', $value);
 
     // Convert all token field deltas to 0 to prevent unexpected
     // token validation errors.
@@ -456,6 +463,9 @@ class WebformTokenManager implements WebformTokenManagerInterface {
           // Encode xml.
           if (isset($suffixes['xmlencode'])) {
             $replace = htmlspecialchars($replace, ENT_XML1);
+          }
+          if (isset($suffixes['base64encode'])) {
+            $replace = base64_encode($replace);
           }
         }
 

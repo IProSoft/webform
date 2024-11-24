@@ -6,7 +6,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Element\FormElement;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -14,7 +14,7 @@ use Drupal\webform\Utility\WebformOptionsHelper;
 /**
  * Base class for webform other element.
  */
-abstract class WebformOtherBase extends FormElement {
+abstract class WebformOtherBase extends FormElementBase {
 
   use WebformCompositeFormElementTrait;
 
@@ -240,7 +240,9 @@ abstract class WebformOtherBase extends FormElement {
     $element_value = (array) $value[$type];
     $other_value = $value['other'];
     if ($element_value) {
-      $element_value = array_filter($element_value);
+      $element_value = array_filter($element_value, function ($value) {
+        return $value !== '';
+      });
       $element_value = array_combine($element_value, $element_value);
     }
     $other_is_empty = (isset($element_value[static::OTHER_OPTION]) && $other_value === '');
@@ -282,7 +284,9 @@ abstract class WebformOtherBase extends FormElement {
     $other_value = $value['other'];
 
     if (static::isMultiple($element)) {
-      $return_value = array_filter($element_value);
+      $return_value = array_filter($element_value, function ($value) {
+        return $value !== '';
+      });
       $return_value = array_combine($return_value, $return_value);
       if (isset($return_value[static::OTHER_OPTION])) {
         unset($return_value[static::OTHER_OPTION]);

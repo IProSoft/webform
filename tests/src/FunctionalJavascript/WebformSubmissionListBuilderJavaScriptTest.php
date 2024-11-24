@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\FunctionalJavascript;
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformInterface;
@@ -33,7 +33,8 @@ class WebformSubmissionListBuilderJavaScriptTest extends WebformWebDriverTestBas
     /* ********************************************************************** */
 
     $submit = $this->getWebformSubmitButtonLabel($webform);
-    $this->drupalPostForm('/webform/' . $webform->id(), [], $submit);
+    $this->drupalGet('/webform/' . $webform->id());
+    $this->submitForm([], $submit);
     $sid = $this->getLastSubmissionId($webform);
     $this->drupalLogin($this->createUser([
       'view any webform submission',

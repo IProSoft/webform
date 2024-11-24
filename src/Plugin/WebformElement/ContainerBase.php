@@ -62,7 +62,7 @@ abstract class ContainerBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     if (!empty($element['#randomize'])) {
@@ -126,8 +126,9 @@ abstract class ContainerBase extends WebformElementBase {
 
     $format = $this->getItemFormat($element);
 
-    // Emails can only display div containers with <h3>.
-    if (!empty($options['email'])) {
+    // Emails can only display div containers with <h2>, except containers
+    // which do not display the container's title.
+    if (!empty($options['email']) && $format !== 'container') {
       $format = 'header';
     }
 

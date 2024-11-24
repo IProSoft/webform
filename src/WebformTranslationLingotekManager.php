@@ -2,8 +2,8 @@
 
 namespace Drupal\webform;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Serialization\Yaml;
 
 /**
  * Defines a class to translate webform Lingotek integration.
@@ -42,8 +42,8 @@ class WebformTranslationLingotekManager implements WebformTranslationLingotekMan
                 $field_settings[$setting_name] = Yaml::decode($field_settings[$setting_name]);
               }
             }
+            $this->encodeTokens($field_settings);
           }
-          $this->encodeTokens($field_settings);
         }
         break;
 

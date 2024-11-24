@@ -3,7 +3,7 @@
  * JavaScript behaviors for color element integration.
  */
 
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
   'use strict';
 
@@ -14,41 +14,32 @@
    */
   Drupal.behaviors.webformColor = {
     attach: function (context) {
-      $(context).find('.form-color:not(.form-color-output)').once('webform-color').each(function () {
+      $(once('webform-color', '.form-color:not(.form-color-output)', context)).each(function () {
         var $element = $(this);
-        // Handle browser that don't support the HTML5 color input.
-        if (Modernizr.inputtypes.color === false) {
-          // Remove swatch sizes.
-          $element.removeClass('form-color-small')
-            .removeClass('form-color-medium')
-            .removeClass('form-color-large');
+        // Display color input's output w/ visually-hidden label to
+        // the end user.
+        var $output = $('<input class="form-color-output ' + $element.attr('class') + ' js-webform-input-mask" data-inputmask-mask="\\#######" />').uniqueId();
+        var $label = $element.parent('.js-form-type-color').find('label').clone();
+        var id = $output.attr('id');
+        $label.attr({for: id, class: 'visually-hidden'});
+        if ($.fn.inputmask) {
+          $output.inputmask();
         }
-        else {
-          // Display color input's output w/ visually-hidden label to
-          // the end user.
-          var $output = $('<input class="form-color-output ' + $element.attr('class') + ' js-webform-input-mask" data-inputmask-mask="\\#######" />').uniqueId();
-          var $label = $element.parent('.js-form-type-color').find('label').clone();
-          var id = $output.attr('id');
-          $label.attr({for: id, class: 'visually-hidden'});
-          if ($.fn.inputmask) {
-            $output.inputmask();
-          }
-          $output[0].value = $element[0].value;
-          $element
-            .after($output)
-            .after($label)
-            .css({float: 'left'});
+        $output[0].value = $element[0].value;
+        $element
+          .after($output)
+          .after($label)
+          .css({float: 'left'});
 
-          // Sync $element and $output.
-          $element.on('input', function () {
-            $output[0].value = $element[0].value;
-          });
-          $output.on('input', function () {
-            $element[0].value = $output[0].value;
-          });
-        }
+        // Sync $element and $output.
+        $element.on('input', function () {
+          $output[0].value = $element[0].value;
+        });
+        $output.on('input', function () {
+          $element[0].value = $output[0].value;
+        });
       });
     }
   };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

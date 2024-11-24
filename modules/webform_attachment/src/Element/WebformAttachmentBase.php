@@ -3,7 +3,7 @@
 namespace Drupal\webform_attachment\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Url;
 use Drupal\webform\WebformSubmissionForm;
 use Drupal\webform\WebformSubmissionInterface;
@@ -11,7 +11,7 @@ use Drupal\webform\WebformSubmissionInterface;
 /**
  * Provides a base class for 'webform_attachment' elements.
  */
-abstract class WebformAttachmentBase extends RenderElement implements WebformAttachmentInterface {
+abstract class WebformAttachmentBase extends RenderElementBase implements WebformAttachmentInterface {
 
   /**
    * {@inheritdoc}
@@ -111,10 +111,10 @@ abstract class WebformAttachmentBase extends RenderElement implements WebformAtt
    * {@inheritdoc}
    */
   public static function getFileMimeType(array $element, WebformSubmissionInterface $webform_submission) {
-    /** @var \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $file_mime_type_guesser */
+    /** @var \Symfony\Component\Mime\MimeTypeGuesserInterface $file_mime_type_guesser */
     $file_mime_type_guesser = \Drupal::service('file.mime_type.guesser');
     $file_name = static::getFileName($element, $webform_submission);
-    return $file_mime_type_guesser->guess($file_name);
+    return $file_mime_type_guesser->guessMimeType($file_name);
   }
 
   /**

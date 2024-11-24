@@ -33,24 +33,26 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the form includes 'user.roles:authenticated' because the
     // '[current-user:mail]' token.
-    $this->assertEqualsCanonicalizing($form['#cache'], [
+    $expected = [
       'contexts' => [
         'user.roles:authenticated',
       ],
       'tags' => [
+        'CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form',
         'config:core.entity_form_display.webform_submission.contact.add',
         'config:webform.settings',
         'config:webform.webform.contact',
         'webform:contact',
       ],
       'max-age' => -1,
-    ]);
+    ];
+    $this->assertEqualsCanonicalizing($expected, $form['#cache']);
 
     // Check that the name element does not have #cache because the
     // '[current-user:mail]' is set via
     // \Drupal\webform\WebformSubmissionForm::setEntity.
     $this->assertFalse(isset($form['elements']['email']['#cache']));
-    $this->assertEqual($form['elements']['email']['#default_value'], '');
+    $this->assertEquals($form['elements']['email']['#default_value'], '');
 
     // Login and check the #cache property.
     $this->drupalLogin($account);
@@ -66,12 +68,13 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the form includes 'user.roles:authenticated' because the
     // '[current-user:mail]' token.
-    $this->assertEqualsCanonicalizing($form['#cache'], [
+    $expected = [
       'contexts' => [
         'user',
         'user.roles:authenticated',
       ],
       'tags' => [
+        'CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form',
         'config:core.entity_form_display.webform_submission.contact.add',
         'config:webform.settings',
         'config:webform.webform.contact',
@@ -79,9 +82,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'webform:contact',
       ],
       'max-age' => -1,
-    ]);
+    ];
+    $this->assertEqualsCanonicalizing($expected, $form['#cache']);
     $this->assertFalse(isset($form['elements']['email']['#cache']));
-    $this->assertEqual($form['elements']['email']['#default_value'], $account->getEmail());
+    $this->assertEquals($form['elements']['email']['#default_value'], $account->getEmail());
 
     // Add the '[current-user:mail]' to the name elements' description.
     $element = $webform->getElementDecoded('email')
@@ -94,7 +98,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
 
     // Check that the 'email' element does have '#cache' property because the
     // '#description' is using the '[current-user:mail]' token.
-    $this->assertEqualsCanonicalizing($form['elements']['email']['#cache'], [
+    $expected = [
       'contexts' => [
         'user',
       ],
@@ -105,9 +109,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'webform:contact',
       ],
       'max-age' => -1,
-    ]);
-    $this->assertEqual($form['elements']['email']['#default_value'], $account->getEmail());
-    $this->assertEqual($form['elements']['email']['#description']['#markup'], $account->getEmail());
+    ];
+    $this->assertEqualsCanonicalizing($expected, $form['elements']['email']['#cache']);
+    $this->assertEquals($form['elements']['email']['#default_value'], $account->getEmail());
+    $this->assertEquals($form['elements']['email']['#description']['#markup'], $account->getEmail());
   }
 
 }

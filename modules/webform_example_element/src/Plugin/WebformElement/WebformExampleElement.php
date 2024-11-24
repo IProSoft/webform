@@ -38,6 +38,7 @@ class WebformExampleElement extends WebformElementBase {
       'minlength' => '',
       'maxlength' => '',
       'placeholder' => '',
+      'example_textarea' => '',
     ] + parent::defineDefaultProperties();
   }
 
@@ -46,7 +47,7 @@ class WebformExampleElement extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Here you can customize the webform element's properties.
@@ -67,6 +68,17 @@ class WebformExampleElement extends WebformElementBase {
     //
     // @see \Drupal\webform\Plugin\WebformElementBase::form
     // @see \Drupal\webform\Plugin\WebformElement\TextBase::form
+    // Create a custom field set for the example element.
+    $form['example_element_fieldset'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Example elements'),
+    ];
+    $form['example_element_fieldset']['example_textarea'] = [
+      '#type' => 'textarea',
+      '#placeholder' => 'Example textarea',
+      '#title' => $this->t('Example textarea'),
+      '#description' => $this->t('Please enter some text.'),
+    ];
     return $form;
   }
 

@@ -2,10 +2,12 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Core\Datetime\DateHelper;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Datetime\Element\Datelist as DatelistElement;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
@@ -21,7 +23,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   category = @Translation("Date/time elements"),
  * )
  */
-class DateList extends DateBase {
+class DateList extends DateBase implements TrustedCallbackInterface {
 
   /**
    * {@inheritdoc}
@@ -51,13 +53,13 @@ class DateList extends DateBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Remove month abbreviation.
     // @see \Drupal\Core\Datetime\Element\Datelist::processDatelist
     if (isset($element['#date_abbreviate']) && $element['#date_abbreviate'] === FALSE) {
-      $element['#date_date_callbacks'][] = '_webform_datelist_date_date_callback';
+      $element['#date_date_callbacks'][] = [DateList::class, 'dateListCallback'];
     }
 
     // Remove 'for' from the element's label.
@@ -253,6 +255,14 @@ class DateList extends DateBase {
         $validate_callback[0] = DateList::class;
       }
     }
+
+    // Copy the datelist element's states to child inputs.
+    if (isset($element['#states'])) {
+      foreach (Element::children($element) as $key) {
+        $element[$key]['#states'] = $element['#states'];
+      }
+    }
+
     return $element;
   }
 
@@ -294,6 +304,34 @@ class DateList extends DateBase {
         $form_state->setErrorByName($name, $message);
       }
     }
+  }
+
+  /**
+   * Callback for removing abbreviation from datelist.
+   *
+   * @param array $element
+   *   The element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   * @param \Drupal\Core\Datetime\DrupalDateTime|null $date
+   *   The date value.
+   *
+   * @see \Drupal\Core\Datetime\Element\Datelist::processDatelist
+   */
+  public static function dateListCallback(array &$element, FormStateInterface $form_state, $date) {
+    $no_abbreviate = (isset($element['#date_abbreviate']) && $element['#date_abbreviate'] === FALSE);
+    if ($no_abbreviate && isset($element['month']) && isset($element['month']['#options'])) {
+      // Load translated date part labels from the appropriate calendar plugin.
+      $date_helper = new DateHelper();
+      $element['month']['#options'] = $date_helper->monthNames($element['#required']);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks() {
+    return array_merge(['dateListCallback'], parent::trustedCallbacks());
   }
 
 }

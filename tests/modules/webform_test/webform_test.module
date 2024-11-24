@@ -5,7 +5,7 @@
  * Support module for webform related testing.
  */
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformElementHelper;
 
@@ -120,9 +120,9 @@ function _webform_test_load_include($id) {
     $id = $match[1];
   }
 
-  $include_base_path = drupal_get_path('module', 'webform_test') . '/includes';
+  $include_base_path = __DIR__ . '/includes';
   if (file_exists("$include_base_path/webform_test.$id.inc")) {
-    module_load_include('inc', 'webform_test', 'includes/webform_test.' . $id);
+    \Drupal::moduleHandler()->loadInclude('webform_test', 'inc', 'includes/webform_test.' . $id);
     return $id;
   }
   else {

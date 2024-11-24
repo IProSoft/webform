@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Functional\Handler;
+namespace Drupal\Tests\webform\Functional\Variant;
 
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
@@ -16,7 +16,7 @@ class WebformVariantTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'webform_test_variant'];
+  protected static $modules = ['webform', 'webform_test_variant'];
 
   /**
    * Webforms to load.
@@ -41,7 +41,9 @@ class WebformVariantTest extends WebformBrowserTestBase {
     $this->assertNoCssSelect('[href$="/admin/structure/webform/manage/test_variant/variants/add/test_offcanvas_width"][data-dialog-options*="550"]');
 
     // Add variant.
-    $this->drupalPostForm('/admin/structure/webform/manage/test_variant/variants/add/test_offcanvas_width', ['variant_id' => 'test_offcanvas_width', 'label' => 'test_offcanvas_width'], 'Save');
+    $this->drupalGet('/admin/structure/webform/manage/test_variant/variants/add/test_offcanvas_width');
+    $edit = ['variant_id' => 'test_offcanvas_width', 'label' => 'test_offcanvas_width'];
+    $this->submitForm($edit, 'Save');
 
     // Check edit off-canvas element width is 800.
     $this->drupalGet('/admin/structure/webform/manage/test_variant/variants/');

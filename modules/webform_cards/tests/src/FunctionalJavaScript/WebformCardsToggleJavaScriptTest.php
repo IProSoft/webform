@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform_cards\FunctionalJavaScript;
+namespace Drupal\Tests\webform_cards\FunctionalJavascript;
 
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
 
@@ -16,7 +16,7 @@ class WebformCardsToggleJavaScriptTest extends WebformWebDriverTestBase {
    *
    * @var array
    */
-  public static $modules = ['webform', 'webform_cards', 'webform_cards_test'];
+  protected static $modules = ['webform', 'webform_cards', 'webform_cards_test'];
 
   /**
    * Test webform cards toggle show/hide all.

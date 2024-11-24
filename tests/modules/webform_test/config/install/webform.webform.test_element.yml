@@ -14,7 +14,8 @@ archive: false
 id: test_element
 title: 'Test: Element'
 description: 'Test instances of common webform elements.'
-category: 'Test: Element'
+categories:
+  - 'Test: Element'
 elements: |
   hidden:
     '#type': hidden
@@ -64,7 +65,7 @@ elements: |
       '#default_value': |
         {textarea line 1}
         {textarea line 2}
-        
+
     textfield:
       '#type': textfield
       '#title': textfield
@@ -203,6 +204,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#default_value': '1'
@@ -214,6 +216,7 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
+        target_bundles: null
         filter:
           type: _none
       '#default_value':
@@ -239,7 +242,6 @@ elements: |
       '#default_value':
         - 1
         - 2
-  
 css: ''
 javascript: ''
 settings:
@@ -327,6 +329,8 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 1
   preview_label: ''
   preview_title: ''

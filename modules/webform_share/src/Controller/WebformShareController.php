@@ -83,7 +83,7 @@ class WebformShareController extends ControllerBase {
       $build['#attached']['library'][] = "webform_share/libraries.$library.$version";
     }
     // Add setting notifying AjaxCommand that this page is shared via an
-    // embeddded iframe.
+    // embedded iframe.
     // @see Drupal.AjaxCommands.prototype.webformRefresh
     $build['#attached']['drupalSettings']['webform_share']['page'] = TRUE;
     return $build;
@@ -117,12 +117,18 @@ class WebformShareController extends ControllerBase {
       '#javascript' => TRUE,
       '#query' => $request->query->all(),
     ];
-    $iframe = $this->renderer->renderPlain($build);
+    $iframe = $this->renderer->renderInIsolation($build);
 
     $iframe_script = json_encode($iframe);
     $iframe_script = str_replace('src=\\"\/\/', 'src=\\"' . $request->getScheme() . ':\/\/', $iframe_script);
     $content = 'document.write(' . $iframe_script . ');';
     $response = new CacheableResponse($content, 200, ['Content-Type' => 'text/javascript']);
+
+    $additional_cache_contexts = [];
+    foreach ($webform->getElementsPrepopulate() as $element_key) {
+      $additional_cache_contexts[] = 'url.query_args:' . $element_key;
+    }
+    $webform->addCacheContexts($additional_cache_contexts);
 
     $response->addCacheableDependency($webform);
     if ($source_entity) {

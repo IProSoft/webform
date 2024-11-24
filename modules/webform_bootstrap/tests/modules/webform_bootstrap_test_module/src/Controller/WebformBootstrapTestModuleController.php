@@ -2,8 +2,8 @@
 
 namespace Drupal\webform_bootstrap_test_module\Controller;
 
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Render\Markup;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,7 +33,7 @@ class WebformBootstrapTestModuleController extends ControllerBase {
     ];
     $build = [];
     foreach ($style_guides as $style_guide) {
-      $content = file_get_contents(drupal_get_path('module', 'webform_bootstrap_test_module') . '/style-guide/' . $style_guide . '.html');
+      $content = file_get_contents(__DIR__ . '/../../style-guide/' . $style_guide . '.html');
       $build[$style_guide] = [
         '#markup' => Markup::create($content),
       ];

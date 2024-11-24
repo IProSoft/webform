@@ -2,8 +2,9 @@
 
 namespace Drupal\webform\Breadcrumb;
 
-use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Link;
@@ -62,7 +63,7 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, WebformRequestInterface $request_handler, TranslationInterface $string_translation, ConfigFactoryInterface $config_factory = NULL) {
+  public function __construct(ModuleHandlerInterface $module_handler, WebformRequestInterface $request_handler, TranslationInterface $string_translation, ?ConfigFactoryInterface $config_factory = NULL) {
     $this->moduleHandler = $module_handler;
     $this->requestHandler = $request_handler;
     $this->setStringTranslation($string_translation);
@@ -72,10 +73,14 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public function applies(RouteMatchInterface $route_match) {
+  public function applies(RouteMatchInterface $route_match, ?CacheableMetadata $cacheable_metadata = NULL) {
+    // @todo Remove null safe operator after Drupal 12.0.0 becomes the minimum
+    //   requirement, see https://www.drupal.org/project/drupal/issues/3459277.
+    $cacheable_metadata?->addCacheContexts(['route']);
+
     $route_name = $route_match->getRouteName();
     // All routes must begin or contain 'webform.
-    if (strpos($route_name, 'webform') === FALSE) {
+    if (!$route_name || strpos($route_name, 'webform') === FALSE) {
       return FALSE;
     }
 
@@ -179,7 +184,7 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $breadcrumb->addLink(Link::createFromRoute($this->t('Home'), '<front>'));
       $breadcrumb->addLink(Link::createFromRoute($this->t('Administration'), 'system.admin'));
       $breadcrumb->addLink(Link::createFromRoute($this->t('Help'), 'help.main'));
-      $breadcrumb->addLink(Link::createFromRoute($this->t('Webform'), 'help.page', ['name' => 'webform']));
+      $breadcrumb->addLink(Link::createFromRoute($this->t('Webform', [], ['context' => 'module']), 'help.page', ['name' => 'webform']));
     }
     elseif ($this->type === 'webform_plugins_elements') {
       $breadcrumb = new Breadcrumb();
@@ -282,6 +287,8 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     // This breadcrumb builder is based on a route parameter, and hence it
     // depends on the 'route' cache context.
+    // @todo Remove after Drupal 12.0.0 becomes the minimum requirement,
+    //   see https://www.drupal.org/project/drupal/issues/3459277.
     $breadcrumb->addCacheContexts(['route']);
 
     return $breadcrumb;

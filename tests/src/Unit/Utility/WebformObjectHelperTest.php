@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\webform\Utility\WebformObjectHelper;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Utility\WebformObjectHelper;
 
 /**
  * Tests webform object utility.
@@ -39,7 +39,7 @@ class WebformObjectHelperTest extends UnitTestCase {
    *
    * @see testSortByProperty()
    */
-  public function providerSortByProperty() {
+  public static function providerSortByProperty() {
     $object = new \stdClass();
     $object->c = 'c';
     $object->a = 'a';
