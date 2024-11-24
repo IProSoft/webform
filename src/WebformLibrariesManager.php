@@ -3,8 +3,8 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Asset\LibraryDiscoveryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -88,7 +88,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
     $libraries = $this->getLibraries();
 
     // Defined REQUIREMENT constants which may not be loaded.
-    // @see ~/Sites/drupal_webfor/mweb/core/includes/install.inc
+    // @see ~/Sites/drupal_webform/mweb/core/includes/install.inc
     if (!defined('REQUIREMENT_OK')) {
       define('REQUIREMENT_INFO', -1);
       define('REQUIREMENT_OK', 0);
@@ -107,7 +107,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
 
     // Build library info array.
     $info = [
-      '#prefix' => '<p><hr/></p><dl>',
+      '#prefix' => '<hr class="webform-hr"/><dl>',
       '#suffix' => '</dl>',
     ];
 
@@ -194,7 +194,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       $t_args = [':href' => ($this->moduleHandler->moduleExists('help')) ? Url::fromRoute('help.page', ['name' => 'webform'], ['fragment' => 'libraries'])->toString() : 'https://www.drupal.org/docs/8/modules/webform/webform-libraries'];
       $description['download'] = [
         '#markup' => '<hr/>' .
-          $this->t('Please download external libaries using one the <a href=":href">recommended methods.', $t_args),
+          $this->t('Please download external libraries using one of the <a href=":href">recommended methods</a>.', $t_args),
       ];
       $t_args = [':href' => Url::fromRoute('webform.config.advanced')->toString()];
       $description['cdn'] = [
@@ -209,7 +209,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'webform_libraries' => [
         'title' => $this->t('Webform: External libraries'),
         'value' => $this->t('@total libraries (@installed installed; @excluded excluded; @missing CDN)', $stats),
-        'description' => $this->renderer->renderPlain($description),
+        'description' => $this->renderer->renderInIsolation($description),
         'severity' => $severity,
       ],
     ];
@@ -419,7 +419,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/floating-ui/floating-ui'),
       'download_url' => Url::fromUri('https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz'),
       'version' => '2.11.6',
-      'core' => 9,
       'license' => 'MIT',
     ];
     $libraries['tippyjs'] = [
@@ -429,7 +428,6 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'homepage_url' => Url::fromUri('https://github.com/atomiks/tippyjs'),
       'download_url' => Url::fromUri('https://registry.npmjs.org/tippy.js/-/tippy.js-6.3.7.tgz'),
       'version' => '6.3.7',
-      'core' => 9,
       'license' => 'MIT',
     ];
     $libraries['jquery.select2'] = [

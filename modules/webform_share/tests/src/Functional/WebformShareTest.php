@@ -136,7 +136,8 @@ class WebformShareTest extends WebformBrowserTestBase {
       ->save();
 
     // Check no page title.
-    $assert_session->responseNotContains('<h1 class="title page-title">Contact</h1>');
+    $this->drupalGet('/webform/contact/share');
+    $assert_session->responseNotContains('<h1>Contact</h1>');
 
     // Check iframe page iFrame-resizer script.
     $this->drupalGet("/webform/contact/share/$library/$version");
@@ -151,13 +152,13 @@ class WebformShareTest extends WebformBrowserTestBase {
       '#type' => 'webform_share_script',
       '#webform' => $webform,
     ];
-    $actual_script_tag = $renderer->renderPlain($build);
+    $actual_script_tag = $renderer->renderInIsolation($build);
 
     $src = $base_url . "/webform/contact/share.js";
     $src = preg_replace('#^https?:#', '', $src);
     $expected_script_tag = '<script src="' . $src . '"></script>' . PHP_EOL;
 
-    $this->assertEquals($expected_script_tag, $actual_script_tag);
+    $this->assertEquals($expected_script_tag, (string) $actual_script_tag);
   }
 
 }

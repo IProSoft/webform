@@ -628,7 +628,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
       '#type' => 'operations',
       '#links' => $links,
       '#prefix' => '<div class="webform-dropbutton webform-submission-views-dropbutton">',
-      '#suffix' => '</div>' . ($this->submissionView ? '<p><hr/></p>' : ''),
+      '#suffix' => '</div>' . ($this->submissionView ? '<hr class="webform-hr"/>' : ''),
     ];
     return $build;
   }
@@ -1307,7 +1307,7 @@ class WebformSubmissionListBuilder extends EntityListBuilder {
     // If query is order(ed) by 'element__*' we need to build a custom table
     // sort using hook_query_TAG_alter().
     // @see webform_query_webform_submission_list_builder_alter()
-    if ($order && strpos($order['sql'], 'element__') === 0) {
+    if (!empty($order['sql']) && strpos($order['sql'], 'element__') === 0) {
       $name = $order['sql'];
       $column = $this->columns[$name];
       $query->addTag('webform_submission_list_builder')

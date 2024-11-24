@@ -7,9 +7,9 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\EventSubscriber\DefaultExceptionHtmlSubscriber;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RedirectDestinationInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformHtmlEditor;
@@ -18,10 +18,10 @@ use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformTokenManagerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
@@ -115,7 +115,7 @@ class WebformDefaultExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscrib
    *   The event to process.
    */
   public function on403(ExceptionEvent $event) {
-    if ($event->getRequestType() !== HttpKernelInterface::MASTER_REQUEST) {
+    if ($event->getRequestType() !== HttpKernelInterface::MAIN_REQUEST) {
       return;
     }
 
@@ -289,7 +289,7 @@ class WebformDefaultExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscrib
    * @param null|\Drupal\Core\Entity\EntityInterface $entity
    *   (Optional) Entity to be used when replacing tokens.
    */
-  protected function redirectToLogin(ExceptionEvent $event, $message = NULL, EntityInterface $entity = NULL) {
+  protected function redirectToLogin(ExceptionEvent $event, $message = NULL, ?EntityInterface $entity = NULL) {
     // Display message.
     if ($message) {
       $this->setMessage($message, $entity);
@@ -316,10 +316,10 @@ class WebformDefaultExceptionHtmlSubscriber extends DefaultExceptionHtmlSubscrib
    * @param null|\Drupal\Core\Entity\EntityInterface $entity
    *   (Optional) Entity to be used when replacing tokens.
    */
-  protected function setMessage($message, EntityInterface $entity = NULL) {
+  protected function setMessage($message, ?EntityInterface $entity = NULL) {
     $message = $this->tokenManager->replace($message, $entity);
     $build = WebformHtmlEditor::checkMarkup($message);
-    $this->messenger->addStatus($this->renderer->renderPlain($build));
+    $this->messenger->addStatus($this->renderer->renderInIsolation($build));
   }
 
 }

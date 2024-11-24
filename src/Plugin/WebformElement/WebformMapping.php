@@ -8,9 +8,9 @@ use Drupal\Core\Render\Element as RenderElement;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMapping as WebformMappingElement;
 use Drupal\webform\Entity\WebformOptions;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -113,7 +113,7 @@ class WebformMapping extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
     if (isset($element['#destination__description'])) {
       $element['#destination__description'] = WebformHtmlEditor::checkMarkup($element['#destination__description']);

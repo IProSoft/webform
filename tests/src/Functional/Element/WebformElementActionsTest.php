@@ -80,7 +80,7 @@ class WebformElementActionsTest extends WebformElementBrowserTestBase {
     $this->drupalGet('/webform/test_element_actions');
     $this->submitForm([], 'Save Draft');
     $sid = $this->getLastSubmissionId($webform);
-    $assert_session->responseContains('<a href="' . $base_path . 'admin/structure/webform/manage/test_element_actions/submission/' . $sid . '/delete?destination=' . $base_path . 'webform/test_element_actions" class="button button--danger custom-delete" style="font-weight: bold" data-custom-delete data-drupal-selector="edit-actions-custom-delete" id="edit-actions-custom-delete" hreflang="en">{Custom delete}</a>');
+    $assert_session->responseContains('<a href="' . $base_path . 'admin/structure/webform/manage/test_element_actions/submission/' . $sid . '/delete?destination=' . $base_path . 'webform/test_element_actions" class="button button--danger use-ajax custom-delete" data-dialog-type="modal" data-dialog-options="{&quot;width&quot;:880}" style="font-weight: bold" data-custom-delete data-drupal-selector="edit-actions-custom-delete" id="edit-actions-custom-delete" hreflang="en">{Custom delete}</a>');
     $this->assertCssSelect('[id="edit-actions-delete"]');
 
     /* ********************************************************************** */

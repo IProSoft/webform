@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform\Functional\Access;
 
+use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 
 /**
  * Tests for webform default filter format access.
@@ -98,7 +98,12 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     // text format list page.
     $this->drupalGet('/admin/config/content/formats');
     $assert_session->statusCodeEquals(200);
-    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+    if (version_compare(\Drupal::VERSION, '11.1', '<')) {
+      $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+    }
+    else {
+      $assert_session->elementTextContains('css', 'tr[data-drupal-selector="edit-formats-webform-default"]', 'Disabled');
+    }
 
     // Check that editing the webform default format is blocked.
     $this->drupalGet('/admin/config/content/formats/manage/webform_default');

@@ -3,12 +3,12 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Theme\ThemeInitializationInterface;
+use Drupal\Core\Theme\ThemeManagerInterface;
 
 /**
  * Defines a class to manage webform theming.
@@ -193,7 +193,7 @@ class WebformThemeManager implements WebformThemeManagerInterface {
     if ($theme_name !== NULL) {
       $this->setCurrentTheme($theme_name);
     }
-    $markup = $this->renderer->renderPlain($elements);
+    $markup = $this->renderer->renderInIsolation($elements);
     if ($theme_name !== NULL) {
       $this->setActiveTheme();
     }

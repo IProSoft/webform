@@ -6,12 +6,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Markup;
-use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\Plugin\WebformElementOtherInterface;
+use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -154,7 +154,7 @@ abstract class OptionsBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     $is_wrapper_fieldset = in_array($element['#type'], ['checkboxes', 'radios', 'webform_entity_checkboxes', 'webform_entity_radios', 'webform_term_checkboxes', 'webform_toggles', 'webform_buttons']);
     if ($is_wrapper_fieldset) {
       // Issue #2396145: Option #description_display for webform element fieldset
@@ -213,7 +213,7 @@ abstract class OptionsBase extends WebformElementBase {
 
     // Make sure submitted value is not lost if the element's #options were
     // altered after the submission was completed.
-    // This only applies to the main webforom element with a #webform_key
+    // This only applies to the main webform element with a #webform_key
     // and not a webform composite's sub elements.
     $is_completed = $webform_submission && $webform_submission->isCompleted();
     $has_default_value = (isset($element['#default_value']) && $element['#default_value'] !== '' && $element['#default_value'] !== NULL);
@@ -251,7 +251,7 @@ abstract class OptionsBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  protected function prepareElementValidateCallbacks(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  protected function prepareElementValidateCallbacks(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     if ($this->hasMultipleValues($element)) {
       $element['#element_validate'][] = [get_class($this), 'validateMultipleOptions'];
     }
@@ -327,21 +327,24 @@ abstract class OptionsBase extends WebformElementBase {
     $value = $this->getValue($element, $webform_submission, $options);
 
     $format = $this->getItemFormat($element);
+    $options = OptGroup::flattenOptions($element['#options'] ?? []);
     switch ($format) {
       case 'raw':
         return $value;
 
       case 'text_description':
-        if (isset($element['#options'])) {
+        if ($options && isset($options[$value])) {
           $options_description = $this->hasProperty('options_description_display');
           $text = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
           $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
           return ['#markup' => $text . ($description ? PHP_EOL . '<div class="description">' . $description . '</div>' : '')];
         }
-        return '';
+        else {
+          return $value;
+        }
 
       case 'description':
-        if (isset($element['#options'])) {
+        if ($options && isset($options[$value])) {
           $options_description = $this->hasProperty('options_description_display');
           if ($options_description) {
             $description = WebformOptionsHelper::getOptionDescription($value, $element['#options'], $options_description);
@@ -352,12 +355,17 @@ abstract class OptionsBase extends WebformElementBase {
 
       case 'value':
       default:
-        if (isset($element['#options'])) {
+        if ($options && isset($options[$value])) {
           $options_description = $this->hasProperty('options_description_display');
-          $value = WebformOptionsHelper::getOptionText($value, $element['#options'], $options_description);
+          $build = [
+            '#markup' => WebformOptionsHelper::getOptionText($value, $options, $options_description),
+          ];
         }
-
-        $build = ['#markup' => $value];
+        else {
+          $build = [
+            '#plain_text' => $value,
+          ];
+        }
 
         $options += ['prefixing' => TRUE];
         if ($options['prefixing']) {

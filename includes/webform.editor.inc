@@ -13,16 +13,16 @@
  * Below functions are copied from editor.module.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\file\FileInterface;
-use Drupal\webform\WebformInterface;
-use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\filter\FilterFormatInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
+use Drupal\file\FileInterface;
+use Drupal\filter\FilterFormatInterface;
+use Drupal\webform\Element\WebformHtmlEditor;
+use Drupal\webform\WebformInterface;
 
 /**
  * Implements hook_ENTITY_TYPE_access().

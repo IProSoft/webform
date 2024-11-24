@@ -5,8 +5,8 @@
  * Callback functions for date, datetime, and time elements.
  */
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElement\DateList;
 use Drupal\webform\Plugin\WebformElement\DateTime;
 
@@ -38,7 +38,7 @@ function _webform_datelist_date_date_callback(array &$element, FormStateInterfac
  *
  * @see \Drupal\webform\Plugin\WebformElement\DateTime::prepare
  */
-function _webform_datetime_date(array &$element, FormStateInterface $form_state, DrupalDateTime $date = NULL) {
+function _webform_datetime_date(array &$element, FormStateInterface $form_state, ?DrupalDateTime $date = NULL) {
   DateTime::dateCallback($element, $form_state, $date);
 }
 
@@ -54,6 +54,6 @@ function _webform_datetime_date(array &$element, FormStateInterface $form_state,
  *
  * @see \Drupal\webform\Plugin\WebformElement\DateTime::prepare
  */
-function _webform_datetime_time(array &$element, FormStateInterface $form_state, DrupalDateTime $date = NULL) {
+function _webform_datetime_time(array &$element, FormStateInterface $form_state, ?DrupalDateTime $date = NULL) {
   DateTime::timeCallback($element, $form_state, $date);
 }

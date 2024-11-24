@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform\Unit\Utility;
 
-use Drupal\Core\Serialization\Yaml;
-use Drupal\webform\Utility\WebformYaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Utility\WebformYaml;
 
 /**
  * Tests webform tidy utility.
@@ -37,7 +37,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testTidy()
    */
-  public function providerTidy() {
+  public static function providerTidy() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",
@@ -87,7 +87,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testDecode()
    */
-  public function providerDecode() {
+  public static function providerDecode() {
     $tests[] = [
       "simple: value",
       ['simple' => 'value'],
@@ -149,7 +149,7 @@ class WebformYamlTest extends UnitTestCase {
    *
    * @see testEncode()
    */
-  public function providerEncode() {
+  public static function providerEncode() {
     $tests[] = [
       ['simple' => 'value'],
       "simple: value",

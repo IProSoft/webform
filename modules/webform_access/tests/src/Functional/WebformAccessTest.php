@@ -91,6 +91,7 @@ class WebformAccessTest extends WebformAccessBrowserTestBase {
       'default_value_input[webform][0][target_id]' => 'contact',
       'default_value_input[webform][0][settings][default_data]' => 'test: test',
       'default_value_input[webform][0][settings][webform_access_group][]' => 'manager',
+      'set_default_value' => TRUE,
     ];
     $this->submitForm($edit, 'Save settings');
     $this->drupalGet('/node/add/webform');

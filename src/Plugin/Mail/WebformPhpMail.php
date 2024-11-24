@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Plugin\Mail;
 
-use Drupal\Core\Mail\Plugin\Mail\PhpMail;
 use Drupal\Core\Mail\MailFormatHelper;
+use Drupal\Core\Mail\Plugin\Mail\PhpMail;
 
 /**
  * Extend's the default Drupal mail backend to support HTML email.
@@ -35,7 +35,7 @@ class WebformPhpMail extends PhpMail {
           '#webform_submission' => $message['params']['webform_submission'],
           '#handler' => $message['params']['handler'],
         ];
-        $message['body'] = \Drupal::service('renderer')->renderPlain($build);
+        $message['body'] = \Drupal::service('renderer')->renderInIsolation($build);
       }
       return $message;
     }

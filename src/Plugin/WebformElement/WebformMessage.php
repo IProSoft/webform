@@ -4,8 +4,8 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\Element\WebformMessage as WebformMessageElement;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'webform_message' element.
@@ -48,7 +48,7 @@ class WebformMessage extends WebformMarkupBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     if (!empty($element['#message_storage']) && empty($element['#message_id'])) {

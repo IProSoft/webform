@@ -3,8 +3,8 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\webform\Element\WebformMessage as WebformMessageElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Element\WebformMessage as WebformMessageElement;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -91,7 +91,7 @@ class Telephone extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Add international library and classes.

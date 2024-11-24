@@ -3,17 +3,17 @@
 namespace Drupal\Tests\webform\Traits;
 
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\WebformInterface;
-use Drupal\webform\Entity\Webform;
 
 /**
  * Provides convenience methods for webform assertions in browser tests.
@@ -341,7 +341,7 @@ trait WebformBrowserTestTrait {
       return $actions_element['#submit__label'];
     }
 
-    return t('Submit');
+    return 'Submit';
   }
 
   /**

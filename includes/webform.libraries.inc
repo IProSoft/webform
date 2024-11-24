@@ -14,7 +14,7 @@ use Drupal\webform\Utility\WebformDialogHelper;
  */
 function webform_library_info_build() {
   $base_path = base_path();
-  $default_query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  $default_query_string = \Drupal::service('asset.query_string')->get();
 
   /** @var \Drupal\webform\WebformInterface[] $webforms */
   $webforms = Webform::loadMultiple();
@@ -30,12 +30,12 @@ function webform_library_info_build() {
       $settings = ['type' => 'external', 'preprocess' => FALSE, 'minified' => FALSE];
       if ($type === 'css') {
         $libraries["webform.css.$webform_id"] = [
-          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}?{$default_query_string}" => $settings]],
+          'css' => ['theme' => ["{$base_path}webform/css/{$webform_id}/custom.css?{$default_query_string}" => $settings]],
         ];
       }
       else {
         $libraries["webform.javascript.$webform_id"] = [
-          'js' => ["{$base_path}webform/javascript/{$webform_id}?{$default_query_string}" => $settings],
+          'js' => ["{$base_path}webform/javascript/{$webform_id}/custom.js?{$default_query_string}" => $settings],
         ];
       }
     }
@@ -191,6 +191,16 @@ function webform_css_alter(&$css, AttachedAssetsInterface $assets) {
  * Implements hook_js_alter().
  */
 function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  // Ensure codemirror.js always loads first with weight = -1.
+  // This prevents "Uncaught ReferenceError: CodeMirror is not defined" errors.
+  // If the CKEditor Codemirror module is installed, it will overwrite
+  // the Webform module's codemirror.js weight.
+  // @see ckeditor_codemirror/ckeditor_codemirror.libraries.yml
+  // @see webform/webform.libraries.yml
+  if (isset($javascript['libraries/codemirror/lib/codemirror.js'])) {
+    $javascript['libraries/codemirror/lib/codemirror.js']['weight'] = -1;
+  }
+
   _webform_asset_alter($javascript, 'javascript');
 }
 
@@ -206,7 +216,7 @@ function webform_js_alter(&$javascript, AttachedAssetsInterface $assets) {
  */
 function _webform_asset_alter(array &$items, $type) {
   foreach ($items as $key => &$item) {
-    if (strpos($key, "webform/$type/") === 0) {
+    if (strpos($key, "/webform/$type/") === 0) {
       $item['weight'] = 1000;
       $item['group'] = 1000;
     }

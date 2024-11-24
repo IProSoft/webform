@@ -10,8 +10,8 @@ use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformTokenManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Provides a base webform for webform variants.
@@ -91,7 +91,7 @@ abstract class WebformVariantFormBase extends FormBase {
    *   Throws not found exception if the number of variant instances for this
    *   webform exceeds the variant's cardinality.
    */
-  public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL, $webform_variant = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?WebformInterface $webform = NULL, $webform_variant = NULL) {
     $this->webform = $webform;
     try {
       $this->webformVariant = $this->prepareWebformVariant($webform_variant);

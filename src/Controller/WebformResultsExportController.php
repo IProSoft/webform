@@ -198,7 +198,7 @@ class WebformResultsExportController extends ControllerBase implements Container
    *
    * @see http://www.jeffgeerling.com/blogs/jeff-geerling/using-batch-api-build-huge-csv
    */
-  public static function batchSet(WebformInterface $webform, EntityInterface $source_entity = NULL, array $export_options) {
+  public static function batchSet(WebformInterface $webform, ?EntityInterface $source_entity, array $export_options) {
     if (!empty($export_options['excluded_columns']) && is_string($export_options['excluded_columns'])) {
       $excluded_columns = explode(',', $export_options['excluded_columns']);
       $export_options['excluded_columns'] = array_combine($excluded_columns, $excluded_columns);
@@ -240,7 +240,7 @@ class WebformResultsExportController extends ControllerBase implements Container
    * @param mixed|array $context
    *   The batch current context.
    */
-  public static function batchProcess(WebformInterface $webform, EntityInterface $source_entity = NULL, array $export_options = [], &$context = []) {
+  public static function batchProcess(WebformInterface $webform, ?EntityInterface $source_entity, array $export_options = [], &$context = []) {
     /** @var \Drupal\webform\WebformSubmissionExporterInterface $submission_exporter */
     $submission_exporter = \Drupal::service('webform_submission.exporter');
     $submission_exporter->setWebform($webform);
@@ -250,7 +250,7 @@ class WebformResultsExportController extends ControllerBase implements Container
     if (empty($context['sandbox'])) {
       $context['sandbox']['progress'] = 0;
       $context['sandbox']['offset'] = 0;
-      $context['sandbox']['max'] = $submission_exporter->getQuery()->accessCheck(FALSE)->count()->execute();
+      $context['sandbox']['max'] = $submission_exporter->getTotal();
       // Store entity ids and not the actual webform or source entity in the
       // $context to prevent "The container was serialized" errors.
       // @see https://www.drupal.org/node/2822023
@@ -274,8 +274,12 @@ class WebformResultsExportController extends ControllerBase implements Container
 
     $context['message'] = t('Exported @count of @total submissions…', ['@count' => $context['sandbox']['progress'], '@total' => $context['sandbox']['max']]);
 
-    // Track finished.
-    if ($context['sandbox']['max'] > 0 && $context['sandbox']['progress'] !== $context['sandbox']['max']) {
+    // Track finished, if there are results and progress does not match the
+    // expected total, calculate finished percentage. A safety guard is added
+    // if the current run didn't find any results, then consider it finished as
+    // well. This could happen when records are added ore removed during the
+    // export.
+    if ($entity_ids && $context['sandbox']['max'] > 0 && $context['sandbox']['progress'] !== $context['sandbox']['max']) {
       $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
     }
     else {

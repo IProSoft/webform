@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Element;
 
-use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\webform\Utility\WebformElementHelper;
 
 /**
@@ -15,7 +15,7 @@ use Drupal\webform\Utility\WebformElementHelper;
  *
  * @FormElement("webform_email_confirm")
  */
-class WebformEmailConfirm extends FormElement {
+class WebformEmailConfirm extends FormElementBase {
 
   use WebformCompositeFormElementTrait;
 
@@ -88,6 +88,10 @@ class WebformEmailConfirm extends FormElement {
         }
       }
     }
+
+    // Since the element's id is never rendered, move it to the wrapper so that
+    // inline validation works as expected.
+    $element['#wrapper_attributes']['id'] = $element['#id'];
 
     // Get mail 1 email element.
     $mail_1_properties = [

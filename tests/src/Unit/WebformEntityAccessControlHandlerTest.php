@@ -10,8 +10,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\UnitTestCase;
-use Drupal\webform\WebformAccessRulesManagerInterface;
 use Drupal\webform\Plugin\WebformSourceEntityManagerInterface;
+use Drupal\webform\WebformAccessRulesManagerInterface;
 use Drupal\webform\WebformEntityAccessControlHandler;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -222,7 +222,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
    *
    * @see testCheckAccess()
    */
-  public function providerCheckAccess() {
+  public static function providerCheckAccess() {
     $tests = [];
 
     /* ********************************************************************** */
@@ -587,7 +587,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'duplicate', [
-        'permisssions' => ['create webform', 'edit own webform'],
+        'permissions' => ['create webform', 'edit own webform'],
         'account_is_webform_owner' => FALSE,
       ],
       [

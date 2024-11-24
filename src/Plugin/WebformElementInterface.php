@@ -5,8 +5,8 @@ namespace Drupal\webform\Plugin;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -327,7 +327,7 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    *
    * @see \Drupal\webform\Element\WebformCompositeBase::processWebformComposite
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL);
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL);
 
   /**
    * Finalize an element to be rendered within a webform.
@@ -340,7 +340,7 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    *
    * @see \Drupal\webform\Element\WebformCompositeBase::processWebformComposite
    */
-  public function finalize(array &$element, WebformSubmissionInterface $webform_submission = NULL);
+  public function finalize(array &$element, ?WebformSubmissionInterface $webform_submission = NULL);
 
   /**
    * Alter an element's associated form.
@@ -374,7 +374,7 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    *
    * @see \Drupal\webform\WebformAccessRulesManagerInterface::checkWebformAccess
    */
-  public function checkAccessRules($operation, array $element, AccountInterface $account = NULL);
+  public function checkAccessRules($operation, array $element, ?AccountInterface $account = NULL);
 
   /**
    * Replace tokens for all element properties.
@@ -384,7 +384,7 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    * @param \Drupal\Core\Entity\EntityInterface|null $entity
    *   A webform or webform submission entity.
    */
-  public function replaceTokens(array &$element, EntityInterface $entity = NULL);
+  public function replaceTokens(array &$element, ?EntityInterface $entity = NULL);
 
   /**
    * Display element disabled warning.

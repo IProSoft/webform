@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform_options_limit\Functional;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Webform options limit test.
@@ -102,7 +102,7 @@ class WebformOptionsLimitTest extends WebformBrowserTestBase {
     $this->postSubmission($webform, ['options_limit_select_none[]' => 'O']);
     $assert_session->responseContains('options_limit_select_none: O is unavailable.');
 
-    // Chech that unavailable option can't be prepopulated.
+    // Check that unavailable option can't be prepopulated.
     $this->drupalGet('/webform/test_handler_options_limit', ['query' => ['options_limit_default[]' => 'A']]);
     $assert_session->checkboxNotChecked('edit-options-limit-default-a');
     $this->drupalGet('/webform/test_handler_options_limit', ['query' => ['options_limit_default[]' => 'B']]);

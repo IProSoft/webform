@@ -7,8 +7,8 @@ use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
@@ -16,6 +16,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\webform\Cache\WebformBubbleableMetadata;
@@ -280,7 +281,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    * @see \Drupal\Core\Entity\EntityFormBuilder::getForm
    */
   public function setEntity(EntityInterface $entity) {
-    // Create new metadata to be applie when the form is built.
+    // Create new metadata to be applied when the form is built.
     // @see \Drupal\webform\WebformSubmissionForm::buildForm
     $this->bubbleableMetadata = new WebformBubbleableMetadata();
 
@@ -457,7 +458,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   An associative array containing last submission data
    *   with excluded elements.
    */
-  protected function getLastSubmissionData(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+  protected function getLastSubmissionData(WebformInterface $webform, ?EntityInterface $source_entity = NULL, ?AccountInterface $account = NULL) {
     $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE]);
     if (!$last_submission) {
       return [];
@@ -680,7 +681,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Server side #states API validation.
     $this->conditionsValidator->buildForm($form, $form_state);
 
-    // Append the bubbleable metadat to the form's render array.
+    // Append the bubbleable metadata to the form's render array.
     // @see \Drupal\webform\WebformSubmissionForm::setEntity
     $this->bubbleableMetadata->appendTo($form);
 
@@ -767,31 +768,6 @@ class WebformSubmissionForm extends ContentEntityForm {
     // @see \Drupal\webform\WebformSubmissionForm::addStatesPrefix
     $this->statesPrefix = '.' . end($class);
 
-    // Check for a custom webform, track it, and return it.
-    if ($custom_form = $this->getCustomForm($form, $form_state)) {
-      $custom_form['#custom_form'] = TRUE;
-      return $custom_form;
-    }
-
-    $form = parent::form($form, $form_state);
-
-    /* Information */
-
-    // Prepend webform submission data using the default view without the data.
-    if (!$webform_submission->isNew() && !$webform_submission->isDraft()) {
-      $form['navigation'] = [
-        '#type' => 'webform_submission_navigation',
-        '#webform_submission' => $webform_submission,
-        '#weight' => -20,
-      ];
-      $form['information'] = [
-        '#type' => 'webform_submission_information',
-        '#webform_submission' => $webform_submission,
-        '#source_entity' => $this->sourceEntity,
-        '#weight' => -19,
-      ];
-    }
-
     /* Confirmation */
 
     // Add confirmation modal.
@@ -815,6 +791,31 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#weight' => -1000,
         '#attached' => ['library' => ['webform/webform.confirmation.modal']],
         '#element_validate' => ['::removeConfirmationModal'],
+      ];
+    }
+
+    // Check for a custom webform, track it, and return it.
+    if ($custom_form = $this->getCustomForm($form, $form_state)) {
+      $custom_form['#custom_form'] = TRUE;
+      return $custom_form;
+    }
+
+    $form = parent::form($form, $form_state);
+
+    /* Information */
+
+    // Prepend webform submission data using the default view without the data.
+    if (!$webform_submission->isNew() && !$webform_submission->isDraft()) {
+      $form['navigation'] = [
+        '#type' => 'webform_submission_navigation',
+        '#webform_submission' => $webform_submission,
+        '#weight' => -20,
+      ];
+      $form['information'] = [
+        '#type' => 'webform_submission_information',
+        '#webform_submission' => $webform_submission,
+        '#source_entity' => $this->sourceEntity,
+        '#weight' => -19,
       ];
     }
 
@@ -1094,7 +1095,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         if ($offcanvas) {
           WebformDialogHelper::attachLibraries($form);
         }
-        $this->messenger()->addWarning($this->renderer->renderPlain($build));
+        $this->messenger()->addWarning($this->renderer->renderInIsolation($build));
       }
     }
 
@@ -1756,6 +1757,13 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   The current state of the form.
    */
   public function autosave(array &$form, FormStateInterface $form_state) {
+    // Make sure the submission exists before validating it.
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+    $webform_submission = $this->getEntity();
+    if ($webform_submission->id() && !WebformSubmission::load($webform_submission->id())) {
+      return;
+    }
+
     if ($form_state->hasAnyErrors()) {
       if ($this->draftEnabled() && $this->getWebformSetting('draft_auto_save') && !$this->entity->isCompleted()) {
         $form_state->set('in_draft', TRUE);
@@ -1854,6 +1862,14 @@ class WebformSubmissionForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Make sure the submission exists before validating it.
+    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+    $webform_submission = $this->getEntity();
+    if ($webform_submission->id() && !WebformSubmission::load($webform_submission->id())) {
+      $form_state->setErrorByName(NULL, $this->t('An error occurred while trying to validate the submission. Please save your work and reload this page.'));
+      return;
+    }
+
     parent::validateForm($form, $form_state);
 
     // Disable inline form error when performing validation via the API.
@@ -2094,18 +2110,18 @@ class WebformSubmissionForm extends ContentEntityForm {
     $files = $this->entityTypeManager->getStorage('file')->loadMultiple($fids);
     foreach ($files as $file) {
       $total_file_size += (int) $file->getSize();
-      $file_names[] = $file->getFilename() . ' - ' . format_size($file->getSize(), $this->entity->language()->getId());
+      $file_names[] = $file->getFilename() . ' - ' . ByteSizeMarkup::create($file->getSize(), $this->entity->language()->getId());
     }
 
     if ($total_file_size > $file_limit) {
-      $t_args = ['%quota' => format_size($file_limit)];
+      $t_args = ['%quota' => ByteSizeMarkup::create($file_limit)];
       $message = [];
       $message['content'] = ['#markup' => $this->t("This form's file upload quota of %quota has been exceeded. Please remove some files.", $t_args)];
       $message['files'] = [
         '#theme' => 'item_list',
         '#items' => $file_names,
       ];
-      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
+      $form_state->setErrorByName(NULL, $this->renderer->renderInIsolation($message));
     }
   }
 
@@ -2652,13 +2668,10 @@ class WebformSubmissionForm extends ContentEntityForm {
       $prepopulate_data = $this->getRequest()->query->all();
     }
     else {
-      $prepopulate_data = [];
-      $elements = $this->getWebform()->getElementsPrepopulate();
-      foreach ($elements as $element_key) {
-        if ($this->getRequest()->query->has($element_key)) {
-          $prepopulate_data[$element_key] = $this->getRequest()->query->get($element_key);
-        }
-      }
+      $prepopulate_data = array_intersect_key(
+        $this->getRequest()->query->all(),
+        $this->getWebform()->getElementsPrepopulate()
+      );
     }
 
     // Validate prepopulate data.

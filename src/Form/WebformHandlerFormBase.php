@@ -10,8 +10,8 @@ use Drupal\Core\Render\Element\MachineName;
 use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\WebformInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Provides a base webform for webform handlers.
@@ -97,7 +97,7 @@ abstract class WebformHandlerFormBase extends FormBase {
    *   Throws not found exception if the number of handler instances for this
    *   webform exceeds the handler's cardinality.
    */
-  public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL, $webform_handler = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?WebformInterface $webform = NULL, $webform_handler = NULL) {
     $this->webform = $webform;
     try {
       $this->webformHandler = $this->prepareWebformHandler($webform_handler);

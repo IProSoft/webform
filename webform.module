@@ -9,10 +9,10 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
-use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -100,8 +100,7 @@ function webform_modules_installed($modules) {
   $email_provider->check();
 
   // Update Webform HTML editor.
-  if (in_array('ckeditor', $modules)
-    || in_array('ckeditor5', $modules)) {
+  if (in_array('ckeditor5', $modules)) {
     \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
@@ -133,8 +132,7 @@ function webform_modules_uninstalled($modules) {
   $email_provider->check();
 
   // Update Webform HTML editor.
-  if (in_array('ckeditor', $modules)
-    || in_array('ckeditor5', $modules)) {
+  if (in_array('ckeditor5', $modules)) {
     \Drupal::moduleHandler()->loadInclude('webform', 'inc', 'includes/webform.install') .
     _webform_update_html_editor();
   }
@@ -264,7 +262,7 @@ function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableD
   if (strpos($route_name, 'entity.webform_submission.devel_') === 0 || $route_name === 'entity.webform_submission.token_devel') {
     foreach ($data['tabs'] as $tab_level) {
       foreach ($tab_level as $tab) {
-        /** @var Drupal\Core\Url $url */
+        /** @var \Drupal\Core\Url $url */
         $url = $tab['#link']['url'];
         $tab_route_name = $url->getRouteName();
         $tab_route_parameters = $url->getRouteParameters();
@@ -632,6 +630,7 @@ function webform_page_attachments(array &$attachments) {
 function webform_metatags_alter(array &$metatags, array &$context) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (!empty(\Drupal::config('webform.settings')->get('settings.default_confirmation_noindex'))
+    && $route_name
     && preg_match('/^(entity\.webform\.confirmation|entity\.[a-z-_]+\.webform\.confirmation)$/', $route_name)) {
     $robots = (!empty($metatags['robots']))
       ? preg_split('/\s*,\s*/', $metatags['robots'])
@@ -860,9 +859,14 @@ function webform_file_download($uri) {
  *   An empty array if the file name length is smaller than the limit or an
  *   array containing an error message if it's not or is empty.
  *
+ * @deprecated in webform:6.3.0 and is removed from webform:7.0.0. Use
+ *   'FileNameLength' file validator plugin instead.
+ *
+ * @see https://www.drupal.org/node/3475420
  * @see file_validate_name_length()
  */
 function webform_file_validate_name_length(FileInterface $file) {
+  @trigger_error(__FUNCTION__ . "() is deprecated in webform:6.3.0 and is removed from webform:7.0.0. Use 'FileNameLength' file validator plugin instead. See https://www.drupal.org/node/3475420", E_USER_DEPRECATED);
   $errors = [];
   // Don't display error is the file_validate_name_length() has already
   // displayed a warning because the files length is over 240.
@@ -953,30 +957,6 @@ function webform_webform_access_rules() {
 }
 
 /* ************************************************************************** */
-// Devel generate info hooks.
-/* ************************************************************************** */
-
-/**
- * Implements hook_devel_generate_info_alter().
- */
-function webform_devel_generate_info_alter(array &$generators) {
-  if (!isset($generators['webform_submission'])) {
-    return;
-  }
-
-  // Use deprecated generator because the devel_generate.module changed the
-  // DevelGenerateBaseInterface.
-  //
-  // @see \Drupal\webform\Plugin\DevelGenerate\WebformSubmissionDevelGenerateDeprecated
-  // @see https://www.drupal.org/project/webform/issues/3155654
-  // @see https://gitlab.com/drupalspoons/devel/-/issues/324
-  $info = \Drupal::service('extension.list.module')->getExtensionInfo('devel_generate');
-  if (!empty($info['version']) && strpos($info['version'], '8.x-') === 0) {
-    $generators['webform_submission']['class'] = 'Drupal\webform\Plugin\DevelGenerate\WebformSubmissionDevelGenerateDeprecated';
-  }
-}
-
-/* ************************************************************************** */
 // Element info hooks.
 /* ************************************************************************** */
 
@@ -1026,6 +1006,11 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
     return $element;
   }
 
+  // Set #webform_element for all options (checkboxes and radios).
+  foreach (Element::children($element) as $key) {
+    $element[$key]['#webform_element'] = TRUE;
+  }
+
   // Description display.
   if (!empty($element['#options_description_display'])) {
     $description_property_name = ($element['#options_description_display'] === 'help') ? '#help' : '#description';
@@ -1038,7 +1023,6 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
 
       [$title, $description] = WebformOptionsHelper::splitOption($title);
       $element[$key]['#title'] = $title;
-      $element[$key]['#webform_element'] = TRUE;
       $element[$key][$description_property_name] = $description;
     }
   }

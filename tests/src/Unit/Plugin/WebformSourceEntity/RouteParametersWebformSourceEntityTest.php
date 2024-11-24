@@ -5,8 +5,8 @@ namespace Drupal\Tests\webform\Unit\Plugin\WebformSourceEntity;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\webform\Plugin\WebformSourceEntity\RouteParametersWebformSourceEntity;
 use Drupal\Tests\UnitTestCase;
+use Drupal\webform\Plugin\WebformSourceEntity\RouteParametersWebformSourceEntity;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -76,7 +76,7 @@ class RouteParametersWebformSourceEntityTest extends UnitTestCase {
    *
    * @see testGetCurrentSourceEntity()
    */
-  public function providerGetCurrentSourceEntity() {
+  public static function providerGetCurrentSourceEntity() {
     $tests[] = [[], [], FALSE, 'Empty parameters'];
     $tests[] = [['source_entity' => 1], [], TRUE, 'Just source entity in the parameters'];
     $tests[] = [['source_entity' => 1], ['source_entity'], FALSE, 'Source entity in the parameters but forced to ignore'];

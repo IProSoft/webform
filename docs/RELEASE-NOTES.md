@@ -175,6 +175,7 @@ References
 - [Issue #2870145: Set printerClass in phpunit.xml.dist](https://www.drupal.org/node/2870145)
 - [Lesson 10.2 - Unit testing](https://docs.acquia.com/article/lesson-102-unit-testing)
 
+
     # Export database and base URL.
     export SIMPLETEST_DB=mysql://drupal_d8_webform:drupal.@dm1n@localhost/drupal_d8_webform;
     export SIMPLETEST_BASE_URL='http://localhost/wf';
@@ -189,8 +190,8 @@ References
     # Functional test.
     php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Functional/WebformExampleFunctionalTest.php
 
-    # Kernal test.
-    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Kernal/Utility/WebformDialogHelperTest.php
+    # Kernel test.
+    php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Kernel/Utility/WebformDialogHelperTest.php
 
     # Unit test.
     php ../../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Unit/Utility/WebformYamlTest.php
@@ -202,9 +203,11 @@ References
 -------------------------
 
 [Git Release Notes for Drush](https://www.drupal.org/project/grn)
+[Generate release notes](https://drupal-mrn.dev/)
 
-  drush release-notes --nouser 6.2.x 6.2.x
-  drush release-notes --nouser 6.1.x 6.2.x
+
+    drush release-notes --nouser 6.2.x 6.2.x
+    drush release-notes --nouser 6.1.x 6.2.x
 
 
 6. Tag and create a new release
@@ -225,7 +228,7 @@ References
 7. Tag and create a hotfix release
 ----------------------------------
 
-    # Creete hotfix branch
+    # Create hotfix branch
     git checkout 6.2.LATEST-VERSION
     git checkout -b 6.2.NEXT-VERSION-hotfix
     git push -u origin 6.2.NEXT-VERSION-hotfix

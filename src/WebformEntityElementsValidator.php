@@ -5,9 +5,9 @@ namespace Drupal\webform;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
+use Drupal\Core\Form\FormState;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
@@ -441,7 +441,7 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
             '#items' => $items,
           ],
         ];
-        $messages[] = $this->renderer->renderPlain($build);
+        $messages[] = $this->renderer->renderInIsolation($build);
       }
       return $messages;
     }
@@ -595,7 +595,7 @@ class WebformEntityElementsValidator implements WebformEntityElementsValidatorIn
           '#items' => [$message],
         ],
       ];
-      return $this->renderer->renderPlain($build);
+      return $this->renderer->renderInIsolation($build);
     }
 
     return $message;

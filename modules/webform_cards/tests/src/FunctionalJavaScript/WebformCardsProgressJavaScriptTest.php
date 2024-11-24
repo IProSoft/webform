@@ -1,9 +1,9 @@
 <?php
 
-namespace Drupal\Tests\webform_cards\FunctionalJavaScript;
+namespace Drupal\Tests\webform_cards\FunctionalJavascript;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Tests\webform\FunctionalJavascript\WebformWebDriverTestBase;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Tests for webform cards progress.

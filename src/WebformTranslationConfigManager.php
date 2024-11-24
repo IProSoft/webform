@@ -2,7 +2,7 @@
 
 namespace Drupal\webform;
 
-use Drupal\block\Entity\Block;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\TypedConfigManagerInterface;
@@ -10,18 +10,18 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
+use Drupal\block\Entity\Block;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
 use Drupal\webform\Twig\WebformTwigExtension;
-use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformYaml;
 
 /**
  * Defines a class to translate webform config.
@@ -31,7 +31,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
   use StringTranslationTrait;
 
   /**
-   * A unsaved webfofrm used to get element properties by element type.
+   * A unsaved webform used to get element properties by element type.
    *
    * @var \Drupal\webform\WebformInterface
    */
@@ -93,7 +93,7 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
    * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
    *   The typed config manager.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, FormBuilderInterface $form_builder, WebformElementManagerInterface $element_manager, WebformTranslationManagerInterface $translation_manager, TypedConfigManagerInterface $typed_config_manager = NULL) {
+  public function __construct(ModuleHandlerInterface $module_handler, FormBuilderInterface $form_builder, WebformElementManagerInterface $element_manager, WebformTranslationManagerInterface $translation_manager, ?TypedConfigManagerInterface $typed_config_manager = NULL) {
     $this->formBuilder = $form_builder;
     $this->moduleHandler = $module_handler;
     $this->elementManager = $element_manager;
@@ -344,7 +344,12 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
         $body_element =& NestedArray::getValue($config_element, ['handlers', $handler_id, 'settings', 'body']);
         if ($body_element) {
           $configuration = $handler->getConfiguration();
-          if (!empty($configuration['settings']['twig'])) {
+
+          $default_value = (string) ($body_element['translation']['#default_value'] ?? '');
+          if (preg_match('/^(_default|\[[^]]+\])$/', $default_value)) {
+            // Don't alter the body element if the value '_default' or a token.
+          }
+          elseif (!empty($configuration['settings']['twig'])) {
             $this->alterTextareaElement($body_element, 'twig');
             $body_element['translation']['#access'] = WebformTwigExtension::hasEditTwigAccess();
           }

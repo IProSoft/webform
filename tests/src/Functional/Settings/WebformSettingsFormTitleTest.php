@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\webform\Functional\Settings;
 
-use Drupal\Core\Serialization\Yaml;
-use Drupal\webform\Entity\Webform;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
 
 /**

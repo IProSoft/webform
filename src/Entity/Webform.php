@@ -2,12 +2,12 @@
 
 namespace Drupal\webform\Entity;
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -20,13 +20,13 @@ use Drupal\webform\Plugin\WebformElementAttachmentInterface;
 use Drupal\webform\Plugin\WebformElementComputedInterface;
 use Drupal\webform\Plugin\WebformElementVariantInterface;
 use Drupal\webform\Plugin\WebformElementWizardPageInterface;
+use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\Plugin\WebformHandlerMessageInterface;
+use Drupal\webform\Plugin\WebformHandlerPluginCollection;
 use Drupal\webform\Plugin\WebformVariantInterface;
 use Drupal\webform\Plugin\WebformVariantPluginCollection;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
-use Drupal\webform\Plugin\WebformHandlerInterface;
-use Drupal\webform\Plugin\WebformHandlerPluginCollection;
 use Drupal\webform\Utility\WebformTextHelper;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\webform\WebformException;
@@ -496,13 +496,6 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * @var bool
    */
   protected $hasAnonymousSubmissionTrackingHandler;
-
-  /**
-   * Track if the webform has message handler.
-   *
-   * @var bool
-   */
-  private $hasMessagehandler;
 
   /**
    * {@inheritdoc}
@@ -1557,7 +1550,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     // Get the current langcode.
-    $current_langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $current_langcode = \Drupal::languageManager()->getConfigOverrideLanguage()->getId();
 
     // If the current langcode is the same as this webform's langcode
     // then return.
@@ -2033,7 +2026,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPages($operation = 'default', WebformSubmissionInterface $webform_submission = NULL) {
+  public function getPages($operation = 'default', ?WebformSubmissionInterface $webform_submission = NULL) {
     $pages = $this->buildPages($operation);
     if ($this->getSetting('wizard_progress_states') && $webform_submission) {
       /** @var \Drupal\webform\WebformSubmissionConditionsValidatorInterface $constraint_validator */
@@ -2471,7 +2464,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
     }
 
     $path_alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
-    $query = $path_alias_storage->getQuery('OR')->accessCheck();
+    $query = $path_alias_storage->getQuery('OR')->accessCheck(TRUE);
 
     // Delete webform base, confirmation, submissions and drafts paths.
     $path_suffixes = ['', '/confirmation', '/submissions', '/drafts'];
@@ -2553,20 +2546,20 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * {@inheritdoc}
    */
   public function hasMessageHandler() {
-    if (isset($this->hasMessagehandler)) {
-      $this->hasMessagehandler;
+    if (isset($this->hasMessageHandler)) {
+      $this->hasMessageHandler;
     }
 
-    $this->hasMessagehandler = FALSE;
+    $this->hasMessageHandler = FALSE;
     $handlers = $this->getHandlers();
     foreach ($handlers as $handler) {
       if ($handler instanceof WebformHandlerMessageInterface) {
-        $this->hasMessagehandler = TRUE;
+        $this->hasMessageHandler = TRUE;
         break;
       }
     }
 
-    return $this->hasMessagehandler;
+    return $this->hasMessageHandler;
   }
 
   /**
@@ -2780,7 +2773,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
    * @return bool
    *   TRUE if a webform handler is enabled.
    */
-  protected function isHandlerEnabled(WebformHandlerInterface $handler, WebformSubmissionInterface $webform_submission = NULL) {
+  protected function isHandlerEnabled(WebformHandlerInterface $handler, ?WebformSubmissionInterface $webform_submission = NULL) {
     // Check if the handler is disabled.
     if ($handler->isDisabled()) {
       return FALSE;
@@ -2950,7 +2943,7 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
   /**
    * {@inheritdoc}
    */
-  public function applyVariants(WebformSubmissionInterface $webform_submission = NULL, array $variants = [], $force = FALSE) {
+  public function applyVariants(?WebformSubmissionInterface $webform_submission = NULL, array $variants = [], $force = FALSE) {
     // Get variants from webform submission.
     if ($webform_submission) {
       // Make sure webform submission is associated with this webform.

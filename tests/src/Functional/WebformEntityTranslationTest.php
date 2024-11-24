@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional;
 
-use Drupal\Core\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\webform\Entity\Webform;
 
@@ -90,10 +90,10 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
 
     // Check translations.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate');
-    $assert_session->responseContains('<a href="' . base_path() . 'webform/test_translation"><strong>English (original)</strong></a>');
-    $assert_session->responseContains('<a href="' . base_path() . 'es/webform/test_translation" hreflang="es">Spanish</a>');
-    $assert_session->responseNotContains('<a href="' . base_path() . 'fr/webform/test_translation" hreflang="fr">French</a>');
-    $assert_session->responseContains('<a href="' . base_path() . 'admin/structure/webform/manage/test_translation/translate/es/edit">Edit</a>');
+    $assert_session->linkByHrefExists('/webform/test_translation');
+    $assert_session->linkByHrefExists('/es/webform/test_translation');
+    $assert_session->linkByHrefNotExists('/fr/webform/test_translation');
+    $assert_session->linkByHrefExists('/admin/structure/webform/manage/test_translation/translate/es/edit');
 
     // Check Spanish translation.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/es/edit');
@@ -106,6 +106,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][textfield][title]', 'Campo de texto');
 
     // Check select with options translation.
+    // cSpell:disable
     $assert_session->fieldValueEquals('translation[config_names][webform.webform.test_translation][elements][select_options][title]', 'Seleccione (opciones)');
 
     // Check select with custom options translation.
@@ -205,18 +206,33 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     // Check default elements.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
 
+    // Check email body's default textfield.
+    $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
+
+    // Enable set body to custom HTML.
+    $handler = $webform->getHandler('email_confirmation');
+    $configuration = $handler->getConfiguration();
+    $configuration['settings']['body'] = '<strong>some HTML</strong>';
+    $handler->setConfiguration($configuration);
+    $webform->save();
+
+    // Check default elements with HTML.
+    $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
+
     // Check custom HTML Editor.
     $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][description][value][value]"]');
 
     // Check email body's HTML Editor.
     $this->assertCssSelect('textarea[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body][value][value]"]');
 
-    // Check email body's Twig Editor.
+    // Enable twig.
     $handler = $webform->getHandler('email_confirmation');
     $configuration = $handler->getConfiguration();
     $configuration['settings']['twig'] = TRUE;
     $handler->setConfiguration($configuration);
     $webform->save();
+
+    // Check email body's Twig Editor.
     $this->drupalGet('/admin/structure/webform/manage/test_translation/translate/fr/add');
     $this->assertCssSelect('textarea.js-webform-codemirror.twig[name="translation[config_names][webform.webform.test_translation][handlers][email_confirmation][settings][body]"]');
 
@@ -423,7 +439,7 @@ class WebformEntityTranslationTest extends WebformBrowserTestBase {
     $this->drupalGet('/es/webform/test_translation', ['query' => ['variant' => 'test']]);
     $assert_session->responseContains('<label for="edit-textfield">Campo de texto</label>');
     $assert_session->responseContains('<label for="edit-select-options">Seleccione (opciones)</label>');
-
+    // cSpell:enable
     // Check French (not translated) webform.
     $this->drupalGet('/fr/webform/test_translation');
     $assert_session->responseContains('<label for="edit-textfield">Text field</label>');
