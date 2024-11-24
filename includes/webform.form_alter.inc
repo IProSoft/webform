@@ -5,8 +5,10 @@
  * Webform module form alter hooks.
  */
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\WebformSubmissionForm;
 
@@ -14,6 +16,24 @@ use Drupal\webform\WebformSubmissionForm;
  * Implements hook_form_alter().
  */
 function webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_admin_permissions':
+      // We need to hide the 'Use the Webform (Default) - DO NOT EDIT text format'
+      // permission.
+      if (isset($form['permissions']['use text format webform_default'])) {
+        $form['permissions']['use text format webform_default']['#access'] = FALSE;
+      }
+      break;
+
+    case 'field_config_edit_form':
+      // Remove the 'Webform (Default) - DO NOT EDIT' options from allowed formats.
+      NestedArray::unsetValue(
+        $form,
+        ['settings', 'allowed_formats', '#options', WebformHtmlEditor::DEFAULT_FILTER_FORMAT],
+      );
+      break;
+  }
+
   if (strpos($form_id, 'webform_') === FALSE || strpos($form_id, 'node_') === 0) {
     return;
   }

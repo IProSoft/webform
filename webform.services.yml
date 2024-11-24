@@ -127,6 +127,12 @@ services:
     tags:
       - { name: event_subscriber }
 
+  webform.filter_format_subscriber:
+    class: Drupal\webform\EventSubscriber\WebformFilterFormatSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }
+
   # Route subscriber.
 
   webform.route_subscriber:
@@ -136,6 +142,7 @@ services:
       - { name: event_subscriber }
 
   # Caching
+
   cache_context.webform_source_entity:
     class: Drupal\webform\Cache\WebformSourceEntityCacheContext
     arguments: ['@plugin.manager.webform.source_entity']
