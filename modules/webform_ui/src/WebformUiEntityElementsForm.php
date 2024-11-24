@@ -17,7 +17,6 @@ use Drupal\webform\Plugin\WebformElement\WebformTable;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
-use Drupal\webform\WebformLibrariesManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -508,7 +507,7 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
           'key' => $key,
         ]),
         '#attributes' => $offcanvas_dialog_attributes,
-        '#prefix' => !empty($indentation) ? $this->renderer->renderPlain($indentation) : '',
+        '#prefix' => !empty($indentation) ? $this->renderer->renderInIsolation($indentation) : '',
       ],
     ];
     if (!empty($element['#admin_notes'])) {

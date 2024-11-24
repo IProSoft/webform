@@ -114,7 +114,6 @@ class WebformDevelCommands extends WebformCommandsBase {
     $this->output()->writeln(dt('Repairing admin configuration…'));
     _webform_update_admin_settings(TRUE);
 
-
     $this->output()->writeln(dt('Repairing webform HTML editor…'));
     _webform_update_html_editor();
 

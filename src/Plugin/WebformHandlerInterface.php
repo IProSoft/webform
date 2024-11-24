@@ -532,9 +532,9 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    *   The account trying to access the entity.
    *
    * @return \Drupal\Core\Core\AccessResultInterface
-   *   The result of the access check. No option returns a nuetral result.
+   *   The result of the access check. No option returns a neutral result.
    */
-  public function access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account = NULL);
+  public function access(WebformSubmissionInterface $webform_submission, $operation, ?AccountInterface $account = NULL);
 
   /* ************************************************************************ */
   // Preprocessing methods.
@@ -589,7 +589,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The result of the access check. Defaults to neutral.
    */
-  public function accessElement(array &$element, $operation, AccountInterface $account = NULL);
+  public function accessElement(array &$element, $operation, ?AccountInterface $account = NULL);
 
   /**
    * Acts on a element after it has been created.

@@ -36,7 +36,7 @@ class WebformOptionsCustomTest extends WebformBrowserTestBase {
 
     $this->drupalGet('/webform/test_element_options_custom_html');
 
-    // Check that 'data-option-value' is added to the basdic HTML markup.
+    // Check that 'data-option-value' is added to the basic HTML markup.
     // @see webform_options_custom.webform_options_custom.test_html.yml
     $assert_session->responseContains('<div data-id="one" data-name="One" data-option-value="one">One</div>');
     $assert_session->responseContains('<div data-id="two" data-name="Two" data-option-value="two">Two</div>');
