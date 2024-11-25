@@ -248,6 +248,7 @@ class WebformSubmissionDevelGenerate extends DevelGenerateBase implements Contai
       }
     }
     $this->setMessage($this->formatPlural($values['num'], '1 submissions created.', 'Finished creating @count submissions'));
+    // @phpstan-ignore-next-line property.notFound
     static::$generatingSubmissions = FALSE;
   }
 
