@@ -101,7 +101,7 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
 
     // Check that webform default filter format is not included on
-    // permissons pages.
+    // permissions pages.
     $this->drupalGet('/admin/people/permissions');
     $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
     $this->drupalGet('/admin/people/permissions/authenticated');
