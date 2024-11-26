@@ -699,9 +699,6 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    *   The current state of the form.
    * @param array $export_options
    *   An associative array of default values.
-   *
-   * @return array
-   *   An associative array contain an element's export option webform.
    */
   public function buildExportOptionsForm(array &$form, FormStateInterface $form_state, array $export_options);
 

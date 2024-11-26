@@ -260,7 +260,7 @@ class WebformOptionsForm extends EntityForm {
   public function save(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\webform\WebformOptionsInterface $webform_options */
     $webform_options = $this->getEntity();
-    $webform_options->save();
+    $status = $webform_options->save();
 
     $context = [
       '@label' => $webform_options->label(),
@@ -271,6 +271,8 @@ class WebformOptionsForm extends EntityForm {
     $this->messenger()->addStatus($this->t('Options %label saved.', ['%label' => $webform_options->label()]));
 
     $form_state->setRedirect('entity.webform_options.collection');
+
+    return $status;
   }
 
 }

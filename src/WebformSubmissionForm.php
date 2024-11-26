@@ -1909,6 +1909,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Validate file (upload) limit.
     $this->validateUploadedManagedFiles($form, $form_state);
+    return $this->entity;
   }
 
   /**
@@ -2015,7 +2016,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     // Save and log webform submission.
-    $webform_submission->save();
+    $status = $webform_submission->save();
 
     // Invalidate cache if any limits are specified.
     if ($this->getWebformSetting('limit_total')
@@ -2032,6 +2033,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     if ($this->checkTotalLimit() || $this->checkUserLimit()) {
       $form_state->setRebuild();
     }
+    return $status;
   }
 
   /**

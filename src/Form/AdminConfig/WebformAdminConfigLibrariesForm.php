@@ -232,7 +232,7 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
 
     // Reset libraries cache.
     // @see webform_library_info_build()
-    \Drupal::service('library.discovery')->clearCachedDefinitions();
+    \Drupal::service('library.discovery')->clear();
   }
 
 }

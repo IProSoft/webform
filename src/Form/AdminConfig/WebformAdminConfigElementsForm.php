@@ -541,7 +541,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
 
     // Reset libraries cached.
     // @see webform_library_info_build()
-    \Drupal::service('library.discovery')->clearCachedDefinitions();
+    \Drupal::service('library.discovery')->clear();
   }
 
   /**

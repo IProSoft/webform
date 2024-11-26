@@ -68,7 +68,9 @@ function webform_scheduled_email_help($section) {
  * @see \Drupal\webform_scheduled_email\Commands\WebformScheduledEmailCommands::drush_webform_scheduled_email_cron()
  */
 function webform_scheduled_email_cron_process($webform_id = NULL, $handler_id = NULL) {
+  // @phpstan-ignore-next-line
   $schedule_limit = drush_get_option('schedule_limit') ?: 1000;
+  // @phpstan-ignore-next-line
   $send_limit = drush_get_option('send_limit') ?: 500;
 
   // Get and validate optional $webform_id parameter.
@@ -76,6 +78,7 @@ function webform_scheduled_email_cron_process($webform_id = NULL, $handler_id = 
   if ($webform_id) {
     $webform = Webform::load($webform_id);
     if (!$webform) {
+      // @phpstan-ignore-next-line
       return drush_set_error(dt('Webform @id not recognized.', ['@id' => $webform_id]));
     }
   }
@@ -86,9 +89,11 @@ function webform_scheduled_email_cron_process($webform_id = NULL, $handler_id = 
       $handler = $webform->getHandler($handler_id);
     }
     catch (\Exception $exception) {
+      // @phpstan-ignore-next-line
       return drush_set_error(dt('Handler @id not recognized.', ['@id' => $handler_id]));
     }
     if (!($handler instanceof ScheduleEmailWebformHandler)) {
+      // @phpstan-ignore-next-line
       return drush_set_error(dt('Handler @id is not a scheduled email handler.', ['@id' => $handler_id]));
     }
   }

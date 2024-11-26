@@ -5,6 +5,9 @@
  * Alter hooks to increase webform input and button size.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+
 /**
  * Implements hook_webform_submission_form_alter().
  */

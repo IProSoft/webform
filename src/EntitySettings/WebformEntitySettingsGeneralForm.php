@@ -578,7 +578,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     $webform_storage = $this->entityTypeManager->getStorage('webform');
     $webform_storage->resetCategoriesCache();
 
-    parent::save($form, $form_state);
+    return parent::save($form, $form_state);
   }
 
   /**
