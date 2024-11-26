@@ -836,6 +836,8 @@ function webform_get_submissions_query($filters = array(), $header = NULL, $page
       if (!isset($sort['sort']) || !in_array($sort['sort'], array('asc', 'desc'), TRUE)) {
         $sort['sort'] = '';
       }
+      // Include this field in select as it is used in left join.
+      $pager_query->fields('wsd', array('data'));
       $pager_query->leftJoin('webform_component', 'wc', 'ws.nid = wc.nid AND wc.name = :form_key', array('form_key' => $sort['order']));
       $pager_query->leftJoin('webform_submitted_data', 'wsd', 'wc.nid = wsd.nid AND ws.sid = wsd.sid AND wc.cid = wsd.cid');
       $pager_query->orderBy('wsd.data', $sort['sort']);
