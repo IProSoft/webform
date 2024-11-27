@@ -35,6 +35,7 @@ entitywebformedit
 entitywebformsettings
 eslinting
 filecontent
+filesizes
 fileurl
 Flexmail
 Formdazzle
