@@ -7,14 +7,14 @@ namespace Drupal\Tests\webform\Kernel\Plugin\ConfigAction;
 use Drupal\Core\Config\Action\ConfigActionException;
 use Drupal\Core\Config\Action\ConfigActionManager;
 use Drupal\Core\Config\ConfigManagerInterface;
-use Drupal\KernelTests\KernelTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests the "addCaptchaElement" config action.
  *
  * @group webform
  */
-class AddCaptchaElementTest extends KernelTestBase {
+class AddCaptchaElementTest extends BrowserTestBase {
 
   const CONFIG_NAME = 'webform.webform.contact';
 
@@ -22,6 +22,10 @@ class AddCaptchaElementTest extends KernelTestBase {
    * {@inheritdoc}
    */
   protected static $modules = ['captcha', 'system', 'user', 'webform'];
+
+  protected $defaultTheme = 'stark';
+
+  protected $profile = 'minimal';
 
   /**
    * The config action manager.
@@ -61,7 +65,7 @@ class AddCaptchaElementTest extends KernelTestBase {
 
     $elements = $entity->getElementsDecoded();
     $this->assertArrayHasKey('captcha', $elements);
-    $this->assertEqual($elements['captcha'], ['#type' => 'captcha']);
+    $this->assertEquals($elements['captcha'], ['#type' => 'captcha']);
   }
 
   /**
