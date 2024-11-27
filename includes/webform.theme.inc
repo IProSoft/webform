@@ -9,7 +9,6 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\ByteSizeMarkup;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\file\Entity\File;
 use Drupal\webform\Element\WebformSelectOther;
@@ -655,26 +654,12 @@ function webform_preprocess_file_managed_file(&$variables) {
  * @see \Drupal\webform\Plugin\WebformElement\WebformManagedFileBase::prepare
  */
 function webform_preprocess_file_upload_help(&$variables) {
-  $upload_validators = $variables['upload_validators'];
+  $validator_help = $variables['upload_validators'];
 
-  if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
-    $variables['descriptions'][] = t('@size limit per form.', ['@size' => ByteSizeMarkup::create($upload_validators['webform_file_limit'][0])]);
+  if (isset($validator_help['webform_file_limit'])) {
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => ByteSizeMarkup::create($validator_help['webform_file_limit'])]);
   }
 
-  // Issue #3136578: Comma-separate the list of allowed file extensions.
-  // @see https://www.drupal.org/project/drupal/issues/3136578
-  if (isset($upload_validators['webform_file_validate_extensions'])) {
-    foreach ($variables['descriptions'] as $index => $description) {
-      if ($description instanceof TranslatableMarkup
-        && $description->getUntranslatedString() === 'Allowed types: @extensions.') {
-        $arguments = $description->getArguments();
-        if (is_string($arguments['@extensions']) && strpos($arguments['@extensions'], ',') === FALSE) {
-          $arguments['@extensions'] = preg_replace('/ +/', ', ', $arguments['@extensions']);
-          $variables['descriptions'][$index] = new TranslatableMarkup($description->getUntranslatedString(), $arguments);
-        }
-      }
-    }
-  }
 }
 
 /**

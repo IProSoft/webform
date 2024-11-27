@@ -53,7 +53,7 @@ class Range extends NumericBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Set default min/max. Default step is defined via parent::prepare().
@@ -129,7 +129,7 @@ class Range extends NumericBase {
           ];
         }
         else {
-          $element['#field_suffix'] = [
+          $element['#field_prefix'] = [
             'output' => $output,
             'delimiter' => ['#markup' => '<span class="webform-range-output-delimiter"></span>'],
           ];
@@ -158,7 +158,7 @@ class Range extends NumericBase {
   /**
    * {@inheritdoc}
    */
-  protected function prepareElementValidateCallbacks(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  protected function prepareElementValidateCallbacks(array &$element, ?WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepareElementValidateCallbacks($element, $webform_submission);
     $element['#element_validate'][] = [get_class($this), 'validateRange'];
   }

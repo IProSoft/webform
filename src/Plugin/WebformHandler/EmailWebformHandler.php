@@ -1066,7 +1066,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $emails = array_filter($emails);
     // Make sure all email addresses are unique.
     $emails = array_unique($emails);
-    // Sort email addresses to make it easier to debug queuing and/or sending
+    // Sort email addresses to make it easier to debug queueing and/or sending
     // issues.
     asort($emails);
 
@@ -1573,7 +1573,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
    * @return array
    *   A select other element.
    */
-  protected function buildElement($name, $title, $label, $required = FALSE, array $element_options = [], array $options_options = NULL, array $role_options = NULL, array $other_options = NULL) {
+  protected function buildElement($name, $title, $label, $required = FALSE, array $element_options = [], ?array $options_options = NULL, ?array $role_options = NULL, ?array $other_options = NULL) {
     [$element_name, $element_type] = (strpos($name, '_') !== FALSE) ? explode('_', $name) : [$name, 'text'];
 
     $default_option = $this->getDefaultConfigurationValue($name);

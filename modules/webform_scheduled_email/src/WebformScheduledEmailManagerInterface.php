@@ -266,7 +266,7 @@ interface WebformScheduledEmailManagerInterface {
   public function delete(EntityInterface $entity, $handler_id = NULL);
 
   /* ************************************************************************ */
-  // Queuing/sending functions (aka the tumbleweed).
+  // Queueing/sending functions (aka the tumbleweed).
   /* ************************************************************************ */
 
   /**
@@ -293,7 +293,7 @@ interface WebformScheduledEmailManagerInterface {
    *   - WebformScheduledEmailManagerInterface::EMAIL_UNSCHEDULED
    *   - WebformScheduledEmailManagerInterface::EMAIL_SENT
    */
-  public function cron(EntityInterface $entity = NULL, $handler_id = NULL, $schedule_limit = 1000, $send_limit = NULL);
+  public function cron(?EntityInterface $entity = NULL, $handler_id = NULL, $schedule_limit = 1000, $send_limit = NULL);
 
   /* ************************************************************************ */
   // Statistic/tracking functions.
@@ -310,7 +310,7 @@ interface WebformScheduledEmailManagerInterface {
    * @return array
    *   An array containing the handler waiting, queued, ready, and total submissions.
    */
-  public function stats(EntityInterface $entity = NULL, $handler_id = NULL);
+  public function stats(?EntityInterface $entity = NULL, $handler_id = NULL);
 
   /**
    * Get the number of emails waiting to be queued.
@@ -323,7 +323,7 @@ interface WebformScheduledEmailManagerInterface {
    * @return int
    *   The number of emails waiting to be queued.
    */
-  public function waiting(EntityInterface $entity = NULL, $handler_id = NULL);
+  public function waiting(?EntityInterface $entity = NULL, $handler_id = NULL);
 
   /**
    * Get the number of emails queued but not ready to be sent.
@@ -336,7 +336,7 @@ interface WebformScheduledEmailManagerInterface {
    * @return int
    *   The number of emails queued but not ready to be sent.
    */
-  public function queued(EntityInterface $entity = NULL, $handler_id = NULL);
+  public function queued(?EntityInterface $entity = NULL, $handler_id = NULL);
 
   /**
    * Get the number of emails ready to be sent during the next cron task.
@@ -349,7 +349,7 @@ interface WebformScheduledEmailManagerInterface {
    * @return int
    *   The number of emails ready to be sent.
    */
-  public function ready(EntityInterface $entity = NULL, $handler_id = NULL);
+  public function ready(?EntityInterface $entity = NULL, $handler_id = NULL);
 
   /**
    * Get the total number of scheduled emails.
@@ -364,6 +364,6 @@ interface WebformScheduledEmailManagerInterface {
    * @return int
    *   The total number of scheduled emails.
    */
-  public function total(EntityInterface $entity = NULL, $handler_id = NULL, $state = NULL);
+  public function total(?EntityInterface $entity = NULL, $handler_id = NULL, $state = NULL);
 
 }

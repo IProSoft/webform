@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\webform\Functional\Access;
 
-use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\webform\Element\WebformHtmlEditor;
 
 /**
@@ -18,7 +18,7 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['webform'];
+  protected static $modules = ['node', 'field_ui', 'webform'];
 
   /**
    * Webforms to load.
@@ -100,6 +100,13 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     $assert_session->statusCodeEquals(200);
     $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
 
+    // Check that webform default filter format is not included on
+    // permissions pages.
+    $this->drupalGet('/admin/people/permissions');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+    $this->drupalGet('/admin/people/permissions/authenticated');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+
     // Check that editing the webform default format is blocked.
     $this->drupalGet('/admin/config/content/formats/manage/webform_default');
     $assert_session->statusCodeEquals(403);
@@ -117,6 +124,18 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     // Check webform default format is NOT accessible via check_markup().
     // @see \Drupal\webform\Element\WebformHtmlEditor::preRenderText
     $this->assertEquals('', check_markup('<script></script>Test', WebformHtmlEditor::DEFAULT_FILTER_FORMAT));
+
+    /* ********************************************************************** */
+    // Check config settings allowed formats test.
+    // @see \Drupal\text\Plugin\Field\FieldType\TextItemBase::fieldSettingsForm
+    /* ********************************************************************** */
+
+    // Check removing the 'Webform (Default) - DO NOT EDIT' options
+    // from allowed formats.
+    $this->drupalCreateContentType(['type' => 'page', 'label' => 'Page']);
+    $this->drupalLogin($this->rootUser);
+    $this->drupalGet('/admin/structure/types/manage/page/fields/node.page.body');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
   }
 
 }

@@ -209,7 +209,7 @@ class WebformLibrariesManager implements WebformLibrariesManagerInterface {
       'webform_libraries' => [
         'title' => $this->t('Webform: External libraries'),
         'value' => $this->t('@total libraries (@installed installed; @excluded excluded; @missing CDN)', $stats),
-        'description' => $this->renderer->renderPlain($description),
+        'description' => $this->renderer->renderInIsolation($description),
         'severity' => $severity,
       ],
     ];

@@ -458,7 +458,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   An associative array containing last submission data
    *   with excluded elements.
    */
-  protected function getLastSubmissionData(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+  protected function getLastSubmissionData(WebformInterface $webform, ?EntityInterface $source_entity = NULL, ?AccountInterface $account = NULL) {
     $last_submission = $this->getStorage()->getLastSubmission($webform, $source_entity, $account, ['in_draft' => FALSE, 'access_check' => FALSE]);
     if (!$last_submission) {
       return [];
@@ -681,7 +681,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Server side #states API validation.
     $this->conditionsValidator->buildForm($form, $form_state);
 
-    // Append the bubbleable metadat to the form's render array.
+    // Append the bubbleable metadata to the form's render array.
     // @see \Drupal\webform\WebformSubmissionForm::setEntity
     $this->bubbleableMetadata->appendTo($form);
 
@@ -1095,7 +1095,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         if ($offcanvas) {
           WebformDialogHelper::attachLibraries($form);
         }
-        $this->messenger()->addWarning($this->renderer->renderPlain($build));
+        $this->messenger()->addWarning($this->renderer->renderInIsolation($build));
       }
     }
 
@@ -2121,7 +2121,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#theme' => 'item_list',
         '#items' => $file_names,
       ];
-      $form_state->setErrorByName(NULL, $this->renderer->renderPlain($message));
+      $form_state->setErrorByName(NULL, $this->renderer->renderInIsolation($message));
     }
   }
 
