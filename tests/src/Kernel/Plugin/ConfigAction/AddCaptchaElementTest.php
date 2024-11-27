@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\webform\Kernel\Plugin\ConfigAction;
 
+use Drupal\Core\Config\Action\ConfigActionException;
 use Drupal\Core\Config\Action\ConfigActionManager;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\KernelTests\KernelTestBase;
@@ -53,7 +54,7 @@ class AddCaptchaElementTest extends KernelTestBase {
     $this->configActionManager->applyAction(
       'addCaptchaElement',
       self::CONFIG_NAME,
-      1,
+      '1',
     );
 
     $entity = $this->configManager->loadConfigEntityByName(self::CONFIG_NAME);
@@ -71,7 +72,7 @@ class AddCaptchaElementTest extends KernelTestBase {
     $this->configActionManager->applyAction(
       'addCaptchaElement',
       'webform.webform_options.state_codes',
-      1,
+      '1',
     );
   }
 
