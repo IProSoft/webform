@@ -127,12 +127,12 @@ function webform_form_update_manager_update_form_alter(&$form, FormStateInterfac
   // Display dismissible warning at the top of the page.
   $t_args = [
     ':href_manual' => 'https://www.drupal.org/docs/user_guide/en/extend-manual-install.html',
-    ':href_drush' => 'https://www.drupal.org/docs/user_guide/en/security-update-module.html',
+    ':href_composer' => 'https://www.drupal.org/docs/user_guide/en/install-composer.html',
   ];
   $form['webform_update_manager_warning'] = [
     '#type' => 'webform_message',
     '#message_type' => 'warning',
-    '#message_message' => t('The Webform module may not update properly using this administrative interface. It is strongly recommended that you update the Webform module <a href=":href_manual">manually</a> or by using <a href=":href_drush">Drush</a>.', $t_args),
+    '#message_message' => t('The Webform module may not update properly using this administrative interface. It is strongly recommended that you update the Webform module <a href=":href_manual">manually</a> or by using <a href=":href_composer">Composer</a>.', $t_args),
     '#message_close' => TRUE,
     '#message_storage' => WebformMessage::STORAGE_SESSION,
     '#weight' => -10,
