@@ -20,7 +20,7 @@ class AddCaptchaElementTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['captcha', 'system', 'webform'];
+  protected static $modules = ['captcha', 'system', 'user', 'webform'];
 
   /**
    * The config action manager.
