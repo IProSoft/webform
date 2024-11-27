@@ -129,7 +129,7 @@ class Range extends NumericBase {
           ];
         }
         else {
-          $element['#field_suffix'] = [
+          $element['#field_prefix'] = [
             'output' => $output,
             'delimiter' => ['#markup' => '<span class="webform-range-output-delimiter"></span>'],
           ];

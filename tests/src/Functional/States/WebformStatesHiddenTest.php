@@ -43,6 +43,9 @@ class WebformStatesHiddenTest extends WebformBrowserTestBase {
 
     $this->drupalGet('/webform/test_states_server_hidden');
 
+    // Item field.
+    $assert_session->responseContains('<div data-drupal-states="{&quot;visible&quot;:{&quot;:input[name=\u0022trigger_checkbox\u0022]&quot;:{&quot;checked&quot;:true}}}" class="js-webform-states-hidden js-form-item form-item form-type-item js-form-type-item form-item-dependent-item js-form-item-dependent-item" id="edit-dependent-item">');
+
     // Text field.
     $assert_session->responseContains('<div class="js-webform-states-hidden js-form-item form-item form-type-textfield js-form-type-textfield form-item-dependent-textfield js-form-item-dependent-textfield">');
 

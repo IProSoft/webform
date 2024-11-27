@@ -18,7 +18,7 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'webform'];
+  protected static $modules = ['node', 'field_ui', 'webform'];
 
   /**
    * Webforms to load.
@@ -98,12 +98,14 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     // text format list page.
     $this->drupalGet('/admin/config/content/formats');
     $assert_session->statusCodeEquals(200);
-    if (version_compare(\Drupal::VERSION, '11.1', '<')) {
-      $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
-    }
-    else {
-      $assert_session->elementTextContains('css', 'tr[data-drupal-selector="edit-formats-webform-default"]', 'Disabled');
-    }
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+
+    // Check that webform default filter format is not included on
+    // permissions pages.
+    $this->drupalGet('/admin/people/permissions');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
+    $this->drupalGet('/admin/people/permissions/authenticated');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
 
     // Check that editing the webform default format is blocked.
     $this->drupalGet('/admin/config/content/formats/manage/webform_default');
@@ -142,6 +144,18 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     $this->drupalGet('/node/' . $node->id() . '/edit');
     $assert_session->elementNotExists('css', '[name="body[0][format]"]');
     $assert_session->responseNotContains('<option value="plain_text" selected="selected">Plain text</option><');
+
+    /* ********************************************************************** */
+    // Check config settings allowed formats test.
+    // @see \Drupal\text\Plugin\Field\FieldType\TextItemBase::fieldSettingsForm
+    /* ********************************************************************** */
+
+    // Check removing the 'Webform (Default) - DO NOT EDIT' options
+    // from allowed formats.
+    $this->drupalCreateContentType(['type' => 'page', 'label' => 'Page']);
+    $this->drupalLogin($this->rootUser);
+    $this->drupalGet('/admin/structure/types/manage/page/fields/node.page.body');
+    $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
   }
 
 }
