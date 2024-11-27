@@ -49,7 +49,7 @@ class AddCaptchaElementTest extends KernelTestBase {
    * Tests adding a CAPTCHA element to a webform.
    */
   public function testAddCaptchaElement(): void {
-    // Apply the config action
+    // Apply the config action.
     $this->configActionManager->applyAction(
       'addCaptchaElement',
       self::CONFIG_NAME,
