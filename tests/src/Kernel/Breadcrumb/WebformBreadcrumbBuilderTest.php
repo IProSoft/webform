@@ -496,7 +496,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
       ->willReturn($route_name);
     $route_match->expects($this->any())
       ->method('getParameter')
-      ->willReturnMap(parameter_map));
+      ->willReturnMap($parameter_map);
 
     /** @var \Drupal\Core\Routing\RouteMatchInterface $route_match */
     return $route_match;
@@ -518,13 +518,13 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
     $this->node = $this->createMock('Drupal\node\NodeInterface');
     $this->node->expects($this->any())
       ->method('label')
-      ->willReturn('node}'));
+      ->willReturn('{node}');
     $this->node->expects($this->any())
       ->method('getEntityTypeId')
-      ->willReturn('ode'));
+      ->willReturn('node');
     $this->node->expects($this->any())
       ->method('id')
-      ->willReturn(''));
+      ->willReturn('1');
     $this->node->expects($this->any())
       ->method('toLink')
       ->willReturn(Link:createFromRoute('{node}', 'entity.node.canonical', ['node' => 1])));
@@ -539,7 +539,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
     $this->webform = $this->createMock('Drupal\webform\WebformInterface');
     $this->webform->expects($this->any())
       ->method('label')
-      ->willReturn('webform}'));
+      ->willReturn('{webform}');
     $this->webform->expects($this->any())
       ->method('id')
       ->willReturn(1);
@@ -559,10 +559,10 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
     $this->webformSubmission = $this->createMock('Drupal\webform\WebformSubmissionInterface');
     $this->webformSubmission->expects($this->any())
       ->method('getWebform')
-      ->willReturn($this>webform));
+      ->willReturn($this->webform);
     $this->webformSubmission->expects($this->any())
       ->method('label')
-      ->willReturn('webform_submission}'));
+      ->willReturn('{webform_submission}');
     $this->webformSubmission->expects($this->any())
       ->method('id')
       ->willReturn(1);

@@ -56,7 +56,7 @@ class WebformSubmissionAccessTest extends WebformAccessTestBase {
     $email_webform = $this->createMock('Drupal\webform\WebformInterface');
     $email_webform->expects($this->any())
       ->method('getHandlers')
-      ->willReturn([message_handler]));
+      ->willReturn([$message_handler]);
     $email_webform->expects($this->any())
       ->method('access')
       ->with('submission_update_any')
