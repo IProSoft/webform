@@ -112,7 +112,7 @@ class AddCaptchaElementTest extends BrowserTestBase {
     $this->expectException(\AssertionError::class);
     $this->configActionManager->applyAction(
       'addCaptchaElement',
-      'webform.webform_options.state_codes',
+      self::CONFIG_NAME,
       $value,
     );
   }
