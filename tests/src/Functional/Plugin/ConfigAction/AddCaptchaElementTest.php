@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\webform\Kernel\Plugin\ConfigAction;
+namespace Drupal\Tests\webform\Functional\Plugin\ConfigAction;
 
 use Drupal\Core\Config\Action\ConfigActionException;
 use Drupal\Core\Config\Action\ConfigActionManager;

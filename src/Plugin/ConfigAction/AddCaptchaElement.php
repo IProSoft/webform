@@ -24,10 +24,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class AddCaptchaElement implements ConfigActionPluginInterface, ContainerFactoryPluginInterface {
 
   /**
-   * Constructs a SimpleConfigUpdate object.
+   * Constructs a AddCaptchaElement object.
    *
    * @param \Drupal\Core\Config\ConfigManagerInterface $configManager
-   *   The config factory.
+   *   The config manager.
    */
   public function __construct(
     protected readonly ConfigManagerInterface $configManager,
