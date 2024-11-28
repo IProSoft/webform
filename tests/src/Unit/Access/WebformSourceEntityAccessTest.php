@@ -49,7 +49,7 @@ class WebformSourceEntityAccessTest extends WebformAccessTestBase {
       ->willReturnMap([
         [$node, NULL],
         [$webform_node, $webform],
-      ]));
+      ]);
     $this->container->set('webform.entity_reference_manager', $entity_reference_manager);
 
     /* ********************************************************************** */

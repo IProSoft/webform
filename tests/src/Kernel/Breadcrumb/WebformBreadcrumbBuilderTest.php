@@ -527,7 +527,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
       ->willReturn('1');
     $this->node->expects($this->any())
       ->method('toLink')
-      ->willReturn(Link:createFromRoute('{node}', 'entity.node.canonical', ['node' => 1])));
+      ->willReturn(Link:createFromRoute('{node}', 'entity.node.canonical', ['node' => 1]));
 
     $this->nodeAccess = clone $this->node;
     $this->nodeAccess->expects($this->any())
