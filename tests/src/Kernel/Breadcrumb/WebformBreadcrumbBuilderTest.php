@@ -321,9 +321,9 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
     $webform_submission_access = $this->createMock('Drupal\webform\WebformSubmissionInterface');
     $webform_submission_access->expects($this->any())
       ->method('access')
-      ->will($this->returnCallback(function ($operation) {
+      ->willReturnCallback(function ($operation) {
         return ($operation === 'view_own');
-      }));
+      });
     $route_match = $this->getMockRouteMatch('entity.node.webform_submission.canonical', [
       ['webform_submission', $webform_submission_access],
       ['webform', $this->webform],
