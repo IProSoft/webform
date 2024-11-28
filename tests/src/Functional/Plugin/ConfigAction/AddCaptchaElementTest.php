@@ -24,12 +24,12 @@ class AddCaptchaElementTest extends BrowserTestBase {
   protected static $modules = ['captcha', 'system', 'user', 'webform'];
 
   /**
-   * {@inheritdoc }
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
   /**
-   * {@inheritdoc }
+   * {@inheritdoc}
    */
   protected $profile = 'minimal';
 
