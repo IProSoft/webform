@@ -8,6 +8,7 @@ use Drupal\Core\Config\Action\ConfigActionException;
 use Drupal\Core\Config\Action\ConfigActionManager;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Tests\BrowserTestBase;
+use Webmozart\Assert\Assert;
 
 /**
  * Tests the "addCaptchaElement" config action.
@@ -69,6 +70,23 @@ class AddCaptchaElementTest extends BrowserTestBase {
   }
 
   /**
+   * Tests adding a CAPTCHA element to a with non true value.
+   */
+  public function testAddCaptchaElementNonTrueValue(): void {
+    // Apply the config action.
+    $this->configActionManager->applyAction(
+      'addCaptchaElement',
+      self::CONFIG_NAME,
+      '',
+    );
+
+    $entity = $this->configManager->loadConfigEntityByName(self::CONFIG_NAME);
+
+    $elements = $entity->getElementsDecoded();
+    $this->assertArrayNotHasKey('captcha', $elements);
+  }
+
+  /**
    * Tests a non-webform config.
    */
   public function testAddCaptchaElementWithInvalidConfigName(): void {
@@ -78,6 +96,32 @@ class AddCaptchaElementTest extends BrowserTestBase {
       'webform.webform_options.state_codes',
       '1',
     );
+  }
+
+  /**
+   * Tests a non-webform config.
+   *
+   * @dataProvider dataProviderForNonStringValue
+   */
+  public function testAddCaptchaElementNonStringValue(mixed $value): void {
+    $this->expectException(\AssertionError::class);
+    $this->configActionManager->applyAction(
+      'addCaptchaElement',
+      'webform.webform_options.state_codes',
+      $value,
+    );
+  }
+
+  /**
+   * Data provider test thet the non string values.
+   *
+   * @return array
+   */
+  public function dataProviderForNonStringValue(): array {
+    return [
+      'Test a boolean' => [TRUE],
+      'Test an array' => [['value' => TRUE]],
+    ];
   }
 
 }
