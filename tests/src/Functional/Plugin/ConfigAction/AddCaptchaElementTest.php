@@ -8,7 +8,6 @@ use Drupal\Core\Config\Action\ConfigActionException;
 use Drupal\Core\Config\Action\ConfigActionManager;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Tests\BrowserTestBase;
-use Webmozart\Assert\Assert;
 
 /**
  * Tests the "addCaptchaElement" config action.
@@ -24,8 +23,14 @@ class AddCaptchaElementTest extends BrowserTestBase {
    */
   protected static $modules = ['captcha', 'system', 'user', 'webform'];
 
+  /**
+   * {@inheritdoc }
+   */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc }
+   */
   protected $profile = 'minimal';
 
   /**
@@ -116,6 +121,7 @@ class AddCaptchaElementTest extends BrowserTestBase {
    * Data provider test thet the non string values.
    *
    * @return array
+   *   Test cases to pass.
    */
   public function dataProviderForNonStringValue(): array {
     return [
