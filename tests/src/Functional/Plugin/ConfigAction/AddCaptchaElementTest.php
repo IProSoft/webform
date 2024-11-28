@@ -75,7 +75,7 @@ class AddCaptchaElementTest extends BrowserTestBase {
   }
 
   /**
-   * Tests adding a CAPTCHA element to a with non true value.
+   * Tests adding a CAPTCHA element to a webform with non true value.
    */
   public function testAddCaptchaElementNonTrueValue(): void {
     // Apply the config action.
@@ -92,7 +92,7 @@ class AddCaptchaElementTest extends BrowserTestBase {
   }
 
   /**
-   * Tests a non-webform config.
+   * Tests a non-webform config entity.
    */
   public function testAddCaptchaElementWithInvalidConfigName(): void {
     $this->expectException(ConfigActionException::class);
@@ -104,7 +104,7 @@ class AddCaptchaElementTest extends BrowserTestBase {
   }
 
   /**
-   * Tests a non-webform config.
+   * Tests a non-string value as the config action.
    *
    * @dataProvider dataProviderForNonStringValue
    */
