@@ -46,7 +46,7 @@ class WebformSourceEntityAccessTest extends WebformAccessTestBase {
     $entity_reference_manager = $this->createMock('Drupal\webform\WebformEntityReferenceManagerInterface');
     $entity_reference_manager->expects($this->any())
       ->method('getWebform')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         [$node, NULL],
         [$webform_node, $webform],
       ]));
