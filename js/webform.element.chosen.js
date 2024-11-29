@@ -32,12 +32,12 @@
         $.fn.oldChosen = $.fn.chosen;
         $.fn.chosen = function (options) {
           const select = $(this);
-          const is_creating_chosen = !!options;
-          if (is_creating_chosen && select.css('position') === 'absolute') {
+          const isCreatingChosen = !!options;
+          if (isCreatingChosen && select.css('position') === 'absolute') {
             select.removeAttr('style');
           }
           const ret = select.oldChosen(options);
-          if (is_creating_chosen && select.css('display') === 'none') {
+          if (isCreatingChosen && select.css('display') === 'none') {
             select.attr(
               'style',
               'display:visible; position:absolute; width:0px; height: 0px; clip:rect(0,0,0,0)',

@@ -613,12 +613,12 @@
       if (type === 'checkbox' || type === 'radio') {
         $input.prop('checked', value);
       } else if (tag === 'select') {
-        $.each(value, function (i, option_value) {
+        $.each(value, function (i, optionValue) {
           // Prevent "Syntax error, unrecognized expression" error by
           // escaping single quotes.
           // @see https://forum.jquery.com/topic/escape-characters-prior-to-using-selector
-          option_value = option_value.replace(/'/g, "\\'");
-          $input.find(`option[value='${option_value}']`).prop('selected', true);
+          optionValue = optionValue.replace(/'/g, "\\'");
+          $input.find(`option[value='${optionValue}']`).prop('selected', true);
         });
       } else if (type !== 'submit' && type !== 'button') {
         input.value = value;

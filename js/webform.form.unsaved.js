@@ -99,8 +99,8 @@
         Drupal.Ajax.prototype.beforeSubmitWebformUnsavedOriginal =
           Drupal.Ajax.prototype.beforeSubmit;
         Drupal.Ajax.prototype.beforeSubmit = function (
-          form_values,
-          element_settings,
+          formValues,
+          elementSettings,
           options,
         ) {
           unsaved = false;

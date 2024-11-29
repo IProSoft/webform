@@ -37,8 +37,8 @@
         Drupal.Ajax.prototype.beforeSubmitWebformManagedFileAutoUploadOriginal =
           Drupal.Ajax.prototype.beforeSubmit;
         Drupal.Ajax.prototype.beforeSubmit = function (
-          form_values,
-          element_settings,
+          formValues,
+          elementSettings,
           options,
         ) {
           const $form = this.$form;

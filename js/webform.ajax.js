@@ -31,25 +31,25 @@
     attach(context) {
       $(once('webform-ajax-link', '.webform-ajax-link', context)).each(
         function () {
-          const element_settings = {};
-          element_settings.progress = { type: 'fullscreen' };
+          const elementSettings = {};
+          elementSettings.progress = { type: 'fullscreen' };
 
           // For anchor tags, these will go to the target of the anchor rather
           // than the usual location.
           const href = $(this).attr('href');
           if (href) {
-            element_settings.url = href;
-            element_settings.event = 'click';
+            elementSettings.url = href;
+            elementSettings.event = 'click';
           }
-          element_settings.dialogType = $(this).data('dialog-type');
-          element_settings.dialogRenderer = $(this).data('dialog-renderer');
-          element_settings.dialog = $(this).data('dialog-options');
-          element_settings.base = $(this).attr('id');
-          element_settings.element = this;
-          Drupal.ajax(element_settings);
+          elementSettings.dialogType = $(this).data('dialog-type');
+          elementSettings.dialogRenderer = $(this).data('dialog-renderer');
+          elementSettings.dialog = $(this).data('dialog-options');
+          elementSettings.base = $(this).attr('id');
+          elementSettings.element = this;
+          Drupal.ajax(elementSettings);
 
           // Close all open modal dialogs when opening off-canvas dialog.
-          if (element_settings.dialogRenderer === 'off_canvas') {
+          if (elementSettings.dialogRenderer === 'off_canvas') {
             $(this).on('click', function () {
               $('.ui-dialog.webform-ui-dialog:visible')
                 .find('.ui-dialog-content')
@@ -112,9 +112,9 @@
 
         // Move the progress indicator from the submit button to after this link.
         // @todo Figure out a better way to set a progress indicator.
-        const $progress_indicator = $form.find('.ajax-progress');
-        if ($progress_indicator) {
-          $(this).after($progress_indicator);
+        const $progressIndicator = $form.find('.ajax-progress');
+        if ($progressIndicator) {
+          $(this).after($progressIndicator);
         }
 
         // Cancel the click event.

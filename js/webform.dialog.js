@@ -91,19 +91,19 @@
         // @see \Drupal\webform\WebformSubmissionForm::setEntity
         href += `${href.indexOf('?') === -1 ? '?' : '&'}_webform_dialog=1`;
 
-        const element_settings = {};
-        element_settings.progress = { type: 'fullscreen' };
-        element_settings.url = href;
-        element_settings.event = 'touchstart click';
-        element_settings.dialogType = $a.data('dialog-type') || 'modal';
-        element_settings.dialog = options;
-        element_settings.element = this;
-        element_settings.error = function error(xmlhttp, uri) {
+        const elementSettings = {};
+        elementSettings.progress = { type: 'fullscreen' };
+        elementSettings.url = href;
+        elementSettings.event = 'touchstart click';
+        elementSettings.dialogType = $a.data('dialog-type') || 'modal';
+        elementSettings.dialog = options;
+        elementSettings.element = this;
+        elementSettings.error = function error(xmlhttp, uri) {
           if (xmlhttp.status === 403) {
             window.location.replace(href.split('?')[0]);
           }
         };
-        Drupal.ajax(element_settings);
+        Drupal.ajax(elementSettings);
       });
     },
   };

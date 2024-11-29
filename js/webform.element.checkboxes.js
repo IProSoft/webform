@@ -22,36 +22,36 @@
       ).each(function () {
         const $element = $(this);
 
-        const options_all_value = $element.data('options-all');
-        const options_none_value = $element.data('options-none');
+        const optionsAllValue = $element.data('options-all');
+        const optionsNoneValue = $element.data('options-none');
 
         // Get all checkboxes.
         const $checkboxes = $element.find('input[type="checkbox"]');
 
         // Get all options/checkboxes.
         const $options = $checkboxes
-          .not(`[value="${options_all_value}"]`)
-          .not(`[value="${options_none_value}"]`);
+          .not(`[value="${optionsAllValue}"]`)
+          .not(`[value="${optionsNoneValue}"]`);
 
         // Get options all and none checkboxes.
-        const $options_all = $element.find(
-          `:checkbox[value="${options_all_value}"]`,
+        const $optionsAll = $element.find(
+          `:checkbox[value="${optionsAllValue}"]`,
         );
-        const $options_none = $element.find(
-          `:checkbox[value="${options_none_value}"]`,
+        const $optionsNone = $element.find(
+          `:checkbox[value="${optionsNoneValue}"]`,
         );
 
         // All of the above.
-        if ($options_all.length) {
-          $options_all.on('click', toggleCheckAllEventHandler);
-          if ($options_all.prop('checked')) {
+        if ($optionsAll.length) {
+          $optionsAll.on('click', toggleCheckAllEventHandler);
+          if ($optionsAll.prop('checked')) {
             toggleCheckAllEventHandler();
           }
         }
 
         // None of the above.
-        if ($options_none.length) {
-          $options_none.on('click', toggleCheckNoneEventHandler);
+        if ($optionsNone.length) {
+          $optionsNone.on('click', toggleCheckNoneEventHandler);
           toggleCheckNoneEventHandler();
         }
 
@@ -62,10 +62,10 @@
          * Toggle check all checkbox checked state.
          */
         function toggleCheckAllEventHandler() {
-          if ($options_all.prop('checked')) {
+          if ($optionsAll.prop('checked')) {
             // Uncheck options none.
-            if ($options_none.is(':checked')) {
-              $options_none
+            if ($optionsNone.is(':checked')) {
+              $optionsNone
                 .prop('checked', false)
                 .trigger('change', ['webform.states']);
             }
@@ -87,9 +87,9 @@
          * Toggle check none checkbox checked state.
          */
         function toggleCheckNoneEventHandler() {
-          if ($options_none.prop('checked')) {
+          if ($optionsNone.prop('checked')) {
             $checkboxes
-              .not(`[value="${options_none_value}"]`)
+              .not(`[value="${optionsNoneValue}"]`)
               .filter(':checked')
               .prop('checked', false)
               .trigger('change', ['webform.states']);
@@ -103,16 +103,16 @@
           const isAllChecked =
             $options.filter(':checked').length === $options.length;
           if (
-            $options_all.length &&
-            $options_all.prop('checked') !== isAllChecked
+            $optionsAll.length &&
+            $optionsAll.prop('checked') !== isAllChecked
           ) {
-            $options_all
+            $optionsAll
               .prop('checked', isAllChecked)
               .trigger('change', ['webform.states']);
           }
           const isOneChecked = $options.is(':checked');
-          if ($options_none.length && isOneChecked) {
-            $options_none
+          if ($optionsNone.length && isOneChecked) {
+            $optionsNone
               .prop('checked', false)
               .trigger('change', ['webform.states']);
           }

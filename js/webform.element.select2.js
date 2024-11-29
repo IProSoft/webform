@@ -91,12 +91,12 @@
     // Select2 search broken inside jQuery UI 1.10.x modal Dialog.
     // @see https://github.com/select2/select2/issues/1246
     if ($.ui && $.ui.dialog && $.ui.dialog.prototype._allowInteraction) {
-      const ui_dialog_interaction = $.ui.dialog.prototype._allowInteraction;
+      const uiDialogInteraction = $.ui.dialog.prototype._allowInteraction;
       $.ui.dialog.prototype._allowInteraction = function (e) {
         if ($(e.target).closest('.select2-dropdown').length) {
           return true;
         }
-        return ui_dialog_interaction.apply(this, arguments);
+        return uiDialogInteraction.apply(this, arguments);
       };
     }
   });
