@@ -84,7 +84,7 @@ Commit changes
     git push
 
 
-1. Update composer.libraries.json
+7. Update composer.libraries.json
 ----------------------------------
 
     cd ~/Sites/drupal_webform/web/modules/sandbox/webform
