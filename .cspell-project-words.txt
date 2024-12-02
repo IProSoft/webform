@@ -35,6 +35,7 @@ entitywebformedit
 entitywebformsettings
 eslinting
 filecontent
+filesizes
 fileurl
 Flexmail
 Formdazzle
@@ -174,7 +175,6 @@ Tfor
 Timepicker
 togglelink
 Traducción
-TRANSLIT
 Unarchives
 unflag
 unflagged
