@@ -66,21 +66,25 @@ class WebformTranslationLingotekManager implements WebformTranslationLingotekMan
       case 'webform_options_custom';
         // Convert options YAML string to an associative array.
         $options = Yaml::decode($source_data['options']);
-
-        // Extract optgroups from the options and append them as '_optgroups_'
-        // to the options so that the optgroups can be translated.
-        $optgroups = [];
-        foreach ($options as $option_value => $option_text) {
-          if (is_array($option_text)) {
-            $optgroups[$option_value] = $option_value;
+        if ($options) {
+          // Extract optgroups from the options and append them as '_optgroups_'
+          // to the options so that the optgroups can be translated.
+          $optgroups = [];
+          foreach ($options as $option_value => $option_text) {
+            if (is_array($option_text)) {
+              $optgroups[$option_value] = $option_value;
+            }
           }
-        }
-        if ($optgroups) {
-          $options['_optgroups_'] = $optgroups;
-        }
+          if ($optgroups) {
+            $options['_optgroups_'] = $optgroups;
+          }
 
-        // Update source data's options.
-        $source_data['options'] = $options;
+          // Update source data's options.
+          $source_data['options'] = $options;
+        }
+        else {
+          unset($source_data['options']);
+        }
         break;
     }
   }
