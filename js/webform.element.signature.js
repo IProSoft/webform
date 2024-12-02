@@ -58,7 +58,7 @@
             },
             Drupal.webform.signaturePad.options,
           );
-          var signaturePad = new SignaturePad(canvas, options);
+          const signaturePad = new SignaturePad(canvas, options);
 
           // Disable the signature pad when input is disabled or readonly.
           if ($input.is(':disabled') || $input.is('[readonly]')) {

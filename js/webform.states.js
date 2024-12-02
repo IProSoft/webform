@@ -192,7 +192,7 @@
         )
       ) {
         $target.toggleClass('required', e.value);
-        var $checkboxes = $target.find('input[type="checkbox"]');
+        const $checkboxes = $target.find('input[type="checkbox"]');
         if (e.value) {
           // Add event handler.
           $checkboxes.on('click', statesCheckboxesRequiredEventHandler);
@@ -214,7 +214,7 @@
         if (isMultiple) {
           // Checkboxes.
           const $tbody = $target.find('tbody');
-          var $checkboxes = $tbody.find('input[type="checkbox"]');
+          const $checkboxes = $tbody.find('input[type="checkbox"]');
           copyRequireMessage($target, $checkboxes);
           if (e.value) {
             $checkboxes.on(
