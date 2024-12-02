@@ -30,7 +30,6 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'webform_entity_print_attachment',
     'webform_image_select',
     'webform_options_custom',
-    'webform_toggles',
   ];
 
   /**
@@ -4989,115 +4988,6 @@ webform_time:
   timepicker: false
   title: ''
   title_display: ''
-  unique: false
-  unique_entity: false
-  unique_error: ''
-  unique_user: false
-  wrapper_attributes: {  }
-webform_toggle:
-  access: true
-  access_create_permissions: {  }
-  access_create_roles:
-    - anonymous
-    - authenticated
-  access_create_users: {  }
-  access_update_permissions: {  }
-  access_update_roles:
-    - anonymous
-    - authenticated
-  access_update_users: {  }
-  access_view_permissions: {  }
-  access_view_roles:
-    - anonymous
-    - authenticated
-  access_view_users: {  }
-  admin_notes: ''
-  admin_title: ''
-  attributes: {  }
-  default_value: false
-  description: ''
-  description_display: ''
-  disabled: false
-  exclude_empty: false
-  field_prefix: ''
-  field_suffix: ''
-  flex: 1
-  format: value
-  format_attributes: {  }
-  format_html: ''
-  format_text: ''
-  help: ''
-  help_display: ''
-  help_title: ''
-  label_attributes: {  }
-  more: ''
-  more_title: ''
-  off_text: ''
-  on_text: ''
-  prepopulate: false
-  private: false
-  required_error: ''
-  return_value: ''
-  states: {  }
-  states_clear: true
-  title: ''
-  title_display: after
-  toggle_size: medium
-  toggle_theme: light
-  wrapper_attributes: {  }
-webform_toggles:
-  access: true
-  access_create_permissions: {  }
-  access_create_roles:
-    - anonymous
-    - authenticated
-  access_create_users: {  }
-  access_update_permissions: {  }
-  access_update_roles:
-    - anonymous
-    - authenticated
-  access_update_users: {  }
-  access_view_permissions: {  }
-  access_view_roles:
-    - anonymous
-    - authenticated
-  access_view_users: {  }
-  admin_notes: ''
-  admin_title: ''
-  attributes: {  }
-  default_value: ''
-  description: ''
-  description_display: ''
-  disabled: false
-  field_prefix: ''
-  field_suffix: ''
-  flex: 1
-  format: value
-  format_attributes: {  }
-  format_html: ''
-  format_items: comma
-  format_items_html: ''
-  format_items_text: ''
-  format_text: ''
-  help: ''
-  help_display: ''
-  help_title: ''
-  label_attributes: {  }
-  more: ''
-  more_title: ''
-  off_text: ''
-  on_text: ''
-  options: {  }
-  options_randomize: false
-  prepopulate: false
-  private: false
-  required_error: ''
-  states: {  }
-  states_clear: true
-  title: ''
-  title_display: ''
-  toggle_size: medium
-  toggle_theme: light
   unique: false
   unique_entity: false
   unique_error: ''

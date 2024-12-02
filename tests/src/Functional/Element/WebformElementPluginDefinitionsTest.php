@@ -28,7 +28,6 @@ class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase 
     'webform_entity_print_attachment',
     'webform_image_select',
     'webform_options_custom',
-    'webform_toggles',
   ];
 
   /**
@@ -1786,44 +1785,6 @@ webform_time:
   label: Time
   class: Drupal\webform\Plugin\WebformElement\WebformTime
   provider: webform
-  input: true
-  container: false
-  root: false
-  multiple: true
-webform_toggle:
-  dependencies: {  }
-  default_key: ''
-  category: 'Advanced elements'
-  description: 'Provides a form element for toggling a single on/off state.'
-  hidden: false
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: true
-  deprecated_message: 'The Toggles library is not being maintained and has major accessibility issues. It has been <a href="https://www.drupal.org/project/webform/issues/2890861">deprecated</a> and will be removed before Webform 8.x-5.0.'
-  id: webform_toggle
-  label: Toggle
-  class: Drupal\webform_toggles\Plugin\WebformElement\WebformToggle
-  provider: webform_toggles
-  input: true
-  container: false
-  root: false
-  multiple: false
-webform_toggles:
-  dependencies: {  }
-  default_key: ''
-  category: 'Options elements'
-  description: 'Provides a form element for toggling multiple on/off states.'
-  hidden: false
-  multiline: false
-  composite: false
-  states_wrapper: false
-  deprecated: true
-  deprecated_message: 'The Toggles library is not being maintained and has major accessibility issues. It has been <a href="https://www.drupal.org/project/webform/issues/2890861">deprecated</a> and will be removed before Webform 8.x-5.0.'
-  id: webform_toggles
-  label: Toggles
-  class: Drupal\webform_toggles\Plugin\WebformElement\WebformToggles
-  provider: webform_toggles
   input: true
   container: false
   root: false

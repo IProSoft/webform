@@ -123,8 +123,6 @@ echo 'true' > modules/webform_submission_schema/tests/modules/webform_schema_tes
 
 echo 'true' > modules/webform_submission_export_import/tests/modules/webform_submission_export_import_test/webform_submission_export_import_test.features.yml
 
-echo 'true' > modules/webform_toggles/tests/modules/webform_toggles_test/webform_toggles_test.features.yml
-
 echo 'true' > modules/webform_demo/webform_demo_application_evaluation/webform_demo_application_evaluation.features.yml
 echo 'true' > modules/webform_demo/webform_demo_event_registration/webform_demo_event_registration.features.yml
 echo 'true' > modules/webform_demo/webform_demo_group/webform_demo_group.features.yml
@@ -201,7 +199,6 @@ drush en -y webform\
   webform_scheduled_email_test\
   webform_schema_test\
   webform_submission_export_import_test\
-  webform_toggles_test;
 
 # Show the difference between the active config and the default config.
 drush features-diff webform
@@ -256,7 +253,6 @@ drush features-export -y webform_options_limit_test
 drush features-export -y webform_scheduled_email_test
 drush features-export -y webform_schema_test
 drush features-export -y webform_submission_export_import_test
-drush features-export -y webform_toggles_test
 
 # Revert all feature update to *.info.yml files.
 git checkout -- *.info.yml
@@ -311,7 +307,6 @@ drush webform:tidy -y --dependencies webform_options_limit_test
 drush webform:tidy -y --dependencies webform_scheduled_email_test
 drush webform:tidy -y --dependencies webform_schema_test
 drush webform:tidy -y --dependencies webform_submission_export_import_test
-drush webform:tidy -y --dependencies webform_toggles_test
 
 # Re-import all webform configuration into your site.
 drush features-import -y webform
@@ -364,5 +359,4 @@ drush features-import -y webform_options_limit_test
 drush features-import -y webform_scheduled_email_test
 drush features-import -y webform_schema_test
 drush features-import -y webform_submission_export_import_test
-drush features-import -y webform_toggles_test
 ```

@@ -35,7 +35,6 @@
         "jquery/select2": "*",
         "jquery/textcounter": "*",
         "jquery/timepicker": "*",
-        "jquery/toggles": "*",
         "popperjs/popperjs": "*",
         "progress-tracker/progress-tracker": "*",
         "signature_pad/signature_pad": "*",
@@ -96,6 +95,7 @@
                 "license": "MIT"
             }
         },
+
         "jquery.hotkeys": {
             "type": "package",
             "package": {
@@ -219,22 +219,6 @@
                 },
                 "dist": {
                     "url": "https://github.com/jonthornton/jquery-timepicker/archive/refs/tags/1.14.0.zip",
-                    "type": "zip"
-                },
-                "license": "MIT"
-            }
-        },
-        "jquery.toggles": {
-            "type": "package",
-            "package": {
-                "name": "jquery/toggles",
-                "version": "4.0.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.toggles"
-                },
-                "dist": {
-                    "url": "https://github.com/simontabor/jquery-toggles/archive/refs/tags/v4.0.0.zip",
                     "type": "zip"
                 },
                 "license": "MIT"
