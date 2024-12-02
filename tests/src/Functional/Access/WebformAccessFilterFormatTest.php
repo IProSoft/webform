@@ -152,7 +152,6 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
 
     // Check removing the 'Webform (Default) - DO NOT EDIT' options
     // from allowed formats.
-    $this->drupalCreateContentType(['type' => 'page', 'label' => 'Page']);
     $this->drupalLogin($this->rootUser);
     $this->drupalGet('/admin/structure/types/manage/page/fields/node.page.body');
     $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);
