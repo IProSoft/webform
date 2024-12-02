@@ -29,8 +29,6 @@ class WebformElementPluginPropertiesTest extends WebformElementBrowserTestBase {
     'webform_jqueryui_datepicker',
     'webform_entity_print_attachment',
     'webform_image_select',
-    'webform_location_geocomplete',
-    'webform_location_places',
     'webform_options_custom',
     'webform_toggles',
   ];
@@ -3591,84 +3589,6 @@ webform_link:
   url__type: url
   wrapper_attributes: {  }
   wrapper_type: fieldset
-webform_location_geocomplete:
-  access: true
-  access_create_permissions: {  }
-  access_create_roles:
-    - anonymous
-    - authenticated
-  access_create_users: {  }
-  access_update_permissions: {  }
-  access_update_roles:
-    - anonymous
-    - authenticated
-  access_update_users: {  }
-  access_view_permissions: {  }
-  access_view_roles:
-    - anonymous
-    - authenticated
-  access_view_users: {  }
-  admin_notes: ''
-  admin_title: ''
-  administrative_area_level_1__access: false
-  administrative_area_level_1__title: State/Province
-  api_key: ''
-  country__access: false
-  country__title: Country
-  country_short__access: false
-  country_short__title: 'Country Code'
-  default_value: {  }
-  description: ''
-  description_display: ''
-  disabled: false
-  flex: 1
-  format: value
-  format_html: ''
-  format_items: ul
-  format_items_html: ''
-  format_items_text: ''
-  format_text: ''
-  formatted_address__access: false
-  formatted_address__title: 'Formatted Address'
-  geolocation: false
-  help: ''
-  help_title: ''
-  hidden: false
-  label_attributes: {  }
-  lat__access: false
-  lat__title: Latitude
-  lng__access: false
-  lng__title: Longitude
-  locality__access: false
-  locality__title: Locality
-  location__access: false
-  location__title: Location
-  map: false
-  more: ''
-  more_title: ''
-  multiple: false
-  postal_code__access: false
-  postal_code__title: 'Postal Code'
-  prepopulate: false
-  private: false
-  required: false
-  required_error: ''
-  states: {  }
-  states_clear: true
-  street_address__access: false
-  street_address__title: 'Street Address'
-  street_number__access: false
-  street_number__title: 'Street Number'
-  sublocality__access: false
-  sublocality__title: City
-  subpremise__access: false
-  subpremise__title: Unit
-  title: ''
-  title_display: ''
-  value__placeholder: ''
-  value__title: Address
-  wrapper_attributes: {  }
-webform_location_places:
   access: true
   access_create_permissions: {  }
   access_create_roles:

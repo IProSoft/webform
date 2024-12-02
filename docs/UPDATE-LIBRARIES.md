@@ -58,8 +58,7 @@ Enable and download all libraries
 
     cd ~/Sites/drupal_webform
     drush php-eval "\Drupal::configFactory()->getEditable('webform.settings')->set('libraries.excluded_libraries', [])->save();"
-    drush en -y webform_image_select webform_toggles webform_location_geocomplete webform_location_places webform_options_custom
-    drush webform:libraries:download
+    drush en -y webform_image_select webform_toggles webform_options_custom drush webform:libraries:download
 
 Update libraries.zip
 
@@ -85,7 +84,7 @@ Commit changes
     git push
 
 
-7. Update composer.libraries.json
+1. Update composer.libraries.json
 ----------------------------------
 
     cd ~/Sites/drupal_webform/web/modules/sandbox/webform

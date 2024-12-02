@@ -24,11 +24,9 @@
         "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
     },
     "require": {
-        "algolia/places": "*",
         "choices/choices": "*",
         "codemirror/codemirror": "*",
         "jquery/chosen": "*",
-        "jquery/geocomplete": "*",
         "jquery/hotkeys": "*",
         "jquery/image-picker": "*",
         "jquery/inputmask": "*",
@@ -50,22 +48,6 @@
         "drupal/jquery_ui_datepicker": "Provides jQuery UI Datepicker library. Required to support datepickers. The Webform jQueryUI Datepicker module is deprecated because jQueryUI is no longer maintained."
     },
     "repositories": {
-        "algolia.places": {
-            "type": "package",
-            "package": {
-                "name": "algolia/places",
-                "version": "1.19.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "algolia.places"
-                },
-                "dist": {
-                    "url": "https://registry.npmjs.org/places.js/-/places.js-1.19.0.tgz",
-                    "type": "tar"
-                },
-                "license": "MIT"
-            }
-        },
         "choices": {
             "type": "package",
             "package": {
@@ -109,22 +91,6 @@
                 },
                 "dist": {
                     "url": "https://github.com/harvesthq/chosen/releases/download/v1.8.7/chosen_v1.8.7.zip",
-                    "type": "zip"
-                },
-                "license": "MIT"
-            }
-        },
-        "jquery.geocomplete": {
-            "type": "package",
-            "package": {
-                "name": "jquery/geocomplete",
-                "version": "1.7.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.geocomplete"
-                },
-                "dist": {
-                    "url": "https://github.com/ubilabs/geocomplete/archive/refs/tags/1.7.0.zip",
                     "type": "zip"
                 },
                 "license": "MIT"

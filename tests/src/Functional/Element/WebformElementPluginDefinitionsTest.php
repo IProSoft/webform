@@ -27,8 +27,6 @@ class WebformElementPluginDefinitionsTest extends WebformElementBrowserTestBase 
     'webform_cards',
     'webform_entity_print_attachment',
     'webform_image_select',
-    'webform_location_geocomplete',
-    'webform_location_places',
     'webform_options_custom',
     'webform_toggles',
   ];
@@ -1346,44 +1344,6 @@ webform_link:
   label: Link
   class: Drupal\webform\Plugin\WebformElement\WebformLink
   provider: webform
-  input: true
-  container: false
-  root: false
-  multiple: true
-webform_location_geocomplete:
-  dependencies: {  }
-  default_key: ''
-  category: 'Composite elements'
-  description: 'Provides a form element to collect valid location information (address, longitude, latitude, geolocation) using Google Maps API''s Geocoding and Places Autocomplete.'
-  hidden: false
-  multiline: true
-  composite: true
-  states_wrapper: true
-  deprecated: true
-  deprecated_message: 'The jQuery: Geocoding and Places Autocomplete Plugin library is not being maintained. It has been <a href="https://www.drupal.org/node/2991275">deprecated</a> and will be removed before Webform 8.x-5.0.'
-  id: webform_location_geocomplete
-  label: 'Location (Geocomplete)'
-  class: Drupal\webform_location_geocomplete\Plugin\WebformElement\WebformLocationGeocomplete
-  provider: webform_location_geocomplete
-  input: true
-  container: false
-  root: false
-  multiple: true
-webform_location_places:
-  dependencies: {  }
-  default_key: ''
-  category: 'Composite elements'
-  description: 'Provides a form element to collect valid location information (address, longitude, latitude, geolocation) using Algolia Places.'
-  hidden: false
-  multiline: true
-  composite: true
-  states_wrapper: true
-  deprecated: false
-  deprecated_message: ''
-  id: webform_location_places
-  label: 'Location (Algolia Places)'
-  class: Drupal\webform_location_places\Plugin\WebformElement\WebformLocationPlaces
-  provider: webform_location_places
   input: true
   container: false
   root: false
