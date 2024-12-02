@@ -30,7 +30,6 @@
         "jquery/chosen": "*",
         "jquery/geocomplete": "*",
         "jquery/hotkeys": "*",
-        "jquery/icheck": "*",
         "jquery/image-picker": "*",
         "jquery/inputmask": "*",
         "jquery/intl-tel-input": "*",
@@ -142,22 +141,6 @@
                 },
                 "dist": {
                     "url": "https://github.com/jeresig/jquery.hotkeys/archive/refs/tags/0.2.0.zip",
-                    "type": "zip"
-                },
-                "license": "MIT"
-            }
-        },
-        "jquery.icheck": {
-            "type": "package",
-            "package": {
-                "name": "jquery/icheck",
-                "version": "1.0.2 ",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.icheck"
-                },
-                "dist": {
-                    "url": "https://api.github.com/repos/drgullin/icheck/zipball/8a6eb37bd7dab1e843c1b630c91c6398ff409d05",
                     "type": "zip"
                 },
                 "license": "MIT"

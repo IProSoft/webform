@@ -102,8 +102,6 @@ echo 'true' > modules/webform_group/tests/modules/webform_group_test/webform_gro
 
 echo 'true' > modules/webform_templates/webform_templates.features.yml
 
-echo 'true' > modules/webform_icheck/tests/modules/webform_icheck_test/webform_icheck_test.features.yml
-
 echo 'true' > modules/webform_jqueryui_datepicker/tests/modules/webform_jqueryui_datepicker_test/webform_jqueryui_datepicker.features.yml
 
 echo 'true' > modules/webform_image_select/webform_image_select.features.yml
@@ -198,7 +196,6 @@ drush en -y webform\
   webform_clientside_validation_test\
   webform_entity_print_test\
   webform_entity_print_attachment_test\
-  webform_icheck_test\
   webform_jqueryui_datepicker_test\
   webform_image_select_test\
   webform_location_geocomplete_test\
@@ -258,7 +255,6 @@ drush features-export -y webform_attachment_test
 drush features-export -y webform_clientside_validation_test
 drush features-export -y webform_entity_print_test
 drush features-export -y webform_entity_print_attachment_test
-drush features-export -y webform_icheck_test
 drush features-export -y webform_jqueryui_datepicker_test
 drush features-export -y webform_image_select_test
 drush features-export -y webform_node_test_multiple
@@ -293,7 +289,6 @@ drush webform:tidy -y --dependencies webform_example_handler
 drush webform:tidy -y --dependencies webform_example_variant
 drush webform:tidy -y --dependencies webform_example_remote_post
 drush webform:tidy -y --dependencies webform_group_test
-drush webform:tidy -y --dependencies webform_icheck
 drush webform:tidy -y --dependencies webform_jqueryui_datepicker
 drush webform:tidy -y --dependencies webform_image_select
 drush webform:tidy -y --dependencies webform_location_geocomplete_test
@@ -349,7 +344,6 @@ drush features-import -y webform_example_variant
 drush features-import -y webform_example_remote_post
 drush features-import -y webform_entity_print
 drush features-import -y webform_group_test
-drush features-import -y webform_icheck
 drush features-import -y webform_jqueryui_datepicker_test
 drush features-import -y webform_image_select
 drush features-import -y webform_location_geocomplete_test

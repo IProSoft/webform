@@ -47,7 +47,6 @@ hubspot
 htmldecode
 ible
 icontact
-icheck
 imce
 kint
 innerjoin
