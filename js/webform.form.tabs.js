@@ -28,12 +28,12 @@
       $(once('webform-tabs', 'div.webform-tabs', context)).each(function () {
         // Set active tab and clear the location hash once it is set.
         let tabIndex = 0;
-        if (location.hash) {
-          tabIndex = $(`a[href="${Drupal.checkPlain(location.hash)}"]`).data(
+        if (window.location.hash) {
+          tabIndex = $(`a[href="${Drupal.checkPlain(window.location.hash)}"]`).data(
             'tab-index',
           );
           if (typeof tabIndex !== 'undefined') {
-            location.hash = '';
+            window.location.hash = '';
           }
         }
 

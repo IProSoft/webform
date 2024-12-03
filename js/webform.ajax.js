@@ -78,7 +78,7 @@
         const hash = $(this).data('hash');
         if (hash) {
           $(this).on('click', function () {
-            location.hash = $(this).data('hash');
+            window.location.hash = $(this).data('hash');
           });
         }
       });
