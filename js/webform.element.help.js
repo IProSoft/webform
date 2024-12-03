@@ -4,14 +4,12 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // @see https://atomiks.github.io/tippyjs/v5/all-props/
   // @see https://atomiks.github.io/tippyjs/v6/all-props/
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.elementHelpIcon = Drupal.webform.elementHelpIcon || {};
-  Drupal.webform.elementHelpIcon.options = Drupal.webform.elementHelpIcon.options || {};
+  Drupal.webform.elementHelpIcon.options =
+    Drupal.webform.elementHelpIcon.options || {};
 
   /**
    * Element help icon.
@@ -19,7 +17,7 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformElementHelpIcon = {
-    attach: function (context) {
+    attach(context) {
       if (!window.tippy) {
         return;
       }
@@ -29,11 +27,11 @@
       //
       // Converted from ES6 to ES5.
       // @see https://babeljs.io/repl/
-      var hideOnEsc = {
+      const hideOnEsc = {
         name: 'hideOnEsc',
         defaultValue: true,
         fn: function fn(_ref) {
-          var hide = _ref.hide;
+          const hide = _ref.hide;
 
           function onKeyDown(event) {
             if (event.keyCode === 27) {
@@ -47,30 +45,34 @@
             },
             onHide: function onHide() {
               document.removeEventListener('keydown', onKeyDown);
-            }
+            },
           };
-        }
+        },
       };
 
-      $(once('webform-element-help', '.js-webform-element-help', context)).each(function () {
-        var $link = $(this);
+      $(once('webform-element-help', '.js-webform-element-help', context)).each(
+        function () {
+          const $link = $(this);
 
-        $link.on('click', function (event) {
-          // Prevent click from toggling <label>s wrapped around help.
-          event.preventDefault();
-        });
+          $link.on('click', function (event) {
+            // Prevent click from toggling <label>s wrapped around help.
+            event.preventDefault();
+          });
 
-        var options = $.extend({
-          content: $link.attr('data-webform-help'),
-          delay: 100,
-          allowHTML: true,
-          interactive: true,
-          plugins: [hideOnEsc]
-        }, Drupal.webform.elementHelpIcon.options);
+          const options = $.extend(
+            {
+              content: $link.attr('data-webform-help'),
+              delay: 100,
+              allowHTML: true,
+              interactive: true,
+              plugins: [hideOnEsc],
+            },
+            Drupal.webform.elementHelpIcon.options,
+          );
 
-        tippy(this, options);
-      });
-    }
+          tippy(this, options);
+        },
+      );
+    },
   };
-
 })(jQuery, Drupal, once);

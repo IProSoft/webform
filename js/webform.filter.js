@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, debounce, once) {
-
-  'use strict';
-
   /**
    * Filters the webform element list by a text input search string.
    *
@@ -24,34 +21,47 @@
    *   Attaches the behavior for the webform element filtering.
    */
   Drupal.behaviors.webformFilterByText = {
-    attach: function (context, settings) {
-      $(once('webform-form-filter-text', 'input.webform-form-filter-text', context)).each(function () {
-        var $input = $(this);
+    attach(context, settings) {
+      $(
+        once(
+          'webform-form-filter-text',
+          'input.webform-form-filter-text',
+          context,
+        ),
+      ).each(function () {
+        const $input = $(this);
         $input.wrap('<div class="webform-form-filter"></div>');
-        var $reset = $('<input class="webform-form-filter-reset" type="reset" title="Clear the search query." value="✕" style="display: none" />');
+        const $reset = $(
+          '<input class="webform-form-filter-reset" type="reset" title="Clear the search query." value="✕" style="display: none" />',
+        );
         $reset.insertAfter($input);
-        var $table = $($input.data('element'));
-        var $summary = $($input.data('summary'));
-        var $noResults = $($input.data('no-results'));
-        var $details = $table.closest('details');
-        var $filterRows;
+        const $table = $($input.data('element'));
+        const $summary = $($input.data('summary'));
+        const $noResults = $($input.data('no-results'));
+        const $details = $table.closest('details');
+        let $filterRows;
 
-        var focusInput = $input.data('focus') || 'true';
-        var sourceSelector = $input.data('source') || '.webform-form-filter-text-source';
-        var parentSelector = $input.data('parent') || 'tr';
-        var selectedSelector = $input.data('selected') || '';
+        const focusInput = $input.data('focus') || 'true';
+        const sourceSelector =
+          $input.data('source') || '.webform-form-filter-text-source';
+        const parentSelector = $input.data('parent') || 'tr';
+        const selectedSelector = $input.data('selected') || '';
 
-        var hasDetails = $details.length;
-        var totalItems;
-        var args = {
+        const hasDetails = $details.length;
+        let totalItems;
+        const args = {
           '@item': $input.data('item-singular') || Drupal.t('item'),
           '@items': $input.data('item-plural') || Drupal.t('items'),
-          '@total': null
+          '@total': null,
         };
 
         if ($table.length) {
           $filterRows = $table.find(sourceSelector);
-          var off = /chrom(e|ium)/.test(window.navigator.userAgent.toLowerCase()) ? 'chrome-off-' + Math.floor(Math.random() * 100000000) : 'off';
+          const off = /chrom(e|ium)/.test(
+            window.navigator.userAgent.toLowerCase(),
+          )
+            ? `chrome-off-${Math.floor(Math.random() * 100000000)}`
+            : 'off';
           $input
             .attr('autocomplete', off)
             .on('keyup', debounce(filterElementList, 200))
@@ -61,7 +71,9 @@
 
           // Make sure the filter input is always focused.
           if (focusInput === 'true') {
-            setTimeout(function () {$input.trigger('focus');});
+            setTimeout(function () {
+              $input.trigger('focus');
+            });
           }
         }
 
@@ -83,7 +95,7 @@
          *   The jQuery event for the keyup event that triggered the filter.
          */
         function filterElementList(e) {
-          var query = $(e.target).val().toLowerCase();
+          const query = $(e.target).val().toLowerCase();
 
           // Filter if the length of the query is at least 2 characters.
           if (query.length >= 2) {
@@ -96,14 +108,15 @@
 
             // Announce filter changes.
             // @see Drupal.behaviors.blockFilterByText
-            Drupal.announce(Drupal.formatPlural(
-              totalItems,
-              '1 @item is available in the modified list.',
-              '@total @items are available in the modified list.',
-              args
-            ));
-          }
-          else {
+            Drupal.announce(
+              Drupal.formatPlural(
+                totalItems,
+                '1 @item is available in the modified list.',
+                '@total @items are available in the modified list.',
+                args,
+              ),
+            );
+          } else {
             totalItems = $filterRows.length;
             $filterRows.each(function (index) {
               $(this).closest(parentSelector).show();
@@ -124,12 +137,9 @@
 
           // Update summary.
           if ($summary.length) {
-            $summary.html(Drupal.formatPlural(
-              totalItems,
-              '1 @item',
-              '@total @items',
-              args
-            ));
+            $summary.html(
+              Drupal.formatPlural(totalItems, '1 @item', '@total @items', args),
+            );
             $summary[totalItems ? 'show' : 'hide']();
           }
 
@@ -142,13 +152,15 @@
            *   The label of the webform.
            */
           function toggleEntry(index, label) {
-            var $label = $(label);
-            var $row = $label.closest(parentSelector);
+            const $label = $(label);
+            const $row = $label.closest(parentSelector);
 
-            var textMatch = $label.text().toLowerCase().indexOf(query) !== -1;
-            var isSelected = (selectedSelector && $row.find(selectedSelector).length) ? true : false;
+            const textMatch = $label.text().toLowerCase().indexOf(query) !== -1;
+            const isSelected = !!(
+              selectedSelector && $row.find(selectedSelector).length
+            );
 
-            var isVisible = textMatch || isSelected;
+            const isVisible = textMatch || isSelected;
             $row.toggle(isVisible);
             if (isVisible) {
               totalItems++;
@@ -159,7 +171,6 @@
           }
         }
       });
-    }
+    },
   };
-
 })(jQuery, Drupal, Drupal.debounce, once);

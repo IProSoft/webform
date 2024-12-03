@@ -6,9 +6,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   /**
    * Attaches webform off-canvas behaviors.
    *
@@ -18,10 +15,10 @@
    *   Attaches event listeners to window for off-canvas dialogs.
    */
   Drupal.behaviors.webformOffCanvasEvents = {
-    attach: function () {
+    attach() {
       // Resize seven.theme tabs when off-canvas dialog opened and closed.
       // @see core/themes/seven/js/nav-tabs.js
-      if(once('webform-off-canvas', 'html').length) {
+      if (once('webform-off-canvas', 'html').length) {
         $(window).on({
           'dialog:aftercreate': function (event, dialog, $element, settings) {
             if (Drupal.offCanvas.isOffCanvas($element)) {
@@ -32,15 +29,14 @@
             if (Drupal.offCanvas.isOffCanvas($element)) {
               $(window).trigger('resize.tabs');
             }
-          }
+          },
         });
       }
-    }
+    },
   };
 
   // Append .ckeditor-off-canvas-reset to document to disable ckeditor reset.
   // @see webform_css_alter()
   // @see web/core/modules/ckeditor/js/ckeditor.off-canvas-css-reset.es6.js
   $(document.body).append('<style id="ckeditor-off-canvas-reset"></style>');
-
 })(jQuery, Drupal, once);

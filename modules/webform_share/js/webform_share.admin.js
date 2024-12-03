@@ -4,21 +4,24 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   /**
    * Webform share admin copy.
    *
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformShareAdminCopy = {
-    attach: function (context) {
-      $(once('webform-share-admin-copy', '.js-webform-share-admin-copy', context)).each(function () {
-        var $container = $(this);
-        var $textarea = $container.find('textarea');
-        var $button = $container.find(':submit, :button');
-        var $message = $container.find('.webform-share-admin-copy-message');
+    attach(context) {
+      $(
+        once(
+          'webform-share-admin-copy',
+          '.js-webform-share-admin-copy',
+          context,
+        ),
+      ).each(function () {
+        const $container = $(this);
+        const $textarea = $container.find('textarea');
+        const $button = $container.find(':submit, :button');
+        const $message = $container.find('.webform-share-admin-copy-message');
         // Copy code from textarea to the clipboard.
         // @see https://stackoverflow.com/questions/47879184/document-execcommandcopy-not-working-on-chrome/47880284
         $button.on('click', function () {
@@ -30,7 +33,6 @@
           return false;
         });
       });
-    }
+    },
   };
-
 })(jQuery, Drupal, once);

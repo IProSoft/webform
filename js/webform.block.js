@@ -4,9 +4,6 @@
  */
 
 (function ($, window, Drupal) {
-
-  'use strict';
-
   /**
    * Provide the summary information for the block settings vertical tabs.
    *
@@ -16,7 +13,7 @@
    *   Attaches the behavior for the block settings summaries.
    */
   Drupal.behaviors.webformBlockSettingsSummary = {
-    attach: function () {
+    attach() {
       // The drupalSetSummary method required for this behavior is not available
       // on the Blocks administration page, so we need to make sure this
       // behavior is processed only if drupalSetSummary is defined.
@@ -34,11 +31,20 @@
        *   A string with the summary.
        */
       function selectSummary(context) {
-        return $(context).find('#edit-visibility-webform-webforms option:selected').map(function () { return Drupal.checkPlain(this.text); }).get().join(', ') || Drupal.t('Not restricted');
+        return (
+          $(context)
+            .find('#edit-visibility-webform-webforms option:selected')
+            .map(function () {
+              return Drupal.checkPlain(this.text);
+            })
+            .get()
+            .join(', ') || Drupal.t('Not restricted')
+        );
       }
 
-      $('[data-drupal-selector="edit-visibility-webform"]').drupalSetSummary(selectSummary);
-    }
+      $('[data-drupal-selector="edit-visibility-webform"]').drupalSetSummary(
+        selectSummary,
+      );
+    },
   };
-
 })(jQuery, window, Drupal);

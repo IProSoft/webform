@@ -4,16 +4,14 @@
  */
 
 (function ($, Drupal, drupalSettings, once) {
-
-  'use strict';
-
   // @see https://github.com/algolia/places
   // @see https://community.algolia.com/places/documentation.html#options
   Drupal.webform = Drupal.webform || {};
   Drupal.webform.locationPlaces = Drupal.webform.locationPlaces || {};
-  Drupal.webform.locationPlaces.options = Drupal.webform.locationPlaces.options || {};
+  Drupal.webform.locationPlaces.options =
+    Drupal.webform.locationPlaces.options || {};
 
-  var mapping = {
+  const mapping = {
     lat: 'lat',
     lng: 'lng',
     name: 'name',
@@ -24,7 +22,7 @@
     country: 'country',
     countryCode: 'country_code',
     county: 'county',
-    suburb: 'suburb'
+    suburb: 'suburb',
   };
 
   /**
@@ -33,14 +31,20 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformLocationPlaces = {
-    attach: function (context) {
+    attach(context) {
       if (!window.places) {
         return;
       }
 
-      $(once('webform-location-places', '.js-webform-type-webform-location-places', context)).each(function () {
-        var $element = $(this);
-        var $input = $element.find('.webform-location-places');
+      $(
+        once(
+          'webform-location-places',
+          '.js-webform-type-webform-location-places',
+          context,
+        ),
+      ).each(function () {
+        const $element = $(this);
+        const $input = $element.find('.webform-location-places');
 
         // Prevent the 'Enter' key from submitting the form.
         $input.on('keydown', function (event) {
@@ -49,28 +53,41 @@
           }
         });
 
-        var options = $.extend({
-          type: 'address',
-          useDeviceLocation: true,
-          container: $input.get(0)
-        }, Drupal.webform.locationPlaces.options);
+        const options = $.extend(
+          {
+            type: 'address',
+            useDeviceLocation: true,
+            container: $input.get(0),
+          },
+          Drupal.webform.locationPlaces.options,
+        );
 
         // Add application id and API key.
-        if (drupalSettings.webform.location.places.app_id && drupalSettings.webform.location.places.api_key) {
+        if (
+          drupalSettings.webform.location.places.app_id &&
+          drupalSettings.webform.location.places.api_key
+        ) {
           options.appId = drupalSettings.webform.location.places.app_id;
           options.apiKey = drupalSettings.webform.location.places.api_key;
         }
 
-        var placesAutocomplete = window.places(options);
+        const placesAutocomplete = window.places(options);
 
         // Disable autocomplete.
-        var off = /chrom(e|ium)/.test(window.navigator.userAgent.toLowerCase()) ? 'chrome-off-' + Math.floor(Math.random() * 100000000) : 'off';
+        const off = /chrom(e|ium)/.test(
+          window.navigator.userAgent.toLowerCase(),
+        )
+          ? `chrome-off-${Math.floor(Math.random() * 100000000)}`
+          : 'off';
         $input.attr('autocomplete', off);
 
         // Sync values on change and clear events.
         placesAutocomplete.on('change', function (e) {
           $.each(mapping, function (source, destination) {
-            var value = (source === 'lat' || source === 'lng' ? e.suggestion.latlng[source] : e.suggestion[source]) || '';
+            const value =
+              (source === 'lat' || source === 'lng'
+                ? e.suggestion.latlng[source]
+                : e.suggestion[source]) || '';
             setValue(destination, value);
           });
         });
@@ -83,24 +100,28 @@
         // If there is no default value see if the default value should be set
         // to the browser's current geolocation.
         // @see https://community.algolia.com/places/examples.html#dynamic-form
-        if ($input.val() === ''
-          && window.navigator.geolocation
-          && $input.attr('data-webform-location-places-geolocation')) {
-
+        if (
+          $input.val() === '' &&
+          window.navigator.geolocation &&
+          $input.attr('data-webform-location-places-geolocation')
+        ) {
           placesAutocomplete.on('reverse', function (e) {
-            var suggestion = e.suggestions[0];
+            const suggestion = e.suggestions[0];
             $input.val(suggestion.value);
             $.each(mapping, function (source, destination) {
-              var value = (source === 'lat' || source === 'lng' ? suggestion.latlng[source] : suggestion[source]) || '';
+              const value =
+                (source === 'lat' || source === 'lng'
+                  ? suggestion.latlng[source]
+                  : suggestion[source]) || '';
               setValue(destination, value);
             });
           });
 
           window.navigator.geolocation.getCurrentPosition(function (response) {
-            var coords = response.coords;
-            var lat = coords.latitude.toFixed(6);
-            var lng = coords.longitude.toFixed(6);
-            placesAutocomplete.reverse(lat + ',' + lng);
+            const coords = response.coords;
+            const lat = coords.latitude.toFixed(6);
+            const lng = coords.longitude.toFixed(6);
+            placesAutocomplete.reverse(`${lat},${lng}`);
           });
         }
 
@@ -113,11 +134,10 @@
          *   The attribute value
          */
         function setValue(name, value) {
-          var inputSelector = ':input[data-webform-location-places-attribute="' + name + '"]';
+          const inputSelector = `:input[data-webform-location-places-attribute="${name}"]`;
           $element.find(inputSelector).val(value);
         }
       });
-    }
+    },
   };
-
 })(jQuery, Drupal, drupalSettings, once);

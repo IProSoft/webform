@@ -4,9 +4,6 @@
  */
 
 (function ($, Drupal, once) {
-
-  'use strict';
-
   // All options can be override using custom data-* attributes.
   // @see https://github.com/gjunge/rateit.js/wiki#options.
 
@@ -16,11 +13,11 @@
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.webformRating = {
-    attach: function (context) {
-      $(once('webform-rating', '[data-rateit-backingfld]', context))
-        .each(function () {
-          var $rateit = $(this);
-          var $input = $($rateit.attr('data-rateit-backingfld'));
+    attach(context) {
+      $(once('webform-rating', '[data-rateit-backingfld]', context)).each(
+        function () {
+          const $rateit = $(this);
+          const $input = $($rateit.attr('data-rateit-backingfld'));
           if (!$.fn.rateit) {
             $rateit.remove();
             $input.removeClass('js-webform-visually-hidden');
@@ -30,9 +27,10 @@
           // Rateit only initialize inputs on load.
           if (document.readyState === 'complete') {
             $rateit.rateit();
-          }
-          else {
-            window.setTimeout(function () {$rateit.rateit();});
+          } else {
+            window.setTimeout(function () {
+              $rateit.rateit();
+            });
           }
 
           // Update the RateIt widget when the input's value has changed.
@@ -46,8 +44,8 @@
           $input.on('webform:disabled', function () {
             $rateit.rateit('readonly', $input.is(':disabled'));
           });
-        });
-    }
+        },
+      );
+    },
   };
-
 })(jQuery, Drupal, once);
