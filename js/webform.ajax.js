@@ -3,7 +3,7 @@
  * JavaScript behaviors for Ajax.
  */
 
-(function ($, Drupal, drupalSettings, once) {
+(function ($, Drupal, drupalSettings, once, tabbable) {
 
   'use strict';
 
@@ -167,7 +167,11 @@
       setTimeout(function () {$element.removeClass('color-success');}, 3000);
 
       // Focus first tabbable item for the updated elements and handlers.
-      $element.find(':tabbable:not(.tabledrag-handle)').eq(0).trigger('focus');
+      const tabbableElements = tabbable.tabbable($element.get(0));
+      const filteredElements = tabbableElements.filter(element => !element.classList.contains('tabledrag-handle'));
+      if (filteredElements.length) {
+        filteredElements[0].focus();
+      }
 
       // Scroll element into view.
       Drupal.webformScrolledIntoView($element);
@@ -333,4 +337,4 @@
     }
   };
 
-})(jQuery, Drupal, drupalSettings, once);
+})(jQuery, Drupal, drupalSettings, once, tabbable);
