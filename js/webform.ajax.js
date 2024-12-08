@@ -259,6 +259,10 @@
       updateKey = (response.url.match(/[?|&]update=([^&]+)($|&)/)) ? RegExp.$1 : null;
       addElement = (response.url.match(/[?|&]add_element=([^&]+)($|&)/)) ? RegExp.$1 : null;
       $('.webform-ajax-refresh').trigger('click');
+      // Ensure the off canvas dialog is always closed and removed.
+      // @see Drupal.AjaxCommands.prototype.closeDialog
+      Drupal.dialog($('#drupal-off-canvas').get(0)).close();
+      $('#drupal-off-canvas').remove();
     }
     else {
       // Clear unsaved information flag so that the current webform page
