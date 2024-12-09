@@ -261,8 +261,7 @@
       $('.webform-ajax-refresh').trigger('click');
       // Ensure the off canvas dialog is always closed and removed.
       // @see Drupal.AjaxCommands.prototype.closeDialog
-      Drupal.dialog($('#drupal-off-canvas').get(0)).close();
-      $('#drupal-off-canvas').remove();
+      $('#drupal-off-canvas').hide();
     }
     else {
       // Clear unsaved information flag so that the current webform page
