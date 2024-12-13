@@ -996,7 +996,7 @@ function webform_element_info_alter(array &$info) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current state of the form.
  * @param array $complete_form
- *   The complete webform structure.
+ *   The complete form structure.
  *
  * @return array
  *   The processed element.
@@ -1004,6 +1004,11 @@ function webform_element_info_alter(array &$info) {
 function webform_process_options(&$element, FormStateInterface $form_state, &$complete_form) {
   if (!WebformElementHelper::isWebformElement($element)) {
     return $element;
+  }
+
+  // Set #webform_element for all options (checkboxes and radios).
+  foreach (Element::children($element) as $key) {
+    $element[$key]['#webform_element'] = TRUE;
   }
 
   // Description display.
@@ -1018,7 +1023,6 @@ function webform_process_options(&$element, FormStateInterface $form_state, &$co
 
       [$title, $description] = WebformOptionsHelper::splitOption($title);
       $element[$key]['#title'] = $title;
-      $element[$key]['#webform_element'] = TRUE;
       $element[$key][$description_property_name] = $description;
     }
   }
