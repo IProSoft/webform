@@ -117,7 +117,9 @@ class Range extends NumericBase {
 
       // Calculate the output's width based on the #max number's string length.
       $output['#attributes'] += ['style' => ''];
-      $output['#attributes']['style'] .= ($output['#attributes']['style'] ? ';' : '') . 'width:' . (strlen($element['#max'] . '') + 1) . 'em';
+      $max_string_length = strlen($element['#max'] . '');
+      $max_string_length = ($max_string_length > 4) ? $max_string_length : 4;
+      $output['#attributes']['style'] .= ($output['#attributes']['style'] ? ';' : '') . 'width:' . ($max_string_length + 1.5) . 'em';
 
       // Append output element as a child.
       if ($element['#output'] === 'left') {
