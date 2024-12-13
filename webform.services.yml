@@ -127,6 +127,12 @@ services:
     tags:
       - { name: event_subscriber }
 
+  webform.filter_format_subscriber:
+    class: Drupal\webform\EventSubscriber\WebformFilterFormatSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }
+
   # Route subscriber.
 
   webform.route_subscriber:
@@ -134,6 +140,7 @@ services:
     arguments: ['@module_handler', '@config.factory']
     tags:
       - { name: event_subscriber }
+
 
   # Route context.
 
