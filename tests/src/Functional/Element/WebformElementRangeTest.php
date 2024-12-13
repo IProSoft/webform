@@ -47,7 +47,7 @@ class WebformElementRangeTest extends WebformElementBrowserTestBase {
     // Check output right range element.
     $assert_session->responseContains('<span class="field-suffix"><span class="webform-range-output-delimiter"></span><div class="js-form-item form-item form-type-number js-form-type-number form-item-range-output-disabled__output js-form-item-range-output-disabled__output form-no-label form-disabled">');
     $assert_session->responseContains('<label for="range_output_right__output" class="visually-hidden">range_output_right</label>');
-    $assert_session->responseContains('<input style="width:4.5em" type="number" id="range_output_right__output" step="1" min="0" max="100" class="form-number" />');
+    $assert_session->responseContains('<input style="width:5.5em" type="number" id="range_output_right__output" step="1" min="0" max="100" class="form-number" />');
 
     // Check processing.
     $this->drupalGet('/webform/test_element_range');
