@@ -65,6 +65,11 @@
             options.maxItemCount = $select.data('limit');
           }
 
+          // Allow custom options.
+          if ($select.attr('data-options')) {
+            options = $.extend(JSON.parse($input.attr('data-options')), options);
+          }
+
           var choices = new Choices(this, options);
 
           // Store reference to this element's choices instance so that

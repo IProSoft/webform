@@ -75,6 +75,11 @@
             options.max_selected_options = $select.data('limit');
           }
 
+          // Allow custom options.
+          if ($select.attr('data-options')) {
+            options = $.extend(JSON.parse($input.attr('data-options')), options);
+          }
+
           // Remove required attribute from IE11 which breaks
           // HTML5 clientside validation.
           if (window.navigator.userAgent.indexOf('Trident/') !== -1

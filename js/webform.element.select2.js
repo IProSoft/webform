@@ -58,6 +58,11 @@ if (!jQuery.trim) {
             options.maximumSelectionLength = $select.data('limit');
           }
 
+          // Allow custom options.
+          if ($select.attr('data-options')) {
+            options = $.extend(JSON.parse($input.attr('data-options')), options);
+          }
+
           // Remove required attribute from IE11 which breaks
           // HTML5 clientside validation.
           // @see https://github.com/select2/select2/issues/5114
