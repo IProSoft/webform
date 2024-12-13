@@ -1,7 +1,7 @@
 name: 'Webform Bootstrap'
 type: module
 description: 'Helps support Webform to Bootstrap integration.'
-package: Webform
+package: 'Webform [DEPRECATED]'
 core_version_requirement: ^10.3 || ^11.0
 dependencies:
   - 'webform:webform'
