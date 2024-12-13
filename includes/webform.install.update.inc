@@ -4331,3 +4331,12 @@ function webform_update_8638() {
     $role->save();
   }
 }
+
+/**
+ * Deprecate Webform Bootstrap 3.x support.
+ */
+function webform_update_8639() {
+  \Drupal::configFactory()->getEditable('webform.settings')
+    ->clear('requirements.bootstrap')
+    ->save();
+}
