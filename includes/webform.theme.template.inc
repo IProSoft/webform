@@ -877,20 +877,19 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
  *   - attributes: The help attributes.
  */
 function template_preprocess_webform_element_help(array &$variables) {
-  $content = (is_array($variables['help'])) ? \Drupal::service('renderer')->render($variables['help']) : $variables['help'];
+  $help_title = WebformHtmlEditor::stripTags($variables['help_title'] ?? '');
 
-  $help = '';
-  if (!empty($variables['help_title'])) {
-    $help .= '<div class="webform-element-help--title">' . WebformHtmlEditor::stripTags($variables['help_title']) . '</div>';
-  }
-  $help .= '<div class="webform-element-help--content">' . WebformHtmlEditor::stripTags($content) . '</div>';
+  $content = (is_array($variables['help']))
+    ? \Drupal::service('renderer')->render($variables['help'])
+    : $variables['help'];
+  $help_content = WebformHtmlEditor::stripTags($content);
 
-  $label = '';
-  if (!empty($variables['help_title'])) {
-    $label .= WebformHtmlEditor::stripTags($variables['help_title']);
-    $label .= ': ';
-  }
-  $label .= WebformHtmlEditor::stripTags($content);
+  $label = ($help_title) ? $help_title . ' - ' : '';
+  $label .= $help_content;
+
+  $help = ($help_title) ? '<div class="webform-element-help--title">' . $help_title . '</div>' : '';
+  $help .= '<div class="webform-element-help--content">' . $help_content . '</div>';
+
 
   $attributes = $variables['attributes'] ?? [];
   $attributes['class'][] = 'webform-element-help';
