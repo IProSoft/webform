@@ -877,13 +877,6 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
  *   - attributes: The help attributes.
  */
 function template_preprocess_webform_element_help(array &$variables) {
-  $attributes = $variables['attributes'] ?? [];
-  $attributes['class'][] = 'webform-element-help';
-  $attributes['class'][] = 'js-webform-element-help';
-  $attributes['role'] = 'tooltip';
-  $attributes['tabindex'] = '0';
-  $attributes['aria-label'] = $variables['help_title'] ?: t('Help tooltip');
-
   $content = (is_array($variables['help'])) ? \Drupal::service('renderer')->render($variables['help']) : $variables['help'];
 
   $help = '';
@@ -891,6 +884,20 @@ function template_preprocess_webform_element_help(array &$variables) {
     $help .= '<div class="webform-element-help--title">' . WebformHtmlEditor::stripTags($variables['help_title']) . '</div>';
   }
   $help .= '<div class="webform-element-help--content">' . WebformHtmlEditor::stripTags($content) . '</div>';
+
+  $label = '';
+  if (!empty($variables['help_title'])) {
+    $label .= WebformHtmlEditor::stripTags($variables['help_title']);
+    $label .= ': ';
+  }
+  $label .= WebformHtmlEditor::stripTags($content);
+
+  $attributes = $variables['attributes'] ?? [];
+  $attributes['class'][] = 'webform-element-help';
+  $attributes['class'][] = 'js-webform-element-help';
+  $attributes['role'] = 'tooltip';
+  $attributes['tabindex'] = '0';
+  $attributes['aria-label'] = $label;
   $attributes['data-webform-help'] = $help;
 
   $variables['attributes'] = new Attribute($attributes);
