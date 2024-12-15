@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;
+use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Render\Markup;
@@ -886,10 +887,10 @@ function template_preprocess_webform_element_help(array &$variables) {
 
   $label = ($help_title) ? $help_title . ' - ' : '';
   $label .= $help_content;
+  $label = MailFormatHelper::htmlToText(strip_tags($label, ['br', 'p']));
 
   $help = ($help_title) ? '<div class="webform-element-help--title">' . $help_title . '</div>' : '';
   $help .= '<div class="webform-element-help--content">' . $help_content . '</div>';
-
 
   $attributes = $variables['attributes'] ?? [];
   $attributes['class'][] = 'webform-element-help';
