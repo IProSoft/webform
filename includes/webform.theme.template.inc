@@ -887,7 +887,7 @@ function template_preprocess_webform_element_help(array &$variables) {
 
   $label = ($help_title) ? $help_title . ' - ' : '';
   $label .= $help_content;
-  $label = MailFormatHelper::htmlToText(strip_tags($label, ['br', 'p']));
+  $label = trim(MailFormatHelper::htmlToText(strip_tags($label, ['br', 'p'])));
 
   $help = ($help_title) ? '<div class="webform-element-help--title">' . $help_title . '</div>' : '';
   $help .= '<div class="webform-element-help--content">' . $help_content . '</div>';
