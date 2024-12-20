@@ -48,7 +48,7 @@ class WebformImageSelectElementTest extends WebformElementBrowserTestBase {
       'image_select_default' => 'dog_1',
     ];
     $this->postSubmission($webform, $edit, 'Preview');
-    $assert_session->responseContains('<figure style="display: inline-block; margin: 0 6px 6px 0; padding: 6px; border: 1px solid #ddd;width: 220px"><img src="https://placedog.net/220/200" width="220" height="200" alt="Cute Dog 1" title="Cute Dog 1" loading="lazy" />');
+    $assert_session->elementExists('xpath', '//figure/img[@src = "https://placedog.net/220/200"][@width = "220"][@height = 200][@alt = "Cute Dog 1"][@title = "Cute Dog 1"][@loading="lazy"]');
   }
 
 }
