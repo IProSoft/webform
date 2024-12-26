@@ -30,23 +30,23 @@ class DateList extends DateBase implements TrustedCallbackInterface {
    */
   protected function defineDefaultProperties() {
     return [
-        'date_min' => '',
-        'date_max' => '',
-        // Date settings.
-        'date_part_order' => [
-          'year',
-          'month',
-          'day',
-          'hour',
-          'minute',
-        ],
-        'date_text_parts' => [],
-        'date_year_range' => '1900:2050',
-        'date_year_range_reverse' => FALSE,
-        'date_increment' => 1,
-        'date_abbreviate' => TRUE,
-        'date_part_title_display' => '',
-      ] + parent::defineDefaultProperties();
+      'date_min' => '',
+      'date_max' => '',
+      // Date settings.
+      'date_part_order' => [
+        'year',
+        'month',
+        'day',
+        'hour',
+        'minute',
+      ],
+      'date_text_parts' => [],
+      'date_year_range' => '1900:2050',
+      'date_year_range_reverse' => FALSE,
+      'date_increment' => 1,
+      'date_abbreviate' => TRUE,
+      'date_part_title_display' => '',
+    ] + parent::defineDefaultProperties();
   }
 
   /* ************************************************************************ */
