@@ -1792,7 +1792,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       '@webform-libraries-download' => 'webform-libraries-download',
       '@webform-composer-update' => 'webform-composer-update',
     ];
-    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+    // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing.
     $drush_version = (class_exists('\Drush\Drush')) ? Drush::getMajorVersion() : 8;
     if ($drush_version >= 9) {
       foreach ($t_args as $command_name => $command) {

@@ -22,7 +22,7 @@ use Drupal\Core\Hook\Attribute\Hook;
  * Hook implementations for webform_entity_print.
  */
 class WebformEntityPrintHooks {
-    // phpcs:ignore
+  // phpcs:ignore.
 
   /**
    * Implements hook_webform_submission_access().

@@ -171,7 +171,8 @@ class WebformEmailConfirm extends FormElementBase {
    */
   public static function validateWebformEmailConfirm(&$element, FormStateInterface $form_state, &$complete_form) {
     if (isset($element['flexbox'])) {
-      $mail_element = &$element['flexbox']; // phpcs:ignore
+      // phpcs:ignore.
+      $mail_element = &$element['flexbox'];
     }
     else {
       $mail_element = &$element;

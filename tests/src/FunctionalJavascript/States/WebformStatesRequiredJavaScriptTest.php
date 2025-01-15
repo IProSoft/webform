@@ -1,5 +1,6 @@
 <?php
-// phpcs:ignoreFile
+
+// phpcs:ignoreFile.
 
 namespace Drupal\Tests\webform\FunctionalJavascript\States;
 

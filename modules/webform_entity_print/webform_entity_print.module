@@ -25,7 +25,8 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 /**
  * The name of the query parameter for webform entity print image tokens.
  */
-define('WEBFORM_ENTITY_PRINT_IMAGE_TOKEN', 'webform_entity_print_itok'); // phpcs:ignore
+// phpcs:ignore.
+define('WEBFORM_ENTITY_PRINT_IMAGE_TOKEN', 'webform_entity_print_itok');
 
 /**
  * Implements hook_webform_submission_access().

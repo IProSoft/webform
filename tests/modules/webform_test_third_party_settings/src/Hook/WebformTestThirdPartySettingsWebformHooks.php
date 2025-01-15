@@ -42,7 +42,7 @@ class WebformTestThirdPartySettingsWebformHooks {
    */
   #[Hook('webform_submission_form_alter')]
   public function webformSubmissionFormAlter(&$form, FormStateInterface $form_state, $form_id) {
-        // phpcs:ignore DrupalPractice.Variables.GetRequestData.SuperglobalAccessed
+    // phpcs:ignore DrupalPractice.Variables.GetRequestData.SuperglobalAccessed.
     if (!empty($_POST)) {
       return;
     }

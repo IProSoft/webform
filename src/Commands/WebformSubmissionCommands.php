@@ -233,7 +233,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
    */
   public function import($webform = NULL, $import_uri = NULL, array $options = ['skip_validation' => NULL, 'treat_warnings_as_errors' => NULL, 'entity-type' => NULL, 'entity-id' => NULL]) {
     /** @var \Drupal\webform_submission_export_import\WebformSubmissionExportImportImporterInterface $submission_importer */
-    // phpcs:ignore
+    // phpcs:ignore.
     $submission_importer = \Drupal::service('webform_submission_export_import.importer');
 
     // Get webform.
@@ -366,7 +366,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
         throw new UserAbortException();
       }
 
-      // phpcs:ignore
+      // phpcs:ignore.
       $form = WebformResultsClearForm::create(\Drupal::getContainer());
       $form->batchSet();
       drush_backend_batch_process();
@@ -384,7 +384,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
         throw new UserAbortException();
       }
 
-      // phpcs:ignore
+      // phpcs:ignore.
       $form = WebformSubmissionsPurgeForm::create(\Drupal::getContainer());
       $form->batchSet($webform, $source_entity);
       drush_backend_batch_process();
@@ -429,7 +429,7 @@ class WebformSubmissionCommands extends WebformCommandsBase {
       'num' => $num ?: 50,
     ] + $options;
     /** @var \Drupal\webform\Plugin\DevelGenerate\WebformSubmissionDevelGenerate $instance */
-    // phpcs:ignore
+    // phpcs:ignore.
     $instance = \Drupal::service('plugin.manager.develgenerate')->createInstance('webform_submission', []);
     $instance->generate($values);
   }

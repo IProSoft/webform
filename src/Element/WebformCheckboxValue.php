@@ -54,7 +54,7 @@ class WebformCheckboxValue extends FormElementBase {
 
     $properties = [
       '#title' => '#title',
-      // phpcs:ignore DrupalPractice.General.DescriptionT.DescriptionT
+      // phpcs:ignore DrupalPractice.General.DescriptionT.DescriptionT.
       '#description' => '#description',
       '#help' => '#help',
     ];
