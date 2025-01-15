@@ -1962,13 +1962,11 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
       }
     }
 
-    foreach ($sub_element_keys as $sub_element_key) {
-      // Delete submission element key data.
-      \Drupal::database()->delete('webform_submission_data')
-        ->condition('webform_id', $this->id())
-        ->condition('name', $sub_element_key)
-        ->execute();
-    }
+    // Delete submission element key data.
+    \Drupal::database()->delete('webform_submission_data')
+      ->condition('webform_id', $this->id())
+      ->condition('name', $sub_element_keys, 'IN')
+      ->execute();
   }
 
   /**
