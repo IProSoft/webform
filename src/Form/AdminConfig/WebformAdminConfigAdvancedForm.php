@@ -100,7 +100,7 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
         '#title' => $this->t('Display element description as help text (tooltip)'),
         '#description' => $this->t("If checked, all element descriptions will be moved to help text (tooltip).")
           . '<br/><br/><em>'
-          . $this->t('This behavior is disabled when the <a href=":href">Tippy.js library is disabled</a.', [':href' => Url::fromRoute('webform.config.libraries')->toString()]) . '</em>',
+          . $this->t('This behavior is disabled when the <a href=":href">Tippy.js library is disabled</a>.', [':href' => Url::fromRoute('webform.config.libraries')->toString()]) . '</em>',
         '#default_value' => $config->get('ui.description_help'),
         '#disabled' => TRUE,
       ];
@@ -194,13 +194,6 @@ class WebformAdminConfigAdvancedForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('requirements.clientside_validation'),
     ];
 
-    $form['requirements']['bootstrap'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Check if the Webform Bootstrap Integration module is installed when using the Bootstrap theme'),
-      '#description' => $this->t('If unchecked, all warnings about the Webform Bootstrap Integration module will be disabled.'),
-      '#return_value' => TRUE,
-      '#default_value' => $config->get('requirements.bootstrap'),
-    ];
     $form['requirements']['spam'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Check if SPAM protection module is installed'),

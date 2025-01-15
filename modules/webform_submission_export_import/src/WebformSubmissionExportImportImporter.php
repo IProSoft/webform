@@ -390,7 +390,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     $handle = fopen($this->getImportUri(), 'r');
 
     // Get the column names.
-    $column_names = fgetcsv($handle);
+    $column_names = fgetcsv($handle, escape: '\\');
     foreach ($column_names as $index => $name) {
       $column_names[$index] = $name;
     }
@@ -415,7 +415,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     // Import submission records.
     while ($stats['total'] < $limit && !feof($handle)) {
       // Get CSV values.
-      $values = fgetcsv($handle);
+      $values = fgetcsv($handle, escape: '\\');
       // Complete ignored empty rows.
       if (empty($values) || $values === ['']) {
         continue;
@@ -1000,7 +1000,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
     $total = -1;
     $handle = fopen($this->importUri, 'r');
     while (!feof($handle)) {
-      $line = fgetcsv($handle);
+      $line = fgetcsv($handle, escape: '\\');
       if (!empty($line) && !is_null(array_pop($line))) {
         $total++;
       }
@@ -1014,7 +1014,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    */
   public function getSourceColumns() {
     $file = fopen($this->getImportUri(), 'r');
-    $values = fgetcsv($file);
+    $values = fgetcsv($file, escape: '\\');
     fclose($file);
     return array_combine($values, $values);
   }
