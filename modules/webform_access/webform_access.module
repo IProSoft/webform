@@ -4,6 +4,7 @@
  * @file
  * Provides webform access controls for webform nodes.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_access\Hook\WebformAccessHooks;
 use Drupal\Core\Access\AccessResult;
@@ -21,9 +22,8 @@ use Drupal\webform_access\Entity\WebformAccessGroup;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_access_webform_help_info()
-{
-    return \Drupal::service(WebformAccessHooks::class)->webformHelpInfo();
+function webform_access_webform_help_info() {
+  return \Drupal::service(WebformAccessHooks::class)->webformHelpInfo();
 }
 
 /* ************************************************************************** */
@@ -74,36 +74,32 @@ function webform_access_field_storage_config_delete(EntityInterface $entity) {
  * @see \Drupal\Core\Menu\Plugin\Block\LocalTasksBlock::build
  */
 #[LegacyHook]
-function webform_access_menu_local_tasks_alter(&$data, $route_name)
-{
-    return \Drupal::service(WebformAccessHooks::class)->menuLocalTasksAlter($data, $route_name);
+function webform_access_menu_local_tasks_alter(&$data, $route_name) {
+  return \Drupal::service(WebformAccessHooks::class)->menuLocalTasksAlter($data, $route_name);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_access() for webform entities.
  */
 #[LegacyHook]
-function webform_access_webform_access(WebformInterface $webform, $operation, AccountInterface $account)
-{
-    return \Drupal::service(WebformAccessHooks::class)->webformAccess($webform, $operation, $account);
+function webform_access_webform_access(WebformInterface $webform, $operation, AccountInterface $account) {
+  return \Drupal::service(WebformAccessHooks::class)->webformAccess($webform, $operation, $account);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_access() for webform_submission entities.
  */
 #[LegacyHook]
-function webform_access_webform_submission_access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account)
-{
-    return \Drupal::service(WebformAccessHooks::class)->webformSubmissionAccess($webform_submission, $operation, $account);
+function webform_access_webform_submission_access(WebformSubmissionInterface $webform_submission, $operation, AccountInterface $account) {
+  return \Drupal::service(WebformAccessHooks::class)->webformSubmissionAccess($webform_submission, $operation, $account);
 }
 
 /**
  * Implements hook_webform_submission_query_access_alter().
  */
 #[LegacyHook]
-function webform_access_webform_submission_query_access_alter(AlterableInterface $query, array $webform_submission_tables)
-{
-    \Drupal::service(WebformAccessHooks::class)->webformSubmissionQueryAccessAlter($query, $webform_submission_tables);
+function webform_access_webform_submission_query_access_alter(AlterableInterface $query, array $webform_submission_tables) {
+  \Drupal::service(WebformAccessHooks::class)->webformSubmissionQueryAccessAlter($query, $webform_submission_tables);
 }
 
 /* ************************************************************************** */
@@ -114,18 +110,16 @@ function webform_access_webform_submission_query_access_alter(AlterableInterface
  * Implements hook_field_widget_single_element_form_alter().
  */
 #[LegacyHook]
-function webform_access_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, $context)
-{
-    return \Drupal::service(WebformAccessHooks::class)->fieldWidgetSingleElementFormAlter($element, $form_state, $context);
+function webform_access_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, $context) {
+  return \Drupal::service(WebformAccessHooks::class)->fieldWidgetSingleElementFormAlter($element, $form_state, $context);
 }
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 #[LegacyHook]
-function webform_access_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    \Drupal::service(WebformAccessHooks::class)->formNodeFormAlter($form, $form_state, $form_id);
+function webform_access_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(WebformAccessHooks::class)->formNodeFormAlter($form, $form_state, $form_id);
 }
 
 /**
@@ -181,9 +175,8 @@ function _webform_access_form_node_form_submit(&$form, FormStateInterface $form_
  * Add the webform access group to an individual user's account page.
  */
 #[LegacyHook]
-function webform_access_form_user_form_alter(&$form, FormStateInterface $form_state)
-{
-    return \Drupal::service(WebformAccessHooks::class)->formUserFormAlter($form, $form_state);
+function webform_access_form_user_form_alter(&$form, FormStateInterface $form_state) {
+  return \Drupal::service(WebformAccessHooks::class)->formUserFormAlter($form, $form_state);
 }
 
 /**

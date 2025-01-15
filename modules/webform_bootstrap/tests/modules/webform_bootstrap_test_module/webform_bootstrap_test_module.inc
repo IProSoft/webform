@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_bootstrap_test_module\Hook\WebformBootstrapTestModuleHooks1;
 
@@ -12,18 +16,16 @@ use Drupal\webform_bootstrap_test_module\Hook\WebformBootstrapTestModuleHooks1;
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_test_module_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id)
-{
-    \Drupal::service(WebformBootstrapTestModuleHooks1::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
+function webform_bootstrap_test_module_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(WebformBootstrapTestModuleHooks1::class)->webformSubmissionFormAlter($form, $form_state, $form_id);
 }
 
 /**
  * Implements hook_webform_element_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_test_module_webform_element_alter(array &$element, FormStateInterface $form_state, array $context)
-{
-    return \Drupal::service(WebformBootstrapTestModuleHooks1::class)->webformElementAlter($element, $form_state, $context);
+function webform_bootstrap_test_module_webform_element_alter(array &$element, FormStateInterface $form_state, array $context) {
+  return \Drupal::service(WebformBootstrapTestModuleHooks1::class)->webformElementAlter($element, $form_state, $context);
 }
 
 /**

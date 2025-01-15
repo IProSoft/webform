@@ -4,6 +4,7 @@
  * @file
  * Options alter hooks.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformOptionsHooks;
 use Drupal\Core\Datetime\TimeZoneFormHelper;
@@ -16,9 +17,8 @@ use Drupal\webform\Utility\WebformOptionsHelper;
  * @see config/install/webform.webform.example_options.yml
  */
 #[LegacyHook]
-function webform_webform_options_range_alter(array &$options, array $element = [])
-{
-    \Drupal::service(WebformOptionsHooks::class)->webformOptionsRangeAlter($options, $element);
+function webform_webform_options_range_alter(array &$options, array $element = []) {
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsRangeAlter($options, $element);
 }
 
 /**

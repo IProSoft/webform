@@ -4,6 +4,7 @@
  * @file
  * Theme hooks, preprocessor, and suggestions.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformThemeHooks;
 use Drupal\Component\Utility\Html;
@@ -26,9 +27,8 @@ use Drupal\webform\Utility\WebformElementHelper;
  * Implements hook_theme().
  */
 #[LegacyHook]
-function webform_theme()
-{
-    return \Drupal::service(WebformThemeHooks::class)->theme();
+function webform_theme() {
+  return \Drupal::service(WebformThemeHooks::class)->theme();
 }
 
 /**

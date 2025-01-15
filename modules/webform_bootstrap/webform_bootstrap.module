@@ -4,6 +4,7 @@
  * @file
  * Helps support Webform to Bootstrap integration.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_bootstrap\Hook\WebformBootstrapHooks;
 use Drupal\bootstrap\Bootstrap;
@@ -18,9 +19,8 @@ use Drupal\webform_bootstrap\WebformBootstrapRenderCallbacks;
  * Implements hook_page_attachments().
  */
 #[LegacyHook]
-function webform_bootstrap_page_attachments(array &$attachments)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->pageAttachments($attachments);
+function webform_bootstrap_page_attachments(array &$attachments) {
+  return \Drupal::service(WebformBootstrapHooks::class)->pageAttachments($attachments);
 }
 
 /**
@@ -43,18 +43,16 @@ function webform_bootstrap_webform_element_webform_likert_alter(array &$element,
  * Implements hook_webform_element_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_webform_element_alter(array &$element, FormStateInterface $form_state, array $context)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->webformElementAlter($element, $form_state, $context);
+function webform_bootstrap_webform_element_alter(array &$element, FormStateInterface $form_state, array $context) {
+  return \Drupal::service(WebformBootstrapHooks::class)->webformElementAlter($element, $form_state, $context);
 }
 
 /**
  * Implements hook_link_alter().
  */
 #[LegacyHook]
-function webform_bootstrap_link_alter(&$variables)
-{
-    return \Drupal::service(WebformBootstrapHooks::class)->linkAlter($variables);
+function webform_bootstrap_link_alter(&$variables) {
+  return \Drupal::service(WebformBootstrapHooks::class)->linkAlter($variables);
 }
 
 /**

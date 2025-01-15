@@ -4,6 +4,7 @@
  * @file
  * Webform scheduled email module drush commands.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailDrushHooks;
 use Drupal\webform\Entity\Webform;
@@ -14,9 +15,8 @@ use Drush\Drush;
  * Implements hook_drush_command().
  */
 #[LegacyHook]
-function webform_scheduled_email_drush_command()
-{
-    return \Drupal::service(WebformScheduledEmailDrushHooks::class)->drushCommand();
+function webform_scheduled_email_drush_command() {
+  return \Drupal::service(WebformScheduledEmailDrushHooks::class)->drushCommand();
 }
 
 /**

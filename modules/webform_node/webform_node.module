@@ -4,6 +4,7 @@
  * @file
  * Provides a webform content type which allows webforms to be integrated into a website as nodes.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_node\Hook\WebformNodeHooks;
 use Drupal\Component\Serialization\Yaml;
@@ -31,9 +32,8 @@ function webform_node_entity_type_alter(array &$entity_types) {
  * Implements hook_entity_operation().
  */
 #[LegacyHook]
-function webform_node_entity_operation(EntityInterface $entity)
-{
-    return \Drupal::service(WebformNodeHooks::class)->entityOperation($entity);
+function webform_node_entity_operation(EntityInterface $entity) {
+  return \Drupal::service(WebformNodeHooks::class)->entityOperation($entity);
 }
 
 /**
@@ -48,9 +48,8 @@ function webform_node_node_access(NodeInterface $node, $operation, AccountInterf
  * Implements hook_webform_submission_query_access_alter().
  */
 #[LegacyHook]
-function webform_node_webform_submission_query_access_alter(AlterableInterface $query, array $webform_submission_tables)
-{
-    return \Drupal::service(WebformNodeHooks::class)->webformSubmissionQueryAccessAlter($query, $webform_submission_tables);
+function webform_node_webform_submission_query_access_alter(AlterableInterface $query, array $webform_submission_tables) {
+  return \Drupal::service(WebformNodeHooks::class)->webformSubmissionQueryAccessAlter($query, $webform_submission_tables);
 }
 
 /**
@@ -61,9 +60,8 @@ function webform_node_webform_submission_query_access_alter(AlterableInterface $
  * @see \Drupal\webform_node\Controller\WebformNodeReferencesListController::render
  */
 #[LegacyHook]
-function webform_node_node_prepare_form(NodeInterface $node, $operation, FormStateInterface $form_state)
-{
-    return \Drupal::service(WebformNodeHooks::class)->nodePrepareForm($node, $operation, $form_state);
+function webform_node_node_prepare_form(NodeInterface $node, $operation, FormStateInterface $form_state) {
+  return \Drupal::service(WebformNodeHooks::class)->nodePrepareForm($node, $operation, $form_state);
 }
 
 /**
@@ -72,18 +70,16 @@ function webform_node_node_prepare_form(NodeInterface $node, $operation, FormSta
  * Remove user specified entity references.
  */
 #[LegacyHook]
-function webform_node_node_delete(NodeInterface $node)
-{
-    \Drupal::service(WebformNodeHooks::class)->nodeDelete($node);
+function webform_node_node_delete(NodeInterface $node) {
+  \Drupal::service(WebformNodeHooks::class)->nodeDelete($node);
 }
 
 /**
  * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter().
  */
 #[LegacyHook]
-function webform_node_field_widget_single_element_webform_entity_reference_autocomplete_form_alter(&$element, FormStateInterface $form_state, $context)
-{
-    return \Drupal::service(WebformNodeHooks::class)->fieldWidgetSingleElementWebformEntityReferenceAutocompleteFormAlter($element, $form_state, $context);
+function webform_node_field_widget_single_element_webform_entity_reference_autocomplete_form_alter(&$element, FormStateInterface $form_state, $context) {
+  return \Drupal::service(WebformNodeHooks::class)->fieldWidgetSingleElementWebformEntityReferenceAutocompleteFormAlter($element, $form_state, $context);
 }
 
 /**

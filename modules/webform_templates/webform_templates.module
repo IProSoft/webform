@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_templates\Hook\WebformTemplatesHooks;
 
@@ -20,7 +24,6 @@ function webform_templates_entity_type_alter(array &$entity_types) {
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_templates_webform_help_info()
-{
-    return \Drupal::service(WebformTemplatesHooks::class)->webformHelpInfo();
+function webform_templates_webform_help_info() {
+  return \Drupal::service(WebformTemplatesHooks::class)->webformHelpInfo();
 }

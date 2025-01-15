@@ -4,6 +4,7 @@
  * @file
  * Provides keyboard shortcuts to create and save webform elements.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_shortcuts\Hook\WebformShortcutsHooks;
 use Drupal\Core\Cache\CacheableMetadata;
@@ -15,9 +16,8 @@ use Drupal\webform\Utility\WebformTextHelper;
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_shortcuts_webform_libraries_info()
-{
-    return \Drupal::service(WebformShortcutsHooks::class)->webformLibrariesInfo();
+function webform_shortcuts_webform_libraries_info() {
+  return \Drupal::service(WebformShortcutsHooks::class)->webformLibrariesInfo();
 }
 
 /**
@@ -101,9 +101,8 @@ function webform_shortcuts_preprocess_block(&$variables) {
  * Implements hook_form_FORM_ID_alter() for admin config advanced form.
  */
 #[LegacyHook]
-function webform_shortcuts_form_webform_admin_config_advanced_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformShortcutsHooks::class)->formWebformAdminConfigAdvancedFormAlter($form, $form_state);
+function webform_shortcuts_form_webform_admin_config_advanced_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformShortcutsHooks::class)->formWebformAdminConfigAdvancedFormAlter($form, $form_state);
 }
 
 /**

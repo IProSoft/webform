@@ -4,6 +4,7 @@
  * @file
  * Webform module form alter hooks.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformFormAlterHooks;
 use Drupal\Component\Utility\NestedArray;
@@ -17,9 +18,8 @@ use Drupal\webform\WebformSubmissionForm;
  * Implements hook_form_alter().
  */
 #[LegacyHook]
-function webform_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformFormAlterHooks::class)->formAlter($form, $form_state, $form_id);
+function webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformFormAlterHooks::class)->formAlter($form, $form_state, $form_id);
 }
 
 /**
@@ -56,9 +56,8 @@ function _webform_form_webform_submission_form_after_build($form, FormStateInter
  * @see https://www.drupal.org/project/webform/issues/2920095
  */
 #[LegacyHook]
-function webform_form_update_manager_update_form_alter(&$form, FormStateInterface $form_state)
-{
-    return \Drupal::service(WebformFormAlterHooks::class)->formUpdateManagerUpdateFormAlter($form, $form_state);
+function webform_form_update_manager_update_form_alter(&$form, FormStateInterface $form_state) {
+  return \Drupal::service(WebformFormAlterHooks::class)->formUpdateManagerUpdateFormAlter($form, $form_state);
 }
 
 /* ************************************************************************** */
@@ -69,9 +68,8 @@ function webform_form_update_manager_update_form_alter(&$form, FormStateInterfac
  * Implements hook_form_FORM_ID_alter() for views exposed form.
  */
 #[LegacyHook]
-function webform_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    \Drupal::service(WebformFormAlterHooks::class)->formViewsExposedFormAlter($form, $form_state, $form_id);
+function webform_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(WebformFormAlterHooks::class)->formViewsExposedFormAlter($form, $form_state, $form_id);
 }
 
 /* ************************************************************************** */
@@ -104,7 +102,6 @@ function _webform_form_smtp_admin_settings_submit(&$form, FormStateInterface $fo
  * Implements hook_form_FORM_ID_alter() for config single import form.
  */
 #[LegacyHook]
-function webform_form_config_single_import_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformFormAlterHooks::class)->formConfigSingleImportFormAlter($form, $form_state);
+function webform_form_config_single_import_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformFormAlterHooks::class)->formConfigSingleImportFormAlter($form, $form_state);
 }

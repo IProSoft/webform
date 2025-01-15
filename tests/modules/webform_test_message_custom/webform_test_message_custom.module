@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_message_custom\Hook\WebformTestMessageCustomHooks;
 
@@ -7,6 +11,7 @@ use Drupal\webform_test_message_custom\Hook\WebformTestMessageCustomHooks;
  * @file
  * Support module for Webform module custom message testing.
  */
+
 /**
  * Implements hook_webform_message_custom().
  */

@@ -4,6 +4,7 @@
  * @file
  * Provides a form element to collect valid location information using Google Maps API's Geocoding and Places Autocomplete.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_location_geocomplete\Hook\WebformLocationGeocompleteHooks;
 use Drupal\Core\Asset\AttachedAssetsInterface;
@@ -14,25 +15,22 @@ use Drupal\Core\Url;
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_location_geocomplete_webform_libraries_info()
-{
-    return \Drupal::service(WebformLocationGeocompleteHooks::class)->webformLibrariesInfo();
+function webform_location_geocomplete_webform_libraries_info() {
+  return \Drupal::service(WebformLocationGeocompleteHooks::class)->webformLibrariesInfo();
 }
 
 /**
  * Implements hook_js_alter().
  */
 #[LegacyHook]
-function webform_location_geocomplete_js_alter(&$javascript, AttachedAssetsInterface $assets)
-{
-    \Drupal::service(WebformLocationGeocompleteHooks::class)->jsAlter($javascript, $assets);
+function webform_location_geocomplete_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  \Drupal::service(WebformLocationGeocompleteHooks::class)->jsAlter($javascript, $assets);
 }
 
 /**
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function webform_location_geocomplete_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformLocationGeocompleteHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
+function webform_location_geocomplete_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformLocationGeocompleteHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
 }
