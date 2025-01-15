@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test elements with formatting.
- */
-
 use Drupal\webform\WebformInterface;
 
 /**
