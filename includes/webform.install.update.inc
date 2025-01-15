@@ -4347,12 +4347,12 @@ function webform_update_8639() {
  */
 function webform_update_8640() {
   $manager = \Drupal::entityDefinitionUpdateManager();
-  
+
   // Get the current webform_submission entity type definition,
   // ensure the storage schema class is set.
   $entity_type = $manager->getEntityType('webform_submission')
     ->setHandlerClass('storage_schema', WebformSubmissionStorageSchema::class);
-  
+
   // Regenerate entity type indexes.
   $manager->updateEntityType($entity_type);
 }
