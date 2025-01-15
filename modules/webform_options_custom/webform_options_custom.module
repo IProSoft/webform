@@ -4,6 +4,7 @@
  * @file
  * Provides a custom options element.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_options_custom\Hook\WebformOptionsCustomHooks;
 use Drupal\Core\Url;
@@ -12,9 +13,8 @@ use Drupal\Core\Url;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_options_custom_webform_help_info()
-{
-    return \Drupal::service(WebformOptionsCustomHooks::class)->webformHelpInfo();
+function webform_options_custom_webform_help_info() {
+  return \Drupal::service(WebformOptionsCustomHooks::class)->webformHelpInfo();
 }
 
 /**
@@ -29,7 +29,6 @@ function webform_options_custom_menu_local_tasks_alter(&$data, $route_name) {
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_options_custom_webform_libraries_info()
-{
-    return \Drupal::service(WebformOptionsCustomHooks::class)->webformLibrariesInfo();
+function webform_options_custom_webform_libraries_info() {
+  return \Drupal::service(WebformOptionsCustomHooks::class)->webformLibrariesInfo();
 }

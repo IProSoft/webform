@@ -4,6 +4,7 @@
  * @file
  * Provides keyboard shortcuts to create and save webform elements.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_shortcuts\Hook\WebformShortcutsHooks;
 use Drupal\Core\Cache\CacheableMetadata;
@@ -15,9 +16,8 @@ use Drupal\webform\Utility\WebformTextHelper;
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_shortcuts_webform_libraries_info()
-{
-    return \Drupal::service(WebformShortcutsHooks::class)->webformLibrariesInfo();
+function webform_shortcuts_webform_libraries_info() {
+  return \Drupal::service(WebformShortcutsHooks::class)->webformLibrariesInfo();
 }
 
 /**
@@ -107,7 +107,7 @@ function webform_shortcuts_form_webform_admin_config_advanced_form_alter(&$form,
     '#type' => 'details',
     '#title' => t('Keyboard shortcut settings'),
     '#description' => t('Enter custom keyboard shortcuts for common form builder actions. Leave blank to disable an individual shortcut.') . '<br/>' .
-      t('<a href=":href">Learn more about configuring shortcuts using the jQuery HotKeys library</a>', [':href' => 'https://github.com/jeresig/jquery.hotkeys']),
+    t('<a href=":href">Learn more about configuring shortcuts using the jQuery HotKeys library</a>', [':href' => 'https://github.com/jeresig/jquery.hotkeys']),
     '#open' => TRUE,
     '#tree' => TRUE,
   ];

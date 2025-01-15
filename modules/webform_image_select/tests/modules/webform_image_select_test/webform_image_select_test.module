@@ -4,6 +4,7 @@
  * @file
  * Support module for webform that provides image select element working examples.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_image_select_test\Hook\WebformImageSelectTestHooks;
 use Drupal\webform_image_select\Entity\WebformImageSelectImages;

@@ -4,6 +4,7 @@
  * @file
  * Allows webform emails to be scheduled.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailHooks;
 use Drupal\Core\Entity\EntityInterface;
@@ -23,18 +24,16 @@ function webform_scheduled_email_config_schema_info_alter(&$definitions) {
  * Implements hook_entity_update().
  */
 #[LegacyHook]
-function webform_scheduled_email_entity_update(EntityInterface $entity)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->entityUpdate($entity);
+function webform_scheduled_email_entity_update(EntityInterface $entity) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->entityUpdate($entity);
 }
 
 /**
  * Implements hook_entity_predelete().
  */
 #[LegacyHook]
-function webform_scheduled_email_entity_predelete(EntityInterface $entity)
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->entityPredelete($entity);
+function webform_scheduled_email_entity_predelete(EntityInterface $entity) {
+  \Drupal::service(WebformScheduledEmailHooks::class)->entityPredelete($entity);
 }
 
 /**
@@ -59,9 +58,8 @@ function webform_scheduled_email_webform_submission_delete(WebformSubmissionInte
  * Implements hook_cron().
  */
 #[LegacyHook]
-function webform_scheduled_email_cron()
-{
-    \Drupal::service(WebformScheduledEmailHooks::class)->cron();
+function webform_scheduled_email_cron() {
+  \Drupal::service(WebformScheduledEmailHooks::class)->cron();
 }
 
 /**

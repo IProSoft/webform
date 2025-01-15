@@ -4,6 +4,7 @@
  * @file
  * Provides a form element to collect valid location information (address, longitude, latitude, geolocation) using Algolia Places.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_location_places\Hook\WebformLocationPlacesHooks;
 use Drupal\Core\Form\FormStateInterface;
@@ -13,16 +14,14 @@ use Drupal\Core\Url;
  * Implements hook_webform_libraries_info().
  */
 #[LegacyHook]
-function webform_location_places_webform_libraries_info()
-{
-    return \Drupal::service(WebformLocationPlacesHooks::class)->webformLibrariesInfo();
+function webform_location_places_webform_libraries_info() {
+  return \Drupal::service(WebformLocationPlacesHooks::class)->webformLibrariesInfo();
 }
 
 /**
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function webform_location_places_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformLocationPlacesHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
+function webform_location_places_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformLocationPlacesHooks::class)->webformAdminThirdPartySettingsFormAlter($form, $form_state);
 }

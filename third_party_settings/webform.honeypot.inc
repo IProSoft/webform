@@ -4,6 +4,7 @@
  * @file
  * Integrates third party settings on the Honeypot module's behalf.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformHoneypotHooks;
 use Drupal\Core\Form\FormStateInterface;
@@ -134,25 +135,22 @@ function _webform_honeypot_form_validate(&$form, FormStateInterface $form_state)
  * Implements hook_webform_admin_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function honeypot_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformAdminThirdPartySettingsFormAlter($form, $form_state);
+function honeypot_webform_admin_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformAdminThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_third_party_settings_form_alter().
  */
 #[LegacyHook]
-function honeypot_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformThirdPartySettingsFormAlter($form, $form_state);
+function honeypot_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformThirdPartySettingsFormAlter($form, $form_state);
 }
 
 /**
  * Implements hook_webform_submission_form_alter().
  */
 #[LegacyHook]
-function honeypot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformSubmissionFormAlter($form, $form_state, $form_id);
+function honeypot_webform_submission_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformHoneypotHooks::class)->honeypotWebformSubmissionFormAlter($form, $form_state, $form_id);
 }

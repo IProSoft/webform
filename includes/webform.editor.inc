@@ -12,6 +12,7 @@
  *
  * Below functions are copied from editor.module.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformEditorHooks;
 use Drupal\Component\Serialization\Yaml;
@@ -69,9 +70,8 @@ function webform_editor_js_settings_alter(array &$settings) {
  * @see editor_entity_insert()
  */
 #[LegacyHook]
-function webform_webform_insert(WebformInterface $webform)
-{
-    \Drupal::service(WebformEditorHooks::class)->webformInsert($webform);
+function webform_webform_insert(WebformInterface $webform) {
+  \Drupal::service(WebformEditorHooks::class)->webformInsert($webform);
 }
 
 /**
@@ -80,9 +80,8 @@ function webform_webform_insert(WebformInterface $webform)
  * @see editor_entity_update()
  */
 #[LegacyHook]
-function webform_webform_update(WebformInterface $webform)
-{
-    \Drupal::service(WebformEditorHooks::class)->webformUpdate($webform);
+function webform_webform_update(WebformInterface $webform) {
+  \Drupal::service(WebformEditorHooks::class)->webformUpdate($webform);
 }
 
 /**
@@ -91,9 +90,8 @@ function webform_webform_update(WebformInterface $webform)
  * @see editor_entity_delete()
  */
 #[LegacyHook]
-function webform_webform_delete(WebformInterface $webform)
-{
-    \Drupal::service(WebformEditorHooks::class)->webformDelete($webform);
+function webform_webform_delete(WebformInterface $webform) {
+  \Drupal::service(WebformEditorHooks::class)->webformDelete($webform);
 }
 
 /* ************************************************************************** */

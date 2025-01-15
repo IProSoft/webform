@@ -4,6 +4,7 @@
  * @file
  * Archived Webform update hooks.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformInstallUpdateHooks;
 use Drupal\Component\Uuid\Php as Uuid;
@@ -32,9 +33,8 @@ use Drupal\webform\WebformInterface;
  * Implements hook_update_dependencies().
  */
 #[LegacyHook]
-function webform_update_dependencies()
-{
-    return \Drupal::service(WebformInstallUpdateHooks::class)->updateDependencies();
+function webform_update_dependencies() {
+  return \Drupal::service(WebformInstallUpdateHooks::class)->updateDependencies();
 }
 
 /* ************************************************************************** */
