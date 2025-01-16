@@ -235,7 +235,7 @@ class WebformRequest implements WebformRequestInterface {
   /**
    * {@inheritdoc}
    */
-  public function getRouteName(EntityInterface $webform_entity, ?EntityInterface $source_entity, $route_name) {
+  public function getRouteName(EntityInterface $webform_entity, ?EntityInterface $source_entity = NULL, $route_name) {
     if (!$this->hasSourceEntityWebformRoutes($source_entity)) {
       $source_entity = NULL;
     }
