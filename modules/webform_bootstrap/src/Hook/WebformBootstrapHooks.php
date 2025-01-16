@@ -2,17 +2,15 @@
 
 namespace Drupal\webform_bootstrap\Hook;
 
+use Drupal\bootstrap\Bootstrap;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform_bootstrap\WebformBootstrapRenderCallbacks;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_bootstrap.
  */
 class WebformBootstrapHooks {
-    // phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+  // phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing.
 
   /**
    * Implements hook_page_attachments().
@@ -29,7 +27,7 @@ class WebformBootstrapHooks {
    * Implements hook_webform_element_alter().
    */
   #[Hook('webform_element_alter')]
-  public function webformElementAlter(array &$element, \Drupal\Core\Form\FormStateInterface $form_state, array $context) {
+  public function webformElementAlter(array &$element, FormStateInterface $form_state, array $context) {
     if (!_webform_bootstrap_is_active_theme()) {
       return;
     }
@@ -38,7 +36,7 @@ class WebformBootstrapHooks {
     // @see \Drupal\bootstrap\Utility\Element::smartDescription
     static $smart_description_enabled;
     if (!isset($smart_description_enabled)) {
-      $theme = \Drupal\bootstrap\Bootstrap::getTheme();
+      $theme = Bootstrap::getTheme();
       $smart_description_enabled = $theme->getSetting('tooltip_enabled') && $theme->getSetting('forms_smart_descriptions');
     }
     // We need to set $element['#smart_description'] to false if the element's

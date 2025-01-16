@@ -3,7 +3,6 @@
 namespace Drupal\webform_scheduled_email\Hook;
 
 use Drupal\webform\Entity\Webform;
-use Drupal\webform_scheduled_email\Plugin\WebformHandler\ScheduleEmailWebformHandler;
 use Drush\Drush;
 use Drupal\Core\Hook\Attribute\Hook;
 

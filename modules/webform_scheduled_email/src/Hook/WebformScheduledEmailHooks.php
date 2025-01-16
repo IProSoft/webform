@@ -3,9 +3,6 @@
 namespace Drupal\webform_scheduled_email\Hook;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

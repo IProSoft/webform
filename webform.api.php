@@ -17,7 +17,7 @@ use Drupal\Core\Database\Query\AlterableInterface;
  * Hooks related to Webform module.
  */
 
-// phpcs:disable DrupalPractice.CodeAnalysis.VariableAnalysis.UnusedVariable
+// phpcs:disable DrupalPractice.CodeAnalysis.VariableAnalysis.UnusedVariable.
 
 /**
  * @addtogroup hooks

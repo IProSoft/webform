@@ -562,7 +562,7 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
     // if (class_exists('\Drupal\file\Plugin\Field\FieldType\FileItem')) {
     //   FileItem::validateMaxFilesize($element, $form_state);
     // }
-    // phpcs:enable
+    // phpcs:enable.
     // @see \Drupal\file\Plugin\Field\FieldType\FileItem::validateMaxFilesize
     if (!empty($element['#value']) && !Bytes::toNumber($element['#value'])) {
       $form_state->setError($element, t('The "@name" option must contain a valid value. You may either leave the text field empty or enter a string like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes).', ['@name' => $element['#title']]));

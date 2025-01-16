@@ -10,7 +10,7 @@ use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-// phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+// phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing.
 
 /**
  * Provides a 'tel' element.

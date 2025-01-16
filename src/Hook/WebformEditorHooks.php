@@ -2,14 +2,6 @@
 
 namespace Drupal\webform\Hook;
 
-use Drupal\Component\Serialization\Yaml;
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Config\Config;
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\file\FileInterface;
-use Drupal\filter\FilterFormatInterface;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\WebformInterface;
 use Drupal\Core\Hook\Attribute\Hook;

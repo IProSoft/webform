@@ -97,11 +97,11 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     // @todo Determine how to submit multiple files.
     /*
     $edit = [
-      'files[managed_file_multiple_two][]' => [
-        \Drupal::service('file_system')->realpath($this->files[0]->uri),
-        \Drupal::service('file_system')->realpath($this->files[1]->uri),
-        \Drupal::service('file_system')->realpath($this->files[2]->uri),
-      ],
+    'files[managed_file_multiple_two][]' => [
+    \Drupal::service('file_system')->realpath($this->files[0]->uri),
+    \Drupal::service('file_system')->realpath($this->files[1]->uri),
+    \Drupal::service('file_system')->realpath($this->files[2]->uri),
+    ],
     ];
     $this->drupalGet('/webform/test_element_managed_file');
     $this->submitForm($edit, 'Upload');
@@ -110,8 +110,8 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
     // Check file input is removed.
     $assert_session->fieldNotExists('files[managed_file_multiple_two][]');
     $assert_session->fieldNotExists('managed_file_multiple_two_upload_button');
-    */
-    // phpcs:enable
+     */
+    // phpcs:enable.
 
     /* File placeholder */
 

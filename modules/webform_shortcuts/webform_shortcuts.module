@@ -37,7 +37,7 @@ function webform_shortcuts_preprocess_block(&$variables) {
   $cache = CacheableMetadata::createFromObject($config);
 
   // Shortcuts.
-  // phpcs:disable Squiz.Arrays.ArrayDeclaration.KeySpecified
+  // phpcs:disable Squiz.Arrays.ArrayDeclaration.KeySpecified.
   $shortcuts = [
     '--',
     'add_element' => t('Add element'),
@@ -50,7 +50,7 @@ function webform_shortcuts_preprocess_block(&$variables) {
     'toggle_weights' => t('Show/hide row weights'),
     '--',
   ];
-  // phpcs:enable Squiz.Arrays.ArrayDeclaration.KeySpecified
+  // phpcs:enable Squiz.Arrays.ArrayDeclaration.KeySpecified.
 
   $items = [];
   $last_shortcut = '';

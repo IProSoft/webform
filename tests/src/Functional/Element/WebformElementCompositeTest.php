@@ -144,7 +144,7 @@ webform_element_composite_advanced:
     // phpcs:disable
     // $assert_session->responseContains('<input data-drupal-selector="edit-radios-wrapper-fieldset-element-descriptions-one" aria-describedby="edit-radios-wrapper-fieldset-element-descriptions-one--description" type="radio" id="edit-radios-wrapper-fieldset-element-descriptions-one" name="radios_wrapper_fieldset_element_descriptions" value="One" class="form-radio" />');
     // $assert_session->responseContains('<div id="edit-radios-wrapper-fieldset-element-descriptions-one--description" class="webform-element-description">This is a radio description</div>');
-    // phpcs:enable
+    // phpcs:enable.
   }
 
 }

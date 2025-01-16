@@ -3,7 +3,6 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

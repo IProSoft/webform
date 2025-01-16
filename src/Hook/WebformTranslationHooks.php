@@ -3,9 +3,6 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element;
-use Drupal\webform\Utility\WebformYaml;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

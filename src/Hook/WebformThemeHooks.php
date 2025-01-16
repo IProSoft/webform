@@ -2,16 +2,6 @@
 
 namespace Drupal\webform\Hook;
 
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Render\Element;
-use Drupal\Core\StringTranslation\ByteSizeMarkup;
-use Drupal\Core\Template\Attribute;
-use Drupal\file\Entity\File;
-use Drupal\webform\Element\WebformSelectOther;
-use Drupal\webform\Plugin\WebformElement\Radios as WebformRadios;
-use Drupal\webform\Plugin\WebformElement\WebformEntityRadios;
-use Drupal\webform\Utility\WebformAccessibilityHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\Core\Hook\Attribute\Hook;
 

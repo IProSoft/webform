@@ -4,7 +4,6 @@ namespace Drupal\webform\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

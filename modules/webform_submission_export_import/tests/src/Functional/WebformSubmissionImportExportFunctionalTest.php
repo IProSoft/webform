@@ -94,7 +94,7 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
     $submissions[0]->setNotes('This is a note');
     $submissions[0]->save();
 
-    // phpcs:disable
+    // phpcs:disable.
     // @todo Determine why the below test is failing via DrupalCI.
     return;
 
@@ -149,7 +149,7 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
 
     // Check all other values remained the same.
     $this->assertEquals($expected_values, $actual_values);
-    // phpcs:enable
+    // phpcs:enable.
   }
 
   /**

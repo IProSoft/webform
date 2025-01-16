@@ -86,7 +86,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
       return FALSE;
 
     case UPLOAD_ERR_OK:
-      // phpcs:disable
+      // phpcs:disable.
       /* ******************************************************************** */
       // DO NOT USE IF UPLOADED FILE.
       /* ******************************************************************** */
@@ -95,7 +95,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
       // if (is_uploaded_file($file_info->getRealPath())) {
       //   break;
       // }
-      // phpcs:enable
+      // phpcs:enable.
       break;
 
     default:

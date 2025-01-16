@@ -13,7 +13,7 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform_bootstrap\WebformBootstrapRenderCallbacks;
 
-// phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
+// phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing.
 
 /**
  * Implements hook_page_attachments().

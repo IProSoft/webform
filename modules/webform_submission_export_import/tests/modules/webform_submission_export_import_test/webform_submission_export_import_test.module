@@ -77,17 +77,17 @@ function webform_submission_export_import_test_form_webform_submission_export_im
     $form['import']['import_url']['#help'] = FALSE;
     $form['#attached']['library'][] = 'webform_submission_export_import_test/webform_submission_export_import_test';
   }
-  // phpcs:disable
+  // phpcs:disable.
   /*
   // Get webform.csv and external.csv from Google Sheets.
   file_put_contents(
-     "$files_path/test_submission_export_import-webform.csv",
-    file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vTYImRfGbGGCtKq7hrYGkm5jJo_P0fwNrLOBpcSapBkEUPlBToShXcSJAdDAF5hjVupbGFAm1anUtip/pub?gid=646036902&single=true&output=csv')
+  "$files_path/test_submission_export_import-webform.csv",
+  file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vTYImRfGbGGCtKq7hrYGkm5jJo_P0fwNrLOBpcSapBkEUPlBToShXcSJAdDAF5hjVupbGFAm1anUtip/pub?gid=646036902&single=true&output=csv')
   );
   file_put_contents(
-     "$files_path/test_submission_export_import-external.csv",
-    file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vTYImRfGbGGCtKq7hrYGkm5jJo_P0fwNrLOBpcSapBkEUPlBToShXcSJAdDAF5hjVupbGFAm1anUtip/pub?gid=173244372&single=true&output=csv')
+  "$files_path/test_submission_export_import-external.csv",
+  file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vTYImRfGbGGCtKq7hrYGkm5jJo_P0fwNrLOBpcSapBkEUPlBToShXcSJAdDAF5hjVupbGFAm1anUtip/pub?gid=173244372&single=true&output=csv')
   );
-  */
-  // phpcs:enable
+   */
+  // phpcs:enable.
 }

@@ -1,7 +1,7 @@
 <?php
 
 // phpcs:disable Drupal.Semantics.FunctionT.ConcatString
-// phpcs:disable Drupal.Strings.UnnecessaryStringConcat.Found
+// phpcs:disable Drupal.Strings.UnnecessaryStringConcat.Found.
 
 namespace Drupal\webform;
 

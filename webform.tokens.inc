@@ -75,7 +75,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
   // [values:{element_key}:{format}:{items}:urlencode]
   // [values:{element_key}:{delta}:{format}]
   // [values:{element_key}:{delta}:{sub-element}]
-  // phpcs:enable Drupal.Commenting.InlineComment.InvalidEndChar
+  // phpcs:enable Drupal.Commenting.InlineComment.InvalidEndChar.
   $keys = explode(':', $value_token);
   $element_key = array_shift($keys);
 

@@ -2,10 +2,7 @@
 
 namespace Drupal\webform_shortcuts\Hook;
 
-use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\webform\Utility\WebformTextHelper;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

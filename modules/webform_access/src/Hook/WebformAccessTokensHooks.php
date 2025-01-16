@@ -10,7 +10,7 @@ use Drupal\Core\Hook\Attribute\Hook;
  * Hook implementations for webform_access.
  */
 class WebformAccessTokensHooks {
-    // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
+  // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar.
 
   /**
    * Implements hook_token_info().
@@ -77,14 +77,14 @@ class WebformAccessTokensHooks {
           // Get access group user email addresses.
           // [webform_access:users]
           // [webform_access:type:TYPE_ID]
-          // [webform_access:type:TYPE_ID:users]
+          // [webform_access:type:TYPE_ID:users].
           if (in_array($type, ['users', 'all']) || $type === 'type' && (empty($property) || in_array($property, ['users', 'all']))) {
             $emails = array_merge($emails, _webform_access_tokens_get_access_group_emails('user', $webform_access_group_ids));
           }
           // Get access group 'custom' email addresses.
           // [webform_access:emails]
           // [webform_access:type:TYPE_ID]
-          // [webform_access:type:TYPE_ID:emails]
+          // [webform_access:type:TYPE_ID:emails].
           if (in_array($type, ['emails', 'all']) || $type === 'type' && (empty($property) || in_array($property, ['emails', 'all']))) {
             foreach ($webform_access_groups as $webform_access_group) {
               if ($webform_access_group_emails = $webform_access_group->getEmails()) {

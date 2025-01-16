@@ -36,20 +36,20 @@ class WebformElementTimeTest extends WebformElementBrowserTestBase {
     // Check time processing.
     $this->drupalGet('/webform/test_element_time');
     $this->submitForm([], 'Submit');
-    // phpcs:disable
+    // phpcs:disable.
     /*
     $time_12_hour_plus_6_hours = date('H:i:00', strtotime('+6 hours'));
 
     $assert_session->responseContains("time_default: '14:00:00'
-time_24_hour: '14:00:00'
-time_12_hour: '14:00:00'
-time_12_hour_plus_6_hours: '$time_12_hour_plus_6_hours'
-time_steps: '14:00:00'
-time_min_max: '14:00:00'
-time_timepicker: '14:00:00'
-time_timepicker_min_max: '14:00:00'");
-    */
-    // phpcs:enable
+    time_24_hour: '14:00:00'
+    time_12_hour: '14:00:00'
+    time_12_hour_plus_6_hours: '$time_12_hour_plus_6_hours'
+    time_steps: '14:00:00'
+    time_min_max: '14:00:00'
+    time_timepicker: '14:00:00'
+    time_timepicker_min_max: '14:00:00'");
+     */
+    // phpcs:enable.
 
     // Check time validation.
     $this->drupalGet('/webform/test_element_time');
