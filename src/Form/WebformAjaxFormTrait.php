@@ -163,7 +163,7 @@ trait WebformAjaxFormTrait {
     $form['#form_wrapper_id'] = $wrapper_id;
 
     $form += ['#prefix' => '', '#suffix' => ''];
-    $form['#prefix'] .= '<span id="' . $wrapper_id . '-content"></span>';
+    $form['#prefix'] .= '<span id="' . $wrapper_id . '-content" tabindex="-1"></span>';
     $form['#prefix'] .= '<div' . $wrapper_attributes . '>';
     $form['#suffix'] = '</div>' . $form['#suffix'];
 
