@@ -49,7 +49,7 @@
     "drupal/mailsystem": "^4.5",
     "drupal/metatag": "^2.0",
     "drupal/paragraphs": "^1.18",
-    "drupal/select2": "1.x-dev",
+    "drupal/select2": "^2.0",
     "drupal/smtp": "^1.4",
     "drupal/styleguide": "^2.1",
     "drupal/telephone_validation": "2.x-dev",
