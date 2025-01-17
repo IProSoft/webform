@@ -49,11 +49,11 @@ phpcs:
 
 composer:
   variables:
-    _LENIENT_ALLOW_LIST: "select2, styleguide"
+    _LENIENT_ALLOW_LIST: "styleguide"
 
 composer (max PHP version):
   variables:
-    _LENIENT_ALLOW_LIST: "select2, styleguide"
+    _LENIENT_ALLOW_LIST: "styleguide"
 
 composer (next minor):
   variables:
