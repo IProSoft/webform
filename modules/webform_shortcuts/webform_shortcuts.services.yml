@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_shortcuts\Hook\WebformShortcutsHooks:
+    class: Drupal\webform_shortcuts\Hook\WebformShortcutsHooks
+    autowire: true

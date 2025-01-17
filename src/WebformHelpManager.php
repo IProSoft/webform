@@ -5,6 +5,7 @@
 
 namespace Drupal\webform;
 
+use Drush\Drush;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -1792,7 +1793,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       '@webform-composer-update' => 'webform-composer-update',
     ];
     // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
-    $drush_version = (class_exists('\Drush\Drush')) ? \Drush\Drush::getMajorVersion() : 8;
+    $drush_version = (class_exists('\Drush\Drush')) ? Drush::getMajorVersion() : 8;
     if ($drush_version >= 9) {
       foreach ($t_args as $command_name => $command) {
         $t_args[$command_name] = str_replace('-', ':', $command);
