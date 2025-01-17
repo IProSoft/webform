@@ -2,12 +2,6 @@
 
 namespace Drupal\webform_submission_export_import\Hook;
 
-use Drupal\Component\Utility\Environment;
-use Drupal\Core\File\Event\FileUploadSanitizeNameEvent;
-use Drupal\Core\File\FileExists;
-use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\StringTranslation\ByteSizeMarkup;
-use Drupal\file\Entity\File;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**

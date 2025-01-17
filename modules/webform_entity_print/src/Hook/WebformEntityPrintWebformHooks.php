@@ -2,7 +2,6 @@
 
 namespace Drupal\webform_entity_print\Hook;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 

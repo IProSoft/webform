@@ -2,16 +2,9 @@
 
 namespace Drupal\webform_access\Hook;
 
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\webform\Utility\WebformElementHelper;
-use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformSubmissionInterface;
-use Drupal\webform_access\Entity\WebformAccessGroup;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
