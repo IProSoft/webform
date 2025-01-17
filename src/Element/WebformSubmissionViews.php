@@ -54,8 +54,8 @@ class WebformSubmissionViews extends WebformMultiple {
       '#type' => 'container',
       '#title' => t('View / Name / Title'),
       '#help' => '<b>' . t('View') . ':</b> ' . t('A webform submission embed display. The selected view should also include contextual filters. {webform_id}/{source_entity_type}/{source_entity_id}/{account_id}/{in_draft}') .
-        '<hr/>' . '<b>' . t('Name') . ':</b> ' . t('The name to be displayed in the URL when there are multiple submission views available.') .
-        '<hr/>' . '<b>' . t('Options') . ':</b> ' . t('The title to be display in the dropdown menu when there are multiple submission views available.'),
+      '<hr/>' . '<b>' . t('Name') . ':</b> ' . t('The name to be displayed in the URL when there are multiple submission views available.') .
+      '<hr/>' . '<b>' . t('Options') . ':</b> ' . t('The title to be display in the dropdown menu when there are multiple submission views available.'),
       'view' => [
         '#type' => 'select',
         '#title' => t('View'),
@@ -92,11 +92,11 @@ class WebformSubmissionViews extends WebformMultiple {
       $element['#element']['global_routes'] = [
         '#type' => 'checkboxes',
         '#title' => t('Apply to global'),
-        // phpcs:disable
+        // phpcs:disable.
         '#help' => t('Display the selected view on the below paths') .
-          '<hr/><b>' . t('Submissions') . ':</b><br/>/admin/structure/webform/submissions/manage' .
-          '<hr/><b>' . t('User') . ':</b><br/>/user/{user}/submissions',
-        // phpcs:enable
+        '<hr/><b>' . t('Submissions') . ':</b><br/>/admin/structure/webform/submissions/manage' .
+        '<hr/><b>' . t('User') . ':</b><br/>/user/{user}/submissions',
+        // phpcs:enable.
         '#options' => $global_route_options,
         '#element_validate' => [['\Drupal\webform\Utility\WebformElementHelper', 'filterValues']],
         '#error_no_message' => TRUE,
@@ -112,12 +112,12 @@ class WebformSubmissionViews extends WebformMultiple {
     $element['#element']['webform_routes'] = [
       '#type' => 'checkboxes',
       '#title' => t('Apply to webform'),
-      // phpcs:disable
+      // phpcs:disable.
       '#help' => t('Display the selected view on the below paths') .
-        '<hr/><b>' . t('Submissions') . ':</b><br/>/admin/structure/webform/manage/{webform}/results/submissions' .
-        '<hr/><b>' . t('User drafts') . ':</b><br/>/webform/{webform}/drafts' .
-        '<hr/><b>' . t('User submissions') . ':</b><br/>/webform/{webform}/submissions',
-      // phpcs:enable
+      '<hr/><b>' . t('Submissions') . ':</b><br/>/admin/structure/webform/manage/{webform}/results/submissions' .
+      '<hr/><b>' . t('User drafts') . ':</b><br/>/webform/{webform}/drafts' .
+      '<hr/><b>' . t('User submissions') . ':</b><br/>/webform/{webform}/submissions',
+      // phpcs:enable.
       '#options' => $webform_route_options,
       '#element_validate' => [['\Drupal\webform\Utility\WebformElementHelper', 'filterValues']],
       '#error_no_message' => TRUE,
@@ -133,13 +133,13 @@ class WebformSubmissionViews extends WebformMultiple {
       $element['#element']['node_routes'] = [
         '#type' => 'checkboxes',
         '#title' => t('Apply to node'),
-        // phpcs:disable
+        // phpcs:disable.
         '#help' =>
-          t('Display the selected view on the below paths') .
-          '<hr/><b>' . t('Submissions') . ':</b><br/>/node/{node}/webform/results/submissions' .
-          '<hr/>' . '<b>' . t('User drafts') . ':</b><br/>/node/{node}/webform/drafts' .
-          '<hr/>' . '<b>' . t('User submissions') . ':</b><br/>/node/{node}/webform/submissions',
-        // phpcs:enable
+        t('Display the selected view on the below paths') .
+        '<hr/><b>' . t('Submissions') . ':</b><br/>/node/{node}/webform/results/submissions' .
+        '<hr/>' . '<b>' . t('User drafts') . ':</b><br/>/node/{node}/webform/drafts' .
+        '<hr/>' . '<b>' . t('User submissions') . ':</b><br/>/node/{node}/webform/submissions',
+        // phpcs:enable.
         '#options' => $node_route_options,
         '#element_validate' => [['\Drupal\webform\Utility\WebformElementHelper', 'filterValues']],
         '#error_no_message' => TRUE,

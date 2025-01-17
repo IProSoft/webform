@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Plugin;
 
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Component\Utility\SortArray;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -66,8 +67,8 @@ class WebformSourceEntityManager extends DefaultPluginManager implements Webform
    */
   public static function getMainSourceEntity(EntityInterface $source_entity) {
     if (\Drupal::moduleHandler()->moduleExists('paragraphs')) {
-      // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
-      while ($source_entity instanceof \Drupal\paragraphs\Entity\Paragraph) {
+      // phpcs:ignore Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing.
+      while ($source_entity instanceof Paragraph) {
         $source_entity = $source_entity->getParentEntity();
       }
     }

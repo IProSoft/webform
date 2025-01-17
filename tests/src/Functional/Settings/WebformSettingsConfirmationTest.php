@@ -186,7 +186,7 @@ class WebformSettingsConfirmationTest extends WebformBrowserTestBase {
     $this->drupalGet('/webform/test_confirmation_page/confirmation');
     $assert_session->responseNotContains('<meta name="robots" content="noindex" />');
 
-    // phpcs:disable
+    // phpcs:disable.
     // @todo (TESTING) Figure out why the inline confirmation link is not including the query string parameters.
     // $assert_session->responseContains('<a href="' . $webform_confirmation_page->toUrl()->toString() . '?custom=param">Back to form</a>');.
     // phpcs:enable

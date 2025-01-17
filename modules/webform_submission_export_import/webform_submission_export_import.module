@@ -5,6 +5,8 @@
  * Provides the ability to export and import submissions.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform_submission_export_import\Hook\WebformSubmissionExportImportHooks;
 use Drupal\Component\Utility\Environment;
 use Drupal\Core\File\Event\FileUploadSanitizeNameEvent;
 use Drupal\Core\File\FileExists;
@@ -15,34 +17,17 @@ use Drupal\file\Entity\File;
 /**
  * Implements hook_webform_help_info().
  */
+#[LegacyHook]
 function webform_submission_export_import_webform_help_info() {
-  $help = [];
-  $help['webform_submission_export_import'] = [
-    'group' => 'forms',
-    'title' => t('Upload'),
-    'content' => t('The <strong>Upload</strong> page allows a CSV (comma separated values) file or URL to be uploaded, converted, and imported into webform submissions.'),
-    'video_id' => 'import',
-    'routes' => [
-      // @see /admin/structure/webform/manage/{webform}/results/upload
-      'entity.webform_submission_export_import.results_import',
-      // @see /node/{node}/webform/results/upload
-      'entity.node.webform_submission_export_import.results_import',
-    ],
-  ];
-  return $help;
+  return \Drupal::service(WebformSubmissionExportImportHooks::class)->webformHelpInfo();
 }
 
 /**
  * Implements hook_local_tasks_alter().
  */
+#[LegacyHook]
 function webform_submission_export_import_local_tasks_alter(&$local_tasks) {
-  // Remove webform node results import if the webform_node.module
-  // is not installed.
-  if (!\Drupal::moduleHandler()->moduleExists('webform_node')) {
-    unset(
-      $local_tasks['entity.node.webform_submission_export_import.results_import']
-    );
-  }
+  \Drupal::service(WebformSubmissionExportImportHooks::class)->localTasksAlter($local_tasks);
 }
 
 /* ************************************************************************** */
@@ -101,7 +86,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
       return FALSE;
 
     case UPLOAD_ERR_OK:
-      // phpcs:disable
+      // phpcs:disable.
       /* ******************************************************************** */
       // DO NOT USE IF UPLOADED FILE.
       /* ******************************************************************** */
@@ -110,7 +95,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
       // if (is_uploaded_file($file_info->getRealPath())) {
       //   break;
       // }
-      // phpcs:enable
+      // phpcs:enable.
       break;
 
     default:
@@ -238,7 +223,7 @@ function _webform_submission_export_import_file_save_upload_single(\SplFileInfo 
   // DO NOT USE MOVE UPLOADED FILE.
   /* ******************************************************************** */
   // phpcs:ignore
-  // if (!drupal_move_uploaded_file($file_info->getRealPath(), $file->getFileUri())) {
+  // if (!drupal_move_uploaded_file($file_info->getRealPath(), $file->getFileUri())) {.
   if (!\Drupal::service('file_system')->move($file_info->getRealPath(), $file->getFileUri(), $replace)) {
     \Drupal::messenger()->addError(t('File upload error. Could not move uploaded file.'));
     \Drupal::logger('file')->notice('Upload error. Could not move uploaded file %file to destination %destination.', ['%file' => $file->getFilename(), '%destination' => $file->getFileUri()]);
