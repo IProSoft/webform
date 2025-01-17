@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_toggles\Hook\WebformTogglesHooks:
+    class: Drupal\webform_toggles\Hook\WebformTogglesHooks
+    autowire: true

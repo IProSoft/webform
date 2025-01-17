@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test elements title displays.
- */
-
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Plugin\WebformElement\WebformManagedFileBase;
 

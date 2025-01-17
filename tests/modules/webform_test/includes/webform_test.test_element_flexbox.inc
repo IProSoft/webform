@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Generate test elements with Flexbox wrappers.
- */
-
 use Drupal\Component\Serialization\Yaml;
 
 /**

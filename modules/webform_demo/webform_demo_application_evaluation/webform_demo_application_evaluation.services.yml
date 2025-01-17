@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_demo_application_evaluation\Hook\WebformDemoApplicationEvaluationHooks:
+    class: Drupal\webform_demo_application_evaluation\Hook\WebformDemoApplicationEvaluationHooks
+    autowire: true

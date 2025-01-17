@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Support module for webform that provides form alter hook for wizard custom tests.
- */
-
 use Drupal\Core\Form\FormStateInterface;
 
 /**

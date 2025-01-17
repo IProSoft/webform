@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Webform install helper functions.
- */
-
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Render\Element;
