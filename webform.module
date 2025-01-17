@@ -4,6 +4,7 @@
  * @file
  * Enables the creation of webforms and questionnaires.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformHooks;
 use Drupal\Component\Serialization\Json;
@@ -40,9 +41,8 @@ require_once __DIR__ . '/includes/webform.query.inc';
  * Implements hook_help().
  */
 #[LegacyHook]
-function webform_help($route_name, RouteMatchInterface $route_match)
-{
-    return \Drupal::service(WebformHooks::class)->help($route_name, $route_match);
+function webform_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(WebformHooks::class)->help($route_name, $route_match);
 }
 
 /**
@@ -57,27 +57,24 @@ function webform_webform_message_custom($operation, $id) {
  * Implements hook_modules_installed().
  */
 #[LegacyHook]
-function webform_modules_installed($modules)
-{
-    \Drupal::service(WebformHooks::class)->modulesInstalled($modules);
+function webform_modules_installed($modules) {
+  \Drupal::service(WebformHooks::class)->modulesInstalled($modules);
 }
 
 /**
  * Implements hook_modules_uninstalled().
  */
 #[LegacyHook]
-function webform_modules_uninstalled($modules)
-{
-    \Drupal::service(WebformHooks::class)->modulesUninstalled($modules);
+function webform_modules_uninstalled($modules) {
+  \Drupal::service(WebformHooks::class)->modulesUninstalled($modules);
 }
 
 /**
  * Implements hook_config_schema_info_alter().
  */
 #[LegacyHook]
-function webform_config_schema_info_alter(&$definitions)
-{
-    return \Drupal::service(WebformHooks::class)->configSchemaInfoAlter($definitions);
+function webform_config_schema_info_alter(&$definitions) {
+  return \Drupal::service(WebformHooks::class)->configSchemaInfoAlter($definitions);
 }
 
 /**
@@ -114,36 +111,32 @@ function webform_user_login($account) {
  * Implements hook_cron().
  */
 #[LegacyHook]
-function webform_cron()
-{
-    \Drupal::service(WebformHooks::class)->cron();
+function webform_cron() {
+  \Drupal::service(WebformHooks::class)->cron();
 }
 
 /**
  * Implements hook_rebuild().
  */
 #[LegacyHook]
-function webform_rebuild()
-{
-    \Drupal::service(WebformHooks::class)->rebuild();
+function webform_rebuild() {
+  \Drupal::service(WebformHooks::class)->rebuild();
 }
 
 /**
  * Implements hook_local_tasks_alter().
  */
 #[LegacyHook]
-function webform_local_tasks_alter(&$local_tasks)
-{
-    \Drupal::service(WebformHooks::class)->localTasksAlter($local_tasks);
+function webform_local_tasks_alter(&$local_tasks) {
+  \Drupal::service(WebformHooks::class)->localTasksAlter($local_tasks);
 }
 
 /**
  * Implements hook_menu_local_tasks_alter().
  */
 #[LegacyHook]
-function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability)
-{
-    \Drupal::service(WebformHooks::class)->menuLocalTasksAlter($data, $route_name, $cacheability);
+function webform_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
+  \Drupal::service(WebformHooks::class)->menuLocalTasksAlter($data, $route_name, $cacheability);
 }
 
 /**
@@ -161,9 +154,8 @@ function webform_module_implements_alter(&$implementations, $hook) {
  * Implements hook_token_info_alter().
  */
 #[LegacyHook]
-function webform_token_info_alter(&$data)
-{
-    \Drupal::service(WebformHooks::class)->tokenInfoAlter($data);
+function webform_token_info_alter(&$data) {
+  \Drupal::service(WebformHooks::class)->tokenInfoAlter($data);
 }
 
 /**
@@ -178,9 +170,8 @@ function webform_entity_update(EntityInterface $entity) {
  * Implements hook_entity_delete().
  */
 #[LegacyHook]
-function webform_entity_delete(EntityInterface $entity)
-{
-    \Drupal::service(WebformHooks::class)->entityDelete($entity);
+function webform_entity_delete(EntityInterface $entity) {
+  \Drupal::service(WebformHooks::class)->entityDelete($entity);
 }
 
 /**
@@ -223,9 +214,8 @@ function _webform_clear_webform_submission_list_cache_tag(EntityInterface $entit
  * Implements hook_mail().
  */
 #[LegacyHook]
-function webform_mail($key, &$message, $params)
-{
-    \Drupal::service(WebformHooks::class)->mail($key, $message, $params);
+function webform_mail($key, &$message, $params) {
+  \Drupal::service(WebformHooks::class)->mail($key, $message, $params);
 }
 
 /**
@@ -248,27 +238,24 @@ function webform_toolbar_alter(&$items) {
  * Implements hook_menu_links_discovered_alter().
  */
 #[LegacyHook]
-function webform_menu_links_discovered_alter(&$links)
-{
-    \Drupal::service(WebformHooks::class)->menuLinksDiscoveredAlter($links);
+function webform_menu_links_discovered_alter(&$links) {
+  \Drupal::service(WebformHooks::class)->menuLinksDiscoveredAlter($links);
 }
 
 /**
  * Implements hook_page_attachments().
  */
 #[LegacyHook]
-function webform_page_attachments(array &$attachments)
-{
-    \Drupal::service(WebformHooks::class)->pageAttachments($attachments);
+function webform_page_attachments(array &$attachments) {
+  \Drupal::service(WebformHooks::class)->pageAttachments($attachments);
 }
 
 /**
  * Implements hook_metatags_alter().
  */
 #[LegacyHook]
-function webform_metatags_alter(array &$metatags, array &$context)
-{
-    \Drupal::service(WebformHooks::class)->metatagsAlter($metatags, $context);
+function webform_metatags_alter(array &$metatags, array &$context) {
+  \Drupal::service(WebformHooks::class)->metatagsAlter($metatags, $context);
 }
 
 /**
@@ -437,18 +424,16 @@ function _webform_page_attachments(array &$attachments) {
  * @see webform_preprocess_file_link()
  */
 #[LegacyHook]
-function webform_file_access(FileInterface $file, $operation, AccountInterface $account)
-{
-    return \Drupal::service(WebformHooks::class)->fileAccess($file, $operation, $account);
+function webform_file_access(FileInterface $file, $operation, AccountInterface $account) {
+  return \Drupal::service(WebformHooks::class)->fileAccess($file, $operation, $account);
 }
 
 /**
  * Implements hook_file_download().
  */
 #[LegacyHook]
-function webform_file_download($uri)
-{
-    return \Drupal::service(WebformHooks::class)->fileDownload($uri);
+function webform_file_download($uri) {
+  return \Drupal::service(WebformHooks::class)->fileDownload($uri);
 }
 
 /**
@@ -490,9 +475,8 @@ function webform_file_validate_name_length(FileInterface $file) {
  * @see js/webform.contextual.js
  */
 #[LegacyHook]
-function webform_contextual_links_view_alter(&$element, $items)
-{
-    \Drupal::service(WebformHooks::class)->contextualLinksViewAlter($element, $items);
+function webform_contextual_links_view_alter(&$element, $items) {
+  \Drupal::service(WebformHooks::class)->contextualLinksViewAlter($element, $items);
 }
 
 /**
@@ -511,9 +495,8 @@ function webform_webform_access_rules() {
  * Implements hook_element_info_alter().
  */
 #[LegacyHook]
-function webform_element_info_alter(array &$info)
-{
-    \Drupal::service(WebformHooks::class)->elementInfoAlter($info);
+function webform_element_info_alter(array &$info) {
+  \Drupal::service(WebformHooks::class)->elementInfoAlter($info);
 }
 
 /**

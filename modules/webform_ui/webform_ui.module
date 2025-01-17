@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_ui\Hook\WebformUiHooks;
 
@@ -12,9 +16,8 @@ use Drupal\webform_ui\Hook\WebformUiHooks;
  * Implements hook_entity_type_alter().
  */
 #[LegacyHook]
-function webform_ui_entity_type_alter(array &$entity_types)
-{
-    \Drupal::service(WebformUiHooks::class)->entityTypeAlter($entity_types);
+function webform_ui_entity_type_alter(array &$entity_types) {
+  \Drupal::service(WebformUiHooks::class)->entityTypeAlter($entity_types);
 }
 
 /**

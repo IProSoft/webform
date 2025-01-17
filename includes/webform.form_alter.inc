@@ -4,6 +4,7 @@
  * @file
  * Webform module form alter hooks.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformFormAlterHooks;
 use Drupal\Component\Utility\NestedArray;
@@ -17,9 +18,8 @@ use Drupal\webform\WebformSubmissionForm;
  * Implements hook_form_alter().
  */
 #[LegacyHook]
-function webform_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-    return \Drupal::service(WebformFormAlterHooks::class)->formAlter($form, $form_state, $form_id);
+function webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return \Drupal::service(WebformFormAlterHooks::class)->formAlter($form, $form_state, $form_id);
 }
 
 /**

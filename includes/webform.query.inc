@@ -4,6 +4,7 @@
  * @file
  * Webform module query hooks.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformQueryHooks;
 use Drupal\Core\Cache\Cache;
@@ -19,18 +20,16 @@ use Drupal\webform\Entity\Webform;
  * @see \Drupal\webform\WebformSubmissionListBuilder::getEntityIds
  */
 #[LegacyHook]
-function webform_query_webform_submission_list_builder_alter(AlterableInterface $query)
-{
-    \Drupal::service(WebformQueryHooks::class)->queryWebformSubmissionListBuilderAlter($query);
+function webform_query_webform_submission_list_builder_alter(AlterableInterface $query) {
+  \Drupal::service(WebformQueryHooks::class)->queryWebformSubmissionListBuilderAlter($query);
 }
 
 /**
  * Implements hook_query_TAG_alter().
  */
 #[LegacyHook]
-function webform_query_entity_reference_alter(AlterableInterface $query)
-{
-    \Drupal::service(WebformQueryHooks::class)->queryEntityReferenceAlter($query);
+function webform_query_entity_reference_alter(AlterableInterface $query) {
+  \Drupal::service(WebformQueryHooks::class)->queryEntityReferenceAlter($query);
 }
 
 /**
@@ -41,7 +40,6 @@ function webform_query_entity_reference_alter(AlterableInterface $query)
  * for an operation stored in the 'op' meta-data (or 'view' if not provided).
  */
 #[LegacyHook]
-function webform_query_webform_submission_access_alter(AlterableInterface $query)
-{
-    return \Drupal::service(WebformQueryHooks::class)->queryWebformSubmissionAccessAlter($query);
+function webform_query_webform_submission_access_alter(AlterableInterface $query) {
+  return \Drupal::service(WebformQueryHooks::class)->queryWebformSubmissionAccessAlter($query);
 }

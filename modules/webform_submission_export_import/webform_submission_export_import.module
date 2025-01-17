@@ -4,6 +4,7 @@
  * @file
  * Provides the ability to export and import submissions.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_submission_export_import\Hook\WebformSubmissionExportImportHooks;
 use Drupal\Component\Utility\Environment;
@@ -17,9 +18,8 @@ use Drupal\file\Entity\File;
  * Implements hook_webform_help_info().
  */
 #[LegacyHook]
-function webform_submission_export_import_webform_help_info()
-{
-    return \Drupal::service(WebformSubmissionExportImportHooks::class)->webformHelpInfo();
+function webform_submission_export_import_webform_help_info() {
+  return \Drupal::service(WebformSubmissionExportImportHooks::class)->webformHelpInfo();
 }
 
 /**

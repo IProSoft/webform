@@ -4,6 +4,7 @@
  * @file
  * Provides an example that shows how to add custom properties to Webform elements.
  */
+
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_example_element_properties\Hook\WebformExampleElementPropertiesHooks;
 use Drupal\Core\Form\FormStateInterface;
@@ -28,9 +29,8 @@ function webform_example_element_properties_webform_element_translatable_propert
  * Implements hook_webform_element_configuration_form_alter().
  */
 #[LegacyHook]
-function webform_example_element_properties_webform_element_configuration_form_alter(&$form, FormStateInterface $form_state)
-{
-    \Drupal::service(WebformExampleElementPropertiesHooks::class)->webformElementConfigurationFormAlter($form, $form_state);
+function webform_example_element_properties_webform_element_configuration_form_alter(&$form, FormStateInterface $form_state) {
+  \Drupal::service(WebformExampleElementPropertiesHooks::class)->webformElementConfigurationFormAlter($form, $form_state);
 }
 
 /**
