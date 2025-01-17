@@ -63,6 +63,9 @@ field.widget.settings.webform_entity_reference_autocomplete:
     default_data:
       type: boolean
       label: 'Default submission data'
+    enable_status:
+      type: boolean
+      label: 'Display status configuration'
 
 field.widget.settings.webform_entity_reference_select:
   type: mapping
@@ -77,6 +80,9 @@ field.widget.settings.webform_entity_reference_select:
       sequence:
         type: string
         label: 'Webform'
+    enable_status:
+      type: boolean
+      label: 'Display status configuration'
 
 field.formatter.settings.webform_entity_reference_entity_view:
   type: mapping

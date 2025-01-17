@@ -33,6 +33,7 @@ class WebformEntityReferenceSelectWidget extends OptionsWidgetBase {
   public static function defaultSettings() {
     return [
       'default_data' => TRUE,
+      'enable_status' => TRUE,
       'webforms' => [],
     ] + parent::defaultSettings();
   }
@@ -59,6 +60,12 @@ class WebformEntityReferenceSelectWidget extends OptionsWidgetBase {
       '#default_value' => $this->getSetting('webforms'),
     ];
     $this->elementManager->processElement($element['webforms']);
+    $element['enable_status'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable status options'),
+      '#description' => $this->t('If checked, site builders will be able to change the status of this webform instance (open, closed or scheduled)'),
+      '#default_value' => $this->getSetting('enable_status') ?? static::defaultSettings()['enable_status'],
+    ];
     return $element;
   }
 
