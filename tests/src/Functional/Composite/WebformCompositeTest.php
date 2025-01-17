@@ -55,8 +55,8 @@ class WebformCompositeTest extends WebformBrowserTestBase {
 
     // Check link multiple in table.
     $assert_session->responseContains('<label>Link multiple</label>');
-    $assert_session->responseContains('<th class="link_multiple-table--title webform-multiple-table--title">Link Title<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Link Title" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link Title&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link title help&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
-    $assert_session->responseContains('<th class="link_multiple-table--url webform-multiple-table--url">Link URL<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Link URL" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link URL&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link url help&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
+    $assert_session->responseMatches('|<th class="link_multiple-table--title webform-multiple-table--title">Link Title\s*<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Link Title" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link Title&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link title help&lt;/div&gt;"><span aria-hidden="true">\?</span></span>|');
+    $assert_session->responseMatches('|<th class="link_multiple-table--url webform-multiple-table--url">Link URL\s*<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Link URL" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Link URL&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;This is link url help&lt;/div&gt;"><span aria-hidden="true">\?</span></span>|');
 
     /* Processing */
 

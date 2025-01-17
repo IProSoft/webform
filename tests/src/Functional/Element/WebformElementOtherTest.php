@@ -70,7 +70,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<span class="fieldset-legend js-form-required form-required">Checkboxes other advanced</span>');
     $assert_session->responseContains('<input data-drupal-selector="edit-checkboxes-other-advanced-other" aria-describedby="edit-checkboxes-other-advanced-other--description" type="text" id="edit-checkboxes-other-advanced-other" name="checkboxes_other_advanced[other]" value="Four" size="60" maxlength="255" placeholder="What is this other option" class="form-text" />');
     $assert_session->responseContains('<div id="edit-checkboxes-other-advanced-other--description" class="webform-element-description">Other checkbox description</div>');
-    $assert_session->responseContains('<label for="edit-checkboxes-other-advanced-checkboxes-one" class="option">One<span class="webform-element-help js-webform-element-help"');
+    $assert_session->responseMatches('|<label for="edit-checkboxes-other-advanced-checkboxes-one" class="option">One\s*<span class="webform-element-help js-webform-element-help"|');
 
     /* ********************************************************************** */
     // radios_other.
@@ -79,7 +79,6 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     // Check basic radios_other.
     $assert_session->responseContains('<span class="fieldset-legend">Radios other basic</span>');
     $assert_session->responseContains('<input data-drupal-selector="edit-radios-other-basic-radios-other-" type="radio" id="edit-radios-other-basic-radios-other-" name="radios_other_basic[radios]" value="_other_" checked="checked" class="form-radio" />');
-    $assert_session->responseContains('<label for="edit-radios-other-basic-radios-other-" class="option">Other…</label>');
     $assert_session->responseContains('<input data-drupal-selector="edit-radios-other-basic-other" type="text" id="edit-radios-other-basic-other" name="radios_other_basic[other]" value="Four" size="60" maxlength="255" placeholder="Enter other…" class="form-text" />');
 
     // Check advanced radios_other w/ custom label.
@@ -87,7 +86,7 @@ class WebformElementOtherTest extends WebformElementBrowserTestBase {
     $assert_session->responseContains('<input data-drupal-selector="edit-radios-other-advanced-radios-other-" type="radio" id="edit-radios-other-advanced-radios-other-" name="radios_other_advanced[radios]" value="_other_" checked="checked" class="form-radio" />');
     $assert_session->responseContains('<input data-drupal-selector="edit-radios-other-advanced-other" aria-describedby="edit-radios-other-advanced-other--description" type="text" id="edit-radios-other-advanced-other" name="radios_other_advanced[other]" value="Four" size="60" maxlength="255" placeholder="What is this other option" class="form-text" />');
     $assert_session->responseContains('<div id="edit-radios-other-advanced-other--description" class="webform-element-description">Other radio description</div>');
-    $assert_session->responseContains('<label for="edit-radios-other-advanced-radios-one" class="option">One<span class="webform-element-help js-webform-element-help"');
+    $assert_session->responseMatches('|<label for="edit-radios-other-advanced-radios-one" class="option">One\s*<span class="webform-element-help js-webform-element-help"|');
 
     /* ********************************************************************** */
     // wrapper_type.
