@@ -25,6 +25,7 @@
       type: text
       label: 'HTML/SVG markup'
       webform_type: twig
+      translatable: false
     url:
       type: label
       label: 'HTML/SVG URL'
