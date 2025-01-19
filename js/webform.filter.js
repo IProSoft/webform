@@ -162,4 +162,25 @@
     }
   };
 
+  /**
+   * Allow filter form to be submitted after browser back.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches the behavior for removing data-drupal-form-submit-last
+   *   attribute from the form as it was blocking the form from being
+   *   submitted after browser back.
+   */
+  Drupal.behaviors.webformRemoveAttributeOnPageBack = {
+    attach: function (context) {
+      $(window).on('pageshow', function (e) {
+        // Remove attribute from form on browser back.
+        if (e.originalEvent.persisted) {
+          $('#webform-filter-form').removeAttr('data-drupal-form-submit-last');
+        }
+      });
+    }
+  };
+
 })(jQuery, Drupal, Drupal.debounce, once);
