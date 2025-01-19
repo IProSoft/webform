@@ -3,6 +3,7 @@
 namespace Drupal\webform;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -65,13 +66,6 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
    * @var array
    */
   protected $webforms = [];
-
-  /**
-   * Cache of source entity field names.
-   *
-   * @var array
-   */
-  protected $fieldNames = [];
 
   /**
    * Constructs a WebformEntityReferenceManager object.
@@ -186,26 +180,17 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       return [];
     }
 
-    // Cache the source entity's field names.
-    $entity_id = $entity->getEntityTypeId() . '-' . $entity->id();
-    if (isset($this->fieldNames[$entity_id])) {
-      return $this->fieldNames[$entity_id];
-    }
-
     $field_names = [];
-    if ($entity instanceof ContentEntityInterface) {
-      $fields = $entity->getFieldDefinitions();
-      foreach ($fields as $field_name => $field_definition) {
-        if ($field_definition->getType() === 'webform') {
-          $field_names[$field_name] = $field_name;
-        }
+    $fields = $entity->getFieldDefinitions();
+    foreach ($fields as $field_name => $field_definition) {
+      if ($field_definition->getType() === 'webform') {
+        $field_names[$field_name] = $field_name;
       }
     }
 
     // Sort fields alphabetically.
     ksort($field_names);
 
-    $this->fieldNames[$entity_id] = $field_names;
     return $field_names;
   }
 
@@ -289,8 +274,7 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
       return;
     }
 
-    $paragraph_fields = $this->getParagraphFieldNames($entity);
-    foreach ($paragraph_fields as $paragraph_field) {
+    foreach ($this->getParagraphFieldNames($entity) as $paragraph_field) {
       if (!$entity->hasField($paragraph_field)) {
         continue;
       }
@@ -316,26 +300,18 @@ class WebformEntityReferenceManager implements WebformEntityReferenceManagerInte
   /**
    * Get paragraph field names.
    *
-   * @param \Drupal\Core\Entity\EntityInterface|null $entity
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
    *   A fieldable content entity.
    *
-   * @return array
-   *   An array of paragraph field names.
+   * @return \Generator
+   *   Paragraph field names.
    */
   protected function getParagraphFieldNames(EntityInterface $entity) {
-    $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadByProperties([
-      'entity_type' => $entity->getEntityTypeId(),
-      'type' => 'entity_reference_revisions',
-    ]);
-
-    $field_names = [];
-    foreach ($fields as $field) {
-      if ($field->getSetting('target_type') === 'paragraph') {
-        $field_name = $field->get('field_name');
-        $field_names[$field_name] = $field_name;
+    foreach ($entity->getFieldDefinitions() as $field_definition) {
+      if ($field_definition->getType() == 'entity_reference_revisions' && $field_definition->getFieldStorageDefinition()->getSetting('target_type') == 'paragraph') {
+        yield $field_definition->getName();
       }
     }
-    return $field_names;
   }
 
   /* ************************************************************************ */
