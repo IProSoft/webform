@@ -66,6 +66,7 @@
       var selectors = [
         '.form-checkboxes',
         '.form-radios',
+        '.webform-type-radios',
         '.form-boolean-group',
         '.form-type-datelist .container-inline',
         '.form-type-tel',
@@ -75,6 +76,10 @@
       $(this.currentForm).find(selectors.join(', ')).each(function () {
         var $container = $(this);
         var $errorMessages = $container.find('strong.error.form-item--error-message');
+        // Update placement of grouped radio error messages.
+        if ($container.is('fieldset')) {
+          return $errorMessages.appendTo($container);
+        }
         $errorMessages.insertAfter($container);
       });
 
