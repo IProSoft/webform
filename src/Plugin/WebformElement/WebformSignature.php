@@ -323,12 +323,8 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
     if (!file_exists($image_uri)) {
       // Copy existing file.
       if ($sid && file_exists("$image_signature_directory/signature-$image_hash.png")) {
-        $this->fileSystem->move(
-          "$image_signature_directory/signature-$image_hash.png",
-          "$image_directory/signature-$image_hash.png"
-        );
-      }
-      else {
+        $this->fileSystem->move("$image_signature_directory/signature-$image_hash.png", $image_uri);
+      } else {
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $value));
         file_put_contents($image_uri, $data);
       }
