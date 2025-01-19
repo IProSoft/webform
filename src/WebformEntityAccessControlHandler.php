@@ -76,6 +76,35 @@ class WebformEntityAccessControlHandler extends EntityAccessControlHandler imple
   public function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
     /** @var \Drupal\webform\WebformInterface $entity */
 
+    // Split out webform and submission access checks.
+    if (str_contains($operation, 'submission_')) {
+      // Check submission_* operation.
+      return $this->checkAccessSubmission($entity, $operation, $account);
+    }
+    else {
+      // Check default webform operation.
+      return $this->checkAccessWebform($entity, $operation, $account);
+    }
+  }
+
+  /**
+   * Performs webform access checks.
+   *
+   * This method is supposed to be overwritten by extending classes that
+   * do their own custom access checking.
+   *
+   * @param \Drupal\webform\WebformInterface $entity
+   *   The entity for which to check access.
+   * @param string $operation
+   *   The entity operation. Usually one of 'view', 'view label', 'update' or
+   *   'delete'.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The user for which to check access.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  protected function checkAccessWebform(WebformInterface $entity, string $operation, AccountInterface $account) {
     // Check 'administer webform' permission.
     if ($account->hasPermission('administer webform')) {
       return WebformAccessResult::allowed();
@@ -149,110 +178,6 @@ class WebformEntityAccessControlHandler extends EntityAccessControlHandler imple
       return $rules_access_result;
     }
 
-    // Check submission_* operation.
-    if (strpos($operation, 'submission_') === 0) {
-      // Grant user with administer webform submission access to do whatever they
-      // like on the submission operations.
-      if ($account->hasPermission('administer webform submission')) {
-        return WebformAccessResult::allowed();
-      }
-
-      // Allow users with 'view any webform submission' or
-      // 'administer webform submission' to view all submissions.
-      if ($operation === 'submission_view_any' && ($account->hasPermission('view any webform submission') || $account->hasPermission('administer webform submission'))) {
-        return WebformAccessResult::allowed();
-      }
-
-      // Allow users with 'view own webform submission' to view own submissions.
-      if ($operation === 'submission_view_own' && $account->hasPermission('view own webform submission')) {
-        return WebformAccessResult::allowed();
-      }
-
-      // Allow users with 'edit any webform submission' to update any submissions.
-      if ($operation === 'submission_update_any' && $account->hasPermission('edit any webform submission')) {
-        return WebformAccessResult::allowed();
-      }
-
-      // Allow users with 'edit own webform submission' to update own submissions.
-      if ($operation === 'submission_update_own' && $account->hasPermission('edit own webform submission')) {
-        return WebformAccessResult::allowed();
-      }
-
-      if (in_array($operation, ['submission_page', 'submission_create'])) {
-        // Check limit total unique access.
-        // @see \Drupal\webform\WebformSubmissionForm::setEntity
-        if ($entity->getSetting('limit_total_unique')) {
-          $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
-          $last_submission = $this->getSubmissionStorage()->getLastSubmission($entity, $source_entity, NULL, ['in_draft' => FALSE]);
-          if ($last_submission && $last_submission->access('update')) {
-            return WebformAccessResult::allowed($last_submission);
-          }
-        }
-
-        // Check limit user unique access.
-        // @see \Drupal\webform\WebformSubmissionForm::setEntity
-        if ($entity->getSetting('limit_user_unique')) {
-          // Require user to be authenticated to access a unique submission.
-          if (!$account->isAuthenticated()) {
-            return WebformAccessResult::forbidden($entity);
-          }
-          $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
-          $last_submission = $this->getSubmissionStorage()->getLastSubmission($entity, $source_entity, $account, ['in_draft' => FALSE]);
-          if ($last_submission && $last_submission->access('update')) {
-            return WebformAccessResult::allowed($last_submission);
-          }
-        }
-
-        // Allow (secure) token to bypass submission page and create access controls.
-        $token = $this->requestStack->getCurrentRequest()->query->get('token');
-        if ($token && $entity->isOpen()) {
-          $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
-          if ($submission = $this->getSubmissionStorage()->loadFromToken($token, $entity, $source_entity)) {
-            return WebformAccessResult::allowed($submission)
-              ->addCacheContexts(['url']);
-          }
-        }
-      }
-
-      // The "page" operation is the same as "create" but requires that the
-      // Webform is allowed to be displayed as dedicated page.
-      // Used by the 'entity.webform.canonical' route.
-      if ($operation === 'submission_page') {
-        // Completely block access to a template if the user can't create new
-        // Webforms.
-        $create_access = $entity->access('create', $account, TRUE);
-        if ($entity->isTemplate() && !$create_access->isAllowed()) {
-          return WebformAccessResult::forbidden($entity)
-            ->addCacheableDependency($create_access);
-        }
-
-        // Block access if the webform does not have a page URL.
-        if (!$entity->hasPage()) {
-          $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
-          if (!$source_entity) {
-            return WebformAccessResult::forbidden($entity);
-          }
-        }
-      }
-
-      // Convert submission 'page' to corresponding 'create' access rule.
-      $submission_operation = str_replace('submission_page', 'submission_create', $operation);
-      // Remove 'submission_*' prefix.
-      $submission_operation = str_replace('submission_', '', $submission_operation);
-
-      // Check webform submission access rules.
-      $submission_access_result = $this->accessRulesManager->checkWebformAccess($submission_operation, $account, $entity);
-      if ($submission_access_result->isAllowed()) {
-        return $submission_access_result;
-      }
-
-      // Check webform 'update' access.
-      $update_access_result = $this->checkAccess($entity, 'update', $account);
-      if ($update_access_result->isAllowed()) {
-        return $update_access_result;
-      }
-    }
-
     // NOTE: Not calling parent::checkAccess().
     // @see \Drupal\Core\Entity\EntityAccessControlHandler::checkAccess
     if ($operation === 'delete' && $entity->isNew()) {
@@ -261,6 +186,119 @@ class WebformEntityAccessControlHandler extends EntityAccessControlHandler imple
     else {
       return WebformAccessResult::neutral($entity);
     }
+  }
+
+  /**
+   * Performs submission access checks.
+   *
+   * @param \Drupal\webform\WebformInterface $entity
+   *   The entity for which to check access.
+   * @param string $operation
+   *   The entity operation. Usually one of 'view', 'view label', 'update' or
+   *   'delete'.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The user for which to check access.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  protected function checkAccessSubmission(WebformInterface $entity, string $operation, AccountInterface $account) {
+    // Grant user with administer webform submission access to do whatever they
+    // like on the submission operations.
+    if ($account->hasPermission('administer webform submission')) {
+      return WebformAccessResult::allowed();
+    }
+
+    // Allow users with 'view any webform submission' or
+    // 'administer webform submission' to view all submissions.
+    if ($operation === 'submission_view_any' && ($account->hasPermission('view any webform submission') || $account->hasPermission('administer webform submission'))) {
+      return WebformAccessResult::allowed();
+    }
+
+    // Allow users with 'view own webform submission' to view own submissions.
+    if ($operation === 'submission_view_own' && $account->hasPermission('view own webform submission')) {
+      return WebformAccessResult::allowed();
+    }
+
+    // Allow users with 'edit any webform submission' to update any submissions.
+    if ($operation === 'submission_update_any' && $account->hasPermission('edit any webform submission')) {
+      return WebformAccessResult::allowed();
+    }
+
+    // Allow users with 'edit own webform submission' to update own submissions.
+    if ($operation === 'submission_update_own' && $account->hasPermission('edit own webform submission')) {
+      return WebformAccessResult::allowed();
+    }
+
+    if (in_array($operation, ['submission_page', 'submission_create'])) {
+      // Check limit total unique access.
+      // @see \Drupal\webform\WebformSubmissionForm::setEntity
+      if ($entity->getSetting('limit_total_unique')) {
+        $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
+        $last_submission = $this->getSubmissionStorage()->getLastSubmission($entity, $source_entity, NULL, ['in_draft' => FALSE]);
+        if ($last_submission && $last_submission->access('update')) {
+          return WebformAccessResult::allowed($last_submission);
+        }
+      }
+
+      // Check limit user unique access.
+      // @see \Drupal\webform\WebformSubmissionForm::setEntity
+      if ($entity->getSetting('limit_user_unique')) {
+        // Require user to be authenticated to access a unique submission.
+        if (!$account->isAuthenticated()) {
+          return WebformAccessResult::forbidden($entity);
+        }
+        $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
+        $last_submission = $this->getSubmissionStorage()->getLastSubmission($entity, $source_entity, $account, ['in_draft' => FALSE]);
+        if ($last_submission && $last_submission->access('update')) {
+          return WebformAccessResult::allowed($last_submission);
+        }
+      }
+
+      // Allow (secure) token to bypass submission page and create access controls.
+      $token = $this->requestStack->getCurrentRequest()->query->get('token');
+      if ($token && $entity->isOpen()) {
+        $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
+        if ($submission = $this->getSubmissionStorage()->loadFromToken($token, $entity, $source_entity)) {
+          return WebformAccessResult::allowed($submission)
+            ->addCacheContexts(['url']);
+        }
+      }
+    }
+
+    // The "page" operation is the same as "create" but requires that the
+    // Webform is allowed to be displayed as dedicated page.
+    // Used by the 'entity.webform.canonical' route.
+    if ($operation === 'submission_page') {
+      // Completely block access to a template if the user can't create new
+      // Webforms.
+      $create_access = $entity->access('create', $account, TRUE);
+      if ($entity->isTemplate() && !$create_access->isAllowed()) {
+        return WebformAccessResult::forbidden($entity)
+          ->addCacheableDependency($create_access);
+      }
+
+      // Block access if the webform does not have a page URL.
+      if (!$entity->getSetting('page')) {
+        $source_entity = $this->webformSourceEntityManager->getSourceEntity('webform');
+        if (!$source_entity) {
+          return WebformAccessResult::forbidden($entity);
+        }
+      }
+    }
+
+    // Convert submission 'page' to corresponding 'create' access rule.
+    $submission_operation = str_replace('submission_page', 'submission_create', $operation);
+    // Remove 'submission_*' prefix.
+    $submission_operation = str_replace('submission_', '', $submission_operation);
+
+    // Check webform submission access rules.
+    $submission_access_result = $this->accessRulesManager->checkWebformAccess($submission_operation, $account, $entity);
+    if ($submission_access_result->isAllowed()) {
+      return $submission_access_result;
+    }
+
+    return WebformAccessResult::neutral($entity);
   }
 
 }
