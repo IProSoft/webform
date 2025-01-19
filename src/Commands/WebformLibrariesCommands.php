@@ -115,21 +115,24 @@ class WebformLibrariesCommands extends WebformCommandsBase {
     // Load existing composer.json file and unset certain properties.
     $composer_path = __DIR__ . '/../../composer.json';
     $json = file_get_contents($composer_path);
-    $data = json_decode($json, FALSE, static::JSON_ENCODE_FLAGS);
-    $data = (array) $data;
+    $data = json_decode($json, TRUE);
+    if ($data === NULL && json_last_error() !== JSON_ERROR_NONE) {
+      throw new \Exception('Failed to decode JSON: ' . json_last_error_msg());
+    }
     unset($data['extra'], $data['require-dev']);
-    $data = (object) $data;
 
     // Set disable tls.
     $this->setComposerDisableTls($data);
 
     // Set libraries.
-    $data->repositories = (object) [];
-    $data->require = (object) [];
-    $this->setComposerLibraries($data->repositories, $data->require);
-    // Remove _webform property.
-    foreach ($data->repositories as &$repository) {
-      unset($repository['_webform']);
+    $data['repositories'] = [];
+    $data['require'] = [];
+    $this->setComposerLibraries($data['repositories'], $data['require']);
+    // Remove _webform property from repositories.
+    foreach ($data['repositories'] as &$repository) {
+      if (isset($repository['_webform'])) {
+        unset($repository['_webform']);
+      }
     }
     $this->output()->writeln(json_encode($data, static::JSON_ENCODE_FLAGS));
   }
@@ -298,7 +301,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   }
 
   /* ************************************************************************ */
-  // :ibraries remove.
+  // Libraries remove.
   /* ************************************************************************ */
 
   /**
@@ -395,34 +398,33 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    * @aliases wfcu,webform-composer-update
    */
   public function composerUpdate(array $options = ['disable-tls' => FALSE]) {
-    // cSpell:enable
     $composer_json = $this->composer_json;
     $composer_directory = $this->composer_directory;
 
     $json = file_get_contents($composer_json);
-    $data = json_decode($json, FALSE, static::JSON_ENCODE_FLAGS);
-    if (!isset($data->repositories)) {
-      $data->repositories = (object) [];
+    // Decode as associative array.
+    $data = json_decode($json, TRUE);
+    if ($data === NULL && json_last_error() !== JSON_ERROR_NONE) {
+      throw new \Exception('Failed to decode JSON: ' . json_last_error_msg());
     }
-    if (!isset($data->require)) {
-      $data->require = (object) [];
+    if (!isset($data['repositories']) || !is_array($data['repositories'])) {
+      $data['repositories'] = [];
+    }
+    if (!isset($data['require']) || !is_array($data['require'])) {
+      $data['require'] = [];
     }
 
     // Add drupal-library to installer paths.
     if (strpos($json, 'type:drupal-library') === FALSE) {
       $library_path = $composer_directory . 'libraries/{$name}';
-      $data->extra->{'installer-paths'}->{$library_path}[] = 'type:drupal-library';
+      $data['extra']['installer-paths'][$library_path][] = 'type:drupal-library';
     }
 
-    // Get repositories and require.
-    $repositories = &$data->repositories;
-    $require = &$data->require;
-
     // Remove all existing _webform repositories.
-    foreach ($repositories as $repository_name => $repository) {
-      if (!empty($repository->_webform)) {
-        $package_name = $repositories->{$repository_name}->package->name;
-        unset($repositories->{$repository_name}, $require->{$package_name});
+    foreach ($data['repositories'] as $key => $repository) {
+      if (!empty($repository['_webform'])) {
+        $package_name = $repository['package']['name'];
+        unset($data['repositories'][$key], $data['require'][$package_name]);
       }
     }
 
@@ -430,7 +432,7 @@ class WebformLibrariesCommands extends WebformCommandsBase {
     $this->setComposerDisableTls($data);
 
     // Set libraries.
-    $this->setComposerLibraries($repositories, $require);
+    $this->setComposerLibraries($data['repositories'], $data['require']);
 
     file_put_contents($composer_json, json_encode($data, static::JSON_ENCODE_FLAGS));
 
@@ -443,16 +445,16 @@ class WebformLibrariesCommands extends WebformCommandsBase {
    *
    * This is needed when CKEditor's HTTPS server's SSL is not working properly.
    *
-   * @param object $data
+   * @param array $data
    *   Composer JSON data.
    */
-  protected function setComposerDisableTls(&$data) {
+  protected function setComposerDisableTls(array &$data) {
     // Remove disable-tls config.
-    if (isset($data->config) && isset($data->config->{'disable-tls'})) {
-      unset($data->config->{'disable-tls'});
+    if (isset($data['config']) && isset($data['config']['disable-tls'])) {
+      unset($data['config']['disable-tls']);
     }
     if ($this->input()->getOption('disable-tls')) {
-      $data->config->{'disable-tls'} = TRUE;
+      $data['config']['disable-tls'] = TRUE;
     }
   }
 
@@ -463,19 +465,14 @@ class WebformLibrariesCommands extends WebformCommandsBase {
   /**
    * Set composer libraries.
    *
-   * @param object $repositories
+   * @param array $repositories
    *   Composer repositories.
-   * @param object $require
+   * @param array $require
    *   Composer require.
    */
-  protected function setComposerLibraries(&$repositories, &$require) {
+  protected function setComposerLibraries(array &$repositories, array &$require) {
     $libraries = $this->librariesManager->getLibraries(TRUE);
     foreach ($libraries as $library_name => $library) {
-      // Never overwrite existing repositories.
-      if (isset($repositories->{$library_name})) {
-        continue;
-      }
-
       // Skip libraries installed by other modules.
       if (!empty($library['module'])) {
         continue;
@@ -505,7 +502,19 @@ class WebformLibrariesCommands extends WebformCommandsBase {
         $package_name = "$library_name/$library_name";
       }
 
-      $repositories->$library_name = [
+      // Check if the repository already exists.
+      $exists = FALSE;
+      foreach ($repositories as $existing_repository) {
+        if (isset($existing_repository['package']) && $existing_repository['package']['name'] === $package_name) {
+          $exists = TRUE;
+          break;
+        }
+      }
+      if ($exists) {
+        continue;
+      }
+
+      $repositories[] = [
         '_webform' => TRUE,
         'type' => 'package',
         'package' => [
@@ -523,9 +532,8 @@ class WebformLibrariesCommands extends WebformCommandsBase {
         ],
       ];
 
-      $require->$package_name = '*';
+      $require[$package_name] = '*';
     }
-    $repositories = WebformObjectHelper::sortByProperty($repositories);
     $require = WebformObjectHelper::sortByProperty($require);
   }
 
