@@ -3056,14 +3056,6 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#style__description' => $this->t("Apply custom styles to the element's label."),
       '#attributes__description' => $this->t("Enter additional attributes to be added to the element's label."),
     ];
-    // Only display label attribute when the wrapper type is a form element.
-    if ($this->hasProperty('wrapper_type')) {
-      $form['label_attributes']['#states'] = [
-        'visible' => [
-          ':input[name="properties[wrapper_type]"]' => ['value' => 'form_element'],
-        ],
-      ];
-    }
 
     /* Summary attributes */
 
