@@ -173,8 +173,11 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     $build['table']['#attributes']['class'][] = 'webform-forms';
 
     // Bulk operations.
-    if ($this->bulkOperations && $this->currentUser->hasPermission('administer webform')) {
+    if ($this->bulkOperations && ($this->currentUser->hasPermission('administer webform') || $this->currentUser->hasPermission('administer webform overview'))) {
       $build['table'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformEntityBulkForm', $build['table']);
+      if (!$this->currentUser->hasPermission('delete any webform')) {
+        unset($build['table']['operations']['action']['#options']['webform_delete_action']);
+      }
     }
 
     // Attachments.
@@ -194,7 +197,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    */
   protected function buildFilterForm() {
     // Add the filter by key(word) and/or state.
-    if ($this->currentUser->hasPermission('administer webform')) {
+    if ($this->currentUser->hasPermission('administer webform') || $this->currentUser->hasPermission('administer webform overview')) {
       $state_options = [
         (string) $this->t('Active') => [
           '' => $this->t('All [@total]', ['@total' => $this->getTotal(NULL, NULL)]),
@@ -231,7 +234,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    */
   protected function buildInfo() {
     // Display info.
-    if ($this->currentUser->hasPermission('administer webform') && ($total = $this->getTotal($this->keys, $this->category, $this->state))) {
+    if (($this->currentUser->hasPermission('administer webform') || $this->currentUser->hasPermission('administer webform overview')) && ($total = $this->getTotal($this->keys, $this->category, $this->state))) {
       return [
         '#markup' => $this->formatPlural($total, '@count webform', '@count webforms'),
         '#prefix' => '<div>',
@@ -672,12 +675,12 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    * Is the current user a webform administrator.
    *
    * @return bool
-   *   TRUE if the current user has 'administer webform' or 'edit any webform'
-   *   permission.
+   *   TRUE if the current user has 'administer webform' or 'administer webform overview'
+   *   or 'edit any webform' permission.
    */
   protected function isAdmin() {
     $account = $this->currentUser;
-    return ($account->hasPermission('administer webform') || $account->hasPermission('edit any webform') || $account->hasPermission('view any webform submission'));
+    return ($account->hasPermission('administer webform') || $account->hasPermission('administer webform overview') || $account->hasPermission('edit any webform') || $account->hasPermission('view any webform submission'));
   }
 
   /**
