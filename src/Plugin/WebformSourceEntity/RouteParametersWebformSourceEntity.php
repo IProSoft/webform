@@ -25,11 +25,19 @@ class RouteParametersWebformSourceEntity extends WebformSourceEntityBase {
   protected $routeMatch;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $instance->routeMatch = $container->get('current_route_match');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
     return $instance;
   }
 
@@ -47,6 +55,19 @@ class RouteParametersWebformSourceEntity extends WebformSourceEntityBase {
     // parameters.
     $parameters = $this->routeMatch->getParameters()->all();
     $parameters = array_reverse($parameters);
+
+    // Check if the current path is a View page.
+    if (!empty($parameters['view_id'])) {
+      // A Drupal view route doesn't have view entity in the parameters.
+      // Load the view entity by the ID.
+      $view = $this->entityTypeManager
+        ->getStorage('view')
+        ->load($parameters['view_id']);
+      if ($view) {
+        // Put the current view entity into the parameters.
+        $parameters['view_object'] = $view;
+      }
+    }
 
     if (!empty($ignored_types)) {
       $parameters = array_diff_key($parameters, array_flip($ignored_types));

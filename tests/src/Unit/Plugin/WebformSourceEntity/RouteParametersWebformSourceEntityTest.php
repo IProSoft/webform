@@ -4,6 +4,7 @@ namespace Drupal\Tests\webform\Unit\Plugin\WebformSourceEntity;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\webform\Plugin\WebformSourceEntity\RouteParametersWebformSourceEntity;
@@ -40,6 +41,7 @@ class RouteParametersWebformSourceEntityTest extends UnitTestCase {
    */
   public function testGetCurrentSourceEntity(array $route_parameters, array $ignored_types, $expect_source_entity, $assert_message = '') {
     $route_match = $this->createMock(RouteMatchInterface::class);
+    $entity_manager = $this->createMock(EntityTypeManagerInterface::class);
 
     $source_entity = $this->createMock(EntityInterface::class);
 
@@ -57,6 +59,7 @@ class RouteParametersWebformSourceEntityTest extends UnitTestCase {
     // Build container.
     $container = new ContainerBuilder();
     $container->set('current_route_match', $route_match);
+    $container->set('entity_type.manager', $entity_manager);
 
     /* ********************************************************************** */
 
