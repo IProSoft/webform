@@ -24,6 +24,11 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
    * Tests webform schedule email handler.
    */
   public function testWebformScheduledEmail() {
+    // Set default timezone to America/Los_Angeles.
+    $this->config('system.date')
+      ->set('timezone.default', 'America/Los_Angeles')
+      ->save();
+
     $assert_session = $this->assertSession();
 
     $webform_schedule = Webform::load('test_handler_scheduled_email');
@@ -108,7 +113,7 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
     $sid = $this->postSubmission($webform_schedule, ['send' => 'other', 'date[date]' => '2001-01-01', 'date[time]' => '02:00:00'], 'Save Draft');
     $webform_submission = WebformSubmission::load($sid);
     $scheduled_email = $scheduled_manager->load($webform_submission, 'other');
-    $assert_session->pageTextContains("Test: Handler: Test scheduled email: Submission #$sid: Email scheduled by Other handler to be sent on 2001-01-15 02:00:00.");
+    $assert_session->pageTextContains("Test: Handler: Test scheduled email: Submission #$sid: Email scheduled by Other handler to be sent on 2001-01-15T02:00:00-08:00.");
     $this->assertEquals($scheduled_email->send, strtotime('2001-01-15 02:00:00'));
     $this->assertEquals($scheduled_email->state, $scheduled_manager::SUBMISSION_SEND);
 
