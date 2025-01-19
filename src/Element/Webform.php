@@ -121,6 +121,7 @@ class Webform extends RenderElementBase {
       elseif ($webform->getSetting('form_access_denied') !== WebformInterface::ACCESS_DENIED_DEFAULT) {
         // Set access denied message.
         $element['webform_access_denied'] = static::buildAccessDenied($webform);
+        $element['webform_access_denied']['#cache']['contexts'][] = 'user';
       }
       else {
         static::addCacheableDependency($element, $webform);
