@@ -165,6 +165,9 @@ webform.handler.remote_post:
     cast:
       type: boolean
       label: 'Cast remote post data'
+    check_access:
+      type: boolean
+      label: 'Check if an element is displayed'
     debug:
       type: boolean
       label: 'Enable debugging'

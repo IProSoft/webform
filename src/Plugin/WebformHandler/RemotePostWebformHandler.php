@@ -166,6 +166,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'method' => 'POST',
       'type' => 'x-www-form-urlencoded',
       'excluded_data' => $excluded_data,
+      'check_access' => FALSE,
       'custom_data' => '',
       'custom_options' => '',
       'file_data' => TRUE,
@@ -457,6 +458,13 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#required' => TRUE,
       '#default_value' => $this->configuration['excluded_data'],
     ];
+    $form['submission_data']['check_access'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Check if an element is displayed'),
+      '#description' => $this->t("If checked, elements with 'Display element' unchecked (i.e., <code>'#access': false</code> will not included in the request data."),
+      '#default_value' => $this->configuration['check_access'],
+      '#return_value' => TRUE,
+    ];
 
     $this->elementTokenValidate($form);
 
@@ -607,14 +615,22 @@ class RemotePostWebformHandler extends WebformHandlerBase {
     // Append uploaded file name, uri, and base64 data to data.
     $webform = $this->getWebform();
     foreach ($data as $element_key => $element_value) {
-      // Ignore empty and not equal to zero values.
-      // @see https://stackoverflow.com/questions/732979/php-whats-an-alternative-to-empty-where-string-0-is-not-treated-as-empty
-      if (empty($element_value) && $element_value !== 0 && $element_value !== '0') {
+      $element = $webform->getElement($element_key);
+      if (!$element) {
         continue;
       }
 
-      $element = $webform->getElement($element_key);
-      if (!$element) {
+      // Remove elements with #access set to FALSE.
+      if ($this->configuration['check_access']
+        && isset($element['#access'])
+        && $element['#access'] === FALSE) {
+        unset($data[$element_key]);
+        continue;
+      }
+
+      // Ignore empty and not equal to zero values.
+      // @see https://stackoverflow.com/questions/732979/php-whats-an-alternative-to-empty-where-string-0-is-not-treated-as-empty
+      if (empty($element_value) && $element_value !== 0 && $element_value !== '0') {
         continue;
       }
 

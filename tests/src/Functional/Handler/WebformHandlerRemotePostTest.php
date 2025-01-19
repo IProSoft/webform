@@ -148,6 +148,19 @@ options:
     $assert_session->responseContains("sid: &#039;$sid&#039;");
     $assert_session->responseNotContains('Unable to process this submission. Please contact the site administrator.');
 
+    // Check elements are displayed (a.k.a. '#access': false).
+    $webform->getHandler('remote_post')
+      ->setSetting('excluded_data', [])
+      ->setSetting('check_access', TRUE);
+    $webform->setElementProperties(
+      'last_name',
+      ['#access' => FALSE] + $webform->getElement('last_name'),
+    );
+    $webform->save();
+    $sid = $this->postSubmission($webform);
+    $assert_session->responseContains('first_name: John');
+    $assert_session->responseNotContains('last_name: Smith');
+
     // Check 200 Success Error.
     $this->postSubmission($webform, ['response_type' => 200]);
     $assert_session->responseContains('This is a custom 200 success message.');
