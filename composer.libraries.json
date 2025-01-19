@@ -327,14 +327,14 @@
             "type": "package",
             "package": {
                 "name": "signature_pad/signature_pad",
-                "version": "2.3.0",
+                "version": "4.2.0",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "signature_pad"
                 },
                 "dist": {
-                    "url": "https://github.com/szimek/signature_pad/archive/refs/tags/v2.3.0.zip",
-                    "type": "zip"
+                    "url": "https://registry.npmjs.org/signature_pad/-/signature_pad-4.2.0.tgz",
+                    "type": "tar"
                 },
                 "license": "MIT"
             }
