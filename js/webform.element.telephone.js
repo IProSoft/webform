@@ -27,7 +27,12 @@
         var $telephone = $(this);
 
         // Add error message container.
-        var $error = $('<strong class="error form-item--error-message">' + Drupal.t('Invalid phone number') + '</strong>').hide();
+        var errorId = $telephone.attr('id') + '-error';
+        var $error = $('<strong>', {
+          class: 'error form-item--error-message',
+          id: errorId,
+          text: Drupal.t('Invalid phone number'),
+        }).hide();
         $telephone.closest('.js-form-item').append($error);
 
         var options = {
@@ -52,12 +57,24 @@
         var reset = function () {
           $telephone.removeClass('error');
           $error.hide();
+          var describedby = ($telephone.attr('aria-describedby') || '')
+            .split(' ')
+            .filter(function(id) {
+              return id !== errorId;
+            });
+          $telephone.attr('aria-describedby', describedby.join(' ').trim());
         };
 
         var validate = function () {
           if ($.trim($telephone.val())) {
             if (!$telephone.intlTelInput('isValidNumber')) {
               $telephone.addClass('error');
+              var describedby = ($telephone.attr('aria-describedby') || '').split(' ');
+              if (!describedby.includes(errorId)) {
+                describedby.unshift(errorId);
+                $telephone.attr('aria-describedby', describedby.join(' ').trim());
+              }
+
               var placeholder = $telephone.attr('placeholder');
               var message;
               if (placeholder) {
