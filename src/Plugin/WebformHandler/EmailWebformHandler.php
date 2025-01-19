@@ -1738,7 +1738,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $t_args = [
         '@filename' => $attachment['filename'],
         '@filemime' => $attachment['filemime'],
-        '@filesize' => format_size(mb_strlen($attachment['filecontent'])),
+        '@filesize' => \Drupal::service('file_system')->formatSize(mb_strlen($attachment['filecontent'])),
       ];
       if (!empty($attachment['_fileurl'])) {
         $t_args[':href'] = $attachment['_fileurl'];
