@@ -5,6 +5,8 @@
  * Options alter hooks.
  */
 
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform\Hook\WebformOptionsHooks;
 use Drupal\Core\Datetime\TimeZoneFormHelper;
 use Drupal\Core\Language\LanguageManager;
 use Drupal\webform\Utility\WebformOptionsHelper;
@@ -14,79 +16,47 @@ use Drupal\webform\Utility\WebformOptionsHelper;
  *
  * @see config/install/webform.webform.example_options.yml
  */
+#[LegacyHook]
 function webform_webform_options_range_alter(array &$options, array $element = []) {
-  $element += [
-    '#min' => 1,
-    '#max' => 100,
-    '#step' => 1,
-    '#pad_length' => NULL,
-    '#pad_str' => 0,
-  ];
-
-  $options = WebformOptionsHelper::range(
-    $element['#min'],
-    $element['#max'],
-    $element['#step'],
-    $element['#pad_length'],
-    $element['#pad_str']
-  );
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsRangeAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for time zones options.
  */
+#[LegacyHook]
 function webform_webform_options_time_zones_alter(array &$options, array $element = []) {
-  if (empty($options)) {
-    $options = TimeZoneFormHelper::getOptionsList();
-  }
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsTimeZonesAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for country codes options.
  */
+#[LegacyHook]
 function webform_webform_options_country_codes_alter(array &$options, array $element = []) {
-  if (empty($options)) {
-    /** @var \Drupal\Core\Locale\CountryManagerInterface $country_manager */
-    $country_manager = \Drupal::service('country_manager');
-    $options = $country_manager->getList();
-  }
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsCountryCodesAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for country names options.
  */
+#[LegacyHook]
 function webform_webform_options_country_names_alter(array &$options, array $element = []) {
-  if (empty($options)) {
-    /** @var \Drupal\Core\Locale\CountryManagerInterface $country_manager */
-    $country_manager = \Drupal::service('country_manager');
-    $countries = $country_manager->getList();
-    $options = array_combine($countries, $countries);
-  }
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsCountryNamesAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for languages options.
  */
+#[LegacyHook]
 function webform_webform_options_languages_alter(array &$options, array $element = []) {
-  if (empty($options)) {
-    $languages = LanguageManager::getStandardLanguageList();
-    unset($languages['en-x-simple']);
-    $options = [];
-    foreach ($languages as $language) {
-      $options[$language[0]] = $language[0];
-    }
-  }
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsLanguagesAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for translations options.
  */
+#[LegacyHook]
 function webform_webform_options_translations_alter(array &$options, array $element = []) {
-  if (empty($options)) {
-    $languages = \Drupal::languageManager()->getLanguages();
-    $options = [];
-    foreach ($languages as $language) {
-      $options[$language->getId()] = $language->getName();
-    }
-  }
+  \Drupal::service(WebformOptionsHooks::class)->webformOptionsTranslationsAlter($options, $element);
 }

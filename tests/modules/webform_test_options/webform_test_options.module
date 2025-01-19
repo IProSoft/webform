@@ -2,31 +2,28 @@
 
 /**
  * @file
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\webform_test_options\Hook\WebformTestOptionsHooks;
+
+/**
+ * @file
  * Support module for webform that provides form alter hook for wizard cause tests.
  */
 
 /**
  * Implements hook_webform_options_WEBFORM_OPTIONS_ID_alter() for webform options test.
  */
+#[LegacyHook]
 function webform_test_options_webform_options_test_alter(array &$options, array &$element) {
-  $options += [
-    'four' => t('Four'),
-    'five' => t('Five'),
-    'six' => t('Six'),
-  ];
+  \Drupal::service(WebformTestOptionsHooks::class)->webformOptionsTestAlter($options, $element);
 }
 
 /**
  * Implements hook_webform_options_alter().
  */
+#[LegacyHook]
 function webform_test_options_webform_options_alter(array &$options, array &$element, $id) {
-  if ($id === 'custom') {
-    $options = [
-      'one' => t('One'),
-      'two' => t('Two'),
-      'three' => t('Three'),
-    ];
-    // Set the default value to one of the added options.
-    $element['#default_value'] = 'one';
-  }
+  \Drupal::service(WebformTestOptionsHooks::class)->webformOptionsAlter($options, $element, $id);
 }

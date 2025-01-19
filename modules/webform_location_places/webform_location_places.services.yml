@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_location_places\Hook\WebformLocationPlacesHooks:
+    class: Drupal\webform_location_places\Hook\WebformLocationPlacesHooks
+    autowire: true
