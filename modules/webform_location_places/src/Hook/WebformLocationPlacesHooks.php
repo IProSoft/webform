@@ -3,8 +3,8 @@
 namespace Drupal\webform_location_places\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Url;
 
 /**
  * Hook implementations for webform_location_places.

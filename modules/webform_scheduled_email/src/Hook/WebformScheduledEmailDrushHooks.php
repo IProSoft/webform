@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_scheduled_email\Hook;
 
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\webform\Entity\Webform;
 use Drush\Drush;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_scheduled_email.

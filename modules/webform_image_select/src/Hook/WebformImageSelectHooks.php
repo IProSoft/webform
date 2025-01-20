@@ -2,8 +2,8 @@
 
 namespace Drupal\webform_image_select\Hook;
 
-use Drupal\Core\Url;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Url;
 
 /**
  * Hook implementations for webform_image_select.

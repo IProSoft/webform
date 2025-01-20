@@ -2,8 +2,8 @@
 
 namespace Drupal\webform_test_handler_invoke_alter\Hook;
 
-use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\webform\Plugin\WebformHandlerInterface;
 
 /**
  * Hook implementations for webform_test_handler_invoke_alter.

@@ -4,6 +4,7 @@ namespace Drupal\webform\Hook;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Datetime\Entity\DateFormat;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
@@ -13,7 +14,6 @@ use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformUserHelper;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
@@ -53,8 +53,14 @@ class WebformTokensHooks {
       'name' => t('IP address'),
       'description' => t('The IP address that was used when submitting the webform submission.'),
     ];
-    $webform_submission['source-type'] = ['name' => t('Source entity type'), 'description' => t('The source entity type.')];
-    $webform_submission['source-id'] = ['name' => t('Source entity type'), 'description' => t('The source entity type.')];
+    $webform_submission['source-type'] = [
+      'name' => t('Source entity type'),
+      'description' => t('The source entity type.'),
+    ];
+    $webform_submission['source-id'] = [
+      'name' => t('Source entity type'),
+      'description' => t('The source entity type.'),
+    ];
     $webform_submission['source-title'] = [
       'name' => t('Source URL'),
       'description' => t('The Title of the source entity or webform.'),

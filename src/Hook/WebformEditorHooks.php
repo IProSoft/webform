@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Hook;
 
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\WebformInterface;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.

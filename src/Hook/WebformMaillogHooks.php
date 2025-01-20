@@ -4,10 +4,10 @@ namespace Drupal\webform\Hook;
 
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.

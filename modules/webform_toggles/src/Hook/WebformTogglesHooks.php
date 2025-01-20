@@ -2,8 +2,8 @@
 
 namespace Drupal\webform_toggles\Hook;
 
-use Drupal\Core\Url;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Url;
 
 /**
  * Hook implementations for webform_toggles.

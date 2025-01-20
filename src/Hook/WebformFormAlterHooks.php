@@ -4,10 +4,10 @@ namespace Drupal\webform\Hook;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\WebformSubmissionForm;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.

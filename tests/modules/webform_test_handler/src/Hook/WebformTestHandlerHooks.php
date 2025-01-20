@@ -2,8 +2,8 @@
 
 namespace Drupal\webform_test_handler\Hook;
 
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Hook implementations for webform_test_handler.

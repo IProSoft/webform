@@ -3,11 +3,11 @@
 namespace Drupal\webform_entity_print\Hook;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\HttpFoundation\HeaderUtils;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_entity_print.

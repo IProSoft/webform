@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_submission_log\Hook;
 
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_submission_log.

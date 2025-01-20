@@ -3,8 +3,8 @@
 namespace Drupal\webform_node\Hook;
 
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\node\NodeInterface;
 
 /**
  * Hook implementations for webform_node.

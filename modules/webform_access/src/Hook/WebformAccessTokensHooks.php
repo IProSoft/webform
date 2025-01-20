@@ -2,9 +2,9 @@
 
 namespace Drupal\webform_access\Hook;
 
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\webform_access\Entity\WebformAccessType;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_access.

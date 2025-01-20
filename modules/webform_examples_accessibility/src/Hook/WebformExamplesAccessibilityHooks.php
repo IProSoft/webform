@@ -3,9 +3,9 @@
 namespace Drupal\webform_examples_accessibility\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_examples_accessibility.

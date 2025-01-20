@@ -3,9 +3,9 @@
 namespace Drupal\webform_icheck\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Url;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_icheck.
