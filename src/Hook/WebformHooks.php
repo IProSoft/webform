@@ -2,22 +2,37 @@
 
 namespace Drupal\webform\Hook;
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\file\FileInterface;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform\Plugin\WebformElement\ManagedFile;
+use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
+use Drupal\webform\Utility\WebformMailHelper;
+use Drupal\webform\WebformInterface;
 
 /**
  * Hook implementations for webform.
  */
 class WebformHooks {
+
   /**
    * Implements hook_help().
    */
   #[Hook('help')]
-  public function help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  public function help($route_name, RouteMatchInterface $route_match) {
     if (!$route_match->getRouteObject()) {
       return NULL;
     }
     // Get path from route match.
-    $path = preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', \Drupal\Core\Url::fromRouteMatch($route_match)->setAbsolute(FALSE)->toString());
+    $path = preg_replace('/^' . preg_quote(base_path(), '/') . '/', '/', Url::fromRouteMatch($route_match)->setAbsolute(FALSE)->toString());
     if (!in_array($route_name, ['system.modules_list', 'update.status']) && strpos($route_name, 'webform') === FALSE && strpos($path, '/webform') === FALSE) {
       return NULL;
     }
@@ -25,7 +40,8 @@ class WebformHooks {
     $help_manager = \Drupal::service('webform.help_manager');
     if ($route_name === 'help.page.webform') {
       $build = $help_manager->buildIndex();
-    } else {
+    }
+    else {
       $build = $help_manager->buildHelp($route_name, $route_match);
     }
     if ($build) {
@@ -33,7 +49,8 @@ class WebformHooks {
       $config = \Drupal::config('webform.settings');
       $renderer->addCacheableDependency($build, $config);
       return $build;
-    } else {
+    }
+    else {
       return NULL;
     }
   }
@@ -59,7 +76,7 @@ class WebformHooks {
     // Add webform paths when the path.module is being installed.
     if (in_array('path', $modules)) {
       /** @var \Drupal\webform\WebformInterface[] $webforms */
-      $webforms = \Drupal\webform\Entity\Webform::loadMultiple();
+      $webforms = Webform::loadMultiple();
       foreach ($webforms as $webform) {
         $webform->updatePaths();
       }
@@ -181,7 +198,7 @@ class WebformHooks {
    * Implements hook_menu_local_tasks_alter().
    */
   #[Hook('menu_local_tasks_alter')]
-  public function menuLocalTasksAlter(&$data, $route_name, \Drupal\Core\Cache\RefinableCacheableDependencyInterface $cacheability) {
+  public function menuLocalTasksAlter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
     // Change config entities 'Translate *' tab to be just label 'Translate'.
     $webform_entities = ['webform', 'webform_options'];
     foreach ($webform_entities as $webform_entity) {
@@ -208,7 +225,7 @@ class WebformHooks {
           $tab_route_name = $url->getRouteName();
           $tab_route_parameters = $url->getRouteParameters();
           if (strpos($tab_route_name, 'entity.webform_submission.devel_') !== 0) {
-            $webform_submission = \Drupal\webform\Entity\WebformSubmission::load($tab_route_parameters['webform_submission']);
+            $webform_submission = WebformSubmission::load($tab_route_parameters['webform_submission']);
             $url->setRouteParameter('webform', $webform_submission->getWebform()->id());
           }
         }
@@ -257,10 +274,11 @@ class WebformHooks {
       if (strpos($type, 'webform') === 0) {
         if (isset($info['description']) && !empty($info['description'])) {
           $description = $info['description'] . $more;
-        } else {
+        }
+        else {
           $description = $more;
         }
-        $info['description'] = \Drupal\Core\Render\Markup::create($description);
+        $info['description'] = Markup::create($description);
       }
     }
   }
@@ -269,7 +287,7 @@ class WebformHooks {
    * Implements hook_entity_update().
    */
   #[Hook('entity_update')]
-  public function entityUpdate(\Drupal\Core\Entity\EntityInterface $entity) {
+  public function entityUpdate(EntityInterface $entity) {
     _webform_clear_webform_submission_list_cache_tag($entity);
   }
 
@@ -277,13 +295,13 @@ class WebformHooks {
    * Implements hook_entity_delete().
    */
   #[Hook('entity_delete')]
-  public function entityDelete(\Drupal\Core\Entity\EntityInterface $entity) {
+  public function entityDelete(EntityInterface $entity) {
     _webform_clear_webform_submission_list_cache_tag($entity);
     /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
     $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
     // Delete saved export settings for a webform or source entity with the
     // webform field.
-    if ($entity instanceof \Drupal\webform\WebformInterface || $entity_reference_manager->hasField($entity)) {
+    if ($entity instanceof WebformInterface || $entity_reference_manager->hasField($entity)) {
       $name = 'webform.export.' . $entity->getEntityTypeId() . '.' . $entity->id();
       \Drupal::state()->delete($name);
     }
@@ -327,7 +345,7 @@ class WebformHooks {
     if (!empty($params['from_mail'])) {
       // 'From name' is only used when the 'From mail' contains a single
       // email address.
-      $from = !empty($params['from_name']) && strpos($params['from_mail'], ',') === FALSE ? \Drupal\webform\Utility\WebformMailHelper::formatAddress($params['from_mail'], $params['from_name']) : $params['from_mail'];
+      $from = !empty($params['from_name']) && strpos($params['from_mail'], ',') === FALSE ? WebformMailHelper::formatAddress($params['from_mail'], $params['from_name']) : $params['from_mail'];
       $message['from'] = $message['headers']['From'] = $from;
     }
     // Set header 'Cc'.
@@ -357,7 +375,7 @@ class WebformHooks {
     $sender_mail = $params['sender_mail'] ?: '';
     $sender_name = ($params['sender_name'] ?: $params['from_name']) ?: '';
     if ($sender_mail) {
-      $message['headers']['Sender'] = \Drupal\webform\Utility\WebformMailHelper::formatAddress($sender_mail, $sender_name);
+      $message['headers']['Sender'] = WebformMailHelper::formatAddress($sender_mail, $sender_name);
     }
   }
 
@@ -501,7 +519,7 @@ class WebformHooks {
    * @see webform_preprocess_file_link()
    */
   #[Hook('file_access')]
-  public function fileAccess(\Drupal\file\FileInterface $file, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  public function fileAccess(FileInterface $file, $operation, AccountInterface $account) {
     $is_webform_download = $operation === 'download' && strpos($file->getFileUri(), 'private://webform/') === 0;
     // Block access to temporary anonymous private file uploads
     // only when an anonymous user is attempting to download the file.
@@ -509,16 +527,16 @@ class WebformHooks {
     // @see webform_preprocess_file_link()
     // @see webform_file_download()
     if ($is_webform_download && $file->isTemporary() && $file->getOwner() && $file->getOwner()->isAnonymous() && \Drupal::routeMatch()->getRouteName() === 'system.files') {
-      return \Drupal\Core\Access\AccessResult::forbidden();
+      return AccessResult::forbidden();
     }
     // Allow access to files associated with a webform submission.
     // This prevent uploaded webform files from being lost when another user
     // edits a submission with multiple file uploads.
     // @see \Drupal\file\Element\ManagedFile::valueCallback
-    if ($is_webform_download && \Drupal\webform\Plugin\WebformElement\ManagedFile::accessFile($file, $account)) {
-      return \Drupal\Core\Access\AccessResult::allowed();
+    if ($is_webform_download && ManagedFile::accessFile($file, $account)) {
+      return AccessResult::allowed();
     }
-    return \Drupal\Core\Access\AccessResult::neutral();
+    return AccessResult::neutral();
   }
 
   /**
@@ -530,7 +548,7 @@ class WebformHooks {
     $webform_element_manager = \Drupal::service('plugin.manager.webform.element');
     $webform_elements = $webform_element_manager->getInstances();
     foreach ($webform_elements as $webform_element) {
-      if ($webform_element->isEnabled() && $webform_element instanceof \Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface) {
+      if ($webform_element->isEnabled() && $webform_element instanceof WebformElementFileDownloadAccessInterface) {
         $result = $webform_element::accessFileDownload($uri);
         if ($result !== NULL) {
           return $result;
@@ -618,9 +636,7 @@ class WebformHooks {
       ],
     ];
   }
-  /* ************************************************************************** */
-  // Element info hooks.
-  /* ************************************************************************** */
+
   /**
    * Implements hook_element_info_alter().
    */
@@ -659,4 +675,5 @@ class WebformHooks {
       ];
     }
   }
+
 }
