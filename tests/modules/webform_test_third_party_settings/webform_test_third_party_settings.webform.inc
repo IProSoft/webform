@@ -8,7 +8,6 @@
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_third_party_settings\Hook\WebformTestThirdPartySettingsWebformHooks;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * Implements hook_webform_admin_third_party_settings_form_alter().

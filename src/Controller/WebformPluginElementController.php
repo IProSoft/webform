@@ -132,7 +132,7 @@ class WebformPluginElementController extends ControllerBase implements Container
                   '@label' => $webform_element->getPluginLabel(),
                   '@description' => $webform_element->getPluginDescription(),
                 ]
-              )
+              ),
             ],
           ],
         ];

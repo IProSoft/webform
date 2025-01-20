@@ -8,8 +8,6 @@
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformLibrariesHooks;
 use Drupal\Core\Asset\AttachedAssetsInterface;
-use Drupal\webform\Entity\Webform;
-use Drupal\webform\Utility\WebformDialogHelper;
 
 /**
  * Implements hook_library_info_build().

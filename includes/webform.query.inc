@@ -7,9 +7,7 @@
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Hook\WebformQueryHooks;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Query\AlterableInterface;
-use Drupal\webform\Entity\Webform;
 
 /**
  * Implements hook_query_TAG_alter().

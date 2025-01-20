@@ -61,7 +61,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
           '#markup' => $definition['label'],
           '#prefix' => '<span class="webform-form-filter-text-source">',
           '#suffix' => '</span>',
-        ]
+        ],
       ];
       $row[] = $definition['description'];
       $row[] = $definition['category'];

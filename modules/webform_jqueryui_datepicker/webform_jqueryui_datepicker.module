@@ -5,14 +5,9 @@
  * Provides jQueryUI datepicker support for date and datetime elements.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_jqueryui_datepicker\Hook\WebformJqueryuiDatepickerHooks;
-use Drupal\Core\Datetime\Entity\DateFormat;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Plugin\WebformElement\Date;
-use Drupal\webform\Plugin\WebformElement\DateBase;
-use Drupal\webform\Plugin\WebformElement\DateList;
-use Drupal\webform\Plugin\WebformElement\DateTime;
 
 /**
  * Implements hook_webform_element_default_properties_alter().

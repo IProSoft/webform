@@ -2,7 +2,6 @@
 
 namespace Drupal\webform_devel\Hook;
 
-use Drush\Drush;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
