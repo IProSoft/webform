@@ -126,13 +126,32 @@ class WebformAccessFilterFormatTest extends WebformBrowserTestBase {
     $this->assertEquals('', check_markup('<script></script>Test', WebformHtmlEditor::DEFAULT_FILTER_FORMAT));
 
     /* ********************************************************************** */
+    // Check Text format access.
+    /* ********************************************************************** */
+
+    // Check that a user won't see the text format select menu
+    // when they only have the default or one filter visible.
+    // @covers \Drupal\webform\Element\WebformHtmlEditor::processTextFormat
+    $this->drupalLogout();
+    $this->drupalLogin(
+      $this->drupalCreateUser([
+        'administer nodes',
+        'bypass node access',
+      ])
+    );
+    $this->drupalCreateContentType(['type' => 'page', 'name' => 'Page']);
+    $node = $this->drupalCreateNode();
+    $this->drupalGet('/node/' . $node->id() . '/edit');
+    $assert_session->elementNotExists('css', '[name="body[0][format]"]');
+    $assert_session->responseNotContains('<option value="plain_text" selected="selected">Plain text</option><');
+
+    /* ********************************************************************** */
     // Check config settings allowed formats test.
     // @see \Drupal\text\Plugin\Field\FieldType\TextItemBase::fieldSettingsForm
     /* ********************************************************************** */
 
     // Check removing the 'Webform (Default) - DO NOT EDIT' options
     // from allowed formats.
-    $this->drupalCreateContentType(['type' => 'page', 'label' => 'Page']);
     $this->drupalLogin($this->rootUser);
     $this->drupalGet('/admin/structure/types/manage/page/fields/node.page.body');
     $assert_session->responseNotContains(WebformHtmlEditor::DEFAULT_FILTER_FORMAT);

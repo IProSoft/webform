@@ -286,8 +286,9 @@ class WebformEntityController extends ControllerBase implements ContainerInjecti
    * @see \Drupal\webform\Entity\Webform::getSubmissionForm
    */
   protected function getVariants(Request $request, WebformInterface $webform, ?EntityInterface $source_entity = NULL) {
-    // Get variants from '_webform_variant query string parameter.
-    $webform_variant = $request->query->get('_webform_variant');
+    // Get variants from '_webform_variant' query string parameter.
+    $query = $request->query->all();
+    $webform_variant = $query['_webform_variant'] ?? [];
     if ($webform_variant && ($webform->access('update') || $webform->access('test'))) {
       return $webform_variant;
     }

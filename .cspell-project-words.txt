@@ -181,6 +181,7 @@ unflagged
 unscheduling
 Unstar
 unsupport
+varchar
 vwebform
 webformsettings
 websubmission

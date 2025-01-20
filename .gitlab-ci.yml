@@ -63,3 +63,7 @@ phpunit:
 
 phpunit (previous major):
   before_script: []
+
+# Allow max PHP tests to fail as deprecations in other modules will fail this pipeline.
+phpunit (max PHP version):
+  allow_failure: true

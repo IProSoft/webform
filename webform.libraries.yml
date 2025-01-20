@@ -130,6 +130,7 @@ webform.ajax:
     - core/drupal.announce
     - core/jquery
     - core/once
+    - core/tabbable
     - webform/webform.scroll
 
 # Announce.
@@ -214,6 +215,7 @@ drupal.dialog:
     js/webform.drupal.dialog.js: {}
   dependencies:
     - core/drupal.dialog
+    - core/tabbable
 
 # Help.
 
@@ -513,7 +515,7 @@ webform.element.chosen:
     - core/once
     - webform/libraries.jquery.chosen
 
-webform.element.codemirror.text:
+webform.element.codemirror:
   version: VERSION
   css:
     component:
@@ -521,76 +523,54 @@ webform.element.codemirror.text:
   js:
     js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - core/tabbable
+
+webform.element.codemirror.text:
+  version: VERSION
+  dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.text
 
 webform.element.codemirror.yaml:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.yaml
 
 webform.element.codemirror.html:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.html
 
 webform.element.codemirror.htmlmixed:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.htmlmixed
 
 webform.element.codemirror.css:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.css
 
 webform.element.codemirror.javascript:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.javascript
 
 webform.element.codemirror.php:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.php
 
 webform.element.codemirror.twig:
   version: VERSION
-  css:
-    component:
-      css/webform.element.codemirror.css: {}
-  js:
-    js/webform.element.codemirror.js: { weight: -1 }
   dependencies:
+    - webform/webform.element.codemirror
     - webform/libraries.codemirror.twig
 
 webform.element.color:
@@ -1034,14 +1014,14 @@ imce.input:
 
 libraries.choices:
   remote: https://github.com/Choices-js/Choices
-  version: '9.0.1'
+  version: '11.0.2'
   license:
     name: MIT
     url: https://github.com/Choices-js/Choices/blob/master/LICENSE
     gpl-compatible: true
   directory: choices
   cdn:
-    /libraries/choices/: https://cdn.jsdelivr.net/gh/Choices-js/Choices@v9.0.1/
+    /libraries/choices/: https://cdn.jsdelivr.net/gh/Choices-js/Choices@v11.0.2/
   css:
     component:
       css/webform.choices.base.css: {  }

@@ -201,15 +201,16 @@ table.webform-states-table
 /*****************************************************************************   */
 
 /**
- * Remove margin around checkboxes buttons.
+ * Fix checkbox via dialog/off-canvas tray.
  *
  * @see claro/css/src/components/form--checkbox-radio.css
  */
-.webform-options-display-buttons .form-type--boolean {
-  margin-left: 0;
-}
-[dir="rtl"] .webform-options-display-buttons .form-type--boolean {
-  margin-right: 0;
+.ui-dialog .form-type--boolean .form-boolean {
+  position: inherit;
+  inset-block-start: inherit;
+  float: none; /* LTR */
+  margin-inline-start: inherit;
+  transform: none;
 }
 
 /*****************************************************************************   */

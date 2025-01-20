@@ -341,7 +341,10 @@ abstract class WebformOtherBase extends FormElementBase {
   protected static function convertDefaultValueToElementValue(array $element) {
     $type = str_replace('webform_', '', static::$type);
 
-    $default_value = isset($element['#default_value']) && $element['#default_value'] !== '' ? $element['#default_value'] : NULL;
+    $default_value = $element['#default_value'] ?? NULL;
+    if ($default_value === '' || $default_value === ['']) {
+      $default_value = NULL;
+    }
     if (static::isMultiple($element)) {
       // Handle edge case where $default_value is not an array.
       if (!is_array($default_value)) {
