@@ -325,7 +325,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
       '#type' => 'webform_message',
       '#message_type' => 'warning',
       '#message_message' => $this->t('Are you sure you want to import @submissions?', $t_args) . '<br/>' .
-        '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
+      '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
     ];
 
     // Details.
@@ -549,7 +549,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
       'init_message' => t('Initializing submission import'),
       'error_message' => t('The import could not be completed because an error occurred.'),
       'operations' => [
-        [['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchProcess'], $parameters],
+            [['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchProcess'], $parameters],
       ],
       'finished' => ['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchFinish'],
     ];

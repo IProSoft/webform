@@ -23,7 +23,7 @@ class Value extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'value' => '',
     ];

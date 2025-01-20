@@ -83,19 +83,19 @@ class WebformLocationPlaces extends WebformLocationBase {
    */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     return [
-      [
-        'value' => '1600 Pennsylvania Avenue, Washington, District of Columbia, United States of America',
-        'lat' => '38.8635',
-        'lng' => '-76.946',
-        'name' => '1600 Pennsylvania Avenue',
-        'city' => 'Washington',
-        'country' => 'United States of America',
-        'country_code' => 'us',
-        'administrative' => 'District of Columbia',
-        'county' => 'Prince George\'s County',
-        'suburb' => '',
-        'postcode' => '20020',
-      ],
+        [
+          'value' => '1600 Pennsylvania Avenue, Washington, District of Columbia, United States of America',
+          'lat' => '38.8635',
+          'lng' => '-76.946',
+          'name' => '1600 Pennsylvania Avenue',
+          'city' => 'Washington',
+          'country' => 'United States of America',
+          'country_code' => 'us',
+          'administrative' => 'District of Columbia',
+          'county' => 'Prince George\'s County',
+          'suburb' => '',
+          'postcode' => '20020',
+        ],
     ];
   }
 

@@ -43,8 +43,8 @@ class WebformEntitySettingsAccessForm extends WebformEntitySettingsBaseForm {
         '#title' => $info['title'],
         '#open' => ($access[$access_rule]['roles'] || $access[$access_rule]['users']) ? TRUE : FALSE,
         '#description' => $info['description'],
-        // Never convert description to help.
-        // @see _webform_preprocess_description_help()
+          // Never convert description to help.
+          // @see _webform_preprocess_description_help()
         '#help' => FALSE,
       ];
       $form['access'][$access_rule]['roles'] = [

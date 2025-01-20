@@ -202,7 +202,7 @@ wrapper_other_container: ''");
     $this->drupalGet('/webform/test_element_other');
     $edit = [
       'select_other_advanced[select]' => 'One',
-      // This value is ignored, because 'select_other_advanced[select]' is not set to '_other_'.
+        // This value is ignored, because 'select_other_advanced[select]' is not set to '_other_'.
       'select_other_advanced[other]' => 'Five',
     ];
     $this->submitForm($edit, 'Submit');
@@ -268,7 +268,7 @@ wrapper_other_container: ''");
     $this->drupalGet('/webform/test_element_other');
     $edit = [
       'radios_other_advanced[radios]' => 'One',
-      // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
+        // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
       'radios_other_advanced[other]' => 'Five',
     ];
     $this->submitForm($edit, 'Submit');
@@ -329,7 +329,7 @@ wrapper_other_container: ''");
       'checkboxes_other_advanced[checkboxes][Two]' => FALSE,
       'checkboxes_other_advanced[checkboxes][Three]' => FALSE,
       'checkboxes_other_advanced[checkboxes][_other_]' => FALSE,
-      // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
+        // This value is ignored, because 'radios_other_advanced[radios]' is not set to '_other_'.
       'checkboxes_other_advanced[other]' => 'Five',
     ];
     $this->submitForm($edit, 'Submit');

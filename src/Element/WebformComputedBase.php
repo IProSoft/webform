@@ -34,15 +34,15 @@ abstract class WebformComputedBase extends FormElementBase implements WebformCom
     $class = get_class($this);
     return [
       '#process' => [
-        [$class, 'processWebformComputed'],
+            [$class, 'processWebformComputed'],
       ],
       '#input' => TRUE,
       '#template' => '',
       '#mode' => NULL,
       '#hide_empty' => FALSE,
-      // Note: Computed elements do not use the default #ajax wrapper, which is
-      // why we can use #ajax as a boolean.
-      // @see \Drupal\Core\Render\Element\RenderElementBase::preRenderAjaxForm
+        // Note: Computed elements do not use the default #ajax wrapper, which is
+        // why we can use #ajax as a boolean.
+        // @see \Drupal\Core\Render\Element\RenderElementBase::preRenderAjaxForm
       '#ajax' => FALSE,
       '#webform_submission' => NULL,
       '#theme_wrappers' => ['form_element'],
@@ -118,7 +118,7 @@ abstract class WebformComputedBase extends FormElementBase implements WebformCom
           'wrapper' => $wrapper_id,
           'progress' => ['type' => 'none'],
         ],
-        // Disable validation, hide button, add submit button trigger class.
+          // Disable validation, hide button, add submit button trigger class.
         '#attributes' => [
           'formnovalidate' => 'formnovalidate',
           'class' => [
@@ -126,9 +126,9 @@ abstract class WebformComputedBase extends FormElementBase implements WebformCom
             'js-webform-computed-submit',
           ],
         ],
-        // Issue #1342066 Document that buttons with the same #value need a unique
-        // #name for the Form API to distinguish them, or change the Form API to
-        // assign unique #names automatically.
+          // Issue #1342066 Document that buttons with the same #value need a unique
+          // #name for the Form API to distinguish them, or change the Form API to
+          // assign unique #names automatically.
         '#name' => $button_name,
       ];
 
@@ -204,7 +204,7 @@ abstract class WebformComputedBase extends FormElementBase implements WebformCom
    * Determine if the current request is using Ajax.
    */
   protected static function isAjax() {
-    // return (\Drupal::request()->get(MainContentViewSubscriber::WRAPPER_FORMAT) === 'drupal_ajax');
+    // Return (\Drupal::request()->get(MainContentViewSubscriber::WRAPPER_FORMAT) === 'drupal_ajax');
     //
     // ISSUE:
     // For nodes with computed elements there is a duplicate

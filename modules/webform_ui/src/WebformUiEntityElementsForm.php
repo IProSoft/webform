@@ -115,19 +115,19 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
         'class' => ['webform-ui-elements-table'],
       ],
       '#tabledrag' => [
-        [
-          'action' => 'match',
-          'relationship' => 'parent',
-          'group' => 'row-parent-key',
-          'source' => 'row-key',
-          'hidden' => TRUE, /* hides the WEIGHT & PARENT tree columns below */
-          'limit' => FALSE,
-        ],
-        [
-          'action' => 'order',
-          'relationship' => 'sibling',
-          'group' => 'row-weight',
-        ],
+            [
+              'action' => 'match',
+              'relationship' => 'parent',
+              'group' => 'row-parent-key',
+              'source' => 'row-key',
+              'hidden' => TRUE, /* hides the WEIGHT & PARENT tree columns below */
+              'limit' => FALSE,
+            ],
+            [
+              'action' => 'order',
+              'relationship' => 'sibling',
+              'group' => 'row-weight',
+            ],
       ],
     ] + $rows;
 
@@ -586,12 +586,12 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
         '#type' => 'link',
         '#title' => implode('; ', $states),
         '#url' => new Url(
-          'entity.webform_ui.element.edit_form',
-          ['webform' => $webform->id(), 'key' => $key]
+            'entity.webform_ui.element.edit_form',
+            ['webform' => $webform->id(), 'key' => $key]
         ),
         '#attributes' => $offcanvas_dialog_attributes + [
-          // Add custom hash to current page's location.
-          // @see Drupal.behaviors.webformAjaxLink
+              // Add custom hash to current page's location.
+              // @see Drupal.behaviors.webformAjaxLink
           'data-hash' => 'webform-tab--conditions',
           'title' => $this->t('Edit @states conditional', ['@states' => implode('; ', $states)]),
           'aria-label' => $this->t('Edit @states conditional', ['@states' => implode('; ', $states)]),
@@ -671,11 +671,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $row['operations']['#links']['edit'] = [
       'title' => $this->t('Edit'),
       'url' => new Url(
-        'entity.webform_ui.element.edit_form',
-        [
-          'webform' => $webform->id(),
-          'key' => $key,
-        ]
+          'entity.webform_ui.element.edit_form',
+          [
+            'webform' => $webform->id(),
+            'key' => $key,
+          ]
       ),
       'attributes' => $offcanvas_dialog_attributes,
     ];
@@ -690,11 +690,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
       $row['operations']['#links']['duplicate'] = [
         'title' => $this->t('Duplicate'),
         'url' => new Url(
-          'entity.webform_ui.element.duplicate_form',
-          [
-            'webform' => $webform->id(),
-            'key' => $key,
-          ]
+            'entity.webform_ui.element.duplicate_form',
+            [
+              'webform' => $webform->id(),
+              'key' => $key,
+            ]
         ),
         'attributes' => $offcanvas_dialog_attributes,
       ];
@@ -702,11 +702,11 @@ class WebformUiEntityElementsForm extends BundleEntityFormBase {
     $row['operations']['#links']['delete'] = [
       'title' => $this->t('Delete'),
       'url' => new Url(
-        'entity.webform_ui.element.delete_form',
-        [
-          'webform' => $webform->id(),
-          'key' => $key,
-        ]
+          'entity.webform_ui.element.delete_form',
+          [
+            'webform' => $webform->id(),
+            'key' => $key,
+          ]
       ),
       'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
     ];

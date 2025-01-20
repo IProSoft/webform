@@ -24,9 +24,9 @@ class Label extends WebformMarkupBase {
   protected function defineDefaultProperties() {
     return [
       'title' => '',
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
-      // Attributes.
+        // Attributes.
       'attributes' => [],
     ] + parent::defineDefaultProperties();
   }

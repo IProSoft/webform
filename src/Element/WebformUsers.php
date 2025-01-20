@@ -27,8 +27,8 @@ class WebformUsers extends EntityAutocomplete {
     $info['#maxlength'] = NULL;
     $info['#default_value'] = [];
     $info['#element_validate'] = [
-      [$class, 'validateEntityAutocomplete'],
-      [$class, 'validateWebformUsers'],
+        [$class, 'validateEntityAutocomplete'],
+        [$class, 'validateWebformUsers'],
     ];
     return $info;
   }

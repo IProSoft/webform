@@ -22,16 +22,16 @@ class Details extends ContainerBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Title.
+        // Title.
       'title_display' => '',
       'help_display' => '',
-      // Details.
+        // Details.
       'open' => FALSE,
       'summary_attributes' => [],
     ] + parent::defineDefaultProperties();

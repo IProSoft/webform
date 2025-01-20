@@ -56,7 +56,7 @@ class ProcessedText extends WebformMarkupBase {
     return [
       'wrapper_attributes' => [],
       'label_attributes' => [],
-      // Markup settings.
+        // Markup settings.
       'text' => '',
       'format' => $default_format ,
     ] + parent::defineDefaultProperties();

@@ -59,7 +59,7 @@ class WebformMessage extends RenderElementBase {
       '#message_storage' => '',
       '#status_headings' => [],
       '#pre_render' => [
-        [$class, 'preRenderWebformMessage'],
+            [$class, 'preRenderWebformMessage'],
       ],
       '#theme_wrappers' => ['webform_message'],
     ];

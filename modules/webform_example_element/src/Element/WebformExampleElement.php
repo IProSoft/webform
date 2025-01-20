@@ -34,14 +34,14 @@ class WebformExampleElement extends FormElementBase {
       '#input' => TRUE,
       '#size' => 60,
       '#process' => [
-        [$class, 'processWebformElementExample'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformElementExample'],
+            [$class, 'processAjaxForm'],
       ],
       '#element_validate' => [
-        [$class, 'validateWebformExampleElement'],
+            [$class, 'validateWebformExampleElement'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformExampleElement'],
+            [$class, 'preRenderWebformExampleElement'],
       ],
       '#theme' => 'input__webform_example_element',
       '#theme_wrappers' => ['form_element'],

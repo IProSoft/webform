@@ -20,12 +20,12 @@ class WebformCard extends RenderElementBase {
       '#prev_button_label' => '',
       '#next_button_label' => '',
       '#process' => [
-        [$class, 'processGroup'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processGroup'],
+            [$class, 'processAjaxForm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCard'],
-        [$class, 'preRenderGroup'],
+            [$class, 'preRenderWebformCard'],
+            [$class, 'preRenderGroup'],
       ],
       '#value' => NULL,
       '#theme_wrappers' => ['webform_card'],

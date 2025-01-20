@@ -66,7 +66,13 @@ class WebformPluginVariantController extends ControllerBase implements Container
     foreach ($definitions as $plugin_id => $definition) {
       $row = [];
       $row[] = $plugin_id;
-      $row[] = ['data' => ['#markup' => $definition['label'], '#prefix' => '<span class="webform-form-filter-text-source">', '#suffix' => '</span>']];
+      $row[] = [
+        'data' => [
+          '#markup' => $definition['label'],
+          '#prefix' => '<span class="webform-form-filter-text-source">',
+          '#suffix' => '</span>',
+        ],
+      ];
       $row[] = $definition['description'];
       $row[] = $definition['category'];
       $row[] = (isset($excluded_variants[$plugin_id])) ? $this->t('Yes') : $this->t('No');
@@ -162,10 +168,10 @@ class WebformPluginVariantController extends ControllerBase implements Container
     }
 
     $headers = [
-      ['data' => $this->t('Variant'), 'width' => '20%'],
-      ['data' => $this->t('Description'), 'width' => '40%'],
-      ['data' => $this->t('Category'), 'width' => '20%'],
-      ['data' => $this->t('Operations'), 'width' => '20%'],
+        ['data' => $this->t('Variant'), 'width' => '20%'],
+        ['data' => $this->t('Description'), 'width' => '40%'],
+        ['data' => $this->t('Category'), 'width' => '20%'],
+        ['data' => $this->t('Operations'), 'width' => '20%'],
     ];
 
     $definitions = $this->pluginManager->getDefinitions();
@@ -187,7 +193,13 @@ class WebformPluginVariantController extends ControllerBase implements Container
       $row['title']['data'] = [
         '#type' => 'link',
         '#title' => $definition['label'],
-        '#url' => Url::fromRoute('entity.webform.variant.add_form', ['webform' => $webform->id(), 'webform_variant' => $plugin_id]),
+        '#url' => Url::fromRoute(
+            'entity.webform.variant.add_form',
+            [
+              'webform' => $webform->id(),
+              'webform_variant' => $plugin_id,
+            ]
+        ),
         '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($variant_plugin->getOffCanvasWidth()),
         '#prefix' => '<div class="webform-form-filter-text-source">',
         '#suffix' => '</div>',
@@ -203,7 +215,13 @@ class WebformPluginVariantController extends ControllerBase implements Container
 
       $links['add'] = [
         'title' => $this->t('Add variant'),
-        'url' => Url::fromRoute('entity.webform.variant.add_form', ['webform' => $webform->id(), 'webform_variant' => $plugin_id]),
+        'url' => Url::fromRoute(
+            'entity.webform.variant.add_form',
+            [
+              'webform' => $webform->id(),
+              'webform_variant' => $plugin_id,
+            ]
+        ),
         'attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($variant_plugin->getOffCanvasWidth()),
       ];
       $row['operations']['data'] = [

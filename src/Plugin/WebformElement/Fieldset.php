@@ -20,14 +20,14 @@ class Fieldset extends ContainerBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'help_display' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Title.
+        // Title.
       'title_display' => '',
       'description_display' => '',
     ] + parent::defineDefaultProperties();

@@ -84,7 +84,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         '#message_close' => TRUE,
         '#message_storage' => WebformMessage::STORAGE_SESSION,
         '#message_message' => $this->t('Scheduled forms do not work as expected for anonymous users when Drupal\'s <a href=":page_cache_href">Internal Page Cache</a> module is enabled. This is a <a href=":issue_href">known issue</a>.', $t_args) . '<br/><br/>' .
-          '<strong>' . $this->t('It is strongly recommended that you install the <a href=":cache_control_override_href">Cache Control Override</a> module.', $t_args) . '</strong>',
+        '<strong>' . $this->t('It is strongly recommended that you install the <a href=":cache_control_override_href">Cache Control Override</a> module.', $t_args) . '</strong>',
       ];
     }
     $form['form_settings']['scheduled']['open'] = [
@@ -224,8 +224,8 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#type' => 'radios',
       '#title' => $this->t('When a user is denied access to this webform'),
       '#description' => $this->t('Select what happens when a user is denied access to this webform.') .
-        '<br/><br/>' .
-        $this->t('Go to <a href=":href">submission settings</a> to select what happens when a user is denied access to submissions.', [':href' => Url::fromRoute('entity.webform.settings_submissions', ['webform' => $webform->id()])->toString()]),
+      '<br/><br/>' .
+      $this->t('Go to <a href=":href">submission settings</a> to select what happens when a user is denied access to submissions.', [':href' => Url::fromRoute('entity.webform.settings_submissions', ['webform' => $webform->id()])->toString()]),
 
       '#options' => [
         WebformInterface::ACCESS_DENIED_DEFAULT => $this->t('Default (Displays the default access denied page)'),
@@ -268,9 +268,9 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_MESSAGE]],
+                [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_MESSAGE]],
           'or',
-          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE]],
+                [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE]],
         ],
       ],
     ];
@@ -283,11 +283,11 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     // Wizard settings.
     $wizards_progress_checked_states = [
       'visible' => [
-        [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
         'or',
-        [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
         'or',
-        [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
       ],
     ];
     $form['wizard_settings'] = [
@@ -344,7 +344,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Link to previous pages in preview'),
       '#description' => $this->t("If checked, the preview page will included 'Edit' buttons for each previous page.") . '<br/><br/>' .
-        '<em>' . $this->t("This setting is only available when 'Enable preview page' is enabled.") . '</em>',
+      '<em>' . $this->t("This setting is only available when 'Enable preview page' is enabled.") . '</em>',
       '#return_value' => TRUE,
       '#default_value' => $settings['wizard_preview_link'],
       '#states' => [
@@ -658,7 +658,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#type' => 'select',
       '#title' => $this->t('Form method'),
       '#description' => $this->t('The HTTP method with which the form will be submitted.')
-        . '<br /><br /><em>' . $this->t('Selecting a custom POST or GET method will automatically disable wizards, previews, drafts, submissions, limits, purging, confirmations, emails, computed elements, and handlers.') . '</em>',
+      . '<br /><br /><em>' . $this->t('Selecting a custom POST or GET method will automatically disable wizards, previews, drafts, submissions, limits, purging, confirmations, emails, computed elements, and handlers.') . '</em>',
       '#options' => [
         '' => $this->t('POST (Default)'),
         'post' => $this->t('POST (Custom)'),
@@ -695,8 +695,8 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#mode' => 'yaml',
       '#title' => $this->t('Form custom properties'),
       '#description' => $this->t('Properties do not have to prepended with a hash (#) character, the hash character will be automatically added to the custom properties.')
-        . '<br /><br />'
-        . $this->t('These properties and callbacks are not allowed: @properties.', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      . '<br /><br />'
+      . $this->t('These properties and callbacks are not allowed: @properties.', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
       '#default_value' => WebformArrayHelper::removePrefix($properties),
     ];
 
@@ -791,7 +791,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
    */
   protected function getFormBehaviors() {
     return [
-      // Form.
+        // Form.
       'form_reset' => [
         'group' => $this->t('Form'),
         'title' => $this->t('Display reset button'),
@@ -804,7 +804,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, the submit button will be disabled immediately after it is clicked.'),
       ],
 
-      // Navigation.
+        // Navigation.
       'form_disable_back' => [
         'group' => $this->t('Navigation'),
         'title' => $this->t('Disable back button'),
@@ -824,7 +824,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a form with unsaved changes.'),
       ],
 
-      // Validation.
+        // Validation.
       'form_novalidate' => [
         'group' => $this->t('Validation'),
         'title' => $this->t('Disable client-side validation'),
@@ -844,7 +844,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, a required elements indicator will be added to this webform.'),
       ],
 
-      // Elements.
+        // Elements.
       'form_autofocus' => [
         'group' => $this->t('Elements'),
         'title' => $this->t('Autofocus the first element'),
@@ -862,7 +862,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, an expand/collapse all (details) link will be added to this webform when there are two or more details elements available on the webform.'),
       ],
 
-      // Prepopulate.
+        // Prepopulate.
       'form_prepopulate' => [
         'group' => $this->t('Prepopulate'),
         'title' => $this->t('Allow all elements to be populated using query string parameters'),

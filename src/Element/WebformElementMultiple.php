@@ -27,7 +27,7 @@ class WebformElementMultiple extends FormElementBase {
       '#input' => TRUE,
       '#min' => 1,
       '#process' => [
-        [$class, 'processWebformElementMultiple'],
+            [$class, 'processWebformElementMultiple'],
       ],
       '#theme_wrappers' => ['form_element'],
     ];

@@ -65,13 +65,13 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#access' => $settings['ajax'],
       '#states' => [
         'invisible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_MESSAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_MESSAGE]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_MODAL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_MODAL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
         ],
       ],
     ];
@@ -130,11 +130,11 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
         ],
       ],
     ];
@@ -142,19 +142,19 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#type' => 'textfield',
       '#title' => $this->t('Confirmation URL'),
       '#description' => $this->t('The URL or path to redirect the user to upon successful submission.') .
-        '<br/>' . $this->t('Paths beginning with a forward slash (/) will redirect be treated as root-relative. Paths without a forward slash (/) will redirect be treated as Drupal relative path.'),
+      '<br/>' . $this->t('Paths beginning with a forward slash (/) will redirect be treated as root-relative. Paths without a forward slash (/) will redirect be treated as Drupal relative path.'),
       '#default_value' => $settings['confirmation_url'],
       '#maxlength' => NULL,
       '#states' => [
         'visible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
         ],
         'required' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL_MESSAGE]],
         ],
       ],
     ];
@@ -183,9 +183,9 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#open' => TRUE,
       '#states' => [
         'invisible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
         ],
       ],
     ];
@@ -202,9 +202,9 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#default_value' => $settings['confirmation_message'],
       '#states' => [
         'invisible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_URL]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_NONE]],
         ],
       ],
     ];
@@ -217,9 +217,9 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
         ],
       ],
     ];
@@ -236,9 +236,9 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#title' => $this->t('Confirmation back link'),
       '#states' => [
         'visible' => [
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_PAGE]],
           'or',
-          [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
+                [':input[name="confirmation_type"]' => ['value' => WebformInterface::CONFIRMATION_INLINE]],
         ],
       ],
     ];
@@ -252,7 +252,7 @@ class WebformEntitySettingsConfirmationForm extends WebformEntitySettingsBaseFor
       '#type' => 'container',
       '#states' => [
         'visible' => [
-          [':input[name="confirmation_back"]' => ['checked' => TRUE]],
+                [':input[name="confirmation_back"]' => ['checked' => TRUE]],
         ],
       ],
     ];

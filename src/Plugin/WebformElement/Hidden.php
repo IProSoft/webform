@@ -29,10 +29,10 @@ class Hidden extends TextBase {
     }, ARRAY_FILTER_USE_BOTH);
 
     return [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'default_value' => '',
-      // Administration.
+        // Administration.
       'prepopulate' => FALSE,
       'private' => FALSE,
     ] + $access_properties;

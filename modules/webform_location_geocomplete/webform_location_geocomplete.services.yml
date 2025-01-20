@@ -1,0 +1,5 @@
+
+services:
+  Drupal\webform_location_geocomplete\Hook\WebformLocationGeocompleteHooks:
+    class: Drupal\webform_location_geocomplete\Hook\WebformLocationGeocompleteHooks
+    autowire: true

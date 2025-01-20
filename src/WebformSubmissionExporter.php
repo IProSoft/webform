@@ -344,8 +344,8 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     $states_archive_type = ['visible' => []];
     if ($webform && ($webform->hasManagedFile() || $webform->hasAttachments())) {
       $states_archive_type['visible'][] = [
-        [':input[name="files"]' => ['checked' => TRUE]],
-        [':input[name="attachments"]' => ['checked' => TRUE]],
+          [':input[name="files"]' => ['checked' => TRUE]],
+          [':input[name="attachments"]' => ['checked' => TRUE]],
       ];
     }
     foreach ($exporter_plugins as $plugin_id => $exporter_plugin) {
@@ -384,9 +384,9 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       '#options' => $this->exporterManager->getOptions(),
       '#description' => $exporter_description,
       '#default_value' => $export_options['exporter'],
-      // Below .js-webform-exporter is used for exporter configuration form
-      // #states.
-      // @see \Drupal\webform\Plugin\WebformExporterBase::buildConfigurationForm
+        // Below .js-webform-exporter is used for exporter configuration form
+        // #states.
+        // @see \Drupal\webform\Plugin\WebformExporterBase::buildConfigurationForm
       '#attributes' => ['class' => ['js-webform-exporter']],
     ];
     // Exporter configuration forms.

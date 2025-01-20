@@ -24,12 +24,12 @@ class WebformEmailConfirm extends Email {
    */
   protected function defineDefaultProperties() {
     $properties = parent::defineDefaultProperties() + [
-      // Email confirm settings.
+        // Email confirm settings.
       'confirm__title' => '',
       'confirm__description' => '',
       'confirm__placeholder' => '',
       'flexbox' => '',
-      // Wrapper.
+        // Wrapper.
       'wrapper_type' => 'fieldset',
     ];
     unset(

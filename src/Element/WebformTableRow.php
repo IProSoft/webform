@@ -21,7 +21,7 @@ class WebformTableRow extends RenderElementBase {
     return [
       '#optional' => FALSE,
       '#process' => [
-        [$class, 'processTableRow'],
+            [$class, 'processTableRow'],
       ],
       '#pre_render' => [],
     ];

@@ -20,13 +20,13 @@ abstract class ContainerBase extends WebformElementBase {
   protected function defineDefaultProperties() {
     return [
       'title' => '',
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
-      // Randomize.
+        // Randomize.
       'randomize' => FALSE,
-      // Attributes.
+        // Attributes.
       'attributes' => [],
-      // Format.
+        // Format.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',

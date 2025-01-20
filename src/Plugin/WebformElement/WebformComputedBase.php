@@ -42,26 +42,26 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    */
   protected function defineDefaultProperties() {
     return [
-      // Element settings.
+        // Element settings.
       'title' => '',
-      // Markup settings.
+        // Markup settings.
       'display_on' => WebformElementDisplayOnInterface::DISPLAY_ON_BOTH,
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
-      // Computed values.
+        // Computed values.
       'template' => '',
       'mode' => WebformComputedBaseElement::MODE_AUTO,
       'hide_empty' => FALSE,
       'store' => FALSE,
       'ajax' => FALSE,
-      // Attributes.
+        // Attributes.
       'attributes' => [],
       'wrapper_attributes' => [],
       'label_attributes' => [],

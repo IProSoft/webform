@@ -157,9 +157,9 @@ class WebformLocationGeocomplete extends WebformLocationBase {
    */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     return [
-      ['value' => 'The White House, 1600 Pennsylvania Ave NW, Washington, DC 20500, USA'],
-      ['value' => 'London SW1A 1AA, United Kingdom'],
-      ['value' => 'Moscow, Russia, 10307'],
+        ['value' => 'The White House, 1600 Pennsylvania Ave NW, Washington, DC 20500, USA'],
+        ['value' => 'London SW1A 1AA, United Kingdom'],
+        ['value' => 'Moscow, Russia, 10307'],
     ];
   }
 

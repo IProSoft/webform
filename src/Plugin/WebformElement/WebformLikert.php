@@ -33,26 +33,26 @@ class WebformLikert extends WebformElementBase {
     return [
       'title' => '',
       'default_value' => [],
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
       'disabled' => FALSE,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
       'format_attributes' => [],
-      // Likert settings.
+        // Likert settings.
       'sticky' => TRUE,
       'questions' => [],
       'questions_description_display' => 'description',
@@ -62,7 +62,7 @@ class WebformLikert extends WebformElementBase {
       'na_answer' => FALSE,
       'na_answer_value' => '',
       'na_answer_text' => $this->t('N/A'),
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
     ] + $this->defineDefaultBaseProperties();

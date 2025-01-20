@@ -83,9 +83,9 @@ class WebformTestElementProperties extends WebformElementBase {
     );
     // Must explicitly set properties to be included in $form_state.
     $form['test']['update']['#limit_validation_errors'] = [
-      ['properties', 'property_a'],
-      ['properties', 'property_b'],
-      ['properties', 'property_c'],
+        ['properties', 'property_a'],
+        ['properties', 'property_b'],
+        ['properties', 'property_c'],
     ];
 
     return $form;

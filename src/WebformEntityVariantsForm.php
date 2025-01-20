@@ -77,13 +77,13 @@ class WebformEntityVariantsForm extends EntityForm {
 
     // Build table header.
     $header = [
-      ['data' => $this->t('Title / Notes')],
-      ['data' => $this->t('ID'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Element'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Summary'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Weight'), 'class' => ['webform-tabledrag-hide']],
-      ['data' => $this->t('Operations')],
+        ['data' => $this->t('Title / Notes')],
+        ['data' => $this->t('ID'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Element'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Summary'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Weight'), 'class' => ['webform-tabledrag-hide']],
+        ['data' => $this->t('Operations')],
     ];
 
     /** @var \Drupal\webform\WebformInterface $webform */
@@ -190,9 +190,9 @@ class WebformEntityVariantsForm extends EntityForm {
         $operations['view'] = [
           'title' => $this->t('View'),
           'url' => Url::fromRoute(
-            'entity.webform.canonical',
-            ['webform' => $webform->id()],
-            ['query' => $query]
+              'entity.webform.canonical',
+              ['webform' => $webform->id()],
+              ['query' => $query]
           ),
         ];
         // Test.
@@ -200,9 +200,9 @@ class WebformEntityVariantsForm extends EntityForm {
           $operations['test'] = [
             'title' => $this->t('Test'),
             'url' => Url::fromRoute(
-              'entity.webform.test_form',
-              ['webform' => $webform->id()],
-              ['query' => $query]
+                'entity.webform.test_form',
+                ['webform' => $webform->id()],
+                ['query' => $query]
             ),
           ];
         }
@@ -213,9 +213,9 @@ class WebformEntityVariantsForm extends EntityForm {
           $operations['share'] = [
             'title' => $this->t('Share'),
             'url' => Url::fromRoute(
-              'entity.webform.share_embed',
-              ['webform' => $webform->id()],
-              ['query' => $query]
+                'entity.webform.share_embed',
+                ['webform' => $webform->id()],
+                ['query' => $query]
             ),
           ];
         }
@@ -224,9 +224,9 @@ class WebformEntityVariantsForm extends EntityForm {
       $operations['apply'] = [
         'title' => $this->t('Apply'),
         'url' => Url::fromRoute(
-          'entity.webform.variant.apply_form',
-          ['webform' => $webform->id()],
-          ['query' => ['variant_id' => $variant_id]]
+            'entity.webform.variant.apply_form',
+            ['webform' => $webform->id()],
+            ['query' => ['variant_id' => $variant_id]]
         ),
         'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
       ];
@@ -271,8 +271,8 @@ class WebformEntityVariantsForm extends EntityForm {
       $operations['view'] = [
         'title' => $this->t('View variants'),
         'url' => Url::fromRoute(
-          'entity.webform.variant.view_form',
-          ['webform' => $webform->id()]
+            'entity.webform.variant.view_form',
+            ['webform' => $webform->id()]
         ),
         'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
       ];
@@ -281,8 +281,8 @@ class WebformEntityVariantsForm extends EntityForm {
         $operations['test'] = [
           'title' => $this->t('Test variants'),
           'url' => Url::fromRoute(
-            'entity.webform.variant.test_form',
-            ['webform' => $webform->id()]
+              'entity.webform.variant.test_form',
+              ['webform' => $webform->id()]
           ),
           'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
         ];
@@ -294,8 +294,8 @@ class WebformEntityVariantsForm extends EntityForm {
         $operations['share'] = [
           'title' => $this->t('Share variants'),
           'url' => Url::fromRoute(
-            'entity.webform.variant.share_form',
-            ['webform' => $webform->id()]
+              'entity.webform.variant.share_form',
+              ['webform' => $webform->id()]
           ),
           'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
         ];
@@ -304,8 +304,8 @@ class WebformEntityVariantsForm extends EntityForm {
       $operations['apply'] = [
         'title' => $this->t('Apply variants'),
         'url' => Url::fromRoute(
-          'entity.webform.variant.apply_form',
-          ['webform' => $webform->id()]
+            'entity.webform.variant.apply_form',
+            ['webform' => $webform->id()]
         ),
         'attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW),
       ];
@@ -323,11 +323,11 @@ class WebformEntityVariantsForm extends EntityForm {
       '#type' => 'table',
       '#header' => $header,
       '#tabledrag' => [
-        [
-          'action' => 'order',
-          'relationship' => 'sibling',
-          'group' => 'webform-variant-order-weight',
-        ],
+            [
+              'action' => 'order',
+              'relationship' => 'sibling',
+              'group' => 'webform-variant-order-weight',
+            ],
       ],
       '#attributes' => [
         'id' => 'webform-variants',

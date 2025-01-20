@@ -171,7 +171,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'file_data' => TRUE,
       'cast' => FALSE,
       'debug' => FALSE,
-      // States.
+        // States.
       'completed_url' => '',
       'completed_custom_data' => '',
       'updated_url' => '',
@@ -184,10 +184,10 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       'draft_updated_custom_data' => '',
       'converted_url' => '',
       'converted_custom_data' => '',
-      // Custom response messages.
+        // Custom response messages.
       'message' => '',
       'messages' => [],
-      // Custom response redirect URL.
+        // Custom response redirect URL.
       'error_url' => '',
     ];
   }
@@ -287,14 +287,14 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#title' => $this->t('Method'),
       '#description' => $this->t('The <b>POST</b> request method requests that a web server accept the data enclosed in the body of the request message. It is often used when uploading a file or when submitting a completed webform. In contrast, the HTTP <b>GET</b> request method retrieves information from the server.'),
       '#required' => TRUE,
-      // phpcs:disable DrupalPractice.General.OptionsT.TforValue
+        // phpcs:disable DrupalPractice.General.OptionsT.TforValue
       '#options' => [
         'POST' => 'POST',
         'PUT' => 'PUT',
         'PATCH' => 'PATCH',
         'GET' => 'GET',
       ],
-      // phpcs:enable DrupalPractice.General.OptionsT.TforValue
+        // phpcs:enable DrupalPractice.General.OptionsT.TforValue
       '#default_value' => $this->configuration['method'],
     ];
     $form['additional']['type'] = [
@@ -323,14 +323,14 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Cast posted element value and custom data'),
       '#description' => $this->t('If checked, posted element values will be cast to integers, floats, and booleans as needed. Custom data can be cast by placing the desired type in parentheses before the value or token. (i.e. "(int) [webform_submission:value:total]" or "(int) 100")') .
-        '<br/>' .
-        '<br/>' .
-        $this->t('For custom data, the casts allowed are:') .
-        '<ul>' .
-        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(int), (integer)', '@type' => 'integer']) . '</li>' .
-        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(float), (double), (real)', '@type' => 'float']) . '</li>' .
-        '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(bool), (boolean)', '@type' => 'boolean']) . '</li>' .
-        '</ul>',
+      '<br/>' .
+      '<br/>' .
+      $this->t('For custom data, the casts allowed are:') .
+      '<ul>' .
+      '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(int), (integer)', '@type' => 'integer']) . '</li>' .
+      '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(float), (double), (real)', '@type' => 'float']) . '</li>' .
+      '<li>' . $this->t('@cast - cast to @type', ['@cast' => '(bool), (boolean)', '@type' => 'boolean']) . '</li>' .
+      '</ul>',
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['cast'],
     ];

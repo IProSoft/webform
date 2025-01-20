@@ -39,7 +39,7 @@ class WebformAutocomplete extends TextField {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Autocomplete settings.
+        // Autocomplete settings.
       'autocomplete_existing' => FALSE,
       'autocomplete_items' => [],
       'autocomplete_limit' => 10,

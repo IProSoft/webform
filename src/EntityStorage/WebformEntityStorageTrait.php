@@ -50,7 +50,7 @@ trait WebformEntityStorageTrait {
    * @var array
    */
   protected $entityStorageToTypeMappings = [
-    // Default mappings.
+      // Default mappings.
     'printEngineStorage' => 'print_engine',
     'fieldConfigStorage' => 'field_config',
     'fieldStorageConfigStorage' => 'field_storage_config',
@@ -69,7 +69,7 @@ trait WebformEntityStorageTrait {
     'webformAccessTypeStorage' => 'webform_access_type',
     'webformImageSelectImagesStorage' => 'webform_image_select_images',
     'webformOptionsCustomStorage' => 'webform_options_custom',
-    // Custom mappings.
+      // Custom mappings.
     'submissionStorage' => 'webform_submission',
   ];
 

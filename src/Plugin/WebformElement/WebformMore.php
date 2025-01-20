@@ -25,7 +25,7 @@ class WebformMore extends WebformMarkupBase {
       'more_title' => $this->configFactory->get('webform.settings')->get('element.default_more_title'),
       'more' => '',
       'attributes' => [],
-      // Markup settings.
+        // Markup settings.
       'display_on' => WebformElementDisplayOnInterface::DISPLAY_ON_FORM,
     ] + $this->defineDefaultBaseProperties();
   }

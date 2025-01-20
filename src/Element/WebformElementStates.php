@@ -31,7 +31,7 @@ class WebformElementStates extends FormElementBase {
       '#selector_sources' => [],
       '#empty_states' => 3,
       '#process' => [
-        [$class, 'processWebformStates'],
+            [$class, 'processWebformStates'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#multiple' => TRUE,
@@ -147,10 +147,10 @@ class WebformElementStates extends FormElementBase {
 
     // Build header.
     $header = [
-      ['data' => t('State'), 'width' => '25%'],
-      ['data' => t('Element'), 'width' => '50%'],
-      ['data' => t('Trigger/Value'), 'width' => '25%'],
-      ['data' => WebformAccessibilityHelper::buildVisuallyHidden(t('Operations'))],
+        ['data' => t('State'), 'width' => '25%'],
+        ['data' => t('Element'), 'width' => '50%'],
+        ['data' => t('Trigger/Value'), 'width' => '25%'],
+        ['data' => WebformAccessibilityHelper::buildVisuallyHidden(t('Operations'))],
     ];
 
     // Get states and number of rows.
@@ -474,25 +474,25 @@ class WebformElementStates extends FormElementBase {
       '#placeholder' => t('Enter value…'),
       '#states' => [
         'visible' => [
-          [$trigger_selector => ['value' => 'value']],
+                [$trigger_selector => ['value' => 'value']],
           'or',
-          [$trigger_selector => ['value' => '!value']],
+                [$trigger_selector => ['value' => '!value']],
           'or',
-          [$trigger_selector => ['value' => 'pattern']],
+                [$trigger_selector => ['value' => 'pattern']],
           'or',
-          [$trigger_selector => ['value' => '!pattern']],
+                [$trigger_selector => ['value' => '!pattern']],
           'or',
-          [$trigger_selector => ['value' => 'greater']],
+                [$trigger_selector => ['value' => 'greater']],
           'or',
-          [$trigger_selector => ['value' => 'greater_equal']],
+                [$trigger_selector => ['value' => 'greater_equal']],
           'or',
-          [$trigger_selector => ['value' => 'less']],
+                [$trigger_selector => ['value' => 'less']],
           'or',
-          [$trigger_selector => ['value' => 'less_equal']],
+                [$trigger_selector => ['value' => 'less_equal']],
           'or',
-          [$trigger_selector => ['value' => 'between']],
+                [$trigger_selector => ['value' => 'between']],
           'or',
-          [$trigger_selector => ['value' => '!between']],
+                [$trigger_selector => ['value' => '!between']],
         ],
       ],
       '#wrapper_attributes' => ['class' => ['webform-states-table--value']],
@@ -504,9 +504,9 @@ class WebformElementStates extends FormElementBase {
       'description' => ['#markup' => t('Enter a <a href=":href">regular expression</a>', [':href' => 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions'])],
       '#states' => [
         'visible' => [
-          [$trigger_selector => ['value' => 'pattern']],
+                [$trigger_selector => ['value' => 'pattern']],
           'or',
-          [$trigger_selector => ['value' => '!pattern']],
+                [$trigger_selector => ['value' => '!pattern']],
         ],
       ],
     ];
@@ -515,9 +515,9 @@ class WebformElementStates extends FormElementBase {
       'description' => ['#markup' => t('Enter a number range (1:100)')],
       '#states' => [
         'visible' => [
-          [$trigger_selector => ['value' => 'between']],
+                [$trigger_selector => ['value' => 'between']],
           'or',
-          [$trigger_selector => ['value' => '!between']],
+                [$trigger_selector => ['value' => '!between']],
         ],
       ],
     ];

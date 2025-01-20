@@ -56,32 +56,32 @@ class WebformPluginElementController extends ControllerBase implements Container
     $excluded_elements = $this->config('webform.settings')->get('element.excluded_elements');
 
     $default_properties = [
-      // Element settings.
+        // Element settings.
       'title',
       'description',
       'default_value',
-      // Form display.
+        // Form display.
       'title_display',
       'description_display',
       'field_prefix',
       'field_suffix',
-      // Form validation.
+        // Form validation.
       'required',
       'required_error',
       'unique',
-      // Submission display.
+        // Submission display.
       'format',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes',
       'attributes',
-      // Administration.
+        // Administration.
       'admin_title',
       'private',
-      // Flexbox.
+        // Flexbox.
       'flex',
-      // Conditional logic.
+        // Conditional logic.
       'states',
-      // Element access.
+        // Element access.
       'access_create_roles',
       'access_create_users',
       'access_update_roles',
@@ -125,7 +125,15 @@ class WebformPluginElementController extends ControllerBase implements Container
         // Description.
         $description = [
           'data' => [
-            'title_description' => ['#markup' => new FormattableMarkup('<strong>@label</strong><br />@description', ['@label' => $webform_element->getPluginLabel(), '@description' => $webform_element->getPluginDescription()])],
+            'title_description' => [
+              '#markup' => new FormattableMarkup(
+                      '<strong>@label</strong><br />@description',
+                      [
+                        '@label' => $webform_element->getPluginLabel(),
+                        '@description' => $webform_element->getPluginDescription(),
+                      ]
+              ),
+            ],
           ],
         ];
         // Add deprecated warning.
@@ -230,10 +238,10 @@ class WebformPluginElementController extends ControllerBase implements Container
           'data' => [
             $title,
             $description,
-            ['data' => ['#markup' => implode('<br /> → ', $parent_classes)], 'nowrap' => 'nowrap'],
-            ['data' => ['#markup' => implode('<br />', $webform_info)], 'nowrap' => 'nowrap'],
-            ['data' => ['#markup' => implode('<br />', $element_info)], 'nowrap' => 'nowrap'],
-            ['data' => ['#markup' => implode('<br />' . PHP_EOL, $properties)], 'nowrap' => 'nowrap'],
+                ['data' => ['#markup' => implode('<br /> → ', $parent_classes)], 'nowrap' => 'nowrap'],
+                ['data' => ['#markup' => implode('<br />', $webform_info)], 'nowrap' => 'nowrap'],
+                ['data' => ['#markup' => implode('<br />', $element_info)], 'nowrap' => 'nowrap'],
+                ['data' => ['#markup' => implode('<br />' . PHP_EOL, $properties)], 'nowrap' => 'nowrap'],
             $formats ? ['data' => ['#markup' => '• ' . implode('<br />• ', $formats)], 'nowrap' => 'nowrap'] : '',
             $related_types ? ['data' => ['#markup' => '• ' . implode('<br />• ', $related_types)], 'nowrap' => 'nowrap'] : '<' . $this->t('none') . '>',
             $dependencies ? ['data' => ['#markup' => '• ' . implode('<br />• ', $dependencies)], 'nowrap' => 'nowrap'] : '',

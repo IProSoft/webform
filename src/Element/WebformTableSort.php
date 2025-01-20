@@ -26,11 +26,11 @@ class WebformTableSort extends Table {
       '#responsive' => TRUE,
       '#sticky' => FALSE,
       '#pre_render' => [
-        [$class, 'preRenderTable'],
-        [$class, 'preRenderWebformTableSort'],
+            [$class, 'preRenderTable'],
+            [$class, 'preRenderWebformTableSort'],
       ],
       '#process' => [
-        [$class, 'processWebformTableSort'],
+            [$class, 'processWebformTableSort'],
       ],
       '#options' => [],
       '#empty' => '',
@@ -196,11 +196,11 @@ class WebformTableSort extends Table {
 
     // Enable tabledrag.
     $element['#tabledrag'] = [
-      [
-        'action' => 'order',
-        'relationship' => 'sibling',
-        'group' => 'table-sort-weight',
-      ],
+        [
+          'action' => 'order',
+          'relationship' => 'sibling',
+          'group' => 'table-sort-weight',
+        ],
     ];
 
     return $element;

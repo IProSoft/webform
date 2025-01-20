@@ -26,10 +26,10 @@ class WebformRating extends Range {
       '#star_size' => 'medium',
       '#reset' => FALSE,
       '#process' => [
-        [$class, 'processWebformRating'],
+            [$class, 'processWebformRating'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformRating'],
+            [$class, 'preRenderWebformRating'],
       ],
       '#theme' => 'input__webform_rating',
     ] + parent::getInfo();

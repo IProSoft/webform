@@ -580,7 +580,7 @@ trait WebformEntityReferenceTrait {
     if ($this->supportsMultipleValues() && $this->hasProperty('tags')) {
       $form['display']['format_items']['#states'] = [
         'visible' => [
-          [':input[name="properties[tags]"]' => ['checked' => TRUE]],
+              [':input[name="properties[tags]"]' => ['checked' => TRUE]],
         ],
       ];
     }

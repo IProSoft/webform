@@ -33,7 +33,7 @@ class TextFormat extends WebformElementBase {
   protected function defineDefaultProperties() {
     $properties = [
       'default_value' => [],
-      // Text format settings.
+        // Text format settings.
       'allowed_formats' => [],
       'hide_help' => FALSE,
     ] + parent::defineDefaultProperties();

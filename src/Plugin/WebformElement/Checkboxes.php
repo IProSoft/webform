@@ -28,18 +28,18 @@ class Checkboxes extends OptionsBase {
     return [
       'multiple' => TRUE,
       'multiple_error' => '',
-      // Options settings.
+        // Options settings.
       'options_display' => 'one_column',
       'options_description_display' => 'description',
       'options__properties' => [],
-      // Options all and none.
+        // Options all and none.
       'options_all' => FALSE,
       'options_all_value' => 'all',
       'options_all_text' => (string) $this->t('All of the above'),
       'options_none' => FALSE,
       'options_none_value' => 'none',
       'options_none_text' => (string) $this->t('None of the above'),
-      // Wrapper.
+        // Wrapper.
       'wrapper_type' => 'fieldset',
     ] + parent::defineDefaultProperties();
   }

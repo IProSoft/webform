@@ -131,50 +131,50 @@ class WebformSubmissionStorageTest extends KernelTestBase {
     // Test that only drafts are purged.
     $tests[] = [
       WebformSubmissionStorageInterface::PURGE_DRAFT,
-      [
-        [TRUE, TRUE],
-        [TRUE, FALSE],
-        [FALSE, TRUE],
-        [FALSE, FALSE],
-      ],
-      [1],
+        [
+            [TRUE, TRUE],
+            [TRUE, FALSE],
+            [FALSE, TRUE],
+            [FALSE, FALSE],
+        ],
+        [1],
     ];
 
     // Test that only completed submissions are purged.
     $tests[] = [
       WebformSubmissionStorageInterface::PURGE_COMPLETED,
-      [
-        [TRUE, TRUE],
-        [TRUE, FALSE],
-        [FALSE, TRUE],
-        [FALSE, FALSE],
-      ],
-      [3],
+        [
+            [TRUE, TRUE],
+            [TRUE, FALSE],
+            [FALSE, TRUE],
+            [FALSE, FALSE],
+        ],
+        [3],
     ];
 
     // Test that both completed and draft submissions are purged.
     $tests[] = [
       WebformSubmissionStorageInterface::PURGE_ALL,
-      [
-        [TRUE, TRUE],
-        [TRUE, FALSE],
-        [FALSE, TRUE],
-        [FALSE, FALSE],
-      ],
-      [1, 3],
+        [
+            [TRUE, TRUE],
+            [TRUE, FALSE],
+            [FALSE, TRUE],
+            [FALSE, FALSE],
+        ],
+        [1, 3],
     ];
 
     // Test the cron size parameter.
     $tests[] = [
       WebformSubmissionStorageInterface::PURGE_ALL,
-      [
-        [TRUE, TRUE],
-        [TRUE, TRUE],
-        [TRUE, FALSE],
-        [FALSE, TRUE],
-        [FALSE, FALSE],
-      ],
-      [1, 2],
+        [
+            [TRUE, TRUE],
+            [TRUE, TRUE],
+            [TRUE, FALSE],
+            [FALSE, TRUE],
+            [FALSE, FALSE],
+        ],
+        [1, 2],
     ];
 
     return $tests;

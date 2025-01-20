@@ -123,15 +123,15 @@ class WebformImageSelect extends Select {
 
         $image = [
           '#theme' => 'image',
-          // ISSUE:
-          // Image src must be an absolute URL so that it can be sent
-          // via email but template_preprocess_image() converts the #uri to
-          // a root-relative URL.
-          // @see template_preprocess_image()
-          //
-          // SOLUTION:
-          // Using 'src' attributes to prevent the #uri from being converted to
-          // a root-relative paths.
+            // ISSUE:
+            // Image src must be an absolute URL so that it can be sent
+            // via email but template_preprocess_image() converts the #uri to
+            // a root-relative URL.
+            // @see template_preprocess_image()
+            //
+            // SOLUTION:
+            // Using 'src' attributes to prevent the #uri from being converted to
+            // a root-relative paths.
           '#attributes' => ['src' => $src],
           '#title' => $element['#images'][$value]['text'],
           '#alt' => $element['#images'][$value]['text'],

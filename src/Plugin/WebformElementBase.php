@@ -165,30 +165,30 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'default_value' => '',
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
       'field_prefix' => '',
       'field_suffix' => '',
       'disabled' => FALSE,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
       'attributes' => [],
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
@@ -247,18 +247,18 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    */
   protected function defineDefaultBaseProperties() {
     return [
-      // Administration.
+        // Administration.
       'admin_title' => '',
       'admin_notes' => '',
       'prepopulate' => FALSE,
       'private' => FALSE,
       'access' => TRUE,
-      // Flexbox.
+        // Flexbox.
       'flex' => 1,
-      // Conditional logic.
+        // Conditional logic.
       'states' => [],
       'states_clear' => TRUE,
-      // Element access.
+        // Element access.
       'access_create_roles' => ['anonymous', 'authenticated'],
       'access_create_users' => [],
       'access_create_permissions' => [],
@@ -2386,7 +2386,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t("Displays a Help tooltip after the element's title."),
       '#states' => [
         'invisible' => [
-          [':input[name="properties[title_display]"]' => ['value' => 'invisible']],
+                [':input[name="properties[title_display]"]' => ['value' => 'invisible']],
         ],
       ],
     ];
@@ -2394,7 +2394,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('Help title'),
       '#description' => $this->t("The text displayed in Help tooltip after the element's title.") . '<br /><br />' .
-        $this->t("Defaults to the element's title"),
+      $this->t("Defaults to the element's title"),
     ];
     $form['element_description']['help']['help'] = [
       '#type' => 'webform_html_editor',
@@ -2410,7 +2410,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('More title'),
       '#description' => $this->t('The click-able label used to open and close more text.') . '<br /><br />' .
-        $this->t('Defaults to: %value', ['%value' => $this->configFactory->get('webform.settings')->get('element.default_more_title')]),
+      $this->t('Defaults to: %value', ['%value' => $this->configFactory->get('webform.settings')->get('element.default_more_title')]),
     ];
     $form['element_description']['more']['more'] = [
       '#type' => 'webform_html_editor',
@@ -2746,7 +2746,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#return_value' => TRUE,
       '#states' => [
         'visible' => [
-          ['input[name="properties[unique]"]' => ['checked' => TRUE]],
+                ['input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2757,7 +2757,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#return_value' => TRUE,
       '#states' => [
         'visible' => [
-          ['input[name="properties[unique]"]' => ['checked' => TRUE]],
+                ['input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2767,7 +2767,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('If set, this message will be used when an element\'s value are not unique, instead of the default "@message" message.', ['@message' => $this->t('The value %value has already been submitted once for the %name element. You may have already submitted this webform, or you need to use a different value.')]),
       '#states' => [
         'visible' => [
-          [':input[name="properties[unique]"]' => ['checked' => TRUE]],
+                [':input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2810,9 +2810,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#title' => $this->t('Clear value(s) when hidden'),
       '#return_value' => TRUE,
       '#description' => ($this instanceof ContainerBase) ?
-        $this->t("When this container is hidden all this container's subelement values will be cleared.")
+      $this->t("When this container is hidden all this container's subelement values will be cleared.")
         :
-        $this->t("When this element is hidden, this element's value will be cleared."),
+      $this->t("When this element is hidden, this element's value will be cleared."),
     ];
     if ($this->hasProperty('states') && $this->hasProperty('required')) {
       $form['conditional_logic']['states_required_message'] = [
@@ -2986,8 +2986,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     $form['wrapper_attributes'] = [
       '#type' => 'details',
       '#title' => ($this->hasProperty('wrapper_type')) ?
-        $this->t('Wrapper type and attributes') :
-        $this->t('Wrapper attributes'),
+      $this->t('Wrapper type and attributes') :
+      $this->t('Wrapper attributes'),
     ];
     $form['wrapper_attributes']['wrapper_type'] = [
       '#type' => 'select',
@@ -2997,11 +2997,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         'form_element' => $this->t('Form element'),
         'container' => $this->t('Container'),
       ],
-      // phpcs:disable
-      '#description' => '<b>' . $this->t('Fieldset') . ':</b> ' . $this->t('Wraps inputs in a fieldset.') . ' <strong>' . $this->t('Recommended') . '</strong>' .
-        '<br/><br/><b>' . $this->t('Form element') . ':</b> ' . $this->t('Wraps inputs in a basic form element with title and description.') .
-        '<br/><br/><b>' . $this->t('Container') . ':</b> ' . $this->t('Wraps inputs in a basic div with no title or description.'),
-      // phpcs:enable
+        // phpcs:disable
+        '#description' => '<b>' . $this->t('Fieldset') . ':</b> ' . $this->t('Wraps inputs in a fieldset.') . ' <strong>' . $this->t('Recommended') . '</strong>' .
+          '<br/><br/><b>' . $this->t('Form element') . ':</b> ' . $this->t('Wraps inputs in a basic form element with title and description.') .
+          '<br/><br/><b>' . $this->t('Container') . ':</b> ' . $this->t('Wraps inputs in a basic div with no title or description.'),
+        // phpcs:enable
     ];
     // Hide element description and display when using a container wrapper.
     if ($this->hasProperty('wrapper_type')) {
@@ -3172,9 +3172,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#title' => $this->t('Multiple items'),
       '#states' => [
         'visible' => [
-          [':input[name="properties[multiple][container][cardinality]"]' => ['value' => '-1']],
+                [':input[name="properties[multiple][container][cardinality]"]' => ['value' => '-1']],
           'or',
-          [':input[name="properties[multiple][container][cardinality_number]"]' => ['!value' => 1]],
+                [':input[name="properties[multiple][container][cardinality_number]"]' => ['!value' => 1]],
         ],
       ],
     ];
@@ -3249,8 +3249,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#type' => 'textfield',
       '#title' => $this->t('Admin title'),
       '#description' => $this->t('The admin title will always be displayed when managing elements and viewing & downloading submissions.') .
-        '<br/>' .
-        $this->t("If an element's title is hidden, the element's admin title will be displayed when viewing a submission."),
+      '<br/>' .
+      $this->t("If an element's title is hidden, the element's admin title will be displayed when viewing a submission."),
     ];
     $form['admin']['admin_notes'] = [
       '#type' => 'webform_html_editor',
@@ -3340,7 +3340,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         '#type' => 'webform_message',
         '#message_type' => 'warning',
         '#message_message' => $this->t('Webform submissions store passwords as plain text.') . ' ' .
-          $this->t('<a href=":href">Encryption</a> should be enabled for this element.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
+        $this->t('<a href=":href">Encryption</a> should be enabled for this element.', [':href' => 'https://www.drupal.org/project/webform_encrypt']),
         '#access' => TRUE,
         '#weight' => -100,
         '#message_close' => TRUE,
@@ -3422,8 +3422,8 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#mode' => 'yaml',
       '#title' => $this->t('Custom properties'),
       '#description' => $this->t('Properties do not have to be prepended with a hash (#) character, the hash character will be automatically added to the custom properties.') .
-        '<br /><br />' .
-        $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      '<br /><br />' .
+      $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
       '#default_value' => $custom_properties,
       '#parents' => ['properties', 'custom'],
     ];

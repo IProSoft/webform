@@ -99,8 +99,8 @@ class WebformDialogHelper {
       'data-dialog-type' => 'modal',
       'data-dialog-options' => Json::encode([
         'width' => $width,
-        // .webform-ui-dialog is used to set the dialog's top position.
-        // @see modules/sandbox/webform/css/webform.ajax.css
+            // .webform-ui-dialog is used to set the dialog's top position.
+            // @see modules/sandbox/webform/css/webform.ajax.css
         'dialogClass' => 'webform-ui-dialog',
       ]),
     ];

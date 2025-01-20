@@ -22,7 +22,7 @@ class WebformVariant extends FormElementBase {
       '#input' => TRUE,
       '#variant' => '',
       '#process' => [
-        [$class, 'processWebformVariant'],
+            [$class, 'processWebformVariant'],
       ],
       '#pre_render' => [],
       '#theme_wrappers' => ['form_element'],

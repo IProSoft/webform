@@ -50,7 +50,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // General settings.
+        // General settings.
       'description' => $this->t('Sign above'),
       'readonly' => FALSE,
       'uri_scheme' => 'public',
@@ -222,7 +222,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       $form['signature']['signature_message'] = [
         '#type' => 'webform_message',
         '#message_message' => '<strong>' . $this->t('Saving of results is disabled.') . '</strong> ' .
-          $this->t('Signatures will still be saved to %directory.', ['%directory' => $image_directory]),
+        $this->t('Signatures will still be saved to %directory.', ['%directory' => $image_directory]),
         '#message_type' => 'warning',
         '#access' => TRUE,
       ];

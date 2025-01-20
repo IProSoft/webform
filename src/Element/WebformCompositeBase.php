@@ -24,11 +24,11 @@ abstract class WebformCompositeBase extends FormElementBase implements WebformCo
       '#input' => TRUE,
       '#access' => TRUE,
       '#process' => [
-        [$class, 'processWebformComposite'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformComposite'],
+            [$class, 'processAjaxForm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
+            [$class, 'preRenderWebformCompositeFormElement'],
       ],
       '#title_display' => 'invisible',
       '#required' => FALSE,

@@ -57,11 +57,11 @@ class WebformMultiple extends FormElementBase {
       '#table_wrapper_attributes' => [],
       '#remove' => TRUE,
       '#process' => [
-        [$class, 'processWebformMultiple'],
+            [$class, 'processWebformMultiple'],
       ],
       '#theme_wrappers' => ['form_element'],
-      // Add '#markup' property to add an 'id' attribute to the form element.
-      // @see template_preprocess_form_element()
+        // Add '#markup' property to add an 'id' attribute to the form element.
+        // @see template_preprocess_form_element()
       '#markup' => '',
     ];
   }
@@ -250,11 +250,11 @@ class WebformMultiple extends FormElementBase {
       // Add sorting to table.
       if ($element['#sorting']) {
         $element['items']['#tabledrag'] = [
-          [
-            'action' => 'order',
-            'relationship' => 'sibling',
-            'group' => 'webform-multiple-sort-weight',
-          ],
+            [
+              'action' => 'order',
+              'relationship' => 'sibling',
+              'group' => 'webform-multiple-sort-weight',
+            ],
         ];
       }
     }
@@ -433,10 +433,10 @@ class WebformMultiple extends FormElementBase {
         $header_label = [];
       }
       return [
-        [
-          'data' => $header_label,
-          'colspan' => ($colspan + 1),
-        ],
+          [
+            'data' => $header_label,
+            'colspan' => ($colspan + 1),
+          ],
       ];
     }
     elseif (is_array($element['#header'])) {
@@ -469,12 +469,12 @@ class WebformMultiple extends FormElementBase {
     }
     elseif (is_string($element['#header'])) {
       return [
-        ['data' => $element['#header'], 'colspan' => ($element['#child_keys']) ? count($element['#child_keys']) + $colspan : $colspan + 1],
+          ['data' => $element['#header'], 'colspan' => ($element['#child_keys']) ? count($element['#child_keys']) + $colspan : $colspan + 1],
       ];
     }
     elseif (!empty($element['#header_label'])) {
       return [
-        ['data' => $element['#header_label'], 'colspan' => ($element['#child_keys']) ? count($element['#child_keys']) + $colspan : $colspan + 1],
+          ['data' => $element['#header_label'], 'colspan' => ($element['#child_keys']) ? count($element['#child_keys']) + $colspan : $colspan + 1],
       ];
     }
     else {
@@ -685,9 +685,9 @@ class WebformMultiple extends FormElementBase {
           '#limit_validation_errors' => [],
           '#submit' => [[get_called_class(), 'addItemSubmit']],
           '#ajax' => $ajax_settings,
-          // Issue #1342066 Document that buttons with the same #value need a unique
-          // #name for the Form API to distinguish them, or change the Form API to
-          // assign unique #names automatically.
+            // Issue #1342066 Document that buttons with the same #value need a unique
+            // #name for the Form API to distinguish them, or change the Form API to
+            // assign unique #names automatically.
           '#row_index' => $row_index,
           '#name' => $table_id . '_add_' . $row_index,
         ];
@@ -700,9 +700,9 @@ class WebformMultiple extends FormElementBase {
           '#limit_validation_errors' => [],
           '#submit' => [[get_called_class(), 'removeItemSubmit']],
           '#ajax' => $ajax_settings,
-          // Issue #1342066 Document that buttons with the same #value need a unique
-          // #name for the Form API to distinguish them, or change the Form API to
-          // assign unique #names automatically.
+            // Issue #1342066 Document that buttons with the same #value need a unique
+            // #name for the Form API to distinguish them, or change the Form API to
+            // assign unique #names automatically.
           '#row_index' => $row_index,
           '#name' => $table_id . '_remove_' . $row_index,
         ];

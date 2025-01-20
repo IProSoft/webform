@@ -28,30 +28,30 @@ class WebformVariant extends WebformElementBase implements WebformElementDisplay
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'default_value' => '',
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
       'attributes' => [],
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
-      // Flexbox.
+        // Flexbox.
       'flex' => 1,
-      // Variant.
+        // Variant.
       'variant' => '',
       'prepopulate' => TRUE,
       'randomize' => FALSE,
@@ -222,9 +222,9 @@ class WebformVariant extends WebformElementBase implements WebformElementDisplay
     ];
     $display_on_form_states = [
       'visible' => [
-        [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_FORM]],
+            [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_FORM]],
         'or',
-       [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_BOTH]],
+            [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_BOTH]],
       ],
     ];
     $form['element_description']['#states'] = $display_on_form_states;
@@ -235,9 +235,9 @@ class WebformVariant extends WebformElementBase implements WebformElementDisplay
 
     $display_on_view_states = [
       'visible' => [
-        [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_VIEW]],
+            [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_VIEW]],
         'or',
-       [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_BOTH]],
+            [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_BOTH]],
       ],
     ];
     $form['display']['#states'] = $display_on_view_states;

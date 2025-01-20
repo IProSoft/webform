@@ -24,7 +24,7 @@ class WebformTime extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Time settings.
+        // Time settings.
       'timepicker' => FALSE,
       'time_format' => 'H:i',
       'placeholder' => '',

@@ -150,7 +150,7 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       '#type' => 'textfield',
       '#title' => $this->t('Default base path for webform URLs'),
       '#description' => $this->t('Leave blank to disable the automatic generation of URL aliases for all webforms.')
-        . ' ' . $this->t('The base path has to start with a slash and cannot end with a slash.'),
+      . ' ' . $this->t('The base path has to start with a slash and cannot end with a slash.'),
       '#pattern' => '^/.+(?<!/)$',
       '#default_value' => $settings['default_page_base_path'],
     ];
@@ -266,13 +266,13 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       '#tree' => TRUE,
     ];
     $behavior_elements = [
-      // Form.
+        // Form.
       'default_form_submit_once' => [
         'group' => $this->t('Form'),
         'title' => $this->t('Prevent duplicate submissions for all webforms'),
         'description' => $this->t('If checked, the submit button will be disabled immediately after it is clicked.'),
       ],
-      // Navigation.
+        // Navigation.
       'default_form_disable_back' => [
         'group' => $this->t('Navigation'),
         'title' => $this->t('Disable back button for all webforms'),
@@ -288,7 +288,7 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
         'title' => $this->t('Warn users about unsaved changes for all webforms'),
         'description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a webform with unsaved changes.'),
       ],
-      // Validation.
+        // Validation.
       'default_form_novalidate' => [
         'group' => $this->t('Validation'),
         'title' => $this->t('Disable client-side validation for all webforms'),
@@ -305,7 +305,7 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
         'title' => $this->t('Display required indicator on all webforms'),
         'description' => $this->t('If checked, a required elements indicator will be added to all webforms.'),
       ],
-      // Elements.
+        // Elements.
       'default_form_details_toggle' => [
         'group' => $this->t('Elements'),
         'title' => $this->t('Display collapse/expand all details link on all webforms'),
@@ -586,10 +586,10 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       '#type' => 'webform_multiple',
       '#key' => 'name',
       '#header' => [
-        ['data' => $this->t('Machine name'), 'width' => '40%'],
-        ['data' => $this->t('Title'), 'width' => '40%'],
-        ['data' => $this->t('Width'), 'width' => '10%'],
-        ['data' => $this->t('Height'), 'width' => '10%'],
+            ['data' => $this->t('Machine name'), 'width' => '40%'],
+            ['data' => $this->t('Title'), 'width' => '40%'],
+            ['data' => $this->t('Width'), 'width' => '10%'],
+            ['data' => $this->t('Height'), 'width' => '10%'],
       ],
       '#element' => [
         'name' => [
@@ -632,8 +632,8 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Enable site-wide dialog support'),
       '#description' => $this->t('If checked, the webform dialog library will be added to every page on your website, this allows any webform to be opened in a modal dialog.')
-        . '<br /><br />'
-        . $this->t('Webform specific dialog links will be included on all webform settings form.'),
+      . '<br /><br />'
+      . $this->t('Webform specific dialog links will be included on all webform settings form.'),
       '#return_value' => TRUE,
       '#default_value' => $settings['dialog'],
     ];

@@ -175,12 +175,12 @@ class WebformOptionsHelperTest extends UnitTestCase {
    */
   public static function providerEncodeConfig() {
     $tests[] = [
-      ['one' => 1, 'two' => 2, 'with.period' => 'with period'],
-      [
-        ['value' => 'one', 'text' => 1],
-        ['value' => 'two', 'text' => 2],
-        ['value' => 'with.period', 'text' => 'with period'],
-      ],
+        ['one' => 1, 'two' => 2, 'with.period' => 'with period'],
+        [
+            ['value' => 'one', 'text' => 1],
+            ['value' => 'two', 'text' => 2],
+            ['value' => 'with.period', 'text' => 'with period'],
+        ],
     ];
     return $tests;
   }
@@ -209,12 +209,12 @@ class WebformOptionsHelperTest extends UnitTestCase {
    */
   public static function providerDecodeConfig() {
     $tests[] = [
-      [
-        ['value' => 'one', 'text' => 1],
-        ['value' => 'two', 'text' => 2],
-        ['value' => 'with.period', 'text' => 'with period'],
-      ],
-      ['one' => 1, 'two' => 2, 'with.period' => 'with period'],
+        [
+            ['value' => 'one', 'text' => 1],
+            ['value' => 'two', 'text' => 2],
+            ['value' => 'with.period', 'text' => 'with period'],
+        ],
+        ['one' => 1, 'two' => 2, 'with.period' => 'with period'],
     ];
     return $tests;
   }

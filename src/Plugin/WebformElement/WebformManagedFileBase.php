@@ -253,9 +253,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $file_upload_help = [
       '#theme' => 'file_upload_help',
       '#upload_validators' => $element['#upload_validators'] + ($file_limit ? [
-        // Add a custom "validator" that is just used in
-        // webform_preprocess_file_upload_help to show a "per form" upload
-        // limit. This is validated below in ::validateManagedFileLimit.
+            // Add a custom "validator" that is just used in
+            // webform_preprocess_file_upload_help to show a "per form" upload
+            // limit. This is validated below in ::validateManagedFileLimit.
         'webform_file_limit' => Bytes::toNumber($file_limit),
       ] : []),
       '#cardinality' => (empty($element['#multiple'])) ? 1 : $element['#multiple'],
@@ -837,7 +837,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
             Html::getClass($element['#type'] . '-placeholder'),
           ],
         ],
-        // Display placeholder before file upload input.
+          // Display placeholder before file upload input.
         '#weight' => ($element['upload']['#weight'] - 1),
         'content' => WebformHtmlEditor::checkMarkup($element['#file_placeholder']),
       ];
@@ -974,8 +974,8 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       $form['file']['file_message'] = [
         '#type' => 'webform_message',
         '#message_message' => '<strong>' . $this->t('Saving of results is disabled.') . '</strong> ' .
-          $this->t('Uploaded files will be temporarily stored on the server and referenced in the database for %interval.', ['%interval' => $temporary_interval]) . ' ' .
-          $this->t('Uploaded files should be attached to an email and/or remote posted to an external server.'),
+        $this->t('Uploaded files will be temporarily stored on the server and referenced in the database for %interval.', ['%interval' => $temporary_interval]) . ' ' .
+        $this->t('Uploaded files should be attached to an email and/or remote posted to an external server.'),
         '#message_type' => 'warning',
         '#access' => TRUE,
       ];
@@ -995,7 +995,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         '#type' => 'webform_message',
         '#message_type' => 'warning',
         '#message_message' => $this->t('Public files upload destination is dangerous for webforms that are available to anonymous and/or untrusted users.') . ' ' .
-          $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
+        $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
         '#access' => TRUE,
         '#states' => [
           'visible' => [
@@ -1037,8 +1037,8 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       '#type' => 'select',
       '#title' => $this->t('File upload preview (Authenticated users only)'),
       '#description' => $this->t('Select how the uploaded file previewed.') . '<br/><br/>' .
-          $this->t('Allowing anonymous users to preview files is dangerous.') . '<br/>' .
-          $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
+      $this->t('Allowing anonymous users to preview files is dangerous.') . '<br/>' .
+      $this->t('For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'),
       '#options' => WebformOptionsHelper::appendValueToText($this->getItemFormats()),
       '#empty_option' => '<' . $this->t('no preview') . '>',
     ];
@@ -1056,7 +1056,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
       '#type' => 'textfield',
       '#title' => $this->t('Allowed file extensions'),
       '#description' => $this->t('Separate extensions with a space or comma and do not include the leading dot.') . '<br/><br/>' .
-        $this->t('Defaults to: %value', ['%value' => $this->getDefaultFileExtensions()]),
+      $this->t('Defaults to: %value', ['%value' => $this->getDefaultFileExtensions()]),
       '#maxlength' => 255,
     ];
     $form['file']['file_name'] = [
@@ -1460,11 +1460,11 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'filecontent' => file_get_contents($file->getFileUri()),
         'filename' => $file->getFilename(),
         'filemime' => $file->getMimeType(),
-        // File URIs that are not supported return FALSE, when this happens
-        // still use the file's URI as the file's path.
+          // File URIs that are not supported return FALSE, when this happens
+          // still use the file's URI as the file's path.
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
-        // URI is used when debugging or resending messages.
-        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
+          // URI is used when debugging or resending messages.
+          // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
         '_fileurl' => $file->createFileUrl(FALSE),
       ];
     }

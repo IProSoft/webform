@@ -41,12 +41,12 @@ class WebformElementComposite extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformElementComposite'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformElementComposite'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
-      // Add '#markup' property to add an 'id' attribute to the form element.
-      // @see template_preprocess_form_element()
+        // Add '#markup' property to add an 'id' attribute to the form element.
+        // @see template_preprocess_form_element()
       '#markup' => '',
     ];
   }
@@ -137,10 +137,10 @@ class WebformElementComposite extends FormElementBase {
           '#type' => 'container',
           '#title' => t('Settings'),
           '#help' => '<b>' . t('Key') . ':</b> ' . t('A unique machine-readable name. Can only contain lowercase letters, numbers, and underscores.') .
-            '<hr/>' . '<b>' . t('Type') . ':</b> ' . t('The type of element to be displayed.') .
-            '<hr/>' . '<b>' . t('Options') . ':</b> ' . t('Please select predefined options or enter custom options.') . ' ' . t('Key-value pairs MUST be specified as "safe_key: \'Some readable options\'". Use of only alphanumeric characters and underscores is recommended in keys. One option per line.') .
-            ($edit_source ? '<hr/>' . '<b>' . t('Custom Properties') . ':</b> ' . t('Properties do not have to be prepended with a hash (#) character, the hash character will be automatically added to the custom properties.') : '') .
-            '<hr/>' . '<b>' . t('Required') . ':</b> ' . t('Check this option if the user must enter a value.'),
+          '<hr/>' . '<b>' . t('Type') . ':</b> ' . t('The type of element to be displayed.') .
+          '<hr/>' . '<b>' . t('Options') . ':</b> ' . t('Please select predefined options or enter custom options.') . ' ' . t('Key-value pairs MUST be specified as "safe_key: \'Some readable options\'". Use of only alphanumeric characters and underscores is recommended in keys. One option per line.') .
+          ($edit_source ? '<hr/>' . '<b>' . t('Custom Properties') . ':</b> ' . t('Properties do not have to be prepended with a hash (#) character, the hash character will be automatically added to the custom properties.') : '') .
+          '<hr/>' . '<b>' . t('Required') . ':</b> ' . t('Check this option if the user must enter a value.'),
           'key' => [
             '#type' => 'textfield',
             '#title' => t('Key'),
@@ -178,12 +178,12 @@ class WebformElementComposite extends FormElementBase {
             ],
             '#error_no_message' => TRUE,
           ],
-          // ISSUE:
-          // Set #access: FALSE is losing the custom properties.
-          //
-          // WORKAROUND:
-          // Use 'hidden' element.
-          // @see \Drupal\webform\Element\WebformMultiple::buildElementRow
+                // ISSUE:
+                // Set #access: FALSE is losing the custom properties.
+                //
+                // WORKAROUND:
+                // Use 'hidden' element.
+                // @see \Drupal\webform\Element\WebformMultiple::buildElementRow
           'custom' => $edit_source ? [
             '#type' => 'webform_codemirror',
             '#mode' => 'yaml',
@@ -196,7 +196,7 @@ class WebformElementComposite extends FormElementBase {
           ] : [
             '#type' => 'hidden',
           ],
-          // Note: Setting #return_value: TRUE is not returning any value.
+                // Note: Setting #return_value: TRUE is not returning any value.
           'required' => [
             '#type' => 'checkbox',
             '#title' => t('Required'),
@@ -209,9 +209,9 @@ class WebformElementComposite extends FormElementBase {
           '#type' => 'container',
           '#title' => t('Labels'),
           '#help' => '<b>' . t('Title') . ':</b> ' . t('This is used as a descriptive label when displaying this webform element.') .
-            '<hr/><b>' . t('Placeholder') . ':</b> ' . t('The placeholder will be shown in the element until the user starts entering a value.') .
-            '<hr/><b>' . t('Description') . ':</b> ' . t('A short description of the element used as help for the user when they use the webform.') .
-            '<hr/><b>' . t('Help text') . ':</b> ' . t('A tooltip displayed after the title.'),
+          '<hr/><b>' . t('Placeholder') . ':</b> ' . t('The placeholder will be shown in the element until the user starts entering a value.') .
+          '<hr/><b>' . t('Description') . ':</b> ' . t('A short description of the element used as help for the user when they use the webform.') .
+          '<hr/><b>' . t('Help text') . ':</b> ' . t('A tooltip displayed after the title.'),
           'title' => [
             '#type' => 'textfield',
             '#title' => t('Title'),

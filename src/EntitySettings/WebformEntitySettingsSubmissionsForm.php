@@ -184,13 +184,13 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#weight' => -97,
     ];
     $behavior_elements = [
-      // Form specific behaviors.
+        // Form specific behaviors.
       'form_previous_submissions' => [
         'title' => $this->t('Show the notification about previous submissions'),
         'form_description' => $this->t('Show the previous submissions notification that appears when users have previously submitted this form.'),
       ],
-      // Global behaviors.
-      // @see \Drupal\webform\Form\WebformAdminSettingsForm
+        // Global behaviors.
+        // @see \Drupal\webform\Form\WebformAdminSettingsForm
       'form_disable_remote_addr' => [
         'title' => $this->t('Disable the tracking of user IP address'),
         'all_description' => $this->t('User IP address tracking is disabled for all webforms.'),
@@ -278,11 +278,11 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#message_storage' => WebformMessage::STORAGE_SESSION,
       '#states' => [
         'visible' => [
-          [':input[name="token_view"]' => ['checked' => TRUE]],
+                [':input[name="token_view"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="token_update"]' => ['checked' => TRUE]],
+                [':input[name="token_update"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="token_delete"]' => ['checked' => TRUE]],
+                [':input[name="token_delete"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -290,19 +290,19 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       'token_view' => [
         'title' => $this->t('Allow users to view a submission using a secure token'),
         'form_description' => $this->t("If checked users will be able to view a submission using the webform submission's URL appended with the submission's (secure) token.") . ' ' .
-          $this->t("The 'tokenized' URL to view a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-view-url] token."),
+        $this->t("The 'tokenized' URL to view a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-view-url] token."),
       ],
       'token_update' => [
         'title' => $this->t('Allow users to update a submission using a secure token'),
         'form_description' => $this->t("If checked users will be able to update a submission using the webform's URL appended with the submission's (secure) token.") . ' ' .
-          $this->t("The 'tokenized' URL to update a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-update-url] token.") . ' ' .
-          $this->t('Only webforms that are open to new submissions can be updated using the secure token.'),
+        $this->t("The 'tokenized' URL to update a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-update-url] token.") . ' ' .
+        $this->t('Only webforms that are open to new submissions can be updated using the secure token.'),
       ],
       'token_delete' => [
         'title' => $this->t('Allow users to delete a submission using a secure token'),
         'form_description' => $this->t("If checked users will be able to delete a submission using the webform's URL appended with the submission's (secure) token.") . ' ' .
-          $this->t("The 'tokenized' URL to delete a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-delete-url] token.") . ' ' .
-          $this->t('Only webforms that are open to new submissions can be deleted using the secure token.'),
+        $this->t("The 'tokenized' URL to delete a submission will be available when viewing a submission's information and can be inserted into an email using the [webform_submission:token-delete-url] token.") . ' ' .
+        $this->t('Only webforms that are open to new submissions can be deleted using the secure token.'),
       ],
     ];
     $this->appendBehaviors($form['submission_access'], $behavior_elements, $settings, $default_settings);
@@ -317,8 +317,8 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#type' => 'radios',
       '#title' => $this->t('When a user is denied access to a submission'),
       '#description' => $this->t('Select what happens when a user is denied access to a submission.') .
-        '<br/><br/>' .
-        $this->t('Go to <a href=":href">form settings</a> to select what happens when a user is denied access to a webform.', [':href' => Url::fromRoute('entity.webform.settings_form', ['webform' => $webform->id()])->toString()]),
+      '<br/><br/>' .
+      $this->t('Go to <a href=":href">form settings</a> to select what happens when a user is denied access to a webform.', [':href' => Url::fromRoute('entity.webform.settings_form', ['webform' => $webform->id()])->toString()]),
       '#options' => [
         WebformInterface::ACCESS_DENIED_DEFAULT => $this->t('Default (Displays the default access denied page)'),
         WebformInterface::ACCESS_DENIED_PAGE => $this->t('Page (Displays message when access is denied to a submission)'),
@@ -425,9 +425,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#default_value' => $settings['limit_total_message'],
       '#states' => [
         'visible' => [
-          [':input[name="limit_total"]' => ['!value' => '']],
+                [':input[name="limit_total"]' => ['!value' => '']],
           'or',
-          [':input[name="entity_limit_total"]' => ['!value' => '']],
+                [':input[name="entity_limit_total"]' => ['!value' => '']],
         ],
       ],
     ];
@@ -436,9 +436,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       $form['submission_limits']['total']['total_container']['token_tree_link'] += [
         '#states' => [
           'visible' => [
-            [':input[name="limit_total"]' => ['!value' => '']],
+                  [':input[name="limit_total"]' => ['!value' => '']],
             'or',
-            [':input[name="entity_limit_total"]' => ['!value' => '']],
+                  [':input[name="entity_limit_total"]' => ['!value' => '']],
           ],
         ],
       ];
@@ -451,7 +451,7 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
     $form['submission_limits']['total']['limit_total_unique_info'] = [
       '#type' => 'webform_message',
       '#message_message' => $this->t('Only submission administrators will only be able to create and update the unique submission.') . '<br/><br/>' .
-        $this->t('Webform blocks can be used to place this webform on the desired source entity types.'),
+      $this->t('Webform blocks can be used to place this webform on the desired source entity types.'),
       '#message_type' => 'info',
       '#message_close' => TRUE,
       '#message_storage' => WebformMessage::STORAGE_SESSION,
@@ -528,9 +528,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#default_value' => $settings['limit_user_message'],
       '#states' => [
         'visible' => [
-          [':input[name="limit_user"]' => ['!value' => '']],
+                [':input[name="limit_user"]' => ['!value' => '']],
           'or',
-          [':input[name="entity_limit_user"]' => ['!value' => '']],
+                [':input[name="entity_limit_user"]' => ['!value' => '']],
         ],
       ],
     ];
@@ -539,9 +539,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       $form['submission_limits']['user']['user_container']['token_tree_link'] += [
         '#states' => [
           'visible' => [
-            [':input[name="limit_user"]' => ['!value' => '']],
+                  [':input[name="limit_user"]' => ['!value' => '']],
             'or',
-            [':input[name="entity_limit_user"]' => ['!value' => '']],
+                  [':input[name="entity_limit_user"]' => ['!value' => '']],
           ],
         ],
       ];
@@ -629,8 +629,8 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         'visible' => [
           ':input[name="draft"]' => ['value' => WebformInterface::DRAFT_ALL],
           ':input[name="purge"]' => [
-            ['value' => WebformSubmissionStorageInterface::PURGE_NONE],
-            ['value' => WebformSubmissionStorageInterface::PURGE_COMPLETED],
+                    ['value' => WebformSubmissionStorageInterface::PURGE_NONE],
+                    ['value' => WebformSubmissionStorageInterface::PURGE_COMPLETED],
           ],
         ],
       ],
@@ -756,8 +756,8 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         '#type' => 'link',
         '#title' => $this->t('Create new submission view'),
         '#url' => Url::fromRoute(
-          'entity.view.duplicate_form',
-          ['view' => 'webform_submissions']
+            'entity.view.duplicate_form',
+            ['view' => 'webform_submissions']
         ),
         '#attributes' => [
           'target' => '_blank',

@@ -24,7 +24,7 @@ class Checkbox extends BooleanBase {
   protected function defineDefaultProperties() {
     $properties = [
       'title_display' => 'after',
-      // Checkbox.
+        // Checkbox.
       'exclude_empty' => FALSE,
     ] + parent::defineDefaultProperties();
     unset(

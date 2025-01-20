@@ -76,14 +76,14 @@ trait WebformTermReferenceTrait {
       '#attributes' => ['data-webform-states-no-clear' => TRUE],
       '#states' => [
         'visible' => [
-          [':input[name="properties[breadcrumb]"]' => ['checked' => TRUE]],
+                [':input[name="properties[breadcrumb]"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="properties[format]"]' => ['value' => 'breadcrumb']],
+                [':input[name="properties[format]"]' => ['value' => 'breadcrumb']],
         ],
         'required' => [
-          [':input[name="properties[breadcrumb]"]' => ['checked' => TRUE]],
+                [':input[name="properties[breadcrumb]"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="properties[format]"]' => ['value' => 'breadcrumb']],
+                [':input[name="properties[format]"]' => ['value' => 'breadcrumb']],
         ],
       ],
     ];

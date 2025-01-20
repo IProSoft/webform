@@ -122,9 +122,9 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
   public function defaultConfiguration() {
     return [
       'element_key' => '',
-      // Boolean limit.
+        // Boolean limit.
       'limit' => NULL,
-      // Options limit.
+        // Options limit.
       'limits' => [],
       'limit_reached_message' => '@name is not available',
       'limit_source_entity' => TRUE,
@@ -287,8 +287,8 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       '#type' => 'textfield',
       '#title' => $this->t('Limit reached message'),
       '#description' => $this->t('This message will be displayed when all limits are reached.')
-        . '<br/><br/>'
-        . $this->t('Leave blank to hide this message.'),
+      . '<br/><br/>'
+      . $this->t('Leave blank to hide this message.'),
       '#default_value' => $this->configuration['limit_reached_message'],
     ];
     $form['limit_settings']['limit_source_entity'] = [
@@ -354,32 +354,32 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       '#type' => 'textfield',
       '#title' => $this->t('Multiple remaining message'),
       '#description' => $this->t('This message is displayed when the remaining submission is greater than one.')
-        . '<br/><br/>'
-        . $this->t('Leave blank to hide this message.'),
+      . '<br/><br/>'
+      . $this->t('Leave blank to hide this message.'),
       '#default_value' => $this->configuration['option_multiple_message'],
     ];
     $form['option_settings']['option_message']['option_single_message'] = [
       '#type' => 'textfield',
       '#title' => $this->t('One remaining message'),
       '#description' => $this->t('This message is displayed when there is only one remaining submission available.')
-        . '<br/><br/>'
-        . $this->t('Leave blank to hide this message.'),
+      . '<br/><br/>'
+      . $this->t('Leave blank to hide this message.'),
       '#default_value' => $this->configuration['option_single_message'],
     ];
     $form['option_settings']['option_message']['option_none_message'] = [
       '#type' => 'textfield',
       '#title' => $this->t('None remaining message'),
       '#description' => $this->t('This message is displayed when there are remaining submissions allows.')
-        . '<br/><br/>'
-        . $this->t('Leave blank to hide this message.'),
+      . '<br/><br/>'
+      . $this->t('Leave blank to hide this message.'),
       '#default_value' => $this->configuration['option_none_message'],
     ];
     $form['option_settings']['option_message']['option_unlimited_message'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Unlimited message'),
       '#description' => $this->t('This message is displayed when there are not submissions limits.')
-        . '<br/><br/>'
-        . $this->t('Leave blank to hide this message.'),
+      . '<br/><br/>'
+      . $this->t('Leave blank to hide this message.'),
       '#default_value' => $this->configuration['option_unlimited_message'],
     ];
     $form['option_settings']['option_error_message'] = [
@@ -405,7 +405,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         '#states' => [
           'visible' => [
             ':input[name="settings[option_message_display]"]' => ['value' => WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_DESCRIPTION],
-            // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified
+                  // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified
             $tableselect_states,
           ],
         ],
@@ -971,12 +971,12 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       }
 
       $rows[] = [
-        ['data' => $limit['label'], 'style' => 'font-weight: bold'],
-        ['data' => $limit['limit'] ?: '∞', 'style' => 'text-align: right'],
-        ['data' => $limit['limit'] ? $limit['remaining'] : '∞', 'style' => 'text-align: right'],
-        ['data' => $limit['total'], 'style' => 'text-align: right'],
-        ['data' => $progress, 'style' => 'text-align: center'],
-        ['data' => $percentage, 'style' => 'text-align: right'],
+          ['data' => $limit['label'], 'style' => 'font-weight: bold'],
+          ['data' => $limit['limit'] ?: '∞', 'style' => 'text-align: right'],
+          ['data' => $limit['limit'] ? $limit['remaining'] : '∞', 'style' => 'text-align: right'],
+          ['data' => $limit['total'], 'style' => 'text-align: right'],
+          ['data' => $progress, 'style' => 'text-align: center'],
+          ['data' => $percentage, 'style' => 'text-align: right'],
       ];
     }
 
@@ -990,10 +990,10 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         '#type' => 'table',
         '#header' => [
           '',
-          ['data' => $this->t('Limit'), 'style' => 'text-align: right'],
-          ['data' => $this->t('Remaining'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-          ['data' => $this->t('Total'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-          ['data' => $this->t('Progress'), 'style' => 'text-align: center', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Limit'), 'style' => 'text-align: right'],
+                ['data' => $this->t('Remaining'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Total'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Progress'), 'style' => 'text-align: center', 'class' => [RESPONSIVE_PRIORITY_LOW]],
           '',
         ],
         '#rows' => $rows,

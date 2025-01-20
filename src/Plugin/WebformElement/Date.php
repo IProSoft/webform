@@ -32,7 +32,7 @@ class Date extends DateBase {
     }
 
     $properties = [
-      // Date settings.
+        // Date settings.
       'date_date_format' => $date_format,
       'placeholder' => '',
       'step' => '',

@@ -73,34 +73,34 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
   public function testCheckAccess($operation, array $options, array $expected, $assert_message = '') {
     // Set $options default value.
     $options += [
-      // What is the request path.
+        // What is the request path.
       'request_path' => '',
-      // What is the request format.
+        // What is the request format.
       'request_format' => 'html',
-      // Array of permissions to assign to a mocked account.
+        // Array of permissions to assign to a mocked account.
       'permissions' => [],
-      // Array of access rules that should yield 'allowed' when the mocked
-      // access rules manager is requested ::checkWebformAccess()
-      // or ::checkWebformSubmissionAccess().
+        // Array of access rules that should yield 'allowed' when the mocked
+        // access rules manager is requested ::checkWebformAccess()
+        // or ::checkWebformSubmissionAccess().
       'access_rules' => [],
-      // Whether the mocked user should be owner of the webform.
+        // Whether the mocked user should be owner of the webform.
       'account_is_webform_owner' => FALSE,
-      // Whether the mocked webform should be a template.
+        // Whether the mocked webform should be a template.
       'webform_is_template' => FALSE,
-      // Whether the mocked webform should be open.
+        // Whether the mocked webform should be open.
       'webform_is_open' => TRUE,
-      // Whether the mocked webform submission should successfully
-      // load through token in query string. Defaults to FALSE.
+        // Whether the mocked webform submission should successfully
+        // load through token in query string. Defaults to FALSE.
       'submission_load_from_token' => FALSE,
     ];
 
     // Set $expected default value.
     $expected += [
-      // Whether ::isAllowed() on the return should yield TRUE.
+        // Whether ::isAllowed() on the return should yield TRUE.
       'access_result_is_allowed' => TRUE,
-      // Cache tags of the return.
+        // Cache tags of the return.
       'access_result_cache_tags' => [],
-      // Cache contexts of the return.
+        // Cache contexts of the return.
       'access_result_cache_contexts' => [],
     ];
 
@@ -123,7 +123,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
     $entity_type_manager = $this->createMock(EntityTypeManagerInterface::class);
     $entity_type_manager->method('getStorage')
       ->willReturnMap([
-        ['webform_submission', $webform_submission_storage],
+          ['webform_submission', $webform_submission_storage],
       ]);
 
     // Mock webform source entity manager.
@@ -154,7 +154,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       ->willReturn($options['webform_is_open']);
     $webform->method('access')
       ->willReturnMap([
-        ['create', $account, TRUE, AccessResult::allowed()],
+          ['create', $account, TRUE, AccessResult::allowed()],
       ]);
     $webform->method('hasPage')->willReturnOnConsecutiveCalls([
       FALSE, TRUE,
@@ -178,7 +178,7 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       ->willReturn($webform);
     $webform_submission_storage->method('loadFromToken')
       ->willReturnMap([
-        [$token, $webform, NULL, NULL, ($options['submission_load_from_token'] ? $webform_submission : NULL)],
+          [$token, $webform, NULL, NULL, ($options['submission_load_from_token'] ? $webform_submission : NULL)],
       ]);
 
     // Mock access rules manager.
@@ -231,38 +231,38 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'view',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        ],
       'View when nobody',
     ];
 
     $tests[] = [
       'view',
-      [
-        'permissions' => ['administer webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => [],
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['administer webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => [],
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'View when has "administer webform" permission',
     ];
 
     $tests[] = [
       'view',
-      [
-        'access_rules' => ['administer'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['administer'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'View when has "administer" access rule',
     ];
 
@@ -272,86 +272,86 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'view',
-      [
-        'permissions' => ['access any webform configuration'],
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
-      ],
+        [
+          'permissions' => ['access any webform configuration'],
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        ],
       'View when has "access any webform configuration" permission and request form is HTML',
     ];
 
     $tests[] = [
       'view',
-      [
-        'request_format' => 'not_html',
-        'permissions' => ['access any webform configuration'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'request_format' => 'not_html',
+          'permissions' => ['access any webform configuration'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
+        ],
       'View when has "access any webform configuration" permission and request form is NOT HTML',
     ];
 
     $tests[] = [
       'view',
-      [
-        'permissions' => ['access own webform configuration'],
-        'account_is_webform_owner' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
-      ],
+        [
+          'permissions' => ['access own webform configuration'],
+          'account_is_webform_owner' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        ],
       'View when has "access own webform configuration" permission and is not owner and request form is HTML',
     ];
 
     $tests[] = [
       'view',
-      [
-        'request_format' => 'not_html',
-        'permissions' => ['access own webform configuration'],
-        'account_is_webform_owner' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
-      ],
+        [
+          'request_format' => 'not_html',
+          'permissions' => ['access own webform configuration'],
+          'account_is_webform_owner' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        ],
       'View when has "access own webform configuration" permission and is not owner and request form is NOT HTML',
     ];
 
     $tests[] = [
       'view',
-      [
-        'permissions' => ['access own webform configuration'],
-        'account_is_webform_owner' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
-      ],
+        [
+          'permissions' => ['access own webform configuration'],
+          'account_is_webform_owner' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context', 'request_format', 'url.path'],
+        ],
       'View when has "access own webform configuration" permission and is owner and request form is HTML',
     ];
 
     $tests[] = [
       'view',
-      [
-        'request_format' => 'not_html',
-        'permissions' => ['access own webform configuration'],
-        'account_is_webform_owner' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'request_format' => 'not_html',
+          'permissions' => ['access own webform configuration'],
+          'account_is_webform_owner' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['request_format', 'url.path', 'user', 'user.permissions', 'webform_cache_context'],
+        ],
       'View when has "access own webform configuration" permission and is owner and request form is NOT HTML',
     ];
 
@@ -361,79 +361,79 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'test',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Test when nobody',
     ];
 
     $tests[] = [
       'test',
-      [
-        'permissions' => ['administer webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => [],
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['administer webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => [],
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Test when has "administer webform" permission',
     ];
 
     $tests[] = [
       'test',
-      [
-        'access_rules' => ['administer'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['administer'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Test when has "administer" access rule',
     ];
 
     $tests[] = [
       'test',
-      [
-        'permissions' => ['edit any webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['edit any webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Test when has "edit any webform" permission',
     ];
 
     $tests[] = [
       'test',
-      [
-        'permissions' => ['edit own webform'],
-        'account_is_webform_owner' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['edit own webform'],
+          'account_is_webform_owner' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Test when has "edit own webform" permission and is not owner',
     ];
 
     $tests[] = [
       'test',
-      [
-        'permissions' => ['edit own webform'],
-        'account_is_webform_owner' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['edit own webform'],
+          'account_is_webform_owner' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Test when has "edit own webform" permission and is owner',
     ];
 
@@ -443,25 +443,25 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'update',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Update when nobody',
     ];
 
     $tests[] = [
       'update',
-      [
-        'permissions' => ['administer webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => [],
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['administer webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => [],
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Update when has "administer webform" permission',
     ];
 
@@ -469,38 +469,38 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
       'update', [
         'access_rules' => ['administer'],
       ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Update when has "administer" access rule',
     ];
 
     $tests[] = [
       'update',
-      [
-        'permissions' => ['edit any webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['edit any webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Update when has "edit any webform" permission',
     ];
 
     $tests[] = [
       'update',
-      [
-        'permission' => ['edit own webform'],
-        'account_is_webform_owner' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permission' => ['edit own webform'],
+          'account_is_webform_owner' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Update when has "edit own webform" permission and is not owner',
     ];
 
@@ -509,11 +509,11 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
         'permissions' => ['edit own webform'],
         'account_is_webform_owner' => TRUE,
       ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Update when has "edit own webform" permission and is owner',
     ];
 
@@ -523,65 +523,65 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'duplicate',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Duplicate when nobody',
     ];
 
     $tests[] = [
       'duplicate',
-      [
-        'permissions' => ['administer webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => [],
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['administer webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => [],
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Duplicate when has "administer webform" permission',
     ];
 
     $tests[] = [
       'duplicate',
-      [
-        'access_rules' => ['administer'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['administer'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Duplicate when has "administer" access rule',
     ];
 
     $tests[] = [
       'duplicate',
-      [
-        'permissions' => ['create webform'],
-        'webform_is_template' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['create webform'],
+          'webform_is_template' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Duplicate when has "create webform" permission and webform is not template',
     ];
 
     $tests[] = [
       'duplicate',
-      [
-        'permissions' => ['create webform', 'edit any webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['create webform', 'edit any webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Duplicate when has "create webform" and "edit any webform" permissions',
     ];
 
@@ -590,25 +590,25 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
         'permissions' => ['create webform', 'edit own webform'],
         'account_is_webform_owner' => FALSE,
       ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Duplicate when has "create webform" and "edit own webform" permissions and is not owner',
     ];
 
     $tests[] = [
       'duplicate',
-      [
-        'permissions' => ['create webform', 'edit own webform'],
-        'account_is_webform_owner' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['create webform', 'edit own webform'],
+          'account_is_webform_owner' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Duplicate when has "create webform" and "edit own webform" permissions and is owner',
     ];
 
@@ -618,79 +618,79 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'delete',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Delete when nobody',
     ];
 
     $tests[] = [
       'delete',
-      [
-        'permissions' => ['administer webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => [],
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['administer webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => [],
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Delete when has "administer webform" permission',
     ];
 
     $tests[] = [
       'delete',
-      [
-        'access_rules' => ['administer'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['administer'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Delete when has "administer" access rule',
     ];
 
     $tests[] = [
       'delete',
-      [
-        'permissions' => ['delete any webform'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['delete any webform'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Delete when has "delete any webform" permission',
     ];
 
     $tests[] = [
       'delete',
-      [
-        'permissions' => ['delete own webform'],
-        'account_is_webform_owner' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['delete own webform'],
+          'account_is_webform_owner' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Delete when has "delete own webform" permission and is not owner',
     ];
 
     $tests[] = [
       'delete',
-      [
-        'permissions' => ['delete own webform'],
-        'account_is_webform_owner' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['delete own webform'],
+          'account_is_webform_owner' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user', 'user.permissions', 'webform_cache_context'],
+        ],
       'Delete when has "delete own webform" permission and is owner',
     ];
 
@@ -700,27 +700,27 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'submission_purge',
-      [
-        'access_rules' => ['purge_any'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['purge_any'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Purge when has "purge_any" access rule',
     ];
 
     $tests[] = [
       'submission_purge_any',
-      [
-        'access_rules' => ['purge_any'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['purge_any'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Purge when has "purge_any" access rule',
     ];
 
@@ -730,115 +730,115 @@ class WebformEntityAccessControlHandlerTest extends UnitTestCase {
 
     $tests[] = [
       'submission_view_any',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Submission view any when nobody',
     ];
 
     $tests[] = [
       'submission_view_any',
-      [
-        'permissions' => ['view any webform submission'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['view any webform submission'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Submission view any when has "view any webform submission" permission',
     ];
 
     $tests[] = [
       'submission_view_any',
-      [
-        'permissions' => ['view own webform submission'],
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'permissions' => ['view own webform submission'],
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Submission view any when has "view own webform submission" permission but is not owner',
     ];
 
     $tests[] = [
       'submission_view_own',
-      [],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Submission view own when nobody',
     ];
 
     $tests[] = [
       'submission_view_own',
-      [
-        'permissions' => ['view own webform submission'],
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_contexts' => ['user.permissions'],
-      ],
+        [
+          'permissions' => ['view own webform submission'],
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_contexts' => ['user.permissions'],
+        ],
       'Submission view own when has "view own webform submission" permission',
     ];
 
     // The "submission_page" operation.
     $tests[] = [
       'submission_page',
-      [
-        'webform_is_open' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'webform_is_open' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Submission page when nobody',
     ];
 
     $tests[] = [
       'submission_page',
-      [
-        'submission_load_from_token' => TRUE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['webform_cache_tag', 'webform_submission_cache_tag'],
-        'access_result_cache_contexts' => ['url', 'user.permissions', 'webform_cache_context', 'webform_submission_cache_context'],
-      ],
+        [
+          'submission_load_from_token' => TRUE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['webform_cache_tag', 'webform_submission_cache_tag'],
+          'access_result_cache_contexts' => ['url', 'user.permissions', 'webform_cache_context', 'webform_submission_cache_context'],
+        ],
       'Submission page when accessible through token',
     ];
 
     $tests[] = [
       'submission_page',
-      [
-        'webform_is_template' => TRUE,
-        'webform_is_open' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => FALSE,
-        'access_result_cache_tags' => ['webform_cache_tag'],
-        'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
-      ],
+        [
+          'webform_is_template' => TRUE,
+          'webform_is_open' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => FALSE,
+          'access_result_cache_tags' => ['webform_cache_tag'],
+          'access_result_cache_contexts' => ['user.permissions', 'webform_cache_context'],
+        ],
       'Submission page when the webform is template without create access',
     ];
 
     $tests[] = [
       'submission_page',
-      [
-        'access_rules' => ['create'],
-        'webform_is_open' => FALSE,
-      ],
-      [
-        'access_result_is_allowed' => TRUE,
-        'access_result_cache_tags' => ['access_rules_cache_tag'],
-        'access_result_cache_contexts' => ['access_rules_cache_context'],
-      ],
+        [
+          'access_rules' => ['create'],
+          'webform_is_open' => FALSE,
+        ],
+        [
+          'access_result_is_allowed' => TRUE,
+          'access_result_cache_tags' => ['access_rules_cache_tag'],
+          'access_result_cache_contexts' => ['access_rules_cache_context'],
+        ],
       'Submission page when the webform allows "page"',
     ];
 

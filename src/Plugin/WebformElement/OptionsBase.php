@@ -41,7 +41,7 @@ abstract class OptionsBase extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Options settings.
+        // Options settings.
       'options' => [],
       'options_randomize' => FALSE,
     ] + parent::defineDefaultProperties();
@@ -54,24 +54,24 @@ abstract class OptionsBase extends WebformElementBase {
         'other__title' => '',
         'other__placeholder' => $this->t('Enter other…'),
         'other__description' => '',
-        // Text field or textarea.
+          // Text field or textarea.
         'other__size' => '',
         'other__maxlength' => '',
         'other__field_prefix' => '',
         'other__field_suffix' => '',
-        // Textarea.
+          // Textarea.
         'other__rows' => '',
-        // Number.
+          // Number.
         'other__min' => '',
         'other__max' => '',
         'other__step' => '',
-        // Counter.
+          // Counter.
         'other__counter_type' => '',
         'other__counter_minimum' => '',
         'other__counter_minimum_message' => '',
         'other__counter_maximum' => '',
         'other__counter_maximum_message' => '',
-        // Wrapper.
+          // Wrapper.
         'wrapper_type' => 'fieldset',
       ];
     }
@@ -615,11 +615,11 @@ abstract class OptionsBase extends WebformElementBase {
     // Build format options with help.
     $options_format_options = [
       'compact' => $this->t('Compact, with the option values delimited by commas in one column.') .
-        WebformOptionsHelper::DESCRIPTION_DELIMITER .
-        $this->t('Compact options are more suitable for importing data into other systems.'),
+      WebformOptionsHelper::DESCRIPTION_DELIMITER .
+      $this->t('Compact options are more suitable for importing data into other systems.'),
       'separate' => $this->t('Separate, with each possible option value in its own column.') .
-        WebformOptionsHelper::DESCRIPTION_DELIMITER .
-        $this->t('Separate options are more suitable for building reports, graphs, and statistics in a spreadsheet application. Ranking will be included for sortable option elements.'),
+      WebformOptionsHelper::DESCRIPTION_DELIMITER .
+      $this->t('Separate options are more suitable for building reports, graphs, and statistics in a spreadsheet application. Ranking will be included for sortable option elements.'),
     ];
     $form['options'] = [
       '#type' => 'details',
@@ -964,16 +964,16 @@ abstract class OptionsBase extends WebformElementBase {
     // Other.
     $states_textfield_or_number = [
       'visible' => [
-        [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
         'or',
-        [':input[name="properties[other__type]"]' => ['value' => 'number']],
+            [':input[name="properties[other__type]"]' => ['value' => 'number']],
       ],
     ];
     $states_textbase = [
       'visible' => [
-        [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
         'or',
-        [':input[name="properties[other__type]"]' => ['value' => 'textarea']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textarea']],
       ],
     ];
     $states_textarea = [
@@ -1092,7 +1092,7 @@ abstract class OptionsBase extends WebformElementBase {
     if ($this->supportsMultipleValues() && $this->hasProperty('multiple')) {
       $form['display']['format_items']['#states'] = [
         'visible' => [
-          [':input[name="properties[multiple]"]' => ['checked' => TRUE]],
+              [':input[name="properties[multiple]"]' => ['checked' => TRUE]],
         ],
       ];
     }
@@ -1101,20 +1101,20 @@ abstract class OptionsBase extends WebformElementBase {
       '#type' => 'details',
       '#title' => $this->t('Options (custom) properties'),
       '#access' => $this->hasProperty('options__properties')
-        && $this->currentUser->hasPermission('edit webform source'),
+      && $this->currentUser->hasPermission('edit webform source'),
     ];
     $form['options_properties']['options__properties'] = [
       '#type' => 'webform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Options properties'),
       '#description' => $this->t("Custom options properties must include the 'Option value' followed by option (element) properties prepended with a hash (#) character.") .
-        "<pre>option_value:
+      "<pre>option_value:
   '#wrapper_attributes':
     class:
       - disabled
   '#disabled': true</pre>" .
-        '<br /><br />' .
-        $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      '<br /><br />' .
+      $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
     ];
 
     return $form;

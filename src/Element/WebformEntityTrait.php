@@ -50,8 +50,8 @@ trait WebformEntityTrait {
     $selection_handler_options = [
       'target_type' => $element['#target_type'],
       'handler' => $element['#selection_handler'],
-      // Set '_webform_settings' used to limit and randomize options.
-      // @see webform_query_entity_reference_alter()
+        // Set '_webform_settings' used to limit and randomize options.
+        // @see webform_query_entity_reference_alter()
       '_webform_settings' => $settings,
     ] + $selection_settings;
 

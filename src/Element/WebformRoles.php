@@ -20,7 +20,7 @@ class WebformRoles extends Checkboxes {
     $info = parent::getInfo();
     $class = get_class($this);
     $info['#element_validate'] = [
-      [$class, 'validateWebformRoles'],
+        [$class, 'validateWebformRoles'],
     ];
     $info['#include_anonymous'] = TRUE;
     return $info;

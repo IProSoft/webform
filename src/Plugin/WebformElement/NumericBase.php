@@ -17,7 +17,7 @@ abstract class NumericBase extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Form validation.
+        // Form validation.
       'readonly' => FALSE,
       'size' => '',
       'placeholder' => '',

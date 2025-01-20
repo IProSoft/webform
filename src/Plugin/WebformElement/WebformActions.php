@@ -25,9 +25,9 @@ class WebformActions extends ContainerBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Title.
+        // Title.
       'title' => '',
-      // Attributes.
+        // Attributes.
       'attributes' => [],
     ] + $this->defineDefaultBaseProperties();
     $buttons = array_merge(WebformActionsElement::$buttons, ['update']);
@@ -216,8 +216,8 @@ class WebformActions extends ContainerBase {
         '#description' => $this->t('Defaults to: %value', ['%value' => $button['default_label'] ?? $this->configFactory->get('webform.settings')->get('settings.default_' . $name . '_button_label')]),
         '#size' => 20,
         '#attributes' => [
-          // Make sure default value is never cleared by #states API.
-          // @see js/webform.states.js
+              // Make sure default value is never cleared by #states API.
+              // @see js/webform.states.js
           'data-webform-states-no-clear' => TRUE,
         ],
         '#states' => [

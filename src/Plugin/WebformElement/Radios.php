@@ -20,11 +20,11 @@ class Radios extends OptionsBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Form display.
+        // Form display.
       'options_display' => 'one_column',
       'options_description_display' => 'description',
       'options__properties' => [],
-      // Wrapper.
+        // Wrapper.
       'wrapper_type' => 'fieldset',
     ] + parent::defineDefaultProperties();
     unset(

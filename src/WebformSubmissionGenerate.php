@@ -91,7 +91,7 @@ class WebformSubmissionGenerate implements WebformSubmissionGenerateInterface {
   public function getTestValue(WebformInterface $webform, $name, array $element, array $options = []) {
     // Set default options.
     $options += [
-      // Return random test value(s).
+        // Return random test value(s).
       'random' => TRUE,
     ];
 

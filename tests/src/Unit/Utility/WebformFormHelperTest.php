@@ -114,12 +114,12 @@ class WebformFormHelperTest extends UnitTestCase {
         ],
       ],
       'two' => [
-        [
-          '#title' => 'two-FIRST',
-        ],
-        [
-          '#title' => 'two-SECOND',
-        ],
+            [
+              '#title' => 'two-FIRST',
+            ],
+            [
+              '#title' => 'two-SECOND',
+            ],
       ],
     ]);
 
@@ -137,13 +137,13 @@ class WebformFormHelperTest extends UnitTestCase {
         ],
       ],
       'two' => [
-        [
-          '#title' => 'two-FIRST-UPDATED',
-          '#type' => 'textfield',
-        ],
-        [
-          '#title' => 'two-SECOND',
-        ],
+            [
+              '#title' => 'two-FIRST-UPDATED',
+              '#type' => 'textfield',
+            ],
+            [
+              '#title' => 'two-SECOND',
+            ],
       ],
     ]);
   }

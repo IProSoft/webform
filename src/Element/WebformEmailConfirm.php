@@ -28,10 +28,10 @@ class WebformEmailConfirm extends FormElementBase {
       '#input' => TRUE,
       '#size' => 60,
       '#process' => [
-        [$class, 'processWebformEmailConfirm'],
+            [$class, 'processWebformEmailConfirm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
+            [$class, 'preRenderWebformCompositeFormElement'],
       ],
       '#required' => FALSE,
     ];

@@ -55,12 +55,12 @@ class WebformEntityHandlersForm extends EntityForm {
 
     // Build table header.
     $header = [
-      ['data' => $this->t('Title / Description')],
-      ['data' => $this->t('ID'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Summary'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
-      ['data' => $this->t('Weight'), 'class' => ['webform-tabledrag-hide']],
-      ['data' => $this->t('Operations')],
+        ['data' => $this->t('Title / Description')],
+        ['data' => $this->t('ID'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Summary'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+        ['data' => $this->t('Weight'), 'class' => ['webform-tabledrag-hide']],
+        ['data' => $this->t('Operations')],
     ];
 
     // Build table rows for handlers.
@@ -145,9 +145,9 @@ class WebformEntityHandlersForm extends EntityForm {
         $operations['test'] = [
           'title' => $this->t('Test'),
           'url' => Url::fromRoute(
-            'entity.webform.test_form',
-            ['webform' => $this->entity->id()],
-            ['query' => ['_webform_handler' => $handler_id]]
+              'entity.webform.test_form',
+              ['webform' => $this->entity->id()],
+              ['query' => ['_webform_handler' => $handler_id]]
           ),
         ];
       }
@@ -185,11 +185,11 @@ class WebformEntityHandlersForm extends EntityForm {
       '#type' => 'table',
       '#header' => $header,
       '#tabledrag' => [
-        [
-          'action' => 'order',
-          'relationship' => 'sibling',
-          'group' => 'webform-handler-order-weight',
-        ],
+            [
+              'action' => 'order',
+              'relationship' => 'sibling',
+              'group' => 'webform-handler-order-weight',
+            ],
       ],
       '#attributes' => [
         'id' => 'webform-handlers',

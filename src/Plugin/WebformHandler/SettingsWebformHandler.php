@@ -140,7 +140,7 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#type' => 'textfield',
       '#title' => $this->t('Confirmation URL'),
       '#description' => $this->t('The URL or path to redirect the user to upon successful submission.') .
-        '<br/>' . $this->t('Paths beginning with a forward slash (/) will redirect be treated as root-relative. Paths without a forward slash (/) will redirect be treated as Drupal relative path.'),
+      '<br/>' . $this->t('Paths beginning with a forward slash (/) will redirect be treated as root-relative. Paths without a forward slash (/) will redirect be treated as Drupal relative path.'),
       '#default_value' => $this->configuration['confirmation_url'],
       '#access' => !empty($this->configuration['confirmation_url']) || $has_confirmation_url,
       '#maxlength' => NULL,
@@ -176,8 +176,8 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#title' => $this->t('Custom settings (YAML)'),
       '#description' => $this->t('Enter the setting name and value as YAML.'),
       '#default_value' => $custom_settings,
-      // Must set #parents because custom is not a configuration value.
-      // @see \Drupal\webform\Plugin\WebformHandler\SettingsWebformHandler::submitConfigurationForm
+        // Must set #parents because custom is not a configuration value.
+        // @see \Drupal\webform\Plugin\WebformHandler\SettingsWebformHandler::submitConfigurationForm
       '#parents' => ['settings', 'custom'],
     ];
 

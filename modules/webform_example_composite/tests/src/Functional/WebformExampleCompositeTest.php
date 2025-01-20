@@ -62,12 +62,12 @@ class WebformExampleCompositeTest extends WebformBrowserTestBase {
       'date_of_birth' => '1910-01-01',
     ]);
     $this->assertEquals($webform_submission->getElementData('webform_example_composite_multiple'), [
-      [
-        'first_name' => 'Jane',
-        'last_name' => 'Doe',
-        'sex' => 'Female',
-        'date_of_birth' => '1920-12-01',
-      ],
+        [
+          'first_name' => 'Jane',
+          'last_name' => 'Doe',
+          'sex' => 'Female',
+          'date_of_birth' => '1920-12-01',
+        ],
     ]);
   }
 

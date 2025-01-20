@@ -50,7 +50,7 @@ class WebformSubmissionsPurgeForm extends WebformSubmissionsDeleteFormBase {
       '#type' => 'webform_message',
       '#message_type' => 'warning',
       '#message_message' => $this->t('Are you sure you want to purge all submissions?') . '<br/>' .
-        '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
+      '<strong>' . $this->t('This action cannot be undone.') . '</strong>',
     ];
   }
 
@@ -81,7 +81,7 @@ class WebformSubmissionsPurgeForm extends WebformSubmissionsDeleteFormBase {
         '#theme' => 'item_list',
         '#items' => [
           $this->t('Remove @submission_total @submissions in @form_total @forms', $t_args),
-          ['#markup' => '<em>' . $this->t('Take a few minutes to complete') . '</em>'],
+                ['#markup' => '<em>' . $this->t('Take a few minutes to complete') . '</em>'],
         ],
       ],
     ];

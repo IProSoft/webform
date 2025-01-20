@@ -604,8 +604,8 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
           ':input[name="settings[body]"]' => ['value' => 'twig'],
         ],
       ],
-      // Must set #parents because body_custom_twig is not a configuration value.
-      // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::validateConfigurationForm
+        // Must set #parents because body_custom_twig is not a configuration value.
+        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::validateConfigurationForm
       '#parents' => ['settings', 'body_custom_twig'],
     ];
     $form['message']['body_custom_twig_help'] = WebformTwigExtension::buildTwigHelp() + [

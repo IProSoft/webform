@@ -25,7 +25,7 @@ class WebformCodeMirror extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Codemirror settings.
+        // Codemirror settings.
       'placeholder' => '',
       'mode' => 'text',
       'wrap' => TRUE,

@@ -94,10 +94,10 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
       $build[$type] = [
         '#type' => 'webform_message',
         '#message_message' => $this->formatPlural(
-          $total,
-          '@count email @message',
-          '@count emails @message',
-          ['@message' => $status_messages[$type]['message']]
+            $total,
+            '@count email @message',
+            '@count emails @message',
+            ['@message' => $status_messages[$type]['message']]
         ),
         '#message_type' => $status_messages[$type]['type'],
       ];
@@ -246,9 +246,9 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
         '#title' => $this->t('Schedule emails for all existing submissions'),
         '#description' => $this->t('Check schedule emails after submissions have been processed.'),
         '#return_value' => TRUE,
-        // Must specify #parents because 'queue' is not a configuration setting.
-        // @see \Drupal\webform_scheduled_email\Plugin\WebformHandler\ScheduleEmailWebformHandler::defaultConfiguration
-        // @see \Drupal\webform\Plugin\WebformHandlerBase::setSettingsParentsRecursively
+          // Must specify #parents because 'queue' is not a configuration setting.
+          // @see \Drupal\webform_scheduled_email\Plugin\WebformHandler\ScheduleEmailWebformHandler::defaultConfiguration
+          // @see \Drupal\webform\Plugin\WebformHandlerBase::setSettingsParentsRecursively
         '#parents' => ['settings', 'queue'],
       ];
       $form['scheduled']['queue_message'] = [
@@ -277,7 +277,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
         $this->t('Email will be rescheduled when a draft or submission is updated.'),
         $this->t("Multiple handlers can be used to schedule multiple emails."),
         $this->t('Deleting this handler will unschedule all scheduled emails.'),
-        ['#markup' => $this->t('Scheduled emails are automatically sent starting at midnight using <a href=":href">cron</a>, which is executed at predefined interval.', [':href' => 'https://www.drupal.org/docs/7/setting-up-cron/overview'])],
+            ['#markup' => $this->t('Scheduled emails are automatically sent starting at midnight using <a href=":href">cron</a>, which is executed at predefined interval.', [':href' => 'https://www.drupal.org/docs/7/setting-up-cron/overview'])],
       ],
     ];
 

@@ -22,10 +22,10 @@ class TextField extends TextBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Form display.
+        // Form display.
       'input_mask' => '',
       'input_hide' => FALSE,
-      // Form validation.
+        // Form validation.
       'counter_type' => '',
       'counter_minimum' => NULL,
       'counter_minimum_message' => '',
