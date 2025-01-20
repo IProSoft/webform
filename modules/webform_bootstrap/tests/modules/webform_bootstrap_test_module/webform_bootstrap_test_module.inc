@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Alter hooks for bootstrap testing.
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;

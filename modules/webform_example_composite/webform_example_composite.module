@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Example module for composite fields.
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
