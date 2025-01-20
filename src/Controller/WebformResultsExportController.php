@@ -272,7 +272,13 @@ class WebformResultsExportController extends ControllerBase implements Container
     $context['sandbox']['progress'] += count($webform_submissions);
     $context['sandbox']['offset'] += $submission_exporter->getBatchLimit();
 
-    $context['message'] = t('Exported @count of @total submissions…', ['@count' => $context['sandbox']['progress'], '@total' => $context['sandbox']['max']]);
+    $context['message'] = t(
+      'Exported @count of @total submissions…',
+      [
+        '@count' => $context['sandbox']['progress'],
+        '@total' => $context['sandbox']['max'],
+      ]
+    );
 
     // Track finished, if there are results and progress does not match the
     // expected total, calculate finished percentage. A safety guard is added
@@ -337,7 +343,16 @@ class WebformResultsExportController extends ControllerBase implements Container
 
       /** @var \Drupal\webform\WebformRequestInterface $request_handler */
       $request_handler = \Drupal::service('webform.request');
-      $redirect_url = $request_handler->getUrl($webform, $source_entity, 'webform.results_export', ['query' => ['filename' => $filename], 'absolute' => TRUE]);
+      $redirect_url = $request_handler->getUrl(
+        $webform, $source_entity,
+        'webform.results_export',
+        [
+          'query' => [
+            'filename' => $filename,
+          ],
+          'absolute' => TRUE,
+        ]
+      );
       return new RedirectResponse($redirect_url->toString());
     }
   }

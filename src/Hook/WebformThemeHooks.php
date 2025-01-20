@@ -2,8 +2,8 @@
 
 namespace Drupal\webform\Hook;
 
-use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\webform\Utility\WebformElementHelper;
 
 /**
  * Hook implementations for webform.

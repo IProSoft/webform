@@ -4,8 +4,8 @@ namespace Drupal\webform\Hook;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Query\AlterableInterface;
-use Drupal\webform\Entity\Webform;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Hook implementations for webform.
@@ -119,7 +119,15 @@ class WebformQueryHooks {
             $webform_account_access_update[] = $webform->id();
           }
         }
-        \Drupal::cache()->set('webform_submission_access__account_update__' . $account->id(), $webform_account_access_update, Cache::PERMANENT, ['config:webform_list', 'user:' . $account->id()]);
+        \Drupal::cache()->set(
+          'webform_submission_access__account_update__' . $account->id(),
+          $webform_account_access_update,
+          Cache::PERMANENT,
+          [
+            'config:webform_list',
+            'user:' . $account->id(),
+          ]
+        );
       }
       foreach ($webform_account_access_update as $webform_id) {
         foreach ($webform_submission_tables as $table) {

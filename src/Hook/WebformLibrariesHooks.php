@@ -3,9 +3,9 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.

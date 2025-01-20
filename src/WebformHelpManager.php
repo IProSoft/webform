@@ -5,7 +5,6 @@
 
 namespace Drupal\webform;
 
-use Drush\Drush;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -21,6 +20,7 @@ use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
+use Drush\Drush;
 
 /**
  * Webform help manager.
@@ -360,7 +360,17 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '#alt' => $video['title'],
       ];
       $row['thumbnail'] = [
-        'data' => ['video' => $this->buildVideoLink($id, $video_display, $video_thumbnail, ['class' => [], 'more' => FALSE])],
+        'data' => [
+          'video' => $this->buildVideoLink(
+            $id,
+            $video_display,
+            $video_thumbnail,
+            [
+              'class' => [],
+              'more' => FALSE,
+            ]
+          ),
+        ],
         'width' => '200',
       ];
       // Content.

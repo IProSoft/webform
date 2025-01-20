@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Hook;
 
-use Drupal\webform\Entity\Webform;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
