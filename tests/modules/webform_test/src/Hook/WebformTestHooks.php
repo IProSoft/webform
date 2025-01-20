@@ -4,7 +4,6 @@ namespace Drupal\webform_test\Hook;
 
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Hook\Attribute\Hook;
-use Drupal\Core\Url;
 
 /**
  * Hook implementations for webform_test.
@@ -18,10 +17,10 @@ class WebformTestHooks {
   public function webformLoad(array $entities) {
     // If ?generate is passed to the current pages URL the test webform's elements
     // will get rebuilt.
-        // phpcs:ignore
-        if (!isset($_GET['generate'])) {
+    // phpcs:ignore
+    if (!isset($_GET['generate'])) {
       return;
-}
+    }
     foreach ($entities as $id => $entity) {
       $name = _webform_test_load_include($id);
       if ($name && function_exists('webform_test_' . $name)) {

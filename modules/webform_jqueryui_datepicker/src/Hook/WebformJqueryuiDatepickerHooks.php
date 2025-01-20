@@ -147,30 +147,30 @@ class WebformJqueryuiDatepickerHooks {
       $form['date']['date_date_datepicker_button']['#weight'] = -9;
       // Adjust states.
       $form['date']['date_date_placeholder']['#states']['visible'] = [
-          [
-            ':input[name="properties[date_date_element]"]' => [
-              'value' => 'text',
-            ],
+        [
+          ':input[name="properties[date_date_element]"]' => [
+            'value' => 'text',
           ],
+        ],
         'or',
-          [
-            ':input[name="properties[date_date_element]"]' => [
-              'value' => 'datepicker',
-            ],
+        [
+          ':input[name="properties[date_date_element]"]' => [
+            'value' => 'datepicker',
           ],
+        ],
       ];
       $form['date']['date_date_format']['#states']['visible'] = [
-          [
-            ':input[name="properties[date_date_element]"]' => [
-              'value' => 'text',
-            ],
+        [
+          ':input[name="properties[date_date_element]"]' => [
+            'value' => 'text',
           ],
+        ],
         'or',
-          [
-            ':input[name="properties[date_date_element]"]' => [
-              'value' => 'datepicker',
-            ],
+        [
+          ':input[name="properties[date_date_element]"]' => [
+            'value' => 'datepicker',
           ],
+        ],
       ];
     }
   }

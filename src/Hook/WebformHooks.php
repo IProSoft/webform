@@ -487,14 +487,14 @@ class WebformHooks {
     // @see webform_metatags_alter()
     if (!\Drupal::moduleHandler()->moduleExists('metatag') && !empty(\Drupal::config('webform.settings')->get('settings.default_confirmation_noindex')) && preg_match('/^(entity\.webform\.confirmation|entity\.[a-z-_]+\.webform\.confirmation)$/', $route_name)) {
       $attachments['#attached']['html_head'][] = [
-          [
-            '#tag' => 'meta',
-            '#attributes' => [
-              'name' => 'robots',
-              'content' => 'noindex',
-            ],
+        [
+          '#tag' => 'meta',
+          '#attributes' => [
+            'name' => 'robots',
+            'content' => 'noindex',
           ],
-          'webform_confirmation_noindex',
+        ],
+        'webform_confirmation_noindex',
       ];
     }
   }

@@ -78,13 +78,13 @@ class WebformResultsExportController extends ControllerBase implements Container
         $file_url = Url::fromRoute($route_name, $route_parameters, ['absolute' => TRUE])->toString();
         $this->messenger()->addStatus($this->t('Export creation complete. Your download should begin now. If it does not start, <a href=":href">download the file here</a>. This file may only be downloaded once.', [':href' => $file_url]));
         $build['#attached']['html_head'][] = [
-            [
-              '#tag' => 'meta',
-              '#attributes' => [
-                'http-equiv' => 'refresh',
-                'content' => '0; url=' . $file_url,
-              ],
+          [
+            '#tag' => 'meta',
+            '#attributes' => [
+              'http-equiv' => 'refresh',
+              'content' => '0; url=' . $file_url,
             ],
+          ],
           'webform_results_export_download_file_refresh',
         ];
       }
