@@ -28,7 +28,7 @@ class WebformImageSelectImages extends FormElementBase {
       '#empty_items' => 1,
       '#add_more_items' => 1,
       '#process' => [
-        [$class, 'processWebformImageSelectImages'],
+            [$class, 'processWebformImageSelectImages'],
       ],
       '#theme_wrappers' => ['form_element'],
     ];
@@ -70,9 +70,9 @@ class WebformImageSelectImages extends FormElementBase {
       '#type' => 'webform_multiple',
       '#key' => 'value',
       '#header' => [
-        ['data' => t('Image value'), 'width' => '25%'],
-        ['data' => t('Image text'), 'width' => '25%'],
-        ['data' => t('Image src'), 'width' => '50%'],
+            ['data' => t('Image value'), 'width' => '25%'],
+            ['data' => t('Image text'), 'width' => '25%'],
+            ['data' => t('Image src'), 'width' => '50%'],
       ],
       '#element' => [
         'value' => [

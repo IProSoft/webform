@@ -47,26 +47,26 @@ class WebformResultsExportDownloadTest extends WebformBrowserTestBase {
     $sids[] = $this->postSubmissionTest($webform);
 
     $tests = [
-      [
-        'archive_type' => 'tar',
-        'files' => TRUE,
-        'attachments' => FALSE,
-      ],
-      [
-        'archive_type' => 'zip',
-        'files' => TRUE,
-        'attachments' => FALSE,
-      ],
-      [
-        'archive_type' => 'tar',
-        'files' => FALSE,
-        'attachments' => TRUE,
-      ],
-      [
-        'archive_type' => 'zip',
-        'files' => FALSE,
-        'attachments' => TRUE,
-      ],
+        [
+          'archive_type' => 'tar',
+          'files' => TRUE,
+          'attachments' => FALSE,
+        ],
+        [
+          'archive_type' => 'zip',
+          'files' => TRUE,
+          'attachments' => FALSE,
+        ],
+        [
+          'archive_type' => 'tar',
+          'files' => FALSE,
+          'attachments' => TRUE,
+        ],
+        [
+          'archive_type' => 'zip',
+          'files' => FALSE,
+          'attachments' => TRUE,
+        ],
     ];
     foreach ($tests as $test) {
       // Set exporter archive type.

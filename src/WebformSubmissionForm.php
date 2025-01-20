@@ -971,17 +971,17 @@ class WebformSubmissionForm extends ContentEntityForm {
       $form['actions'] = [
         '#type' => 'actions',
         '#attributes' => ['style' => 'display:none'],
-        // Do not process the actions element. This prevents the
-        // .form-actions class from being added, which then makes the button
-        // appear in dialogs.
-        // @see \Drupal\Core\Render\Element\Actions::processActions
-        // @see Drupal.behaviors.dialog.prepareDialogButtons
+          // Do not process the actions element. This prevents the
+          // .form-actions class from being added, which then makes the button
+          // appear in dialogs.
+          // @see \Drupal\Core\Render\Element\Actions::processActions
+          // @see Drupal.behaviors.dialog.prepareDialogButtons
         '#process' => [],
       ];
       $form['actions']['reset'] = [
         '#type' => 'submit',
         '#value' => $this->t('Reset'),
-        // @see \Drupal\webform\WebformSubmissionForm::noValidate
+          // @see \Drupal\webform\WebformSubmissionForm::noValidate
         '#validate' => ['::noValidate'],
         '#submit' => ['::reset'],
         '#attributes' => [
@@ -1358,12 +1358,12 @@ class WebformSubmissionForm extends ContentEntityForm {
       '#attributes' => [
         'class' => ['webform-wizard-pages-links', 'js-webform-wizard-pages-links'],
       ],
-      // Only process the container and prevent .form-actions from being added
-      // which force submit buttons to be rendered in dialogs.
-      // @see \Drupal\Core\Render\Element\Actions
-      // @see Drupal.behaviors.dialog.prepareDialogButtons
+        // Only process the container and prevent .form-actions from being added
+        // which force submit buttons to be rendered in dialogs.
+        // @see \Drupal\Core\Render\Element\Actions
+        // @see Drupal.behaviors.dialog.prepareDialogButtons
       '#process' => [
-        ['\Drupal\Core\Render\Element\Actions', 'processContainer'],
+            ['\Drupal\Core\Render\Element\Actions', 'processContainer'],
       ],
     ];
     if ($this->getWebformSetting('wizard_progress_link')) {
@@ -1525,7 +1525,7 @@ class WebformSubmissionForm extends ContentEntityForm {
           $element['preview_prev'] = [
             '#type' => 'submit',
             '#value' => $this->config('webform.settings')->get('settings.default_preview_prev_button_label'),
-            // @see \Drupal\webform\WebformSubmissionForm::noValidate
+              // @see \Drupal\webform\WebformSubmissionForm::noValidate
             '#validate' => ['::noValidate'],
             '#submit' => ['::previous'],
             '#attributes' => [
@@ -1551,7 +1551,7 @@ class WebformSubmissionForm extends ContentEntityForm {
             '#type' => 'submit',
             '#value' => $previous_button_label,
             '#webform_actions_button_custom' => $previous_button_custom,
-            // @see \Drupal\webform\WebformSubmissionForm::noValidate
+              // @see \Drupal\webform\WebformSubmissionForm::noValidate
             '#validate' => ['::noValidate'],
             '#submit' => ['::previous'],
             '#attributes' => [
@@ -2399,7 +2399,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         '#title' => $this->getWebformSetting('preview_label'),
         '#title_tag' => $this->getWebformSetting('wizard_page_title_tag', ''),
         '#attributes' => $preview_attributes,
-        // Progress bar is -20.
+          // Progress bar is -20.
         '#weight' => -10,
         'submission' => $this->entityTypeManager
           ->getViewBuilder('webform_submission')

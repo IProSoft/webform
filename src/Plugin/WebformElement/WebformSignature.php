@@ -50,7 +50,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // General settings.
+        // General settings.
       'description' => $this->t('Sign above'),
       'readonly' => FALSE,
       'uri_scheme' => 'public',

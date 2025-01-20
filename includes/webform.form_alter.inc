@@ -5,13 +5,13 @@
  * Webform module form alter hooks.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformFormAlterHooks;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
+use Drupal\webform\Hook\WebformFormAlterHooks;
 use Drupal\webform\WebformSubmissionForm;
 
 /**

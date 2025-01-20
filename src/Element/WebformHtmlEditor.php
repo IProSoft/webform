@@ -31,12 +31,12 @@ class WebformHtmlEditor extends FormElementBase implements TrustedCallbackInterf
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformHtmlEditor'],
-        [$class, 'processAjaxForm'],
-        [$class, 'processGroup'],
+            [$class, 'processWebformHtmlEditor'],
+            [$class, 'processAjaxForm'],
+            [$class, 'processGroup'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderGroup'],
+            [$class, 'preRenderGroup'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#format' => '',
@@ -112,11 +112,11 @@ class WebformHtmlEditor extends FormElementBase implements TrustedCallbackInterf
         '#format' => $format,
         '#allowed_formats' => [$format],
         '#webform_html_editor' => TRUE,
-        // Do not allow the text format value to be cleared when the text format
-        // is hidden via #states. We must use a wrapper <div> because
-        // The TextFormat element does not support #attributes.
-        // @see \Drupal\webform\Plugin\WebformElement\TextFormat::preRenderFixTextFormatStates
-        // @see \Drupal\filter\Element\TextFormat
+          // Do not allow the text format value to be cleared when the text format
+          // is hidden via #states. We must use a wrapper <div> because
+          // The TextFormat element does not support #attributes.
+          // @see \Drupal\webform\Plugin\WebformElement\TextFormat::preRenderFixTextFormatStates
+          // @see \Drupal\filter\Element\TextFormat
         '#prefix' => '<div data-webform-states-no-clear>',
         '#suffix' => '</div>',
       ];

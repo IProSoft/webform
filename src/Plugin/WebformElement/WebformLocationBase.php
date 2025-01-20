@@ -17,23 +17,23 @@ abstract class WebformLocationBase extends WebformCompositeBase {
       'title' => '',
       'default_value' => [],
       'multiple' => FALSE,
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'disabled' => FALSE,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',

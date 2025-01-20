@@ -39,27 +39,27 @@ class WebformYamlTest extends UnitTestCase {
    */
   public static function providerTidy() {
     $tests[] = [
-      ['simple' => 'value'],
+        ['simple' => 'value'],
       "simple: value",
     ];
     $tests[] = [
-      ['returns' => "line 1\nline 2"],
+        ['returns' => "line 1\nline 2"],
       "returns: |-\n  line 1\n  line 2",
     ];
     $tests[] = [
-      ['one two' => "line 1\nline 2"],
+        ['one two' => "line 1\nline 2"],
       "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
-      ['one two' => "line 1\r\nline 2"],
+        ['one two' => "line 1\r\nline 2"],
       "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
-      ['array' => ['one', 'two']],
+        ['array' => ['one', 'two']],
       "array:\n  - one\n  - two",
     ];
     $tests[] = [
-      [['one' => 'One'], ['two' => 'Two']],
+        [['one' => 'One'], ['two' => 'Two']],
       "- one: One\n- two: Two",
     ];
     return $tests;
@@ -90,39 +90,39 @@ class WebformYamlTest extends UnitTestCase {
   public static function providerDecode() {
     $tests[] = [
       "simple: value",
-      ['simple' => 'value'],
+        ['simple' => 'value'],
     ];
     $tests[] = [
       "returns: |\n  line 1\n  line 2",
-      ['returns' => "line 1\nline 2"],
+        ['returns' => "line 1\nline 2"],
     ];
     $tests[] = [
       "'one two': |\n  line 1\n  line 2",
-      ['one two' => "line 1\nline 2"],
+        ['one two' => "line 1\nline 2"],
     ];
     $tests[] = [
       "array:\n  - one\n  - two",
-      ['array' => ['one', 'two']],
+        ['array' => ['one', 'two']],
     ];
     $tests[] = [
       "- one: One\n- two: Two",
-      [['one' => 'One'], ['two' => 'Two']],
+        [['one' => 'One'], ['two' => 'Two']],
     ];
     $tests[] = [
       FALSE,
-      [],
+        [],
     ];
     $tests[] = [
       NULL,
-      [],
+        [],
     ];
     $tests[] = [
-      [],
-      [],
+        [],
+        [],
     ];
     $tests[] = [
       0,
-      [],
+        [],
     ];
     return $tests;
   }
@@ -151,27 +151,27 @@ class WebformYamlTest extends UnitTestCase {
    */
   public static function providerEncode() {
     $tests[] = [
-      ['simple' => 'value'],
+        ['simple' => 'value'],
       "simple: value",
     ];
     $tests[] = [
-      ['returns' => "line 1\nline 2"],
+        ['returns' => "line 1\nline 2"],
       "returns: |-\n  line 1\n  line 2",
     ];
     $tests[] = [
-      ['one two' => "line 1\nline 2"],
+        ['one two' => "line 1\nline 2"],
       "'one two': |-\n  line 1\n  line 2",
     ];
     $tests[] = [
-      ['array' => ['one', 'two']],
+        ['array' => ['one', 'two']],
       "array:\n  - one\n  - two",
     ];
     $tests[] = [
-      [['one' => 'One'], ['two' => 'Two']],
+        [['one' => 'One'], ['two' => 'Two']],
       "- one: One\n- two: Two",
     ];
     $tests[] = [
-      [],
+        [],
       '',
     ];
     $tests[] = [

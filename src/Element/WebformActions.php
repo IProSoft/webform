@@ -41,8 +41,8 @@ class WebformActions extends Container {
     $class = get_class($this);
     return [
       '#process' => [
-        [$class, 'processWebformActions'],
-        [$class, 'processContainer'],
+            [$class, 'processWebformActions'],
+            [$class, 'processContainer'],
       ],
       '#theme_wrappers' => ['container'],
     ];

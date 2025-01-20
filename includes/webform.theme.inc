@@ -5,15 +5,15 @@
  * Theme hooks, preprocessor, and suggestions.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformThemeHooks;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\file\Entity\File;
 use Drupal\webform\Element\WebformSelectOther;
+use Drupal\webform\Hook\WebformThemeHooks;
 use Drupal\webform\Plugin\WebformElement\Radios as WebformRadios;
 use Drupal\webform\Plugin\WebformElement\WebformEntityRadios;
 use Drupal\webform\Utility\WebformAccessibilityHelper;

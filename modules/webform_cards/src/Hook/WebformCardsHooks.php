@@ -106,41 +106,41 @@ class WebformCardsHooks {
     $form['#attributes']['data-current-page'] = $current_page;
     // Add settings as data-* attributes.
     $setting_names = [
-          // Update wizard/cards progress bar's pages based on conditions.
+        // Update wizard/cards progress bar's pages based on conditions.
       'wizard_progress_states',
-          // Link to previous pages in progress bar.
+        // Link to previous pages in progress bar.
       'wizard_progress_link',
-          // Link to previous pages in preview.
+        // Link to previous pages in preview.
       'wizard_preview_link',
-          // Include confirmation page in progress.
+        // Include confirmation page in progress.
       'wizard_confirmation',
-          // Update wizard/cards progress bar's pages based on conditions.
+        // Update wizard/cards progress bar's pages based on conditions.
       'wizard_progress_states',
-          // Link to previous pages in progress bar.
+        // Link to previous pages in progress bar.
       'wizard_progress_link',
-          // Auto forward to next page when the page is completed.
+        // Auto forward to next page when the page is completed.
       'wizard_auto_forward',
-          // Hide the next button when auto-forwarding.
+        // Hide the next button when auto-forwarding.
       'wizard_auto_forward_hide_next_button',
-          // Navigate between cards using left or right arrow keys.
+        // Navigate between cards using left or right arrow keys.
       'wizard_keyboard',
-          // Link to previous pages in preview.
+        // Link to previous pages in preview.
       'wizard_preview_link',
-          // Include confirmation page in progress.
+        // Include confirmation page in progress.
       'wizard_confirmation',
-          // Track wizard/cards progress in the URL.
+        // Track wizard/cards progress in the URL.
       'wizard_track',
-          // Display show/hide all wizard/cards pages link.
+        // Display show/hide all wizard/cards pages link.
       'wizard_toggle',
-          // Wizard/cards show all elements label.
+        // Wizard/cards show all elements label.
       'wizard_toggle_show_label',
-          // Wizard/cards show all elements label.
+        // Wizard/cards show all elements label.
       'wizard_toggle_hide_label',
-          // Ajax effect.
+        // Ajax effect.
       'ajax_effect',
-          // Ajax speed.
+        // Ajax speed.
       'ajax_speed',
-          // Ajax scroll top.
+        // Ajax scroll top.
       'ajax_scroll_top',
     ];
     foreach ($setting_names as $setting_name) {
@@ -191,10 +191,10 @@ class WebformCardsHooks {
         ],
       ],
       '#weight' => 0,
-          // Cards and previews previous button labels can have the same value.
-          // Issue #1342066 Document that buttons with the same #value need a unique
-          // #name for the Form API to distinguish them, or change the Form API to
-          // assign unique #names automatically.
+        // Cards and previews previous button labels can have the same value.
+        // Issue #1342066 Document that buttons with the same #value need a unique
+        // #name for the Form API to distinguish them, or change the Form API to
+        // assign unique #names automatically.
       '#name' => $webform->id() . '_card_previous_button',
     ];
     $form['actions']['cards_next'] = [

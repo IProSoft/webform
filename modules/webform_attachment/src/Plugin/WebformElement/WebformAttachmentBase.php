@@ -40,19 +40,19 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
    */
   protected function defineDefaultProperties() {
     return [
-      // Element settings.
+        // Element settings.
       'title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
-      // Display settings.
+        // Display settings.
       'display_on' => WebformElementDisplayOnInterface::DISPLAY_ON_NONE,
-      // Attachment values.
+        // Attachment values.
       'filename' => '',
       'sanitize' => FALSE,
       'link_title' => '',
       'trim' => FALSE,
       'download' => FALSE,
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
     ] + $this->defineDefaultBaseProperties();
@@ -186,9 +186,9 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
       '#access' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="properties[display_on]"]' => ['value' => 'form']],
+                [':input[name="properties[display_on]"]' => ['value' => 'form']],
           'or',
-          [':input[name="properties[display_on]"]' => ['value' => 'both']],
+                [':input[name="properties[display_on]"]' => ['value' => 'both']],
         ],
       ],
     ];
@@ -269,8 +269,8 @@ abstract class WebformAttachmentBase extends WebformElementBase implements Webfo
         'filecontent' => $file_content,
         'filename' => $file_name,
         'filemime' => $file_mime,
-        // URI is used when debugging or resending messages.
-        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
+          // URI is used when debugging or resending messages.
+          // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
         '_fileurl' => ($file_url) ? $file_url->toString() : NULL,
       ];
     }

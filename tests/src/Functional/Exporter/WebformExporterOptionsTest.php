@@ -34,7 +34,7 @@ class WebformExporterOptionsTest extends WebformBrowserTestBase {
 
     // Set default edit export settings.
     $edit = [
-      // Exclude all columns except sid.
+        // Exclude all columns except sid.
       'excluded_columns' => 'serial,uuid,token,uri,created,completed,changed,in_draft,current_page,remote_addr,uid,langcode,webform_id,entity_type,entity_id,sticky,locked,notes',
     ];
 

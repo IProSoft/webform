@@ -28,7 +28,7 @@ class WebformScale extends NumericBase {
       'scale_size' => 'medium',
       'scale_type' => 'circle',
       'scale_text' => 'below',
-      // Wrapper.
+        // Wrapper.
       'wrapper_type' => 'fieldset',
     ] + parent::defineDefaultProperties();
     unset(

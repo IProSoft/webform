@@ -78,11 +78,11 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
       'title_display' => 'invisible',
       'disabled' => FALSE,
       'flexbox' => '',
-      // Enhancements.
+        // Enhancements.
       'select2' => FALSE,
       'choices' => FALSE,
       'chosen' => FALSE,
-      // Wrapper.
+        // Wrapper.
       'wrapper_type' => 'fieldset',
     ] + parent::defineDefaultProperties()
       + $this->defineDefaultMultipleProperties();
@@ -1002,13 +1002,13 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
       'visible' => $this->t('Visible'),
       'labels' => [
         'data' => [
-          ['title' => ['#markup' => $this->t('Labels')]],
+                ['title' => ['#markup' => $this->t('Labels')]],
           $labels_help,
         ],
       ],
       'settings' => [
         'data' => [
-          ['title' => ['#markup' => $this->t('Settings')]],
+                ['title' => ['#markup' => $this->t('Settings')]],
           $settings_help,
         ],
       ],
@@ -1535,11 +1535,11 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
         'filecontent' => file_get_contents($file->getFileUri()),
         'filename' => $file->getFilename(),
         'filemime' => $file->getMimeType(),
-        // File URIs that are not supported return FALSE, when this happens
-        // still use the file's URI as the file's path.
+          // File URIs that are not supported return FALSE, when this happens
+          // still use the file's URI as the file's path.
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
-        // URI is used when debugging or resending messages.
-        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
+          // URI is used when debugging or resending messages.
+          // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
         '_fileurl' => $file->createFileUrl(FALSE),
       ];
     }

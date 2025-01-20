@@ -78,7 +78,7 @@ class WebformElementButtonsTest extends WebformElementBrowserTestBase {
     $this->drupalGet('/webform/test_element_buttons');
     $edit = [
       'buttons_other_advanced[buttons]' => 'One',
-      // This value is ignored, because 'buttons_other_advanced[buttons]' is not set to '_other_'.
+        // This value is ignored, because 'buttons_other_advanced[buttons]' is not set to '_other_'.
       'buttons_other_advanced[other]' => 'Five',
     ];
     $this->submitForm($edit, 'Submit');

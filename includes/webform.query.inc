@@ -5,11 +5,11 @@
  * Webform module query hooks.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformQueryHooks;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Entity\Webform;
+use Drupal\webform\Hook\WebformQueryHooks;
 
 /**
  * Implements hook_query_TAG_alter().

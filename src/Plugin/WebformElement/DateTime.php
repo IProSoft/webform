@@ -44,12 +44,12 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
     $properties = [
       'date_min' => '',
       'date_max' => '',
-      // Date settings.
+        // Date settings.
       'date_date_format' => $date_format,
       'date_date_element' => 'date',
       'date_year_range' => '1900:2050',
       'date_date_placeholder' => '',
-      // Time settings.
+        // Time settings.
       'date_time_format' => $time_format,
       'date_time_element' => 'time',
       'date_time_min' => '',
@@ -192,9 +192,9 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#access' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
           'or',
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
         ],
       ],
     ];
@@ -269,9 +269,9 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       ],
       '#states' => [
         'invisible' => [
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
           'or',
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
         ],
       ],
     ];
@@ -281,9 +281,9 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#description' => $this->t('The placeholder will be shown in the element until the user starts entering a value.'),
       '#states' => [
         'visible' => [
-          [':input[name="properties[date_time_element]"]' => ['value' => 'text']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'text']],
           'or',
-          [':input[name="properties[date_time_element]"]' => ['value' => 'timepicker']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'timepicker']],
         ],
       ],
     ];
@@ -303,13 +303,13 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#attributes' => ['data-webform-states-no-clear' => TRUE],
       '#states' => [
         'invisible' => [
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime']],
           'or',
-          [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
+                [':input[name="properties[date_date_element]"]' => ['value' => 'datetime-local']],
           'or',
-          [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
           'or',
-          [':input[name="properties[date_time_element]"]' => ['value' => 'time']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'time']],
         ],
       ],
     ];
@@ -320,7 +320,7 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#description' => $this->t('Specifies the minimum time.'),
       '#states' => [
         'invisible' => [
-          [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
         ],
       ],
     ];
@@ -330,7 +330,7 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#description' => $this->t('Specifies the maximum time.'),
       '#states' => [
         'invisible' => [
-          [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
         ],
       ],
     ];
@@ -350,7 +350,7 @@ class DateTime extends DateBase implements TrustedCallbackInterface {
       '#other__description' => $this->t('Enter interval in seconds.'),
       '#states' => [
         'invisible' => [
-          [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
+                [':input[name="properties[date_time_element]"]' => ['value' => 'none']],
         ],
       ],
     ];

@@ -79,29 +79,29 @@ class Address extends WebformCompositeBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'default_value' => [],
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => 'invisible',
       'description_display' => '',
       'help_display' => '',
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
       'format_items' => $this->getItemsDefaultFormat(),
       'format_items_html' => '',
       'format_items_text' => '',
-      // Address settings.
+        // Address settings.
       'available_countries' => [],
       'field_overrides' => [],
       'langcode_override' => '',
@@ -288,7 +288,7 @@ class Address extends WebformCompositeBase {
       '#prefix' => '<div class="address" translate="no">',
       '#suffix' => '</div>',
       '#post_render' => [
-        ['\Drupal\address\Plugin\Field\FieldFormatter\AddressDefaultFormatter', 'postRender'],
+            ['\Drupal\address\Plugin\Field\FieldFormatter\AddressDefaultFormatter', 'postRender'],
       ],
       '#cache' => [
         'contexts' => [
@@ -432,17 +432,17 @@ class Address extends WebformCompositeBase {
    */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     return [
-      [
-        'given_name' => 'John',
-        'family_name' => 'Smith',
-        'organization' => 'Google Inc.',
-        'address_line1' => '1098 Alta Ave',
-        'postal_code' => '94043',
-        'locality' => 'Mountain View',
-        'administrative_area' => 'CA',
-        'country_code' => 'US',
-        'langcode' => 'en',
-      ],
+        [
+          'given_name' => 'John',
+          'family_name' => 'Smith',
+          'organization' => 'Google Inc.',
+          'address_line1' => '1098 Alta Ave',
+          'postal_code' => '94043',
+          'locality' => 'Mountain View',
+          'administrative_area' => 'CA',
+          'country_code' => 'US',
+          'langcode' => 'en',
+        ],
     ];
   }
 

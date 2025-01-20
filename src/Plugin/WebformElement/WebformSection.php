@@ -22,13 +22,13 @@ class WebformSection extends ContainerBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Title.
+        // Title.
       'title_tag' => $this->configFactory->get('webform.settings')->get('element.default_section_title_tag'),
       'title_display' => '',
       'title_attributes' => [],

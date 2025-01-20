@@ -27,13 +27,13 @@ class Textarea extends TextBase {
     return [
       'title' => '',
       'default_value' => '',
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
@@ -44,7 +44,7 @@ class Textarea extends TextBase {
       'readonly' => FALSE,
       'rows' => NULL,
       'maxlength' => NULL,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
       'unique' => FALSE,
@@ -56,11 +56,11 @@ class Textarea extends TextBase {
       'counter_minimum_message' => '',
       'counter_maximum' => NULL,
       'counter_maximum_message' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
       'attributes' => [],
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',

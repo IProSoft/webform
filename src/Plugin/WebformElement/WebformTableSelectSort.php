@@ -28,7 +28,7 @@ class WebformTableSelectSort extends OptionsBase {
     return [
       'multiple' => TRUE,
       'multiple_error' => '',
-      // Table settings.
+        // Table settings.
       'js_select' => TRUE,
     ] + parent::defineDefaultProperties();
   }

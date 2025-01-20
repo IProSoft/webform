@@ -25,13 +25,13 @@ class WebformEmailMultiple extends FormElementBase {
       '#cardinality' => NULL,
       '#allow_tokens' => FALSE,
       '#process' => [
-        [$class, 'processWebformEmailConfirm'],
-        [$class, 'processAutocomplete'],
-        [$class, 'processAjaxForm'],
-        [$class, 'processPattern'],
+            [$class, 'processWebformEmailConfirm'],
+            [$class, 'processAutocomplete'],
+            [$class, 'processAjaxForm'],
+            [$class, 'processPattern'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformEmailMultiple'],
+            [$class, 'preRenderWebformEmailMultiple'],
       ],
       '#theme' => 'input__webform_email_multiple',
       '#theme_wrappers' => ['form_element'],

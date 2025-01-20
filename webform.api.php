@@ -121,16 +121,16 @@ function hook_webform_element_configuration_form_alter(array &$form, FormStateIn
     '#title' => t('Custom properties'),
     '#description' => t('The below custom properties are provided and managed by the webform_test_custom_properties.module.'),
     '#open' => TRUE,
-    // Add custom properties after all fieldset elements, which have a
-    // weight of -20.
-    // @see \Drupal\webform\Plugin\WebformElementBase::buildConfigurationForm
+      // Add custom properties after all fieldset elements, which have a
+      // weight of -20.
+      // @see \Drupal\webform\Plugin\WebformElementBase::buildConfigurationForm
     '#weight' => -10,
   ];
   $form['custom_properties']['custom_data'] = [
     '#type' => 'textfield',
     '#title' => t('Custom data'),
     '#description' => t("The custom data value will be added to the \$element's render array attributes."),
-    // The element #default_value is auto-populated upstream and should NOT be set here.
+      // The element #default_value is auto-populated upstream and should NOT be set here.
   ];
 }
 
@@ -618,7 +618,7 @@ function hook_webform_help_info_alter(array &$help) {
  */
 function hook_webform_access_rules() {
   return [
-    // A custom operation.
+      // A custom operation.
     'some_operation' => [
       'title' => t('Some operation'),
       'weight' => -100,
@@ -626,28 +626,28 @@ function hook_webform_access_rules() {
       'permissions' => ['some permission', 'another permission'],
     ],
 
-    // Custom any and own operations using hook_submission_access().
-    //
-    // - _any: means to grant access to all webform submissions independently
-    //   of authorship
-    // - _own: means to grant access only if the user requesting access is
-    //   the author of the webform submission on which the operation is
-    //   being requested.
-    //
-    // The below 2 operations can be queried together as following:
-    //
-    // \Drupal::entityTypeManager()
-    // ->getAccessControlHandler('webform_submission')
-    // ->access($webform_submission, 'some_operation', $account);
-    //
-    // This will return TRUE as long as the $account is has either
-    // 'some_operation_any' or has 'some_operation_own' and is author of
-    // the $webform_submission.
-    //
-    // Note, to implement *_own and *_any you will need to implement
-    // hook_webform_submission_access().
-    //
-    // @see hook_webform_submission_access()
+      // Custom any and own operations using hook_submission_access().
+      //
+      // - _any: means to grant access to all webform submissions independently
+      //   of authorship
+      // - _own: means to grant access only if the user requesting access is
+      //   the author of the webform submission on which the operation is
+      //   being requested.
+      //
+      // The below 2 operations can be queried together as following:
+      //
+      // \Drupal::entityTypeManager()
+      // ->getAccessControlHandler('webform_submission')
+      // ->access($webform_submission, 'some_operation', $account);
+      //
+      // This will return TRUE as long as the $account is has either
+      // 'some_operation_any' or has 'some_operation_own' and is author of
+      // the $webform_submission.
+      //
+      // Note, to implement *_own and *_any you will need to implement
+      // hook_webform_submission_access().
+      //
+      // @see hook_webform_submission_access()
     'some_operation_any' => [
       'title' => t('Some operation on ALL webform submissions'),
       'description' => ['#markup' => t('Allow users to execute such particular operation on all webform submissions independently of whether they are authors of those submissions.')],

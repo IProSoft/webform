@@ -170,8 +170,8 @@ abstract class WebformHandlerFormBase extends FormBase {
         'exists' => [$this, 'exists'],
       ],
       '#element_validate' => [
-        [$this, 'validateMachineName'],
-        [MachineName::class, 'validateMachineName'],
+            [$this, 'validateMachineName'],
+            [MachineName::class, 'validateMachineName'],
       ],
     ];
     $form['general']['notes'] = [
@@ -192,7 +192,7 @@ abstract class WebformHandlerFormBase extends FormBase {
       '#title' => $this->t('Enable the %name handler.', ['%name' => $this->webformHandler->label()]),
       '#return_value' => TRUE,
       '#default_value' => $this->webformHandler->isEnabled(),
-      // Disable broken plugins.
+        // Disable broken plugins.
       '#disabled' => ($this->webformHandler->getPluginId() === 'broken'),
     ];
 

@@ -25,11 +25,11 @@ class Range extends NumericBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Number settings.
+        // Number settings.
       'min' => 0,
       'max' => 100,
       'step' => 1,
-      // Output settings.
+        // Output settings.
       'output' => '',
       'output__field_prefix' => '',
       'output__field_suffix' => '',

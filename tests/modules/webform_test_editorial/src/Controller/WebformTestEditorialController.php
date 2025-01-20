@@ -130,10 +130,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
     foreach ($groups as $group_name => $help) {
       // Header.
       $header = [
-        ['data' => $this->t('Name'), 'width' => '20%'],
-        ['data' => $this->t('Title'), 'width' => '20%'],
-        ['data' => $this->t('Content'), 'width' => '50%'],
-        ['data' => $this->t('Links'), 'width' => '10%'],
+          ['data' => $this->t('Name'), 'width' => '20%'],
+          ['data' => $this->t('Title'), 'width' => '20%'],
+          ['data' => $this->t('Content'), 'width' => '50%'],
+          ['data' => $this->t('Links'), 'width' => '10%'],
       ];
 
       // Rows.
@@ -167,10 +167,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
         }
         $rows[] = [
           'data' => [
-            ['data' => $name],
-            ['data' => $info['title']],
-            ['data' => $info['content']],
-            ['data' => implode(' | ', $links)],
+                ['data' => $name],
+                ['data' => $info['title']],
+                ['data' => $info['content']],
+                ['data' => implode(' | ', $links)],
           ],
         ];
       }
@@ -208,10 +208,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
   public function videos() {
     // Header.
     $header = [
-      ['data' => $this->t('Name'), 'width' => '10%'],
-      ['data' => $this->t('Title'), 'width' => '20%'],
-      ['data' => $this->t('Content'), 'width' => '50%'],
-      ['data' => $this->t('Video/Slides'), 'width' => '20%'],
+        ['data' => $this->t('Name'), 'width' => '10%'],
+        ['data' => $this->t('Title'), 'width' => '20%'],
+        ['data' => $this->t('Content'), 'width' => '50%'],
+        ['data' => $this->t('Video/Slides'), 'width' => '20%'],
     ];
 
     // Rows.
@@ -224,10 +224,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
       $slides = Link::fromTextAndUrl($this->t('Slides'), Url::fromUri('https://docs.google.com/presentation/d/' . $info['presentation_id']))->toString();
       $rows[] = [
         'data' => [
-          ['data' => '<b>' . $name . '</b>' . (!empty($info['hidden']) ? '<br/>[' . $this->t('hidden') . ']' : '')],
-          ['data' => $info['title']],
-          ['data' => $info['content']],
-          ['data' => $video . '<br/>' . $slides],
+              ['data' => '<b>' . $name . '</b>' . (!empty($info['hidden']) ? '<br/>[' . $this->t('hidden') . ']' : '')],
+              ['data' => $info['title']],
+              ['data' => $info['content']],
+              ['data' => $video . '<br/>' . $slides],
         ],
       ];
     }
@@ -262,9 +262,9 @@ class WebformTestEditorialController extends ControllerBase implements Container
 
       // Header.
       $header = [
-        ['data' => $this->t('Name'), 'width' => '25%'],
-        ['data' => $this->t('Label'), 'width' => '25%'],
-        ['data' => $this->t('Description'), 'width' => '50%'],
+          ['data' => $this->t('Name'), 'width' => '25%'],
+          ['data' => $this->t('Label'), 'width' => '25%'],
+          ['data' => $this->t('Description'), 'width' => '50%'],
       ];
 
       // Rows.
@@ -272,9 +272,9 @@ class WebformTestEditorialController extends ControllerBase implements Container
       foreach ($elements as $name => $element) {
         $rows[] = [
           'data' => [
-            ['data' => '<b>' . $name . '</b>'],
-            ['data' => $element['label']],
-            ['data' => $element['description']],
+                ['data' => '<b>' . $name . '</b>'],
+                ['data' => $element['label']],
+                ['data' => $element['description']],
           ],
         ];
       }
@@ -298,10 +298,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
   public function libraries() {
     // Header.
     $header = [
-      ['data' => $this->t('Name'), 'width' => '10%'],
-      ['data' => $this->t('Title'), 'width' => '10%'],
-      ['data' => $this->t('Description'), 'width' => '40%'],
-      ['data' => $this->t('Notes'), 'width' => '40%'],
+        ['data' => $this->t('Name'), 'width' => '10%'],
+        ['data' => $this->t('Title'), 'width' => '10%'],
+        ['data' => $this->t('Description'), 'width' => '40%'],
+        ['data' => $this->t('Notes'), 'width' => '40%'],
     ];
 
     // Rows.
@@ -310,10 +310,10 @@ class WebformTestEditorialController extends ControllerBase implements Container
     foreach ($libraries as $name => $library) {
       $rows[] = [
         'data' => [
-          ['data' => $name],
-          ['data' => '<a href="' . $library['homepage_url']->toString() . '">' . $library['title'] . '</a>'],
-          ['data' => $library['description']],
-          ['data' => $library['notes']],
+              ['data' => $name],
+              ['data' => '<a href="' . $library['homepage_url']->toString() . '">' . $library['title'] . '</a>'],
+              ['data' => $library['description']],
+              ['data' => $library['notes']],
         ],
       ];
     }
@@ -335,9 +335,9 @@ class WebformTestEditorialController extends ControllerBase implements Container
   public function schema() {
     // Header.
     $header = [
-      ['data' => $this->t('Name'), 'width' => '20%'],
-      ['data' => $this->t('Type'), 'width' => '20%'],
-      ['data' => $this->t('Description'), 'width' => '60%'],
+        ['data' => $this->t('Name'), 'width' => '20%'],
+        ['data' => $this->t('Type'), 'width' => '20%'],
+        ['data' => $this->t('Description'), 'width' => '60%'],
     ];
 
     // Rows.
@@ -347,9 +347,9 @@ class WebformTestEditorialController extends ControllerBase implements Container
     foreach ($base_fields as $field_name => $base_field) {
       $rows[] = [
         'data' => [
-          ['data' => $field_name],
-          ['data' => $base_field->getType()],
-          ['data' => $base_field->getDescription()],
+              ['data' => $field_name],
+              ['data' => $base_field->getType()],
+              ['data' => $base_field->getDescription()],
         ],
       ];
     }
@@ -378,8 +378,8 @@ class WebformTestEditorialController extends ControllerBase implements Container
     ];
     // Header.
     $header = [
-      ['data' => $this->t('Name'), 'width' => '30%'],
-      ['data' => $this->t('Value'), 'width' => '70%'],
+        ['data' => $this->t('Name'), 'width' => '30%'],
+        ['data' => $this->t('Value'), 'width' => '70%'],
     ];
     $build = [];
     $commands = webform_drush_command();
@@ -403,8 +403,8 @@ class WebformTestEditorialController extends ControllerBase implements Container
           foreach ($command[$property] as $name => $value) {
             $rows[] = [
               'data' => [
-                ['data' => $name],
-                ['data' => $value],
+                    ['data' => $name],
+                    ['data' => $value],
               ],
             ];
           }

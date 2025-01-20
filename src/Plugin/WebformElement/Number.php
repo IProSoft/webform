@@ -20,7 +20,7 @@ class Number extends NumericBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Number settings.
+        // Number settings.
       'min' => NULL,
       'max' => NULL,
       'step' => NULL,

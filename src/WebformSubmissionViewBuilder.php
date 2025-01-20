@@ -230,8 +230,8 @@ class WebformSubmissionViewBuilder extends EntityViewBuilder implements WebformS
       // an empty table cell.
       $html = $webform_element->formatHtml($element, $webform_submission, $options);
       $rows[$key] = [
-        ['header' => TRUE, 'data' => $title],
-        ['data' => (is_string($html)) ? ['#markup' => $html] : $html],
+          ['header' => TRUE, 'data' => $title],
+          ['data' => (is_string($html)) ? ['#markup' => $html] : $html],
       ];
     }
 

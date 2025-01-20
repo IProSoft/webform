@@ -47,20 +47,20 @@ class WebformTokenSubmissionValueTest extends WebformBrowserTestBase {
     // Check anonymous token handling.
     $this->postSubmission($webform);
     $tokens = [
-      // Element.
+        // Element.
       'webform:element:email' => 'email',
       'webform:element:email:title' => 'email',
       'webform:element:email:description' => '<em>This is an email address</em>',
       'webform:element:not_element:description' => '[webform:element:not_element:description]',
       'webform:element:email:not_property' => '[webform:element:email:not_property]',
 
-      // Checkboxes.
+        // Checkboxes.
       'webform:element:checkboxes' => 'One, Three',
       'webform:element:checkboxes:checked:one' => '1',
       'webform:element:checkboxes:selected:two' => '0',
       'webform:element:checkboxes:selected:three' => '1',
 
-      // Emails.
+        // Emails.
       'webform_submission:values:email' => 'example@example.com',
       'webform_submission:values:emails:0' => 'one@example.com',
       'webform_submission:values:emails:1' => 'two@example.com',
@@ -72,25 +72,25 @@ class WebformTokenSubmissionValueTest extends WebformBrowserTestBase {
       'webform_submission:values:emails:2:html' => '<a href="mailto:three@example.com">three@example.com</a>',
       'webform_submission:values:emails:99:html' => '',
 
-      // Users.
+        // Users.
       'webform_submission:values:user' => 'admin (1)',
       'webform_submission:values:users' => 'admin (1)',
       'webform_submission:values:user:entity:mail' => 'admin@example.com',
       'webform_submission:values:users:0:entity:account-name' => 'admin',
       'webform_submission:values:users:99:entity:account-name' => '',
 
-      // Current users.
+        // Current users.
       'current-user:display-name' => '',
       'current-user:missing' => '',
 
-      // Terms.
+        // Terms.
       'webform_submission:values:term' => 'Parent 1 (1)',
       'webform_submission:values:terms' => 'Parent 1 (1), Parent 1: Child 1 (2)',
       'webform_submission:values:term:entity:name' => 'Parent 1',
       'webform_submission:values:terms:entity:name' => 'Parent 1',
       'webform_submission:values:terms:1:entity:name' => 'Parent 1: Child 1',
 
-      // Names.
+        // Names.
       'webform_submission:values:name' => 'John Smith',
       'webform_submission:values:names' => '- John Smith
 - Jane Doe',
@@ -98,7 +98,7 @@ class WebformTokenSubmissionValueTest extends WebformBrowserTestBase {
       'webform_submission:values:names:1' => 'Jane Doe',
       'webform_submission:values:names:99' => '',
 
-      // Contacts.
+        // Contacts.
       'webform_submission:values:contact' => 'John Smith
 10 Main Street
 Springfield, Alabama. 12345
@@ -121,19 +121,19 @@ john@example.com',
       'webform_submission:values:contacts:0:email:html' => '<a href="mailto:john@example.com">john@example.com</a>',
       'webform_submission:values:contacts:1:email:raw:html' => 'jane@example.com',
 
-      // Containers.
+        // Containers.
       'webform_submission:values:fieldset' => '<pre>fieldset
 --------
 first_name: John
 last_name: Smith
 </pre>',
 
-      // Markup.
+        // Markup.
       'webform_submission:values:webform_markup' => '*This is some basic HTML.*
 ',
       'webform_submission:values:webform_markup:html' => '<strong>This is some basic HTML.</strong>',
 
-      // Submission limits.
+        // Submission limits.
       'webform_submission:limit:webform' => '100',
       'webform_submission:total:webform' => '1',
       'webform_submission:limit:user' => '10',
@@ -143,20 +143,20 @@ last_name: Smith
       'webform_submission:limit:user:source_entity' => '5',
       'webform_submission:total:user:source_entity' => '',
 
-      // Clear.
+        // Clear.
       'webform_submission:values:missing' => '[webform_submission:values:missing]',
       'webform_submission:values:missing:clear' => '',
       'webform:random:missing' => '[webform:random:missing]',
       'webform:random:missing:clear' => '',
 
-      // HTML decode.
+        // HTML decode.
       'webform_submission:values:markup' => '&lt;b&gt;Bold&lt;/b&gt; &amp;amp; UPPERCASE',
       'webform_submission:values:markup:htmldecode' => '<b>Bold</b> &amp; UPPERCASE',
       'webform_submission:values:markup:htmldecode:striptags' => 'Bold &amp; UPPERCASE',
       'webform_submission:values:script' => '&lt;script&gt;alert(&#039;hi&#039;);&lt;/script&gt;',
       'webform_submission:values:script:htmldecode' => 'alert(\'hi\');',
 
-      // URL encode.
+        // URL encode.
       'webform_submission:values:url' => 'http://example.com?query=param',
       'webform_submission:values:url:urlencode' => 'http%3A%2F%2Fexample.com%3Fquery%3Dparam',
     ];
@@ -175,7 +175,7 @@ last_name: Smith
     $this->drupalLogin($this->rootUser);
     $this->postSubmission($webform);
     $tokens = [
-      // Current users.
+        // Current users.
       'current-user:display-name' => 'admin',
       'current-user:missing' => '',
     ];

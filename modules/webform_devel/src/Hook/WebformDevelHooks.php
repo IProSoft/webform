@@ -20,7 +20,7 @@ class WebformDevelHooks {
       'title' => t('Form API Export'),
       'content' => t("The <strong>Form API export</strong> page demonstrates how a webform's elements may be used to create custom configuration forms."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/fapi
+            // @see /admin/structure/webform/manage/{webform}/fapi
         'entity.webform.fapi_export_form',
       ],
     ];

@@ -30,8 +30,8 @@ class WebformMapping extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformMapping'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformMapping'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#filter' => TRUE,
@@ -97,8 +97,8 @@ class WebformMapping extends FormElementBase {
 
     // Build header.
     $header = [
-      ['data' => ['#markup' => $element['#source__title'] . ' ' . $arrow]],
-      ['data' => ['#markup' => $element['#destination__title']]],
+        ['data' => ['#markup' => $element['#source__title'] . ' ' . $arrow]],
+        ['data' => ['#markup' => $element['#destination__title']]],
     ];
 
     // Build rows.

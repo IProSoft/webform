@@ -7,11 +7,11 @@
  * @see webform_preprocess_table()
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformTranslationHooks;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Render\Element;
+use Drupal\webform\Hook\WebformTranslationHooks;
 use Drupal\webform\Utility\WebformYaml;
 
 /**

@@ -25,24 +25,24 @@ class VerticalTabs extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Element settings.
+        // Element settings.
       'title' => $this->t('Vertical Tabs'),
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => 'invisible',
       'description_display' => '',
       'help_display' => '',
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
-      // Vertical tabs.
+        // Vertical tabs.
       'default_tab' => '',
     ] + $this->defineDefaultBaseProperties();
   }

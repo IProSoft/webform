@@ -37,9 +37,9 @@ class WebformEmailProvider implements WebformEmailProviderInterface {
    */
   public function getModules() {
     return [
-      // Mail System - https://www.drupal.org/project/mailsystem
+        // Mail System - https://www.drupal.org/project/mailsystem
       'mailsystem',
-      // SMTP Authentication Support - https://www.drupal.org/project/smtp
+        // SMTP Authentication Support - https://www.drupal.org/project/smtp
       'smtp',
     ];
   }

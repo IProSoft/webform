@@ -35,8 +35,8 @@ class WebformElementOptions extends FormElementBase {
       '#yaml' => FALSE,
       '#likert' => FALSE,
       '#process' => [
-        [$class, 'processWebformElementOptions'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformElementOptions'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#custom__type' => 'webform_options',

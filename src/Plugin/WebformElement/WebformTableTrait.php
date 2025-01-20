@@ -42,7 +42,7 @@ trait WebformTableTrait {
       foreach ($element['#options'] as $options_key => $options_value) {
         if (is_string($options_value)) {
           $element['#options'][$options_key] = [
-            ['value' => $options_value],
+              ['value' => $options_value],
           ];
         }
       }
@@ -197,9 +197,9 @@ trait WebformTableTrait {
   public static function setProcessTableSelectCallback(array &$element) {
     $class = get_called_class();
     $element['#process'] = [
-      ['\Drupal\Core\Render\Element\Tableselect', 'processTableselect'],
-      [$class , 'processTableSelect'],
-      [$class , 'processTableSelectOptions'],
+        ['\Drupal\Core\Render\Element\Tableselect', 'processTableselect'],
+        [$class , 'processTableSelect'],
+        [$class , 'processTableSelectOptions'],
     ];
   }
 

@@ -22,8 +22,8 @@ class WebformCheckboxValue extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformCheckboxValue'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformCheckboxValue'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#states' => [],
@@ -54,7 +54,7 @@ class WebformCheckboxValue extends FormElementBase {
 
     $properties = [
       '#title' => '#title',
-      // phpcs:ignore DrupalPractice.General.DescriptionT.DescriptionT
+        // phpcs:ignore DrupalPractice.General.DescriptionT.DescriptionT
       '#description' => '#description',
       '#help' => '#help',
     ];

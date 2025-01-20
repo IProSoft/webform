@@ -25,19 +25,19 @@ class Item extends WebformMarkup {
   protected function defineDefaultProperties() {
     return [
       'title' => '',
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
       'field_prefix' => '',
       'field_suffix' => '',
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
     ] + parent::defineDefaultProperties();
   }

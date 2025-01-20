@@ -45,14 +45,14 @@ class WebformExampleComposite extends WebformCompositeBase {
     $elements['date_of_birth'] = [
       '#type' => 'date',
       '#title' => t('Date of birth'),
-      // Use #after_build to add #states.
+        // Use #after_build to add #states.
       '#after_build' => [[get_called_class(), 'afterBuild']],
     ];
     $elements['sex'] = [
       '#type' => 'select',
       '#title' => t('Sex'),
       '#options' => 'sex',
-      // Use #after_build to add #states.
+        // Use #after_build to add #states.
       '#after_build' => [[get_called_class(), 'afterBuild']],
     ];
 
@@ -67,8 +67,8 @@ class WebformExampleComposite extends WebformCompositeBase {
     preg_match('/^(.+)\[[^]]+]$/', $element['#name'], $match);
     $composite_name = $match[1];
     $element['#states']['disabled'] = [
-      [':input[name="' . $composite_name . '[first_name]"]' => ['empty' => TRUE]],
-      [':input[name="' . $composite_name . '[last_name]"]' => ['empty' => TRUE]],
+        [':input[name="' . $composite_name . '[first_name]"]' => ['empty' => TRUE]],
+        [':input[name="' . $composite_name . '[last_name]"]' => ['empty' => TRUE]],
     ];
     // Add .js-form-wrapper to wrapper (ie td) to prevent #states API from
     // disabling the entire table row when this element is disabled.

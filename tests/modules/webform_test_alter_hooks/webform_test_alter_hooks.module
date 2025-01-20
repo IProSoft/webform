@@ -5,9 +5,9 @@
  * Support module for webform that tests form and element alter hooks.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_alter_hooks\Hook\WebformTestAlterHooksHooks;
-use Drupal\Core\Form\FormStateInterface;
 
 /* ************************************************************************** */
 // Form hooks.

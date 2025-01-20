@@ -109,23 +109,23 @@ class WebformSubmissionImportExportFunctionalTest extends WebformBrowserTestBase
     WebformElementHelper::convertRenderMarkupToStrings($actual_stats);
     $this->debug($actual_stats);
     $expected_stats = [
-      'created' => 1,
-      'updated' => 2,
-      'skipped' => 0,
-      'total' => 3,
-      'warnings' => [
-        1 => [],
-        2 => [],
-        3 => [
-          0 => '[file] Unable to read file from URL (' . $file_uri . ').',
-          1 => '[files] Unable to read file from URL (' . $files_uri . ').',
+        'created' => 1,
+        'updated' => 2,
+        'skipped' => 0,
+        'total' => 3,
+        'warnings' => [
+            1 => [],
+            2 => [],
+            3 => [
+                0 => '[file] Unable to read file from URL (' . $file_uri . ').',
+                1 => '[files] Unable to read file from URL (' . $files_uri . ').',
+            ],
         ],
-      ],
-      'errors' => [
-        1 => [],
-        2 => [],
-        3 => [],
-      ],
+        'errors' => [
+            1 => [],
+            2 => [],
+            3 => [],
+        ],
     ];
     $this->assertEquals($expected_stats, $actual_stats);
 

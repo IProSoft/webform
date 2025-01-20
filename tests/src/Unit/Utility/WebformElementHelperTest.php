@@ -72,24 +72,24 @@ class WebformElementHelperTest extends UnitTestCase {
   public static function providerGetIgnoredProperties() {
     // Nothing ignored.
     $tests[] = [
-      ['#value' => 'text'],
-      [],
+        ['#value' => 'text'],
+        [],
     ];
     // Ignore #tree.
     $tests[] = [
-      ['#tree' => TRUE],
-      ['#tree' => '#tree'],
+        ['#tree' => TRUE],
+        ['#tree' => '#tree'],
     ];
     // Ignore #tree and #element_validate.
     $tests[] = [
-      ['#tree' => TRUE, '#value' => 'text', '#element_validate' => 'some_function'],
-      ['#tree' => '#tree', '#element_validate' => '#element_validate'],
+        ['#tree' => TRUE, '#value' => 'text', '#element_validate' => 'some_function'],
+        ['#tree' => '#tree', '#element_validate' => '#element_validate'],
     ];
     // Ignore #subelement__tree and #subelement__element_validate,
     // but not '#subelement__weight'.
     $tests[] = [
-      ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function', '#subelement__weight' => 0],
-      ['#subelement__tree' => '#subelement__tree', '#subelement__element_validate' => '#subelement__element_validate'],
+        ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function', '#subelement__weight' => 0],
+        ['#subelement__tree' => '#subelement__tree', '#subelement__element_validate' => '#subelement__element_validate'],
     ];
     return $tests;
   }
@@ -119,57 +119,57 @@ class WebformElementHelperTest extends UnitTestCase {
   public static function providerRemoveIgnoredProperties() {
     // Nothing removed.
     $tests[] = [
-      ['#value' => 'text'],
-      ['#value' => 'text'],
+        ['#value' => 'text'],
+        ['#value' => 'text'],
     ];
     // Remove #tree.
     $tests[] = [
-      ['#tree' => TRUE],
-      [],
+        ['#tree' => TRUE],
+        [],
     ];
     // Remove #tree and #element_validate.
     $tests[] = [
-      ['#tree' => TRUE, '#value' => 'text', '#element_validate' => 'some_function'],
-      ['#value' => 'text'],
+        ['#tree' => TRUE, '#value' => 'text', '#element_validate' => 'some_function'],
+        ['#value' => 'text'],
     ];
     // Remove #ajax: string.
     $tests[] = [
-      ['#ajax' => 'some_function'],
-      [],
+        ['#ajax' => 'some_function'],
+        [],
     ];
     // Don't remove #ajax: FALSE.
     // @see @see \Drupal\webform\Element\WebformComputedBase
     $tests[] = [
-      ['#ajax' => FALSE],
-      ['#ajax' => FALSE],
+        ['#ajax' => FALSE],
+        ['#ajax' => FALSE],
     ];
     // Remove #subelement__tree and #subelement__element_validate.
     $tests[] = [
-      ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function', '#subelement__equal_stepwise_validate' => TRUE],
-      ['#value' => 'text', '#subelement__equal_stepwise_validate' => TRUE],
+        ['#subelement__tree' => TRUE, '#value' => 'text', '#subelement__element_validate' => 'some_function', '#subelement__equal_stepwise_validate' => TRUE],
+        ['#value' => 'text', '#subelement__equal_stepwise_validate' => TRUE],
     ];
     // Remove random nested #element_validate.
     $tests[] = [
-      ['random' => ['#element_validate' => 'some_function']],
-      ['random' => []],
+        ['random' => ['#element_validate' => 'some_function']],
+        ['random' => []],
     ];
     $tests[] = [
-      ['#prefix' => ['#markup' => 'some_markup', '#element_validate' => 'some_function', '#equal_stepwise_validate' => TRUE]],
-      ['#prefix' => ['#markup' => 'some_markup', '#equal_stepwise_validate' => TRUE]],
+        ['#prefix' => ['#markup' => 'some_markup', '#element_validate' => 'some_function', '#equal_stepwise_validate' => TRUE]],
+        ['#prefix' => ['#markup' => 'some_markup', '#equal_stepwise_validate' => TRUE]],
     ];
     // Remove any *_validate(s) and *_callback(s).
     $tests[] = [
-      ['random' => ['#some_random_validate' => 'some_function']],
-      ['random' => []],
+        ['random' => ['#some_random_validate' => 'some_function']],
+        ['random' => []],
     ];
     $tests[] = [
-      ['random' => ['#some_random_callbacks' => 'some_function']],
-      ['random' => []],
+        ['random' => ['#some_random_callbacks' => 'some_function']],
+        ['random' => []],
     ];
     // Remove #weight but not subelement__weight.
     $tests[] = [
-      ['#weight' => 1, '#subelement__weight' => 1],
-      ['#subelement__weight' => 1],
+        ['#weight' => 1, '#subelement__weight' => 1],
+        ['#subelement__weight' => 1],
     ];
     return $tests;
   }
@@ -198,14 +198,14 @@ class WebformElementHelperTest extends UnitTestCase {
    */
   public static function providerConvertRenderMarkupToStrings() {
     return [
-      [
-        ['test' => Markup::create('markup')],
-        ['test' => 'markup'],
-      ],
-      [
-        ['test' => ['nested' => Markup::create('markup')]],
-        ['test' => ['nested' => 'markup']],
-      ],
+        [
+            ['test' => Markup::create('markup')],
+            ['test' => 'markup'],
+        ],
+        [
+            ['test' => ['nested' => Markup::create('markup')]],
+            ['test' => ['nested' => 'markup']],
+        ],
     ];
   }
 
@@ -233,36 +233,36 @@ class WebformElementHelperTest extends UnitTestCase {
    */
   public static function providerHasProperty() {
     return [
-      [
-        [[], '#required', NULL],
-        FALSE,
-        'Does not have #required',
-      ],
-      [
-        [['#required' => TRUE], '#required', NULL],
-        TRUE,
-        'Has #required',
-      ],
-      [
-        [['#required' => TRUE], '#required', 'value'],
-        FALSE,
-        '#required !== value',
-      ],
-      [
-        [['#required' => 'value'], '#required', 'value'],
-        TRUE,
-        '#required === value',
-      ],
-      [
-        [['nested' => ['#required' => TRUE]], '#required', NULL],
-        TRUE,
-        'Has nested #required',
-      ],
-      [
-        [['nested' => ['#required' => 'value']], '#required', 'value'],
-        TRUE,
-        'nested #required === value',
-      ],
+        [
+            [[], '#required', NULL],
+          FALSE,
+          'Does not have #required',
+        ],
+        [
+            [['#required' => TRUE], '#required', NULL],
+          TRUE,
+          'Has #required',
+        ],
+        [
+            [['#required' => TRUE], '#required', 'value'],
+          FALSE,
+          '#required !== value',
+        ],
+        [
+            [['#required' => 'value'], '#required', 'value'],
+          TRUE,
+          '#required === value',
+        ],
+        [
+            [['nested' => ['#required' => TRUE]], '#required', NULL],
+          TRUE,
+          'Has nested #required',
+        ],
+        [
+            [['nested' => ['#required' => 'value']], '#required', 'value'],
+          TRUE,
+          'nested #required === value',
+        ],
 
     ];
   }

@@ -92,19 +92,19 @@ class WebformElementAddressTest extends WebformElementBrowserTestBase {
       'sorting_code' => '',
     ], $data['address_advanced']);
     $this->assertEquals([
-      [
-        'address_line1' => '1098 Alta Ave',
-        'address_line2' => '',
-        'address_line3' => '',
-        'administrative_area' => 'CA',
-        'country_code' => 'US',
-        'family_name' => 'Smith',
-        'given_name' => 'John',
-        'langcode' => 'en',
-        'locality' => 'Mountain View',
-        'organization' => 'Google Inc.',
-        'postal_code' => '94043',
-      ],
+        [
+          'address_line1' => '1098 Alta Ave',
+          'address_line2' => '',
+          'address_line3' => '',
+          'administrative_area' => 'CA',
+          'country_code' => 'US',
+          'family_name' => 'Smith',
+          'given_name' => 'John',
+          'langcode' => 'en',
+          'locality' => 'Mountain View',
+          'organization' => 'Google Inc.',
+          'postal_code' => '94043',
+        ],
     ], $data['address_multiple']);
 
     // Check text formatting.

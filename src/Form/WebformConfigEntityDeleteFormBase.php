@@ -168,7 +168,7 @@ abstract class WebformConfigEntityDeleteFormBase extends EntityForm implements W
         '#type' => 'submit',
         '#value' => $this->getConfirmText(),
         '#submit' => [
-          [$this, 'submitForm'],
+                [$this, 'submitForm'],
         ],
       ],
       'cancel' => ConfirmFormHelper::buildCancelLink($this, $this->getRequest()),

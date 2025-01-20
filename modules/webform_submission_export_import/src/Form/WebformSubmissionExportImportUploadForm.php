@@ -549,7 +549,7 @@ class WebformSubmissionExportImportUploadForm extends ConfirmFormBase {
       'init_message' => t('Initializing submission import'),
       'error_message' => t('The import could not be completed because an error occurred.'),
       'operations' => [
-        [['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchProcess'], $parameters],
+            [['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchProcess'], $parameters],
       ],
       'finished' => ['\Drupal\webform_submission_export_import\Form\WebformSubmissionExportImportUploadForm', 'batchFinish'],
     ];

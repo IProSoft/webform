@@ -20,7 +20,7 @@ class WebformPermissions extends Select {
     $info = parent::getInfo();
     $class = get_class($this);
     $info['#element_validate'] = [
-      [$class, 'validateWebformPermissions'],
+        [$class, 'validateWebformPermissions'],
     ];
     return $info;
   }

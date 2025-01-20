@@ -30,7 +30,7 @@ class WebformHorizontalRule extends WebformElementBase implements WebformElement
     return [
       'states' => [],
       'attributes' => [],
-      // Markup settings.
+        // Markup settings.
       'display_on' => WebformElementDisplayOnInterface::DISPLAY_ON_FORM,
     ];
   }

@@ -394,10 +394,10 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         'table' => [
           '#type' => 'table',
           '#header' => [
-            ['data' => $this->t('Title'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-            ['data' => $this->t('Dimensions'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-            ['data' => $this->t('Example'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-            ['data' => $this->t('Source'), 'width' => '70%'],
+                  ['data' => $this->t('Title'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                  ['data' => $this->t('Dimensions'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                  ['data' => $this->t('Example'), 'width' => '10%', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                  ['data' => $this->t('Source'), 'width' => '70%'],
           ],
           '#rows' => $rows,
         ],

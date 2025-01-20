@@ -25,9 +25,9 @@ class WebformShareHooks {
       'title' => t('Share embed'),
       'content' => t("The <strong>Share embed</strong> page provides code snippets that are used to embedded a webform in any website, webpage, and application."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/share
+            // @see /admin/structure/webform/manage/{webform}/share
         'entity.webform.share_embed',
-              // @see /node/{node}/webform/share
+            // @see /node/{node}/webform/share
         'entity.node.webform.share_embed',
       ],
     ];
@@ -36,9 +36,9 @@ class WebformShareHooks {
       'title' => t('Share preview'),
       'content' => t("The <strong>Share preview</strong> page allows site builders to preview an embedded webform."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/share/preview
+            // @see /admin/structure/webform/manage/{webform}/share/preview
         'entity.webform.share_preview',
-              // @see /node/{node}/webform/share/preview
+            // @see /node/{node}/webform/share/preview
         'entity.node.webform.share_preview',
       ],
     ];
@@ -47,9 +47,9 @@ class WebformShareHooks {
       'title' => t('Share test'),
       'content' => t("The <strong>Share test</strong> page allows site builders to test an embedded webform."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/share/test
+            // @see /admin/structure/webform/manage/{webform}/share/test
         'entity.webform.share_test',
-              // @see /node/{node}/webform/share/test
+            // @see /node/{node}/webform/share/test
         'entity.node.webform.share_test',
       ],
     ];
@@ -151,8 +151,8 @@ class WebformShareHooks {
   #[Hook('theme')]
   public function theme($existing, $type, $theme, $path) {
     return [
-          // Using dedicated html and page template ensures the shared webforms
-          // output is as simple as possible.
+        // Using dedicated html and page template ensures the shared webforms
+        // output is as simple as possible.
       'html__webform_share' => [
         'render element' => 'html',
       ],

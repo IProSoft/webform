@@ -5,9 +5,9 @@
  * Provides an example that shows how to add custom properties to Webform elements.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_example_element_properties\Hook\WebformExampleElementPropertiesHooks;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_webform_element_default_properties_alter().

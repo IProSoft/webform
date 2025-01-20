@@ -141,7 +141,7 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
       'init_message' => $this->t('Clearing submission data'),
       'error_message' => $this->t('The submissions could not be cleared because an error occurred.'),
       'operations' => [
-        [[$this, 'batchProcess'], $parameters],
+            [[$this, 'batchProcess'], $parameters],
       ],
       'finished' => [$this, 'batchFinish'],
     ];

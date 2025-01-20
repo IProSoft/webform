@@ -24,9 +24,9 @@ class WebformMessage extends WebformMarkupBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Attributes.
+        // Attributes.
       'attributes' => [],
-      // Message settings.
+        // Message settings.
       'message_type' => 'status',
       'message_message' => '',
       'message_close' => FALSE,

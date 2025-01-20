@@ -5,10 +5,10 @@
  * Webform libraries.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformLibrariesHooks;
 use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\Entity\Webform;
+use Drupal\webform\Hook\WebformLibrariesHooks;
 use Drupal\webform\Utility\WebformDialogHelper;
 
 /**

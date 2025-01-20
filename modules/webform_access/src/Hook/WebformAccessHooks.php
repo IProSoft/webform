@@ -25,7 +25,7 @@ class WebformAccessHooks {
       'content' => t('The <strong>Access group</strong> page lists reusable groups used to access webform source entity and users.'),
       'video_id' => 'access',
       'routes' => [
-              // @see /admin/structure/webform/access/group/manage
+            // @see /admin/structure/webform/access/group/manage
         'entity.webform_access_group.collection',
       ],
     ];
@@ -36,7 +36,7 @@ class WebformAccessHooks {
       'content' => t('The <strong>Access type</strong> page lists types of groups used to send email notifications to users.'),
       'video_id' => 'access',
       'routes' => [
-              // @see /admin/structure/webform/access/type/manage
+            // @see /admin/structure/webform/access/type/manage
         'entity.webform_access_type.collection',
       ],
     ];

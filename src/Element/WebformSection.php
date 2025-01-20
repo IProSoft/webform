@@ -18,17 +18,17 @@ class WebformSection extends RenderElementBase {
     $class = get_class($this);
     return [
       '#process' => [
-        [$class, 'processGroup'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processGroup'],
+            [$class, 'processAjaxForm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderGroup'],
+            [$class, 'preRenderGroup'],
       ],
       '#value' => NULL,
       '#title_tag' => 'h2',
-      // Must set default description display to before to prevent it from being
-      // set to after.
-      // @see \Drupal\Core\Form\FormBuilder::doBuildForm
+        // Must set default description display to before to prevent it from being
+        // set to after.
+        // @see \Drupal\Core\Form\FormBuilder::doBuildForm
       '#description_display' => 'before',
       '#theme_wrappers' => ['webform_section'],
     ];

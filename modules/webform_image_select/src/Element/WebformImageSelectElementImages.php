@@ -31,8 +31,8 @@ class WebformImageSelectElementImages extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformImageSelectElementImages'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformImageSelectElementImages'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
     ];

@@ -25,8 +25,8 @@ abstract class WebformAttachmentBase extends RenderElementBase implements Webfor
       '#download' => FALSE,
       '#trim' => FALSE,
       '#process' => [
-        [$class, 'processWebformAttachment'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformAttachment'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
     ];

@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailDrushHooks;
 use Drupal\webform\Entity\Webform;
+use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailDrushHooks;
 use Drupal\webform_scheduled_email\Plugin\WebformHandler\ScheduleEmailWebformHandler;
 use Drush\Drush;
 

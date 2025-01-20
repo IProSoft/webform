@@ -122,9 +122,9 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
   public function defaultConfiguration() {
     return [
       'element_key' => '',
-      // Boolean limit.
+        // Boolean limit.
       'limit' => NULL,
-      // Options limit.
+        // Options limit.
       'limits' => [],
       'limit_reached_message' => '@name is not available',
       'limit_source_entity' => TRUE,
@@ -405,7 +405,7 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         '#states' => [
           'visible' => [
             ':input[name="settings[option_message_display]"]' => ['value' => WebformOptionsLimitHandlerInterface::MESSAGE_DISPLAY_DESCRIPTION],
-            // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified
+                  // phpcs:ignore Squiz.Arrays.ArrayDeclaration.NoKeySpecified
             $tableselect_states,
           ],
         ],
@@ -971,12 +971,12 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
       }
 
       $rows[] = [
-        ['data' => $limit['label'], 'style' => 'font-weight: bold'],
-        ['data' => $limit['limit'] ?: '∞', 'style' => 'text-align: right'],
-        ['data' => $limit['limit'] ? $limit['remaining'] : '∞', 'style' => 'text-align: right'],
-        ['data' => $limit['total'], 'style' => 'text-align: right'],
-        ['data' => $progress, 'style' => 'text-align: center'],
-        ['data' => $percentage, 'style' => 'text-align: right'],
+          ['data' => $limit['label'], 'style' => 'font-weight: bold'],
+          ['data' => $limit['limit'] ?: '∞', 'style' => 'text-align: right'],
+          ['data' => $limit['limit'] ? $limit['remaining'] : '∞', 'style' => 'text-align: right'],
+          ['data' => $limit['total'], 'style' => 'text-align: right'],
+          ['data' => $progress, 'style' => 'text-align: center'],
+          ['data' => $percentage, 'style' => 'text-align: right'],
       ];
     }
 
@@ -990,10 +990,10 @@ class OptionsLimitWebformHandler extends WebformHandlerBase implements WebformOp
         '#type' => 'table',
         '#header' => [
           '',
-          ['data' => $this->t('Limit'), 'style' => 'text-align: right'],
-          ['data' => $this->t('Remaining'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-          ['data' => $this->t('Total'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
-          ['data' => $this->t('Progress'), 'style' => 'text-align: center', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Limit'), 'style' => 'text-align: right'],
+                ['data' => $this->t('Remaining'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Total'), 'style' => 'text-align: right', 'class' => [RESPONSIVE_PRIORITY_LOW]],
+                ['data' => $this->t('Progress'), 'style' => 'text-align: center', 'class' => [RESPONSIVE_PRIORITY_LOW]],
           '',
         ],
         '#rows' => $rows,

@@ -24,7 +24,7 @@ class WebformSchemaHooks {
       'title' => t('Webform Schema'),
       'content' => t("The <strong>Schema</strong> page displays an overview of a webform's elements and specified data types, which can be used to map webform submissions to an external API."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/schema
+            // @see /admin/structure/webform/manage/{webform}/schema
         'entity.webform.schema_form',
       ],
     ];

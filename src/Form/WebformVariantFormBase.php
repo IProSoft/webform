@@ -196,7 +196,7 @@ abstract class WebformVariantFormBase extends FormBase {
       '#title' => $this->t('Enable the %name variant', ['%name' => $this->webformVariant->label()]),
       '#return_value' => TRUE,
       '#default_value' => $this->webformVariant->isEnabled(),
-      // Disable broken plugins.
+        // Disable broken plugins.
       '#disabled' => ($this->webformVariant->getPluginId() === 'broken'),
     ];
 

@@ -20,15 +20,15 @@ class WebformElementHelper {
    * @var array
    */
   public static $ignoredProperties = [
-    // Properties that will allow code injection.
+      // Properties that will allow code injection.
     '#allowed_tags' => '#allowed_tags',
       // Properties that will break webform data handling.
     '#tree' => '#tree',
     '#array_parents' => '#array_parents',
     '#parents' => '#parents',
-    // Properties that will cause unpredictable rendering.
+      // Properties that will cause unpredictable rendering.
     '#weight' => '#weight',
-    // Callbacks are blocked to prevent unwanted code executions.
+      // Callbacks are blocked to prevent unwanted code executions.
     '#access_callback' => '#access_callback',
     '#ajax' => '#ajax',
     '#after_build' => '#after_build',
@@ -40,7 +40,7 @@ class WebformElementHelper {
     '#submit' => '#submit',
     '#validate' => '#validate',
     '#value_callback' => '#value_callback',
-    // Element specific callbacks.
+      // Element specific callbacks.
     '#file_value_callbacks' => '#file_value_callbacks',
     '#date_date_callbacks' => '#date_date_callbacks',
     '#date_time_callbacks' => '#date_time_callbacks',
@@ -53,7 +53,7 @@ class WebformElementHelper {
    * @var array
    */
   public static $allowedProperties = [
-    // webform_validation.module.
+      // webform_validation.module.
     '#equal_stepwise_validate' => '#equal_stepwise_validate',
   ];
 

@@ -30,7 +30,7 @@ class WebformCard extends ContainerBase {
       'title_attributes' => [],
       'prev_button_label' => '',
       'next_button_label' => '',
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',

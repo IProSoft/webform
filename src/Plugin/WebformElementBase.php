@@ -165,30 +165,30 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Element settings.
+        // Element settings.
       'title' => '',
       'default_value' => '',
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
       'field_prefix' => '',
       'field_suffix' => '',
       'disabled' => FALSE,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
       'attributes' => [],
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
@@ -247,18 +247,18 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
    */
   protected function defineDefaultBaseProperties() {
     return [
-      // Administration.
+        // Administration.
       'admin_title' => '',
       'admin_notes' => '',
       'prepopulate' => FALSE,
       'private' => FALSE,
       'access' => TRUE,
-      // Flexbox.
+        // Flexbox.
       'flex' => 1,
-      // Conditional logic.
+        // Conditional logic.
       'states' => [],
       'states_clear' => TRUE,
-      // Element access.
+        // Element access.
       'access_create_roles' => ['anonymous', 'authenticated'],
       'access_create_users' => [],
       'access_create_permissions' => [],
@@ -2386,7 +2386,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t("Displays a Help tooltip after the element's title."),
       '#states' => [
         'invisible' => [
-          [':input[name="properties[title_display]"]' => ['value' => 'invisible']],
+                [':input[name="properties[title_display]"]' => ['value' => 'invisible']],
         ],
       ],
     ];
@@ -2746,7 +2746,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#return_value' => TRUE,
       '#states' => [
         'visible' => [
-          ['input[name="properties[unique]"]' => ['checked' => TRUE]],
+                ['input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2757,7 +2757,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#return_value' => TRUE,
       '#states' => [
         'visible' => [
-          ['input[name="properties[unique]"]' => ['checked' => TRUE]],
+                ['input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2767,7 +2767,7 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#description' => $this->t('If set, this message will be used when an element\'s value are not unique, instead of the default "@message" message.', ['@message' => $this->t('The value %value has already been submitted once for the %name element. You may have already submitted this webform, or you need to use a different value.')]),
       '#states' => [
         'visible' => [
-          [':input[name="properties[unique]"]' => ['checked' => TRUE]],
+                [':input[name="properties[unique]"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -2997,11 +2997,11 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         'form_element' => $this->t('Form element'),
         'container' => $this->t('Container'),
       ],
-      // phpcs:disable
-      '#description' => '<b>' . $this->t('Fieldset') . ':</b> ' . $this->t('Wraps inputs in a fieldset.') . ' <strong>' . $this->t('Recommended') . '</strong>' .
-        '<br/><br/><b>' . $this->t('Form element') . ':</b> ' . $this->t('Wraps inputs in a basic form element with title and description.') .
-        '<br/><br/><b>' . $this->t('Container') . ':</b> ' . $this->t('Wraps inputs in a basic div with no title or description.'),
-      // phpcs:enable
+        // phpcs:disable
+        '#description' => '<b>' . $this->t('Fieldset') . ':</b> ' . $this->t('Wraps inputs in a fieldset.') . ' <strong>' . $this->t('Recommended') . '</strong>' .
+          '<br/><br/><b>' . $this->t('Form element') . ':</b> ' . $this->t('Wraps inputs in a basic form element with title and description.') .
+          '<br/><br/><b>' . $this->t('Container') . ':</b> ' . $this->t('Wraps inputs in a basic div with no title or description.'),
+        // phpcs:enable
     ];
     // Hide element description and display when using a container wrapper.
     if ($this->hasProperty('wrapper_type')) {
@@ -3172,9 +3172,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
       '#title' => $this->t('Multiple items'),
       '#states' => [
         'visible' => [
-          [':input[name="properties[multiple][container][cardinality]"]' => ['value' => '-1']],
+                [':input[name="properties[multiple][container][cardinality]"]' => ['value' => '-1']],
           'or',
-          [':input[name="properties[multiple][container][cardinality_number]"]' => ['!value' => 1]],
+                [':input[name="properties[multiple][container][cardinality_number]"]' => ['!value' => 1]],
         ],
       ],
     ];

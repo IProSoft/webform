@@ -268,9 +268,9 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#open' => TRUE,
       '#states' => [
         'visible' => [
-          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_MESSAGE]],
+                [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_MESSAGE]],
           'or',
-          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE]],
+                [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE]],
         ],
       ],
     ];
@@ -283,11 +283,11 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
     // Wizard settings.
     $wizards_progress_checked_states = [
       'visible' => [
-        [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_bar"]' => ['checked' => TRUE]],
         'or',
-        [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_pages"]' => ['checked' => TRUE]],
         'or',
-        [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
+            [':input[name="wizard_progress_percentage"]' => ['checked' => TRUE]],
       ],
     ];
     $form['wizard_settings'] = [
@@ -791,7 +791,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
    */
   protected function getFormBehaviors() {
     return [
-      // Form.
+        // Form.
       'form_reset' => [
         'group' => $this->t('Form'),
         'title' => $this->t('Display reset button'),
@@ -804,7 +804,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, the submit button will be disabled immediately after it is clicked.'),
       ],
 
-      // Navigation.
+        // Navigation.
       'form_disable_back' => [
         'group' => $this->t('Navigation'),
         'title' => $this->t('Disable back button'),
@@ -824,7 +824,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a form with unsaved changes.'),
       ],
 
-      // Validation.
+        // Validation.
       'form_novalidate' => [
         'group' => $this->t('Validation'),
         'title' => $this->t('Disable client-side validation'),
@@ -844,7 +844,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, a required elements indicator will be added to this webform.'),
       ],
 
-      // Elements.
+        // Elements.
       'form_autofocus' => [
         'group' => $this->t('Elements'),
         'title' => $this->t('Autofocus the first element'),
@@ -862,7 +862,7 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, an expand/collapse all (details) link will be added to this webform when there are two or more details elements available on the webform.'),
       ],
 
-      // Prepopulate.
+        // Prepopulate.
       'form_prepopulate' => [
         'group' => $this->t('Prepopulate'),
         'title' => $this->t('Allow all elements to be populated using query string parameters'),

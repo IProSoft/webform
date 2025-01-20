@@ -32,7 +32,7 @@ class DateList extends DateBase implements TrustedCallbackInterface {
     return [
       'date_min' => '',
       'date_max' => '',
-      // Date settings.
+        // Date settings.
       'date_part_order' => [
         'year',
         'month',

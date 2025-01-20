@@ -13,17 +13,17 @@
  * Below functions are copied from editor.module.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformEditorHooks;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\file\FileInterface;
 use Drupal\filter\FilterFormatInterface;
 use Drupal\webform\Element\WebformHtmlEditor;
+use Drupal\webform\Hook\WebformEditorHooks;
 use Drupal\webform\WebformInterface;
 
 /**

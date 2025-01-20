@@ -23,9 +23,9 @@ class WebformLocationPlacesHooks {
       'notes' => t('Algolia Places is by the location places elements.'),
       'homepage_url' => Url::fromUri('https://github.com/algolia/places'),
       'issues_url' => Url::fromUri('https://github.com/algolia/places/issues'),
-          // NOTE: Using NPM/JsDelivr because it contains the '/dist/cdn/' directory.
-          // @see https://asset-packagist.org/package/detail?fullname=npm-asset/places.js
-          // @see https://www.jsdelivr.com/package/npm/places.js
+        // NOTE: Using NPM/JsDelivr because it contains the '/dist/cdn/' directory.
+        // @see https://asset-packagist.org/package/detail?fullname=npm-asset/places.js
+        // @see https://www.jsdelivr.com/package/npm/places.js
       'download_url' => Url::fromUri('https://registry.npmjs.org/places.js/-/places.js-1.19.0.tgz'),
       'version' => '1.19.0',
       'elements' => [

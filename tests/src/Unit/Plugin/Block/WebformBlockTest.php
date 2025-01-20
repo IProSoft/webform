@@ -56,13 +56,13 @@ class WebformBlockTest extends UnitTestCase {
     $cache_contexts_manager = $this->createMock(CacheContextsManager::class);
     $cache_contexts_manager->method('assertValidTokens')
       ->willReturnMap([
-        [$cache_contexts, TRUE],
+          [$cache_contexts, TRUE],
       ]);
 
     $container = $this->createMock(ContainerInterface::class);
     $container->method('get')
       ->willReturnMap([
-        ['cache_contexts_manager', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $cache_contexts_manager],
+          ['cache_contexts_manager', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $cache_contexts_manager],
       ]);
 
     \Drupal::setContainer($container);
@@ -78,7 +78,7 @@ class WebformBlockTest extends UnitTestCase {
       ->willReturn($this->randomMachineName());
     $webform->method('access')
       ->willReturnMap([
-        ['submission_create', $account, TRUE, $access_result],
+          ['submission_create', $account, TRUE, $access_result],
       ]);
     $block = $this->mockWebformBlock($webform);
 
@@ -108,12 +108,12 @@ class WebformBlockTest extends UnitTestCase {
     $storage = $this->createMock(EntityStorageInterface::class);
     $storage->method('load')
       ->willReturnMap([
-        [$webform->id(), $webform],
+          [$webform->id(), $webform],
       ]);
 
     $entity_type_manager->method('getStorage')
       ->willReturnMap([
-        ['webform', $storage],
+          ['webform', $storage],
       ]);
 
     $token_manager = $this->createMock(WebformTokenManagerInterface::class);

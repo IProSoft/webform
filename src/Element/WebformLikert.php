@@ -27,8 +27,8 @@ class WebformLikert extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformLikert'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformLikert'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
       '#required' => FALSE,
@@ -36,8 +36,8 @@ class WebformLikert extends FormElementBase {
       '#sticky' => TRUE,
       '#questions' => [],
       '#questions_description_display' => 'description',
-      // Using #answers instead of #options to prevent triggering
-      // \Drupal\Core\Form\FormValidator::performRequiredValidation().
+        // Using #answers instead of #options to prevent triggering
+        // \Drupal\Core\Form\FormValidator::performRequiredValidation().
       '#answers' => [],
       '#answers_description_display' => 'description',
       '#na_answer' => FALSE,
@@ -146,8 +146,8 @@ class WebformLikert extends FormElementBase {
         '#type' => 'item',
         '#title' => $question_title,
         '#id' => $question_id,
-        // Must include an empty <span> so that the item's value is
-        // not required.
+          // Must include an empty <span> so that the item's value is
+          // not required.
         '#value' => '<span></span>',
         '#webform_element' => TRUE,
         '#required' => $element['#required'],
@@ -169,12 +169,12 @@ class WebformLikert extends FormElementBase {
         $row[$answer_key] = [
           '#parents' => [$element['#name'], $question_key],
           '#type' => 'radio',
-          // Must cast values as strings to prevent NULL and empty strings.
-          // from being evaluated as 0.
+            // Must cast values as strings to prevent NULL and empty strings.
+            // from being evaluated as 0.
           '#return_value' => (string) $answer_key,
-          // Set value to FALSE to prevent '0' or '' from being checked when
-          // value is NULL.
-          // @see \Drupal\Core\Render\Element\Radio::preRenderRadio
+            // Set value to FALSE to prevent '0' or '' from being checked when
+            // value is NULL.
+            // @see \Drupal\Core\Render\Element\Radio::preRenderRadio
           '#value' => ($value === NULL) ? FALSE : (string) $value,
           '#attributes' => $answer_attributes,
         ];

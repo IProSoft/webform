@@ -24,9 +24,9 @@ class WebformOptionsLimitHooks {
       'title' => t('Options limit'),
       'content' => t("The <strong>Options</strong> page displays a summary of the webform's options limits."),
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/results/options-limit
+            // @see /admin/structure/webform/manage/{webform}/results/options-limit
         'entity.webform_options_limit.summary',
-              // @see /node/{node}/webform/results/options-limit
+            // @see /node/{node}/webform/results/options-limit
         'entity.node.webform_options_limit.summary',
       ],
     ];

@@ -65,22 +65,22 @@ class WebformTokenManager implements WebformTokenManagerInterface {
    * @see webform_token_info_alter()
    */
   protected static $suffixes = [
-    // Base64 encode the token's value.
-    // @see https://www.php.net/manual/en/function.base64-encode.php
+      // Base64 encode the token's value.
+      // @see https://www.php.net/manual/en/function.base64-encode.php
     'base64encode',
-    // Removes the token when not replaced.
+      // Removes the token when not replaced.
     'clear',
-    // Decodes HTML entities.
+      // Decodes HTML entities.
     'htmldecode',
-    // Removes all HTML tags from the token's value.
+      // Removes all HTML tags from the token's value.
     'striptags',
-    // URL encodes the token's value.
-    // @see https://www.php.net/manual/en/function.urlencode.php
+      // URL encodes the token's value.
+      // @see https://www.php.net/manual/en/function.urlencode.php
     'urlencode',
-    // Raw URL encodes the token's value.
-    // @see https://www.php.net/manual/en/function.rawurlencode.php
+      // Raw URL encodes the token's value.
+      // @see https://www.php.net/manual/en/function.rawurlencode.php
     'rawurlencode',
-    // XML encodes the token's value.
+      // XML encodes the token's value.
     'xmlencode',
   ];
 

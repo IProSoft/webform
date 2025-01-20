@@ -168,10 +168,10 @@ class WebformPluginVariantController extends ControllerBase implements Container
     }
 
     $headers = [
-      ['data' => $this->t('Variant'), 'width' => '20%'],
-      ['data' => $this->t('Description'), 'width' => '40%'],
-      ['data' => $this->t('Category'), 'width' => '20%'],
-      ['data' => $this->t('Operations'), 'width' => '20%'],
+        ['data' => $this->t('Variant'), 'width' => '20%'],
+        ['data' => $this->t('Description'), 'width' => '40%'],
+        ['data' => $this->t('Category'), 'width' => '20%'],
+        ['data' => $this->t('Operations'), 'width' => '20%'],
     ];
 
     $definitions = $this->pluginManager->getDefinitions();
@@ -194,11 +194,11 @@ class WebformPluginVariantController extends ControllerBase implements Container
         '#type' => 'link',
         '#title' => $definition['label'],
         '#url' => Url::fromRoute(
-          'entity.webform.variant.add_form',
-          [
-            'webform' => $webform->id(),
-            'webform_variant' => $plugin_id,
-          ]
+            'entity.webform.variant.add_form',
+            [
+              'webform' => $webform->id(),
+              'webform_variant' => $plugin_id,
+            ]
         ),
         '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($variant_plugin->getOffCanvasWidth()),
         '#prefix' => '<div class="webform-form-filter-text-source">',
@@ -216,11 +216,11 @@ class WebformPluginVariantController extends ControllerBase implements Container
       $links['add'] = [
         'title' => $this->t('Add variant'),
         'url' => Url::fromRoute(
-          'entity.webform.variant.add_form',
-          [
-            'webform' => $webform->id(),
-            'webform_variant' => $plugin_id,
-          ]
+            'entity.webform.variant.add_form',
+            [
+              'webform' => $webform->id(),
+              'webform_variant' => $plugin_id,
+            ]
         ),
         'attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($variant_plugin->getOffCanvasWidth()),
       ];

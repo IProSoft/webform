@@ -47,8 +47,8 @@ class WebformSourceEntityAccessTest extends WebformAccessTestBase {
     $entity_reference_manager->expects($this->any())
       ->method('getWebform')
       ->will($this->returnValueMap([
-        [$node, NULL],
-        [$webform_node, $webform],
+          [$node, NULL],
+          [$webform_node, $webform],
       ]));
     $this->container->set('webform.entity_reference_manager', $entity_reference_manager);
 

@@ -6,9 +6,9 @@
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_node\Hook\WebformNodeTokensHooks;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\node\NodeInterface;
+use Drupal\webform_node\Hook\WebformNodeTokensHooks;
 
 /**
  * Implements hook_token_info().

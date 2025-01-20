@@ -117,20 +117,20 @@ trait WebformAjaxElementTrait {
     $element['update'] = [
       '#type' => 'submit',
       '#value' => t('Update'),
-      // Submit buttons with the same label must have a unique name.
-      // @see https://www.drupal.org/project/drupal/issues/1342066
+        // Submit buttons with the same label must have a unique name.
+        // @see https://www.drupal.org/project/drupal/issues/1342066
       '#name' => $this->getAjaxElementUpdateName($id),
-      // Validate the element.
+        // Validate the element.
       '#validate' => [[get_called_class(), 'validateAjaxElementCallback']],
-      // Submit the element.
+        // Submit the element.
       '#submit' => [[get_called_class(), 'submitAjaxElementCallback']],
-      // Refresh the element.
+        // Refresh the element.
       '#ajax' => [
         'callback' => [get_called_class(), 'updateAjaxElementCallback'],
         'wrapper' => $this->getAjaxElementWrapperId($id),
         'progress' => ['type' => 'fullscreen'],
       ],
-      // Disable validation, hide the button, and add trigger update class.
+        // Disable validation, hide the button, and add trigger update class.
       '#attributes' => [
         'formnovalidate' => 'formnovalidate',
         'class' => [
@@ -138,9 +138,9 @@ trait WebformAjaxElementTrait {
           $this->getAjaxElementUpdateClass($id),
         ],
       ],
-      // Always render the update button.
+        // Always render the update button.
       '#access' => TRUE,
-      // Store a reference to the Ajax id.
+        // Store a reference to the Ajax id.
       '#webform_ajax_element_type' => 'update',
       '#webform_ajax_element_id' => $id,
     ];

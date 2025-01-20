@@ -50,9 +50,9 @@ class WebformExampleElementPropertiesHooks {
       '#title' => t('Custom properties'),
       '#description' => t('The below custom properties are provided and managed by the webform_example_element_properties.module.'),
       '#open' => TRUE,
-          // Add custom properties after all fieldset elements, which have a
-          // weight of -20.
-          // @see \Drupal\webform\Plugin\WebformElementBase::buildConfigurationForm
+        // Add custom properties after all fieldset elements, which have a
+        // weight of -20.
+        // @see \Drupal\webform\Plugin\WebformElementBase::buildConfigurationForm
       '#weight' => -10,
     ];
     $form['custom_properties']['custom_data'] = [

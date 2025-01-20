@@ -52,26 +52,26 @@ class WebformMapping extends WebformElementBase {
     return [
       'title' => '',
       'default_value' => [],
-      // Description/Help.
+        // Description/Help.
       'help' => '',
       'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
-      // Form display.
+        // Form display.
       'title_display' => '',
       'description_display' => '',
       'help_display' => '',
       'disabled' => FALSE,
-      // Form validation.
+        // Form validation.
       'required' => FALSE,
       'required_error' => '',
-      // Submission display.
+        // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',
       'format_attributes' => [],
-      // Mapping settings.
+        // Mapping settings.
       'arrow' => '→',
       'source' => [],
       'source__description_display' => 'description',
@@ -80,7 +80,7 @@ class WebformMapping extends WebformElementBase {
       'destination__type' => 'select',
       'destination__title' => 'Destination',
       'destination__description' => '',
-      // Attributes.
+        // Attributes.
       'wrapper_attributes' => [],
       'label_attributes' => [],
     ] + $this->defineDefaultBaseProperties();
@@ -153,8 +153,8 @@ class WebformMapping extends WebformElementBase {
         ];
 
         $header = [
-          ['data' => $element['#source__title'], 'width' => '50%'],
-          ['data' => $element['#destination__title'], 'width' => '50%'],
+            ['data' => $element['#source__title'], 'width' => '50%'],
+            ['data' => $element['#destination__title'], 'width' => '50%'],
         ];
 
         $rows = [];
@@ -164,7 +164,7 @@ class WebformMapping extends WebformElementBase {
           $destination_title = ($destination_value) ? WebformOptionsHelper::getOptionText($destination_value, $element['#destination']) : $this->t('[blank]');
           $rows[$source_key] = [
             $source_title,
-            ['data' => ['#markup' => "$arrow $destination_title"]],
+              ['data' => ['#markup' => "$arrow $destination_title"]],
           ];
         }
 
@@ -444,9 +444,9 @@ class WebformMapping extends WebformElementBase {
       '#labels' => $this->t('destinations'),
       '#states' => [
         'visible' => [
-          [':input[name="properties[destination__type][select]"]' => ['value' => 'select']],
+                [':input[name="properties[destination__type][select]"]' => ['value' => 'select']],
           'or',
-          [':input[name="properties[destination__type][select]"]' => ['value' => 'webform_select_other']],
+                [':input[name="properties[destination__type][select]"]' => ['value' => 'webform_select_other']],
         ],
       ],
     ];

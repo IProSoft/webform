@@ -251,16 +251,16 @@ class WebformTranslationConfigManager implements WebformTranslationConfigManager
 
     // Tweak form elements.
     $element_alterations = [
-      // Form settings.
+        // Form settings.
       'title' => ['#maxlength' => NULL],
-      // Submission settings.
+        // Submission settings.
       'submission_label' => ['#maxlength' => NULL],
-      // Email handler.
-      // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler
+        // Email handler.
+        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler
       'subject' => ['#maxlength' => NULL],
       'from_name' => ['#maxlength' => 255],
       'sender_name' => ['#maxlength' => 255],
-      // Confirmation settings.
+        // Confirmation settings.
       'confirmation_url' => ['#maxlength' => NULL],
     ];
     $this->alterElements($config_element, $element_alterations);

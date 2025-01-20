@@ -67,17 +67,17 @@ abstract class WebformOtherBase extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformOther'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformOther'],
+            [$class, 'processAjaxForm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
+            [$class, 'preRenderWebformCompositeFormElement'],
       ],
       '#options' => [],
       '#other__option_delimiter' => ', ',
       '#states' => [],
-      // Add '#markup' property to add an 'id' attribute to the form element.
-      // @see template_preprocess_form_element()
+        // Add '#markup' property to add an 'id' attribute to the form element.
+        // @see template_preprocess_form_element()
       '#markup' => '',
     ];
   }

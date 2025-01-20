@@ -14,7 +14,7 @@ trait WebformEntityOptionsTrait {
    */
   protected function defineDefaultProperties() {
     $properties = parent::defineDefaultProperties() + [
-      // Entity reference settings.
+        // Entity reference settings.
       'target_type' => '',
       'selection_handler' => '',
       'selection_settings' => [],

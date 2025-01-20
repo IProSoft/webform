@@ -250,8 +250,8 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
     $row['operation'] = [
       '#type' => 'link',
       '#title' => $label,
-      // Must clone the URL object to prevent the above 'label' link attributes
-      // (i.e. webform-tooltip-link) from being copied to 'operation' link.
+        // Must clone the URL object to prevent the above 'label' link attributes
+        // (i.e. webform-tooltip-link) from being copied to 'operation' link.
       '#url' => clone $url,
       '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($webform_element->getOffCanvasWidth(), ['button', 'button--primary', 'button--small']),
     ];

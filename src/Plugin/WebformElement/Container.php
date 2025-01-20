@@ -21,16 +21,16 @@ class Container extends ContainerBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Attributes.
+        // Attributes.
       'attributes' => [],
-      // Randomize.
+        // Randomize.
       'randomize' => FALSE,
-      // Flexbox.
+        // Flexbox.
       'flex' => 1,
-      // Conditional logic.
+        // Conditional logic.
       'states' => [],
       'states_clear' => TRUE,
-      // Format.
+        // Format.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
       'format_text' => '',

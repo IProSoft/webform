@@ -249,9 +249,9 @@ class WebformAdminConfigElementsForm extends WebformAdminConfigBaseForm {
         '#message_type' => 'info',
         '#states' => [
           'visible' => [
-            [':input[name="html_editor[element_format]"]' => ['!value' => '']],
+                  [':input[name="html_editor[element_format]"]' => ['!value' => '']],
             'or',
-            [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
+                  [':input[name="html_editor[mail_format]"]' => ['!value' => '']],
           ],
         ],
         '#message_close' => TRUE,

@@ -253,9 +253,9 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
     $file_upload_help = [
       '#theme' => 'file_upload_help',
       '#upload_validators' => $element['#upload_validators'] + ($file_limit ? [
-        // Add a custom "validator" that is just used in
-        // webform_preprocess_file_upload_help to show a "per form" upload
-        // limit. This is validated below in ::validateManagedFileLimit.
+            // Add a custom "validator" that is just used in
+            // webform_preprocess_file_upload_help to show a "per form" upload
+            // limit. This is validated below in ::validateManagedFileLimit.
         'webform_file_limit' => Bytes::toNumber($file_limit),
       ] : []),
       '#cardinality' => (empty($element['#multiple'])) ? 1 : $element['#multiple'],
@@ -837,7 +837,7 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
             Html::getClass($element['#type'] . '-placeholder'),
           ],
         ],
-        // Display placeholder before file upload input.
+          // Display placeholder before file upload input.
         '#weight' => ($element['upload']['#weight'] - 1),
         'content' => WebformHtmlEditor::checkMarkup($element['#file_placeholder']),
       ];
@@ -1460,11 +1460,11 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
         'filecontent' => file_get_contents($file->getFileUri()),
         'filename' => $file->getFilename(),
         'filemime' => $file->getMimeType(),
-        // File URIs that are not supported return FALSE, when this happens
-        // still use the file's URI as the file's path.
+          // File URIs that are not supported return FALSE, when this happens
+          // still use the file's URI as the file's path.
         'filepath' => $this->fileSystem->realpath($file->getFileUri()) ?: $file->getFileUri(),
-        // URI is used when debugging or resending messages.
-        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
+          // URI is used when debugging or resending messages.
+          // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
         '_fileurl' => $file->createFileUrl(FALSE),
       ];
     }

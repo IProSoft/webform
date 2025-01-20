@@ -21,7 +21,7 @@ class WebformImageSelectHooks {
       'title' => t('Configuration: Images'),
       'content' => t('The <strong>Images configuration</strong> page lists reusable images for the image select element.'),
       'routes' => [
-              // @see /admin/structure/webform/options/images
+            // @see /admin/structure/webform/options/images
         'entity.webform_image_select_images.collection',
       ],
     ];

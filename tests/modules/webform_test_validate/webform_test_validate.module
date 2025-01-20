@@ -5,9 +5,9 @@
  * Support module for webform that provides form validate hooks for form validate tests.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform_test_validate\Hook\WebformTestValidateHooks;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_webform_form_FORM_ID_alter().

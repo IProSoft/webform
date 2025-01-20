@@ -5,8 +5,6 @@
  * Provides Entity Print (PDF) integration.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_entity_print\Hook\WebformEntityPrintHooks;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
@@ -14,12 +12,14 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformSubmissionInterface;
+use Drupal\webform_entity_print\Hook\WebformEntityPrintHooks;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 
 /**

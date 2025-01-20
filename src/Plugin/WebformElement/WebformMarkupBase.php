@@ -19,7 +19,7 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformEl
    */
   protected function defineDefaultProperties() {
     return [
-      // Markup settings.
+        // Markup settings.
       'display_on' => WebformElementDisplayOnInterface::DISPLAY_ON_FORM,
     ] + $this->defineDefaultBaseProperties();
   }

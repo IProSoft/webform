@@ -527,20 +527,20 @@ class WebformSubmissionLimitBlock extends BlockBase implements ContainerFactoryP
     foreach ($token_types as $token_type) {
       $token_name = static::getTokenName($token_type, $type, $source_entity);
       $rows[] = [
-        ['data' => '[' . $token_type . ']', 'style' => 'vertical-align: top'],
-        [
-          'data' => [
-            'name' => [
-              '#markup' => $tokens[$token_name]['name'],
-              '#prefix' => '<strong>',
-              '#suffix' => '</strong><br/>',
+          ['data' => '[' . $token_type . ']', 'style' => 'vertical-align: top'],
+          [
+            'data' => [
+              'name' => [
+                '#markup' => $tokens[$token_name]['name'],
+                '#prefix' => '<strong>',
+                '#suffix' => '</strong><br/>',
+              ],
+              'description' => [
+                '#markup' => $tokens[$token_name]['description'],
+              ],
             ],
-            'description' => [
-              '#markup' => $tokens[$token_name]['description'],
-            ],
+            'style' => 'vertical-align: top',
           ],
-          'style' => 'vertical-align: top',
-        ],
       ];
     }
 
@@ -554,8 +554,8 @@ class WebformSubmissionLimitBlock extends BlockBase implements ContainerFactoryP
         'table' => [
           '#type' => 'table',
           '#header' => [
-            ['data' => t('Token'), 'style' => 'width: auto'],
-            ['data' => t('Name / Description'), 'style' => 'width: 100%'],
+                    ['data' => t('Token'), 'style' => 'width: auto'],
+                    ['data' => t('Name / Description'), 'style' => 'width: 100%'],
           ],
           '#rows' => $rows,
           '#attributes' => ['style' => 'margin: 1em 0'],

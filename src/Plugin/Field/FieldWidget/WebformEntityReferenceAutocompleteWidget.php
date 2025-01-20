@@ -70,8 +70,8 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
       '#target_type' => $this->getFieldSetting('target_type'),
       '#selection_handler' => $this->getFieldSetting('handler'),
       '#selection_settings' => $selection_settings,
-      // Entity reference field items are handling validation themselves via
-      // the 'ValidReference' constraint.
+        // Entity reference field items are handling validation themselves via
+        // the 'ValidReference' constraint.
       '#validate_reference' => FALSE,
       '#maxlength' => 1024,
       '#default_value' => $default_value,

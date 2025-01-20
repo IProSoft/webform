@@ -22,7 +22,7 @@ class WebformOptionsCustomHooks {
       'content' => t('The <strong>Custom options configuration</strong> page lists reusable HTML/SVG custom options elements.'),
       'video_id' => 'custom_options',
       'routes' => [
-              // @see /admin/structure/webform/options/custom
+            // @see /admin/structure/webform/options/custom
         'entity.webform_options_custom.collection',
       ],
     ];

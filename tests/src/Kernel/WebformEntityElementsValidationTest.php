@@ -39,7 +39,7 @@ class WebformEntityElementsValidationTest extends KernelTestBase {
    */
   public function testValidate() {
     $tests = [
-      /*
+        /*
       [
         'getElementsRaw' => '', // Elements.
         'getElementsOriginalRaw' => '', // Original elements.
@@ -47,149 +47,149 @@ class WebformEntityElementsValidationTest extends KernelTestBase {
       ],
       */
 
-      // Check required.
-      [
-        'getElementsRaw' => '',
-        'getElementsOriginalRaw' => '',
-        'messages' => [
-          'Elements are required',
+        // Check required.
+        [
+          'getElementsRaw' => '',
+          'getElementsOriginalRaw' => '',
+          'messages' => [
+            'Elements are required',
+          ],
         ],
-      ],
 
-      // Check elements are an array.
-      [
-        'getElementsRaw' => 'string',
-        'messages' => [
-          'Elements are not valid. YAML must contain an associative array of elements.',
+        // Check elements are an array.
+        [
+          'getElementsRaw' => 'string',
+          'messages' => [
+            'Elements are not valid. YAML must contain an associative array of elements.',
+          ],
         ],
-      ],
 
-      // Check names.
-      [
-        'getElementsRaw' => "Not Valid:
+        // Check names.
+        [
+          'getElementsRaw' => "Not Valid:
   '#type': textfield",
-        'messages' => [
-          'The element key <em class="placeholder">Not Valid</em> on line 1 must contain only lowercase letters, numbers, and underscores.',
+          'messages' => [
+            'The element key <em class="placeholder">Not Valid</em> on line 1 must contain only lowercase letters, numbers, and underscores.',
+          ],
         ],
-      ],
 
-      // Check duplicate names.
-      [
-        'getElementsRaw' => "name:
+        // Check duplicate names.
+        [
+          'getElementsRaw' => "name:
   '#type': textfield
 duplicate:
   name:
     '#type': textfield",
-        'messages' => [
-          'Elements contain a duplicate element key <em class="placeholder">name</em> found on lines 1 and 4.',
+          'messages' => [
+            'Elements contain a duplicate element key <em class="placeholder">name</em> found on lines 1 and 4.',
+          ],
         ],
-      ],
 
-      // Check duplicate name with single and double quotes.
-      [
-        'getElementsRaw' => "name :
+        // Check duplicate name with single and double quotes.
+        [
+          'getElementsRaw' => "name :
   '#type': textfield
 duplicate:
   name:
     '#type': textfield",
-        'messages' => [
-          'Elements contain a duplicate element key <em class="placeholder">name</em> found on lines 1 and 4.',
+          'messages' => [
+            'Elements contain a duplicate element key <em class="placeholder">name</em> found on lines 1 and 4.',
+          ],
         ],
-      ],
 
-      // Check reserved names.
-      [
-        'getElementsRaw' => "name:
+        // Check reserved names.
+        [
+          'getElementsRaw' => "name:
   '#type': textfield
 duplicate:
   add:
     '#type': textfield",
-        'messages' => [
-          'The element key <em class="placeholder">add</em> on line 4 is a reserved key.',
+          'messages' => [
+            'The element key <em class="placeholder">add</em> on line 4 is a reserved key.',
+          ],
         ],
-      ],
 
-      // Check ignored properties.
-      [
-        'getElementsRaw' => "'tree':
+        // Check ignored properties.
+        [
+          'getElementsRaw' => "'tree':
   '#tree': true
   '#submit' : 'function_name'",
-        'messages' => [
-          'Elements contain an unsupported <em class="placeholder">#tree</em> property found on line 2.',
-          'Elements contain an unsupported <em class="placeholder">#submit</em> property found on line 3.',
+          'messages' => [
+            'Elements contain an unsupported <em class="placeholder">#tree</em> property found on line 2.',
+            'Elements contain an unsupported <em class="placeholder">#submit</em> property found on line 3.',
+          ],
         ],
-      ],
 
-      // Check validate submissions.
-      [
-        'getElementsRaw' => "name_changed:
+        // Check validate submissions.
+        [
+          'getElementsRaw' => "name_changed:
   '#type': 'textfield'",
-        'getElementsOriginalRaw' => "name:
+          'getElementsOriginalRaw' => "name:
   '#type': 'textfield'",
-        'messages' => [
-          'The <em class="placeholder">name</em> element can not be removed because the <em class="placeholder">Test</em> webform has <a href="http://example.com">results</a>.<ul><li><a href="http://example.com">Delete all submissions</a> to this webform.</li><li><a href="/admin/modules">Enable the Webform UI module</a> and safely delete this element.</li><li>Hide this element by setting its <code>\'#access\'</code> property to <code>false</code>.</li></ul>',
+          'messages' => [
+            'The <em class="placeholder">name</em> element can not be removed because the <em class="placeholder">Test</em> webform has <a href="http://example.com">results</a>.<ul><li><a href="http://example.com">Delete all submissions</a> to this webform.</li><li><a href="/admin/modules">Enable the Webform UI module</a> and safely delete this element.</li><li>Hide this element by setting its <code>\'#access\'</code> property to <code>false</code>.</li></ul>',
+          ],
         ],
-      ],
 
-      // Check validate hierarchy.
-      [
-        'getElementsRaw' => 'empty: empty',
-        'getElementsOriginalRaw' => 'empty: empty',
-        'getElementsInitializedAndFlattened' => [
-          'leaf_parent' => [
-            '#type' => 'textfield',
-            '#webform_key' => 'leaf_parent',
-            '#webform_children' => TRUE,
+        // Check validate hierarchy.
+        [
+          'getElementsRaw' => 'empty: empty',
+          'getElementsOriginalRaw' => 'empty: empty',
+          'getElementsInitializedAndFlattened' => [
+            'leaf_parent' => [
+              '#type' => 'textfield',
+              '#webform_key' => 'leaf_parent',
+              '#webform_children' => TRUE,
+            ],
+            'root' => [
+              '#type' => 'webform_wizard_page',
+              '#webform_key' => 'root',
+              '#webform_parent_key' => TRUE,
+            ],
           ],
-          'root' => [
-            '#type' => 'webform_wizard_page',
-            '#webform_key' => 'root',
-            '#webform_parent_key' => TRUE,
+          'messages' => [
+            'The <em class="placeholder">leaf_parent</em> (textfield) is a webform element that can not have any child elements.',
+            'The <em class="placeholder">root</em> (webform_wizard_page) is a root element that can not be used as child to another element',
           ],
         ],
-        'messages' => [
-          'The <em class="placeholder">leaf_parent</em> (textfield) is a webform element that can not have any child elements.',
-          'The <em class="placeholder">root</em> (webform_wizard_page) is a root element that can not be used as child to another element',
-        ],
-      ],
 
-      // Check validate table hierarchy.
-      [
-        'getElementsRaw' => 'empty: empty',
-        'getElementsOriginalRaw' => 'empty: empty',
-        'getElementsInitializedAndFlattened' => [
-          'table' => [
-            '#type' => 'webform_table',
-            '#webform_key' => 'table',
+        // Check validate table hierarchy.
+        [
+          'getElementsRaw' => 'empty: empty',
+          'getElementsOriginalRaw' => 'empty: empty',
+          'getElementsInitializedAndFlattened' => [
+            'table' => [
+              '#type' => 'webform_table',
+              '#webform_key' => 'table',
+            ],
+            'table_row' => [
+              '#type' => 'webform_table_row',
+              '#webform_key' => 'table_row',
+              '#webform_parent_key' => 'table',
+            ],
+            'table_row_invalid' => [
+              '#type' => 'webform_table_row',
+              '#webform_key' => 'table_row',
+              '#webform_parent_key' => NULL,
+            ],
           ],
-          'table_row' => [
-            '#type' => 'webform_table_row',
-            '#webform_key' => 'table_row',
-            '#webform_parent_key' => 'table',
-          ],
-          'table_row_invalid' => [
-            '#type' => 'webform_table_row',
-            '#webform_key' => 'table_row',
-            '#webform_parent_key' => NULL,
+          'messages' => [
+            'The <em class="placeholder">table_row_invalid</em> (webform_table_row) must be with in a <em class="placeholder">Table</em> (webform_table) element.',
           ],
         ],
-        'messages' => [
-          'The <em class="placeholder">table_row_invalid</em> (webform_table_row) must be with in a <em class="placeholder">Table</em> (webform_table) element.',
-        ],
-      ],
 
-      // Check validate pages.
-      [
-        'getElementsRaw' => "page:
+        // Check validate pages.
+        [
+          'getElementsRaw' => "page:
   '#type': webform_wizard_page
 card:
   '#type': webform_card",
-        'messages' => [
-          'Pages and cards cannot be used in the same webform. Please remove or convert the pages/cards to the same element type.',
+          'messages' => [
+            'Pages and cards cannot be used in the same webform. Please remove or convert the pages/cards to the same element type.',
+          ],
         ],
-      ],
-// phpcs:disable
-/*
+        // phpcs:disable
+        /*
       // Check validate rendering.
       [
         'getElementsRaw' => "machine_name:
@@ -207,7 +207,7 @@ card:
         ],
       ],
 */
-// phpcs:enable
+        // phpcs:enable
     ];
 
     // Check invalid YAML.

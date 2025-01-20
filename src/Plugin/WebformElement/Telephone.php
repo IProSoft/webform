@@ -2,13 +2,13 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use libphonenumber\PhoneNumberFormat;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformMessage as WebformMessageElement;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use libphonenumber\PhoneNumberFormat;
 
 // phpcs:disable Drupal.Classes.FullyQualifiedNamespace.UseStatementMissing
 

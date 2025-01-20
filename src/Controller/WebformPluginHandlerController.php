@@ -61,7 +61,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
           '#markup' => $definition['label'],
           '#prefix' => '<span class="webform-form-filter-text-source">',
           '#suffix' => '</span>',
-        ]
+        ],
       ];
       $row[] = $definition['description'];
       $row[] = $definition['category'];
@@ -155,10 +155,10 @@ class WebformPluginHandlerController extends ControllerBase implements Container
    */
   public function listHandlers(Request $request, WebformInterface $webform) {
     $headers = [
-      ['data' => $this->t('Handler'), 'width' => '20%'],
-      ['data' => $this->t('Description'), 'width' => '40%'],
-      ['data' => $this->t('Category'), 'width' => '20%'],
-      ['data' => $this->t('Operations'), 'width' => '20%'],
+        ['data' => $this->t('Handler'), 'width' => '20%'],
+        ['data' => $this->t('Description'), 'width' => '40%'],
+        ['data' => $this->t('Category'), 'width' => '20%'],
+        ['data' => $this->t('Operations'), 'width' => '20%'],
     ];
 
     $definitions = $this->pluginManager->getDefinitions();
@@ -204,11 +204,11 @@ class WebformPluginHandlerController extends ControllerBase implements Container
           '#type' => 'link',
           '#title' => $definition['label'],
           '#url' => Url::fromRoute(
-            'entity.webform.handler.add_form',
-            [
-              'webform' => $webform->id(),
-              'webform_handler' => $plugin_id,
-            ]
+              'entity.webform.handler.add_form',
+              [
+                'webform' => $webform->id(),
+                'webform_handler' => $plugin_id,
+              ]
           ),
           '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($handler_plugin->getOffCanvasWidth()),
           '#prefix' => '<div class="webform-form-filter-text-source">',
@@ -237,11 +237,11 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         $links['add'] = [
           'title' => $this->t('Add handler'),
           'url' => Url::fromRoute(
-            'entity.webform.handler.add_form',
-            [
-              'webform' => $webform->id(),
-              'webform_handler' => $plugin_id,
-            ]
+              'entity.webform.handler.add_form',
+              [
+                'webform' => $webform->id(),
+                'webform_handler' => $plugin_id,
+              ]
           ),
           'attributes' => WebformDialogHelper::getOffCanvasDialogAttributes($handler_plugin->getOffCanvasWidth()),
         ];

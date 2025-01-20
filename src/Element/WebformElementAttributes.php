@@ -23,10 +23,10 @@ class WebformElementAttributes extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformElementAttributes'],
+            [$class, 'processWebformElementAttributes'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformElementAttributes'],
+            [$class, 'preRenderWebformElementAttributes'],
       ],
       '#theme_wrappers' => ['container'],
       '#classes' => '',

@@ -39,7 +39,7 @@ class WebformShareIframe extends RenderElementBase implements TrustedCallbackInt
       '#test' => [],
       '#theme' => 'webform_share_iframe',
       '#pre_render' => [
-        [$class, 'preRenderWebformShareIframe'],
+            [$class, 'preRenderWebformShareIframe'],
       ],
     ];
   }

@@ -44,7 +44,7 @@ abstract class DateBase extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Form validation.
+        // Form validation.
       'date_date_min' => '',
       'date_date_max' => '',
       'date_days' => ['0', '1', '2', '3', '4', '5', '6'],
@@ -320,10 +320,10 @@ abstract class DateBase extends WebformElementBase {
         '#message_storage' => WebformMessageElement::STORAGE_SESSION,
         '#states' => [
           'visible' => [
-            [':input[name="properties[date_date_min]"]' => ['filled' => TRUE]],
-            [':input[name="properties[date_date_max]"]' => ['filled' => TRUE]],
-            [':input[name="properties[date_time_min]"]' => ['filled' => TRUE]],
-            [':input[name="properties[date_time_max]"]' => ['filled' => TRUE]],
+                  [':input[name="properties[date_date_min]"]' => ['filled' => TRUE]],
+                  [':input[name="properties[date_date_max]"]' => ['filled' => TRUE]],
+                  [':input[name="properties[date_time_min]"]' => ['filled' => TRUE]],
+                  [':input[name="properties[date_time_max]"]' => ['filled' => TRUE]],
           ],
         ],
       ];

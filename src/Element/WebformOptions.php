@@ -39,7 +39,7 @@ class WebformOptions extends FormElementBase {
       '#options_description' => FALSE,
       '#options_description_maxlength' => NULL,
       '#process' => [
-        [$class, 'processWebformOptions'],
+            [$class, 'processWebformOptions'],
       ],
       '#theme_wrappers' => ['form_element'],
     ];

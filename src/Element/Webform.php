@@ -37,7 +37,7 @@ class Webform extends RenderElementBase {
     $class = get_class($this);
     return [
       '#pre_render' => [
-        [$class, 'preRenderWebformElement'],
+            [$class, 'preRenderWebformElement'],
       ],
       '#lazy' => FALSE,
     ] + static::$defaultProperties;

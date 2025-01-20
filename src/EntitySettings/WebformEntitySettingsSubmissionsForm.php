@@ -184,13 +184,13 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#weight' => -97,
     ];
     $behavior_elements = [
-      // Form specific behaviors.
+        // Form specific behaviors.
       'form_previous_submissions' => [
         'title' => $this->t('Show the notification about previous submissions'),
         'form_description' => $this->t('Show the previous submissions notification that appears when users have previously submitted this form.'),
       ],
-      // Global behaviors.
-      // @see \Drupal\webform\Form\WebformAdminSettingsForm
+        // Global behaviors.
+        // @see \Drupal\webform\Form\WebformAdminSettingsForm
       'form_disable_remote_addr' => [
         'title' => $this->t('Disable the tracking of user IP address'),
         'all_description' => $this->t('User IP address tracking is disabled for all webforms.'),
@@ -278,11 +278,11 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#message_storage' => WebformMessage::STORAGE_SESSION,
       '#states' => [
         'visible' => [
-          [':input[name="token_view"]' => ['checked' => TRUE]],
+                [':input[name="token_view"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="token_update"]' => ['checked' => TRUE]],
+                [':input[name="token_update"]' => ['checked' => TRUE]],
           'or',
-          [':input[name="token_delete"]' => ['checked' => TRUE]],
+                [':input[name="token_delete"]' => ['checked' => TRUE]],
         ],
       ],
     ];
@@ -425,9 +425,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#default_value' => $settings['limit_total_message'],
       '#states' => [
         'visible' => [
-          [':input[name="limit_total"]' => ['!value' => '']],
+                [':input[name="limit_total"]' => ['!value' => '']],
           'or',
-          [':input[name="entity_limit_total"]' => ['!value' => '']],
+                [':input[name="entity_limit_total"]' => ['!value' => '']],
         ],
       ],
     ];
@@ -436,9 +436,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       $form['submission_limits']['total']['total_container']['token_tree_link'] += [
         '#states' => [
           'visible' => [
-            [':input[name="limit_total"]' => ['!value' => '']],
+                  [':input[name="limit_total"]' => ['!value' => '']],
             'or',
-            [':input[name="entity_limit_total"]' => ['!value' => '']],
+                  [':input[name="entity_limit_total"]' => ['!value' => '']],
           ],
         ],
       ];
@@ -528,9 +528,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       '#default_value' => $settings['limit_user_message'],
       '#states' => [
         'visible' => [
-          [':input[name="limit_user"]' => ['!value' => '']],
+                [':input[name="limit_user"]' => ['!value' => '']],
           'or',
-          [':input[name="entity_limit_user"]' => ['!value' => '']],
+                [':input[name="entity_limit_user"]' => ['!value' => '']],
         ],
       ],
     ];
@@ -539,9 +539,9 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
       $form['submission_limits']['user']['user_container']['token_tree_link'] += [
         '#states' => [
           'visible' => [
-            [':input[name="limit_user"]' => ['!value' => '']],
+                  [':input[name="limit_user"]' => ['!value' => '']],
             'or',
-            [':input[name="entity_limit_user"]' => ['!value' => '']],
+                  [':input[name="entity_limit_user"]' => ['!value' => '']],
           ],
         ],
       ];
@@ -629,8 +629,8 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         'visible' => [
           ':input[name="draft"]' => ['value' => WebformInterface::DRAFT_ALL],
           ':input[name="purge"]' => [
-            ['value' => WebformSubmissionStorageInterface::PURGE_NONE],
-            ['value' => WebformSubmissionStorageInterface::PURGE_COMPLETED],
+                    ['value' => WebformSubmissionStorageInterface::PURGE_NONE],
+                    ['value' => WebformSubmissionStorageInterface::PURGE_COMPLETED],
           ],
         ],
       ],
@@ -756,8 +756,8 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         '#type' => 'link',
         '#title' => $this->t('Create new submission view'),
         '#url' => Url::fromRoute(
-          'entity.view.duplicate_form',
-          ['view' => 'webform_submissions']
+            'entity.view.duplicate_form',
+            ['view' => 'webform_submissions']
         ),
         '#attributes' => [
           'target' => '_blank',

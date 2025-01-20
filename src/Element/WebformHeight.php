@@ -38,10 +38,10 @@ class WebformHeight extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformHeight'],
+            [$class, 'processWebformHeight'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
+            [$class, 'preRenderWebformCompositeFormElement'],
       ],
       '#required' => FALSE,
       '#height_type' => 'number',

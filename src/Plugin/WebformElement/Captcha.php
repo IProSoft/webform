@@ -47,14 +47,14 @@ class Captcha extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Captcha settings.
+        // Captcha settings.
       'captcha_type' => 'default',
       'captcha_admin_mode' => FALSE,
       'captcha_title' => '',
       'captcha_description' => '',
-      // Flexbox.
+        // Flexbox.
       'flex' => 1,
-      // Conditional logic.
+        // Conditional logic.
     ];
   }
 
@@ -132,9 +132,9 @@ class Captcha extends WebformElementBase {
   public function preview() {
     $element = parent::preview() + [
       '#captcha_admin_mode' => TRUE,
-      // Define empty form id to prevent fatal error when preview is
-      // rendered via Ajax.
-      // @see \Drupal\captcha\Element\Captcha::processCaptchaElement
+        // Define empty form id to prevent fatal error when preview is
+        // rendered via Ajax.
+        // @see \Drupal\captcha\Element\Captcha::processCaptchaElement
       '#captcha_info' => ['form_id' => ''],
     ];
     if ($this->moduleHandler->moduleExists('image_captcha')) {

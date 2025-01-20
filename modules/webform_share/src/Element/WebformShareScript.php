@@ -25,7 +25,7 @@ class WebformShareScript extends RenderElementBase implements TrustedCallbackInt
       '#query' => [],
       '#theme' => 'webform_share_script',
       '#pre_render' => [
-        [$class, 'preRenderWebformShareScript'],
+            [$class, 'preRenderWebformShareScript'],
       ],
     ];
   }

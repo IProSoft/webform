@@ -111,9 +111,9 @@ class WebformHandlerEmailBasicTest extends WebformBrowserTestBase {
     $edit = [
       'first_name' => '"<first_name>"',
       'last_name' => '"<last_name>"',
-      // Drupal strip_tags() from mail subject.
-      // @see \Drupal\Core\Mail\MailManager::doMail
-      // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
+        // Drupal strip_tags() from mail subject.
+        // @see \Drupal\Core\Mail\MailManager::doMail
+        // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
       'subject' => 'This has <removed> & "special" \'characters\'',
       'message' => 'This has <not_removed> & "special" \'characters\'',
     ];

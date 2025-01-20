@@ -65,7 +65,7 @@ class WebformMessageManagerTest extends UnitTestCase {
     $entity_type_manager = $this->createMock(EntityTypeManagerInterface::class);
     $entity_type_manager->method('getStorage')
       ->willReturnMap([
-        ['webform_submission', $webform_submission_storage],
+          ['webform_submission', $webform_submission_storage],
       ]);
 
     // Mock logger.

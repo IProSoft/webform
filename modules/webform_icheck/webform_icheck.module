@@ -5,11 +5,11 @@
  * Provides support for highly customizable checkboxes and radio buttons.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_icheck\Hook\WebformIcheckHooks;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Url;
+use Drupal\webform_icheck\Hook\WebformIcheckHooks;
 
 /**
  * Implements hook_webform_libraries_info().

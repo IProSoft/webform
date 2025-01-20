@@ -180,26 +180,26 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function providerTestApplies() {
     $this->setUpMockEntities();
     $tests = [
-      [FALSE],
-      [FALSE, 'not'],
-      [FALSE, 'webform'],
-      [FALSE, 'entity.webform'],
-      [TRUE, 'entity.webform.handler.'],
-      [TRUE, 'entity.webform_ui.element'],
-      [TRUE, 'entity.webform.user.submissions'],
-      // Source entity.
-      [TRUE, 'entity.{source_entity}.webform'],
-      [TRUE, 'entity.{source_entity}.webform_submission'],
-      [TRUE, 'entity.node.webform'],
-      [TRUE, 'entity.node.webform_submission'],
-      [TRUE, 'entity.node.webform.user.submissions'],
-      // Submissions.
-      [FALSE, 'entity.webform.user.submission'],
-      [TRUE, 'entity.webform.user.submission', [['webform_submission', $this->webformSubmissionAccess]]],
-      [TRUE, 'webform', [['webform_submission', $this->webformSubmissionAccess]]],
-      // Translations.
-      [FALSE, 'entity.webform.config_translation_overview'],
-      [TRUE, 'entity.webform.config_translation_overview', [['webform', $this->webformAccess]]],
+        [FALSE],
+        [FALSE, 'not'],
+        [FALSE, 'webform'],
+        [FALSE, 'entity.webform'],
+        [TRUE, 'entity.webform.handler.'],
+        [TRUE, 'entity.webform_ui.element'],
+        [TRUE, 'entity.webform.user.submissions'],
+        // Source entity.
+        [TRUE, 'entity.{source_entity}.webform'],
+        [TRUE, 'entity.{source_entity}.webform_submission'],
+        [TRUE, 'entity.node.webform'],
+        [TRUE, 'entity.node.webform_submission'],
+        [TRUE, 'entity.node.webform.user.submissions'],
+        // Submissions.
+        [FALSE, 'entity.webform.user.submission'],
+        [TRUE, 'entity.webform.user.submission', [['webform_submission', $this->webformSubmissionAccess]]],
+        [TRUE, 'webform', [['webform_submission', $this->webformSubmissionAccess]]],
+        // Translations.
+        [FALSE, 'entity.webform.config_translation_overview'],
+        [TRUE, 'entity.webform.config_translation_overview', [['webform', $this->webformAccess]]],
     ];
     return $tests;
   }
@@ -233,30 +233,30 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function providerTestType() {
     $this->setUpMockEntities();
     $tests = [
-      [NULL],
-      // Source entity.
-      ['webform_source_entity', 'entity.{source_entity}.webform'],
-      ['webform_source_entity', 'entity.{source_entity}.webform_submission'],
-      ['webform_source_entity', 'entity.node.webform'],
-      ['webform_source_entity', 'entity.node.webform_submission'],
-      // Element.
-      ['webform_element', 'entity.webform_ui.element'],
-      // Handler.
-      ['webform_handler', 'entity.webform.handler.'],
-      // User submissions.
-      ['webform_user_submissions', 'entity.webform.user.submissions'],
-      ['webform_source_entity', 'entity.{source_entity}.webform.user.submissions'],
-      ['webform_source_entity', 'entity.node.webform.user.submissions'],
-      // User submission.
-      ['webform_user_submission', 'entity.webform.user.submission', [['webform_submission', $this->webformSubmission]]],
-      // Submission.
-      [NULL, 'entity.webform_submission.canonical', [['webform_submission', $this->webformSubmission]]],
-      ['webform_submission', 'entity.webform_submission.canonical', [['webform_submission', $this->webformSubmissionAccess]]],
-      // Webform.
-      [NULL, 'entity.webform.canonical', [['webform', $this->webform]]],
-      ['webform', 'entity.webform.canonical', [['webform', $this->webformAccess]]],
-      // Webform template.
-      ['webform_template', 'entity.webform.canonical', [['webform', $this->webformTemplate]]],
+        [NULL],
+        // Source entity.
+        ['webform_source_entity', 'entity.{source_entity}.webform'],
+        ['webform_source_entity', 'entity.{source_entity}.webform_submission'],
+        ['webform_source_entity', 'entity.node.webform'],
+        ['webform_source_entity', 'entity.node.webform_submission'],
+        // Element.
+        ['webform_element', 'entity.webform_ui.element'],
+        // Handler.
+        ['webform_handler', 'entity.webform.handler.'],
+        // User submissions.
+        ['webform_user_submissions', 'entity.webform.user.submissions'],
+        ['webform_source_entity', 'entity.{source_entity}.webform.user.submissions'],
+        ['webform_source_entity', 'entity.node.webform.user.submissions'],
+        // User submission.
+        ['webform_user_submission', 'entity.webform.user.submission', [['webform_submission', $this->webformSubmission]]],
+        // Submission.
+        [NULL, 'entity.webform_submission.canonical', [['webform_submission', $this->webformSubmission]]],
+        ['webform_submission', 'entity.webform_submission.canonical', [['webform_submission', $this->webformSubmissionAccess]]],
+        // Webform.
+        [NULL, 'entity.webform.canonical', [['webform', $this->webform]]],
+        ['webform', 'entity.webform.canonical', [['webform', $this->webformAccess]]],
+        // Webform template.
+        ['webform_template', 'entity.webform.canonical', [['webform', $this->webformTemplate]]],
     ];
     return $tests;
   }
@@ -267,8 +267,8 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function testBuildSourceEntity() {
     $this->setSourceEntity($this->nodeAccess);
     $route_match = $this->getMockRouteMatch('entity.node.webform', [
-      ['webform', $this->webformAccess],
-      ['node', $this->nodeAccess],
+        ['webform', $this->webformAccess],
+        ['node', $this->nodeAccess],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -283,9 +283,9 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function testBuildSourceEntitySubmissions() {
     $this->setSourceEntity($this->nodeAccess);
     $route_match = $this->getMockRouteMatch('entity.node.webform.user.submission', [
-      ['webform_submission', $this->webformSubmissionAccess],
-      ['webform', $this->webform],
-      ['node', $this->node],
+        ['webform_submission', $this->webformSubmissionAccess],
+        ['webform', $this->webform],
+        ['node', $this->node],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -301,9 +301,9 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function testBuildSourceEntityResults() {
     $this->setSourceEntity($this->nodeAccess);
     $route_match = $this->getMockRouteMatch('entity.node.webform_submission.canonical', [
-      ['webform_submission', $this->webformSubmissionAccess],
-      ['webform', $this->webform],
-      ['node', $this->node],
+        ['webform_submission', $this->webformSubmissionAccess],
+        ['webform', $this->webform],
+        ['node', $this->node],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -325,9 +325,9 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
         return ($operation === 'view_own');
       }));
     $route_match = $this->getMockRouteMatch('entity.node.webform_submission.canonical', [
-      ['webform_submission', $webform_submission_access],
-      ['webform', $this->webform],
-      ['node', $this->node],
+        ['webform_submission', $webform_submission_access],
+        ['webform', $this->webform],
+        ['node', $this->node],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -342,7 +342,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
    */
   public function testBuildTemplates() {
     $route_match = $this->getMockRouteMatch('entity.webform.canonical', [
-      ['webform', $this->webformTemplate],
+        ['webform', $this->webformTemplate],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -359,7 +359,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
    */
   public function testBuildElements() {
     $route_match = $this->getMockRouteMatch('entity.webform_ui.element', [
-      ['webform', $this->webform],
+        ['webform', $this->webform],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -378,7 +378,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function testBuildHandlers() {
     // Check source entity.
     $route_match = $this->getMockRouteMatch('entity.webform.handler.add_form', [
-      ['webform', $this->webform],
+        ['webform', $this->webform],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -396,7 +396,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
    */
   public function testBuildSubmissions() {
     $route_match = $this->getMockRouteMatch('entity.webform_submission.canonical', [
-      ['webform_submission', $this->webformSubmissionAccess],
+        ['webform_submission', $this->webformSubmissionAccess],
     ]);
     $links = [
       Link::createFromRoute('Home', '<front>'),
@@ -415,7 +415,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
   public function testBuildUserSubmissions() {
     // Check without view own access.
     $route_match = $this->getMockRouteMatch('entity.webform.user.submission', [
-      ['webform_submission', $this->webformSubmission],
+        ['webform_submission', $this->webformSubmission],
     ]);
     $links = [
       Link::createFromRoute($this->webform->label(), 'entity.webform.canonical', ['webform' => $this->webform->id()]),
@@ -424,7 +424,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
 
     // Check with view own access.
     $route_match = $this->getMockRouteMatch('entity.webform.user.submission', [
-      ['webform_submission', $this->webformSubmissionAccess],
+        ['webform_submission', $this->webformSubmissionAccess],
     ]);
     $links = [
       Link::createFromRoute($this->webform->label(), 'entity.webform.canonical', ['webform' => $this->webform->id()]),
@@ -439,7 +439,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
    */
   public function testBuildUserSubmission() {
     $route_match = $this->getMockRouteMatch('entity.webform.user.submissions', [
-      ['webform', $this->webform],
+        ['webform', $this->webform],
     ]);
     $links = [
       Link::createFromRoute($this->webform->label(), 'entity.webform.canonical', ['webform' => $this->webform->id()]),

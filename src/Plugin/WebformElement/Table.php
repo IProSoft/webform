@@ -43,7 +43,7 @@ class Table extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Table settings.
+        // Table settings.
       'header' => [],
       'empty' => '',
     ];

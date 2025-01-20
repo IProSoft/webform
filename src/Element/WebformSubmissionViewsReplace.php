@@ -21,7 +21,7 @@ class WebformSubmissionViewsReplace extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformSubmissionViewsReplace'],
+            [$class, 'processWebformSubmissionViewsReplace'],
       ],
     ];
   }

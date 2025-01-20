@@ -31,7 +31,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Options settings.
+        // Options settings.
       'multiple' => FALSE,
       'multiple_error' => '',
       'empty_option' => '',
@@ -131,7 +131,7 @@ class WebformOptionsCustom extends Select implements WebformOptionsCustomInterfa
     foreach ($element['#options'] as $value => $text) {
       $rows[] = [
         $value,
-        ['data' => ['#markup' => str_replace(WebformOptionsHelper::DESCRIPTION_DELIMITER, '<br/>', $text)]],
+          ['data' => ['#markup' => str_replace(WebformOptionsHelper::DESCRIPTION_DELIMITER, '<br/>', $text)]],
       ];
     }
 

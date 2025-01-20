@@ -39,7 +39,7 @@ class WebformTemplatesHooks {
       'content' => t('The <strong>Templates</strong> page lists reusable templates that can be duplicated and customized to create new webforms.'),
       'video_id' => 'forms',
       'routes' => [
-              // @see /admin/structure/webform/templates
+            // @see /admin/structure/webform/templates
         'entity.webform.templates',
       ],
     ];

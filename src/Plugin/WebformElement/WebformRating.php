@@ -24,11 +24,11 @@ class WebformRating extends Range {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Number settings.
+        // Number settings.
       'max' => 5,
-      // General settings.
+        // General settings.
       'default_value' => 0,
-      // Rating settings.
+        // Rating settings.
       'star_size' => 'medium',
       'reset' => FALSE,
     ] + parent::defineDefaultProperties();

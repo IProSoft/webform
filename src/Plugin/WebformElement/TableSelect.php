@@ -22,10 +22,10 @@ class TableSelect extends OptionsBase {
    */
   protected function defineDefaultProperties() {
     return [
-      // Options settings.
+        // Options settings.
       'multiple' => TRUE,
       'multiple_error' => '',
-      // Table settings.
+        // Table settings.
       'js_select' => TRUE,
     ] + parent::defineDefaultProperties();
   }

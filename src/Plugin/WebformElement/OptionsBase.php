@@ -41,7 +41,7 @@ abstract class OptionsBase extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Options settings.
+        // Options settings.
       'options' => [],
       'options_randomize' => FALSE,
     ] + parent::defineDefaultProperties();
@@ -54,24 +54,24 @@ abstract class OptionsBase extends WebformElementBase {
         'other__title' => '',
         'other__placeholder' => $this->t('Enter other…'),
         'other__description' => '',
-        // Text field or textarea.
+          // Text field or textarea.
         'other__size' => '',
         'other__maxlength' => '',
         'other__field_prefix' => '',
         'other__field_suffix' => '',
-        // Textarea.
+          // Textarea.
         'other__rows' => '',
-        // Number.
+          // Number.
         'other__min' => '',
         'other__max' => '',
         'other__step' => '',
-        // Counter.
+          // Counter.
         'other__counter_type' => '',
         'other__counter_minimum' => '',
         'other__counter_minimum_message' => '',
         'other__counter_maximum' => '',
         'other__counter_maximum_message' => '',
-        // Wrapper.
+          // Wrapper.
         'wrapper_type' => 'fieldset',
       ];
     }
@@ -964,16 +964,16 @@ abstract class OptionsBase extends WebformElementBase {
     // Other.
     $states_textfield_or_number = [
       'visible' => [
-        [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
         'or',
-        [':input[name="properties[other__type]"]' => ['value' => 'number']],
+            [':input[name="properties[other__type]"]' => ['value' => 'number']],
       ],
     ];
     $states_textbase = [
       'visible' => [
-        [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textfield']],
         'or',
-        [':input[name="properties[other__type]"]' => ['value' => 'textarea']],
+            [':input[name="properties[other__type]"]' => ['value' => 'textarea']],
       ],
     ];
     $states_textarea = [
@@ -1092,7 +1092,7 @@ abstract class OptionsBase extends WebformElementBase {
     if ($this->supportsMultipleValues() && $this->hasProperty('multiple')) {
       $form['display']['format_items']['#states'] = [
         'visible' => [
-          [':input[name="properties[multiple]"]' => ['checked' => TRUE]],
+              [':input[name="properties[multiple]"]' => ['checked' => TRUE]],
         ],
       ];
     }

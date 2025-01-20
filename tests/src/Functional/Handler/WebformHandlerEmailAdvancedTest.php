@@ -127,9 +127,9 @@ class WebformHandlerEmailAdvancedTest extends WebformBrowserTestBase {
       'first_name' => 'John',
       'last_name' => 'Smith',
       'email' => 'from@example.com',
-      // Drupal strip_tags() from mail subject.
-      // @see \Drupal\Core\Mail\MailManager::doMail
-      // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
+        // Drupal strip_tags() from mail subject.
+        // @see \Drupal\Core\Mail\MailManager::doMail
+        // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
       'subject' => 'This has <removed>"special" \'characters\'',
       'message[value]' => '<p><em>Please enter a message.</em> Test that double "quotes" are not encoded.</p>',
       'checkbox' => FALSE,

@@ -134,10 +134,10 @@ class WebformElementAccessTest extends WebformElementBrowserTestBase {
     /* View, Table, and Download access */
 
     $urls = [
-      ['path' => "/admin/structure/webform/manage/test_element_access/submission/$sid"],
-      ['path' => '/admin/structure/webform/manage/test_element_access/results/submissions'],
-      ['path' => '/admin/structure/webform/manage/test_element_access/results/download'],
-      ['path' => '/admin/structure/webform/manage/test_element_access/results/download', 'options' => ['query' => ['download' => 1]]],
+        ['path' => "/admin/structure/webform/manage/test_element_access/submission/$sid"],
+        ['path' => '/admin/structure/webform/manage/test_element_access/results/submissions'],
+        ['path' => '/admin/structure/webform/manage/test_element_access/results/download'],
+        ['path' => '/admin/structure/webform/manage/test_element_access/results/download', 'options' => ['query' => ['download' => 1]]],
     ];
     foreach ($urls as $url) {
       $url += ['options' => []];

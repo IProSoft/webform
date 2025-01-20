@@ -6,9 +6,9 @@
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_access\Hook\WebformAccessTokensHooks;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\webform_access\Entity\WebformAccessType;
+use Drupal\webform_access\Hook\WebformAccessTokensHooks;
 
 // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
 

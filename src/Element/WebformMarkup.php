@@ -18,7 +18,7 @@ class WebformMarkup extends RenderElementBase {
     $class = get_class($this);
     return [
       '#pre_render' => [
-        [$class, 'preRenderWebformMarkup'],
+            [$class, 'preRenderWebformMarkup'],
       ],
     ];
   }

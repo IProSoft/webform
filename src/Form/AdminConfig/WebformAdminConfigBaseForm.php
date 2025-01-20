@@ -117,8 +117,8 @@ abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
       '#header' => ['label' => $this->t('Selected actions')],
       '#options' => $options,
       '#default_value' => array_combine(
-        $settings[$entity_type_id . '_bulk_form_actions'],
-        $settings[$entity_type_id . '_bulk_form_actions']
+          $settings[$entity_type_id . '_bulk_form_actions'],
+          $settings[$entity_type_id . '_bulk_form_actions']
       ),
       '#states' => [
         'visible' => [

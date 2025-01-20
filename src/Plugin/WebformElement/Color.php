@@ -25,7 +25,7 @@ class Color extends WebformElementBase {
    */
   protected function defineDefaultProperties() {
     $properties = [
-      // Color settings.
+        // Color settings.
       'color_size' => 'medium',
     ] + parent::defineDefaultProperties();
     unset(

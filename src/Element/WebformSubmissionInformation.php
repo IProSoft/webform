@@ -22,7 +22,7 @@ class WebformSubmissionInformation extends RenderElementBase {
       '#webform_submission' => NULL,
       '#source_entity' => NULL,
       '#pre_render' => [
-        [$class, 'preRenderWebformSubmissionInformation'],
+            [$class, 'preRenderWebformSubmissionInformation'],
       ],
       '#theme_wrappers' => ['details'],
       '#summary_attributes' => [],

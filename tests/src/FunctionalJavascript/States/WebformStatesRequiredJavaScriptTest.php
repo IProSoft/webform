@@ -25,7 +25,7 @@ class WebformStatesRequiredJavaScriptTest extends WebformWebDriverTestBase {
    * @var array
    */
   protected static $testWebforms = [
-    'test_states_client_required',
+      'test_states_client_required',
   ];
 
   /**

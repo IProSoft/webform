@@ -41,12 +41,12 @@ class WebformElementComposite extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformElementComposite'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformElementComposite'],
+            [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
-      // Add '#markup' property to add an 'id' attribute to the form element.
-      // @see template_preprocess_form_element()
+        // Add '#markup' property to add an 'id' attribute to the form element.
+        // @see template_preprocess_form_element()
       '#markup' => '',
     ];
   }
@@ -178,12 +178,12 @@ class WebformElementComposite extends FormElementBase {
             ],
             '#error_no_message' => TRUE,
           ],
-          // ISSUE:
-          // Set #access: FALSE is losing the custom properties.
-          //
-          // WORKAROUND:
-          // Use 'hidden' element.
-          // @see \Drupal\webform\Element\WebformMultiple::buildElementRow
+                // ISSUE:
+                // Set #access: FALSE is losing the custom properties.
+                //
+                // WORKAROUND:
+                // Use 'hidden' element.
+                // @see \Drupal\webform\Element\WebformMultiple::buildElementRow
           'custom' => $edit_source ? [
             '#type' => 'webform_codemirror',
             '#mode' => 'yaml',
@@ -196,7 +196,7 @@ class WebformElementComposite extends FormElementBase {
           ] : [
             '#type' => 'hidden',
           ],
-          // Note: Setting #return_value: TRUE is not returning any value.
+                // Note: Setting #return_value: TRUE is not returning any value.
           'required' => [
             '#type' => 'checkbox',
             '#title' => t('Required'),

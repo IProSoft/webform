@@ -23,7 +23,7 @@ abstract class WebformExcludedBase extends FormElementBase {
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformExcluded'],
+            [$class, 'processWebformExcluded'],
       ],
       '#webform_id' => NULL,
       '#theme_wrappers' => ['form_element'],

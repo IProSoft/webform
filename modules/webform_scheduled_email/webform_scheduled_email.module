@@ -5,12 +5,12 @@
  * Allows webform emails to be scheduled.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailHooks;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
+use Drupal\webform_scheduled_email\Hook\WebformScheduledEmailHooks;
 
 /**
  * Implements hook_config_schema_info_alter().

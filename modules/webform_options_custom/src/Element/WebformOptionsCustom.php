@@ -41,10 +41,10 @@ class WebformOptionsCustom extends FormElementBase implements WebformOptionsCust
     '#empty_value',
     '#select2',
     '#chosen',
-    // NOTE:
-    // Choices is not supported by custom options because of <option> being
-    // removed inside the <select>.
-    // @see https://github.com/Choices-js/Choices/issues/601
+      // NOTE:
+      // Choices is not supported by custom options because of <option> being
+      // removed inside the <select>.
+      // @see https://github.com/Choices-js/Choices/issues/601
     '#placeholder',
     '#help_display',
     '#size',
@@ -60,11 +60,11 @@ class WebformOptionsCustom extends FormElementBase implements WebformOptionsCust
     return [
       '#input' => TRUE,
       '#process' => [
-        [$class, 'processWebformOptionsCustom'],
-        [$class, 'processAjaxForm'],
+            [$class, 'processWebformOptionsCustom'],
+            [$class, 'processAjaxForm'],
       ],
       '#pre_render' => [
-        [$class, 'preRenderWebformCompositeFormElement'],
+            [$class, 'preRenderWebformCompositeFormElement'],
       ],
       '#options_custom' => NULL,
       '#options' => [],

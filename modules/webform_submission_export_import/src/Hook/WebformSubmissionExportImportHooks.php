@@ -21,9 +21,9 @@ class WebformSubmissionExportImportHooks {
       'content' => t('The <strong>Upload</strong> page allows a CSV (comma separated values) file or URL to be uploaded, converted, and imported into webform submissions.'),
       'video_id' => 'import',
       'routes' => [
-              // @see /admin/structure/webform/manage/{webform}/results/upload
+            // @see /admin/structure/webform/manage/{webform}/results/upload
         'entity.webform_submission_export_import.results_import',
-              // @see /node/{node}/webform/results/upload
+            // @see /node/{node}/webform/results/upload
         'entity.node.webform_submission_export_import.results_import',
       ],
     ];

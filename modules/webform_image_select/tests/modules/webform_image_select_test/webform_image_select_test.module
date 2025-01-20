@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform_image_select_test\Hook\WebformImageSelectTestHooks;
 use Drupal\webform_image_select\Entity\WebformImageSelectImages;
+use Drupal\webform_image_select_test\Hook\WebformImageSelectTestHooks;
 
 /**
  * Implements hook_webform_image_select_images_WEBFORM_IMAGE_SELECT_IMAGES_ID_alter().

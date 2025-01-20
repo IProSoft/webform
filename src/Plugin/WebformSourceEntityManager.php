@@ -2,12 +2,12 @@
 
 namespace Drupal\webform\Plugin;
 
-use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Component\Utility\SortArray;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Webform source entity plugin manager.

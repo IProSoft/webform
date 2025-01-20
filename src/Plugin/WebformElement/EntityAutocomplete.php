@@ -27,7 +27,7 @@ class EntityAutocomplete extends WebformElementBase implements WebformElementEnt
    */
   protected function defineDefaultProperties() {
     return [
-      // Entity reference settings.
+        // Entity reference settings.
       'target_type' => '',
       'selection_handler' => 'default',
       'selection_settings' => [],
