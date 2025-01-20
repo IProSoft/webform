@@ -651,7 +651,7 @@ class WebformHooks {
         [
           '\Drupal\webform\Element\WebformHtmlEditor',
           'processTextFormat',
-        ]
+        ],
       ];
       $info['text_format']['#process'] = array_merge(
         $info['text_format']['#process'] ?? [],
@@ -671,7 +671,7 @@ class WebformHooks {
     if (isset($info['processed_text'])) {
       $info['processed_text']['#pre_render'][] = [
         '\Drupal\webform\Element\WebformHtmlEditor',
-        'preRenderProcessedText'
+        'preRenderProcessedText',
       ];
     }
   }

@@ -33,6 +33,9 @@
     <exclude name="Drupal.Semantics.FunctionT.NotLiteralString"/>
     <exclude name="Drupal.Semantics.FunctionT.ConcatString"/>
     <exclude name="Drupal.Strings.UnnecessaryStringConcat.Found"/>
+    <exclude name="DrupalPractice.Objects.GlobalFunction.GlobalFunction"/>
+    <exclude name="DrupalPractice.Objects.GlobalDrupal.GlobalDrupal"/>
+    <exclude name="DrupalPractice.Objects.GlobalClass.GlobalClass"/>
   </rule>
 
   <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
