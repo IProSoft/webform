@@ -5,10 +5,10 @@
  * Integrates third party settings on the Honeypot module's behalf.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformHoneypotHooks;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Url;
+use Drupal\webform\Hook\WebformHoneypotHooks;
 
 /**
  * Flag to indicate that a honeypot setting can be set.

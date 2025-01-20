@@ -5,10 +5,10 @@
  * Integrates third party settings on the CAPTCHA module's behalf.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformCaptchaHooks;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Url;
+use Drupal\webform\Hook\WebformCaptchaHooks;
 use Drupal\webform\Utility\WebformElementHelper;
 
 /**

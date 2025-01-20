@@ -5,10 +5,10 @@
  * Integrates third party settings on the Antibot module's behalf.
  */
 
-use Drupal\Core\Hook\Attribute\LegacyHook;
-use Drupal\webform\Hook\WebformAntibotHooks;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
 use Drupal\Core\Url;
+use Drupal\webform\Hook\WebformAntibotHooks;
 
 /**
  * Flag to indicate that antibot can be set.

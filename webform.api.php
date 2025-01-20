@@ -2,20 +2,16 @@
 
 /**
  * @file
- */
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
-use Drupal\webform\Plugin\WebformHandlerInterface;
-use Drupal\webform\Element\WebformMessage;
-use Drupal\webform\WebformSubmissionInterface;
-use Drupal\Core\Database\Query\AlterableInterface;
-
-/**
- * @file
  * Hooks related to Webform module.
  */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\webform\Element\WebformMessage;
+use Drupal\webform\Plugin\WebformHandlerInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 // phpcs:disable DrupalPractice.CodeAnalysis.VariableAnalysis.UnusedVariable
 
