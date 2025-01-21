@@ -67,6 +67,8 @@ class Telephone extends TextBase {
       'international' => FALSE,
       'international_initial_country' => '',
       'international_preferred_countries' => [],
+      'international_i18n_use_site_language' => FALSE,
+      'international_i18n' => '',
       'international_separate_dial_code' => TRUE,
     ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
     // Add support for telephone_validation.module.
@@ -98,15 +100,24 @@ class Telephone extends TextBase {
     // Add international library and classes.
     if (!empty($element['#international']) && $this->librariesManager->isIncluded('jquery.intl-tel-input')) {
       $element['#attached']['library'][] = 'webform/webform.element.telephone';
-
+      
       $element['#attributes']['class'][] = 'js-webform-telephone-international';
       $element['#attributes']['class'][] = 'webform-webform-telephone-international';
-
+      
       if (!empty($element['#international_initial_country'])) {
         $element['#attributes']['data-webform-telephone-international-initial-country'] = $element['#international_initial_country'];
       }
       if (!empty($element['#international_preferred_countries'])) {
         $element['#attributes']['data-webform-telephone-international-preferred-countries'] = Json::encode($element['#international_preferred_countries']);
+      }
+      if (!empty($element['#international_i18n_use_site_language'])) {
+        $element['#attributes']['data-webform-telephone-international-i18n-use-site-language'] = strval($element['#international_i18n_use_site_language']);
+      }
+      if (!empty($element['#international_i18n'])) {
+        $element['#attributes']['data-webform-telephone-international-i18n'] = $element['#international_i18n'];
+      }
+      else {
+        $element['#attributes']['data-webform-telephone-international-i18n'] = 'en';
       }
       if (!empty($element['#international_separate_dial_code'])) {
         $element['#attributes']['data-webform-telephone-international-separate-dial-code'] = strval($element['#international_separate_dial_code']);
@@ -125,11 +136,14 @@ class Telephone extends TextBase {
         $intl_tel_input_library = $this->libraryDiscovery->getLibraryByName('webform', 'libraries.jquery.intl-tel-input');
         $cdn = reset($intl_tel_input_library['cdn']);
         $utils_script = $cdn . 'build/js/utils.js';
+        $i18n_path = $cdn . 'build/js/i18n/';
       }
       else {
         $utils_script = base_path() . $library_path . '/build/js/utils.js';
+        $i18n_path = base_path() . $library_path . '/build/js/i18n/';
       }
       $element['#attached']['drupalSettings']['webform']['intlTelInput']['utilsScript'] = $utils_script;
+      $element['#attached']['drupalSettings']['webform']['intlTelInput']['i18nPath'] = $i18n_path;
     }
 
     if ($this->moduleHandler->moduleExists('telephone_validation')) {
@@ -190,6 +204,27 @@ class Telephone extends TextBase {
       ],
     ];
     $this->elementManager->processElement($form['telephone']['international_preferred_countries']);
+    $form['telephone']['international_i18n_use_site_language'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use selected site language for localization of country names'),
+      '#description' => $this->t('Specify whether to use the currently selected site language for country localization. If not set, use the language code entered below.'),
+      '#return_value' => TRUE,
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
+      ],
+    ];
+    $form['telephone']['international_i18n'] = [
+      '#title' => $this->t('Code language for localization of country names'),
+      '#type' => 'textfield',
+      '#size' => 5,
+      '#description' => $this->t('Specify existing code language from intl-tel-input library. If not set, use English.'),
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE],
+        'and',
+        ':input[name="properties[international_i18n_use_site_language]"]' => ['checked' => FALSE]],
+      ],
+    ];
+    $this->elementManager->processElement($form['telephone']['international_i18n']);
     
     $form['telephone']['international_separate_dial_code'] = [
       '#type' => 'checkbox',
@@ -207,6 +242,8 @@ class Telephone extends TextBase {
       $form['telephone']['international_initial_country']['#access'] = FALSE;
       $form['telephone']['international_preferred_countries']['#access'] = FALSE;
       $form['telephone']['international_separate_dial_code']['#access'] = FALSE;
+      $form['telephone']['international_i18n_use_site_language']['#access'] = FALSE;
+      $form['telephone']['international_i18n']['#access'] = FALSE;
     }
 
     // Add support for telephone_validation.module.

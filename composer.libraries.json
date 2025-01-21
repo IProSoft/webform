@@ -199,13 +199,13 @@
             "type": "package",
             "package": {
                 "name": "jquery/intl-tel-input",
-                "version": "17.0.19",
+                "version": "24.1.1",
                 "type": "drupal-library",
                 "extra": {
                     "installer-name": "jquery.intl-tel-input"
                 },
                 "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v17.0.19.zip",
+                    "url": "https://github.com/jackocnr/intl-tel-input/archive/refs/tags/v24.1.1.zip",
                     "type": "zip"
                 },
                 "license": "MIT"
