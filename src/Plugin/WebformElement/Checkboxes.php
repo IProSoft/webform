@@ -41,6 +41,8 @@ class Checkboxes extends OptionsBase {
       'options_none_text' => (string) $this->t('None of the above'),
       // Wrapper.
       'wrapper_type' => 'fieldset',
+      // Default value.
+      "#default_value" => [],
     ] + parent::defineDefaultProperties();
   }
 
