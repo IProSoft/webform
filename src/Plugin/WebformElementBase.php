@@ -1437,9 +1437,10 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     switch ($format) {
       case 'ol':
       case 'ul':
+        $list_items = array_map(fn($item) => is_array($item) ? reset($item) : $item, $items);
         return [
           '#theme' => 'item_list',
-          '#items' => $items,
+          '#items' => $list_items,
           '#list_type' => $format,
         ];
 
