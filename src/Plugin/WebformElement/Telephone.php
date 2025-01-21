@@ -67,6 +67,7 @@ class Telephone extends TextBase {
       'international' => FALSE,
       'international_initial_country' => '',
       'international_preferred_countries' => [],
+      'international_separate_dial_code' => TRUE,
     ] + parent::defineDefaultProperties() + $this->defineDefaultMultipleProperties();
     // Add support for telephone_validation.module.
     if ($this->moduleHandler->moduleExists('telephone_validation')) {
@@ -106,6 +107,12 @@ class Telephone extends TextBase {
       }
       if (!empty($element['#international_preferred_countries'])) {
         $element['#attributes']['data-webform-telephone-international-preferred-countries'] = Json::encode($element['#international_preferred_countries']);
+      }
+      if (!empty($element['#international_separate_dial_code'])) {
+        $element['#attributes']['data-webform-telephone-international-separate-dial-code'] = strval($element['#international_separate_dial_code']);
+      }
+      else {
+        $element['#attributes']['data-webform-telephone-international-separate-dial-code'] = strval(true);
       }
 
       // The utilsScript is fetched when the page has finished loading to
@@ -183,12 +190,23 @@ class Telephone extends TextBase {
       ],
     ];
     $this->elementManager->processElement($form['telephone']['international_preferred_countries']);
+    
+    $form['telephone']['international_separate_dial_code'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use separate dial code'),
+      '#description' => $this->t('Specify to use separate dial code, and force user to have dial code in front of the input.'),
+      '#return_value' => TRUE,
+      '#states' => [
+        'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
+      ],
+    ];
 
     if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
       $form['telephone']['#access'] = FALSE;
       $form['telephone']['international']['#access'] = FALSE;
       $form['telephone']['international_initial_country']['#access'] = FALSE;
       $form['telephone']['international_preferred_countries']['#access'] = FALSE;
+      $form['telephone']['international_separate_dial_code']['#access'] = FALSE;
     }
 
     // Add support for telephone_validation.module.

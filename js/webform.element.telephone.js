@@ -45,9 +45,13 @@
         if ($telephone.attr('data-webform-telephone-international-preferred-countries')) {
           options.preferredCountries = JSON.parse($telephone.attr('data-webform-telephone-international-preferred-countries'));
         }
+        if ($telephone.attr('data-webform-telephone-international-separate-dial-code')) {
+          options.separateDialCode = true;
+        }
 
         options = $.extend(options, Drupal.webform.intlTelInput.options);
-        $telephone.intlTelInput(options);
+        window.intlTelInput(this, options);
+        const iti = intlTelInput.getInstance(this);
 
         var reset = function () {
           $telephone.removeClass('error');
@@ -56,7 +60,7 @@
 
         var validate = function () {
           if ($telephone.val().trim()) {
-            if (!$telephone.intlTelInput('isValidNumber')) {
+            if (!iti.isValidNumber()) {
               $telephone.addClass('error');
               var placeholder = $telephone.attr('placeholder');
               var message;
@@ -83,7 +87,9 @@
         // Check for a valid phone number on submit.
         var $form = $(this.form);
         $form.on('submit', function (event) {
-          if (!validate()) {
+          if (validate()) {
+            $telephone.val(iti.getNumber(window.intlTelInput.utils.numberFormat.E164));
+          } else {
             $telephone.focus();
             event.preventDefault();
 
