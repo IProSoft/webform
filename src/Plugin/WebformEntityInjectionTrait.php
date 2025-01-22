@@ -52,7 +52,7 @@ trait WebformEntityInjectionTrait {
   /**
    * Get the webform submission that this handler is handling.
    *
-   * @return \Drupal\webform\WebformSubmissionInterface
+   * @return \Drupal\webform\WebformSubmissionInterface|null
    *   A webform submission.
    */
   public function setWebformSubmission(?WebformSubmissionInterface $webform_submission = NULL) {

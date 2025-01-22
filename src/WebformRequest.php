@@ -224,7 +224,22 @@ class WebformRequest implements WebformRequestInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Generates a URL for a webform entity based on a route.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $webform_entity
+   *   The webform entity for which to generate a URL.
+   * 
+   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
+   *   A source entity that may affect the URL. Defaults to NULL.
+   *
+   * @param string $route_name
+   *   The route name for URL generation.
+   *
+   * @param array $route_options
+   *   An array of options for the route. Defaults to an empty array.
+   *
+   * @return \Drupal\Core\Url
+   *   The generated URL.
    */
   public function getUrl(EntityInterface $webform_entity, ?EntityInterface $source_entity, $route_name, array $route_options = []) {
     $route_name = $this->getRouteName($webform_entity, $source_entity, $route_name);
