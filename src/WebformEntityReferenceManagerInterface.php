@@ -95,7 +95,7 @@ interface WebformEntityReferenceManagerInterface {
    * Get an entity's target webform.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   A fieldable content entity.getFieldName
+   *   A fieldable content entity.
    *
    * @return \Drupal\webform\WebformInterface|null
    *   The entity's target webform or NULL.
