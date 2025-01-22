@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;
+use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\RenderElementBase;
 use Drupal\Core\Render\Markup;
@@ -877,20 +878,26 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
  *   - attributes: The help attributes.
  */
 function template_preprocess_webform_element_help(array &$variables) {
+  $help_title = WebformHtmlEditor::stripTags($variables['help_title'] ?? '');
+
+  $content = (is_array($variables['help']))
+    ? \Drupal::service('renderer')->render($variables['help'])
+    : $variables['help'];
+  $help_content = WebformHtmlEditor::stripTags($content);
+
+  $label = ($help_title) ? $help_title . ' - ' : '';
+  $label .= $help_content;
+  $label = trim(MailFormatHelper::htmlToText(strip_tags($label, ['br', 'p'])));
+
+  $help = ($help_title) ? '<div class="webform-element-help--title">' . $help_title . '</div>' : '';
+  $help .= '<div class="webform-element-help--content">' . $help_content . '</div>';
+
   $attributes = $variables['attributes'] ?? [];
   $attributes['class'][] = 'webform-element-help';
   $attributes['class'][] = 'js-webform-element-help';
   $attributes['role'] = 'tooltip';
   $attributes['tabindex'] = '0';
-  $attributes['aria-label'] = $variables['help_title'] ?: t('Help tooltip');
-
-  $content = (is_array($variables['help'])) ? \Drupal::service('renderer')->render($variables['help']) : $variables['help'];
-
-  $help = '';
-  if (!empty($variables['help_title'])) {
-    $help .= '<div class="webform-element-help--title">' . WebformHtmlEditor::stripTags($variables['help_title']) . '</div>';
-  }
-  $help .= '<div class="webform-element-help--content">' . WebformHtmlEditor::stripTags($content) . '</div>';
+  $attributes['aria-label'] = $label;
   $attributes['data-webform-help'] = $help;
 
   $variables['attributes'] = new Attribute($attributes);

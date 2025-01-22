@@ -115,13 +115,13 @@ class WebformSettingsAdminTest extends WebformBrowserTestBase {
     $this->drupalGet('/admin/structure/webform/config/advanced');
     $edit = ['ui[description_help]' => TRUE];
     $this->submitForm($edit, 'Save configuration');
-    $assert_session->responseContains('<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Display element description as help text (tooltip)" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Display element description as help text (tooltip)&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;If checked, all element descriptions will be moved to help text (tooltip).&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
+    $assert_session->responseContains('<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Display element description as help text (tooltip) - If checked, all element descriptions will be moved to help text (tooltip)." data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Display element description as help text (tooltip)&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;If checked, all element descriptions will be moved to help text (tooltip).&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 
     // Check moving #description to #help for webform admin routes.
     $this->drupalGet('/admin/structure/webform/config/advanced');
     $edit = ['ui[description_help]' => FALSE];
     $this->submitForm($edit, 'Save configuration');
-    $assert_session->responseNotContains('<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Display element description as help text (tooltip)" data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Display element description as help text (tooltip)&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;If checked, all element descriptions will be moved to help text (tooltip).&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
+    $assert_session->responseNotContains('<span class="webform-element-help js-webform-element-help" role="tooltip" tabindex="0" aria-label="Display element description as help text (tooltip) - If checked, all element descriptions will be moved to help text (tooltip)." data-webform-help="&lt;div class=&quot;webform-element-help--title&quot;&gt;Display element description as help text (tooltip)&lt;/div&gt;&lt;div class=&quot;webform-element-help--content&quot;&gt;If checked, all element descriptions will be moved to help text (tooltip).&lt;/div&gt;"><span aria-hidden="true">?</span></span>');
 
     /* Toolbar */
 
