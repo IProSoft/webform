@@ -51,6 +51,11 @@
 
         options = $.extend(options, Drupal.webform.counter.options);
 
+        // Allow custom options.
+        if ($(this).attr('data-options')) {
+          options = $.extend(JSON.parse($(this).attr('data-options')), options);
+        }
+
         $(this).textcounter(options);
       });
 

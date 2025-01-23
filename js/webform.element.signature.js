@@ -56,6 +56,12 @@
             $input.val(signaturePad.toDataURL());
           }
         }, Drupal.webform.signaturePad.options);
+
+        // Allow custom options.
+        if ($input.attr('data-options')) {
+          options = $.extend(JSON.parse($input.attr('data-options')), options);
+        }
+
         var signaturePad = new SignaturePad(canvas, options);
 
         // Disable the signature pad when input is disabled or readonly.

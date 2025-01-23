@@ -57,6 +57,11 @@
 
         options = $.extend(options, Drupal.webform.timePicker.options);
 
+        // Allow custom options.
+        if ($input.attr('data-options')) {
+          options = $.extend(JSON.parse($input.attr('data-options')), options);
+        }
+
         $input.timepicker(options);
       });
     }

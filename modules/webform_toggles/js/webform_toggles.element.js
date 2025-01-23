@@ -39,6 +39,11 @@
           }
         }, Drupal.webform.toggles.options);
 
+        // Allow custom options.
+        if ($toggle.attr('data-options')) {
+          options = $.extend(JSON.parse($toggle.attr('data-options')), options);
+        }
+
         $toggle.toggles(options);
 
         // Trigger change event for #states API.

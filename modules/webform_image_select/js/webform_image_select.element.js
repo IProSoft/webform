@@ -50,6 +50,11 @@
           options.show_label = true;
         }
 
+        // Allow custom options.
+        if ($select.attr('data-options')) {
+          options = $.extend(JSON.parse($select.attr('data-options')), options);
+        }
+
         $select.imagepicker(options);
 
         // Add very basic accessibility to the image picker by

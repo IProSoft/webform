@@ -47,6 +47,12 @@
         }
 
         options = $.extend(options, Drupal.webform.intlTelInput.options);
+
+        // Allow custom options.
+        if ($telephone.attr('data-options')) {
+          options = $.extend(JSON.parse($telephone.attr('data-options')), options);
+        }
+
         $telephone.intlTelInput(options);
 
         var reset = function () {

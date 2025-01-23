@@ -92,6 +92,11 @@
           };
         }
 
+        // Allow custom options.
+        if ($input.attr('data-options')) {
+          options = $.extend(JSON.parse($input.attr('data-options')), options);
+        }
+
         // Disable autocomplete.
         var off = /chrom(e|ium)/.test(window.navigator.userAgent.toLowerCase()) ? 'chrome-off-' + Math.floor(Math.random() * 100000000) : 'off';
         $input.attr('autocomplete', off);
