@@ -35,6 +35,7 @@ entitywebformedit
 entitywebformsettings
 eslinting
 filecontent
+filesizes
 fileurl
 Flexmail
 Formdazzle
@@ -180,6 +181,7 @@ unflagged
 unscheduling
 Unstar
 unsupport
+varchar
 vwebform
 webformsettings
 websubmission

@@ -601,12 +601,20 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    *   Max file size.
    */
   protected function getMaxFileSize(array $element) {
-    $max_filesize = $this->configFactory->get('webform.settings')->get('file.default_max_filesize') ?: Environment::getUploadMaxSize();
-    $max_filesize = Bytes::toNumber($max_filesize);
-    if (!empty($element['#max_filesize'])) {
-      $max_filesize = min($max_filesize, Bytes::toNumber($element['#max_filesize'] . 'MB'));
-    }
-    return $max_filesize;
+    $max_filesizes = [
+      'default' => $this->configFactory->get('webform.settings')->get('file.default_max_filesize'),
+      'php' => Environment::getUploadMaxSize(),
+      'element' => !empty($element['#max_filesize']) ? $element['#max_filesize'] . 'MB' : 0,
+    ];
+
+    // Convert max file sizes to bytes.
+    $max_filesizes = array_map(fn ($size): int => Bytes::toNumber($size), $max_filesizes);
+
+    // Filter out zero values (which indicate no limit).
+    $max_filesizes = array_filter($max_filesizes);
+
+    // Return the smallest max file size, defaulting to 0 if no limits are set.
+    return !empty($max_filesizes) ? min($max_filesizes) : 0;
   }
 
   /**

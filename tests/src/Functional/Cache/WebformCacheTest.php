@@ -44,7 +44,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'config:webform.webform.contact',
         'webform:contact',
       ],
-      'max-age' => -1,
+      'max-age' => version_compare(\Drupal::VERSION, '11.1', '<') ? -1 : 0,
     ];
     $this->assertEqualsCanonicalizing($expected, $form['#cache']);
 
@@ -81,7 +81,7 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'user:2',
         'webform:contact',
       ],
-      'max-age' => -1,
+      'max-age' => version_compare(\Drupal::VERSION, '11.1', '<') ? -1 : 0,
     ];
     $this->assertEqualsCanonicalizing($expected, $form['#cache']);
     $this->assertFalse(isset($form['elements']['email']['#cache']));
