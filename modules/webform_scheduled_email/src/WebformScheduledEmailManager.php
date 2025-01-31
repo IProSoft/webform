@@ -575,17 +575,19 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
 
     // Now update all the emails.
     foreach ($records as $record) {
-      // This should never happen but we will delete this record since
-      // it is pointing to missing submission.
-      if (!isset($webform_submissions[$record->sid])) {
+      /** @var \Drupal\webform\WebformSubmissionInterface|null $webform_submission */
+      $webform_submission = isset($webform_submissions[$record->sid]) ? $webform_submissions[$record->sid] : NULL;
+      $handler_id = $record->handler_id;
+      if (!$webform_submission || !$webform_submission->getWebform()->getHandlers('scheduled_email')->has($handler_id)) {
+        // This record's webform submission or scheduled_email handler no
+        // longer exists.
+        // Remove this orphaned record and move on.
         $this->database->delete('webform_scheduled_email')
           ->condition('eid', $record->eid)
           ->execute();
         continue;
       }
 
-      $webform_submission = $webform_submissions[$record->sid];
-      $handler_id = $record->handler_id;
       switch ($record->state) {
         case WebformScheduledEmailManagerInterface::SUBMISSION_SCHEDULE:
         case WebformScheduledEmailManagerInterface::SUBMISSION_RESCHEDULE:
@@ -655,21 +657,22 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
 
       $eids[] = $record->eid;
 
-      /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
+      /** @var \Drupal\webform\WebformSubmissionInterface|null $webform_submission */
       $webform_submission = $this->getSubmissionStorage()->load($sid);
-      // This should rarely happen and the orphaned record will be deleted.
-      if (!$webform_submission) {
+      if (!$webform_submission | !$webform_submission->getWebform()->getHandlers('scheduled_email')->has($handler_id)) {
+        // This record's webform submission or scheduled_email handler no
+        // longer exists.
+        // Remove this orphaned record and move on.
+        $this->database->delete('webform_scheduled_email')
+          ->condition('eid', $record->eid)
+          ->execute();
         continue;
       }
 
       $webform = $webform_submission->getWebform();
 
       /** @var \Drupal\webform_scheduled_email\Plugin\WebformHandler\ScheduleEmailWebformHandler $handler */
-      $handler = $webform_submission->getWebform()->getHandler($handler_id);
-      // This should rarely happen and the orphaned record will be deleted.
-      if (!$handler) {
-        continue;
-      }
+      $handler = $webform->getHandler($handler_id);
 
       if ($handler->isDisabled()) {
         // Disable sending email.
