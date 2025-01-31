@@ -576,7 +576,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
     // Now update all the emails.
     foreach ($records as $record) {
       /** @var \Drupal\webform\WebformSubmissionInterface|null $webform_submission */
-      $webform_submission = isset($webform_submissions[$record->sid]) ? $webform_submissions[$record->sid] : NULL;
+      $webform_submission = $webform_submissions[$record->sid] ?? NULL;
       $handler_id = $record->handler_id;
       if (!$webform_submission || !$webform_submission->getWebform()->getHandlers('scheduled_email')->has($handler_id)) {
         // This record's webform submission or scheduled_email handler no
