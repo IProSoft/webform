@@ -659,7 +659,7 @@ class WebformScheduledEmailManager implements WebformScheduledEmailManagerInterf
 
       /** @var \Drupal\webform\WebformSubmissionInterface|null $webform_submission */
       $webform_submission = $this->getSubmissionStorage()->load($sid);
-      if (!$webform_submission | !$webform_submission->getWebform()->getHandlers('scheduled_email')->has($handler_id)) {
+      if (!$webform_submission || !$webform_submission->getWebform()->getHandlers('scheduled_email')->has($handler_id)) {
         // This record's webform submission or scheduled_email handler no
         // longer exists.
         // Remove this orphaned record and move on.
