@@ -2,9 +2,12 @@
 
 namespace Drupal\Tests\webform_scheduled_email\Functional;
 
+use Drupal\Component\Datetime\Time;
+use Drupal\Core\Database\Database;
 use Drupal\Tests\webform_node\Functional\WebformNodeBrowserTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform_scheduled_email\WebformScheduledEmailManagerInterface;
 
 /**
  * Tests for webform scheduled email handler.
@@ -19,6 +22,27 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
    * @var array
    */
   protected static $modules = ['webform', 'webform_scheduled_email', 'webform_scheduled_email_test', 'webform_node'];
+
+  /**
+   * The database connection for testing.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
+   * The time class for testing.
+   */
+  protected Time $time;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->connection = Database::getConnection();
+    $this->time = new Time();
+  }
 
   /**
    * Tests webform schedule email handler.
@@ -116,16 +140,6 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
     \Drupal::configFactory()->getEditable('webform_scheduled_email.settings')
       ->set('schedule_type', 'date')
       ->save();
-
-    /* ********************************************************************** */
-    // Check deleting handler removes scheduled emails.
-    // @todo Figure out why the below exception is occurring during tests only.
-    // "Drupal\Component\Plugin\Exception\PluginNotFoundException: Plugin ID 'tomorrow' was not found. "
-    // $handler = $webform->getHandler('yesterday');
-    // $webform->deleteWebformHandler($handler);
-    // $total = \Drupal::database()->select('webform_scheduled_email')->countQuery()->execute()->fetchField();
-    // $this->assertEqual($total, 3);
-    /* ********************************************************************** */
 
     /* ********************************************************************** */
     // Webform scheduling.
@@ -347,6 +361,127 @@ class WebformScheduledEmailTest extends WebformNodeBrowserTestBase {
     $this->assertEquals($scheduled_manager->total(), 0);
     $assert_session->responseContains('Webform submission from: Test: Handler: Test scheduled email</em> sent to <em class="placeholder">simpletest@example.com</em> from <em class="placeholder">Drupal</em> [<em class="placeholder">simpletest@example.com</em>');
     $assert_session->responseContains('Debug: Email: Other');
+
+    /* ********************************************************************** */
+    // Deleting a scheduled email handler should remove its scheduled emails.
+    /* ********************************************************************** */
+
+    // Purge all submissions.
+    $this->purgeSubmissions();
+
+    // Create three tomorrow scheduled emails.
+    $this->postSubmission($webform_schedule, ['send' => 'tomorrow']);
+    $this->postSubmission($webform_schedule, ['send' => 'tomorrow']);
+    $this->postSubmission($webform_schedule, ['send' => 'tomorrow']);
+
+    // Create three yesterday scheduled emails.
+    $this->postSubmission($webform_schedule, ['send' => 'yesterday']);
+    $this->postSubmission($webform_schedule, ['send' => 'yesterday']);
+    $this->postSubmission($webform_schedule, ['send' => 'yesterday']);
+
+    // Assert that we have six scheduled emails at this point.
+    $this->assertEquals(6, $scheduled_manager->total($webform_schedule));
+
+    // Remove the tomorrow scheduled email handler.
+    $tomorrow_handler = $webform_schedule->getHandler('tomorrow');
+    $webform_schedule->deleteWebformHandler($tomorrow_handler);
+    $webform_schedule->save();
+
+    // Assert that we now have only three scheduled emails.
+    $this->assertEquals(3, $scheduled_manager->total($webform_schedule));
+
+    /* ********************************************************************** */
+    // Orphaned webform_scheduled_email records should be removed on cron.
+    /* ********************************************************************** */
+
+    // Purge all submissions.
+    $this->purgeSubmissions();
+
+    // Simulate the creation of orphaned webform_scheduled_email records.
+    $orphan_eids = [];
+
+    // Create a submission to associate with these records.
+    $orphan_sid = $this
+      ->postSubmission($webform_schedule, ['send' => 'yesterday']);
+
+    // Create an orphan with a missing handler in schedule state.
+    // The $tomorrow_handler was deleted above.
+    // This will get processed by WebformScheduledEmailManager::cronSchedule().
+    $orphan_eids[] = $this->connection->insert('webform_scheduled_email')
+      ->fields([
+        'webform_id' => $webform_schedule->id(),
+        'sid' => $orphan_sid,
+        'handler_id' => $tomorrow_handler->getHandlerId(),
+        'state' => WebformScheduledEmailManagerInterface::SUBMISSION_SCHEDULE,
+        'send' => $this->time->getRequestTime() + 60,
+      ])
+      ->execute();
+    // Create an orphan with a missing handler in send state.
+    // This will get processed by WebformScheduledEmailManager::cronSend().
+    $orphan_eids[] = $this->connection->insert('webform_scheduled_email')
+      ->fields([
+        'webform_id' => $webform_schedule->id(),
+        'sid' => $orphan_sid,
+        'handler_id' => $tomorrow_handler->getHandlerId(),
+        'state' => WebformScheduledEmailManagerInterface::SUBMISSION_SEND,
+        'send' => $this->time->getRequestTime() - 60,
+      ])
+      ->execute();
+
+    // Run cron, which should clean up the orphaned records.
+    $scheduled_manager->cron();
+
+    // Assert that the orphaned records were removed.
+    $count = $this->connection
+      ->select('webform_scheduled_email')
+      ->condition('eid', $orphan_eids, 'IN')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $this->assertEquals(0, $count);
+
+    $orphan_eids = [];
+
+    // Delete the submission.
+    $this->purgeSubmissions();
+
+    // Create an orphan with a missing submission in schedule state.
+    // This will get processed by WebformScheduledEmailManager::cronSchedule().
+    $orphan_eids[] = $this->connection->insert('webform_scheduled_email')
+      ->fields([
+        'webform_id' => $webform_schedule->id(),
+        'sid' => $orphan_sid,
+        'handler_id' => $webform_schedule->getHandler('yesterday')->getHandlerId(),
+        'state' => WebformScheduledEmailManagerInterface::SUBMISSION_SCHEDULE,
+        'send' => $this->time->getRequestTime() + 60,
+      ])
+      ->execute();
+    // Create an orphan with a missing submission in send state.
+    // This will get processed by WebformScheduledEmailManager::cronSend().
+    $orphan_eids[] = $this->connection->insert('webform_scheduled_email')
+      ->fields([
+        'webform_id' => $webform_schedule->id(),
+        'sid' => $orphan_sid,
+        'handler_id' => $webform_schedule->getHandler('yesterday')->getHandlerId(),
+        'state' => WebformScheduledEmailManagerInterface::SUBMISSION_SEND,
+        'send' => $this->time->getRequestTime() - 60,
+      ])
+      ->execute();
+
+    // Run cron, which should clean up the orphaned records.
+    $scheduled_manager->cron();
+
+    // Assert that the orphaned records were removed.
+    $count = $this->connection
+      ->select('webform_scheduled_email')
+      ->condition('eid', $orphan_eids, 'IN')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $this->assertEquals(0, $count);
+
+    // Assert that we have no scheduled emails.
+    $this->assertEquals(0, $scheduled_manager->total($webform_schedule));
   }
 
   /**
