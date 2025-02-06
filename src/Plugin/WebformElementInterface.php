@@ -258,13 +258,16 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
   public function hasMultipleWrapper();
 
   /**
-   * Checks if the element value has multiple values.
+   * Returns information about the number of allowed values for an element.
    *
    * @param array $element
    *   An element.
    *
-   * @return bool
-   *   TRUE if the element value has multiple values.
+   * @return bool|int
+   *   TRUE if the element value allows an unlimited number of values. FALSE if
+   *   the element only allows a single value. If the element allows a limited
+   *   number of values, an integer indicating the number of allowed values is
+   *   returned.
    */
   public function hasMultipleValues(array $element);
 
