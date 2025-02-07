@@ -131,6 +131,9 @@ webform.handler.email:
     theme_name:
       type: string
       label: 'Theme name'
+    langcode:
+      type: string
+      label: Language
     parameters:
       label: 'Parameters'
       type: ignore

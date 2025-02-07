@@ -2084,9 +2084,9 @@ class Webform extends ConfigEntityBundleBase implements WebformInterface {
         $access_operation = (in_array($operation, ['default', 'add'])) ? 'create' : 'update';
         if ($element_plugin->checkAccessRules($access_operation, $element)) {
           $pages[$key] = array_intersect_key($element, $wizard_properties) + [
-            '#type' => 'page',
-            '#access' => TRUE,
-          ];
+              '#type' => 'page',
+              '#access' => TRUE,
+            ];
         }
       }
     }
