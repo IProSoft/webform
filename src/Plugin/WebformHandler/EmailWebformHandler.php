@@ -1003,7 +1003,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     $message['handler'] = $this;
 
     // Switch back to the current language.
-    if ($custom_langcode) {
+    if ($custom_langcode && $custom_langcode !== $current_langcode) {
       $this->setWebformTranslation($current_langcode);
     }
 
