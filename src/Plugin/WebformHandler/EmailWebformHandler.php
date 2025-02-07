@@ -910,7 +910,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
     // Switch to custom language.
     $custom_langcode = $this->configuration['langcode'];
     $current_langcode = $this->languageManager->getCurrentLanguage()->getId();
-    if ($custom_langcode) {
+    if ($custom_langcode && $custom_langcode !== $current_langcode) {
       $this->setWebformTranslation($custom_langcode);
     }
 
