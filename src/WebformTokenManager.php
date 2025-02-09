@@ -138,7 +138,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     // anonymous user properties from being displayed.
     // For example, the [current-user:display-name] token will return
     // 'Anonymous', which is not an expected behavior.
-    if ($this->currentUser->isAnonymous() && strpos($text, '[current-user:') !== FALSE) {
+    if (($this->currentUser->isAnonymous() || ($entity instanceof WebformSubmissionInterface && $entity->getOwnerId() === 0) || $entity instanceof WebformInterface) && strpos($text, '[current-user:') !== FALSE) {
       $text = preg_replace('/\[current-user:[^]]+\]/', '', $text);
     }
 
