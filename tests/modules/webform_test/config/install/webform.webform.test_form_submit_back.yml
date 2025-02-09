@@ -67,6 +67,7 @@ settings:
   form_submit_back: true
   form_autofocus: false
   form_details_toggle: false
+  form_use_content_language: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''

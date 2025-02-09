@@ -28,6 +28,13 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
   protected $moduleHandler;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManager
+   */
+  protected $languageManager;
+
+  /**
    * The webform token manager.
    *
    * @var \Drupal\webform\WebformTokenManagerInterface
@@ -69,6 +76,7 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
     $instance = parent::create($container);
     $instance->entityTypeManager = $container->get('entity_type.manager');
     $instance->moduleHandler = $container->get('module_handler');
+    $instance->languageManager = $container->get('language_manager');
     $instance->tokenManager = $container->get('webform.token_manager');
     $instance->thirdPartySettingsManager = $container->get('webform.third_party_settings_manager');
     $instance->addonsManager = $container->get('webform.addons_manager');
@@ -310,6 +318,13 @@ class WebformAdminConfigFormsForm extends WebformAdminConfigBaseForm {
         'group' => $this->t('Elements'),
         'title' => $this->t('Display collapse/expand all details link on all webforms'),
         'description' => $this->t('If checked, an expand/collapse all details link will be added to all webforms which contain two or more details elements.'),
+      ],
+      // Multilingual.
+      'default_form_use_content_language' => [
+        'group' => $this->t('Multilingual'),
+        'title' => $this->t('Use content language to render forms'),
+        'description' => $this->t('If checked, detected content language will be used to render forms instead of detected interface language'),
+        'access' => $this->languageManager->isMultilingual(),
       ],
     ];
     foreach ($behavior_elements as $behavior_key => $behavior_element) {

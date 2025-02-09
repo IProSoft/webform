@@ -862,6 +862,14 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         'form_description' => $this->t('If checked, an expand/collapse all (details) link will be added to this webform when there are two or more details elements available on the webform.'),
       ],
 
+      // Multilingual.
+      'form_use_content_language' => [
+        'group' => $this->t('Multilingual'),
+        'title' => $this->t('Use content language to render the form'),
+        'all_description' => $this->t('Detected content language is used for all forms.'),
+        'form_description' => $this->t('If checked, detected content language will be used to render this form.'),
+      ],
+
       // Prepopulate.
       'form_prepopulate' => [
         'group' => $this->t('Prepopulate'),
