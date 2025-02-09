@@ -118,7 +118,7 @@ trait WebformEntityReferenceWidgetTrait {
       else {
         $message = $this->t('The %webform webform is <strong>closed</strong>. The below status will be ignored.', $t_args);
       }
-      $element['settings']['status_message'] = [
+      $element['settings']['ajax_wrapper']['status_message'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
         '#message_message' => $message,
@@ -126,12 +126,12 @@ trait WebformEntityReferenceWidgetTrait {
     }
     else {
       // Render empty element so that Ajax wrapper is embedded in the page.
-      $element['settings']['status_message'] = [];
+      $element['settings']['ajax_wrapper'] = [];
     }
     $ajax_id = 'webform-entity-reference-' . $field_name . '-' . $delta;
     $this->buildAjaxElementTrigger($ajax_id, $element['target_id']);
     $this->buildAjaxElementUpdate($ajax_id, $element);
-    $this->buildAjaxElementWrapper($ajax_id, $element['settings']['status_message']);
+    $this->buildAjaxElementWrapper($ajax_id, $element['settings']['ajax_wrapper']);
 
     $element['settings']['status'] = [
       '#type' => 'radios',
