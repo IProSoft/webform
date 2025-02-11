@@ -801,6 +801,9 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     $form = parent::form($form, $form_state);
+    // Core marks any entity form as uncacheable by setting max-age to 0.
+    // @todo Remove this in https://www.drupal.org/node/3395524.
+    $form['#cache']['max-age'] = Cache::PERMANENT;
 
     /* Information */
 
