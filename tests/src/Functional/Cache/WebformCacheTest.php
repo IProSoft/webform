@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\webform\Functional\Cache;
 
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Tests\webform\Functional\WebformBrowserTestBase;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
@@ -44,8 +45,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'config:webform.webform.contact',
         'webform:contact',
       ],
-      'max-age' => -1,
     ];
+    if (version_compare(\Drupal::VERSION, '11.1', '<')) {
+      $expected['max-age'] = CacheBackendInterface::CACHE_PERMANENT;
+    }
     $this->assertEqualsCanonicalizing($expected, $form['#cache']);
 
     // Check that the name element does not have #cache because the
@@ -108,8 +111,10 @@ class WebformCacheTest extends WebformBrowserTestBase {
         'user:2',
         'webform:contact',
       ],
-      'max-age' => -1,
     ];
+    if (version_compare(\Drupal::VERSION, '11.1', '<')) {
+      $expected['max-age'] = CacheBackendInterface::CACHE_PERMANENT;
+    }
     $this->assertEqualsCanonicalizing($expected, $form['elements']['email']['#cache']);
     $this->assertEquals($form['elements']['email']['#default_value'], $account->getEmail());
     $this->assertEquals($form['elements']['email']['#description']['#markup'], $account->getEmail());
