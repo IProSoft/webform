@@ -1144,6 +1144,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Display link to previous submissions message when user is adding a new
     // submission.
+    $form['#cache']['contexts'][] = 'user.permissions';
     if ($this->isGet()
       && $this->operation === 'add'
       && $this->getWebformSetting('form_previous_submissions', FALSE)
