@@ -801,6 +801,11 @@ class WebformSubmissionForm extends ContentEntityForm {
     }
 
     $form = parent::form($form, $form_state);
+    // Core marks any entity form as uncacheable by setting max-age to 0.
+    // @todo Remove this in https://www.drupal.org/node/3395524.
+    if (($form['#cache']['max-age'] ?? NULL) === 0) {
+      unset($form['#cache']['max-age']);
+    }
 
     /* Information */
 
@@ -1139,6 +1144,7 @@ class WebformSubmissionForm extends ContentEntityForm {
 
     // Display link to previous submissions message when user is adding a new
     // submission.
+    $form['#cache']['contexts'][] = 'user.permissions';
     if ($this->isGet()
       && $this->operation === 'add'
       && $this->getWebformSetting('form_previous_submissions', FALSE)
