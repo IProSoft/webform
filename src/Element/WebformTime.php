@@ -133,17 +133,21 @@ class WebformTime extends FormElementBase {
       [$hours, $minutes] = explode(':', $value);
       $total_minutes = (intval($hours) * 60) + intval($minutes);
 
-      // get time difference in minutes between the step start-time and chosen time
-      $min_time = strtotime($element['#min']);
+      // get time difference in minutes between the step start-time and chosen time.
+      $min_time = strtotime('00:00');
+      if(!empty($element['#min'])) {
+        $min_time = strtotime($element['#min']);
+      }
+
       $total_minutes_min = (intval(date('H', $min_time)) * 60) + intval(date('i', $min_time));
       $total_minutes_diff = $total_minutes - $total_minutes_min;
 
       if ($step > 1 && $total_minutes_diff % $step !== 0) {
-          $t_args = [
-              '%name' => $name,
-              '%step' => $step,
-          ];
-          $form_state->setError($element, t('%name must be a valid time with intervals from the dropdown (%step min/s).', $t_args));
+        $t_args = [
+          '%name' => $name,
+          '%step' => $step,
+        ];
+        $form_state->setError($element, t('%name must be a valid time with intervals from the dropdown (%step min/s).', $t_args));
       }
     }
 
