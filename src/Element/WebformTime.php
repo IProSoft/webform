@@ -135,7 +135,7 @@ class WebformTime extends FormElementBase {
 
       // get time difference in minutes between the step start-time and chosen time.
       $min_time = strtotime('00:00');
-      if(!empty($element['#min'])) {
+      if (!empty($element['#min'])) {
         $min_time = strtotime($element['#min']);
       }
 
