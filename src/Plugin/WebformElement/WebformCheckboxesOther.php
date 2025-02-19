@@ -71,4 +71,24 @@ class WebformCheckboxesOther extends Checkboxes implements WebformElementOtherIn
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function setDefaultValue(array &$element) {
+    if (!isset($element['#default_value'])) {
+      return;
+    }
+
+    if (isset($element['#default_value']['other']) && isset($element['#default_value']['checkboxes'])) {
+      // Checkboxes element expects to receive flat array @see Drupal\Core\Render\Element\Checkboxes::valueCallback()".
+      $other_value = $element['#default_value']['other'];
+      $element['#default_value'] = array_filter($element['#default_value']['checkboxes']);
+      if ($other_value !== '') {
+        $element['#default_value'] += [$other_value => $other_value];
+      }
+    }
+
+    parent::setDefaultValue($element);
+  }
+
 }
