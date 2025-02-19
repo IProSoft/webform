@@ -66,6 +66,7 @@ class WebformSubmissionStorageSchema extends SqlContentEntityStorageSchema {
       'indexes' => [
         'webform_id' => ['webform_id'],
         'sid_webform_id' => ['sid', 'webform_id'],
+        'name_property' => ['name', 'property'],
       ],
     ];
 
