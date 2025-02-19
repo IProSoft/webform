@@ -27,3 +27,7 @@ include:
 #   SKIP_ESLINT: '1'
 #   OPT_IN_TEST_NEXT_MAJOR: '1'
 #   _CURL_TEMPLATES_REF: 'main'
+
+composer:
+  variables:
+    DRUPAL_CORE: 10.3.12
