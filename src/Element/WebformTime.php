@@ -136,7 +136,7 @@ class WebformTime extends FormElementBase {
       // Calculate time difference between the start time and selected time.
       $min = strtotime('00:00');
       if (isset($element['#min'])) {
-          $min = strtotime($element['#min']);
+        $min = strtotime($element['#min']);
       }
 
       $total_minutes_min = (intval(date('H', $min)) * 60) + intval(date('i', $min));
