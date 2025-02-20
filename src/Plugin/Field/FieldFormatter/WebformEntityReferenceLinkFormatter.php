@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformSourceEntity\QueryStringWebformSourceEntity;
@@ -63,6 +64,7 @@ class WebformEntityReferenceLinkFormatter extends WebformEntityReferenceFormatte
       'label' => 'Go to [webform:title] webform',
       'dialog' => '',
       'attributes' => [],
+      'defaults_in_link' => FALSE,
     ] + parent::defaultSettings();
   }
 
@@ -100,6 +102,11 @@ class WebformEntityReferenceLinkFormatter extends WebformEntityReferenceFormatte
       '#type' => 'textfield',
       '#default_value' => $this->getSetting('label'),
       '#required' => TRUE,
+    ];
+    $form['defaults_in_link'] = [
+      '#title' => $this->t('Defaults in link'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->getSetting('defaults_in_link'),
     ];
 
     $dialog_options = $this->configFactory->get('webform.settings')->get('settings.dialog_options');
@@ -157,6 +164,9 @@ class WebformEntityReferenceLinkFormatter extends WebformEntityReferenceFormatte
           $link_entity = $entity;
         }
         $link_options = QueryStringWebformSourceEntity::getRouteOptionsQuery($source_entity);
+        if ($this->getSetting('defaults_in_link') && $default_data = $items[$delta]->default_data) {
+          $link_options['query'] = array_merge($link_options['query'], $this->tokenManager->replace(Yaml::decode($default_data)));
+        }
         $link = [
           '#type' => 'link',
           '#title' => ['#markup' => $this->tokenManager->replace($link_label, $link_entity)],
