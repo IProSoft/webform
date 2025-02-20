@@ -126,20 +126,20 @@ class WebformTime extends FormElementBase {
     $time_format = $element['#time_format'];
 
     // Check minute steps.
-    if (!empty($element['#step'])) {
+    if ($has_access && isset($element['#step'])) {
       // Covert step seconds to minutes.
       $step = ($element['#step'] / 60);
       // Get total minutes.
       [$hours, $minutes] = explode(':', $value);
       $total_minutes = (intval($hours) * 60) + intval($minutes);
 
-      // get time difference in minutes between the step start-time and chosen time.
-      $min_time = strtotime('00:00');
-      if (!empty($element['#min'])) {
-        $min_time = strtotime($element['#min']);
+      // Calculate time difference between the start time and selected time.
+      $min = strtotime('00:00');
+      if (isset($element['#min'])) {
+          $min = strtotime($element['#min']);
       }
 
-      $total_minutes_min = (intval(date('H', $min_time)) * 60) + intval(date('i', $min_time));
+      $total_minutes_min = (intval(date('H', $min)) * 60) + intval(date('i', $min));
       $total_minutes_diff = $total_minutes - $total_minutes_min;
 
       if ($step > 1 && $total_minutes_diff % $step !== 0) {
