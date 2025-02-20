@@ -420,7 +420,7 @@
    * @see https://stackoverflow.com/a/37825072/145846
    */
   function statesCheckboxesRequiredEventHandler() {
-    var $element = $(this).closest('.js-webform-type-checkboxes, .js-webform-type-webform-checkboxes-other, .js-webform-type-webform-term-checkboxes, .js-webform-tableselect tbody');
+    var $element = $(this).closest('.js-webform-type-checkboxes, .js-form-type-checkboxes, .js-webform-type-webform-checkboxes-other, .js-form-type-webform-checkboxes-other, .js-webform-type-webform-term-checkboxes, .js-webform-tableselect tbody');
     checkboxesRequired($element);
   }
 
