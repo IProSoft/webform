@@ -2,12 +2,14 @@
 
 namespace Drupal\webform_devel\Hook;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_devel.
  */
 class WebformDevelHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_help_info().
@@ -17,8 +19,8 @@ class WebformDevelHooks {
     $help = [];
     $help['webform_devel_form_api_export'] = [
       'group' => 'forms',
-      'title' => t('Form API Export'),
-      'content' => t("The <strong>Form API export</strong> page demonstrates how a webform's elements may be used to create custom configuration forms."),
+      'title' => $this->t('Form API Export'),
+      'content' => $this->t("The <strong>Form API export</strong> page demonstrates how a webform's elements may be used to create custom configuration forms."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/fapi
         'entity.webform.fapi_export_form',

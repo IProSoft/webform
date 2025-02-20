@@ -7,12 +7,14 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform_share\WebformShareHelper;
 use Drupal\webform_share\WebformSharePreRender;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_share.
  */
 class WebformShareHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_help_info().
@@ -22,8 +24,8 @@ class WebformShareHooks {
     $help = [];
     $help['webform_share_embed'] = [
       'group' => 'share',
-      'title' => t('Share embed'),
-      'content' => t("The <strong>Share embed</strong> page provides code snippets that are used to embedded a webform in any website, webpage, and application."),
+      'title' => $this->t('Share embed'),
+      'content' => $this->t("The <strong>Share embed</strong> page provides code snippets that are used to embedded a webform in any website, webpage, and application."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/share
         'entity.webform.share_embed',
@@ -33,8 +35,8 @@ class WebformShareHooks {
     ];
     $help['webform_share_preview'] = [
       'group' => 'share',
-      'title' => t('Share preview'),
-      'content' => t("The <strong>Share preview</strong> page allows site builders to preview an embedded webform."),
+      'title' => $this->t('Share preview'),
+      'content' => $this->t("The <strong>Share preview</strong> page allows site builders to preview an embedded webform."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/share/preview
         'entity.webform.share_preview',
@@ -44,8 +46,8 @@ class WebformShareHooks {
     ];
     $help['webform_share_test'] = [
       'group' => 'share',
-      'title' => t('Share test'),
-      'content' => t("The <strong>Share test</strong> page allows site builders to test an embedded webform."),
+      'title' => $this->t('Share test'),
+      'content' => $this->t("The <strong>Share test</strong> page allows site builders to test an embedded webform."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/share/test
         'entity.webform.share_test',
@@ -124,7 +126,7 @@ class WebformShareHooks {
   public function entityOperation(EntityInterface $entity) {
     $operations = [];
     if ($entity instanceof WebformInterface && $entity->access('update') && $entity->getSetting('share', TRUE)) {
-      $operations['share'] = ['title' => t('Share'), 'url' => $entity->toUrl('share-embed'), 'weight' => 80];
+      $operations['share'] = ['title' => $this->t('Share'), 'url' => $entity->toUrl('share-embed'), 'weight' => 80];
     }
     return $operations;
   }

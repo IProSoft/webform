@@ -2,12 +2,15 @@
 
 namespace Drupal\webform_templates\Hook;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_templates.
  */
 class WebformTemplatesHooks {
+  use StringTranslationTrait;
+
   /**
    * @file
    * Provides starter templates that can be used to create new webforms.
@@ -35,8 +38,8 @@ class WebformTemplatesHooks {
     $help = [];
     $help['webform_templates'] = [
       'group' => 'forms',
-      'title' => t('Templates'),
-      'content' => t('The <strong>Templates</strong> page lists reusable templates that can be duplicated and customized to create new webforms.'),
+      'title' => $this->t('Templates'),
+      'content' => $this->t('The <strong>Templates</strong> page lists reusable templates that can be duplicated and customized to create new webforms.'),
       'video_id' => 'forms',
       'routes' => [
               // @see /admin/structure/webform/templates

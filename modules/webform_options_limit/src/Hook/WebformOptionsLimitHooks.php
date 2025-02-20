@@ -2,12 +2,15 @@
 
 namespace Drupal\webform_options_limit\Hook;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_options_limit.
  */
 class WebformOptionsLimitHooks {
+  use StringTranslationTrait;
+
   /**
    * @file
    * Allows elements with options (i.e. select, checkboxes, and radios) to have option specific submission limits.
@@ -21,8 +24,8 @@ class WebformOptionsLimitHooks {
     $help = [];
     $help['webform_options_limit'] = [
       'group' => 'forms',
-      'title' => t('Options limit'),
-      'content' => t("The <strong>Options</strong> page displays a summary of the webform's options limits."),
+      'title' => $this->t('Options limit'),
+      'content' => $this->t("The <strong>Options</strong> page displays a summary of the webform's options limits."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/results/options-limit
         'entity.webform_options_limit.summary',

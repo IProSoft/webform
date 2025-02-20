@@ -3,12 +3,14 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
  */
 class WebformHoneypotHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_admin_third_party_settings_form_alter().
@@ -22,7 +24,7 @@ class WebformHoneypotHooks {
     $honeypot_time_limit = (int) \Drupal::config('honeypot.settings')->get('time_limit');
     $time_restriction = (int) $third_party_settings_manager->getThirdPartySetting('honeypot', 'time_restriction');
     $time_restriction_state = $honeypot_time_limit === 0 ? WEBFORM_HONEYPOT_DISABLED_ALL : WEBFORM_HONEYPOT_NEUTRAL;
-    _webform_honeypot_form($form, $form_state, $honeypot, $honeypot_state, $time_restriction, $time_restriction_state, t('all webforms'));
+    _webform_honeypot_form($form, $form_state, $honeypot, $honeypot_state, $time_restriction, $time_restriction_state, $this->t('all webforms'));
   }
 
   /**
@@ -55,7 +57,7 @@ class WebformHoneypotHooks {
     else {
       $time_restriction_state = WEBFORM_HONEYPOT_NEUTRAL;
     }
-    _webform_honeypot_form($form, $form_state, $honeypot, $honeypot_state, $time_restriction, $time_restriction_state, t('@label webform', ['@label' => $webform->label()]));
+    _webform_honeypot_form($form, $form_state, $honeypot, $honeypot_state, $time_restriction, $time_restriction_state, $this->t('@label webform', ['@label' => $webform->label()]));
   }
 
   /**

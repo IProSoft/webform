@@ -3,12 +3,14 @@
 namespace Drupal\webform_example_element_properties\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_example_element_properties.
  */
 class WebformExampleElementPropertiesHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_element_default_properties_alter().
@@ -47,8 +49,8 @@ class WebformExampleElementPropertiesHooks {
     $t_args = ['@label' => $element_label, '@type' => $element_type];
     $form['custom_properties'] = [
       '#type' => 'details',
-      '#title' => t('Custom properties'),
-      '#description' => t('The below custom properties are provided and managed by the webform_example_element_properties.module.'),
+      '#title' => $this->t('Custom properties'),
+      '#description' => $this->t('The below custom properties are provided and managed by the webform_example_element_properties.module.'),
       '#open' => TRUE,
           // Add custom properties after all fieldset elements, which have a
           // weight of -20.
@@ -57,8 +59,8 @@ class WebformExampleElementPropertiesHooks {
     ];
     $form['custom_properties']['custom_data'] = [
       '#type' => 'textfield',
-      '#title' => t('Custom data'),
-      '#description' => t("The custom data value will be added to @label (@type) data-* attributes.", $t_args),
+      '#title' => $this->t('Custom data'),
+      '#description' => $this->t("The custom data value will be added to @label (@type) data-* attributes.", $t_args),
     ];
   }
 

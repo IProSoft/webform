@@ -5,6 +5,7 @@ namespace Drupal\webform\Hook;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -22,6 +23,7 @@ use Drupal\webform\WebformInterface;
  * Hook implementations for webform.
  */
 class WebformHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_help().
@@ -203,12 +205,12 @@ class WebformHooks {
     $webform_entities = ['webform', 'webform_options'];
     foreach ($webform_entities as $webform_entity) {
       if (isset($data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'])) {
-        $data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'] = t('Translate');
+        $data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'] = $this->t('Translate');
       }
     }
     // Change simple config 'Translate *' tab to be just label 'Translate'.
     if (isset($data['tabs'][1]['config_translation.local_tasks:config_translation.item.overview.webform.config'])) {
-      $data['tabs'][1]['config_translation.local_tasks:config_translation.item.overview.webform.config']['#link']['title'] = t('Translate');
+      $data['tabs'][1]['config_translation.local_tasks:config_translation.item.overview.webform.config']['#link']['title'] = $this->t('Translate');
     }
     // ISSUE:
     // Devel routes do not use 'webform' parameter which throws the below error.
@@ -268,7 +270,7 @@ class WebformHooks {
     // Append learn more about token suffixes to all webform token descriptions.
     // @see \Drupal\webform\WebformTokenManager::replace
     // @see webform_page_attachments()
-    $token_suffixes = t('Append the below suffixes to alter the returned value.') . '<ul>' . '<li>' . t('<code>:base64encode</code> base64 encodes returned value') . '</li>' . '<li>' . t('<code>:clear</code> removes the token when it is not replaced.') . '</li>' . '<li>' . t('<code>:urlencode</code> URL encodes returned value.') . '</li>' . '<li>' . t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>' . '<li>' . t('<code>:xmlencode</code> XML encodes returned value.') . '</li>' . '<li>' . t('<code>:htmldecode</code> decodes HTML entities in returned value.') . '<br/><b>' . t('This suffix has security implications.') . '</b><br/>' . t('Use <code>:htmldecode</code> with <code>:striptags</code>.') . '</li>' . '<li>' . t('<code>:striptags</code> removes all HTML tags from returned value.') . '</li>' . '</ul>';
+    $token_suffixes = $this->t('Append the below suffixes to alter the returned value.') . '<ul>' . '<li>' . $this->t('<code>:base64encode</code> base64 encodes returned value') . '</li>' . '<li>' . $this->t('<code>:clear</code> removes the token when it is not replaced.') . '</li>' . '<li>' . $this->t('<code>:urlencode</code> URL encodes returned value.') . '</li>' . '<li>' . $this->t('<code>:rawurlencode</code> Raw URL encodes returned value with only hex digits.') . '</li>' . '<li>' . $this->t('<code>:xmlencode</code> XML encodes returned value.') . '</li>' . '<li>' . $this->t('<code>:htmldecode</code> decodes HTML entities in returned value.') . '<br/><b>' . $this->t('This suffix has security implications.') . '</b><br/>' . $this->t('Use <code>:htmldecode</code> with <code>:striptags</code>.') . '</li>' . '<li>' . $this->t('<code>:striptags</code> removes all HTML tags from returned value.') . '</li>' . '</ul>';
     $more = _webform_token_render_more(t('Learn about token suffixes'), $token_suffixes);
     foreach ($data['types'] as $type => &$info) {
       if (strpos($type, 'webform') === 0) {
@@ -588,50 +590,50 @@ class WebformHooks {
   public function webformAccessRules() {
     return [
       'create' => [
-        'title' => t('Create submissions'),
+        'title' => $this->t('Create submissions'),
         'roles' => [
           'anonymous',
           'authenticated',
         ],
       ],
       'view_any' => [
-        'title' => t('View any submissions'),
+        'title' => $this->t('View any submissions'),
       ],
       'update_any' => [
-        'title' => t('Update any submissions'),
+        'title' => $this->t('Update any submissions'),
       ],
       'delete_any' => [
-        'title' => t('Delete any submissions'),
+        'title' => $this->t('Delete any submissions'),
       ],
       'purge_any' => [
-        'title' => t('Purge any submissions'),
+        'title' => $this->t('Purge any submissions'),
       ],
       'view_own' => [
-        'title' => t('View own submissions'),
+        'title' => $this->t('View own submissions'),
       ],
       'update_own' => [
-        'title' => t('Update own submissions'),
+        'title' => $this->t('Update own submissions'),
       ],
       'delete_own' => [
-        'title' => t('Delete own submissions'),
+        'title' => $this->t('Delete own submissions'),
       ],
       'administer' => [
-        'title' => t('Administer webform & submissions'),
+        'title' => $this->t('Administer webform & submissions'),
         'description' => [
           '#type' => 'webform_message',
           '#message_type' => 'warning',
-          '#message_message' => t('<strong>Warning</strong>: The below settings give users, permissions, and roles full access to this webform and its submissions.'),
+          '#message_message' => $this->t('<strong>Warning</strong>: The below settings give users, permissions, and roles full access to this webform and its submissions.'),
         ],
       ],
       'test' => [
-        'title' => t('Test webform'),
+        'title' => $this->t('Test webform'),
       ],
       'configuration' => [
-        'title' => t('Access webform configuration'),
+        'title' => $this->t('Access webform configuration'),
         'description' => [
           '#type' => 'webform_message',
           '#message_type' => 'warning',
-          '#message_message' => t("<strong>Warning</strong>: The below settings give users, permissions, and roles full access to this webform's configuration via API requests."),
+          '#message_message' => $this->t("<strong>Warning</strong>: The below settings give users, permissions, and roles full access to this webform's configuration via API requests."),
         ],
       ],
     ];

@@ -13,12 +13,14 @@ use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformHtmlHelper;
 use Drupal\webform\Utility\WebformUserHelper;
 use Drupal\webform\WebformSubmissionInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
  */
 class WebformTokensHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_token_info().
@@ -31,221 +33,221 @@ class WebformTokensHooks {
     // Webform submission.
     /* ************************************************************************ */
     $types['webform_submission'] = [
-      'name' => t('Webform submissions'),
-      'description' => t('Tokens related to webform submission.'),
+      'name' => $this->t('Webform submissions'),
+      'description' => $this->t('Tokens related to webform submission.'),
       'needs-data' => 'webform_submission',
     ];
     $webform_submission = [];
     $webform_submission['serial'] = [
-      'name' => t('Submission serial number'),
-      'description' => t('The serial number of the webform submission.'),
+      'name' => $this->t('Submission serial number'),
+      'description' => $this->t('The serial number of the webform submission.'),
     ];
     $webform_submission['sid'] = [
-      'name' => t('Submission ID'),
-      'description' => t('The ID of the webform submission.'),
+      'name' => $this->t('Submission ID'),
+      'description' => $this->t('The ID of the webform submission.'),
     ];
-    $webform_submission['uuid'] = ['name' => t('UUID'), 'description' => t('The UUID of the webform submission.')];
+    $webform_submission['uuid'] = ['name' => $this->t('UUID'), 'description' => $this->t('The UUID of the webform submission.')];
     $webform_submission['token'] = [
-      'name' => t('Token'),
-      'description' => t('A secure token used to look up a submission.'),
+      'name' => $this->t('Token'),
+      'description' => $this->t('A secure token used to look up a submission.'),
     ];
     $webform_submission['ip-address'] = [
-      'name' => t('IP address'),
-      'description' => t('The IP address that was used when submitting the webform submission.'),
+      'name' => $this->t('IP address'),
+      'description' => $this->t('The IP address that was used when submitting the webform submission.'),
     ];
-    $webform_submission['source-type'] = ['name' => t('Source entity type'), 'description' => t('The source entity type.')];
-    $webform_submission['source-id'] = ['name' => t('Source entity type'), 'description' => t('The source entity type.')];
+    $webform_submission['source-type'] = ['name' => $this->t('Source entity type'), 'description' => $this->t('The source entity type.')];
+    $webform_submission['source-id'] = ['name' => $this->t('Source entity type'), 'description' => $this->t('The source entity type.')];
     $webform_submission['source-title'] = [
-      'name' => t('Source URL'),
-      'description' => t('The Title of the source entity or webform.'),
+      'name' => $this->t('Source URL'),
+      'description' => $this->t('The Title of the source entity or webform.'),
     ];
     $webform_submission['source-url'] = [
-      'name' => t('Source URL'),
-      'description' => t('The URL where the user submitted the webform submission.'),
+      'name' => $this->t('Source URL'),
+      'description' => $this->t('The URL where the user submitted the webform submission.'),
       'type' => 'url',
     ];
     $webform_submission['token-view-url'] = [
-      'name' => t('View (token) URL'),
-      'description' => t('The URL that can used to view the webform submission. The webform must be configured to allow users to view a submission using a secure token.'),
+      'name' => $this->t('View (token) URL'),
+      'description' => $this->t('The URL that can used to view the webform submission. The webform must be configured to allow users to view a submission using a secure token.'),
       'type' => 'url',
     ];
     $webform_submission['token-update-url'] = [
-      'name' => t('Update (token) URL'),
-      'description' => t('The URL that can used to update the webform submission. The webform must be configured to allow users to update a submission using a secure token.'),
+      'name' => $this->t('Update (token) URL'),
+      'description' => $this->t('The URL that can used to update the webform submission. The webform must be configured to allow users to update a submission using a secure token.'),
       'type' => 'url',
     ];
     $webform_submission['token-delete-url'] = [
-      'name' => t('Delete (token) URL'),
-      'description' => t('The URL that can used to delete the webform submission. The webform must be configured to allow users to delete a submission using a secure token.'),
+      'name' => $this->t('Delete (token) URL'),
+      'description' => $this->t('The URL that can used to delete the webform submission. The webform must be configured to allow users to delete a submission using a secure token.'),
       'type' => 'url',
     ];
     $webform_submission['langcode'] = [
-      'name' => t('Langcode'),
-      'description' => t('The language code of the webform submission.'),
+      'name' => $this->t('Langcode'),
+      'description' => $this->t('The language code of the webform submission.'),
     ];
     $webform_submission['language'] = [
-      'name' => t('Language'),
-      'description' => t('The language name of the webform submission.'),
+      'name' => $this->t('Language'),
+      'description' => $this->t('The language name of the webform submission.'),
     ];
     $webform_submission['current-page'] = [
-      'name' => t('Current page'),
-      'description' => t('The current (last submitted) wizard page of the webform submission.'),
+      'name' => $this->t('Current page'),
+      'description' => $this->t('The current (last submitted) wizard page of the webform submission.'),
     ];
     $webform_submission['current-page:title'] = [
-      'name' => t('Current page title'),
-      'description' => t('The current (last submitted) wizard page title of the webform submission.'),
+      'name' => $this->t('Current page title'),
+      'description' => $this->t('The current (last submitted) wizard page title of the webform submission.'),
     ];
     $webform_submission['in-draft'] = [
-      'name' => t('In draft'),
-      'description' => t('Is the webform submission in draft.'),
+      'name' => $this->t('In draft'),
+      'description' => $this->t('Is the webform submission in draft.'),
     ];
     $webform_submission['state'] = [
-      'name' => t('State (Name)'),
-      'description' => t('The state of the webform submission. (unsaved, draft, completed, updated, locked, or converted)'),
+      'name' => $this->t('State (Name)'),
+      'description' => $this->t('The state of the webform submission. (unsaved, draft, completed, updated, locked, or converted)'),
     ];
     $webform_submission['state:label'] = [
-      'name' => t('State (Label)'),
-      'description' => t('The state raw value untranslated of the webform submission. (Unsaved, Draft, Completed, Updated, Locked, or Converted)'),
+      'name' => $this->t('State (Label)'),
+      'description' => $this->t('The state raw value untranslated of the webform submission. (Unsaved, Draft, Completed, Updated, Locked, or Converted)'),
     ];
-    $webform_submission['label'] = ['name' => t('Label'), 'description' => t('The label of the webform submission.')];
+    $webform_submission['label'] = ['name' => $this->t('Label'), 'description' => $this->t('The label of the webform submission.')];
     // Limit: Webform.
     $webform_submission['limit:webform'] = [
-      'name' => t('Total submissions limit'),
-      'description' => t('The total number of submissions allowed for the webform.'),
+      'name' => $this->t('Total submissions limit'),
+      'description' => $this->t('The total number of submissions allowed for the webform.'),
     ];
     $webform_submission['interval:webform'] = [
-      'name' => t('Total submissions limit interval'),
-      'description' => t('The total submissions interval for the webform.'),
+      'name' => $this->t('Total submissions limit interval'),
+      'description' => $this->t('The total submissions interval for the webform.'),
     ];
     $webform_submission['interval:webform:wait'] = [
-      'name' => t('Wait time before next submission'),
-      'description' => t('The amount of time before the next allowed submission for the webform.'),
+      'name' => $this->t('Wait time before next submission'),
+      'description' => $this->t('The amount of time before the next allowed submission for the webform.'),
     ];
     $webform_submission['total:webform'] = [
-      'name' => t('Total submissions'),
-      'description' => t('The current number of submissions for the webform.'),
+      'name' => $this->t('Total submissions'),
+      'description' => $this->t('The current number of submissions for the webform.'),
     ];
     $webform_submission['remaining:webform'] = [
-      'name' => t('Remaining number of submissions'),
-      'description' => t('The remaining number of submissions for the webform.'),
+      'name' => $this->t('Remaining number of submissions'),
+      'description' => $this->t('The remaining number of submissions for the webform.'),
     ];
     // Limit: User.
     $webform_submission['limit:user'] = [
-      'name' => t('Per user submission limit'),
-      'description' => t('The total number of submissions allowed per user for the webform.'),
+      'name' => $this->t('Per user submission limit'),
+      'description' => $this->t('The total number of submissions allowed per user for the webform.'),
     ];
     $webform_submission['interval:user'] = [
-      'name' => t('Per user submission limit interval'),
-      'description' => t('The total submissions interval per user for the webform.'),
+      'name' => $this->t('Per user submission limit interval'),
+      'description' => $this->t('The total submissions interval per user for the webform.'),
     ];
     $webform_submission['interval:user:wait'] = [
-      'name' => t('Per user wait time before next submission'),
-      'description' => t('The amount of time before the next allowed submission per user for the webform.'),
+      'name' => $this->t('Per user wait time before next submission'),
+      'description' => $this->t('The amount of time before the next allowed submission per user for the webform.'),
     ];
     $webform_submission['total:user'] = [
-      'name' => t('Per user total submissions'),
-      'description' => t('The current number of submissions for the user for the webform.'),
+      'name' => $this->t('Per user total submissions'),
+      'description' => $this->t('The current number of submissions for the user for the webform.'),
     ];
     $webform_submission['remaining:user'] = [
-      'name' => t('Per user remaining number of submissions'),
-      'description' => t('The remaining number of submissions for the user for the webform.'),
+      'name' => $this->t('Per user remaining number of submissions'),
+      'description' => $this->t('The remaining number of submissions for the user for the webform.'),
     ];
     // Limit: Source entity.
     $webform_submission['limit:webform:source_entity'] = [
-      'name' => t('Total submissions limit per source entity'),
-      'description' => t('The total number of submissions allowed for the webform source entity.'),
+      'name' => $this->t('Total submissions limit per source entity'),
+      'description' => $this->t('The total number of submissions allowed for the webform source entity.'),
     ];
     $webform_submission['interval:webform:source_entity'] = [
-      'name' => t('Total submissions limit interval per source entity'),
-      'description' => t('The total submissions interval for the webform source entity.'),
+      'name' => $this->t('Total submissions limit interval per source entity'),
+      'description' => $this->t('The total submissions interval for the webform source entity.'),
     ];
     $webform_submission['interval:webform:source_entity:wait'] = [
-      'name' => t('Wait time before next submission for a source entity'),
-      'description' => t('The amount of time before the next allowed submission for the webform source entity.'),
+      'name' => $this->t('Wait time before next submission for a source entity'),
+      'description' => $this->t('The amount of time before the next allowed submission for the webform source entity.'),
     ];
     $webform_submission['total:webform:source_entity'] = [
-      'name' => t('Total submissions for source entity'),
-      'description' => t('The current number of submissions for the webform source entity.'),
+      'name' => $this->t('Total submissions for source entity'),
+      'description' => $this->t('The current number of submissions for the webform source entity.'),
     ];
     $webform_submission['remaining:webform:source_entity'] = [
-      'name' => t('Remaining number of submissions for source entity'),
-      'description' => t('Remaining number of submissions for the webform source entity.'),
+      'name' => $this->t('Remaining number of submissions for source entity'),
+      'description' => $this->t('Remaining number of submissions for the webform source entity.'),
     ];
     // Limit: User and Source entity.
     $webform_submission['limit:user:source_entity'] = [
-      'name' => t('Per user submission limit for a source entity'),
-      'description' => t('The total number of submissions allowed per user for the webform source entity.'),
+      'name' => $this->t('Per user submission limit for a source entity'),
+      'description' => $this->t('The total number of submissions allowed per user for the webform source entity.'),
     ];
     $webform_submission['interval:user:source_entity'] = [
-      'name' => t('Per user submission limit interval for a source entity'),
-      'description' => t('The total submissions interval per user for the webform source entity.'),
+      'name' => $this->t('Per user submission limit interval for a source entity'),
+      'description' => $this->t('The total submissions interval per user for the webform source entity.'),
     ];
     $webform_submission['interval:user:source_entity:wait'] = [
-      'name' => t('Per user wait time before next submission for a source entity'),
-      'description' => t('The amount of time before the next allowed submission per user for the webform source entity.'),
+      'name' => $this->t('Per user wait time before next submission for a source entity'),
+      'description' => $this->t('The amount of time before the next allowed submission per user for the webform source entity.'),
     ];
     $webform_submission['total:user:source_entity'] = [
-      'name' => t('Per user total submissions for a source entity'),
-      'description' => t('The current number of submissions for the user for the webform source entity.'),
+      'name' => $this->t('Per user total submissions for a source entity'),
+      'description' => $this->t('The current number of submissions for the user for the webform source entity.'),
     ];
     $webform_submission['remaining:user:source_entity'] = [
-      'name' => t('Per user remaining number of submissions for a source entity'),
-      'description' => t('The remaining number of submissions for the user for the webform source entity.'),
+      'name' => $this->t('Per user remaining number of submissions for a source entity'),
+      'description' => $this->t('The remaining number of submissions for the user for the webform source entity.'),
     ];
     // Dynamic tokens for webform submissions.
     $webform_submission['url'] = [
-      'name' => t('URL'),
-      'description' => t("The URL of the webform submission. Replace the '?' with the link template. Defaults to 'canonical' which displays the submission's data."),
+      'name' => $this->t('URL'),
+      'description' => $this->t("The URL of the webform submission. Replace the '?' with the link template. Defaults to 'canonical' which displays the submission's data."),
       'dynamic' => TRUE,
     ];
     $webform_submission['values'] = [
-      'name' => t('Submission values'),
-      'description' => Markup::create(t('Webform tokens from submitted data.') . _webform_token_render_more(t('Learn about submission value tokens'), t("Omit the '?' to output all values. Output all values as HTML using [webform_submission:values:html].") . '<br />' . t("To output individual elements, replace the '?' with…") . '<br />' . '<ul>' . '<li>element_key</li>' . '<li>element_key:format</li>' . '<li>element_key:raw</li>' . '<li>element_key:format:items</li>' . '<li>element_key:delta</li>' . '<li>element_key:sub_element_key</li>' . '<li>element_key:delta:sub_element_key</li>' . '<li>element_key:sub_element_key:format</li>' . '<li>element_key:delta:sub_element_key:format</li>' . '<li>element_key:delta:format</li>' . '<li>element_key:delta:format:html</li>' . '<li>element_key:entity:*</li>' . '<li>element_key:delta:entity:*</li>' . '<li>element_key:delta:entity:field_name:*</li>' . '<li>element_key:sub_element_key:entity:*</li>' . '<li>element_key:sub_element_key:entity:field_name:*</li>' . '<li>element_key:delta:sub_element_key:entity:*</li>' . '<li>element_key:checked:option_value</li>' . '<li>element_key:selected:option_value</li>' . '</ul>' . t("All items after the 'element_key' are optional.") . '<br />' . t("The 'delta' is the numeric index for specific value") . '<br />' . t("The 'sub_element_key' is a composite element's sub element key.") . '<br />' . t("The 'checked'  or 'selected' looks to see if an 'option_value' is checked or selected for an options element (select, checkboxes, or radios)") . '<br />' . t("The 'option_value' is options value for an options element (select, checkboxes, or radios).") . '<br />' . t("The 'format' can be 'value', 'raw', or custom format specifically associated with the element") . '<br />' . t("The 'items' can be 'comma', 'semicolon', 'and', 'ol', 'ul', or custom delimiter") . '<br />' . t("The 'entity:*' applies to the referenced entity") . '<br />' . t("Add 'html' at the end of the token to return HTML markup instead of plain text.") . '<br />' . t("For example, to display the Contact webform's 'Subject' element's value you would use the [webform_submission:values:subject] token."))),
+      'name' => $this->t('Submission values'),
+      'description' => Markup::create(t('Webform tokens from submitted data.') . _webform_token_render_more(t('Learn about submission value tokens'), $this->t("Omit the '?' to output all values. Output all values as HTML using [webform_submission:values:html].") . '<br />' . $this->t("To output individual elements, replace the '?' with…") . '<br />' . '<ul>' . '<li>element_key</li>' . '<li>element_key:format</li>' . '<li>element_key:raw</li>' . '<li>element_key:format:items</li>' . '<li>element_key:delta</li>' . '<li>element_key:sub_element_key</li>' . '<li>element_key:delta:sub_element_key</li>' . '<li>element_key:sub_element_key:format</li>' . '<li>element_key:delta:sub_element_key:format</li>' . '<li>element_key:delta:format</li>' . '<li>element_key:delta:format:html</li>' . '<li>element_key:entity:*</li>' . '<li>element_key:delta:entity:*</li>' . '<li>element_key:delta:entity:field_name:*</li>' . '<li>element_key:sub_element_key:entity:*</li>' . '<li>element_key:sub_element_key:entity:field_name:*</li>' . '<li>element_key:delta:sub_element_key:entity:*</li>' . '<li>element_key:checked:option_value</li>' . '<li>element_key:selected:option_value</li>' . '</ul>' . $this->t("All items after the 'element_key' are optional.") . '<br />' . $this->t("The 'delta' is the numeric index for specific value") . '<br />' . $this->t("The 'sub_element_key' is a composite element's sub element key.") . '<br />' . $this->t("The 'checked'  or 'selected' looks to see if an 'option_value' is checked or selected for an options element (select, checkboxes, or radios)") . '<br />' . $this->t("The 'option_value' is options value for an options element (select, checkboxes, or radios).") . '<br />' . $this->t("The 'format' can be 'value', 'raw', or custom format specifically associated with the element") . '<br />' . $this->t("The 'items' can be 'comma', 'semicolon', 'and', 'ol', 'ul', or custom delimiter") . '<br />' . $this->t("The 'entity:*' applies to the referenced entity") . '<br />' . $this->t("Add 'html' at the end of the token to return HTML markup instead of plain text.") . '<br />' . $this->t("For example, to display the Contact webform's 'Subject' element's value you would use the [webform_submission:values:subject] token."))),
       'dynamic' => TRUE,
     ];
     // Chained tokens for webform submissions.
     $webform_submission['user'] = [
-      'name' => t('Submitter'),
-      'description' => t('The user that submitted the webform submission.'),
+      'name' => $this->t('Submitter'),
+      'description' => $this->t('The user that submitted the webform submission.'),
       'type' => 'user',
     ];
     $webform_submission['created'] = [
-      'name' => t('Date created'),
-      'description' => t('The date the webform submission was created.'),
+      'name' => $this->t('Date created'),
+      'description' => $this->t('The date the webform submission was created.'),
       'type' => 'date',
     ];
     $webform_submission['completed'] = [
-      'name' => t('Date completed'),
-      'description' => t('The date the webform submission was completed.'),
+      'name' => $this->t('Date completed'),
+      'description' => $this->t('The date the webform submission was completed.'),
       'type' => 'date',
     ];
     $webform_submission['changed'] = [
-      'name' => t('Date changed'),
-      'description' => t('The date the webform submission was most recently updated.'),
+      'name' => $this->t('Date changed'),
+      'description' => $this->t('The date the webform submission was most recently updated.'),
       'type' => 'date',
     ];
     $webform_submission['webform'] = [
-      'name' => t('Webform', [], [
+      'name' => $this->t('Webform', [], [
         'context' => 'form',
       ]),
-      'description' => t('The webform that the webform submission belongs to.'),
+      'description' => $this->t('The webform that the webform submission belongs to.'),
       'type' => 'webform',
     ];
     $webform_submission['source-entity'] = [
-      'name' => t('Source entity'),
-      'description' => t('The source entity that the webform submission was submitted from.'),
+      'name' => $this->t('Source entity'),
+      'description' => $this->t('The source entity that the webform submission was submitted from.'),
       'type' => 'entity',
       'dynamic' => TRUE,
     ];
     $webform_submission['source-title'] = [
-      'name' => t('Source title'),
-      'description' => t('The source entity title that the webform submission was submitted from, defaults to the webform title when there is no source entity.'),
+      'name' => $this->t('Source title'),
+      'description' => $this->t('The source entity title that the webform submission was submitted from, defaults to the webform title when there is no source entity.'),
       'type' => 'entity',
       'dynamic' => TRUE,
     ];
     $webform_submission['submitted-to'] = [
-      'name' => t('Submitted to'),
-      'description' => t('The source entity or webform that the webform submission was submitted from.'),
+      'name' => $this->t('Submitted to'),
+      'description' => $this->t('The source entity or webform that the webform submission was submitted from.'),
       'type' => 'entity',
       'dynamic' => TRUE,
     ];
@@ -253,7 +255,7 @@ class WebformTokensHooks {
     if (\Drupal::moduleHandler()->moduleExists('token') && \Drupal::moduleHandler()->moduleExists('help')) {
       $token_url = Url::fromRoute('help.page', ['name' => 'token']);
       $t_args = [':href' => $token_url->toString(TRUE)->getGeneratedUrl()];
-      $token_help = t('For a list of the currently available source entity related tokens, please see <a href=":href">token help</a>.', $t_args);
+      $token_help = $this->t('For a list of the currently available source entity related tokens, please see <a href=":href">token help</a>.', $t_args);
       $webform_submission['source-entity']['description'] = Markup::create($webform_submission['source-entity']['description'] . '<br/>' . $token_help);
       $webform_submission['submitted-to']['description'] = Markup::create($webform_submission['submitted-to']['description'] . '<br/>' . $token_help);
     }
@@ -262,42 +264,42 @@ class WebformTokensHooks {
     // Webform.
     /* ************************************************************************ */
     $types['webform'] = [
-      'name' => t('Webforms'),
-      'description' => t('Tokens related to webforms.'),
+      'name' => $this->t('Webforms'),
+      'description' => $this->t('Tokens related to webforms.'),
       'needs-data' => 'webform',
     ];
     $webform = [];
-    $webform['id'] = ['name' => t('Webform ID'), 'description' => t('The ID of the webform.')];
-    $webform['title'] = ['name' => t('Title'), 'description' => t('The title of the webform.')];
+    $webform['id'] = ['name' => $this->t('Webform ID'), 'description' => $this->t('The ID of the webform.')];
+    $webform['title'] = ['name' => $this->t('Title'), 'description' => $this->t('The title of the webform.')];
     $webform['description'] = [
-      'name' => t('Description'),
-      'description' => t('The administrative description of the webform.'),
+      'name' => $this->t('Description'),
+      'description' => $this->t('The administrative description of the webform.'),
     ];
-    $webform['url'] = ['name' => t('URL'), 'description' => t('The URL of the webform.')];
-    $webform['author'] = ['name' => t('Author'), 'type' => 'user'];
+    $webform['url'] = ['name' => $this->t('URL'), 'description' => $this->t('The URL of the webform.')];
+    $webform['author'] = ['name' => $this->t('Author'), 'type' => 'user'];
     $webform['open'] = [
-      'name' => t('Open date'),
-      'description' => t('The date the webform is open to new submissions.'),
+      'name' => $this->t('Open date'),
+      'description' => $this->t('The date the webform is open to new submissions.'),
       'type' => 'date',
     ];
     $webform['close'] = [
-      'name' => t('Close date'),
-      'description' => t('The date the webform is closed to new submissions.'),
+      'name' => $this->t('Close date'),
+      'description' => $this->t('The date the webform is closed to new submissions.'),
       'type' => 'date',
     ];
     $webform['settings'] = [
-      'name' => t('Settings'),
+      'name' => $this->t('Settings'),
       'description' => Markup::create(t('Webform settings tokens.') . _webform_token_render_more(t('Learn about Webform settings tokens'), '<ul>' . '<li>confirmation_title</li>' . '<li>confirmation_message</li>' . '<li>form_open_message</li>' . '<li>form_close_message</li>' . '</ul>')),
       'dynamic' => TRUE,
     ];
     $webform['element'] = [
-      'name' => t('Element properties'),
-      'description' => Markup::create(t('Webform element property tokens.') . _webform_token_render_more(t('Learn about element property tokens'), t("Replace the '?' with…") . '<br />' . '<ul>' . '<li>element_key:title</li>' . '<li>element_key:description</li>' . '<li>element_key:help</li>' . '<li>element_key:more</li>' . '</ul>' . t("For example, to display an email element's title (aka #title) you would use the [webform:element:email:title] token."))),
+      'name' => $this->t('Element properties'),
+      'description' => Markup::create(t('Webform element property tokens.') . _webform_token_render_more(t('Learn about element property tokens'), $this->t("Replace the '?' with…") . '<br />' . '<ul>' . '<li>element_key:title</li>' . '<li>element_key:description</li>' . '<li>element_key:help</li>' . '<li>element_key:more</li>' . '</ul>' . $this->t("For example, to display an email element's title (aka #title) you would use the [webform:element:email:title] token."))),
       'dynamic' => TRUE,
     ];
     $webform['handler'] = [
-      'name' => t('Handler response'),
-      'description' => Markup::create(t('Webform handler response tokens.') . _webform_token_render_more(t('Learn about handler response tokens'), t("Replace the '?' with…") . '<br />' . '<ul>' . '<li>handler_id:state:key</li>' . '<li>handler_id:state:key1:key2</li>' . '</ul>' . t("For example, to display a remote post's confirmation number you would use the [webform:handler:remote_post:completed:confirmation_number] token."))),
+      'name' => $this->t('Handler response'),
+      'description' => Markup::create(t('Webform handler response tokens.') . _webform_token_render_more(t('Learn about handler response tokens'), $this->t("Replace the '?' with…") . '<br />' . '<ul>' . '<li>handler_id:state:key</li>' . '<li>handler_id:state:key1:key2</li>' . '</ul>' . $this->t("For example, to display a remote post's confirmation number you would use the [webform:handler:remote_post:completed:confirmation_number] token."))),
       'dynamic' => TRUE,
     ];
     $tokens['webform'] = $webform;
@@ -307,8 +309,8 @@ class WebformTokensHooks {
     $roles = \Drupal::config('webform.settings')->get('mail.roles');
     if ($roles) {
       $types['webform_role'] = [
-        'name' => t('Webform roles'),
-        'description' => t("Tokens related to user roles that can receive email. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipients.</em>"),
+        'name' => $this->t('Webform roles'),
+        'description' => $this->t("Tokens related to user roles that can receive email. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipients.</em>"),
         'needs-data' => 'webform_role',
       ];
       $webform_role = [];
@@ -319,7 +321,7 @@ class WebformTokensHooks {
       foreach ($role_names as $role_name => $role_label) {
         $webform_role[$role_name] = [
           'name' => $role_label,
-          'description' => t('The email addresses of all users assigned to the %title role.', [
+          'description' => $this->t('The email addresses of all users assigned to the %title role.', [
             '%title' => $role_label,
           ]),
         ];
@@ -408,7 +410,7 @@ class WebformTokensHooks {
             break;
 
           case 'in-draft':
-            $replacements[$original] = $webform_submission->isDraft() ? t('Yes') : t('No');
+            $replacements[$original] = $webform_submission->isDraft() ? $this->t('Yes') : $this->t('No');
             break;
 
           case 'state':
@@ -417,13 +419,13 @@ class WebformTokensHooks {
 
           case 'state:label':
             $states = [
-              WebformSubmissionInterface::STATE_DRAFT_CREATED => t('Draft created'),
-              WebformSubmissionInterface::STATE_DRAFT_UPDATED => t('Draft updated'),
-              WebformSubmissionInterface::STATE_COMPLETED => t('Completed'),
-              WebformSubmissionInterface::STATE_CONVERTED => t('Converted'),
-              WebformSubmissionInterface::STATE_UPDATED => t('Updated'),
-              WebformSubmissionInterface::STATE_UNSAVED => t('Unsaved'),
-              WebformSubmissionInterface::STATE_LOCKED => t('Locked'),
+              WebformSubmissionInterface::STATE_DRAFT_CREATED => $this->t('Draft created'),
+              WebformSubmissionInterface::STATE_DRAFT_UPDATED => $this->t('Draft updated'),
+              WebformSubmissionInterface::STATE_COMPLETED => $this->t('Completed'),
+              WebformSubmissionInterface::STATE_CONVERTED => $this->t('Converted'),
+              WebformSubmissionInterface::STATE_UPDATED => $this->t('Updated'),
+              WebformSubmissionInterface::STATE_UNSAVED => $this->t('Unsaved'),
+              WebformSubmissionInterface::STATE_LOCKED => $this->t('Locked'),
             ];
             $replacements[$original] = $states[$webform_submission->getState()];
             break;
@@ -515,7 +517,7 @@ class WebformTokensHooks {
             break;
 
           case 'limit:webform':
-            $replacements[$original] = $webform->getSetting('limit_total') ?: t('None');
+            $replacements[$original] = $webform->getSetting('limit_total') ?: $this->t('None');
             break;
 
           case 'interval:webform':
@@ -539,7 +541,7 @@ class WebformTokensHooks {
             break;
 
           case 'limit:user':
-            $replacements[$original] = $webform->getSetting('limit_user') ?: t('None');
+            $replacements[$original] = $webform->getSetting('limit_user') ?: $this->t('None');
             break;
 
           case 'interval:user':
@@ -563,7 +565,7 @@ class WebformTokensHooks {
             break;
 
           case 'limit:webform:source_entity':
-            $replacements[$original] = $webform->getSetting('entity_limit_total') ?: t('None');
+            $replacements[$original] = $webform->getSetting('entity_limit_total') ?: $this->t('None');
             break;
 
           case 'interval:webform:source_entity':
@@ -587,7 +589,7 @@ class WebformTokensHooks {
             break;
 
           case 'limit:user:source_entity':
-            $replacements[$original] = $webform->getSetting('entity_limit_user') ?: t('None');
+            $replacements[$original] = $webform->getSetting('entity_limit_user') ?: $this->t('None');
             break;
 
           case 'interval:user:source_entity':

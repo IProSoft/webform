@@ -4,13 +4,16 @@ namespace Drupal\webform_access\Hook;
 
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\webform_access\Entity\WebformAccessType;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_access.
  */
 class WebformAccessTokensHooks {
-    // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
+  use StringTranslationTrait;
+
+  // phpcs:disable Drupal.Commenting.InlineComment.InvalidEndChar
 
   /**
    * Implements hook_token_info().
@@ -19,62 +22,62 @@ class WebformAccessTokensHooks {
   public function tokenInfo() {
     $types = [];
     $types['webform_access'] = [
-      'name' => t('Webform access'),
-      'description' => t("Tokens related to webform access group types. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipients.</em>"),
+      'name' => $this->t('Webform access'),
+      'description' => $this->t("Tokens related to webform access group types. <em>This token is only available to a Webform email handler's 'To', 'CC', and 'BCC' email recipients.</em>"),
       'needs-data' => 'webform_access',
     ];
     $tokens = [];
     $webform_access = [];
     $webform_access_types = WebformAccessType::loadMultiple();
     $webform_access['type'] = [
-      'name' => t('All users and custom email addresses'),
-      'description' => t('The email addresses of all <strong>users</strong> and <strong>custom email addresses</strong> assigned to the current webform.'),
+      'name' => $this->t('All users and custom email addresses'),
+      'description' => $this->t('The email addresses of all <strong>users</strong> and <strong>custom email addresses</strong> assigned to the current webform.'),
     ];
     $webform_access['users'] = [
-      'name' => t('All users'),
-      'description' => t('The email addresses of all <strong>users</strong> assigned to the current webform.'),
+      'name' => $this->t('All users'),
+      'description' => $this->t('The email addresses of all <strong>users</strong> assigned to the current webform.'),
     ];
     $webform_access['emails'] = [
-      'name' => t('All custom email addresses'),
-      'description' => t('The email addresses of all <strong>custom email addresses</strong> assigned to the current webform.'),
+      'name' => $this->t('All custom email addresses'),
+      'description' => $this->t('The email addresses of all <strong>custom email addresses</strong> assigned to the current webform.'),
     ];
     $webform_access['admins'] = [
-      'name' => t('All administrators'),
-      'description' => t('The email addresses of all <strong>administrators</strong> assigned to the current webform.'),
+      'name' => $this->t('All administrators'),
+      'description' => $this->t('The email addresses of all <strong>administrators</strong> assigned to the current webform.'),
     ];
     $webform_access['all'] = [
-      'name' => t('All users, custom email addresses, and administrators'),
-      'description' => t('The email addresses of all <strong>users</strong>, <strong>custom email addresses</strong>, and <strong>administrators</strong> assigned to the current webform.'),
+      'name' => $this->t('All users, custom email addresses, and administrators'),
+      'description' => $this->t('The email addresses of all <strong>users</strong>, <strong>custom email addresses</strong>, and <strong>administrators</strong> assigned to the current webform.'),
     ];
     foreach ($webform_access_types as $webform_access_type_name => $webform_access_type) {
       $t_args = ['@label' => $webform_access_type->label()];
       $webform_access["type:{$webform_access_type_name}"] = [
-        'name' => t('@label (Users and custom email addresses)', $t_args),
-        'description' => t('The email addresses of <strong>users</strong> and <strong>custom email addresses</strong> assigned to the %title access type for the current webform.', [
+        'name' => $this->t('@label (Users and custom email addresses)', $t_args),
+        'description' => $this->t('The email addresses of <strong>users</strong> and <strong>custom email addresses</strong> assigned to the %title access type for the current webform.', [
           '%title' => $webform_access_type->label(),
         ]),
       ];
       $webform_access["type:{$webform_access_type_name}:users"] = [
-        'name' => t('@label (Users)', $t_args),
-        'description' => t('The email addresses of <strong>users</strong> assigned to the %title access type for the current webform.', [
+        'name' => $this->t('@label (Users)', $t_args),
+        'description' => $this->t('The email addresses of <strong>users</strong> assigned to the %title access type for the current webform.', [
           '%title' => $webform_access_type->label(),
         ]),
       ];
       $webform_access["type:{$webform_access_type_name}:emails"] = [
-        'name' => t('@label (Custom email addresses)', $t_args),
-        'description' => t('The email addresses of <strong>custom email addresses</strong> assigned to the %title access type for the current webform.', [
+        'name' => $this->t('@label (Custom email addresses)', $t_args),
+        'description' => $this->t('The email addresses of <strong>custom email addresses</strong> assigned to the %title access type for the current webform.', [
           '%title' => $webform_access_type->label(),
         ]),
       ];
       $webform_access["type:{$webform_access_type_name}:admins"] = [
-        'name' => t('@label (Administrators)', $t_args),
-        'description' => t('The email addresses of <strong>administrators</strong> assigned to the %title access type for the current webform.', [
+        'name' => $this->t('@label (Administrators)', $t_args),
+        'description' => $this->t('The email addresses of <strong>administrators</strong> assigned to the %title access type for the current webform.', [
           '%title' => $webform_access_type->label(),
         ]),
       ];
       $webform_access["type:{$webform_access_type_name}:all"] = [
-        'name' => t('@label (Users, custom email addresses, Administrators)', $t_args),
-        'description' => t('The email addresses of <strong>users</strong>, <strong>custom email addresses</strong>, and <strong>administrators</strong> assigned to the %title access type for the current webform.', [
+        'name' => $this->t('@label (Users, custom email addresses, Administrators)', $t_args),
+        'description' => $this->t('The email addresses of <strong>users</strong>, <strong>custom email addresses</strong>, and <strong>administrators</strong> assigned to the %title access type for the current webform.', [
           '%title' => $webform_access_type->label(),
         ]),
       ];

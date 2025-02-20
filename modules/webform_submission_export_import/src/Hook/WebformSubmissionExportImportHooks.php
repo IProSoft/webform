@@ -2,12 +2,14 @@
 
 namespace Drupal\webform_submission_export_import\Hook;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_submission_export_import.
  */
 class WebformSubmissionExportImportHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_help_info().
@@ -17,8 +19,8 @@ class WebformSubmissionExportImportHooks {
     $help = [];
     $help['webform_submission_export_import'] = [
       'group' => 'forms',
-      'title' => t('Upload'),
-      'content' => t('The <strong>Upload</strong> page allows a CSV (comma separated values) file or URL to be uploaded, converted, and imported into webform submissions.'),
+      'title' => $this->t('Upload'),
+      'content' => $this->t('The <strong>Upload</strong> page allows a CSV (comma separated values) file or URL to be uploaded, converted, and imported into webform submissions.'),
       'video_id' => 'import',
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/results/upload

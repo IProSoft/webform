@@ -3,12 +3,14 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
  */
 class WebformAntibotHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_admin_third_party_settings_form_alter().
@@ -19,7 +21,7 @@ class WebformAntibotHooks {
     $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
     $antibot = $third_party_settings_manager->getThirdPartySetting('antibot', 'antibot');
     $antibot_state = WEBFORM_ANTIBOT_NEUTRAL;
-    _webform_antibot_form($form, $form_state, $antibot, $antibot_state, t('all webforms'));
+    _webform_antibot_form($form, $form_state, $antibot, $antibot_state, $this->t('all webforms'));
   }
 
   /**
@@ -38,7 +40,7 @@ class WebformAntibotHooks {
     else {
       $antibot_state = WEBFORM_ANTIBOT_NEUTRAL;
     }
-    _webform_antibot_form($form, $form_state, $antibot, $antibot_state, t('@label webform', ['@label' => $webform->label()]));
+    _webform_antibot_form($form, $form_state, $antibot, $antibot_state, $this->t('@label webform', ['@label' => $webform->label()]));
   }
 
   /**

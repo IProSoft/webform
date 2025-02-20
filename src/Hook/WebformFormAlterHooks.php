@@ -7,12 +7,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\WebformSubmissionForm;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
  */
 class WebformFormAlterHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_form_alter().
@@ -64,7 +66,7 @@ class WebformFormAlterHooks {
           $form['langcode_message'] = [
             '#type' => 'webform_message',
             '#message_type' => 'warning',
-            '#message_message' => t('You are editing the original %language language for this webform.', [
+            '#message_message' => $this->t('You are editing the original %language language for this webform.', [
               '%language' => $original_language->getName(),
             ]),
             '#message_close' => TRUE,

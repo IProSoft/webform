@@ -2,12 +2,15 @@
 
 namespace Drupal\webform_schema\Hook;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_schema.
  */
 class WebformSchemaHooks {
+  use StringTranslationTrait;
+
   /**
    * @file
    * Adds a 'Schema' tab to the webform builder UI.
@@ -21,8 +24,8 @@ class WebformSchemaHooks {
     $help = [];
     $help['webform_schema'] = [
       'group' => 'schema',
-      'title' => t('Webform Schema'),
-      'content' => t("The <strong>Schema</strong> page displays an overview of a webform's elements and specified data types, which can be used to map webform submissions to an external API."),
+      'title' => $this->t('Webform Schema'),
+      'content' => $this->t("The <strong>Schema</strong> page displays an overview of a webform's elements and specified data types, which can be used to map webform submissions to an external API."),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/schema
         'entity.webform.schema_form',

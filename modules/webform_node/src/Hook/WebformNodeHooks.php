@@ -11,12 +11,14 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\WebformInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_node.
  */
 class WebformNodeHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_entity_type_alter().
@@ -38,7 +40,7 @@ class WebformNodeHooks {
     $operations = [];
     if ($entity instanceof WebformInterface && $entity->access('update')) {
       $operations['references'] = [
-        'title' => t('References'),
+        'title' => $this->t('References'),
         'url' => $entity->toUrl('references'),
         'weight' => 40,
       ];

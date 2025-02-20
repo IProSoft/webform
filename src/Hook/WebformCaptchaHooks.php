@@ -3,6 +3,7 @@
 namespace Drupal\webform\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Url;
 
@@ -10,6 +11,7 @@ use Drupal\Core\Url;
  * Hook implementations for webform.
  */
 class WebformCaptchaHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_admin_third_party_settings_form_alter().
@@ -21,21 +23,21 @@ class WebformCaptchaHooks {
     $replace_administration_mode = $third_party_settings_manager->getThirdPartySetting('captcha', 'replace_administration_mode');
     $t_args = [
       ':href' => Url::fromRoute('captcha_settings')->toString(),
-      '@from' => t('Place a CAPTCHA here for untrusted users.'),
-      '@to' => t('Add CAPTCHA element to this webform for untrusted users.'),
+      '@from' => $this->t('Place a CAPTCHA here for untrusted users.'),
+      '@to' => $this->t('Add CAPTCHA element to this webform for untrusted users.'),
     ];
     $form['third_party_settings']['captcha'] = [
       '#type' => 'details',
-      '#title' => t('CAPTCHA'),
-      '#description' => t('Provides the <a href=":href">CAPTCHA</a> for adding challenges to forms.', [
+      '#title' => $this->t('CAPTCHA'),
+      '#description' => $this->t('Provides the <a href=":href">CAPTCHA</a> for adding challenges to forms.', [
         ':href' => 'https://en.wikipedia.org/wiki/CAPTCHA',
       ]),
       '#open' => TRUE,
     ];
     $form['third_party_settings']['captcha']['replace_administration_mode'] = [
       '#type' => 'checkbox',
-      '#title' => t('Replace <em>Add CAPTCHA administration links to forms</em> with CAPTCHA webform element'),
-      '#description' => t('If checked and <a href=":href">Add CAPTCHA administration links to forms</a> is enabled, the CAPTCHA fieldset added to every form will create a new CAPTCHA webform element instead of tracking each webform\'s id.', $t_args) . '<br/><br/>' . t('It changes the "@from" link label and behavior to "@to"', $t_args),
+      '#title' => $this->t('Replace <em>Add CAPTCHA administration links to forms</em> with CAPTCHA webform element'),
+      '#description' => $this->t('If checked and <a href=":href">Add CAPTCHA administration links to forms</a> is enabled, the CAPTCHA fieldset added to every form will create a new CAPTCHA webform element instead of tracking each webform\'s id.', $t_args) . '<br/><br/>' . $this->t('It changes the "@from" link label and behavior to "@to"', $t_args),
       '#default_value' => $replace_administration_mode,
       '#return_value' => TRUE,
     ];

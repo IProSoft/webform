@@ -5,12 +5,14 @@ namespace Drupal\webform_examples_accessibility\Hook;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_examples_accessibility.
  */
 class WebformExamplesAccessibilityHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_page_attachments().
@@ -46,7 +48,7 @@ class WebformExamplesAccessibilityHooks {
     $accessibility = \Drupal::request()->query->get('accessibility') === '1' ? TRUE : FALSE;
     $form['accessibility']['accessibility'] = [
       '#type' => 'link',
-      '#title' => $accessibility ? t('Hide accessibility') : t('Show accessibility'),
+      '#title' => $accessibility ? $this->t('Hide accessibility') : $this->t('Show accessibility'),
       '#url' => Url::fromRoute('<current>', [], [
         'query' => [
           'accessibility' => $accessibility ? 0 : 1,
@@ -68,7 +70,7 @@ class WebformExamplesAccessibilityHooks {
     }
     $form['accessibility']['required'] = [
       '#type' => 'link',
-      '#title' => $required ? t('Disable required') : t('Enable required'),
+      '#title' => $required ? $this->t('Disable required') : $this->t('Enable required'),
       '#url' => Url::fromRoute('<current>', [], [
         'query' => [
           'required' => $required ? 0 : 1,
@@ -97,7 +99,7 @@ class WebformExamplesAccessibilityHooks {
     }
     $form['accessibility']['novalidate'] = [
       '#type' => 'link',
-      '#title' => $novalidate ? t('Enable client-side validation') : t('Disable client-side validation'),
+      '#title' => $novalidate ? $this->t('Enable client-side validation') : $this->t('Disable client-side validation'),
       '#url' => Url::fromRoute('<current>', [], [
         'query' => [
           'novalidate' => $novalidate ? 0 : 1,
@@ -119,7 +121,7 @@ class WebformExamplesAccessibilityHooks {
       }
       $form['accessibility']['disable_inline_form_errors'] = [
         '#type' => 'link',
-        '#title' => $disable_inline_form_errors ? t('Enable inline form errors') : t('Disable inline form errors'),
+        '#title' => $disable_inline_form_errors ? $this->t('Enable inline form errors') : $this->t('Disable inline form errors'),
         '#url' => Url::fromRoute('<current>', [], [
           'query' => [
             'disable_inline_form_errors' => $disable_inline_form_errors ? 0 : 1,

@@ -5,12 +5,14 @@ namespace Drupal\webform_access\Hook;
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_access.
  */
 class WebformAccessHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_help_info().
@@ -21,8 +23,8 @@ class WebformAccessHooks {
     // Access group.
     $help['webform_access_group'] = [
       'group' => 'access',
-      'title' => t('Webform Access: Group'),
-      'content' => t('The <strong>Access group</strong> page lists reusable groups used to access webform source entity and users.'),
+      'title' => $this->t('Webform Access: Group'),
+      'content' => $this->t('The <strong>Access group</strong> page lists reusable groups used to access webform source entity and users.'),
       'video_id' => 'access',
       'routes' => [
               // @see /admin/structure/webform/access/group/manage
@@ -32,8 +34,8 @@ class WebformAccessHooks {
     // Access type.
     $help['webform_access_type'] = [
       'type' => 'access',
-      'title' => t('Webform Access: Type'),
-      'content' => t('The <strong>Access type</strong> page lists types of groups used to send email notifications to users.'),
+      'title' => $this->t('Webform Access: Type'),
+      'content' => $this->t('The <strong>Access type</strong> page lists types of groups used to send email notifications to users.'),
       'video_id' => 'access',
       'routes' => [
               // @see /admin/structure/webform/access/type/manage
@@ -105,7 +107,7 @@ class WebformAccessHooks {
     $webform_entities = ['webform_access_group', 'webform_access_type'];
     foreach ($webform_entities as $webform_entity) {
       if (isset($data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'])) {
-        $data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'] = t('Translate');
+        $data['tabs'][0]["config_translation.local_tasks:entity.{$webform_entity}.config_translation_overview"]['#link']['title'] = $this->t('Translate');
       }
     }
     $route_name = \Drupal::routeMatch()->getRouteName();

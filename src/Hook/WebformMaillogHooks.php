@@ -7,12 +7,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformHandler\EmailWebformHandler;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform.
  */
 class WebformMaillogHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_submission_form_alter().
@@ -53,20 +55,20 @@ class WebformMaillogHooks {
       $t_args = [':href' => Url::fromRoute('maillog.settings')->toString()];
       if ($config->get('log')) {
         $build[] = [
-          '#markup' => t('The <a href=":href">Maillog</a> module is logging all emails.', $t_args),
+          '#markup' => $this->t('The <a href=":href">Maillog</a> module is logging all emails.', $t_args),
         ];
       }
       else {
-        $build[] = ['#markup' => t('The <a href=":href">Maillog</a> module is installed.', $t_args)];
+        $build[] = ['#markup' => $this->t('The <a href=":href">Maillog</a> module is installed.', $t_args)];
       }
     }
     // Display warning if the user can view email on page.
     if (\Drupal::currentUser()->hasPermission('view maillog') && $config->get('verbose')) {
-      $build[] = ['#prefix' => ' ', '#markup' => t('Emails will displayed on this page.')];
+      $build[] = ['#prefix' => ' ', '#markup' => $this->t('Emails will displayed on this page.')];
     }
     // Display warning if no emails are being sent.
     $build[] = [
-      '#markup' => t('No emails will be sent.'),
+      '#markup' => $this->t('No emails will be sent.'),
       '#prefix' => ' <b>',
       '#suffix' => '</b>',
     ];

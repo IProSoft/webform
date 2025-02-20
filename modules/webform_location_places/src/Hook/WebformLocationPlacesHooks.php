@@ -4,12 +4,14 @@ namespace Drupal\webform_location_places\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_location_places.
  */
 class WebformLocationPlacesHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_libraries_info().
@@ -18,9 +20,9 @@ class WebformLocationPlacesHooks {
   public function webformLibrariesInfo() {
     $libraries = [];
     $libraries['algolia.places'] = [
-      'title' => t('Algolia Places'),
-      'description' => t('Algolia Places provides a fast, distributed and easy way to use an address search autocomplete JavaScript library on your website.'),
-      'notes' => t('Algolia Places is by the location places elements.'),
+      'title' => $this->t('Algolia Places'),
+      'description' => $this->t('Algolia Places provides a fast, distributed and easy way to use an address search autocomplete JavaScript library on your website.'),
+      'notes' => $this->t('Algolia Places is by the location places elements.'),
       'homepage_url' => Url::fromUri('https://github.com/algolia/places'),
       'issues_url' => Url::fromUri('https://github.com/algolia/places/issues'),
           // NOTE: Using NPM/JsDelivr because it contains the '/dist/cdn/' directory.
@@ -45,16 +47,16 @@ class WebformLocationPlacesHooks {
     $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
     $default_algolia_places_app_id = $third_party_settings_manager->getThirdPartySetting('webform_location_places', 'default_algolia_places_app_id');
     $default_algolia_places_api_key = $third_party_settings_manager->getThirdPartySetting('webform_location_places', 'default_algolia_places_api_key');
-    $form['third_party_settings']['webform_location_places'] = ['#type' => 'details', '#title' => t('Webform Algolia Places'), '#open' => TRUE];
+    $form['third_party_settings']['webform_location_places'] = ['#type' => 'details', '#title' => $this->t('Webform Algolia Places'), '#open' => TRUE];
     $form['third_party_settings']['webform_location_places']['default_algolia_places_app_id'] = [
       '#type' => 'textfield',
-      '#title' => t('Algolia application id'),
-      '#description' => t('Algolia requires users to use a valid application id and API key for more than 1,000 requests per day. By <a href="https://www.algolia.com/users/sign_up/places">signing up</a>, you can create a free Places app and access your API keys.'),
+      '#title' => $this->t('Algolia application id'),
+      '#description' => $this->t('Algolia requires users to use a valid application id and API key for more than 1,000 requests per day. By <a href="https://www.algolia.com/users/sign_up/places">signing up</a>, you can create a free Places app and access your API keys.'),
       '#default_value' => $default_algolia_places_app_id,
     ];
     $form['third_party_settings']['webform_location_places']['default_algolia_places_api_key'] = [
       '#type' => 'textfield',
-      '#title' => t('Algolia API key'),
+      '#title' => $this->t('Algolia API key'),
       '#default_value' => $default_algolia_places_api_key,
     ];
   }

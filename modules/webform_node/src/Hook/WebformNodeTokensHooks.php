@@ -4,12 +4,14 @@ namespace Drupal\webform_node\Hook;
 
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\node\NodeInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_node.
  */
 class WebformNodeTokensHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_token_info().
@@ -17,13 +19,13 @@ class WebformNodeTokensHooks {
   #[Hook('token_info')]
   public function tokenInfo() {
     $types['webform_submission'] = [
-      'name' => t('Webform submissions'),
-      'description' => t('Tokens related to webform submission.'),
+      'name' => $this->t('Webform submissions'),
+      'description' => $this->t('Tokens related to webform submission.'),
       'needs-data' => 'webform_submission',
     ];
     $webform_submission['node'] = [
-      'name' => t('Node'),
-      'description' => t("The node that the webform was submitted from."),
+      'name' => $this->t('Node'),
+      'description' => $this->t("The node that the webform was submitted from."),
       'type' => 'node',
     ];
     return ['types' => $types, 'tokens' => ['webform_submission' => $webform_submission]];

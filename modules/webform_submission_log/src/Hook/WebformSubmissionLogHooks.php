@@ -4,12 +4,14 @@ namespace Drupal\webform_submission_log\Hook;
 
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_submission_log.
  */
 class WebformSubmissionLogHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_help_info().
@@ -19,8 +21,8 @@ class WebformSubmissionLogHooks {
     $help = [];
     $help['submissions_log'] = [
       'group' => 'submissions',
-      'title' => t('Submissions: Log'),
-      'content' => t('The <strong>Submissions log</strong> page tracks all submission events for all webforms that have submission logging enabled. Submission logging can be enabled globally or on a per webform basis.'),
+      'title' => $this->t('Submissions: Log'),
+      'content' => $this->t('The <strong>Submissions log</strong> page tracks all submission events for all webforms that have submission logging enabled. Submission logging can be enabled globally or on a per webform basis.'),
       'routes' => [
               // @see /admin/structure/webform/results/log
         'entity.webform_submission.collection_log',
@@ -28,8 +30,8 @@ class WebformSubmissionLogHooks {
     ];
     $help['submission_log'] = [
       'group' => 'submission',
-      'title' => t('Submission: Log'),
-      'content' => t("The <strong>Log</strong> page shows all events and transactions for a submission."),
+      'title' => $this->t('Submission: Log'),
+      'content' => $this->t("The <strong>Log</strong> page shows all events and transactions for a submission."),
       'video_id' => 'submission',
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/submission/{webform_submission}/log
@@ -40,8 +42,8 @@ class WebformSubmissionLogHooks {
     ];
     $help['results_log'] = [
       'group' => 'submissions',
-      'title' => t('Results: Log'),
-      'content' => t('The <strong>Results Log</strong> lists all webform submission events for the current webform.'),
+      'title' => $this->t('Results: Log'),
+      'content' => $this->t('The <strong>Results Log</strong> lists all webform submission events for the current webform.'),
       'routes' => [
               // @see /admin/structure/webform/manage/{webform}/results/log
         'entity.webform.results_log',
@@ -49,8 +51,8 @@ class WebformSubmissionLogHooks {
     ];
     $help['webform_node_results_log'] = [
       'group' => 'webform_nodes',
-      'title' => t('Webform Node: Results: Log'),
-      'content' => t('The <strong>Results Log</strong> lists all webform submission events for the current webform.'),
+      'title' => $this->t('Webform Node: Results: Log'),
+      'content' => $this->t('The <strong>Results Log</strong> lists all webform submission events for the current webform.'),
       'routes' => [
               // @see /node/{node}/webform/results/log
         'entity.node.webform.results_log',

@@ -8,12 +8,14 @@ use Drupal\webform\Plugin\WebformElement\Date;
 use Drupal\webform\Plugin\WebformElement\DateBase;
 use Drupal\webform\Plugin\WebformElement\DateList;
 use Drupal\webform\Plugin\WebformElement\DateTime;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_jqueryui_datepicker.
  */
 class WebformJqueryuiDatepickerHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_element_default_properties_alter().
@@ -43,20 +45,20 @@ class WebformJqueryuiDatepickerHooks {
     $element_plugin = $form_object->getWebformElementPlugin();
     // Date base element.
     if ($element_plugin instanceof DateBase) {
-      $form['date']['date_days']['#description'] .= ' ' . t('Please note, the date picker will disable unchecked days of the week.');
+      $form['date']['date_days']['#description'] .= ' ' . $this->t('Please note, the date picker will disable unchecked days of the week.');
     }
     // Date element.
     if ($element_plugin instanceof Date) {
       $form['date']['datepicker'] = [
         '#type' => 'checkbox',
-        '#title' => t('Use date picker'),
-        '#description' => t('If checked, the HTML5 date element will be replaced with a <a href="https://jqueryui.com/datepicker/">jQuery UI datepicker</a>'),
+        '#title' => $this->t('Use date picker'),
+        '#description' => $this->t('If checked, the HTML5 date element will be replaced with a <a href="https://jqueryui.com/datepicker/">jQuery UI datepicker</a>'),
         '#return_value' => TRUE,
       ];
       $form['date']['datepicker_button'] = [
         '#type' => 'checkbox',
-        '#title' => t('Show date picker button'),
-        '#description' => t('If checked, date picker will include a calendar button'),
+        '#title' => $this->t('Show date picker button'),
+        '#description' => $this->t('If checked, date picker will include a calendar button'),
         '#return_value' => TRUE,
         '#states' => [
           'visible' => [
@@ -69,29 +71,29 @@ class WebformJqueryuiDatepickerHooks {
       $date_format = DateFormat::load('html_date')->getPattern();
       $form['date']['date_date_format'] = [
         '#type' => 'webform_select_other',
-        '#title' => t('Date format'),
+        '#title' => $this->t('Date format'),
         '#options' => [
-          $date_format => t('HTML date - @format (@date)', [
+          $date_format => $this->t('HTML date - @format (@date)', [
             '@format' => $date_format,
             '@date' => _webform_jqueryui_datepicker_format_date($date_format),
           ]),
-          'l, F j, Y' => t('Long date - @format (@date)', [
+          'l, F j, Y' => $this->t('Long date - @format (@date)', [
             '@format' => 'l, F j, Y',
             '@date' => _webform_jqueryui_datepicker_format_date('l, F j, Y'),
           ]),
-          'D, m/d/Y' => t('Medium date - @format (@date)', [
+          'D, m/d/Y' => $this->t('Medium date - @format (@date)', [
             '@format' => 'D, m/d/Y',
             '@date' => _webform_jqueryui_datepicker_format_date('D, m/d/Y'),
           ]),
-          'm/d/Y' => t('Short date - @format (@date)', [
+          'm/d/Y' => $this->t('Short date - @format (@date)', [
             '@format' => 'm/d/Y',
             '@date' => _webform_jqueryui_datepicker_format_date('m/d/Y'),
           ]),
         ],
-        '#description' => t("Date format is only applicable for browsers that do not have support for the HTML5 date element. Browsers that support the HTML5 date element will display the date using the user's preferred format."),
-        '#other__option_label' => t('Custom…'),
-        '#other__placeholder' => t('Custom date format…'),
-        '#other__description' => t('Enter date format using <a href="http://php.net/manual/en/function.date.php">Date Input Format</a>.'),
+        '#description' => $this->t("Date format is only applicable for browsers that do not have support for the HTML5 date element. Browsers that support the HTML5 date element will display the date using the user's preferred format."),
+        '#other__option_label' => $this->t('Custom…'),
+        '#other__placeholder' => $this->t('Custom date format…'),
+        '#other__description' => $this->t('Enter date format using <a href="http://php.net/manual/en/function.date.php">Date Input Format</a>.'),
         '#attributes' => [
           'data-webform-states-no-clear' => TRUE,
         ],
@@ -107,8 +109,8 @@ class WebformJqueryuiDatepickerHooks {
       $form['form']['placeholder']['#states'] = ['visible' => [':input[name="properties[datepicker]"]' => ['checked' => TRUE]]];
       $form['date']['date_container']['step'] = [
         '#type' => 'number',
-        '#title' => t('Step'),
-        '#description' => t('Specifies the legal number intervals.'),
+        '#title' => $this->t('Step'),
+        '#description' => $this->t('Specifies the legal number intervals.'),
         '#min' => 1,
         '#size' => 4,
         '#states' => [
@@ -123,7 +125,7 @@ class WebformJqueryuiDatepickerHooks {
     // Datetime element.
     if ($element_plugin instanceof DateTime) {
       // Add datepicker option.
-      $form['date']['date_date_element']['#options']['datepicker'] = t('Date picker input - Use jQuery date picker with custom date format');
+      $form['date']['date_date_element']['#options']['datepicker'] = $this->t('Date picker input - Use jQuery date picker with custom date format');
       // Move none options last.
       $none = $form['date']['date_date_element']['#options']['none'];
       unset($form['date']['date_date_element']['#options']['none']);
@@ -131,8 +133,8 @@ class WebformJqueryuiDatepickerHooks {
       // Add button support.
       $form['date']['date_date_datepicker_button'] = [
         '#type' => 'checkbox',
-        '#title' => t('Show date picker button'),
-        '#description' => t('If checked, date picker will include a calendar button'),
+        '#title' => $this->t('Show date picker button'),
+        '#description' => $this->t('If checked, date picker will include a calendar button'),
         '#return_value' => TRUE,
         '#states' => [
           'visible' => [

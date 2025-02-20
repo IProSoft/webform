@@ -5,12 +5,14 @@ namespace Drupal\webform_icheck\Hook;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Url;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_icheck.
  */
 class WebformIcheckHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_libraries_info().
@@ -19,14 +21,14 @@ class WebformIcheckHooks {
   public function webformLibrariesInfo() {
     $libraries = [];
     $libraries['jquery.icheck'] = [
-      'title' => t('jQuery: iCheck'),
-      'description' => t('Highly customizable checkboxes and radio buttons.'),
-      'notes' => t('iCheck is used to optionally enhance checkboxes and radio buttons.'),
+      'title' => $this->t('jQuery: iCheck'),
+      'description' => $this->t('Highly customizable checkboxes and radio buttons.'),
+      'notes' => $this->t('iCheck is used to optionally enhance checkboxes and radio buttons.'),
       'homepage_url' => Url::fromUri('http://icheck.fronteed.com/'),
       'download_url' => Url::fromUri('https://github.com/dargullin/icheck/archive/refs/tags/1.0.2.zip'),
       'version' => '1.0.2 ',
       'optional' => FALSE,
-      'deprecated' => t('The iCheck library is not being maintained. It has been <a href=":href">deprecated</a> and will be removed in Webform 7.0.', [
+      'deprecated' => $this->t('The iCheck library is not being maintained. It has been <a href=":href">deprecated</a> and will be removed in Webform 7.0.', [
         ':href' => 'https://www.drupal.org/project/webform/issues/2931154',
       ]),
       'license' => 'MIT',
@@ -61,19 +63,19 @@ class WebformIcheckHooks {
     $default_icheck = $third_party_settings_manager->getThirdPartySetting('webform_icheck', 'default_icheck');
     $form['form']['icheck'] = [
       '#type' => 'select',
-      '#title' => t('Enhance using iCheck'),
-      '#description' => t('Replaces @type element with jQuery <a href=":href">iCheck</a> boxes.', [
+      '#title' => $this->t('Enhance using iCheck'),
+      '#description' => $this->t('Replaces @type element with jQuery <a href=":href">iCheck</a> boxes.', [
         '@type' => mb_strtolower($element_plugin->getPluginLabel()),
         ':href' => 'http://icheck.fronteed.com/',
       ]),
-      '#empty_option' => t('- Default -'),
+      '#empty_option' => $this->t('- Default -'),
       '#options' => _webform_icheck_get_options(),
     ];
     if ($default_icheck) {
       $icheck_options = OptGroup::flattenOptions($form['form']['icheck']['#options']);
-      $form['form']['icheck']['#description'] .= '<br /><br />' . t("Leave blank to use the default iCheck style. Select 'None' to display the default HTML element.");
-      $form['form']['icheck']['#description'] .= '<br /><br />' . t('Defaults to: %value', ['%value' => $icheck_options[$default_icheck]]);
-      $form['form']['icheck']['#options']['none'] = t('None');
+      $form['form']['icheck']['#description'] .= '<br /><br />' . $this->t("Leave blank to use the default iCheck style. Select 'None' to display the default HTML element.");
+      $form['form']['icheck']['#description'] .= '<br /><br />' . $this->t('Defaults to: %value', ['%value' => $icheck_options[$default_icheck]]);
+      $form['form']['icheck']['#options']['none'] = $this->t('None');
     }
   }
 
@@ -117,14 +119,14 @@ class WebformIcheckHooks {
     $third_party_settings_manager = \Drupal::service('webform.third_party_settings_manager');
     $default_icheck = $third_party_settings_manager->getThirdPartySetting('webform_icheck', 'default_icheck');
     // iCheck.
-    $form['third_party_settings']['webform_icheck'] = ['#type' => 'details', '#title' => t('iCheck'), '#open' => TRUE];
+    $form['third_party_settings']['webform_icheck'] = ['#type' => 'details', '#title' => $this->t('iCheck'), '#open' => TRUE];
     $form['third_party_settings']['webform_icheck']['default_icheck'] = [
       '#type' => 'select',
-      '#title' => t('Enhance checkboxes/radio buttons using iCheck'),
-      '#description' => t('If set, all checkboxes/radio buttons with be enhanced using jQuery <a href=":href">iCheck</a> boxes.', [
+      '#title' => $this->t('Enhance checkboxes/radio buttons using iCheck'),
+      '#description' => $this->t('If set, all checkboxes/radio buttons with be enhanced using jQuery <a href=":href">iCheck</a> boxes.', [
         ':href' => 'http://icheck.fronteed.com/',
       ]),
-      '#empty_option' => t('- Default -'),
+      '#empty_option' => $this->t('- Default -'),
       '#options' => _webform_icheck_get_options(),
       '#default_value' => $default_icheck,
     ];

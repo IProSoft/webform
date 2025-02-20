@@ -3,12 +3,14 @@
 namespace Drupal\webform_entity_print\Hook;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_entity_print.
  */
 class WebformEntityPrintWebformHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_webform_admin_third_party_settings_form_alter().
@@ -26,7 +28,7 @@ class WebformEntityPrintWebformHooks {
       $export_type_settings += [$export_type => []];
       $export_type_settings[$export_type] += [
         'enabled' => FALSE,
-        'link_text' => t('Download @label', $t_args),
+        'link_text' => $this->t('Download @label', $t_args),
         'link_attributes' => [
           'class' => [
             'button',
@@ -38,8 +40,8 @@ class WebformEntityPrintWebformHooks {
     // Add debug settings.
     $form['third_party_settings']['webform_entity_print']['debug'] = [
       '#type' => 'checkbox',
-      '#title' => t('Debug generated documents'),
-      '#description' => t('If checked, administrators will see debug links below each export type.'),
+      '#title' => $this->t('Debug generated documents'),
+      '#description' => $this->t('If checked, administrators will see debug links below each export type.'),
       '#return_value' => TRUE,
       '#default_value' => $third_party_settings_manager->getThirdPartySetting('webform_entity_print', 'debug') ?: FALSE,
     ];

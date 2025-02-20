@@ -10,12 +10,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\WebformInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
  * Hook implementations for webform_cards.
  */
 class WebformCardsHooks {
+  use StringTranslationTrait;
 
   /**
    * Implements hook_entity_base_field_info().
@@ -77,7 +79,7 @@ class WebformCardsHooks {
         '#url' => Url::fromRoute('<none>', [], [
           'fragment' => $form_id,
         ]),
-        '#title' => t('Submit %title form', [
+        '#title' => $this->t('Submit %title form', [
           '%title' => $webform->label(),
         ]),
         '#attributes' => [
