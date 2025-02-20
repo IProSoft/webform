@@ -12,6 +12,7 @@ use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\Plugin\WebformElementFileDownloadAccessInterface;
+use Drupal\webform\Plugin\WebformElementAttachmentInterface;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -27,7 +28,7 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
  *   category = @Translation("Advanced elements"),
  * )
  */
-class WebformSignature extends WebformElementBase implements WebformElementFileDownloadAccessInterface {
+class WebformSignature extends WebformElementBase implements WebformElementFileDownloadAccessInterface, WebformElementAttachmentInterface {
 
   /**
    * The file system service.
@@ -120,6 +121,9 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
 
       case 'url':
         return $this->getImageUrl($element, $webform_submission, $options);
+      case 'name':
+        $uri = $this->getImageUri($element, $webform_submission, $options);
+        return $this->fileSystem->basename($uri);
     }
 
     return parent::formatTextItem($element, $webform_submission, $options);
@@ -141,6 +145,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       'status' => $this->t('Status'),
       'url' => $this->t('URL'),
       'image' => $this->t('Image'),
+      'name' => $this->t('File name'),
     ];
   }
 
@@ -270,11 +275,36 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
    *   An array of options.
    *
    * @return string
+   *   A signature element's image URL.
+   */
+  protected function getImageUrl(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+
+    $image_uri = $this->getImageUri($element, $webform_submission, $options);
+    if (empty($image_uri)) {
+      return '';
+    }
+
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+    return $file_url_generator->generateAbsoluteString($image_uri);
+  }
+
+  /**
+   * Get a signature element's image URI.
+   *
+   * @param array $element
+   *   An element.
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   * @param array $options
+   *   An array of options.
+   *
+   * @return string
    *   A signature element's image URI.
    *
    * @see https://stackoverflow.com/questions/11511511/how-to-save-a-png-image-server-side-from-a-base64-data-string
    */
-  protected function getImageUrl(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function getImageUri(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = $this->getValue($element, $webform_submission, $options);
     if (!$value) {
       return '';
@@ -306,15 +336,12 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       $image_directory = $image_submission_directory;
     }
 
-    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
-    $file_url_generator = \Drupal::service('file_url_generator');
-
     // If a signature file was already created and shared using an
     // unsafe image hash, then return it.
     $unsafe_image_hash = Crypt::hmacBase64($value, Settings::getHashSalt());
     $unsafe_image_uri = "$image_directory/signature-$unsafe_image_hash.png";
     if (file_exists($unsafe_image_uri)) {
-      return $file_url_generator->generateAbsoluteString($unsafe_image_uri);
+      return $unsafe_image_uri;
     }
 
     $image_hash = Crypt::hmacBase64('webform-signature-' . $value, Settings::getHashSalt());
@@ -334,7 +361,7 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
       }
     }
 
-    return $file_url_generator->generateAbsoluteString($image_uri);
+    return $image_uri;
   }
 
   /**
@@ -417,6 +444,53 @@ class WebformSignature extends WebformElementBase implements WebformElementFileD
     else {
       return NULL;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getEmailAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    $uri = $this->getImageUri($element, $webform_submission, $options);
+    if (empty($uri)) {
+      return [];
+    }
+
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $url = $file_url_generator->generateAbsoluteString($uri);
+
+    return [[
+      'filecontent' => file_get_contents($uri),
+      'filename' => $this->fileSystem->basename($uri),
+      'filemime' => 'image/png',
+      // File URIs that are not supported return FALSE, when this happens
+      // still use the file's URI as the file's path.
+      'filepath' => $this->fileSystem->realpath($uri) ?: $uri,
+      // URI is used when debugging or resending messages.
+      // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler::buildAttachments
+      '_fileurl' => $url,
+    ]];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachments(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasExportAttachments() {
+    return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExportAttachmentsBatchLimit() {
+    return NULL;
   }
 
 }
