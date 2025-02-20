@@ -29,7 +29,7 @@ class WebformEntitySettingsAssetsForm extends WebformEntitySettingsBaseForm {
       '#type' => 'fieldset',
       '#title' => $this->t('Custom CSS'),
       '#description' => $this->t('Enter custom CSS to be attached to the webform.') . '<br/>' .
-        $this->t("To customize only webform specific elements, you should use the '.webform-submission-form' selector"),
+      $this->t("To customize only webform specific elements, you should use the '.webform-submission-form' selector"),
     ];
     $form['css']['css'] = [
       '#type' => 'webform_codemirror',
