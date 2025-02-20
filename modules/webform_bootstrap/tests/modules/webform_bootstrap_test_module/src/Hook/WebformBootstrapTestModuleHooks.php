@@ -2,6 +2,7 @@
 
 namespace Drupal\webform_bootstrap_test_module\Hook;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 
 /**
@@ -17,7 +18,7 @@ class WebformBootstrapTestModuleHooks {
    * Implements hook_webform_submission_form_alter().
    */
   #[Hook('webform_submission_form_alter')]
-  public function webformSubmissionFormAlter(array &$form, \FormStateInterface $form_state, $form_id) {
+  public function webformSubmissionFormAlter(array &$form, FormStateInterface $form_state, $form_id) {
     // Wrap any form that does not have a fieldset or details widget in a .well.
     $has_container = FALSE;
     foreach ($form['elements'] as $element) {
@@ -36,7 +37,7 @@ class WebformBootstrapTestModuleHooks {
    * Implements hook_webform_element_alter().
    */
   #[Hook('webform_element_alter')]
-  public function webformElementAlter(array &$element, \FormStateInterface $form_state, array $context) {
+  public function webformElementAlter(array &$element, FormStateInterface $form_state, array $context) {
     if (!isset($element['#type'])) {
       return;
     }
