@@ -388,11 +388,11 @@
    *
    * @see https://stackoverflow.com/a/37825072/145846
    */
-  function checkboxesRequired($element) {
-    var $firstCheckbox = $element.find('input[type="checkbox"]').first();
-    var isChecked = $element.find('input[type="checkbox"]').is(':checked');
-    toggleRequired($firstCheckbox, !isChecked);
-    copyRequireMessage($element, $firstCheckbox);
+  function checkboxesRequired() {
+    var $checkboxes = $('input[type="checkbox"].form-checkbox');
+    var isChecked = $checkboxes.is(':checked');
+    toggleRequired($checkboxes, !isChecked);
+    copyRequireMessage($checkboxes.closest('.js-webform-type-checkboxes, .js-form-item'), $checkboxes);
   }
 
   /**
