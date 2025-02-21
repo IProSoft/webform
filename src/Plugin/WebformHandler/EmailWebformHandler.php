@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformAjaxElementTrait;
 use Drupal\webform\Element\WebformHtmlEditor;
@@ -1738,7 +1739,7 @@ class EmailWebformHandler extends WebformHandlerBase implements WebformHandlerMe
       $t_args = [
         '@filename' => $attachment['filename'],
         '@filemime' => $attachment['filemime'],
-        '@filesize' => format_size(mb_strlen($attachment['filecontent'])),
+        '@filesize' => ByteSizeMarkup::create(mb_strlen($attachment['filecontent'])),
       ];
       if (!empty($attachment['_fileurl'])) {
         $t_args[':href'] = $attachment['_fileurl'];

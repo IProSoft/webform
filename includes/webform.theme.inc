@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Render\Element;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\file\Entity\File;
@@ -657,7 +658,7 @@ function webform_preprocess_file_upload_help(&$variables) {
   $upload_validators = $variables['upload_validators'];
 
   if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
-    $variables['descriptions'][] = t('@size limit per form.', ['@size' => format_size($upload_validators['webform_file_limit'][0])]);
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => ByteSizeMarkup::create($upload_validators['webform_file_limit'][0])]);
   }
 
   // Issue #3136578: Comma-separate the list of allowed file extensions.
@@ -695,7 +696,7 @@ function webform_preprocess_file_link(&$variables) {
   if (empty($variables['file_size'])
     && $file->getSize()
     && \Drupal::service('webform.theme_manager')->isActiveTheme('claro')) {
-    $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $variables['file_size'] = ByteSizeMarkup::create($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
   }
 }
 
