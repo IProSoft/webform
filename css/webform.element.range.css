@@ -25,6 +25,19 @@ html.js .form-type-range .form-type-number {
   white-space: nowrap;
 }
 
+/**
+ * Bubble output (via <output>).
+ */
+.form-type-range output {
+  background: #ededed;
+  border: 1px solid #bbb;
+  display: none;
+  opacity: 0.3;
+  padding: 2px 5px;
+  position: absolute;
+  text-align: center;
+}
+
 .form-type-range .webform-range-output-delimiter {
   display: inline-block;
   width: 10px;
@@ -34,22 +47,8 @@ html.js .form-type-range .form-type-number {
   text-align: right;
 }
 
-/**
- * Bubble output (via <output>).
- */
-.form-type-range output {
-  display: none;
-}
-
 html.js .form-type-range output {
   display: block;
 }
 
-.form-type-range output {
-  position: absolute;
-  padding: 2px 5px;
-  text-align: center;
-  opacity: 0.3;
-  border: 1px solid #bbb;
-  background: #ededed;
-}
+
