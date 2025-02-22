@@ -713,6 +713,13 @@ class WebformEntitySettingsSubmissionsForm extends WebformEntitySettingsBaseForm
         ],
       ],
     ];
+    $form['autofill_settings']['autofill_container']['autofill_ignore_source'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Ignore source entity'),
+      '#description' => $this->t('When auto-filling previous submission data, use the latest data no matter the source entity.'),
+      '#return_value' => TRUE,
+      '#default_value' => $settings['autofill_ignore_source'],
+    ];
     $form['autofill_settings']['autofill_container']['autofill_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Autofill message'),
