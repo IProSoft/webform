@@ -350,7 +350,9 @@ class WebformElementComposite extends FormElement {
       }
 
       // Make sure element is not storing multiple values.
-      if ($element_plugin->hasMultipleValues($composite_element)) {
+      $supported_multiple_value_elements = ['checkboxes', 'webform_checkboxes_other', 'select', 'webform_select_other'];
+      if ($element_plugin->hasMultipleValues($composite_element)
+        && !in_array($composite_element['#type'], $supported_multiple_value_elements)) {
         $form_state->setError($element, t('Multiple value is not supported for %title (@type).', $t_args));
       }
     }

@@ -55,6 +55,17 @@ class WebformExampleComposite extends WebformCompositeBase {
       // Use #after_build to add #states.
       '#after_build' => [[get_called_class(), 'afterBuild']],
     ];
+    $elements['languages'] = [
+      '#type' => 'webform_checkboxes_other',
+      '#title' => t('Languages spoken'),
+      '#options' => [
+        'English' => t('English'),
+        'French' => t('French'),
+        'Spanish' => t('Spanish'),
+      ],
+      // Use #after_build to add #states.
+      '#after_build' => [[get_called_class(), 'afterBuild']],
+    ];
 
     return $elements;
   }

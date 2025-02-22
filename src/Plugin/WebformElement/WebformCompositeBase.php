@@ -644,8 +644,24 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
       return '';
     }
 
-    $format_function = 'format' . $type;
-    return $composite_plugin->$format_function($composite_element, $webform_submission, $options);
+    if ($composite_plugin->hasMultipleValues($composite_element)) {
+      // Set #composite_value, so that composite sub-element get the
+      // correct value.
+      // @see \Drupal\webform\Plugin\WebformElementBase::getValue
+      $composite_element['#composite_value'] = (array) $this->getValue($element, $webform_submission, $options);
+
+      // Clone options and remove #composite_key and #delta.
+      $composite_options = $options;
+      unset($composite_options['composite_key']);
+      unset($composite_options['delta']);
+
+      $format_function = 'format' . $type . 'Items';
+      return $composite_plugin->$format_function($composite_element, $webform_submission, $composite_options);
+    }
+    else {
+      $format_function = 'format' . $type;
+      return $composite_plugin->$format_function($composite_element, $webform_submission, $options);
+    }
   }
 
   /**
@@ -1142,12 +1158,19 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
           '#states' => $state_disabled,
         ];
       }
-      elseif (in_array($type, ['select', 'webform_select_other', 'radios', 'webform_radios_other'])) {
+      elseif (in_array($type, ['select', 'webform_select_other', 'checkboxes', 'webform_checkboxes_other', 'radios', 'webform_radios_other'])) {
         // Get base type (select or radios).
-        $base_type = preg_replace('/webform_(select|radios)_other/', '\1', $type);
+        $base_type = preg_replace('/webform_(select|checkboxes|radios)_other/', '\1', $type);
 
         // Get type options.
         switch ($base_type) {
+          case 'checkboxes':
+            $settings = [
+              'checkboxes' => $this->t('Checkboxes'),
+              'webform_checkboxes_other' => $this->t('Checkboxes other'),
+            ];
+            break;
+
           case 'radios':
             $settings = [
               'radios' => $this->t('Radios'),
@@ -1200,7 +1223,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
             '#suffix' => '<em>' . $message . '</em>',
           ];
         }
-        elseif ($composite_options) {
+        elseif ($composite_options && count($composite_options) > 1) {
           $row['settings']['data'][$composite_key . '__options'] = [
             '#type' => 'select',
             '#title' => $this->t('@title options', $t_args),
@@ -1488,7 +1511,7 @@ abstract class WebformCompositeBase extends WebformElementBase implements Webfor
     if (!$element_plugin->isInput($element)
       || $element_plugin->isComposite()
       || $element_plugin->isContainer($element)
-      || $element_plugin->hasMultipleValues($element)
+      || $element_plugin->hasMultipleValues($element) && (!in_array($type, ['checkboxes', 'webform_checkboxes_other', 'select', 'webform_select_other']))
       || ($element_plugin instanceof WebformElementEntityReferenceInterface && !($element_plugin instanceof WebformManagedFileBase))
       || $element_plugin instanceof WebformElementComputedInterface) {
       return FALSE;
