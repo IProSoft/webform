@@ -387,12 +387,19 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
   protected function setElementDefaultCallback(array &$element, $callback_name) {
     $callback_name = ($callback_name[0] !== '#') ? '#' . $callback_name : $callback_name;
     $callback_value = $this->getElementInfoDefaultProperty($element, $callback_name) ?: [];
-    if (!empty($element[$callback_name])) {
-      $element[$callback_name] = array_merge($callback_value, $element[$callback_name]);
-    }
-    else {
+
+    if (empty($element[$callback_name])) {
       $element[$callback_name] = $callback_value;
+      return;
     }
+
+    foreach ($callback_value as $callback) {
+      if (in_array($callback, $element[$callback_name], TRUE)) {
+        return;
+      }
+    }
+
+    $element[$callback_name] = array_merge($callback_value, $element[$callback_name]);
   }
 
   /**
