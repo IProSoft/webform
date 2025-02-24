@@ -142,7 +142,8 @@ class Webform extends RenderElement {
     // Allow anonymous drafts to be restored.
     // @see \Drupal\webform\WebformSubmissionForm::buildForm
     if (\Drupal::currentUser()->isAnonymous()
-      && $webform->getSetting('draft') === WebformInterface::DRAFT_ALL) {
+      && $webform->getSetting('draft') === WebformInterface::DRAFT_ALL
+      && empty($element['#entity'])) {
       $element['#cache']['max-age'] = 0;
       // @todo Remove once bubbling of element's max-age to page cache is fixed.
       // @see https://www.drupal.org/project/webform/issues/3015760
