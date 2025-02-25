@@ -1,10 +1,7 @@
 uuid: null
 langcode: en
 status: scheduled
-dependencies:
-  enforced:
-    module:
-      - webform_test
+dependencies: {  }
 open: '2040-01-01T00:00:00-05:00'
 close: null
 weight: 0

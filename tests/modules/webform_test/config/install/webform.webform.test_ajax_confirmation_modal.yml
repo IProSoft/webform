@@ -1,10 +1,7 @@
 uuid: null
 langcode: en
 status: open
-dependencies:
-  enforced:
-    module:
-      - webform_test
+dependencies: {  }
 open: null
 close: null
 weight: 0
