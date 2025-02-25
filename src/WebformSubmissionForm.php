@@ -20,6 +20,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\webform\Cache\WebformBubbleableMetadata;
 use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform\Event\PrepopulateDataOnWebformSubscriptionEvent;
 use Drupal\webform\Form\WebformDialogFormTrait;
 use Drupal\webform\Plugin\WebformElement\Hidden;
 use Drupal\webform\Plugin\WebformElement\OptionsBase;
@@ -156,6 +157,13 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected $generate;
 
   /**
+   * The event dispatcher.
+   *
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
    * The webform submission.
    *
    * @var \Drupal\webform\WebformSubmissionInterface
@@ -222,6 +230,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     $instance->conditionsValidator = $container->get('webform_submission.conditions_validator');
     $instance->webformEntityReferenceManager = $container->get('webform.entity_reference_manager');
     $instance->generate = $container->get('webform_submission.generate');
+    $instance->eventDispatcher = $container->get('event_dispatcher');
     return $instance;
   }
 
@@ -2663,15 +2672,9 @@ class WebformSubmissionForm extends ContentEntityForm {
    */
   protected function prepopulateData(array &$data) {
     // Get prepopulate data.
-    if ($this->getWebformSetting('form_prepopulate')) {
-      $prepopulate_data = $this->getRequest()->query->all();
-    }
-    else {
-      $prepopulate_data = array_intersect_key(
-        $this->getRequest()->query->all(),
-        $this->getWebform()->getElementsPrepopulate()
-      );
-    }
+    $prepopulate_data = [];
+    $event = new PrepopulateDataOnWebformSubscriptionEvent($prepopulate_data, clone $this->getEntity());
+    $this->eventDispatcher->dispatch($event);
 
     // Validate prepopulate data.
     foreach ($prepopulate_data as $element_key => &$value) {
