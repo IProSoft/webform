@@ -303,6 +303,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#description' => $this->t('Use x-www-form-urlencoded if unsure, as it is the default format for HTML webforms. You also have the option to post data in <a href="http://www.json.org/">JSON</a> format.'),
       '#options' => [
         'x-www-form-urlencoded' => $this->t('x-www-form-urlencoded'),
+        'multipart/form-data' => $this->t('multipart/form-data'),
         'json' => $this->t('JSON'),
       ],
       '#states' => [
@@ -525,8 +526,18 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         $response = $this->httpClient->get($request_url, $request_options);
       }
       else {
+        $request_params_name = match ($request_type) {
+          'json' => 'json',
+          'multipart/form-data' => 'multipart',
+          default => 'form_params',
+        };
+        $request_data = $this->getRequestData($state, $webform_submission);
+        // Convert form_params to multipart.
+        if ($request_params_name === 'multipart') {
+          $request_data = $this->convertFormParamsToMultipart($request_data);
+        }
+        $request_options[$request_params_name] = $request_data;
         $method = strtolower($request_method);
-        $request_options[($request_type === 'json' ? 'json' : 'form_params')] = $this->getRequestData($state, $webform_submission);
         $response = $this->httpClient->$method($request_url, $request_options);
       }
     }
@@ -1205,6 +1216,24 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   protected function buildTokenTreeElement(array $token_types = ['webform', 'webform_submission'], $description = NULL) {
     $description = $description ?: $this->t('Use [webform_submission:values:ELEMENT_KEY:raw] to get plain text values.');
     return parent::buildTokenTreeElement($token_types, $description);
+  }
+
+  /**
+   * Convert form_params to multipart.
+   */
+  protected function convertFormParamsToMultipart(array $request_data, ?string $parentKey = NULL): array {
+    $result = [];
+    foreach ($request_data as $key => $value) {
+      if (is_array($value)) {
+        $result = array_merge($result, $this->convertFormParamsToMultipart($value, $key));
+        continue;
+      }
+      $result[] = [
+        'name' => ($parentKey !== NULL) ? $parentKey : $key,
+        'contents' => $value,
+      ];
+    }
+    return $result;
   }
 
 }
