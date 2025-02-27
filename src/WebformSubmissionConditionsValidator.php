@@ -359,7 +359,7 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
       }
 
       // Determine if the element is empty (but not zero).
-      if (isset($element['#webform_key'])) {
+      if (isset($element['#webform_key']) && !isset($element['#is_webform_multiple'])) {
         $value = $webform_submission->getElementData($element['#webform_key']);
       }
       else {
