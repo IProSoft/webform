@@ -162,6 +162,17 @@ class WebformLikert extends WebformElementBase {
           '#attached' => ['library' => ['webform/webform.element.likert']],
         ];
 
+      case 'average':
+        $avg = '';
+        $filtered = array_filter($value);
+        if (count($filtered)) {
+          $avg = round(array_sum($filtered) / count($filtered), 3);
+        }
+        return [
+          '#type' => 'markup',
+          '#markup' => $avg,
+        ];
+
       default:
       case 'value':
       case 'list':
@@ -299,6 +310,7 @@ class WebformLikert extends WebformElementBase {
     return parent::getItemFormats() + [
       'list' => $this->t('List'),
       'table' => $this->t('Table'),
+      'average' => $this->t('Average'),
     ];
   }
 
