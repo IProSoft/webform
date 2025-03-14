@@ -143,6 +143,12 @@ class WebformLikert extends WebformElementBase {
             'width' => '40%',
           ];
           foreach ($element['#answers'] as $answer_value => $answer_text) {
+            // Convert to an integer if necessary.
+            // @todo Should this conversion happen earlier, for example by
+            //   overriding the getValue() method?
+            if (is_int($answer_value) && !is_int($question_value) && is_numeric($question_value)) {
+              $question_value = (int) $question_value;
+            }
             $row[$answer_value] = [
               'data' => ($question_value === $answer_value) ? ['#markup' => '&#10007;'] : '',
               'align' => 'center',
