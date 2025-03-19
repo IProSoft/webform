@@ -28,6 +28,9 @@ use Drupal\webform\Plugin\WebformElement\ContainerBase;
 use Drupal\webform\Plugin\WebformElement\Details;
 use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
 use Drupal\webform\Plugin\WebformElement\WebformEmailConfirm;
+use Drupal\webform\Plugin\WebformElement\BooleanBase;
+use Drupal\webform\Plugin\WebformElement\OptionsBase;
+use Drupal\webform\Plugin\WebformElement\TextBase;
 use Drupal\webform\Twig\WebformTwigExtension;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
@@ -1019,6 +1022,9 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     }
     if (isset($element['#unique']) && $webform_submission) {
       $element['#element_validate'][] = [get_class($this), 'validateUnique'];
+    }
+    if ($webform_submission && $this->hasSetConditions($element['#states'] ?? [])) {
+      $element['#element_validate'][] = [get_class($this), 'validateSetTo'];
     }
   }
 
@@ -2194,7 +2200,12 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
         'unchecked' => $this->t('Unchecked', [], ['context' => 'Remove check mark']),
       ];
     }
-
+    // Set "set to" state for allowed elements.
+    if ($this instanceof TextBase || $this instanceof OptionsBase || $this instanceof BooleanBase) {
+      $states[$value_optgroup] = [
+        'set' => $this->t('Set to'),
+      ];
+    }
     // Set expanded/collapsed states for any details element.
     if ($this instanceof Details) {
       $states[$state_optgroup] += [
@@ -3780,4 +3791,52 @@ class WebformElementBase extends PluginBase implements WebformElementInterface, 
     return ['preRenderFixStatesWrapper', 'preRenderFixFlexboxWrapper', 'preRenderWebformCompositeFormElement'];
   }
 
+  /**
+   * Form API callback. Validate element #status set:? value.
+   *
+   * @param array $element
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   */
+  public static function validateSetTo(array &$element, FormStateInterface $form_state): void {
+    foreach($element['#states'] as $state => $conditions) {
+      if(str_contains($state, 'set|')) {
+        $setValue = FALSE;
+        foreach($conditions as $field => $condition) {
+          foreach($condition as $conditionState => $conditionValue) {
+            preg_match('@name=\"([^"]+)\"@m', $field, $match);
+            if(!empty($match[1])) {
+              $value = $form_state->getValue($match[1]);
+              switch($conditionState) {
+                case 'filled':
+                case 'checked':
+                  $setValue = !empty($value);
+                break;
+                case 'empty':
+                case 'unchecked':
+                  $setValue = empty($value);
+                break;
+              }
+            }
+          }
+        }
+        if($setValue) {
+          $element['#value'] = substr($state, 4);
+          $form_state->setValue($element['#webform_key'], $element['#value']);
+        }
+      }
+    }
+  }
+
+  /**
+   * Validate if it has any set|? state
+   *
+   * @param array $states
+   *
+   * @return bool
+   */
+  private function hasSetConditions(array $states): bool {
+    return count(array_filter(array_keys($states), static function ($state) {
+      return str_contains($state, 'set|');
+    })) > 0;
+  }
 }

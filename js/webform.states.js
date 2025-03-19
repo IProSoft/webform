@@ -315,6 +315,73 @@
   /* ************************************************************************ */
 
   /**
+   * Attaches the webform custom states which includes 'set to'.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches states behaviors.
+   */
+  Drupal.behaviors.webformStates = {
+    attach(context, settings) {
+      var $states = $(context).find('[data-drupal-states]');
+      for (var i = 0; i < $states.length; i++) {
+        var config = JSON.parse($states[i].getAttribute('data-drupal-states'));
+        Object.keys(config || {}).forEach(function (state) {
+          // Set state for "Set to" state.
+          if (state.indexOf('set|') === 0) {
+            $document.on('state:' + state, function (e) {
+              if (e.trigger && $(e.target).isWebform()) {
+                if (e.value) {
+                  let setToValue = decodeEntities(state.replace('set|', '')),
+                      isCheckboxElement = $(e.target).filter('input[type="checkbox"]'),
+                      isRadioElement = $(e.target).filter('.webform-type-radios').find('input[type="radio"]'),
+                      isCheckboxMultiple = $(e.target).filter('.webform-type-checkboxes').find('input[type="checkbox"]'),
+                      isStandardElement = $(e.target).filter('select, input, textarea, button');
+                  /*
+                  * Important to check elements by type at begining
+                  * */
+                  console.log({
+                    element: e.target,
+                    isCheckboxElement: isCheckboxElement,
+                    isRadioElement: isRadioElement,
+                    isCheckboxMultiple: isCheckboxMultiple,
+                    isStandardElement: isStandardElement,
+                  });
+                  if(isCheckboxMultiple.length > 0) {
+                    //Allow to set more than one element
+                    let setValues = setToValue.split(',')
+                    isCheckboxMultiple.each(function(i, element){
+                      let found = $(this);
+                      found.prop(
+                          'checked',
+                          setValues.includes(found.val())
+                      ).change();
+                    });
+                  } else if(isCheckboxElement.length > 0) {
+                    let found = isCheckboxElement.parent().find('[value="' + setToValue + '"]');
+                    if(found.length === 0){
+                      return console.log('SetTo: Element checkbox not found with value ' + setToValue);
+                    }
+                    found.prop('checked', true).change();
+                  } else if(isRadioElement.length > 0) {
+                    let found = isRadioElement.parent().find('[value="' + setToValue + '"]');
+                    if(found.length === 0){
+                      return console.log('SetTo: Element radio not found with value ' + setToValue);
+                    }
+                    found.prop('checked', true).change();
+                  } else if(isStandardElement.length > 0) {
+                    isStandardElement.val(setToValue).change();
+                  }
+                }
+              }
+            });
+          }
+        });
+      }
+    },
+  };
+  /**
    * Adds HTML5 validation to required checkboxes.
    *
    * @type {Drupal~behavior}
@@ -598,7 +665,21 @@
   /* ************************************************************************ */
   // Helper functions.
   /* ************************************************************************ */
-
+  /**
+    * Safely decode HTML entities.
+    *
+    * @param {string} text
+    *   Text with encoded HTML entities.
+    * @returns {string}
+    *   Text with decoded HTML entities.
+    *
+    * @see https://stackoverflow.com/questions/1147359/how-to-decode-html-entities-using-jquery/1395954#1395954
+    */
+  function decodeEntities(text) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  }
   /**
    * Toggle an input's required attributes.
    *
